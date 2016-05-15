@@ -1,0 +1,9 @@
+{
+  "name": "reversim-summit-2016",
+  "version": "0.1.0",
+  "description": "The website for reversim summit 2016",
+  "author": "Reversim team <rs16-team@googlegroups.com>",
+  "dependencies": {
+    "express": "3.x.x"
+  }
+}
