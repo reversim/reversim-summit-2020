@@ -1,4 +1,4 @@
-export const db = process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/ReactWebpackNode';
+export const db = process.env.MONGO_URL || 'mongodb://localhost/ReactWebpackNode';
 
 export default {
   db
