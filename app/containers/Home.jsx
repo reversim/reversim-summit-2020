@@ -6,27 +6,45 @@ import styles from 'css/components/home';
 
 const cx = classNames.bind(styles);
 
-class Home extends Component {
+//class Home extends Component {
+//
+//    constructor(props) {
+//        super(props);
+//    }
+//
+//
+//    render() {
+//        return (
+//            <div className={cx('home')}>
+//                This is the home of the site {this.props.user.email}
+//            </div>
+//        );
+//    }
+//}
 
-    constructor(props) {
-        super(props);
-    }
+const Home = ({user, dispatch}) => {
 
+    return (
+        <div className={cx('home')}>
+            { user.authenticated ? (
 
-    render() {
-        return (
-            <div className={cx('home')}>
-                This is the home of the site
-            </div>
-        );
-    }
-}
+                <div>
+                    <span>Hello {user.name}</span>
+                    <img src={user.picture}></img>
+                </div>
+            ) : (
+                <span>not auth</span>
+            )}
+        </div>
+    );
+};
 
 Home.propTypes = {
 };
 
 function mapStateToProps(state) {
     return {
+        user: state.user
     };
 }
 

@@ -29,7 +29,10 @@ export default function render(req, res) {
       authenticated,
       isWaiting: false,
       message: '',
-      isLogin: true
+      isLogin: true,
+      name: req.user && req.user.profile.name,
+      email: req.user && req.user.email,
+      picture: req.user && req.user.profile.picture
     }
   }, history);
   const routes = createRoutes(store);
