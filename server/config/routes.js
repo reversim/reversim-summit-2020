@@ -25,7 +25,10 @@ export default (app) => {
     // /auth/google/return
     // Authentication with google requires an additional scope param, for more info go
     // here https://developers.google.com/identity/protocols/OpenIDConnect#scope-param
-    app.get('/auth/google', passport.authenticate('google', {
+    app.get('/auth/google', function(req, res, next) {
+      console.log('Request URL:', req.originalUrl);
+      next();
+    }, passport.authenticate('google', {
       scope: [
         'https://www.googleapis.com/auth/userinfo.profile',
         'https://www.googleapis.com/auth/userinfo.email'
@@ -36,6 +39,10 @@ export default (app) => {
     // process by verifying the assertion. If valid, the user will be logged in.
     // Otherwise, the authentication has failed.
     app.get('/auth/google/callback',
+        function(req, res, next) {
+          console.log('Request URL:', req.originalUrl);
+          next();
+        },
       passport.authenticate('google', {
         successRedirect: '/',
         failureRedirect: '/login'
