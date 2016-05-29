@@ -12,18 +12,10 @@ const cx = classNames.bind(styles);
 const About = () => {
   return (
     <div className={cx('about')}>
-      <h1 className={cx('header')}>About Ninja Ocean</h1>
+      <h1 className={cx('header')}>About Reversim Summit 2016</h1>
       <div className={cx('description')}>
-        <p>Imagine an ocean of ninjas. Now think of it as a metaphor.<br />
-          Seriously, we love good tech. React, redux, scala, Haskell, machine learning, you name it!
-        </p>
-      </div>
-      <div className={cx('contribute')}>
-        <p>Want to contribute? Help us out!
-          If you think the code on &nbsp;
-          <a target="_blank" href="https://github.com/choonkending/react-webpack-node">this repo</a>
-        &nbsp;could be improved, please create an issue&nbsp;
-          <a target="_blank" href="https://github.com/choonkending/react-webpack-node/issues">here</a>!
+        <p>Reversim (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and Ran Tavory which brings together software developers and product managers, with over 300 recorded episodes over six years and a few k listeners.<br />
+            The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring the content we are interested in, and we hope you will be too.
         </p>
       </div>
     </div>
