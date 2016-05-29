@@ -4,10 +4,11 @@ import { Route, IndexRoute } from 'react-router';
 import App from 'containers/App';
 import Vote from 'containers/Vote';
 import Home from 'containers/Home';
-import CallForPapers from 'containers/CallForPapers';
+import Timeline from 'containers/Timeline';
+import Submit from 'containers/Submit';
+import Sessions from 'containers/Sessions';
 import About from 'containers/About';
 import LoginOrRegister from 'containers/LoginOrRegister';
-import Dashboard from 'containers/Dashboard';
 
 /*
  * @param {Redux Store}
@@ -39,9 +40,9 @@ export default (store) => {
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="/login" component={LoginOrRegister} onEnter={redirectAuth} />
-        <Route path="/callForPapers" component={CallForPapers} />
-        <Route path="/vote" component={Vote} />
-        <Route path="/dashboard" component={Dashboard} onEnter={requireAuth} />
+        <Route path="/timeline" component={Timeline} />
+        <Route path="/submit" component={Submit} onEnter={requireAuth}/>
+        <Route path="/sessions" component={Sessions}/>
         <Route path="/about" component={About} />
       </Route>
   );

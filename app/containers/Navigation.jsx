@@ -13,12 +13,15 @@ const Navigation = ({user, dispatch}) => {
 
     return (
         <nav className={cx('navigation')} role="navigation">
-            <Link to="/" className={cx('item', 'logo')} activeClassName={cx('active')}>Reversim Summit 2016</Link>
+            <Link to="/" className={cx('item')} activeClassName={cx('active')}>Home</Link>
+            <Link to="/timeline" className={cx('item')} activeClassName={cx('active')}>Timeline</Link>
+            <Link to="/submit" className={cx('item')} activeClassName={cx('active')}>Submit</Link>
+            <Link to="/sessions" className={cx('item')} activeClassName={cx('active')}>Sessions</Link>
             { user.authenticated ? (
                 <Link onClick={logout}
-                      className={cx('item')} to="/">Logout</Link>
+                      className={cx('item')} activeClassName={cx('active')} to="/">Logout</Link>
             ) : (
-                <Link className={cx('item')} to="/login">Log in</Link>
+                <Link className={cx('item')} activeClassName={cx('active')} to="/login">Log in</Link>
             )}
         </nav>
     );
