@@ -1,4 +1,7 @@
-@value montserrat from './common/typography.css';
+@import './bootstrap.min.css';
+@import './line-icons.css';
+@import './temp.css';
+
 
 /*
  * Add any global styles here
@@ -7,14 +10,9 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-}
-
 .app {
   composes: box from './common/layout.css';
 
-  font-family: montserrat;
   font-weight: normal;
   font-smoothing: antialiased;
 }

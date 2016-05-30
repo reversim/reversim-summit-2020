@@ -23,6 +23,7 @@ const config = {
     // Add to homescreen for Safari on IOS
     { rel: 'apple-touch-icon', sizes: '152x152', applecon },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto+Condensed', type: 'text/css' },
+    { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css' },
     { rel: 'stylesheet', href: '/assets/styles/main.css' }
     // SEO: If your mobile URL is different from the desktop URL,
     // add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones
@@ -33,11 +34,11 @@ const config = {
     // Setting IE=edge tells Internet Explorer to use the latest engine to render the page and execute Javascript
     { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
     //  Meta descriptions are commonly used on search engine result pages to display preview snippets for a given page.
-    { name: 'description', content: 'An isomorphic React alt boilerplate with Express and MongoDB deployable to Heroku' },
+    { name: 'description', content: 'Reversim Summit 2016' },
     // Mobile Safari introduced this tag to let web developers control the viewport's size and scale
     // The width property controls the size of the viewport, the initial-scale property controls
     // the zoom level when the page is first loaded
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' },
     // Add to homescreen for Chrome on Android
     { name: 'mobile-web-app-capable', content: 'yes' },
     // Add to homescreen for Safari on IOS
