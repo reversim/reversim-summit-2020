@@ -8,11 +8,14 @@ import Proposal from '../models/proposal';
  * List
  */
 export function all(req, res) {
+    //console.log('proposal all started...');
     Proposal.find({}).exec((err, proposals) => {
         if (err) {
             console.log('Error in first query');
             return res.status(500).send('Something went wrong getting the data');
         }
+
+        //console.log('proposal all returning '+JSON.stringify(proposals));
 
         return res.json(proposals);
     });

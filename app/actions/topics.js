@@ -18,6 +18,8 @@ polyfill();
  * @return Promise
  */
 function makeTopicRequest(method, id, data, api = '/topic') {
+  var url = api + (id ? ('/' + id) : '');
+  console.log('making topics request with method: '+method+' url: '+url+' data: '+data);
   return request[method](api + (id ? ('/' + id) : ''), data);
 }
 

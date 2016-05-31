@@ -58,8 +58,27 @@ export function signUp(req, res, next) {
   });
 }
 
+/**
+ * Update a user
+ */
+export function update(req, res) {
+  const query = { google: req.body.userId };
+  const omitKeys = ['id', '_id', '_v'];
+  const data = _.omit(req.body, omitKeys);
+
+  User.findOneAndUpdate(query, data, (err) => {
+    if (err) {
+      console.log('Error on save!');
+      return res.status(500).send('We failed to save for some reason');
+    }
+
+    return res.status(200).send('Updated successfully');
+  });
+}
+
 export default {
   login,
   logout,
+  update,
   signUp
 };

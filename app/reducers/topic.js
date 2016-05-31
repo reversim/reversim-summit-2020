@@ -14,6 +14,7 @@ export default function topic(state = {
   topics: [],
   newTopic: ''
 }, action) {
+  console.log('topic action is: '+action.type);
   switch (action.type) {
     case TYPING:
       return Object.assign({}, state,

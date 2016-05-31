@@ -5,11 +5,14 @@ import Topic from '../models/topics';
  * List
  */
 export function all(req, res) {
+  console.log('topics all started...');
   Topic.find({}).exec((err, topics) => {
     if (err) {
       console.log('Error in first query');
       return res.status(500).send('Something went wrong getting the data');
     }
+
+    console.log('topics all returning '+JSON.stringify(topics));
 
     return res.json(topics);
   });
