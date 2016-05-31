@@ -12,9 +12,6 @@ import Location from './Location';
 import Footer from './Footer';
 import { StickyContainer, Sticky } from 'react-sticky';
 import {fetchProposals } from 'actions/proposals';
-import {
-    createTopic, typing, incrementCount,
-    decrementCount, destroyTopic, fetchTopics } from 'actions/topics';
 
 import styles from 'css/main';
 import homeStyles from 'css/components/home';
@@ -23,13 +20,6 @@ const cxHome = classNames.bind(homeStyles);
 const cx = classNames.bind(styles)
 
 class Home extends Component {
-
-    //Data that needs to be called before rendering the component
-    //This is used for server side rending via the fetchComponentDataBeforeRender() method
-    //static need = [  // eslint-disable-line
-    //    fetchProposals,
-    //    fetchTopics
-    //];
 
     static need = [  // eslint-disable-line
         fetchProposals
