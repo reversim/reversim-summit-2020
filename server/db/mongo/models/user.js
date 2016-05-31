@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  trackRecord: String,
   google: {}
 });
 

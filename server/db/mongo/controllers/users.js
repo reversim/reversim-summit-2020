@@ -62,7 +62,7 @@ export function signUp(req, res, next) {
  * Update a user
  */
 export function update(req, res) {
-  const query = { google: req.body.userId };
+  const query = { google: req.body.google };
   const omitKeys = ['id', '_id', '_v'];
   const data = _.omit(req.body, omitKeys);
 
