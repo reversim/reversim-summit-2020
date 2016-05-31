@@ -139,7 +139,6 @@ export function updateUser(data) {
       .then(response => {
         if (response.status === 200) {
           dispatch(updateUserSuccess(response.data.message));
-          dispatch(push('/'));
         } else {
           dispatch(updateUserError('Oops! Something went wrong'));
         }
