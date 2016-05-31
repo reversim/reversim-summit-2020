@@ -4,7 +4,9 @@
 import {
     GET_PROPOSALS_REQUEST,
     GET_PROPOSALS_SUCCESS,
-    GET_PROPOSALS_FAILURE
+    GET_PROPOSALS_FAILURE,
+    CREATE_PROPOSAL_REQUEST,
+    CREATE_PROPOSAL_FAILURE
 } from 'types';
 
 
@@ -25,6 +27,14 @@ export default function proposal(state = {
             return Object.assign({}, state, {
                 isFetching: false
             });
+        case CREATE_PROPOSAL_REQUEST:
+            return {
+                proposals: [...state.proposals, { id: action.id, count: action.count, text: action.text }]
+            };
+        case CREATE_PROPOSAL_FAILURE:
+            return {
+                proposals: [...state.proposals.filter((tp) => tp.id !== action.id)]
+            };
 
         default:
             return state;
