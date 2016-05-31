@@ -18,7 +18,7 @@ const Sessions = () => {
       <div className={cx("container")}>
         <span data-icon className={cx('icon', 'section-icon', 'icon-multimedia-12')}></span>
         <h3>Proposals</h3>
-        <p className={cx("text-alt")} style={ {marginBottom: '80px'} }>features <span className={cx("highlight")}>proposals</span></p>
+        <p className={cx("text-alt")} style={ {marginBottom: '80px'} }>featured <span className={cx("highlight")}>proposals</span></p>
 
         <div className={cx("row")}>
 

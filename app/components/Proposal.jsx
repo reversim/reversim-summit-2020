@@ -8,6 +8,7 @@ const Proposal = ({id, name, description, speakerName, speakerPosition, speakerP
   return (
     <div className={cx("col-sm-4")}>
       <div className={cx("proposal")}>
+        <h6>{name}</h6>
         <article className={cx("text-box")}>
           {description}
         </article>

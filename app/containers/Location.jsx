@@ -1,4 +1,5 @@
 import React from 'react';
+import LocationMap from '../components/LocationMap';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 
@@ -13,14 +14,16 @@ const Location = () => {
   return (
     <section id="location">
     		<div className={cx("contacts-wrapper")}>
-    			<div id="contacts-map" className={cx("map")} data-settings="../map-settings.json" style={ {height: '560px'} }></div>
+          <LocationMap />
 
     			<div className={cx('container', 'contacts-on-map-container')}>
     				<div className={cx("contacts-on-map")}>
     					<h3>Location</h3>
 
     					<ul className={cx("list")}>
-    						<li><i className={cx('fa', 'fa-map-marker')}></i>Herzl St. 234, Rehovot</li>
+    						<li><i className={cx('fa', 'fa-map-marker')}></i>Weizmann Institute of Science, <br /><span style={{marginLeft: '51px'}} />Herzl St. 234, Rehovot
+                <br />
+                </li>
                 <li><i className={cx('fa', 'fa-phone')}></i>(08) 934-2111</li>
                 <li><i className={cx('fa', 'fa-envelope')}></i>Public Transport</li>
                 <li><i className={cx('fa', 'fa-clock-o')}></i>Parking</li>

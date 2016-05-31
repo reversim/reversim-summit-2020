@@ -19,7 +19,7 @@ const Sponsors = () => {
     <section id="sponsors" className={cx('section', 'align-center')}>
       <div className={cx("container")}>
         <span data-icon className={cx('icon', 'section-icon', 'icon-documents-bookmarks-12')}></span>
-        <h3>General sponsors</h3>
+      <h3>Sponsors</h3>
         <p className={cx("text-alt")}>companies that <span className={cx("highlight")}>support</span> us</p>
         <br/>
         <br/>
