@@ -1,28 +1,58 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import classNames from 'classnames/bind';
+import styles from 'css/main';
+import Proposal from '../components/Proposal';
 
-import styles from 'css/components/home';
+import photo from 'images/speakers/speaker.jpg';
 
 const cx = classNames.bind(styles);
 
-const Sessions = ({user, dispatch}) => {
+/*
+ * Note: This is kept as a container-level component,
+ *  i.e. We should keep this as the container that does the data-fetching
+ *  and dispatching of actions if you decide to have any sub-components.
+ */
+const Sessions = () => {
+  return (
+    <section id="sessions" className={cx('section', 'align-center')} style={ {paddingTop: '25px'} }>
+      <div className={cx("container")}>
+        <span data-icon className={cx('icon', 'section-icon', 'icon-multimedia-12')}></span>
+        <h3>Proposals</h3>
+        <p className={cx("text-alt")} style={ {marginBottom: '80px'} }>features <span className={cx("highlight")}>proposals</span></p>
 
-    return (
-        <div className={cx('home')}>
-            Sessions
+        <div className={cx("row")}>
+
+          <Proposal
+          id="123"
+          name="some lecture"
+          description="Illo repellat dolores laudantium quos, velit, reprehenderit veniam accusamus neque laboriosam tenetur aut quaerat, doloribus autem, facere molestiae? Quisquam ducimus, nesciunt mollitia."
+          speakerName="Lidan"
+          speakerPosition="Developer"
+          speakerPhoto={photo}
+          />
+
+          <Proposal
+          id="123"
+          name="some lecture"
+          description="Illo repellat dolores laudantium quos, velit, reprehenderit veniam accusamus neque laboriosam tenetur aut quaerat, doloribus autem, facere molestiae? Quisquam ducimus, nesciunt mollitia."
+          speakerName="Ori"
+          speakerPosition="Developer"
+          speakerPhoto={photo}
+          />
+
+          <Proposal
+          id="123"
+          name="some lecture"
+          description="Illo repellat dolores laudantium quos, velit, reprehenderit veniam accusamus neque laboriosam tenetur aut quaerat, doloribus autem, facere molestiae? Quisquam ducimus, nesciunt mollitia."
+          speakerName="Ran"
+          speakerPosition="Developer"
+          speakerPhoto={photo}
+          />
+
         </div>
-    );
+      </div>
+    </section>
+  );
 };
 
-Sessions.propTypes = {
-};
-
-function mapStateToProps(state) {
-    return {
-    };
-}
-
-// Read more about where to place `connect` here:
-// https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
-export default connect(mapStateToProps)(Sessions);
+export default Sessions;
