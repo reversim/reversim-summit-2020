@@ -63,6 +63,20 @@ function signUpSuccess(message) {
   };
 }
 
+function updateUserSuccess(message) {
+  return {
+    type: types.UPDATE_SUCCESS_USER,
+    message
+  };
+}
+
+function updateUserError(message) {
+  return {
+    type: types.UPDATE_FAILURE_USER,
+    message
+  };
+}
+
 // Log Out Action Creators
 function beginLogout() {
   return { type: types.LOGOUT_USER};
@@ -110,6 +124,24 @@ export function signUp(data) {
           dispatch(push('/'));
         } else {
           dispatch(signUpError('Oops! Something went wrong'));
+        }
+      })
+      .catch(err => {
+        dispatch(signUpError(err.data.message));
+      });
+  };
+}
+
+export function updateUser(data) {
+  return dispatch => {
+
+    return makeUserRequest('post', data, '/updateUser')
+      .then(response => {
+        if (response.status === 200) {
+          dispatch(updateUserSuccess(response.data.message));
+          dispatch(push('/'));
+        } else {
+          dispatch(updateUserError('Oops! Something went wrong'));
         }
       })
       .catch(err => {
