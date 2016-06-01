@@ -69,7 +69,7 @@ export function fetchProposals() {
 export function createProposal(title, abstract, type, speaker_ids) {
     return (dispatch, getState) => {
         // If the text box is empty
-        if (text.trim().length <= 0) return;
+        // if (text.trim().length <= 0) return;
 
         const id = guid();
         // Redux thunk's middleware receives the store methods `dispatch`

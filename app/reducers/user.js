@@ -10,13 +10,16 @@ import {
   UPDATE_FAILURE_USER,
   LOGOUT_USER,
   LOGOUT_SUCCESS_USER,
-  LOGOUT_ERROR_USER } from 'types';
+  LOGOUT_ERROR_USER,
+  OPEN_LOGIN_MODAL,
+  CLOSE_LOGIN_MODAL } from 'types';
 
 export default function user(state = {
   isLogin: true,
   message: '',
   isWaiting: false,
-  authenticated: false }, action = {}) {
+  authenticated: false,
+  isLoginModalOpen: false }, action = {}) {
   switch (action.type) {
     case TOGGLE_LOGIN_MODE:
       return Object.assign({}, state, {
@@ -71,6 +74,14 @@ export default function user(state = {
         isWaiting: false,
         authenticated: true,
         isLogin: true
+      });
+    case OPEN_LOGIN_MODAL:
+      return Object.assign({}, state, {
+        isLoginModalOpen: true
+      });
+    case CLOSE_LOGIN_MODAL:
+      return Object.assign({}, state, {
+        isLoginModalOpen: false
       });
     default:
       return state;

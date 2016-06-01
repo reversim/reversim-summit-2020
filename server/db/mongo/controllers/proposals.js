@@ -26,6 +26,7 @@ export function all(req, res) {
  */
 export function add(req, res) {
     console.log('adding new proposal '+JSON.stringify(req.body));
+
     Proposal.create(req.body, (err) => {
         if (err) {
             console.log(err);
@@ -76,4 +77,3 @@ export default {
     update,
     remove
 };
-

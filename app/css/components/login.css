@@ -4,9 +4,9 @@
 .login {
   width: 420px;
   margin: 0 auto;
-  background-color: color-athens-gray;
-  border: 2px solid color-mercury;
-  border-radius: global-radius;
+  /*background-color: color-athens-gray;*/
+  /*border: 2px solid color-mercury;*/
+  /*border-radius: global-radius;*/
 }
 
   .waiting {
@@ -38,7 +38,7 @@
 
   .email-container {
     padding: 16px 12px;
-    border-bottom: 2px solid color-mercury;
+    /*border-bottom: 2px solid color-mercury;*/
   }
 
   .google-container {
@@ -61,10 +61,6 @@
   .message {
     color: color-crimson;
     font-size: font-small;
-  }
-
-  .button {
-    composes: greenButton from '../common/button';
   }
 
   .hint {

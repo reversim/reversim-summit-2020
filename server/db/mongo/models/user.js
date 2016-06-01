@@ -22,7 +22,8 @@ const UserSchema = new mongoose.Schema({
     location: { type: String, default: '' },
     website: { type: String, default: '' },
     bio: { type: String, default: '' },
-    picture: { type: String, default: '' }
+    picture: { type: String, default: '' },
+    trackRecord: { type: String, default: '' }
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date,

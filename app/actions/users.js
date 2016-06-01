@@ -24,7 +24,6 @@ function makeUserRequest(method, data, api = '/login') {
   });
 }
 
-
 // Log In Action Creators
 function beginLogin() {
   return { type: types.MANUAL_LOGIN_USER };
@@ -63,9 +62,10 @@ function signUpSuccess(message) {
   };
 }
 
-function updateUserSuccess(message) {
+function updateUserSuccess(data, message) {
   return {
     type: types.UPDATE_SUCCESS_USER,
+    data,
     message
   };
 }
@@ -94,6 +94,15 @@ export function toggleLoginMode() {
   return { type: types.TOGGLE_LOGIN_MODE };
 }
 
+// login modal
+export function openLoginModal() {
+  return { type: types.OPEN_LOGIN_MODAL };
+}
+
+export function closeLoginModal() {
+  return { type: types.CLOSE_LOGIN_MODAL };
+}
+
 export function manualLogin(data) {
   return dispatch => {
     dispatch(beginLogin());
@@ -102,6 +111,7 @@ export function manualLogin(data) {
       .then(response => {
         if (response.status === 200) {
           dispatch(loginSuccess(response.data.message));
+          dispatch(closeLoginModal());
           dispatch(push('/'));
         } else {
           dispatch(loginError('Oops! Something went wrong!'));
@@ -121,6 +131,7 @@ export function signUp(data) {
       .then(response => {
         if (response.status === 200) {
           dispatch(signUpSuccess(response.data.message));
+          dispatch(closeLoginModal());
           dispatch(push('/'));
         } else {
           dispatch(signUpError('Oops! Something went wrong'));
@@ -138,7 +149,7 @@ export function updateUser(data) {
     return makeUserRequest('post', data, '/updateUser')
       .then(response => {
         if (response.status === 200) {
-          dispatch(updateUserSuccess(response.data.message));
+          dispatch(updateUserSuccess(data, response.data.message));
         } else {
           dispatch(updateUserError('Oops! Something went wrong'));
         }

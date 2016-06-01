@@ -2,10 +2,8 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 
-import sponsor1Logo from 'images/sponsors/sponsor-big-1.png';
-import sponsor2Logo from 'images/sponsors/sponsor-big-2.png';
-import sponsor3Logo from 'images/sponsors/sponsor-big-3.png';
-import sponsor4Logo from 'images/sponsors/sponsor-big-4.png';
+import outbrainLogo from 'images/sponsors/outbrain.png';
+import wixLogo from 'images/sponsors/wix.png';
 
 const cx = classNames.bind(styles);
 
@@ -19,16 +17,14 @@ const Sponsors = () => {
     <section id="sponsors" className={cx('section', 'align-center')}>
       <div className={cx("container")}>
         <span data-icon className={cx('icon', 'section-icon', 'icon-documents-bookmarks-12')}></span>
-      <h3>Sponsors</h3>
+        <h3>Sponsors</h3>
         <p className={cx("text-alt")}>companies that <span className={cx("highlight")}>support</span> us</p>
         <br/>
         <br/>
 
         <div className={cx("sponsors")}>
-          <div className={cx('sponsor', 'big')}><img src={sponsor1Logo} alt="" /></div>
-          <div className={cx('sponsor', 'big')}><img src={sponsor2Logo} alt="" /></div>
-          <div className={cx('sponsor', 'big')}><img src={sponsor3Logo} alt="" /></div>
-          <div className={cx('sponsor', 'big')}><img src={sponsor4Logo} alt="" /></div>
+          <a href="http://www.outbrain.com/"><div className={cx('sponsor', 'big')}><img src={outbrainLogo} alt="Outbrain" /></div></a>
+          <a href="http://www.wix.com/"><div className={cx('sponsor', 'big')}><img src={wixLogo} alt="Wix" /></div></a>
         </div>
 
       </div>

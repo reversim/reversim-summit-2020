@@ -10,8 +10,10 @@ import CFP from './CFP';
 import Sponsors from './Sponsors';
 import Location from './Location';
 import Footer from './Footer';
+import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import {fetchProposals } from 'actions/proposals';
+import Scroll, { Element } from 'react-scroll';
 
 import styles from 'css/main';
 import homeStyles from 'css/components/home';
@@ -44,22 +46,38 @@ class Home extends Component {
                                 <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
                                 <h5 className={cx('base-font')}>Call for papers is now open!</h5>
                                 <div className={cx('btns-container')}>
-                                    <a href="#" className={cx('btn', 'btn-md')} data-modal-link="email-ticket">SUBMIT PROPOSAL</a>
-                                    <a href="#" className={cx('btn', 'btn-outline', 'btn-md')} data-modal-link="0">REGISTER</a>
+                                    <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link>
+                                    <a href="#" className={cx('btn', 'btn-outline')} data-modal-link="0">REGISTER</a>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <Sticky style={{zIndex: 1000}}>
+                    <Sticky style={{zIndex: 5}}>
                         <Navigation />
                     </Sticky>
-                    <About />
-                    <Timeline />
-                    <Sessions />
+
+                    <Element name="about">
+                      <About />
+                    </Element>
+
+                    <Element name="timeline">
+                      <Timeline />
+                    </Element>
+
+                    <Element name="proposals">
+                      <Sessions />
+                    </Element>
+
                     <CFP />
-                    <Sponsors />
-                    <Location />
+
+                    <Element name="sponsors">
+                      <Sponsors />
+                    </Element>
+
+                    <Element name="location">
+                      <Location />
+                    </Element>
 
                     <Footer />
                 </div>

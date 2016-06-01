@@ -32,7 +32,10 @@ export default function render(req, res) {
       isLogin: true,
       name: req.user && req.user.profile.name,
       email: req.user && req.user.email,
-      picture: req.user && req.user.profile.picture
+      picture: req.user && req.user.profile.picture,
+      bio: req.user && req.user.profile.bio,
+      trackRecord: req.user && req.user.profile.trackRecord,
+      id: req.user && req.user._id
     }
   }, history);
   const routes = createRoutes(store);

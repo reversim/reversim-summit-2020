@@ -14,7 +14,6 @@ const LocationMap = () => {
 
     googleMapElement={
       <GoogleMap
-        ref={(map) => console.log(map)}
         defaultZoom={16}
         defaultCenter={{ lat: 31.9052004, lng: 34.8090827 }}
       >

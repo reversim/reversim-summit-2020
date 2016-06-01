@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 import reversimLogoFooter from 'images/reversim_logo_footer.png';
-import footerPhoto from 'images/gallery/footer-photo.jpg';
 
 const cx = classNames.bind(styles);
 
@@ -43,25 +42,6 @@ const Footer = ({children}) => {
             </ul>
           </div>
         </div>
-
-        <div className={cx('col-md-4', 'col-lg-3', 'col-lg-offset-1')}>
-          <div className={cx('widget', 'instagram-widget')}>
-            <h6 className={cx("widget-head")}><span className={cx('fa', 'fa-instagram')}></span> Photo feed</h6>
-
-            <ul className={cx("instagram-list")}>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-              <li><img src={footerPhoto} alt="photo" /></li>
-            </ul>
-          </div>
-        </div>
-
       </div>
 
       <div className={cx("footer-base")}>

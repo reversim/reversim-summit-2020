@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
+import { Link } from 'react-router';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +19,7 @@ const CFP = () => {
         <br />
         <br />
 
-        <a href="#" className={cx('btn', 'btn-lg', 'btn-outline')}>Submit</a>
+        <Link to="submit" className={cx('btn', 'btn-lg', 'btn-outline')}>Submit</Link>
       </div>
     </section>
   );

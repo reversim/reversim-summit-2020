@@ -8,7 +8,7 @@ import Timeline from 'containers/Timeline';
 import Submit from 'containers/Submit';
 import Sessions from 'containers/Sessions';
 import About from 'containers/About';
-import LoginOrRegister from 'containers/LoginOrRegister';
+import LoginOrRegister from 'components/LoginOrRegister';
 
 /*
  * @param {Redux Store}

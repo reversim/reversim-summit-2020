@@ -3163,6 +3163,10 @@ li {
   border-radius: 4px;
   overflow: hidden;
 }
+.gmail-btn {
+  background-color: #df4a32 !important;
+  letter-spacing: 0.3em;
+}
 .btn:not(.btn-outline-clr):not(.btn-white):not(.btn-outline) {
   color: #ffffff;
 }
@@ -4510,11 +4514,11 @@ input[type=password] {
   vertical-align: top;
   display: inline-block;
   width: 100%;
-  font-size: 13px;
+  font-size: 14px;
   color: #8d93a0;
   background-color: #ffffff;
   border: 1px solid #e9e9e9;
-  border-radius: 2px;
+  border-radius: 4px;
   outline: none;
 }
 textarea:hover,
@@ -4909,7 +4913,7 @@ button[type="submit"] .loading {
   top: 0;
 }
 /* ----------------------------------------------------------------------------
-    Testimonials
+    Proposals
 ---------------------------------------------------------------------------- */
 .proposal {
   margin-bottom: 15px;
@@ -5976,7 +5980,7 @@ button[type="submit"] .loading {
   position: absolute;
   top: 50%;
   background-color: #ffffff;
-  z-index: 100;
+  z-index: 0;
   padding: 50px 70px;
 }
 .contacts-on-map .list {
@@ -6236,7 +6240,7 @@ button[type="submit"] .loading {
 .header {
   position: relative;
   line-height: 1.5625;
-  z-index: 1000;
+  z-index: 1;
 }
 .header.header-black .header-wrapper {
   -webkit-box-shadow: none;
@@ -6430,6 +6434,16 @@ button[type="submit"] .loading {
   border-width: 0 0 2px;
   border-color: transparent;
   cursor: pointer;
+}
+.header-login {
+  color: #ffffff;
+  display: inline-block;
+  padding: 7px 0;
+  font-family: "PT Sans Caption", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 .navigation-link.dropdown-toggle {
   min-width: 0;
