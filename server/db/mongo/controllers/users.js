@@ -63,14 +63,17 @@ export function signUp(req, res, next) {
  */
 export function update(req, res) {
   const query = { google: req.body.google };
-  const omitKeys = ['id', '_id', '_v'];
+  const omitKeys = ['id', '_id', '_v', 'google'];
   const data = _.omit(req.body, omitKeys);
+  var queryData = {$set: data};
 
-  User.findOneAndUpdate(query, data, (err) => {
+  User.findOneAndUpdate(query, queryData, (err) => {
     if (err) {
-      console.log('Error on save!');
+      console.log('Error on save! '+err);
       return res.status(500).send('We failed to save for some reason');
     }
+
+    console.log('Updated successfully');
 
     return res.status(200).send('Updated successfully');
   });
