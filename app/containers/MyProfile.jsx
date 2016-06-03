@@ -1,0 +1,201 @@
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import classNames from 'classnames/bind';
+import Navigation from 'components/Navigation';
+import About from 'components/About';
+import Footer from 'components/Footer';
+import { StickyContainer, Sticky } from 'react-sticky';
+import Scroll, { Element } from 'react-scroll';
+import {fetchUserProposals } from 'actions/users';
+import Speaker from 'components/Speaker';
+import SocialShare from 'components/SocialShare';
+import Proposal from 'components/Proposal';
+import {Link} from 'react-router';
+import {updateUser} from 'actions/users';
+import NotificationSystem from 'react-notification-system';
+
+import styles from 'css/main';
+
+import someSpeaker from 'images/team/ori.png'
+
+const cx = classNames.bind(styles);
+
+class MyProfile extends Component {
+    constructor(props) {
+        super(props);
+
+        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter }} = props;
+        if (!authenticated) {
+          dispatch(push('/'))
+        }
+
+        this.state = {
+          name,
+          bio,
+          oneLiner,
+          linkedin,
+          twitter
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event) {
+      event.preventDefault();
+      const formElements = event.target.elements;
+
+      const name = formElements.name.value;
+      const oneLiner = formElements.oneLiner.value;
+      const bio = formElements.bio.value;
+      const trackRecord = formElements.trackRecord.value;
+      const linkedin = formElements.linkedin.value;
+      const twitter = formElements.twitter.value;
+
+      const { dispatch, user: { authenticated, id } } = this.props;
+
+      if (authenticated) {
+        dispatch(updateUser({
+          'profile.name': name,
+          'profile.bio': bio,
+          'profile.trackRecord': trackRecord,
+          'profile.linkedin': linkedin,
+          'profile.twitter': twitter,
+          'profile.oneLiner': oneLiner
+        })).then(() => {
+          this.refs.notificationSystem.addNotification({
+            title: 'Profile updated!',
+            level: 'success'
+          });
+          window.scrollTo(0, 0);
+        })
+      }
+    }
+
+    previewProfile(event) {
+      let stateDiff = {};
+      stateDiff[event.target.id] = event.target.value;
+      this.setState(stateDiff);
+    }
+
+    render() {
+        const { user } = this.props;
+
+        return (
+            <StickyContainer>
+              <div className={cx('session-page')}>
+                  <Sticky style={{zIndex: 5}}>
+                      <Navigation />
+                  </Sticky>
+
+                  <div>
+                    <NotificationSystem ref="notificationSystem" style={{ NotificationItem: { DefaultStyle: { marginTop: '120px', padding: '20px' } } } } />
+
+                    <section id="my-profile" className={cx('section', 'container')}>
+                        <div className={cx('col-md-7', 'col-md-offset-1')}>
+                          <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
+                            <h6>Bio</h6>
+                            <fieldset>
+                              <span className={cx("col-xs-12")}>
+                                <label for="name">Full name</label>
+                              </span>
+                              <span className={cx("col-xs-6")}>
+                                <input id="name" ref="name" type="text" value={this.state.name} onChange={this.previewProfile.bind(this)} required />
+                              </span>
+                            </fieldset>
+
+                            <fieldset>
+                              <span className={cx("col-xs-12")}>
+                                <label for="email">Email</label>
+                              </span>
+                              <span className={cx("col-xs-6")}>
+                                {user.email}
+                              </span>
+                              <small className={cx("col-xs-6")}>So we can get in touch with you. Email is only visible to moderators</small>
+                            </fieldset>
+
+                            <fieldset>
+                              <span className={cx("col-xs-12")}>
+                                <label for="oneLiner">One Liner</label>
+                              </span>
+                              <span className={cx("col-xs-6")}>
+                                <input id="oneLiner" ref="oneLiner" type="text" value={this.state.oneLiner} onChange={this.previewProfile.bind(this)} />
+                              </span>
+                              <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
+                            </fieldset>
+
+                            <fieldset>
+                              <span className={cx("col-xs-12")}>
+                                <label for="linkedin">Linkedin Profile</label>
+                              </span>
+                              <span className={cx("col-xs-6")}>
+                                <input id="linkedin" ref="linkedin" type="text" value={this.state.linkedin} onChange={this.previewProfile.bind(this)} />
+                              </span>
+                              <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
+                            </fieldset>
+
+                            <fieldset>
+                              <span className={cx("col-xs-12")}>
+                                <label for="twitter">Twitter @name</label>
+                              </span>
+                              <span className={cx("col-xs-6")}>
+                                <input id="twitter" ref="twitter" type="text" placeholder="@Reversim" value={this.state.twitter} onChange={this.previewProfile.bind(this)} />
+                              </span>
+                              <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
+                            </fieldset>
+
+                            <fieldset>
+                              <span className={cx("col-xs-12")}>
+                                <label for="bio">Short Bio</label>
+                              </span>
+                              <span className={cx("col-xs-6")}>
+                              <textarea id="bio" ref="bio" value={this.state.bio} onChange={this.previewProfile.bind(this)}></textarea>
+                              </span>
+                              <small className={cx("col-xs-6")}>This will be presented on the website</small>
+                            </fieldset>
+
+                            <fieldset>
+                              <span className={cx("col-xs-12")}>
+                                <label for="trackRecord">Track record as speaker</label>
+                              </span>
+                              <span className={cx("col-xs-6")}>
+                                <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord}></textarea>
+                              </span>
+                              <small className={cx("col-xs-6")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
+                            </fieldset>
+
+                            <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>
+                              <input type="submit" value="Update" className={cx('btn')} />
+                            </fieldset>
+                          </form>
+                        </div>
+
+                        <div className={cx('col-md-4')}>
+                          <Speaker name={this.state.name} imageUrl={user.picture || someSpeaker} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter}></Speaker>
+                        </div>
+
+                    </section>
+                  </div>
+
+                  <Footer />
+              </div>
+            </StickyContainer>
+        );
+    }
+}
+
+MyProfile.propTypes = {
+  user: PropTypes.object,
+  dispatch: PropTypes.func.isRequired,
+};
+
+MyProfile.defaultProps = { };
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    };
+}
+
+// Read more about where to place `connect` here:
+// https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
+export default connect(mapStateToProps)(MyProfile);

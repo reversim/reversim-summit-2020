@@ -41,6 +41,8 @@ class MyProposals extends Component {
             type = "Full Featured (30-40 min.)";
           }
 
+          const abstractParagraphs = proposal.abstract.split('\n').map(paragraph => <p>{paragraph}</p>);
+
           return (
             <section className={cx("section")} style={ {padding: '0 30px 60px'} }>
               <div>
@@ -48,14 +50,14 @@ class MyProposals extends Component {
                   <article>
                     <h5>{proposal.title}</h5>
                       <p><small className={cx("text-alt")}><span className={cx("highlight")}>{type}</span></small></p>
-                      <p>{proposal.abstract}</p>
+                      <p>{abstractParagraphs}</p>
                       <Link to={`session/${proposal.id}`} className={cx('btn', 'btn-outline-clr')} style={{ margin: '20px 0 0' }}>View</Link>
                   </article>
                 </div>
               </div>
             	</section>
           );
-        })
+        });
 
         return (
             <StickyContainer>
@@ -77,7 +79,7 @@ class MyProposals extends Component {
                         </div>
 
                         <div className={cx('col-md-4')}>
-                          <Speaker name={name} imageUrl={picture || someSpeaker} oneLiner={oneLiner} bio={<span>{bio}</span>} linkedin={linkedin} twitter={twitter}></Speaker>
+                          <Speaker name={name} imageUrl={picture || someSpeaker} oneLiner={oneLiner} bio={bio} linkedin={linkedin} twitter={twitter}></Speaker>
                         </div>
 
                     </section>

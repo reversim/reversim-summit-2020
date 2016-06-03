@@ -9,7 +9,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import Scroll, { Element } from 'react-scroll';
 import {createProposal} from 'actions/proposals';
 import { push } from 'react-router-redux';
-import {updateUser} from 'actions/users'
+import {updateUser} from 'actions/users';
 
 import styles from 'css/main';
 
@@ -20,7 +20,7 @@ class Submit extends Component {
     constructor(props) {
         super(props);
 
-        const {dispatch, user: {authenticated }} = props;
+        const {dispatch, user: { authenticated }} = props;
         if (!authenticated) {
           dispatch(push('/'))
         }
@@ -43,7 +43,7 @@ class Submit extends Component {
       const proposalType = formElements.proposalType.value;
       const abstract = formElements.abstract.value;
 
-      const { dispatch, user: { authenticated, id, google } } = this.props;
+      const { dispatch, user: { authenticated, id } } = this.props;
 
       if (authenticated) {
         dispatch(updateUser({

@@ -28,7 +28,8 @@ class Session extends Component {
     renderSessionInfo() {
       const { currentProposal: { abstract, title, speaker_ids } } = this.props;
 
-      let speakers = speaker_ids.map(speaker => <Speaker name={speaker.profile.name} imageUrl={speaker.profile.picture || someSpeaker} oneLiner={speaker.profile.oneLiner} bio={<span>{speaker.profile.bio}</span>} linkedin={speaker.profile.linkedin} twitter={speaker.profile.twitter}></Speaker>)
+      let speakers = speaker_ids.map(speaker => <Speaker name={speaker.profile.name} imageUrl={speaker.profile.picture || someSpeaker} oneLiner={speaker.profile.oneLiner} bio={speaker.profile.bio} linkedin={speaker.profile.linkedin} twitter={speaker.profile.twitter}></Speaker>)
+      const abstractParagraphs = abstract.split('\n').map(paragraph => <p>{paragraph}</p>);
 
       return (<div>
                 <section id="register" className={cx('section', 'overlay', 'bg4', 'light-text', 'align-center')}>
@@ -39,7 +40,7 @@ class Session extends Component {
 
                 <section id="session-info" className={cx('section', 'container')}>
                   <div className={cx('col-md-6', 'col-md-offset-1')}>
-                    <p>{abstract}</p>
+                    <p>{abstractParagraphs}</p>
 
                     <SocialShare url={window.location.href} title='google' />
                   </div>

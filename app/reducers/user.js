@@ -79,6 +79,15 @@ export default function user(state = {
         authenticated: true,
         isLogin: true
       });
+    case UPDATE_SUCCESS_USER:
+      return Object.assign({}, state, {
+        name: action.data['profile.name'],
+        oneLiner: action.data['profile.oneLiner'],
+        bio: action.data['profile.bio'],
+        linkedin: action.data['profile.linkedin'],
+        twitter: action.data['profile.twitter'],
+        trackRecord: action.data['profile.trackRecord'],
+      });
     case OPEN_LOGIN_MODAL:
       return Object.assign({}, state, {
         isLoginModalOpen: true

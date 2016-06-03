@@ -82,6 +82,9 @@ class Navigation extends Component {
                         <a className={cx('navigation-link', 'dropdown-toggle', 'header-login')} data-toggle="dropdown">{this.props.user.name || this.props.user.email} <i className={cx('fa', 'fa-caret-down')}></i></a>
                         <ul className={cx("dropdown-menu")}>
                           <li className={cx("navigation-item")}>
+                            <Link to="/my-profile" className={cx('navigation-link')}>Edit Profile</Link>
+                          </li>
+                          <li className={cx("navigation-item")}>
                             <Link to="/my-proposals" className={cx('navigation-link')}>My Proposals</Link>
                           </li>
                           <li className={cx("navigation-item")}>

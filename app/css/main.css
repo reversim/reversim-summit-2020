@@ -1,7 +1,6 @@
-@import './bootstrap.min.css';
-@import './line-icons.css';
-@import './temp.css';
-
+@import url('./bootstrap.min.css');
+@import url('./line-icons.css');
+@import url('./temp.css');
 
 /*
  * Add any global styles here
