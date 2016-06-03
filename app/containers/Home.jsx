@@ -5,7 +5,7 @@ import Navigation from 'components/Navigation';
 import About from 'components/About';
 import Speakers from 'components/Speakers';
 import Timeline from 'components/Timeline';
-import Sessions from 'components/Sessions';
+import Proposals from 'components/Proposals';
 import CFP from 'components/CFP';
 import Sponsors from 'components/Sponsors';
 import Location from 'components/Location';
@@ -32,6 +32,8 @@ class Home extends Component {
     }
 
     render() {
+        const { proposals } = this.props;
+
         return (
             <StickyContainer>
                 <div className={cx('home')}>
@@ -66,7 +68,7 @@ class Home extends Component {
                     </Element>
 
                     <Element name="proposals">
-                      <Sessions />
+                      <Proposals data={proposals} />
                     </Element>
 
                     <CFP />
@@ -87,11 +89,14 @@ class Home extends Component {
 }
 
 Home.propTypes = {
+  user: PropTypes.object,
+  proposals: PropTypes.array
 };
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user: state.user,
+        proposals: state.proposal.proposals
     };
 }
 
