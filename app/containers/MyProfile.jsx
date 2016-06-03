@@ -83,7 +83,7 @@ class MyProfile extends Component {
                         <h6>Bio</h6>
                         <fieldset>
                           <span className={cx("col-xs-12")}>
-                            <label for="name">Full name</label>
+                            <label htmlFor="name">Full name</label>
                           </span>
                           <span className={cx("col-xs-6")}>
                             <input id="name" ref="name" type="text" value={this.state.name} onChange={this.previewProfile.bind(this)} required />
@@ -92,7 +92,7 @@ class MyProfile extends Component {
 
                         <fieldset>
                           <span className={cx("col-xs-12")}>
-                            <label for="email">Email</label>
+                            <label htmlFor="email">Email</label>
                           </span>
                           <span className={cx("col-xs-6")}>
                             {user.email}
@@ -102,7 +102,7 @@ class MyProfile extends Component {
 
                         <fieldset>
                           <span className={cx("col-xs-12")}>
-                            <label for="oneLiner">One Liner</label>
+                            <label htmlFor="oneLiner">One Liner</label>
                           </span>
                           <span className={cx("col-xs-6")}>
                             <input id="oneLiner" ref="oneLiner" type="text" value={this.state.oneLiner} onChange={this.previewProfile.bind(this)} />
@@ -112,7 +112,7 @@ class MyProfile extends Component {
 
                         <fieldset>
                           <span className={cx("col-xs-12")}>
-                            <label for="linkedin">Linkedin Profile</label>
+                            <label htmlFor="linkedin">Linkedin Profile</label>
                           </span>
                           <span className={cx("col-xs-6")}>
                             <input id="linkedin" ref="linkedin" type="text" value={this.state.linkedin} onChange={this.previewProfile.bind(this)} />
@@ -122,7 +122,7 @@ class MyProfile extends Component {
 
                         <fieldset>
                           <span className={cx("col-xs-12")}>
-                            <label for="twitter">Twitter @name</label>
+                            <label htmlFor="twitter">Twitter @name</label>
                           </span>
                           <span className={cx("col-xs-6")}>
                             <input id="twitter" ref="twitter" type="text" placeholder="@Reversim" value={this.state.twitter} onChange={this.previewProfile.bind(this)} />
@@ -132,20 +132,20 @@ class MyProfile extends Component {
 
                         <fieldset>
                           <span className={cx("col-xs-12")}>
-                            <label for="bio">Short Bio</label>
+                            <label htmlFor="bio">Short Bio</label>
                           </span>
                           <span className={cx("col-xs-6")}>
-                          <textarea id="bio" ref="bio" value={this.state.bio} onChange={this.previewProfile.bind(this)}></textarea>
+                          <textarea id="bio" ref="bio" value={this.state.bio} onChange={this.previewProfile.bind(this)} />
                           </span>
                           <small className={cx("col-xs-6")}>This will be presented on the website</small>
                         </fieldset>
 
                         <fieldset>
                           <span className={cx("col-xs-12")}>
-                            <label for="trackRecord">Track record as speaker</label>
+                            <label htmlFor="trackRecord">Track record as speaker</label>
                           </span>
                           <span className={cx("col-xs-6")}>
-                            <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord}></textarea>
+                            <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord} />
                           </span>
                           <small className={cx("col-xs-6")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
                         </fieldset>

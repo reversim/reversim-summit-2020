@@ -29,7 +29,7 @@ const Proposals = ({data}) => {
   })
 
   return (
-    <section id="sessions" className={cx('section', 'align-center')} style={ {paddingTop: '25px'} }>
+    <section id="proposals" className={cx('section', 'align-center')} style={ {paddingTop: '25px'} }>
       <div className={cx('container')}>
         <span data-icon className={cx('icon', 'section-icon', 'icon-badges-votes-08')}></span>
         <h3>Proposals</h3>

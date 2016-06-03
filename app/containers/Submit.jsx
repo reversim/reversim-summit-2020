@@ -20,7 +20,16 @@ class Submit extends Component {
           dispatch(push('/'))
         }
 
+        this.state = {
+          proposalType: 'full'
+        };
+
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleProposalTypeChange = this.handleProposalTypeChange.bind(this);
+    }
+
+    handleProposalTypeChange(event) {
+      this.setState({ proposalType: event.target.value });
     }
 
     handleSubmit(event) {
@@ -35,7 +44,7 @@ class Submit extends Component {
       const twitter = formElements.twitter.value;
 
       const title = formElements.title.value;
-      const proposalType = formElements.proposalType.value;
+      const proposalType = this.state.proposalType;
       const abstract = formElements.abstract.value;
 
       const { dispatch, user: { authenticated, id } } = this.props;
@@ -74,8 +83,7 @@ class Submit extends Component {
                     <div className={cx('col-md-8', 'col-md-offset-2')}>
                       <h5>Topics</h5>
                       <p>You may get a good sense of the topics we're interested in by looking into previous events: Reversim Summit 2013 and Reversim Summit 2014 and Reversim Summit 2015</p>
-                      <p>
-                        Apart from that, here's a good grocery list of topics just to give you ideas. We are interested in everything including:
+                      <p>Apart from that, here's a good grocery list of topics just to give you ideas. We are interested in everything including:</p>
                         <ul>
                           <li>Software development</li>
                           <li>Software product development</li>
@@ -90,8 +98,7 @@ class Submit extends Component {
                           <li>Tooling</li>
                         </ul>
 
-                        There is no predefined list of topics, if you’d like to speak about something interesting, we want it!
-                      </p>
+                      <p>There is no predefined list of topics, if you’d like to speak about something interesting, we want it!</p>
                       <p>We do not set out with a predefined list of tracks. We would like to leave the topics (tracks) open and only after accepting the submissions we will split the sessions into tracks, but we shall not rule out a single good session just b/c it's not a natural fit to any of the predefined list, so don't worry so much about categorizing your submissions.</p>
                       <p>Generally speaking - we are not looking for “intro to something software” or “something software 101”. We’re looking for something of greater depth. However, we are open to session “intro to something that isn’t software”, as long is this something is of general interest, for example “intro to moonwalking and breakdance”</p>
                       <br /><p>There are three possible session types you may submit:</p>
@@ -115,7 +122,7 @@ class Submit extends Component {
                           <h6>Bio</h6>
                           <fieldset>
                             <span className={cx("col-xs-12")}>
-                              <label for="fullname">Full name</label>
+                              <label htmlFor="fullname">Full name</label>
                             </span>
                             <span className={cx("col-xs-5")}>
                               <input id="fullname" ref="fullname" type="text" defaultValue={user.name} required />
@@ -124,7 +131,7 @@ class Submit extends Component {
 
                           <fieldset>
                             <span className={cx("col-xs-12")}>
-                              <label for="email">Email</label>
+                              <label htmlFor="email">Email</label>
                             </span>
                             <span className={cx("col-xs-5")}>
                               {user.email}
@@ -134,7 +141,7 @@ class Submit extends Component {
 
                           <fieldset>
                             <span className={cx("col-xs-12")}>
-                              <label for="oneLiner">One Liner</label>
+                              <label htmlFor="oneLiner">One Liner</label>
                             </span>
                             <span className={cx("col-xs-5")}>
                               <input id="oneLiner" ref="oneLiner" type="text" defaultValue={user.oneLiner} />
@@ -144,7 +151,7 @@ class Submit extends Component {
 
                           <fieldset>
                             <span className={cx("col-xs-12")}>
-                              <label for="linkedin">Linkedin Profile</label>
+                              <label htmlFor="linkedin">Linkedin Profile</label>
                             </span>
                             <span className={cx("col-xs-5")}>
                               <input id="linkedin" ref="linkedin" type="text" defaultValue={user.linkedin} />
@@ -154,7 +161,7 @@ class Submit extends Component {
 
                           <fieldset>
                             <span className={cx("col-xs-12")}>
-                              <label for="twitter">Twitter @name</label>
+                              <label htmlFor="twitter">Twitter @name</label>
                             </span>
                             <span className={cx("col-xs-5")}>
                               <input id="twitter" ref="twitter" type="text" defaultValue={user.twitter} placeholder="@Reversim" />
@@ -164,20 +171,20 @@ class Submit extends Component {
 
                           <fieldset>
                             <span className={cx("col-xs-12")}>
-                              <label for="bio">Short Bio</label>
+                              <label htmlFor="bio">Short Bio</label>
                             </span>
                             <span className={cx("col-xs-5")}>
-                              <textarea id="bio" ref="bio" defaultValue={user.bio}></textarea>
+                              <textarea id="bio" ref="bio" defaultValue={user.bio} />
                             </span>
                             <small className={cx("col-xs-3")}>This will be presented on the website</small>
                           </fieldset>
 
                           <fieldset>
                             <span className={cx("col-xs-12")}>
-                              <label for="trackRecord">Track record as speaker</label>
+                              <label htmlFor="trackRecord">Track record as speaker</label>
                             </span>
                             <span className={cx("col-xs-5")}>
-                              <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord}></textarea>
+                              <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord} />
                             </span>
                             <small className={cx("col-xs-3")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
                           </fieldset>
@@ -186,7 +193,7 @@ class Submit extends Component {
                           <h6>Proposal</h6>
                             <fieldset>
                               <span className={cx("col-xs-12")}>
-                                <label for="title">Title</label>
+                                <label htmlFor="title">Title</label>
                               </span>
                               <span className={cx("col-xs-5")}>
                                 <input id="title" ref="title" type="text" required />
@@ -195,18 +202,18 @@ class Submit extends Component {
 
                             <fieldset>
                               <span className={cx("col-xs-5")}>
-                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" value="full" defaultChecked /> <label for="full">Full Featured (30-40 min.)</label></div>
-                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" value="lightning" /> <label for="lightning">Lightning Talk (5 min.)</label></div>
-                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" value="ossil" /> <label for="ossil">Open Source in Israel (10 min.)</label></div>
+                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "full"} value="full" /> <label htmlFor="full">Full Featured (30-40 min.)</label></div>
+                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "lightning"} value="lightning" /> <label htmlFor="lightning">Lightning Talk (5 min.)</label></div>
+                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "ossil"} value="ossil" /> <label htmlFor="ossil">Open Source in Israel (10 min.)</label></div>
                               </span>
                             </fieldset>
 
                             <fieldset>
                               <span className={cx("col-xs-12")}>
-                                <label for="abstract">Abstract</label>
+                                <label htmlFor="abstract">Abstract</label>
                               </span>
                               <span className={cx("col-xs-5")}>
-                                <textarea id="abstract" ref="abstract" required></textarea>
+                                <textarea id="abstract" ref="abstract" required />
                               </span>
                             </fieldset>
 

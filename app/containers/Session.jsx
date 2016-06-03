@@ -22,10 +22,19 @@ class Session extends Component {
     }
 
     renderSessionInfo() {
-      const { currentProposal: { abstract, title, speaker_ids } } = this.props;
+      const { currentProposal: { abstract, title, type, speaker_ids } } = this.props;
 
-      let speakers = speaker_ids.map(speaker => <Speaker name={speaker.profile.name} imageUrl={speaker.profile.picture || defaultSpeakerPic} oneLiner={speaker.profile.oneLiner} bio={speaker.profile.bio} linkedin={speaker.profile.linkedin} twitter={speaker.profile.twitter}></Speaker>)
-      const abstractParagraphs = abstract.split('\n').map(paragraph => <p>{paragraph}</p>);
+      let proposalType;
+      if (type === 'ossil') {
+        proposalType = "Open Source in Israel (10 min.)";
+      } else if (type === 'lightning') {
+        proposalType = "Lightning Talk (5 min.)";
+      } else {
+        proposalType = "Full Featured (30-40 min.)";
+      }
+
+      let speakers = speaker_ids.map((speaker, i) => <Speaker key={i} name={speaker.profile.name} imageUrl={speaker.profile.picture || defaultSpeakerPic} oneLiner={speaker.profile.oneLiner} bio={speaker.profile.bio} linkedin={speaker.profile.linkedin} twitter={speaker.profile.twitter}></Speaker>)
+      const abstractParagraphs = abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
 
       return (<div>
                 <section id="register" className={cx('section', 'overlay', 'bg4', 'light-text', 'align-center')}>
@@ -36,7 +45,8 @@ class Session extends Component {
 
                 <section id="session-info" className={cx('section', 'container')}>
                   <div className={cx('col-md-6', 'col-md-offset-1')}>
-                    <p>{abstractParagraphs}</p>
+                    <p><small className={cx("text-alt")}><span className={cx("highlight")}>{proposalType}</span></small></p>
+                    {abstractParagraphs}
 
                     <SocialShare url={window.location.href} title='google' />
                   </div>

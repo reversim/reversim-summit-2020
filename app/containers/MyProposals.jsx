@@ -25,7 +25,7 @@ class MyProposals extends Component {
     render() {
         const { name, picture, oneLiner, bio, linkedin, twitter, proposals } = this.props.user;
 
-        const proposalsBlocks = proposals.map(proposal => {
+        const proposalsBlocks = proposals.map((proposal, i) => {
           let type;
           if (proposal.type === 'ossil') {
             type = "Open Source in Israel (10 min.)";
@@ -35,16 +35,16 @@ class MyProposals extends Component {
             type = "Full Featured (30-40 min.)";
           }
 
-          const abstractParagraphs = proposal.abstract.split('\n').map(paragraph => <p>{paragraph}</p>);
+          const abstractParagraphs = proposal.abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
 
           return (
-            <section className={cx("section")} style={ {padding: '0 30px 60px'} }>
+            <section className={cx("section")} style={ {padding: '0 30px 60px'} } key={i}>
               <div>
                 <div className={cx('align-left')}>
                   <article>
                     <h5>{proposal.title}</h5>
                       <p><small className={cx("text-alt")}><span className={cx("highlight")}>{type}</span></small></p>
-                      <p>{abstractParagraphs}</p>
+                      {abstractParagraphs}
                       <Link to={`session/${proposal.id}`} className={cx('btn', 'btn-outline-clr')} style={{ margin: '20px 0 0' }}>View</Link>
                   </article>
                 </div>
