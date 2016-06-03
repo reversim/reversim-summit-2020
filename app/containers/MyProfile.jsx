@@ -1,22 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import Navigation from 'components/Navigation';
-import About from 'components/About';
-import Footer from 'components/Footer';
-import { StickyContainer, Sticky } from 'react-sticky';
-import Scroll, { Element } from 'react-scroll';
-import {fetchUserProposals } from 'actions/users';
+import BaseLayout from 'containers/BaseLayout';
 import Speaker from 'components/Speaker';
-import SocialShare from 'components/SocialShare';
-import Proposal from 'components/Proposal';
 import {Link} from 'react-router';
 import {updateUser} from 'actions/users';
 import NotificationSystem from 'react-notification-system';
 
 import styles from 'css/main';
 
-import someSpeaker from 'images/team/ori.png'
+import defaultPic from 'images/team/ori.png'
 
 const cx = classNames.bind(styles);
 
@@ -81,104 +74,94 @@ class MyProfile extends Component {
         const { user } = this.props;
 
         return (
-            <StickyContainer>
-              <div className={cx('session-page')}>
-                  <Sticky style={{zIndex: 5}}>
-                      <Navigation />
-                  </Sticky>
+            <BaseLayout currentPath={this.props.location.pathname} name="my-profile">
+                <NotificationSystem ref="notificationSystem" style={{ NotificationItem: { DefaultStyle: { marginTop: '120px', padding: '20px' } } } } />
 
-                  <div>
-                    <NotificationSystem ref="notificationSystem" style={{ NotificationItem: { DefaultStyle: { marginTop: '120px', padding: '20px' } } } } />
+                <section id="my-profile" className={cx('section', 'container')}>
+                    <div className={cx('col-md-7', 'col-md-offset-1')}>
+                      <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
+                        <h6>Bio</h6>
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
+                            <label for="name">Full name</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                            <input id="name" ref="name" type="text" value={this.state.name} onChange={this.previewProfile.bind(this)} required />
+                          </span>
+                        </fieldset>
 
-                    <section id="my-profile" className={cx('section', 'container')}>
-                        <div className={cx('col-md-7', 'col-md-offset-1')}>
-                          <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
-                            <h6>Bio</h6>
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label for="name">Full name</label>
-                              </span>
-                              <span className={cx("col-xs-6")}>
-                                <input id="name" ref="name" type="text" value={this.state.name} onChange={this.previewProfile.bind(this)} required />
-                              </span>
-                            </fieldset>
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
+                            <label for="email">Email</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                            {user.email}
+                          </span>
+                          <small className={cx("col-xs-6")}>So we can get in touch with you. Email is only visible to moderators</small>
+                        </fieldset>
 
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label for="email">Email</label>
-                              </span>
-                              <span className={cx("col-xs-6")}>
-                                {user.email}
-                              </span>
-                              <small className={cx("col-xs-6")}>So we can get in touch with you. Email is only visible to moderators</small>
-                            </fieldset>
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
+                            <label for="oneLiner">One Liner</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                            <input id="oneLiner" ref="oneLiner" type="text" value={this.state.oneLiner} onChange={this.previewProfile.bind(this)} />
+                          </span>
+                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
+                        </fieldset>
 
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label for="oneLiner">One Liner</label>
-                              </span>
-                              <span className={cx("col-xs-6")}>
-                                <input id="oneLiner" ref="oneLiner" type="text" value={this.state.oneLiner} onChange={this.previewProfile.bind(this)} />
-                              </span>
-                              <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
-                            </fieldset>
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
+                            <label for="linkedin">Linkedin Profile</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                            <input id="linkedin" ref="linkedin" type="text" value={this.state.linkedin} onChange={this.previewProfile.bind(this)} />
+                          </span>
+                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
+                        </fieldset>
 
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label for="linkedin">Linkedin Profile</label>
-                              </span>
-                              <span className={cx("col-xs-6")}>
-                                <input id="linkedin" ref="linkedin" type="text" value={this.state.linkedin} onChange={this.previewProfile.bind(this)} />
-                              </span>
-                              <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
-                            </fieldset>
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
+                            <label for="twitter">Twitter @name</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                            <input id="twitter" ref="twitter" type="text" placeholder="@Reversim" value={this.state.twitter} onChange={this.previewProfile.bind(this)} />
+                          </span>
+                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
+                        </fieldset>
 
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label for="twitter">Twitter @name</label>
-                              </span>
-                              <span className={cx("col-xs-6")}>
-                                <input id="twitter" ref="twitter" type="text" placeholder="@Reversim" value={this.state.twitter} onChange={this.previewProfile.bind(this)} />
-                              </span>
-                              <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
-                            </fieldset>
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
+                            <label for="bio">Short Bio</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                          <textarea id="bio" ref="bio" value={this.state.bio} onChange={this.previewProfile.bind(this)}></textarea>
+                          </span>
+                          <small className={cx("col-xs-6")}>This will be presented on the website</small>
+                        </fieldset>
 
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label for="bio">Short Bio</label>
-                              </span>
-                              <span className={cx("col-xs-6")}>
-                              <textarea id="bio" ref="bio" value={this.state.bio} onChange={this.previewProfile.bind(this)}></textarea>
-                              </span>
-                              <small className={cx("col-xs-6")}>This will be presented on the website</small>
-                            </fieldset>
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
+                            <label for="trackRecord">Track record as speaker</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                            <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord}></textarea>
+                          </span>
+                          <small className={cx("col-xs-6")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
+                        </fieldset>
 
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label for="trackRecord">Track record as speaker</label>
-                              </span>
-                              <span className={cx("col-xs-6")}>
-                                <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord}></textarea>
-                              </span>
-                              <small className={cx("col-xs-6")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
-                            </fieldset>
+                        <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>
+                          <input type="submit" value="Update" className={cx('btn')} />
+                        </fieldset>
+                      </form>
+                    </div>
 
-                            <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>
-                              <input type="submit" value="Update" className={cx('btn')} />
-                            </fieldset>
-                          </form>
-                        </div>
+                    <div className={cx('col-md-4')}>
+                      <Speaker name={this.state.name} imageUrl={user.picture || defaultPic} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter}></Speaker>
+                    </div>
 
-                        <div className={cx('col-md-4')}>
-                          <Speaker name={this.state.name} imageUrl={user.picture || someSpeaker} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter}></Speaker>
-                        </div>
-
-                    </section>
-                  </div>
-
-                  <Footer />
-              </div>
-            </StickyContainer>
+                </section>
+            </BaseLayout>
         );
     }
 }

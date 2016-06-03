@@ -1,20 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import Navigation from 'components/Navigation';
-import About from 'components/About';
-import Footer from 'components/Footer';
-import { StickyContainer, Sticky } from 'react-sticky';
-import Scroll, { Element } from 'react-scroll';
+import BaseLayout from 'containers/BaseLayout';
 import {fetchUserProposals } from 'actions/users';
 import Speaker from 'components/Speaker';
-import SocialShare from 'components/SocialShare';
-import Proposal from 'components/Proposal';
 import {Link} from 'react-router';
 
 import styles from 'css/main';
 
-import someSpeaker from 'images/team/ori.png'
+import defaultSpeakerPic from 'images/team/ori.png'
 
 const cx = classNames.bind(styles)
 
@@ -60,34 +54,26 @@ class MyProposals extends Component {
         });
 
         return (
-            <StickyContainer>
-              <div className={cx('session-page')}>
-                  <Sticky style={{zIndex: 5}}>
-                      <Navigation />
-                  </Sticky>
+            <BaseLayout currentPath={this.props.location.pathname} name="my-proposals">
 
-                  <div>
-                    <section id="register" className={cx('section', 'overlay', 'bg4', 'light-text', 'align-center')}>
-                      <div className={cx("container")}>
-                        <h1>My Proposals</h1>
-                      </div>
-                    </section>
+              <section id="register" className={cx('section', 'overlay', 'bg4', 'light-text', 'align-center')}>
+                <div className={cx("container")}>
+                  <h1>My Proposals</h1>
+                </div>
+              </section>
 
-                    <section id="my-proposals" className={cx('section', 'container')}>
-                        <div className={cx('col-md-7', 'col-md-offset-1')}>
-                          {proposalsBlocks}
-                        </div>
-
-                        <div className={cx('col-md-4')}>
-                          <Speaker name={name} imageUrl={picture || someSpeaker} oneLiner={oneLiner} bio={bio} linkedin={linkedin} twitter={twitter}></Speaker>
-                        </div>
-
-                    </section>
+              <section id="my-proposals" className={cx('section', 'container')}>
+                  <div className={cx('col-md-7', 'col-md-offset-1')}>
+                    {proposalsBlocks}
                   </div>
 
-                  <Footer />
-              </div>
-            </StickyContainer>
+                  <div className={cx('col-md-4')}>
+                    <Speaker name={name} imageUrl={picture || defaultSpeakerPic} oneLiner={oneLiner} bio={bio} linkedin={linkedin} twitter={twitter}></Speaker>
+                  </div>
+
+              </section>
+
+            </BaseLayout>
         );
     }
 }

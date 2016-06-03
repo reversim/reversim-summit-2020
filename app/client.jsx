@@ -16,6 +16,26 @@ const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
 
 /**
+ *  Fix Hash links
+ */
+function hashLinkScroll() {
+  const { hash } = window.location;
+  if (hash !== '') {
+    // Push onto callback queue so it runs after the DOM is updated,
+    // this is required when navigating from a different page so that
+    // the element is rendered on the page before trying to getElementById.
+    setTimeout(() => {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView();
+    }, 0);
+  } else {
+    // reset scroll to top
+    window.scrollTo(0, 0);
+  }
+}
+
+/**
  * Callback function handling frontend route changes.
  */
 function onUpdate() {
@@ -32,7 +52,7 @@ function onUpdate() {
 
   const { components, params } = this.state;
 
-  window.scrollTo(0, 0);
+  hashLinkScroll();
 
   preRenderMiddleware(store.dispatch, components, params);
 }

@@ -37,7 +37,29 @@ class Navigation extends Component {
   }
 
   render() {
-    const { isLoginModalOpen, authenticated } = this.props.user;
+    const { user: { isLoginModalOpen, authenticated }, currentPath } = this.props;
+
+    let navigationElements;
+    if (currentPath === '/') {
+      // Home navigation
+      navigationElements = [
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500}>About</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500}>Timeline</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="proposals" spy={true} smooth={true} offset={-100} duration={500}>Proposals</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500}>Sponsors</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500}>Location</ScrollLink>
+      ];
+    } else {
+      navigationElements = [
+        <Link className={cx("navigation-link")} to="/#about">About</Link>,
+        <Link className={cx("navigation-link")} to="/#timeline">Timeline</Link>,
+        <Link className={cx("navigation-link")} to="/#proposals">Proposals</Link>,
+        <Link className={cx("navigation-link")} to="/#sponsors">Sponsors</Link>,
+        <Link className={cx("navigation-link")} to="/#location">Location</Link>
+      ];
+    }
+
+    navigationElements = navigationElements.map((elem, i) => <li className={cx("navigation-item")} key={i}>{elem}</li>);
 
     return (
       <header className={cx('header', 'header-black')}>
@@ -58,21 +80,7 @@ class Navigation extends Component {
     				<div className={cx("col-sm-10", "col-xs-12", "navigation-container")}>
     					<div id="navigation" className={cx("navbar-collapse", "collapse")}>
     						<ul className={cx("navigation-list", "pull-left", "light-text")}>
-    							<li className={cx("navigation-item")}>
-                    <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500}>About</ScrollLink>
-                  </li>
-                  <li className={cx("navigation-item")}>
-                    <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500}>Timeline</ScrollLink>
-                  </li>
-                  <li className={cx("navigation-item")}>
-                    <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="proposals" spy={true} smooth={true} offset={-100} duration={500}>Proposals</ScrollLink>
-                  </li>
-                  <li className={cx("navigation-item")}>
-                    <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500}>Sponsors</ScrollLink>
-                  </li>
-                  <li className={cx("navigation-item")}>
-                    <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500}>Location</ScrollLink>
-                  </li>
+    							{navigationElements}
     						</ul>
 
                 { authenticated ? (
@@ -120,6 +128,7 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   user: PropTypes.object,
+  currentPath: PropTypes.string,
   dispatch: PropTypes.func.isRequired
 };
 

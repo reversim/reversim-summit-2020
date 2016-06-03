@@ -35,55 +35,55 @@ class Home extends Component {
         const { proposals } = this.props;
 
         return (
-            <StickyContainer>
-                <div className={cx('home')}>
-                    <section id="hero" className={cx('hero-section', 'bg1', 'bg-cover', 'window-height', 'light-text')}>
-                        <ul className={cx("socials-nav")}>
-                            <li className={cx('socials-nav-item')}><a href="https://twitter.com/reversim"><span className={cx('fa', 'fa-twitter')}></span></a></li>
-                            <li className={cx('socials-nav-item')}><a href="https://www.facebook.com/groups/806177629478248/"><span className={cx('fa', 'fa-facebook')}></span></a></li>
-                        </ul>
-                        <div className={cx('heading-block', 'centered-block', 'align-center')}>
-                            <div className={cx('container')}>
-                                <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>19-20.sep <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>Weizmann Institute of Science</h5>
-                                <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
-                                <h5 className={cx('base-font')}>Call for papers is now open!</h5>
-                                <div className={cx('btns-container')}>
-                                    <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link>
-                                    <a href="#" className={cx('btn', 'btn-outline')} data-modal-link="0">REGISTER</a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+          <StickyContainer>
+              <div className={cx('home')}>
+                  <section id="hero" className={cx('hero-section', 'bg1', 'bg-cover', 'window-height', 'light-text')}>
+                      <ul className={cx("socials-nav")}>
+                          <li className={cx('socials-nav-item')}><a href="https://twitter.com/reversim"><span className={cx('fa', 'fa-twitter')}></span></a></li>
+                          <li className={cx('socials-nav-item')}><a href="https://www.facebook.com/groups/806177629478248/"><span className={cx('fa', 'fa-facebook')}></span></a></li>
+                      </ul>
+                      <div className={cx('heading-block', 'centered-block', 'align-center')}>
+                          <div className={cx('container')}>
+                              <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>19-20.sep <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>Weizmann Institute of Science</h5>
+                              <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
+                              <h5 className={cx('base-font')}>Call for papers is now open!</h5>
+                              <div className={cx('btns-container')}>
+                                  <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link>
+                                  <a href="#" className={cx('btn', 'btn-outline')} data-modal-link="0">REGISTER</a>
+                              </div>
+                          </div>
+                      </div>
+                  </section>
 
-                    <Sticky style={{zIndex: 5}}>
-                        <Navigation />
-                    </Sticky>
+                  <Sticky style={{zIndex: 5}}>
+                      <Navigation currentPath={this.props.location.pathname} />
+                  </Sticky>
 
-                    <Element name="about">
-                      <About />
-                    </Element>
+                  <Element name="about">
+                    <About />
+                  </Element>
 
-                    <Element name="timeline">
-                      <Timeline />
-                    </Element>
+                  <Element name="timeline">
+                    <Timeline />
+                  </Element>
 
-                    <Element name="proposals">
-                      <Proposals data={proposals} />
-                    </Element>
+                  <Element name="proposals">
+                    <Proposals data={proposals} />
+                  </Element>
 
-                    <CFP />
+                  <CFP />
 
-                    <Element name="sponsors">
-                      <Sponsors />
-                    </Element>
+                  <Element name="sponsors">
+                    <Sponsors />
+                  </Element>
 
-                    <Element name="location">
-                      <Location />
-                    </Element>
+                  <Element name="location">
+                    <Location />
+                  </Element>
 
-                    <Footer />
-                </div>
-            </StickyContainer>
+                  <Footer />
+              </div>
+          </StickyContainer>
         );
     }
 }

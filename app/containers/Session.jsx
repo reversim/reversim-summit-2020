@@ -1,18 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import Navigation from 'components/Navigation';
-import About from 'components/About';
-import Footer from 'components/Footer';
-import { StickyContainer, Sticky } from 'react-sticky';
-import Scroll, { Element } from 'react-scroll';
+import BaseLayout from 'containers/BaseLayout';
 import {fetchProposal} from 'actions/proposals';
 import Speaker from 'components/Speaker';
 import SocialShare from 'components/SocialShare';
 
 import styles from 'css/main';
 
-import someSpeaker from 'images/team/ori.png'
+import defaultSpeakerPic from 'images/team/ori.png'
 
 const cx = classNames.bind(styles)
 
@@ -28,7 +24,7 @@ class Session extends Component {
     renderSessionInfo() {
       const { currentProposal: { abstract, title, speaker_ids } } = this.props;
 
-      let speakers = speaker_ids.map(speaker => <Speaker name={speaker.profile.name} imageUrl={speaker.profile.picture || someSpeaker} oneLiner={speaker.profile.oneLiner} bio={speaker.profile.bio} linkedin={speaker.profile.linkedin} twitter={speaker.profile.twitter}></Speaker>)
+      let speakers = speaker_ids.map(speaker => <Speaker name={speaker.profile.name} imageUrl={speaker.profile.picture || defaultSpeakerPic} oneLiner={speaker.profile.oneLiner} bio={speaker.profile.bio} linkedin={speaker.profile.linkedin} twitter={speaker.profile.twitter}></Speaker>)
       const abstractParagraphs = abstract.split('\n').map(paragraph => <p>{paragraph}</p>);
 
       return (<div>
@@ -57,17 +53,9 @@ class Session extends Component {
         const { isFetching } = this.props;
 
         return (
-            <StickyContainer>
-              <div className={cx('session-page')}>
-                  <Sticky style={{zIndex: 5}}>
-                      <Navigation />
-                  </Sticky>
-
-                  {isFetching ? undefined : this.renderSessionInfo()}
-
-                  <Footer />
-              </div>
-            </StickyContainer>
+            <BaseLayout currentPath={this.props.location.pathname} name="session-page">
+                {isFetching ? undefined : this.renderSessionInfo()}
+            </BaseLayout>
         );
     }
 }

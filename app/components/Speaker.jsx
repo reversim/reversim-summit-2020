@@ -27,8 +27,8 @@ const Speaker = ({name, imageUrl, oneLiner, bio, linkedin, twitter}) => {
 
 Speaker.propTypes = {
   name: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
-  oneLiner: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
+  oneLiner: PropTypes.string,
   bio: PropTypes.string,
   linkedin: PropTypes.string,
   twitter: PropTypes.string
