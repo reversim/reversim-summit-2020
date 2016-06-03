@@ -62,12 +62,10 @@ export function signUp(req, res, next) {
  * Update a user
  */
 export function update(req, res) {
-  const query = { google: req.body.google };
   const omitKeys = ['id', '_id', '_v', 'google'];
   const data = _.omit(req.body, omitKeys);
-  var queryData = {$set: data};
 
-  User.findOneAndUpdate(query, queryData, (err) => {
+  User.findOneAndUpdate({ '_id': req.session.passport.user }, data, (err, user) => {
     if (err) {
       console.log('Error on save! '+err);
       return res.status(500).send('We failed to save for some reason');
@@ -79,9 +77,31 @@ export function update(req, res) {
   });
 }
 
+
+/**
+ * Proposals for User
+ */
+export function getProposals(req, res) {
+    //console.log('proposal all started...');
+    console.log("----------------------------------------");
+    console.log(req.session);
+    console.log("----------------------------------------");
+
+
+    User.findOne({'_id': req.session.passport.user}).populate('proposals').exec((err, user) => {
+        if (err) {
+            console.log('Error in first query');
+            return res.status(500).send('Something went wrong getting the data');
+        }
+
+        return res.json(user.proposals);
+    });
+}
+
 export default {
   login,
   logout,
   update,
-  signUp
+  signUp,
+  getProposals
 };

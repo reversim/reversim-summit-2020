@@ -1,7 +1,7 @@
 import User from '../models/user';
 
 export default (id, done) => {
-  User.findById(id, (err, user) => {
+  User.findById(id).populate('proposals').exec((err, user) => {
     done(err, user);
   });
 };

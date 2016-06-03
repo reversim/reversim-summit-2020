@@ -32,6 +32,8 @@ function onUpdate() {
 
   const { components, params } = this.state;
 
+  window.scrollTo(0, 0);
+
   preRenderMiddleware(store.dispatch, components, params);
 }
 

@@ -3,13 +3,15 @@
  */
 import _ from 'lodash';
 import Proposal from '../models/proposal';
+import User from '../models/user';
+import mongoose from 'mongoose';
 
 /**
  * List
  */
 export function all(req, res) {
     //console.log('proposal all started...');
-    Proposal.find({}).exec((err, proposals) => {
+    Proposal.find({}).populate('speaker_ids').exec((err, proposals) => {
         if (err) {
             console.log('Error in first query');
             return res.status(500).send('Something went wrong getting the data');
@@ -22,16 +24,49 @@ export function all(req, res) {
 }
 
 /**
+ * Single Proposal
+ */
+export function get(req, res) {
+    Proposal.findOne({'id': req.params.id}).populate('speaker_ids').exec((err, proposal) => {
+        if (err) {
+            console.log('Error in first query: ' + err);
+            return res.status(500).send('Something went wrong getting the data');
+        }
+
+        return res.json(proposal);
+    });
+}
+
+/**
  * Add a Proposal
  */
 export function add(req, res) {
-    console.log('adding new proposal '+JSON.stringify(req.body));
+    let proposal = _.clone(req.body);
 
-    Proposal.create(req.body, (err) => {
+    proposal.created_at = new Date();
+    proposal.updated_at = new Date();
+
+    console.log('adding new proposal '+JSON.stringify(proposal));
+
+    Proposal.create(proposal, (err, model) => {
         if (err) {
             console.log(err);
             return res.status(400).send(err);
         }
+
+        // Update speakers proposals
+        proposal.speaker_ids.forEach(speaker_id => {
+          User.findByIdAndUpdate(
+            speaker_id,
+            { $push: {'proposals': model._id} },
+            { safe: true, upsert: true },
+            (err, model) => {
+              if (err) {
+                console.log('Error in first query: ' + err);
+              }
+            }
+          );
+        });
 
         return res.status(200).send('OK');
     });
@@ -43,6 +78,7 @@ export function add(req, res) {
 export function update(req, res) {
     const query = { id: req.params.id };
     const omitKeys = ['id', '_id', '_v'];
+    req.body.updated_at = new Date();
     const data = _.omit(req.body, omitKeys);
 
     Proposal.findOneAndUpdate(query, data, (err) => {
@@ -73,6 +109,7 @@ export function remove(req, res) {
 
 export default {
     all,
+    get,
     add,
     update,
     remove

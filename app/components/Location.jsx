@@ -1,5 +1,5 @@
 import React from 'react';
-import LocationMap from '../components/LocationMap';
+import LocationMap from 'components/LocationMap';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 

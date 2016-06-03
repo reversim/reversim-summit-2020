@@ -77,7 +77,21 @@ class Navigation extends Component {
     						</ul>
 
                 { authenticated ? (
-                  <div className={cx("pull-right", "header-login")}>{this.props.user.name || this.props.user.email} (<Link onClick={this.logout.bind(this)} className={cx("navigation-item")} to="/">Logout</Link>)</div>
+                  <div className={cx("pull-right")}>
+                    <ul>
+                      <li className={cx('navigation-item', 'dropdown')}>
+                        <a className={cx('navigation-link', 'dropdown-toggle', 'header-login')} data-toggle="dropdown">{this.props.user.name || this.props.user.email} <i className={cx('fa', 'fa-caret-down')}></i></a>
+                        <ul className={cx("dropdown-menu")}>
+                          <li className={cx("navigation-item")}>
+                            <Link to="/my-proposals" className={cx('navigation-link')}>My Proposals</Link>
+                          </li>
+                          <li className={cx("navigation-item")}>
+                            <Link onClick={this.logout.bind(this)} to="/" className={cx('navigation-link')}>Logout</Link>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 ) : (
                   <a className={cx("pull-right", "buy-btn")} onClick={this.openLoginModal.bind(this)}>Login</a>
 

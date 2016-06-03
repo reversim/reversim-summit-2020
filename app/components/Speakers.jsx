@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
-import Speaker from '../components/Speaker';
+import Speaker from 'components/Speaker';
 import someSpeaker from 'images/speakers/speaker.jpg';
 
 const cx = classNames.bind(styles);
@@ -21,7 +21,7 @@ const Speakers = () => {
         <br />
         <br />
 
-      <Speaker name="Lidan" imageUrl={someSpeaker} position="Developer" bio="Bla bla bla" linkedin="#" twitter="#"></Speaker>
+        <Speaker name="Lidan" imageUrl={someSpeaker} position="Developer" bio="Bla bla bla" linkedin="#" twitter="#"></Speaker>
         <Speaker name="Ori" imageUrl={someSpeaker} position="Developer" bio="Bla bla bla" linkedin="#" twitter="#"></Speaker>
         <Speaker name="Ran" imageUrl={someSpeaker} position="Developer" bio="Bla bla bla" linkedin="#" twitter="#"></Speaker>
 

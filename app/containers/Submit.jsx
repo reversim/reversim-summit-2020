@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames/bind';
-import Navigation from './Navigation';
-import About from './About';
-import Footer from './Footer';
+import Navigation from 'components/Navigation';
+import About from 'components/About';
+import Footer from 'components/Footer';
 import { StickyContainer, Sticky } from 'react-sticky';
 import Scroll, { Element } from 'react-scroll';
 import {createProposal} from 'actions/proposals';
@@ -26,13 +26,6 @@ class Submit extends Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {proposalType: 'full'};
-    }
-
-    chooseProposalType(newValue) {
-      this.setState({
-        proposalType: newValue
-      });
     }
 
     handleSubmit(event) {
@@ -40,26 +33,35 @@ class Submit extends Component {
       const formElements = event.target.elements;
 
       const fullname = formElements.fullname.value;
+      const oneLiner = formElements.oneLiner.value;
       const bio = formElements.bio.value;
       const trackRecord = formElements.trackRecord.value;
+      const linkedin = formElements.linkedin.value;
+      const twitter = formElements.twitter.value;
 
       const title = formElements.title.value;
       const proposalType = formElements.proposalType.value;
       const abstract = formElements.abstract.value;
 
-      const { dispatch, user: { authenticated, id } } = this.props;
+      const { dispatch, user: { authenticated, id, google } } = this.props;
 
       if (authenticated) {
-        dispatch(updateUser({ profile: {name: fullname, bio: bio, trackRecord: trackRecord } }))
+        dispatch(updateUser({
+          'profile.name': fullname,
+          'profile.bio': bio,
+          'profile.trackRecord': trackRecord,
+          'profile.linkedin': linkedin,
+          'profile.twitter': twitter,
+          'profile.oneLiner': oneLiner
+        }))
         .then(() => dispatch(createProposal(title, abstract, proposalType, [id])))
-        .then(() => dispatch(push('/')))
+        .then((result) => dispatch(push(`session/${result.id}`)))
       }
     }
 
 
     render() {
         const { user } = this.props;
-        console.log(user);
 
         return (
             <StickyContainer>
@@ -139,6 +141,35 @@ class Submit extends Component {
                                   <small className={cx("col-xs-4")}>So we can get in touch with you. Email is only visible to moderators</small>
                                 </fieldset>
 
+                                <fieldset>
+                                  <span className={cx("col-xs-12")}>
+                                    <label for="oneLiner">One Liner</label>
+                                  </span>
+                                  <span className={cx("col-xs-5")}>
+                                    <input id="oneLiner" ref="oneLiner" type="text" defaultValue={user.oneLiner} />
+                                  </span>
+                                  <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
+                                </fieldset>
+
+                                <fieldset>
+                                  <span className={cx("col-xs-12")}>
+                                    <label for="linkedin">Linkedin Profile</label>
+                                  </span>
+                                  <span className={cx("col-xs-5")}>
+                                    <input id="linkedin" ref="linkedin" type="text" defaultValue={user.linkedin} />
+                                  </span>
+                                  <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
+                                </fieldset>
+
+                                <fieldset>
+                                  <span className={cx("col-xs-12")}>
+                                    <label for="twitter">Twitter @name</label>
+                                  </span>
+                                  <span className={cx("col-xs-5")}>
+                                    <input id="twitter" ref="twitter" type="text" defaultValue={user.twitter} placeholder="@Reversim" />
+                                  </span>
+                                  <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
+                                </fieldset>
 
                                 <fieldset>
                                   <span className={cx("col-xs-12")}>
@@ -193,8 +224,6 @@ class Submit extends Component {
                                   </fieldset>
                               </form>
                           </div>
-
-
                       </div>
                     </section>
 

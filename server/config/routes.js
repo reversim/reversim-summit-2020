@@ -16,6 +16,7 @@ export default (app) => {
     app.post('/signup', usersController.signUp);
     app.post('/logout', usersController.logout);
     app.post('/updateUser', usersController.update);
+    app.get('/user/proposals', usersController.getProposals);
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
@@ -32,8 +33,8 @@ export default (app) => {
       next();
     }, passport.authenticate('google', {
       scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
+        'profile',
+        'email'
       ]
     }));
 
@@ -65,6 +66,7 @@ export default (app) => {
   // proposal routes
   if (proposalsController) {
     app.get('/proposal', proposalsController.all);
+    app.get('/proposal/:id', proposalsController.get);
     app.post('/proposal/:id', proposalsController.add);
     app.put('/proposal/:id', proposalsController.update);
     app.delete('/proposal/:id', proposalsController.remove);

@@ -12,13 +12,17 @@ import {
   LOGOUT_SUCCESS_USER,
   LOGOUT_ERROR_USER,
   OPEN_LOGIN_MODAL,
-  CLOSE_LOGIN_MODAL } from 'types';
+  CLOSE_LOGIN_MODAL,
+  GET_USER_PROPOSALS_REQUEST,
+  GET_USER_PROPOSALS_SUCCESS,
+  GET_USER_PROPOSALS_FAILURE } from 'types';
 
 export default function user(state = {
   isLogin: true,
   message: '',
   isWaiting: false,
   authenticated: false,
+  proposals: [],
   isLoginModalOpen: false }, action = {}) {
   switch (action.type) {
     case TOGGLE_LOGIN_MODE:
@@ -82,6 +86,19 @@ export default function user(state = {
     case CLOSE_LOGIN_MODAL:
       return Object.assign({}, state, {
         isLoginModalOpen: false
+      });
+    case GET_USER_PROPOSALS_REQUEST:
+      return Object.assign({}, state, {
+        isWaiting: true,
+      });
+    case GET_USER_PROPOSALS_SUCCESS:
+      return Object.assign({}, state, {
+        isWaiting: false,
+        proposals: action.req.data
+      });
+    case GET_USER_PROPOSALS_FAILURE:
+      return Object.assign({}, state, {
+        isWaiting: false
       });
     default:
       return state;

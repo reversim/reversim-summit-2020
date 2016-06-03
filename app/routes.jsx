@@ -2,13 +2,12 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from 'containers/App';
-import Vote from 'containers/Vote';
 import Home from 'containers/Home';
-import Timeline from 'containers/Timeline';
 import Submit from 'containers/Submit';
-import Sessions from 'containers/Sessions';
-import About from 'containers/About';
+import MyProposals from 'containers/MyProposals';
 import LoginOrRegister from 'components/LoginOrRegister';
+import Session from 'containers/Session';
+import { openLoginModal } from 'actions/users';
 
 /*
  * @param {Redux Store}
@@ -20,9 +19,10 @@ export default (store) => {
     const { user: { authenticated }} = store.getState();
     if (!authenticated) {
       replace({
-        pathname: '/login',
+        pathname: '/',
         state: { nextPathname: nextState.location.pathname }
       });
+      store.dispatch(openLoginModal());
     }
     callback();
   };
@@ -40,10 +40,9 @@ export default (store) => {
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="/login" component={LoginOrRegister} onEnter={redirectAuth} />
-        <Route path="/timeline" component={Timeline} />
         <Route path="/submit" component={Submit} onEnter={requireAuth}/>
-        <Route path="/sessions" component={Sessions}/>
-        <Route path="/about" component={About} />
+        <Route path="/session/:id" component={Session}/>
+        <Route path="/my-proposals" component={MyProposals}/>
       </Route>
   );
 };

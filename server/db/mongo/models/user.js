@@ -18,13 +18,20 @@ const UserSchema = new mongoose.Schema({
   tokens: Array,
   profile: {
     name: { type: String, default: '' },
+    oneLiner: { type: String, default: '' },
+    bio: { type: String, default: '' },
     gender: { type: String, default: '' },
     location: { type: String, default: '' },
     website: { type: String, default: '' },
-    bio: { type: String, default: '' },
     picture: { type: String, default: '' },
-    trackRecord: { type: String, default: '' }
+    trackRecord: { type: String, default: '' },
+    linkedin: { type: String, default: '' },
+    twitter: { type: String, default: '' },
   },
+  proposals: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Proposal'
+  }],
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   trackRecord: String,

@@ -16,3 +16,12 @@
   font-weight: normal;
   font-smoothing: antialiased;
 }
+
+.social-buttons {
+  margin-top: 50px;
+}
+
+.share-button {
+  cursor: pointer;
+  margin-right: 10px;
+}

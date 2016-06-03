@@ -44,9 +44,10 @@ export function createProposalRequest(data) {
     };
 }
 
-export function createProposalSuccess() {
+export function createProposalSuccess(id) {
     return {
-        type: types.CREATE_PROPOSAL_SUCCESS
+        type: types.CREATE_PROPOSAL_SUCCESS,
+        id: id
     };
 }
 
@@ -63,6 +64,14 @@ export function fetchProposals() {
     return {
         type: types.GET_PROPOSALS,
         promise: makeProposalsRequest('get')
+    };
+}
+
+export function fetchProposal(id) {
+    return {
+        type: types.GET_PROPOSAL,
+        id: id,
+        promise: makeProposalsRequest('get', id)
     };
 }
 
@@ -102,7 +111,7 @@ export function createProposal(title, abstract, type, speaker_ids) {
                     // on success, but I've opted to leave that out
                     // since we already did an optimistic update
                     // We could return res.json();
-                    return dispatch(createProposalSuccess());
+                    return dispatch(createProposalSuccess(id));
                 }
             })
             .catch(() => {

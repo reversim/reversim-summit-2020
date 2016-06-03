@@ -31,11 +31,15 @@ export default function render(req, res) {
       message: '',
       isLogin: true,
       name: req.user && req.user.profile.name,
+      oneLiner: req.user && req.user.profile.oneLiner,
       email: req.user && req.user.email,
       picture: req.user && req.user.profile.picture,
       bio: req.user && req.user.profile.bio,
       trackRecord: req.user && req.user.profile.trackRecord,
-      id: req.user && req.user._id
+      linkedin: req.user && req.user.profile.linkedin,
+      twitter: req.user && req.user.profile.twitter,
+      id: req.user && req.user._id,
+      proposals: req.user && req.user.proposals
     }
   }, history);
   const routes = createRoutes(store);

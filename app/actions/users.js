@@ -103,6 +103,13 @@ export function closeLoginModal() {
   return { type: types.CLOSE_LOGIN_MODAL };
 }
 
+export function fetchUserProposals() {
+  return {
+      type: types.GET_USER_PROPOSALS,
+      promise: makeUserRequest('get', null, '/user/proposals')
+  };
+}
+
 export function manualLogin(data) {
   return dispatch => {
     dispatch(beginLogin());

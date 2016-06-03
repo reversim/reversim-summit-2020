@@ -4,17 +4,20 @@ import styles from 'css/main';
 
 const cx = classNames.bind(styles);
 
-const Speaker = ({name, imageUrl, position, bio, linkedin, twitter}) => {
+const Speaker = ({name, imageUrl, oneLiner, bio, linkedin, twitter}) => {
+  let twitterButton = twitter ? <li><a href={'https://twitter.com/' + twitter}><span className={cx('fa', 'fa-twitter')}></span></a></li> : undefined;
+  let linkedInButton = linkedin ? <li><a href={linkedin}><span className={cx('fa', 'fa-linkedin')}></span></a></li> : undefined;
+
   return (
-    <div className={cx("col-sm-4")}>
+    <div>
       <div className={cx("speaker")}>
-        <div className={cx('photo-wrapper', 'rounded')}><img src={imageUrl} alt={name} className={cx("img-responsive")} /></div>
+        <div className={cx('photo-wrapper', 'rounded')} style={{width: '40%'}}><img src={imageUrl} alt={name} className={cx("img-responsive")} /></div>
         <h3 className={cx("name")}>{name}</h3>
-        <p className={cx("text-alt")}><small>{position}</small></p>
+        {oneLiner ? <p className={cx("text-alt")}><small>{oneLiner}</small></p> : undefined }
         <p className={cx("about")}>{bio}</p>
         <ul className={cx("speaker-socials")}>
-          <li><a href={twitter || '#'}><span className={cx('fa', 'fa-twitter')}></span></a></li>
-          <li><a href={linkedin || '#'}><span className={cx('fa', 'fa-linkedin')}></span></a></li>
+          {twitterButton}
+          {linkedInButton}
         </ul>
     </div>
   </div>
@@ -24,8 +27,8 @@ const Speaker = ({name, imageUrl, position, bio, linkedin, twitter}) => {
 Speaker.propTypes = {
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  bio: PropTypes.string.isRequired,
+  oneLiner: PropTypes.string.isRequired,
+  bio: PropTypes.element.isRequired,
   linkedin: PropTypes.string,
   twitter: PropTypes.string
 };
