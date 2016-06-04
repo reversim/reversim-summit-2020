@@ -6,6 +6,7 @@ import { manualLogin, signUp, toggleLoginMode } from 'actions/users';
 import stylesLogin from 'css/components/login';
 import styles from 'css/main';
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
+import ga from 'react-ga';
 
 const cxLogin = classNames.bind(stylesLogin);
 const cx = classNames.bind(styles);
@@ -30,7 +31,7 @@ class LoginOrRegister extends Component {
               In order to submit a proposal you must be logged-in
             </div>
             <div className={cx('align-center')}>
-              <a className={cx('btn', 'gmail-btn')} href="/auth/google">Login with Google</a>
+              <ga.OutboundLink eventLabel="Login" to="/auth/google" className={cx('btn', 'gmail-btn')}>Login with Google</ga.OutboundLink>
             </div>
           </div>
         </div>

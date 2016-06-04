@@ -13,7 +13,7 @@ import Footer from 'components/Footer';
 import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import {fetchProposals } from 'actions/proposals';
-import Scroll, { Element } from 'react-scroll';
+import { Element } from 'react-scroll';
 
 import styles from 'css/main';
 import homeStyles from 'css/components/home';

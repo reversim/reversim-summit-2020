@@ -8,6 +8,7 @@ import Speaker from 'components/Speaker';
 import SocialShare from 'components/SocialShare';
 import {updateProposal} from 'actions/proposals';
 import NotificationSystem from 'react-notification-system';
+import ga from 'react-ga';
 
 import styles from 'css/main';
 
@@ -61,7 +62,11 @@ class Session extends Component {
             title: 'Proposal Updated!',
             level: 'success'
           });
-        });
+        })
+        .catch(e => ga.exception({
+          description: `Error on editing session ${currentProposal.id} (${currentProposal.title}): ${e}`,
+          fatal: true
+        }));
       }
     }
 

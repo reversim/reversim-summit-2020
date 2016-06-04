@@ -42,11 +42,18 @@ const Timeline = () => {
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
                         <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 2</strong>
-                        <h6 className={cx("title")}>Open Call for Papers<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                        <h6 className={cx("title")}>Call for Papers Period Begins<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time1" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
-                          <p className={cx("description")}>Luctus at accumsan eget ut ante. Cras molestie sollicitudin. Ultricies et eros id quisque auctor. Per mus enim ac lorem integer. Erat netus id. Porta enim quis et elementum amet risus volutpat magna nec ac.</p>
+                          <p className={cx("description")}>
+                          We've decided that we will not define a list of tracks upfront, rather open up the submission to any topic.
+                          Later on we will choose the best talks and sort them by topic relevance, so that attendees would be able to focus on tracks and room.</p>
+                        <p className={cx("description")}>
+                        This means that we want submission on any topic that may interest developers, product folks, UX etc.
+                        Topics might include startups, mobile, web, devops, data processing, scaling, programming languages, api design, data science, gaming, computer vision and more...
+                        This is not a closed list, it's just to give ideas, if your topic doesn't seem to fit here and is of general interest, we want it!
+                          </p>
                         </article>
                       </div>
                     </div>
@@ -59,13 +66,9 @@ const Timeline = () => {
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
                         <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 30</strong>
-                        <h6 className={cx("title")}>Close Call for Papers<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                        <h6 className={cx("title")}>Call for Papers Period Ends<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
-                      <div id="day1_auditorium1_time2" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
-                        <article>
-                          <p className={cx("description")}>Luctus at accumsan eget ut ante. Cras molestie sollicitudin. Ultricies et eros id quisque auctor. Per mus enim ac lorem integer. Erat netus id. Porta enim quis et elementum amet risus volutpat magna nec ac.</p>
-                        </article>
-                      </div>
+
                     </div>
                     {/*  Lecture end  */}
 
@@ -80,7 +83,9 @@ const Timeline = () => {
                       </a>
                       <div id="day1_auditorium1_time3" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
-                          <p className={cx("description")}>Luctus at accumsan eget ut ante. Cras molestie sollicitudin. Ultricies et eros id quisque auctor. Per mus enim ac lorem integer. Erat netus id. Porta enim quis et elementum amet risus volutpat magna nec ac.</p>
+                          <p className={cx("description")}>We have a wonderful group of moderators that would help you refine your submission and eventually select the proposed sessions.
+                          Please feel free to reach out to any of us if you have any questions.</p>
+                          <p className={cx("description")}>During the selection process we take into account various aspects, including relevance, popularity, interest, originality, presenters track record, diversity etc.</p>
                         </article>
                       </div>
                     </div>
@@ -95,11 +100,6 @@ const Timeline = () => {
                         <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid August</strong>
                       <h6 className={cx("title")}>Review Ends, Publish Agenda<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
-                      <div id="day1_auditorium1_time4" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
-                        <article>
-                          <p className={cx("description")}>Luctus at accumsan eget ut ante. Cras molestie sollicitudin. Ultricies et eros id quisque auctor. Per mus enim ac lorem integer. Erat netus id. Porta enim quis et elementum amet risus volutpat magna nec ac.</p>
-                        </article>
-                      </div>
                     </div>
                     {/*  Lecture end  */}
 
@@ -113,11 +113,6 @@ const Timeline = () => {
                         <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mig August</strong>
                       <h6 className={cx("title")}>Open Registration<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
-                      <div id="day1_auditorium1_time6" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
-                        <article>
-                          <p className={cx("description")}>Luctus at accumsan eget ut ante. Cras molestie sollicitudin. Ultricies et eros id quisque auctor. Per mus enim ac lorem integer. Erat netus id. Porta enim quis et elementum amet risus volutpat magna nec ac.</p>
-                        </article>
-                      </div>
                     </div>
                     {/*  Lecture end  */}
 
@@ -132,7 +127,7 @@ const Timeline = () => {
                       </a>
                       <div id="day1_auditorium1_time7" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
-                          <p className={cx("description")}>Luctus at accumsan eget ut ante. Cras molestie sollicitudin. Ultricies et eros id quisque auctor. Per mus enim ac lorem integer. Erat netus id. Porta enim quis et elementum amet risus volutpat magna nec ac.</p>
+                          <p className={cx("description")}>See you in <a href="#location">Wix Auditorium</a>, Weizmann Institute of Science, Rehovot. 19-20 September, 2016.</p>
                         </article>
                       </div>
                     </div>

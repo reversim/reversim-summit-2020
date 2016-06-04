@@ -5,15 +5,13 @@ import { logOut, openLoginModal, closeLoginModal } from 'actions/users';
 import LoginOrRegister from 'components/LoginOrRegister';
 
 import classNames from 'classnames/bind';
-import stylesNav from 'css/components/navigation';
 import styles from 'css/main';
 import Scroll, { Link as ScrollLink } from 'react-scroll';
-import {ModalContainer, ModalDialog} from 'react-modal-dialog';
+import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 
 import logoImg from 'images/reversim_logo.png';
 import logoImg2x from 'images/reversim_logo@2x.png';
 
-const cxNav = classNames.bind(stylesNav);
 const cx = classNames.bind(styles);
 
 class Navigation extends Component {

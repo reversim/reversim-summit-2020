@@ -6,6 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createRoutes from 'routes';
 import configureStore from 'store/configureStore';
 import preRenderMiddleware from 'middlewares/preRenderMiddleware';
+import ga from 'react-ga';
 
 // Grab the state from a global injected into
 // server-generated HTML
@@ -14,6 +15,9 @@ const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
+
+// Initialize Google Analytics
+ga.initialize('UA-78776133-1');
 
 /**
  *  Fix Hash links
@@ -53,6 +57,9 @@ function onUpdate() {
   const { components, params } = this.state;
 
   hashLinkScroll();
+
+  // log page view to Google Analytics
+  ga.pageview(window.location.pathname);
 
   preRenderMiddleware(store.dispatch, components, params);
 }

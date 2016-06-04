@@ -5,6 +5,7 @@ import BaseLayout from 'containers/BaseLayout';
 import {createProposal} from 'actions/proposals';
 import { push } from 'react-router-redux';
 import {updateUser} from 'actions/users';
+import ga from 'react-ga';
 
 import styles from 'css/main';
 
@@ -60,6 +61,10 @@ class Submit extends Component {
         }))
         .then(() => dispatch(createProposal(title, abstract, proposalType, [id])))
         .then((result) => dispatch(push(`session/${result.id}`)))
+        .catch(e => ga.exception({
+          description: `Error on submit: ${e}`,
+          fatal: true
+        }));
       }
     }
 
@@ -81,7 +86,7 @@ class Submit extends Component {
 
                     <div className={cx('col-md-8', 'col-md-offset-2')}>
                       <h5>Topics</h5>
-                      <p>You may get a good sense of the topics we're interested in by looking into previous events: Reversim Summit 2013 and Reversim Summit 2014 and Reversim Summit 2015</p>
+                      <p>You may get a good sense of the topics we're interested in by looking into previous events: <a href="http://summit2013.reversim.com">Reversim Summit 2013</a> and <a href="http://summit2014.reversim.com">Reversim Summit 2014</a> and <a href="http://summit2015.reversim.com">Reversim Summit 2015</a>.</p>
                       <p>Apart from that, here's a good grocery list of topics just to give you ideas. We are interested in everything including:</p>
                         <ul>
                           <li>Software development</li>
@@ -153,7 +158,7 @@ class Submit extends Component {
                               <label htmlFor="linkedin">Linkedin Profile</label>
                             </span>
                             <span className={cx("col-xs-5")}>
-                              <input id="linkedin" ref="linkedin" type="text" defaultValue={user.linkedin} />
+                              <input id="linkedin" ref="linkedin" type="url" defaultValue={user.linkedin} />
                             </span>
                             <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
                           </fieldset>

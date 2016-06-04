@@ -21,12 +21,17 @@ const Location = () => {
     					<h3>Location</h3>
 
     					<ul className={cx("list")}>
-    						<li><i className={cx('fa', 'fa-map-marker')}></i>Weizmann Institute of Science, <br /><span style={{marginLeft: '51px'}} />Herzl St. 234, Rehovot
+    						<li><i className={cx('fa', 'fa-map-marker')}></i>Wix Auditorium,
                 <br />
+                <span style={{marginLeft: '51px'}}>Weizmann Institute of Science,</span>
+                <br />
+                <span style={{marginLeft: '51px'}}>Herzl St. 234, Rehovot</span>
                 </li>
-                <li><i className={cx('fa', 'fa-phone')}></i>(08) 934-2111</li>
-                <li><i className={cx('fa', 'fa-envelope')}></i>Public Transport</li>
-                <li><i className={cx('fa', 'fa-clock-o')}></i>Parking</li>
+                {
+                  /*<li><i className={cx('fa', 'fa-envelope')}></i>Public Transport</li>*/
+                  /*<li><i className={cx('fa', 'fa-clock-o')}></i>Parking</li>*/
+                }
+                <li><i className={cx('fa', 'fa-info')}></i>More info will be published soon</li>
     					</ul>
     				</div>
     			</div>

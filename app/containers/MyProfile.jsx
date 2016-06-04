@@ -6,6 +6,7 @@ import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
 import {updateUser} from 'actions/users';
 import NotificationSystem from 'react-notification-system';
+import ga from 'react-ga';
 
 import styles from 'css/main';
 
@@ -44,7 +45,7 @@ class MyProfile extends Component {
       const linkedin = formElements.linkedin.value;
       const twitter = formElements.twitter.value;
 
-      const { dispatch, user: { authenticated, id } } = this.props;
+      const { dispatch, user: { authenticated, id, email } } = this.props;
 
       if (authenticated) {
         dispatch(updateUser({
@@ -61,6 +62,10 @@ class MyProfile extends Component {
           });
           window.scrollTo(0, 0);
         })
+        .catch(e => ga.exception({
+          description: `Error on update profile for user ${id} (${email}): ${e}`,
+          fatal: true
+        }));
       }
     }
 
@@ -115,7 +120,7 @@ class MyProfile extends Component {
                             <label htmlFor="linkedin">Linkedin Profile</label>
                           </span>
                           <span className={cx("col-xs-6")}>
-                            <input id="linkedin" ref="linkedin" type="text" value={this.state.linkedin} onChange={this.previewProfile.bind(this)} />
+                            <input id="linkedin" ref="linkedin" type="url" value={this.state.linkedin} onChange={this.previewProfile.bind(this)} />
                           </span>
                           <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
                         </fieldset>

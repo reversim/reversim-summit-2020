@@ -3,8 +3,6 @@ import classNames from 'classnames/bind';
 import styles from 'css/main';
 import Proposal from 'components/Proposal';
 
-import photo from 'images/speakers/speaker.jpg';
-
 const cx = classNames.bind(styles);
 
 /*

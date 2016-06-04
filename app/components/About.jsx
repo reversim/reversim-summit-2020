@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import classNames from 'classnames/bind';
-import stylesAbout from 'css/components/about';
 import styles from 'css/main';
+import ga from 'react-ga';
 
-import img1 from 'images/imac-371x412.png';
+import aboutGeneralInfo from 'images/about-general-info.jpg';
+import aboutSponsors from 'images/about-sponsors.jpg';
+import aboutTopics from 'images/about-topics.jpg';
 
 const cx = classNames.bind(styles);
 
@@ -24,6 +25,12 @@ class About extends Component {
   onTabClicked(index) {
     return (event) => {
       event.preventDefault();
+
+      ga.event({
+        category: 'About',
+        action: 'Change tab',
+        value: index
+      });
 
       this.setState({ activeTab: index });
     }
@@ -61,49 +68,44 @@ class About extends Component {
                 <div className={cx("tab-content")}>
                   <div id="horizontal_tab1" className={this.tabContentClass(0)}>
                     <div className={cx('col-sm-5', 'img-column')}>
-                      <img src={img1} alt="" className={cx("img-responsive")} />
+                      <img src={aboutGeneralInfo} alt="" className={cx("img-responsive")} />
                     </div>
                     <div className={cx('col-sm-7', 'align-left')}>
                       <h6>About Reversim Summit</h6>
-                      <p>Faucibus sed pretium. Ridiculus <strong>consectetuer</strong> et. In arcu enim sit in libero scelerisque mauris sed. Nullam eleifend in varius arcu vitae feugiat magna id ut morbi consectetuer. In vivamus arcu. Id ut dui. Sed massa in. Scelerisque suscipit quisque maecenas aliquet in. Wisi mi ipsum. Elit et mauris. Duis in magni praesent <a href="#">content</a> massa.</p>
-                      <p>Consectetuer amet wisi felis sem <strong>tincidunt</strong>. Ultricies blandit id euismod inceptos mauris pulvinar nec nullam quisque consequat nulla eleifend elementum vivamus aliquam placerat nec. Vehicula leo praesent vitae leo mauris ullamcorper lectus sed mollis id turpis dui cras suspendisse. Porta diam <a href="#">eleifend</a>. Praesent magnis sit. Enim ligula vel justo urna.</p>
-                      <ul>
-                        <li>Nisl cras vitae wisi odio amet.</li>
-                        <li>Lacus amet vestibulum belas</li>
-                        <li>Quis nunc curabitur assumenda</li>
-                      </ul>
+                      <p>
+                        <a href="http://reversim.com/">Reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by <a href="https://twitter.com/orilahav">Ori Lahav</a> and <a href="http://tavory.com/">Ran Tavory</a> which brings together software developers and product, with over 300 recorded episodes and a few thousands listners.
+                      </p>
+                      <p>The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too.</p>
                     </div>
                   </div>
 
                   <div id="horizontal_tab2" className={this.tabContentClass(1)}>
-                    <div className={cx('col-sm-7', 'align-right')}>
+                    <div className={cx('col-sm-7', 'align-left')}>
                       <h6>Topics</h6>
-                      <p>Faucibus sed pretium. Ridiculus <strong>consectetuer</strong> et. In arcu enim sit in libero scelerisque mauris sed. Nullam eleifend in varius arcu vitae feugiat magna id ut morbi consectetuer. In vivamus arcu. Id ut dui. Sed massa in. Scelerisque suscipit quisque maecenas aliquet in. Wisi mi ipsum. Elit et mauris. Duis in magni praesent <a href="#">content</a> massa.</p>
-                      <p>Consectetuer amet wisi felis sem <strong>tincidunt</strong>. Ultricies blandit id euismod inceptos mauris pulvinar nec nullam quisque consequat nulla eleifend elementum vivamus aliquam placerat nec. Vehicula leo praesent vitae leo mauris ullamcorper lectus sed mollis id turpis dui cras suspendisse. Porta diam <a href="#">eleifend</a>. Praesent magnis sit. Enim ligula vel justo urna.</p>
-                      <ul>
-                        <li>Nisl cras vitae wisi odio amet.</li>
-                        <li>Lacus amet vestibulum belas</li>
-                        <li>Quis nunc curabitur assumenda</li>
-                      </ul>
+                      <p>We’re interested in everything including software development, software product development, UX, startups, mobile, web, devops, data processing, scaling, software company culture, tooling and more. There is no predefined list of topics, if you’d like to speak about something interesting, we want it!</p>
+                      <p>We do not set out with a predefined list of tracks. We would like to leave the topics (tracks) open and only after accepting the submissions we will split the sessions into tracks, but we shall not rule out a single good session just b/c it's not a natural fit to any of the predefined list, so don't worry so much about categorizing your submissions.</p>
+                      <p>Generally speaking - we are not looking for “intro to something software” or “something software 101”. We’re looking for something of greater depth. However, we are open to session “intro to something that isn’t software”, as long is this something is of general interest, for example “intro to moonwalking and breakdance”</p>
                     </div>
 
                     <div className={cx('col-sm-5', 'img-column')}>
-                      <img src={img1} alt="" className={cx("img-responsive")} />
+                      <img src={aboutTopics} alt="" className={cx("img-responsive")} />
                     </div>
                   </div>
 
                   <div id="horizontal_tab3" className={this.tabContentClass(2)}>
                     <div className={cx('col-sm-5', 'img-column')}>
-                      <img src={img1} alt="" className={cx("img-responsive")} />
+                      <img src={aboutSponsors} alt="" className={cx("img-responsive")} />
                     </div>
                     <div className={cx('col-sm-7', 'align-left')}>
                       <h6>Sponsors apply</h6>
-                      <p>Faucibus sed pretium. Ridiculus <strong>consectetuer</strong> et. In arcu enim sit in libero scelerisque mauris sed. Nullam eleifend in varius arcu vitae feugiat magna id ut morbi consectetuer. In vivamus arcu. Id ut dui. Sed massa in. Scelerisque suscipit quisque maecenas aliquet in. Wisi mi ipsum. Elit et mauris. Duis in magni praesent <a href="#">content</a> massa.</p>
-                      <ul>
-                        <li>Nisl cras vitae wisi odio amet.</li>
-                        <li>Lacus amet vestibulum belas</li>
-                        <li>Quis nunc curabitur assumenda</li>
-                      </ul>
+                      <p>Thank you for your interest in becoming a Reversim sponsor! While our speakers and attendees are what makes the conference tick, it is our sponsors that allow us to keep tickets cheap, bring in international speakers and make the conference experience the best it can possibly be.</p>
+                      <br />
+                      <h6>Why become a sponsor?</h6>
+                      <p>As a sponsor you’ll contribute to the success of the conference by providing monetary aid or rendering services.</p>
+                      <p>More information about sponsorship packages will be published soon.</p>
+                      <br />
+                      <h6>Becoming a sponsor</h6>
+                      <p>To become a sponsor, <a href="mailto:adam@matan.name">contact the organization team</a>. We will reach back to you.</p>
                     </div>
                   </div>
                 </div>

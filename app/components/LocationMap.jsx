@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
-import {GoogleMapLoader, GoogleMap, Marker} from "react-google-maps";
+import { GoogleMapLoader, GoogleMap, Marker } from "react-google-maps";
 
 const cx = classNames.bind(styles);
 
@@ -25,10 +25,6 @@ const LocationMap = () => {
     }
     />
   );
-};
-
-LocationMap.propTypes = {
-
 };
 
 export default LocationMap;

@@ -1,7 +1,7 @@
 import { polyfill } from 'es6-promise';
 import request from 'axios';
 import { push } from 'react-router-redux';
-
+import ga from 'react-ga';
 import * as types from 'types';
 
 polyfill();
@@ -96,6 +96,7 @@ export function toggleLoginMode() {
 
 // login modal
 export function openLoginModal() {
+  ga.modalview('/login');
   return { type: types.OPEN_LOGIN_MODAL };
 }
 

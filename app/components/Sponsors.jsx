@@ -12,6 +12,7 @@ const cx = classNames.bind(styles);
  *  i.e. We should keep this as the container that does the data-fetching
  *  and dispatching of actions if you decide to have any sub-components.
  */
+ //<a href="http://www.wix.com/"><div className={cx('sponsor', 'big')}><img src={wixLogo} alt="Wix" /></div></a>
 const Sponsors = () => {
   return (
     <section id="sponsors" className={cx('section', 'align-center')}>
@@ -24,7 +25,6 @@ const Sponsors = () => {
 
         <div className={cx("sponsors")}>
           <a href="http://www.outbrain.com/"><div className={cx('sponsor', 'big')}><img src={outbrainLogo} alt="Outbrain" /></div></a>
-          <a href="http://www.wix.com/"><div className={cx('sponsor', 'big')}><img src={wixLogo} alt="Wix" /></div></a>
         </div>
 
       </div>

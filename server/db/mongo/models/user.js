@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String,
   tokens: Array,
+  isReversimTeamMember: { type: Boolean, default: false },
   profile: {
     name: { type: String, default: '' },
     oneLiner: { type: String, default: '' },
@@ -34,7 +35,6 @@ const UserSchema = new mongoose.Schema({
   }],
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  trackRecord: String,
   google: {}
 });
 
