@@ -67,8 +67,8 @@ export function update(req, res) {
 
   User.findOneAndUpdate({ '_id': req.session.passport.user }, data, (err, user) => {
     if (err) {
-      console.log('Error on save! '+err);
-      return res.status(500).send('We failed to save for some reason');
+      console.log(`Error in users/update query: ${err}`);
+      return res.status(500).send('Something went wrong');
     }
 
     console.log('Updated successfully');
@@ -77,25 +77,40 @@ export function update(req, res) {
   });
 }
 
+export function getReversimTeam(req, res) {
+    //console.log('proposal all started...');
+    User.find({ isReversimTeamMember: true }).exec((err, users) => {
+        if (err) {
+          console.log(`Error in users/getReversimTeam query: ${err}`);
+          return res.status(500).send('Something went wrong');
+        }
+
+        return res.json(users);
+    });
+}
 
 /**
  * Proposals for User
  */
 export function getProposals(req, res) {
     //console.log('proposal all started...');
-    console.log("----------------------------------------");
-    console.log(req.session);
-    console.log("----------------------------------------");
 
+    if (req.session.passport) {
+      User.findOne({'_id': req.session.passport.user}).populate('proposals').exec((err, user) => {
+          if (err) {
+            console.log(`Error in users/getProposals query: ${err}`);
+            return res.status(500).send('Something went wrong');
+          }
 
-    User.findOne({'_id': req.session.passport.user}).populate('proposals').exec((err, user) => {
-        if (err) {
-            console.log('Error in first query');
-            return res.status(500).send('Something went wrong getting the data');
-        }
+          return res.json(user.proposals);
+      });
+    } else {
+      console.log("----------------------------------------");
+      console.log(req.session);
+      console.log("----------------------------------------");
 
-        return res.json(user.proposals);
-    });
+      return res.status(500).send('Something went wrong getting the data');
+    }
 }
 
 export default {
@@ -103,5 +118,6 @@ export default {
   logout,
   update,
   signUp,
-  getProposals
+  getProposals,
+  getReversimTeam
 };

@@ -17,6 +17,7 @@ export default (app) => {
     app.post('/logout', usersController.logout);
     app.post('/updateUser', usersController.update);
     app.get('/user/proposals', usersController.getProposals);
+    app.get('/team', usersController.getReversimTeam);
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
@@ -52,17 +53,7 @@ export default (app) => {
       })
     );
   }
-
-  // topic routes
-  if (topicsController) {
-    app.get('/topic', topicsController.all);
-    app.post('/topic/:id', topicsController.add);
-    app.put('/topic/:id', topicsController.update);
-    app.delete('/topic/:id', topicsController.remove);
-  } else {
-    console.warn(unsupportedMessage('topics routes'));
-  }
-
+  
   // proposal routes
   if (proposalsController) {
     app.get('/proposal', proposalsController.all);

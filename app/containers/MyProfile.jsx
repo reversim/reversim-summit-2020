@@ -10,7 +10,7 @@ import ga from 'react-ga';
 
 import styles from 'css/main';
 
-import defaultPic from 'images/team/ori.png'
+import defaultPic from 'images/default_speaker.png'
 
 const cx = classNames.bind(styles);
 

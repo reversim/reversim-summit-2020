@@ -13,7 +13,7 @@ export function all(req, res) {
     //console.log('proposal all started...');
     Proposal.find({}).populate('speaker_ids').exec((err, proposals) => {
         if (err) {
-            console.log('Error in first query');
+            console.log(`Error in proposals/all query: ${err}`);
             return res.status(500).send('Something went wrong getting the data');
         }
 
@@ -29,7 +29,7 @@ export function all(req, res) {
 export function get(req, res) {
     Proposal.findOne({'id': req.params.id}).populate('speaker_ids').exec((err, proposal) => {
         if (err) {
-            console.log('Error in first query: ' + err);
+            console.log(`Error in proposals/get query: ${err}`);
             return res.status(500).send('Something went wrong getting the data');
         }
 
@@ -46,12 +46,12 @@ export function add(req, res) {
     proposal.created_at = new Date();
     proposal.updated_at = new Date();
 
-    console.log('adding new proposal '+JSON.stringify(proposal));
+    console.log('adding new proposal ' + JSON.stringify(proposal));
 
     Proposal.create(proposal, (err, model) => {
         if (err) {
-            console.log(err);
-            return res.status(400).send(err);
+            console.log(`Error in proposals/add query: ${err}`);
+            return res.status(500).send('Something went wrong');
         }
 
         // Update speakers proposals
@@ -62,7 +62,8 @@ export function add(req, res) {
             { safe: true, upsert: true },
             (err, model) => {
               if (err) {
-                console.log('Error in first query: ' + err);
+                console.log(`Error in proposals/add/updateUser query: ${err}`);
+                return res.status(500).send('Something went wrong');
               }
             }
           );
@@ -82,8 +83,8 @@ export function update(req, res) {
 
     Proposal.findOneAndUpdate({ id: req.params.id }, data, (err, obj) => {
         if (err) {
-            console.log('Error on save!');
-            return res.status(500).send('We failed to save for some reason');
+          console.log(`Error in proposals/update query: ${err}`);
+          return res.status(500).send('Something went wrong getting the data');
         }
 
         return res.status(200).send('Updated successfully');
@@ -98,8 +99,8 @@ export function remove(req, res) {
     console.log('removing proposal '+JSON.stringify(query));
     Proposal.findOneAndRemove(query, (err) => {
         if (err) {
-            console.log('Error on delete');
-            return res.status(500).send('We failed to delete for some reason');
+          console.log(`Error in proposals/remove query: ${err}`);
+          return res.status(500).send('Something went wrong');
         }
 
         return res.status(200).send('Removed Successfully');
