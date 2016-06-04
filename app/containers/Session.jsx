@@ -168,7 +168,7 @@ class Session extends Component {
       let speakers = speaker_ids.map((speaker, i) => {
         return (
           <div className={cx("align-center")} key={i}>
-            <Speaker name={speaker.profile.name} imageUrl={speaker.profile.picture || defaultSpeakerPic} oneLiner={speaker.profile.oneLiner} bio={speaker.profile.bio} linkedin={speaker.profile.linkedin} twitter={speaker.profile.twitter}></Speaker>
+            <Speaker name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} bio={speaker.bio} linkedin={speaker.linkedin} twitter={speaker.twitter}></Speaker>
           {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
           </div>
         );

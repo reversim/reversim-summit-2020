@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Proposal from '../models/proposal';
 import User from '../models/user';
 import mongoose from 'mongoose';
+import {transformProposal} from './helpers';
 
 /**
  * List
@@ -19,7 +20,7 @@ export function all(req, res) {
 
         //console.log('proposal all returning '+JSON.stringify(proposals));
 
-        return res.json(proposals);
+        return res.json(proposals.map(transformProposal));
     });
 }
 
@@ -33,7 +34,7 @@ export function get(req, res) {
             return res.status(500).send('Something went wrong getting the data');
         }
 
-        return res.json(proposal);
+        return res.json(transformProposal(proposal));
     });
 }
 

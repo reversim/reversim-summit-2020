@@ -19,9 +19,9 @@ const Proposals = ({data}) => {
       name={ proposal.title }
       description={ proposal.abstract }
       type={ proposal.type }
-      speakerName={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].profile.name : undefined }
-      speakerOneLiner={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].profile.oneLiner : undefined }
-      speakerPhoto={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].profile.picture : undefined }
+      speakerName={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].name : undefined }
+      speakerOneLiner={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].oneLiner : undefined }
+      speakerPhoto={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].picture : undefined }
       />
     );
   })

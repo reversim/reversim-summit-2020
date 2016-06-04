@@ -1,5 +1,6 @@
 import User from '../models/user';
 import passport from 'passport';
+import {transformUser, transformProposal} from './helpers';
 
 /**
  * POST /login
@@ -85,7 +86,7 @@ export function getReversimTeam(req, res) {
           return res.status(500).send('Something went wrong');
         }
 
-        return res.json(users);
+        return res.json(users.map(transformUser));
     });
 }
 
@@ -102,7 +103,7 @@ export function getProposals(req, res) {
             return res.status(500).send('Something went wrong');
           }
 
-          return res.json(user.proposals);
+          return res.json(user.proposals.map(transformProposal));
       });
     } else {
       console.log("----------------------------------------");
