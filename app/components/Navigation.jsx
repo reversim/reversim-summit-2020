@@ -103,7 +103,7 @@ class Navigation extends Component {
                     </ul>
                   </div>
                 ) : (
-                  <a className={cx("pull-right", "buy-btn")} onClick={this.openLoginModal.bind(this)}>Login</a>
+                  <a className={cx("pull-right", "btn", "btn-outline-clr", "buy-btn")} onClick={this.openLoginModal.bind(this)}>Login</a>
 
                 )}
     					</div>

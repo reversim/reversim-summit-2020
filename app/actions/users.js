@@ -152,7 +152,6 @@ export function signUp(data) {
 
 export function updateUser(data) {
   return dispatch => {
-
     return makeUserRequest('post', data, '/updateUser')
       .then(response => {
         if (response.status === 200) {

@@ -9,7 +9,8 @@ import {
     GET_PROPOSAL_SUCCESS,
     GET_PROPOSAL_FAILURE,
     CREATE_PROPOSAL_REQUEST,
-    CREATE_PROPOSAL_FAILURE
+    CREATE_PROPOSAL_FAILURE,
+    UPDATE_PROPOSAL_SUCCESS
 } from 'types';
 
 
@@ -52,6 +53,10 @@ export default function proposal(state = {
             return {
                 proposals: [...state.proposals.filter((tp) => tp.id !== action.id)]
             };
+        case UPDATE_PROPOSAL_SUCCESS:
+            return Object.assign({}, state, {
+                currentProposal: Object.assign({}, state.currentProposal, action.data)
+            });
 
         default:
             return state;

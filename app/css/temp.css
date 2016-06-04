@@ -7070,6 +7070,24 @@ button[type="submit"] .loading {
 .bg5 {
   background-image: url("../images/backgrounds/bg5.jpg");
 }
+.bg-full-session {
+  background-image: url("../images/backgrounds/full.jpg");
+}
+.bg-lightning-session {
+  background-image: url("../images/backgrounds/lightning.jpg");
+}
+.bg-ossil-session {
+  background-image: url("../images/backgrounds/ossil.jpg");
+}
+.bg-my-proposals {
+  background-image: url("../images/backgrounds/my-proposals.jpg");
+}
+.bg-full-session.overlay:before,
+.bg-lightning-session.overlay:before,
+.bg-ossil-session.overlay:before,
+.bg-my-proposals.overlay:before {
+  opacity: 0.8;
+}
 .bg1.overlay:before {
   opacity: 0.9;
 }

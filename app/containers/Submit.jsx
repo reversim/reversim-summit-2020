@@ -36,20 +36,20 @@ class Submit extends Component {
       event.preventDefault();
       const formElements = event.target.elements;
 
-      const fullname = formElements.fullname.value;
-      const oneLiner = formElements.oneLiner.value;
-      const bio = formElements.bio.value;
-      const trackRecord = formElements.trackRecord.value;
-      const linkedin = formElements.linkedin.value;
-      const twitter = formElements.twitter.value;
-
-      const title = formElements.title.value;
-      const proposalType = this.state.proposalType;
-      const abstract = formElements.abstract.value;
-
       const { dispatch, user: { authenticated, id } } = this.props;
 
       if (authenticated) {
+        const fullname = formElements.fullname.value;
+        const oneLiner = formElements.oneLiner.value;
+        const bio = formElements.bio.value;
+        const trackRecord = formElements.trackRecord.value;
+        const linkedin = formElements.linkedin.value;
+        const twitter = formElements.twitter.value;
+
+        const title = formElements.title.value;
+        const proposalType = this.state.proposalType;
+        const abstract = formElements.abstract.value;
+
         dispatch(updateUser({
           'profile.name': fullname,
           'profile.bio': bio,
@@ -62,7 +62,6 @@ class Submit extends Component {
         .then((result) => dispatch(push(`session/${result.id}`)))
       }
     }
-
 
     render() {
         const { user } = this.props;

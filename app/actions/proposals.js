@@ -75,6 +75,34 @@ export function fetchProposal(id) {
     };
 }
 
+function updateProposalSuccess(data, message) {
+  return {
+    type: types.UPDATE_PROPOSAL_SUCCESS,
+    data,
+    message
+  };
+}
+
+function updateProposalError(message) {
+  return {
+    type: types.UPDATE_PROPOSAL_FAILURE,
+    message
+  };
+}
+
+export function updateProposal(id, data) {
+  return dispatch => {
+    return makeProposalsRequest('put', id, data)
+      .then(response => {
+        if (response.status === 200) {
+          dispatch(updateProposalSuccess(data, response.data.message));
+        } else {
+          dispatch(updateProposalError('Oops! Something went wrong'));
+        }
+      });
+  };
+}
+
 export function createProposal(title, abstract, type, speaker_ids) {
     return (dispatch, getState) => {
         // If the text box is empty

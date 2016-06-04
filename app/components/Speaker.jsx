@@ -12,7 +12,9 @@ const Speaker = ({name, imageUrl, oneLiner, bio, linkedin, twitter}) => {
   return (
     <div>
       <div className={cx("speaker")}>
-        <div className={cx('photo-wrapper', 'rounded')} style={{width: '40%'}}><img src={imageUrl} alt={name} className={cx("img-responsive")} /></div>
+        <div className={cx('photo-wrapper', 'rounded')} style={{width: '40%'}}>
+          <img src={imageUrl} alt={name} className={cx("img-responsive")} />
+        </div>
         <h3 className={cx("name")}>{name}</h3>
         {oneLiner ? <p className={cx("text-alt")}><small>{oneLiner}</small></p> : undefined }
         {bioParagaphs}

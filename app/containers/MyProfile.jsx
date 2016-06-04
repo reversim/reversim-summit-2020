@@ -56,7 +56,7 @@ class MyProfile extends Component {
           'profile.oneLiner': oneLiner
         })).then(() => {
           this.refs.notificationSystem.addNotification({
-            title: 'Profile updated!',
+            title: 'Profile Updated!',
             level: 'success'
           });
           window.scrollTo(0, 0);

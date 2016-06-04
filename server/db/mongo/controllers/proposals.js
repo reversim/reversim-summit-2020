@@ -76,12 +76,11 @@ export function add(req, res) {
  * Update a proposal
  */
 export function update(req, res) {
-    const query = { id: req.params.id };
     const omitKeys = ['id', '_id', '_v'];
     req.body.updated_at = new Date();
     const data = _.omit(req.body, omitKeys);
 
-    Proposal.findOneAndUpdate(query, data, (err) => {
+    Proposal.findOneAndUpdate({ id: req.params.id }, data, (err, obj) => {
         if (err) {
             console.log('Error on save!');
             return res.status(500).send('We failed to save for some reason');

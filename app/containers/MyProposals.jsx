@@ -56,7 +56,7 @@ class MyProposals extends Component {
         return (
             <BaseLayout currentPath={this.props.location.pathname} name="my-proposals">
 
-              <section id="register" className={cx('section', 'overlay', 'bg4', 'light-text', 'align-center')}>
+              <section id="register" className={cx('section', 'overlay', 'bg-my-proposals', 'light-text', 'align-center')}>
                 <div className={cx("container")}>
                   <h1>My Proposals</h1>
                 </div>
