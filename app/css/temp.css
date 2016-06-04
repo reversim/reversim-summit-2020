@@ -4992,7 +4992,7 @@ button[type="submit"] .loading {
   padding: 10px 30px;
   text-align: left;
   height: 100%;
-  width: 100%
+  width: 100%;
 }
 .session-info-link:hover:before,
 .session-info-link:active:before {
@@ -5059,6 +5059,7 @@ button[type="submit"] .loading {
   border-radius: 50%;
   opacity: 0;
   z-index: 2;
+  cursor: pointer
 }
 @media (max-width: 991px) {
   .proposal .text-box {
