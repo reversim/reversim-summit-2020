@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { manualLogin, signUp, toggleLoginMode } from 'actions/users';
 import stylesLogin from 'css/components/login';
 import styles from 'css/main';
-import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 import ga from 'react-ga';
 
 const cxLogin = classNames.bind(stylesLogin);

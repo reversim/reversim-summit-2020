@@ -163,27 +163,35 @@ class Session extends Component {
     }
 
     renderSessionInfo() {
-      const { currentProposal: { title, type, speaker_ids }, user: { id } } = this.props;
+      const { currentProposal, user: { id } } = this.props;
 
-      let speakers = speaker_ids.map((speaker, i) => {
-        return (
-          <div className={cx("align-center")} key={i}>
-            <Speaker name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} bio={speaker.bio} linkedin={speaker.linkedin} twitter={speaker.twitter}></Speaker>
-          {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
-          </div>
-        );
-      });
+      let speakers;
+      if (currentProposal) {
+        speakers = currentProposal.speaker_ids.map((speaker, i) => {
+          return (
+            <div className={cx("align-center")} key={i}>
+              <Speaker name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} bio={speaker.bio} linkedin={speaker.linkedin} twitter={speaker.twitter}></Speaker>
+            {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
+            </div>
+          );
+        });
+      }
+
+      let sessionBody;
+      if (currentProposal) {
+        sessionBody = this.state.isEditing ? this.editSession() : this.previewSession()
+      }
 
       return (<div>
-                <section id="register" className={cx('section', 'overlay', `bg-${type}-session`, 'light-text', 'align-center')}>
+                <section id="register" className={cx('section', 'overlay', currentProposal ? `bg-${currentProposal.type}-session` : undefined, 'light-text', 'align-center')}>
                   <div className={cx("container")}>
-                    <h2>{title}</h2>
+                    <h2>{currentProposal ? currentProposal.title : undefined}</h2>
                   </div>
                 </section>
 
                 <section id="session-info" className={cx('section', 'container')}>
                   <div className={cx('col-md-6', 'col-md-offset-1')}>
-                    { this.state.isEditing ? this.editSession() : this.previewSession() }
+                    { sessionBody }
                   </div>
 
                   <div className={cx('col-md-4', 'col-md-offset-1')}>
@@ -194,13 +202,12 @@ class Session extends Component {
     }
 
     render() {
-        const { isFetching } = this.props;
+        const { currentProposal } = this.props;
 
         return (
             <BaseLayout currentPath={this.props.location.pathname} name="session-page">
                 <NotificationSystem ref="notificationSystem" style={{ NotificationItem: { DefaultStyle: { marginTop: '120px', padding: '20px' } } } } />
-
-                {isFetching ? undefined : this.renderSessionInfo()}
+                { this.renderSessionInfo() }
             </BaseLayout>
         );
     }

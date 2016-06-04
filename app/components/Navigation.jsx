@@ -7,7 +7,6 @@ import LoginOrRegister from 'components/LoginOrRegister';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 import Scroll, { Link as ScrollLink } from 'react-scroll';
-import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 
 import logoImg from 'images/reversim_logo.png';
 import logoImg2x from 'images/reversim_logo@2x.png';
@@ -101,22 +100,13 @@ class Navigation extends Component {
                     </ul>
                   </div>
                 ) : (
-                  <a className={cx("pull-right", "btn", "btn-outline-clr", "buy-btn")} onClick={this.openLoginModal.bind(this)}>Login</a>
+                  <a href="/auth/google" className={cx("pull-right", "btn", "btn-outline-clr", "buy-btn")}>Login</a>
 
                 )}
     					</div>
     				</div>
     			</div>
     		</div>
-
-
-        { isLoginModalOpen &&
-          <ModalContainer onClose={this.closeLoginModal.bind(this)}>
-            <ModalDialog onClose={this.closeLoginModal.bind(this)}>
-              <LoginOrRegister />
-            </ModalDialog>
-          </ModalContainer>
-        }
     	</header>
     );
   }

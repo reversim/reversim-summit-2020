@@ -33,8 +33,10 @@ export default function proposal(state = {
                 isFetching: false
             });
         case GET_PROPOSAL_REQUEST:
+            let proposals = state.proposals.filter(p => p.id === action.id);
             return Object.assign({}, state, {
-                isFetching: true
+                isFetching: true,
+                currentProposal: proposals.length > 0 ? proposals[0] : undefined
             });
         case GET_PROPOSAL_SUCCESS:
             return Object.assign({}, state, {

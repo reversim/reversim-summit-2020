@@ -1,6 +1,7 @@
 import User from '../models/user';
 import passport from 'passport';
 import {transformUser, transformProposal} from './helpers';
+import _ from 'lodash';
 
 /**
  * POST /login
