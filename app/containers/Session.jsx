@@ -71,8 +71,10 @@ class Session extends Component {
     }
 
     isSpeaker(userId) {
-      const { currentProposal: { speaker_ids }, user: { id } } = this.props;
-      if (userId) {
+      const { currentProposal: { speaker_ids }, user: { id, authenticated } } = this.props;
+      if (!authenticated) {
+        return false;
+      } else if (userId) {
         return userId === id;
       } else {
         return speaker_ids.map(speaker => speaker._id).indexOf(id) > -1;

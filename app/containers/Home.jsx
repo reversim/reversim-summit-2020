@@ -49,7 +49,7 @@ class Home extends Component {
                               <h5 className={cx('base-font')}>Call for papers is now open!</h5>
                               <div className={cx('btns-container')}>
                                   <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link>
-                                  <a href="#" className={cx('btn', 'btn-outline')} data-modal-link="0">REGISTER</a>
+                                {/*<a href="#" className={cx('btn', 'btn-outline')} data-modal-link="0">REGISTER</a>*/}
                               </div>
                           </div>
                       </div>
@@ -73,9 +73,9 @@ class Home extends Component {
 
                   <CFP />
 
-                  <Element name="sponsors">
+                {/*<Element name="sponsors">
                     <Sponsors />
-                  </Element>
+                  </Element>*/}
 
                   <Element name="location">
                     <Location />

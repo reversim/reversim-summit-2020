@@ -17,13 +17,15 @@ import {
   GET_USER_PROPOSALS_SUCCESS,
   GET_USER_PROPOSALS_FAILURE } from 'types';
 
-export default function user(state = {
+const initialState = {
   isLogin: true,
   message: '',
   isWaiting: false,
   authenticated: false,
   proposals: [],
-  isLoginModalOpen: false }, action = {}) {
+  isLoginModalOpen: false }
+
+export default function user(state = initialState, action = {}) {
   switch (action.type) {
     case TOGGLE_LOGIN_MODE:
       return Object.assign({}, state, {
@@ -69,10 +71,7 @@ export default function user(state = {
         message: ''
       });
     case LOGOUT_SUCCESS_USER:
-      return Object.assign({}, state, {
-        isWaiting: false,
-        authenticated: false
-      });
+      return initialState;
     case LOGOUT_ERROR_USER:
       return Object.assign({}, state, {
         isWaiting: false,

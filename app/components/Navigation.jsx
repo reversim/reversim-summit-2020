@@ -43,7 +43,7 @@ class Navigation extends Component {
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500}>About</ScrollLink>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500}>Timeline</ScrollLink>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="proposals" spy={true} smooth={true} offset={-100} duration={500}>Proposals</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500}>Sponsors</ScrollLink>,
+        /*<ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500}>Sponsors</ScrollLink>*/,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500}>Location</ScrollLink>
       ];
     } else {
@@ -51,7 +51,7 @@ class Navigation extends Component {
         <Link className={cx("navigation-link")} to="/#about">About</Link>,
         <Link className={cx("navigation-link")} to="/#timeline">Timeline</Link>,
         <Link className={cx("navigation-link")} to="/#proposals">Proposals</Link>,
-        <Link className={cx("navigation-link")} to="/#sponsors">Sponsors</Link>,
+        /*<Link className={cx("navigation-link")} to="/#sponsors">Sponsors</Link>*/,
         <Link className={cx("navigation-link")} to="/#location">Location</Link>
       ];
     }
