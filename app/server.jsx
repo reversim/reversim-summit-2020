@@ -39,6 +39,7 @@ export default function render(req, res) {
       trackRecord: req.user && req.user.profile.trackRecord,
       linkedin: req.user && req.user.profile.linkedin,
       twitter: req.user && req.user.profile.twitter,
+      stackOverflow: req.user && req.user.profile.stackOverflow,
       id: req.user && req.user._id,
       proposals: req.user && req.user.proposals
     }

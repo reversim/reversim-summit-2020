@@ -165,7 +165,7 @@ class Session extends Component {
     }
 
     renderSessionInfo() {
-      const { currentProposal, user: { id } } = this.props;
+      const { currentProposal, user: { id }, location: { pathname } } = this.props;
 
       let speakers;
       if (currentProposal) {
@@ -173,7 +173,7 @@ class Session extends Component {
           return (
             <div className={cx("align-center")} key={i}>
               <Speaker name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} bio={speaker.bio} linkedin={speaker.linkedin} twitter={speaker.twitter}></Speaker>
-            {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
+              {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} state={{ from: pathname }} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
             </div>
           );
         });

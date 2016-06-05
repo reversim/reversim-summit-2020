@@ -13,7 +13,8 @@ import Footer from 'components/Footer';
 import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import {fetchProposals } from 'actions/proposals';
-import { Element } from 'react-scroll';
+import { Element, animateScroll } from 'react-scroll';
+import ReactDOM from 'react-dom';
 
 import styles from 'css/main';
 import homeStyles from 'css/components/home';
@@ -31,8 +32,20 @@ class Home extends Component {
         super(props);
     }
 
+    jumpToLocation() {
+      const { location: { state } } = this.props;
+
+      if (state && state.section) {
+        let elem = ReactDOM.findDOMNode(this.refs[state.section])
+        if (elem) {
+          elem.scrollIntoView();
+        }
+      }
+    }
+
     render() {
         const { proposals } = this.props;
+        this.jumpToLocation();
 
         return (
           <StickyContainer>
@@ -59,25 +72,25 @@ class Home extends Component {
                       <Navigation currentPath={this.props.location.pathname} />
                   </Sticky>
 
-                  <Element name="about">
+                  <Element name="about" ref="about">
                     <About />
                   </Element>
 
-                  <Element name="timeline">
+                  <Element name="timeline" ref="timeline">
                     <Timeline />
                   </Element>
 
-                  <Element name="proposals">
+                  <Element name="proposals" ref="proposals">
                     <Proposals data={proposals} />
                   </Element>
 
                   <CFP />
 
-                {/*<Element name="sponsors">
+                {/*<Element name="sponsors"  ref="sponsors">
                     <Sponsors />
                   </Element>*/}
 
-                  <Element name="location">
+                  <Element name="location" ref="location">
                     <Location />
                   </Element>
 

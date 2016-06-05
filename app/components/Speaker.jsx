@@ -4,9 +4,10 @@ import styles from 'css/main';
 
 const cx = classNames.bind(styles);
 
-const Speaker = ({name, imageUrl, oneLiner, bio, linkedin, twitter}) => {
+const Speaker = ({name, imageUrl, oneLiner, bio, linkedin, twitter, stackOverflow}) => {
   const twitterButton = twitter ? <li><a href={'https://twitter.com/' + twitter}><span className={cx('fa', 'fa-twitter')}></span></a></li> : undefined;
   const linkedInButton = linkedin ? <li><a href={linkedin}><span className={cx('fa', 'fa-linkedin')}></span></a></li> : undefined;
+  const stackOverflowButton = stackOverflow ? <li><a href={stackOverflow}><span className={cx('fa', 'fa-stack-overflow')}></span></a></li> : undefined;
   const bioParagaphs = bio.split('\n').map((paragraph, i) => <p className={cx("bio")} key={i}>{paragraph}</p>);
 
   return (
@@ -21,6 +22,7 @@ const Speaker = ({name, imageUrl, oneLiner, bio, linkedin, twitter}) => {
         <ul className={cx("speaker-socials")}>
           {twitterButton}
           {linkedInButton}
+          {stackOverflowButton}
         </ul>
     </div>
   </div>
@@ -33,7 +35,8 @@ Speaker.propTypes = {
   oneLiner: PropTypes.string,
   bio: PropTypes.string,
   linkedin: PropTypes.string,
-  twitter: PropTypes.string
+  twitter: PropTypes.string,
+  stackOverflow: PropTypes.string
 };
 
 export default Speaker;

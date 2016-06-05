@@ -18,7 +18,8 @@ export function transformUser(user) {
       gender: user.profile && user.profile.gender,
       picture: user.profile && user.profile.picture,
       linkedin: user.profile && user.profile.linkedin,
-      twitter: user.profile && user.profile.twitter
+      twitter: user.profile && user.profile.twitter,
+      stackOverflow: user.profile && user.profile.stackOverflow
     };
   }
 

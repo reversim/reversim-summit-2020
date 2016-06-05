@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { goBack, push } from 'react-router-redux';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
 import Speaker from 'components/Speaker';
@@ -18,7 +19,7 @@ class MyProfile extends Component {
     constructor(props) {
         super(props);
 
-        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter }} = props;
+        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter, stackOverflow }} = props;
         if (!authenticated) {
           dispatch(push('/'))
         }
@@ -28,7 +29,8 @@ class MyProfile extends Component {
           bio,
           oneLiner,
           linkedin,
-          twitter
+          twitter,
+          stackOverflow
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,8 +46,9 @@ class MyProfile extends Component {
       const trackRecord = formElements.trackRecord.value;
       const linkedin = formElements.linkedin.value;
       const twitter = formElements.twitter.value;
+      const stackOverflow = formElements.stackOverflow.value;
 
-      const { dispatch, user: { authenticated, id, email } } = this.props;
+      const { dispatch, user: { authenticated, id, email }, location: { state } } = this.props;
 
       if (authenticated) {
         dispatch(updateUser({
@@ -54,13 +57,18 @@ class MyProfile extends Component {
           'profile.trackRecord': trackRecord,
           'profile.linkedin': linkedin,
           'profile.twitter': twitter,
-          'profile.oneLiner': oneLiner
+          'profile.oneLiner': oneLiner,
+          'profile.stackOverflow': stackOverflow
         })).then(() => {
-          this.refs.notificationSystem.addNotification({
-            title: 'Profile Updated!',
-            level: 'success'
-          });
-          window.scrollTo(0, 0);
+          if (state && state.from) {
+            dispatch(push(state.from));
+          } else {
+            this.refs.notificationSystem.addNotification({
+              title: 'Profile Updated!',
+              level: 'success'
+            });
+            window.scrollTo(0, 0);  
+          }
         })
         .catch(e => ga.exception({
           description: `Error on update profile for user ${id} (${email}): ${e}`,
@@ -73,6 +81,13 @@ class MyProfile extends Component {
       let stateDiff = {};
       stateDiff[event.target.id] = event.target.value;
       this.setState(stateDiff);
+    }
+
+    cancel(event) {
+      event.preventDefault();
+
+      const { dispatch } = this.props;
+      dispatch(goBack());
     }
 
     render() {
@@ -137,6 +152,16 @@ class MyProfile extends Component {
 
                         <fieldset>
                           <span className={cx("col-xs-12")}>
+                            <label htmlFor="stackOverflow">Stack Overflow Profile</label>
+                          </span>
+                          <span className={cx("col-xs-6")}>
+                            <input id="stackOverflow" ref="stackOverflow" type="url" value={this.state.stackOverflow} onChange={this.previewProfile.bind(this)} />
+                          </span>
+                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
+                        </fieldset>
+
+                        <fieldset>
+                          <span className={cx("col-xs-12")}>
                             <label htmlFor="bio">Short Bio</label>
                           </span>
                           <span className={cx("col-xs-6")}>
@@ -155,14 +180,18 @@ class MyProfile extends Component {
                           <small className={cx("col-xs-6")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
                         </fieldset>
 
-                        <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>
-                          <input type="submit" value="Update" className={cx('btn')} />
+                        <fieldset className={cx("col-xs-2", "col-xs-offset-2")} style={{marginTop: '30px'}}>
+                          <input type="submit" value="save" className={cx('btn', 'btn-sm')} />
+                        </fieldset>
+
+                        <fieldset className={cx("col-xs-2", "col-xs-offset-2")} style={{marginTop: '30px'}}>
+                          <button title="cancel" className={cx('btn', 'btn-sm', 'btn-outline-clr')} onClick={this.cancel.bind(this)}>Cancel</button>
                         </fieldset>
                       </form>
                     </div>
 
                     <div className={cx('col-md-4')}>
-                      <Speaker name={this.state.name} imageUrl={user.picture || defaultPic} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter}></Speaker>
+                      <Speaker name={this.state.name} imageUrl={user.picture || defaultPic} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter} stackOverflow={this.state.stackOverflow}></Speaker>
                     </div>
 
                 </section>
@@ -173,7 +202,7 @@ class MyProfile extends Component {
 
 MyProfile.propTypes = {
   user: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 MyProfile.defaultProps = { };

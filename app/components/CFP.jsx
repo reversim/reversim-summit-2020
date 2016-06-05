@@ -14,7 +14,7 @@ const CFP = () => {
   return (
     <section id="register" className={cx('section', 'overlay', 'overlay-clr', 'bg-cover', 'bg4', 'light-text', 'align-center')}>
       <div className={cx("container")}>
-        <h2>Submit a lecture now!</h2>
+        <h2>Submit a session now!</h2>
       <p>Reversim Summit is a community event and as such, we are looking for speakers of all levels and experience. <br />
     We’re especially looking for new speakers, we love to learn new things from people we’ve never met. <br />Join us, tell us a good story.</p>
         <br />

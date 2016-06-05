@@ -79,7 +79,7 @@ class Submit extends Component {
                   <div className={cx('align-center')}>
                     <span data-icon className={cx('icon', 'section-icon', 'icon-multimedia-12')}></span>
                     <h3>Reversim Summit 2016 - Submission</h3>
-                    <p className={cx("text-alt")}>Read carefully before submit!</p>
+                  <p className={cx("text-alt")}>Read carefully before submission!</p>
                     <br />
                     <br />
                   </div>
@@ -216,7 +216,7 @@ class Submit extends Component {
                               <span className={cx("col-xs-12")}>
                                 <label htmlFor="abstract">Abstract</label>
                               </span>
-                              <span className={cx("col-xs-5")}>
+                              <span className={cx("col-xs-8")}>
                                 <textarea id="abstract" ref="abstract" required />
                               </span>
                             </fieldset>

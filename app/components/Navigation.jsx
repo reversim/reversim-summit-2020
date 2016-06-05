@@ -48,11 +48,11 @@ class Navigation extends Component {
       ];
     } else {
       navigationElements = [
-        <Link className={cx("navigation-link")} to="/#about">About</Link>,
-        <Link className={cx("navigation-link")} to="/#timeline">Timeline</Link>,
-        <Link className={cx("navigation-link")} to="/#proposals">Proposals</Link>,
-        /*<Link className={cx("navigation-link")} to="/#sponsors">Sponsors</Link>*/,
-        <Link className={cx("navigation-link")} to="/#location">Location</Link>
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } }>About</Link>,
+        <Link className={cx("navigation-link")}  to="/" state={ { section: 'timeline' } }>Timeline</Link>,
+        <Link className={cx("navigation-link")}  to="/" state={ { section: 'proposals' } }>Proposals</Link>,
+        /*<Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } }>Sponsors</Link>*/,
+        <Link className={cx("navigation-link")}  to="/" state={ { section: 'location' } }>Location</Link>
       ];
     }
 
