@@ -18,7 +18,9 @@ class Navigation extends Component {
     super(props);
   }
 
-  logout() {
+  logout(event) {
+    event.preventDefault();
+    
     const { dispatch } = this.props;
     dispatch(logOut());
   }
@@ -42,17 +44,20 @@ class Navigation extends Component {
       navigationElements = [
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500}>About</ScrollLink>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500}>Timeline</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="proposals" spy={true} smooth={true} offset={-100} duration={500}>Proposals</ScrollLink>,
+        /*<ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="proposals" spy={true} smooth={true} offset={-100} duration={500}>Proposals</ScrollLink>,*/
+        <Link className={cx("navigation-link")} to="proposals">Proposals</Link>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500}>Team</ScrollLink>,
         /*<ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500}>Sponsors</ScrollLink>*/,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500}>Location</ScrollLink>
       ];
     } else {
       navigationElements = [
         <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } }>About</Link>,
-        <Link className={cx("navigation-link")}  to="/" state={ { section: 'timeline' } }>Timeline</Link>,
-        <Link className={cx("navigation-link")}  to="/" state={ { section: 'proposals' } }>Proposals</Link>,
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } }>Timeline</Link>,
+        <Link className={cx("navigation-link")} to="proposals" activeClassName={cx('active')}>Proposals</Link>,
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'team' } }>Team</Link>,
         /*<Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } }>Sponsors</Link>*/,
-        <Link className={cx("navigation-link")}  to="/" state={ { section: 'location' } }>Location</Link>
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'location' } }>Location</Link>
       ];
     }
 
@@ -93,7 +98,7 @@ class Navigation extends Component {
                             <Link to="/my-proposals" className={cx('navigation-link')}>My Proposals</Link>
                           </li>
                           <li className={cx("navigation-item")}>
-                            <Link onClick={this.logout.bind(this)} to="/" className={cx('navigation-link')}>Logout</Link>
+                            <a onClick={this.logout.bind(this)} className={cx('navigation-link')}>Logout</a>
                           </li>
                         </ul>
                       </li>
@@ -101,7 +106,6 @@ class Navigation extends Component {
                   </div>
                 ) : (
                   <a href="/auth/google" className={cx("pull-right", "btn", "btn-outline-clr", "buy-btn")}>Login</a>
-
                 )}
     					</div>
     				</div>

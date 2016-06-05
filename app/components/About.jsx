@@ -44,7 +44,7 @@ class About extends Component {
     return (
           <section id="about" className={cx('section', 'align-center')}>
             <div className={cx("container")}>
-              <span data-icon className={cx('icon', 'section-icon', 'icon-faces-users-04')}></span>
+              <span data-icon className={cx('icon', 'section-icon', 'icon-seo-icons-37')}></span>
               <h3>About</h3>
               <p className={cx("text-alt")}>About the conference, topics, important dates, etc.</p>
               <br />

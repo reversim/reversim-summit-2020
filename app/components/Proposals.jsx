@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 import Proposal from 'components/Proposal';
+import { Link } from 'react-router';
 
 const cx = classNames.bind(styles);
 
@@ -10,8 +11,14 @@ const cx = classNames.bind(styles);
  *  i.e. We should keep this as the container that does the data-fetching
  *  and dispatching of actions if you decide to have any sub-components.
  */
+
+const maxProposalsInSection = 4;
+
+
 const Proposals = ({data}) => {
-  const proposalsBlocks = data.map(proposal => {
+  console.log(data)
+
+  const proposalsBlocks = data.splice(0, Math.min(maxProposalsInSection, data.length)).map(proposal => {
     return (
       <Proposal
       key={ proposal.id }
@@ -31,11 +38,10 @@ const Proposals = ({data}) => {
       <div className={cx('container')}>
         <span data-icon className={cx('icon', 'section-icon', 'icon-badges-votes-08')}></span>
         <h3>Proposals</h3>
-        <p className={cx("text-alt")} style={ {marginBottom: '80px'} }>featured <span className={cx("highlight")}>proposals</span></p>
-
+      <p className={cx("text-alt")} style={ {marginBottom: '80px'} }>Newest proposals</p>
       { proposalsBlocks }
-
       </div>
+     { data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
     </section>
   );
 };

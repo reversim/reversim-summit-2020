@@ -15,7 +15,11 @@ import {
   CLOSE_LOGIN_MODAL,
   GET_USER_PROPOSALS_REQUEST,
   GET_USER_PROPOSALS_SUCCESS,
-  GET_USER_PROPOSALS_FAILURE } from 'types';
+  GET_USER_PROPOSALS_FAILURE,
+  GET_REVERSIM_TEAM_REQUEST,
+  GET_REVERSIM_TEAM_SUCCESS,
+  GET_REVERSIM_TEAM_FAILURE,
+ } from 'types';
 
 const initialState = {
   isLogin: true,
@@ -23,6 +27,7 @@ const initialState = {
   isWaiting: false,
   authenticated: false,
   proposals: [],
+  team: [],
   isLoginModalOpen: false }
 
 export default function user(state = initialState, action = {}) {
@@ -107,6 +112,10 @@ export default function user(state = initialState, action = {}) {
     case GET_USER_PROPOSALS_FAILURE:
       return Object.assign({}, state, {
         isWaiting: false
+      });
+    case GET_REVERSIM_TEAM_SUCCESS:
+      return Object.assign({}, state, {
+        team: action.req.data
       });
     default:
       return state;

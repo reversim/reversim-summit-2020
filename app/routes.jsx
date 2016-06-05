@@ -5,6 +5,7 @@ import App from 'containers/App';
 import Home from 'containers/Home';
 import Submit from 'containers/Submit';
 import MyProposals from 'containers/MyProposals';
+import AllProposals from 'containers/AllProposals';
 import MyProfile from 'containers/MyProfile';
 import LoginOrRegister from 'components/LoginOrRegister';
 import Session from 'containers/Session';
@@ -19,12 +20,11 @@ export default (store) => {
   const requireAuth = (nextState, replace, callback) => {
     const { user: { authenticated }} = store.getState();
     if (!authenticated) {
-      // replace({
-      //   pathname: '/auth/google',
-      //   state: { nextPathname: nextState.location.pathname }
-      // });
+      replace({
+        pathname: '/auth/google',
+        state: { nextPathname: nextState.location.pathname }
+      });
       // store.dispatch(openLoginModal());
-      window.location = '/auth/google';
     }
     callback();
   };
@@ -45,6 +45,7 @@ export default (store) => {
         <Route path="/submit" component={Submit} onEnter={requireAuth} />
         <Route path="/session/:id" component={Session} />
         <Route path="/my-proposals" component={MyProposals} onEnter={requireAuth} />
+        <Route path="/proposals" component={AllProposals} />
         <Route path="/my-profile" component={MyProfile} onEnter={requireAuth} />
       </Route>
   );

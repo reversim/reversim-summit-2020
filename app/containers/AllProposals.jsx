@@ -2,20 +2,20 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
-import {fetchUserProposals } from 'actions/users';
 import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
+import { fetchProposals } from 'actions/proposals';
 
 import styles from 'css/main';
 
-import defaultSpeakerPic from 'images/default_speaker.png';
+import defaultSpeakerPic from 'images/default_speaker.png'
 
 const cx = classNames.bind(styles)
 
-class MyProposals extends Component {
+class AllProposals extends Component {
 
     static need = [  // eslint-disable-line
-        fetchUserProposals
+        fetchProposals
     ];
 
     constructor(props) {
@@ -23,9 +23,7 @@ class MyProposals extends Component {
     }
 
     render() {
-        const { name, picture, oneLiner, bio, linkedin, twitter, stackOverflow, proposals } = this.props.user;
-
-        const proposalsBlocks = proposals.map((proposal, i) => {
+        const proposalsBlocks = this.props.proposals.map((proposal, i) => {
           let type;
           if (proposal.type === 'ossil') {
             type = "Open Source in Israel (10 min.)";
@@ -38,8 +36,8 @@ class MyProposals extends Component {
           const abstractParagraphs = proposal.abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
 
           return (
-            <section className={cx("section")} style={ {padding: '0 30px 60px'} } key={i}>
-              <div>
+            <section className={cx("section", "container")} style={ {padding: '0 30px 60px'} } key={i}>
+              <div className={cx("col-md-8", "col-md-offset-1")}>
                 <div className={cx('align-left')}>
                   <article>
                     <h5>{proposal.title}</h5>
@@ -49,28 +47,26 @@ class MyProposals extends Component {
                   </article>
                 </div>
               </div>
+              <div className={cx("col-md-3")}>
+              { proposal.speaker_ids.map((speaker, i) => {
+                return (<Speaker key={i} name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} linkedin={speaker.linkedin} twitter={speaker.twitter} stackOverflow={speaker.stackOverflow}></Speaker>);
+              })  }
+              </div>
             	</section>
           );
         });
 
         return (
-            <BaseLayout currentPath={this.props.location.pathname} name="my-proposals">
+            <BaseLayout currentPath={this.props.location.pathname} name="all-proposals">
 
               <section id="register" className={cx('section', 'overlay', 'bg-my-proposals', 'light-text', 'align-center')}>
                 <div className={cx("container")}>
-                  <h1>My Proposals</h1>
+                  <h1>Reversim Summit 2016 - Proposals</h1>
                 </div>
               </section>
 
-              <section id="my-proposals" className={cx('section', 'container')}>
-                  <div className={cx('col-md-7', 'col-md-offset-1')}>
+              <section id="all-proposals" className={cx('section', 'container')}>
                     {proposalsBlocks}
-                  </div>
-
-                  <div className={cx('col-md-4')}>
-                    <Speaker name={name} imageUrl={picture || defaultSpeakerPic} oneLiner={oneLiner} bio={bio} linkedin={linkedin} twitter={twitter} stackOverflow={stackOverflow} />
-                  </div>
-
               </section>
 
             </BaseLayout>
@@ -78,19 +74,21 @@ class MyProposals extends Component {
     }
 }
 
-MyProposals.propTypes = {
+AllProposals.propTypes = {
   user: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
+  proposals: PropTypes.array
 };
 
-MyProposals.defaultProps = { };
+AllProposals.defaultProps = { };
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        user: state.user,
+        proposals: state.proposal.proposals
     };
 }
 
 // Read more about where to place `connect` here:
 // https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
-export default connect(mapStateToProps)(MyProposals);
+export default connect(mapStateToProps)(AllProposals);

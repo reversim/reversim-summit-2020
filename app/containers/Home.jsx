@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Navigation from 'components/Navigation';
 import About from 'components/About';
-import Speakers from 'components/Speakers';
 import Timeline from 'components/Timeline';
 import Proposals from 'components/Proposals';
 import CFP from 'components/CFP';
 import Sponsors from 'components/Sponsors';
+import Team from 'components/Team';
 import Location from 'components/Location';
 import Footer from 'components/Footer';
 import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
-import {fetchProposals } from 'actions/proposals';
-import { Element, animateScroll } from 'react-scroll';
+import { fetchProposals } from 'actions/proposals';
+import { fetchReversimTeam } from 'actions/users';
+import { Element } from 'react-scroll';
 import ReactDOM from 'react-dom';
 
 import styles from 'css/main';
@@ -25,7 +26,8 @@ const cx = classNames.bind(styles)
 class Home extends Component {
 
     static need = [  // eslint-disable-line
-        fetchProposals
+        fetchReversimTeam,
+        fetchProposals,
     ];
 
     constructor(props) {
@@ -44,7 +46,7 @@ class Home extends Component {
     }
 
     render() {
-        const { proposals } = this.props;
+        const { proposals, user: { team } } = this.props;
         this.jumpToLocation();
 
         return (
@@ -90,6 +92,10 @@ class Home extends Component {
                     <Sponsors />
                   </Element>*/}
 
+                  <Element name="team" ref="team">
+                    <Team team={team} />
+                  </Element>
+
                   <Element name="location" ref="location">
                     <Location />
                   </Element>
@@ -107,9 +113,11 @@ Home.propTypes = {
 };
 
 function mapStateToProps(state) {
+    console.log(state)
+
     return {
         user: state.user,
-        proposals: state.proposal.proposals
+        proposals: state.proposal.proposals,
     };
 }
 
