@@ -67,6 +67,11 @@ export default function render(req, res) {
    * If all three parameters are `undefined`, this means that there was no route found matching the
    * given location.
    */
+
+  function escapeTags(state) {
+    return JSON.parse(JSON.stringify(state).replace(/<\//g, ""));
+  }
+
   match({routes, location: req.url}, (err, redirect, props) => {
     if (err) {
       res.status(500).json(err);
@@ -81,7 +86,7 @@ export default function render(req, res) {
         props.params
       )
       .then(() => {
-        const initialState = store.getState();
+        const initialState = escapeTags(store.getState());
         const componentHTML = renderToString(
           <Provider store={store}>
             <RouterContext {...props} />
@@ -106,6 +111,7 @@ export default function render(req, res) {
         `);
       })
       .catch((err) => {
+        console.error('Error in server.jsx '+err);
         res.status(500).json(err);
       });
     } else {
