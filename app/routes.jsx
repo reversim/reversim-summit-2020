@@ -21,7 +21,7 @@ export default (store) => {
     const { user: { authenticated }} = store.getState();
     if (!authenticated) {
       replace({
-        pathname: '/auth/google',
+        pathname: '/auth/google?returnTo='+nextState.location.pathname,
         state: { nextPathname: nextState.location.pathname }
       });
       // store.dispatch(openLoginModal());

@@ -30,7 +30,7 @@ export default (app) => {
     // Authentication with google requires an additional scope param, for more info go
     // here https://developers.google.com/identity/protocols/OpenIDConnect#scope-param
     app.get('/auth/google', function(req, res, next) {
-      console.log('Request URL:', req.originalUrl);
+      req.session.returnTo = req.query.returnTo;
       next();
     }, passport.authenticate('google', {
       scope: [
@@ -47,10 +47,11 @@ export default (app) => {
           console.log('Request URL:', req.originalUrl);
           next();
         },
-      passport.authenticate('google', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-      })
+      passport.authenticate('google'), function(req, res) {
+          console.log('redirecting to '+req.session.returnTo);
+          res.redirect(req.session.returnTo || '/');
+          delete req.session.returnTo;
+        }
     );
   }
   
