@@ -113,8 +113,6 @@ Home.propTypes = {
 };
 
 function mapStateToProps(state) {
-    console.log(state)
-
     return {
         user: state.user,
         proposals: state.proposal.proposals,

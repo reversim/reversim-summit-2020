@@ -11,14 +11,10 @@ const cx = classNames.bind(styles);
  *  i.e. We should keep this as the container that does the data-fetching
  *  and dispatching of actions if you decide to have any sub-components.
  */
-
 const maxProposalsInSection = 4;
 
-
 const Proposals = ({data}) => {
-  console.log(data)
-
-  const proposalsBlocks = data.splice(0, Math.min(maxProposalsInSection, data.length)).map(proposal => {
+  const proposalsBlocks = data && data.slice(0, Math.min(maxProposalsInSection, data.length)).map(proposal => {
     return (
       <Proposal
       key={ proposal.id }
@@ -40,8 +36,8 @@ const Proposals = ({data}) => {
         <h3>Proposals</h3>
       <p className={cx("text-alt")} style={ {marginBottom: '80px'} }>Newest proposals</p>
       { proposalsBlocks }
+      { data && data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
       </div>
-     { data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
     </section>
   );
 };

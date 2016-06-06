@@ -67,7 +67,7 @@ class MyProfile extends Component {
               title: 'Profile Updated!',
               level: 'success'
             });
-            window.scrollTo(0, 0);  
+            window.scrollTo(0, 0);
           }
         })
         .catch(e => ga.exception({

@@ -12,7 +12,7 @@ import {transformProposal} from './helpers';
  */
 export function all(req, res) {
     //console.log('proposal all started...');
-    Proposal.find({}).populate('speaker_ids').exec((err, proposals) => {
+    Proposal.find({}, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
         if (err) {
             console.log(`Error in proposals/all query: ${err}`);
             return res.status(500).send('Something went wrong getting the data');

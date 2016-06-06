@@ -12,12 +12,12 @@ const cx = classNames.bind(styles);
  *  and dispatching of actions if you decide to have any sub-components.
  */
 const Team = ({ team }) => {
-  if (team.length == 0) return (<span></span>);
+  if (!team || team.length == 0) return (<span></span>);
 
   const teamMembers = team.map((member, i) => {
     return (
-      <div className={cx('col-md-4')} style={ {marginBottom: '60px'} }>
-        <Speaker key={i}
+      <div className={cx('col-md-4')} style={ {marginBottom: '60px'} }  key={i}>
+        <Speaker
         name={member.name}
         imageUrl={member.picture || defaultSpeakerPic}
         oneLiner={member.oneLiner}

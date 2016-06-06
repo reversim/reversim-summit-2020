@@ -72,12 +72,13 @@ class Session extends Component {
 
     isSpeaker(userId) {
       const { currentProposal: { speaker_ids }, user: { id, authenticated } } = this.props;
-      if (!authenticated) {
-        return false;
-      } else if (userId) {
+
+      if (authenticated && userId) {
         return userId === id;
-      } else {
+      } else if (authenticated && speaker_ids) {
         return speaker_ids.map(speaker => speaker._id).indexOf(id) > -1;
+      } else {
+        return false;
       }
     }
 
@@ -144,7 +145,7 @@ class Session extends Component {
       } else {
         proposalType = "Full Featured (30-40 min.)";
       }
-      const abstractParagraphs = abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
+      const abstractParagraphs = abstract && abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
 
       return (
         <div>
@@ -168,7 +169,7 @@ class Session extends Component {
       const { currentProposal, user: { id }, location: { pathname } } = this.props;
 
       let speakers;
-      if (currentProposal) {
+      if (currentProposal && currentProposal.speaker_ids) {
         speakers = currentProposal.speaker_ids.map((speaker, i) => {
           return (
             <div className={cx("align-center")} key={i}>
