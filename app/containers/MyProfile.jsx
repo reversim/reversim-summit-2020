@@ -164,10 +164,9 @@ class MyProfile extends Component {
                           <span className={cx("col-xs-12")}>
                             <label htmlFor="bio">Short Bio</label>
                           </span>
-                          <span className={cx("col-xs-6")}>
+                          <span className={cx("col-xs-12")}>
                           <textarea id="bio" ref="bio" value={this.state.bio} onChange={this.previewProfile.bind(this)} />
                           </span>
-                          <small className={cx("col-xs-6")}>This will be presented on the website</small>
                         </fieldset>
 
                         <fieldset>
