@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logOut, openLoginModal, closeLoginModal } from 'actions/users';
 import LoginOrRegister from 'components/LoginOrRegister';
+import { push } from 'react-router-redux';
 
 import classNames from 'classnames/bind';
 import styles from 'css/main';
@@ -20,9 +21,13 @@ class Navigation extends Component {
 
   logout(event) {
     event.preventDefault();
-    
-    const { dispatch } = this.props;
+
+    const { dispatch, currentPath } = this.props;
     dispatch(logOut());
+
+    if (currentPath !== '/') {
+      dispatch(push('/'));
+    }
   }
 
   openLoginModal() {
