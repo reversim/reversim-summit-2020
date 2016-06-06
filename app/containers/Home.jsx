@@ -14,6 +14,7 @@ import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { fetchProposals } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
+import { fetchReversimTweets } from 'actions/tweets';
 import { Element } from 'react-scroll';
 import ReactDOM from 'react-dom';
 
@@ -28,6 +29,7 @@ class Home extends Component {
     static need = [  // eslint-disable-line
         fetchReversimTeam,
         fetchProposals,
+        fetchReversimTweets
     ];
 
     constructor(props) {
@@ -46,7 +48,7 @@ class Home extends Component {
     }
 
     render() {
-        const { proposals, user: { team } } = this.props;
+        const { proposals, user: { team }, reversimTweets } = this.props;
         this.jumpToLocation();
 
         return (
@@ -100,7 +102,7 @@ class Home extends Component {
                     <Location />
                   </Element>
 
-                  <Footer />
+                  <Footer tweets={reversimTweets} />
               </div>
           </StickyContainer>
         );
@@ -109,13 +111,15 @@ class Home extends Component {
 
 Home.propTypes = {
   user: PropTypes.object,
-  proposals: PropTypes.array
+  proposals: PropTypes.array,
+  reversimTweets: PropTypes.array
 };
 
 function mapStateToProps(state) {
     return {
         user: state.user,
         proposals: state.proposal.proposals,
+        reversimTweets: state.tweets.reversim
     };
 }
 

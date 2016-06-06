@@ -4,6 +4,7 @@
 import passport from 'passport';
 import unsupportedMessage from '../db/unsupportedMessage';
 import { controllers, passport as passportConfig } from '../db';
+import tweetsController from './tweetsController';
 
 const usersController = controllers && controllers.users;
 const topicsController = controllers && controllers.topics;
@@ -20,6 +21,11 @@ export default (app) => {
     app.get('/team', usersController.getReversimTeam);
   } else {
     console.warn(unsupportedMessage('users routes'));
+  }
+
+  // twitter feed
+  if (tweetsController) {
+    app.get('/tweets/reversim', tweetsController.reversimUserFeed);
   }
 
   if (passportConfig && passportConfig.google) {

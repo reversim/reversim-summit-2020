@@ -6,7 +6,33 @@ import reversimLogoFooter from 'images/reversim_logo_footer.png';
 
 const cx = classNames.bind(styles);
 
-const Footer = ({children}) => {
+const Footer = ({tweets, children}) => {
+  const tweetElements = tweets && tweets.map((tweet, i) => {
+    let tweetText = tweet.text;
+
+    // mentions
+    tweet.mentions.forEach(mention => {
+      tweetText = tweetText.replace(`@${mention}`, `<a href="http://twitter.com/${mention}">@${mention}</a>`)
+    });
+
+    // hashtags
+    tweet.hashtags.forEach(hashtag => {
+      tweetText = tweetText.replace(`#${hashtag}`, `<a href="https://twitter.com/search?q=%22${hashtag}%22">#${hashtag}</a>`)
+    });
+
+    // urls
+    tweet.urls.forEach(url => {
+      tweetText = tweetText.replace(url.url, `<a href="${url.url}">${url.display}</a>`)
+    });
+
+    return (
+      <li className={cx("tweet")} key={i}>
+        <p className={cx('text-alt', 'tweet-text')} dangerouslySetInnerHTML={ { __html: tweetText } }></p>
+        <small className={cx("tweet-date")}>{new Date(tweet.created_at).toLocaleDateString('en-US', { day: "numeric", month: "short", year: "numeric"})}</small>
+      </li>
+    );
+  });
+
   return (
     <section className={cx("footer")}>
       <div className={cx("container")}>
@@ -25,20 +51,7 @@ const Footer = ({children}) => {
             <h6 className={cx("widget-head")}><span className={cx('fa', 'fa-twitter')}></span> Twitter Feed</h6>
 
             <ul className={cx("tweets-list")}>
-              <li className={cx("tweet")}>
-                <p className={cx('text-alt', 'tweet-text')}>New: Visual object detection, including face detection and recognition with Imry Kissos, <a href="#">@rantav</a> <a href="#">@orilahav</a></p>
-                <small className={cx("tweet-date")}>27 apr 2016</small>
-              </li>
-
-              <li className={cx("tweet")}>
-                <p className={cx('text-alt', 'tweet-text')}>New: Visual object detection, including face detection and recognition with Imry Kissos, <a href="#">@rantav</a> <a href="#">@orilahav</a></p>
-                <small className={cx("tweet-date")}>27 apr 2016</small>
-              </li>
-
-              <li className={cx("tweet")}>
-                <p className={cx('text-alt', 'tweet-text')}>New: Visual object detection, including face detection and recognition with Imry Kissos, <a href="#">@rantav</a> <a href="#">@orilahav</a></p>
-                <small className={cx("tweet-date")}>27 apr 2016</small>
-              </li>
+              {tweetElements}
             </ul>
           </div>
         </div>
@@ -70,7 +83,8 @@ const Footer = ({children}) => {
 };
 
 Footer.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.object,
+  tweets: PropTypes.array
 };
 
 export default Footer;

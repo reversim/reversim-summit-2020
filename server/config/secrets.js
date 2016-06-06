@@ -7,8 +7,15 @@ export const google = {
   clientSecret: process.env.GOOGLE_SECRET || 'j4y2GQqNT0jGsO8m07ZNs7WO',
   callbackURL: process.env.GOOGLE_CALLBACK || '/auth/google/callback'
 };
+export const twitter = {
+  consumer_key: process.env.TWITTER_CONSUMER_KEY || 'wOgi4xZscVuT1f1NNSMkE6Lf2',
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'OPpj3aINebr69YeOnrCCnhe2ameurGfhG5d878LpZIB9JWWFRu',
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY || '68001994-RAnNfD0hh01bjwqQfBWeo2sjRz9kE5pzeyXzmE72o',
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || 'K4jHN89K451r7xigHWIvd9GKSo39pSS8ZyBeDHxJLYChT'
+};
 
 export default {
   sessionSecret,
-  google
+  google,
+  twitter
 };

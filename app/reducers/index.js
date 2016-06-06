@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import user from 'reducers/user';
 import proposal from 'reducers/proposal';
+import tweets from 'reducers/tweets';
 import { routerReducer as routing } from 'react-router-redux';
 
 // Combine reducers with routeReducer which keeps track of
@@ -8,7 +9,8 @@ import { routerReducer as routing } from 'react-router-redux';
 const rootReducer = combineReducers({
   user,
   proposal,
-  routing
+  routing,
+  tweets
 });
 
 export default rootReducer;
