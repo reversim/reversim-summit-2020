@@ -17,6 +17,8 @@ const cx = classNames.bind(styles);
 class Navigation extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { isNavCollapsed: true }
   }
 
   logout(event) {
@@ -40,6 +42,16 @@ class Navigation extends Component {
     dispatch(closeLoginModal());
   }
 
+  collapseNav() {
+    if (!this.state.isNavCollapsed) {
+      this.setState({ isNavCollapsed: true });
+    }
+  }
+
+  toggleHamburgerNav(event) {
+    this.setState({ isNavCollapsed: !!!this.state.isNavCollapsed });
+  }
+
   render() {
     const { user: { isLoginModalOpen, authenticated }, currentPath } = this.props;
 
@@ -47,22 +59,21 @@ class Navigation extends Component {
     if (currentPath === '/') {
       // Home navigation
       navigationElements = [
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500}>About</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500}>Timeline</ScrollLink>,
-        /*<ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="proposals" spy={true} smooth={true} offset={-100} duration={500}>Proposals</ScrollLink>,*/
-        <Link className={cx("navigation-link")} to="proposals">Proposals</Link>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500}>Team</ScrollLink>,
-        /*<ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500}>Sponsors</ScrollLink>*/,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500}>Location</ScrollLink>
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>,
+        <Link className={cx("navigation-link")} to="proposals" onClick={this.collapseNav.bind(this)}>Proposals</Link>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Team</ScrollLink>,
+        /*<ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Sponsors</ScrollLink>*/,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Location</ScrollLink>
       ];
     } else {
       navigationElements = [
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } }>About</Link>,
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } }>Timeline</Link>,
-        <Link className={cx("navigation-link")} to="proposals" activeClassName={cx('active')}>Proposals</Link>,
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'team' } }>Team</Link>,
-        /*<Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } }>Sponsors</Link>*/,
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'location' } }>Location</Link>
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } } onClick={this.collapseNav.bind(this)}>About</Link>,
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } } onClick={this.collapseNav.bind(this)}>Timeline</Link>,
+        <Link className={cx("navigation-link")} to="proposals" activeClassName={cx('active')} onClick={this.collapseNav.bind(this)}>Proposals</Link>,
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'team' } } onClick={this.collapseNav.bind(this)}>Team</Link>,
+        /*<Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } } onClick={this.collapseNav.bind(this)}>Sponsors</Link>*/,
+        <Link className={cx("navigation-link")} to="/" state={ { section: 'location' } } onClick={this.collapseNav.bind(this)}>Location</Link>
       ];
     }
 
@@ -77,7 +88,7 @@ class Navigation extends Component {
     						<img src={logoImg} alt="Reversim" width="143" height="63" className={cx("retina-hide")} />
                 <img src={logoImg2x} alt="Reversim" width="119" height="53" className={cx("retina-show")} />
     					</Link>
-    					<button className={cx("navbar-toggle", "collapsed")} data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-controls="navigation">
+    					<button className={cx("navbar-toggle", "collapsed")} onClick={this.toggleHamburgerNav.bind(this)} aria-expanded="false" aria-controls="navigation">
     						<span className={cx("icon-bar")}></span>
                 <span className={cx("icon-bar")}></span>
                 <span className={cx("icon-bar")}></span>
@@ -85,7 +96,7 @@ class Navigation extends Component {
     				</div>
 
     				<div className={cx("col-sm-10", "col-xs-12", "navigation-container")}>
-    					<div id="navigation" className={cx("navbar-collapse", "collapse")}>
+    					<div id="navigation" ref="navigation" className={cx("navbar-collapse", this.state.isNavCollapsed ? "collapse" : "")}>
     						<ul className={cx("navigation-list", "pull-left", "light-text")}>
     							{navigationElements}
     						</ul>

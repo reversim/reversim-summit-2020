@@ -14,7 +14,6 @@ import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { fetchProposals } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
-import { fetchReversimTweets } from 'actions/tweets';
 import { Element } from 'react-scroll';
 import ReactDOM from 'react-dom';
 
@@ -28,8 +27,7 @@ class Home extends Component {
 
     static need = [  // eslint-disable-line
         fetchReversimTeam,
-        fetchProposals,
-        fetchReversimTweets
+        fetchProposals
     ];
 
     constructor(props) {

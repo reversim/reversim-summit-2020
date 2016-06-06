@@ -4,15 +4,6 @@ import * as types from 'types';
 
 polyfill();
 
-/*
- * Utility function to make AJAX requests using isomorphic fetch.
- * You can also use jquery's $.ajax({}) if you do not want to use the
- * /fetch API.
- * @param Object Data you wish to pass to the server
- * @param String HTTP method, e.g. post, get, put, delete
- * @param String endpoint - defaults to /login
- * @return Promise
- */
 function makeTweetsRequest(method, data, api = '/tweets') {
   return request({
     url: api,
@@ -23,8 +14,28 @@ function makeTweetsRequest(method, data, api = '/tweets') {
 }
 
 export function fetchReversimTweets() {
-  return {
-      type: types.GET_REVERSIM_TWEETS,
-      promise: makeTweetsRequest('get', null, '/tweets/reversim')
-  };
+  return (dispatch, getState) => {
+    const { tweets: { reversim } } = getState();
+
+    if (reversim.length == 0) {
+      dispatch({
+        type: types.GET_REVERSIM_TWEETS_REQUEST
+      });
+
+      return makeTweetsRequest('get', null, '/tweets/reversim')
+      .then(res => {
+          if (res.status === 200) {
+            return dispatch({
+              type: types.GET_REVERSIM_TWEETS_SUCCESS,
+              tweets: res.data
+            });
+          }
+        })
+      .catch(() => {
+        return dispatch({
+          type: types.GET_REVERSIM_TWEETS_FAILURE
+        });
+      });
+    }
+  }
 }

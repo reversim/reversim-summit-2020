@@ -12,7 +12,7 @@ export default function tweets(state = initialState, action = {}) {
   switch (action.type) {
     case GET_REVERSIM_TWEETS_SUCCESS:
       return Object.assign({}, state, {
-        reversim: action.req.data
+        reversim: action.tweets
       });
     default:
       return state;
