@@ -15,13 +15,13 @@ const cx = classNames.bind(styles);
 const maxProposalsInSection = 4;
 
 const Proposals = ({data}) => {
-  const proposalsBlocks = data && data.slice(0, Math.min(maxProposalsInSection, data.length)).map(proposal => {
+  const proposalsBlocks = data && data.slice(0, Math.min(maxProposalsInSection, data.length)).map((proposal, i) => {
     return (
       <Proposal
-      key={ proposal.id }
+      key={ i }
       id={ proposal.id }
       name={ proposal.title }
-      description={ proposal.abstract }
+      abstract={ proposal.abstract }
       type={ proposal.type }
       speakerName={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].name : undefined }
       speakerOneLiner={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].oneLiner : undefined }

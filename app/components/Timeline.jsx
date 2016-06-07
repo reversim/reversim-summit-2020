@@ -128,7 +128,7 @@ const Timeline = () => {
                       </a>
                       <div id="day1_auditorium1_time7" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
-                          <p className={cx("description")}>See you in <a href="#location">Weizmann Institute of Science</a>, Rehovot. 19-20 September, 2016.</p>
+                          <p className={cx("description")}>See you in <ScrollLink to="location" spy={true} smooth={true} offset={-50} duration={500}>Weizmann Institute of Science</ScrollLink>, Rehovot. 19-20 September, 2016.</p>
                         </article>
                       </div>
                     </div>

@@ -3,6 +3,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
+import removeMd from 'remove-markdown';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +19,7 @@ class Proposal extends Component {
   }
 
   render() {
-    const { id, name, description, type, speakerName, speakerOneLiner, speakerPhoto } = this.props;
+    const { id, name, abstract, type, speakerName, speakerOneLiner, speakerPhoto } = this.props;
 
     let sessionType;
     if (type === 'ossil') {
@@ -29,13 +30,15 @@ class Proposal extends Component {
       sessionType = "Full Featured";
     }
 
+    let abstractText = removeMd(abstract);
+
     return (
       <div className={cx("col-sm-6")}>
         <div className={cx("proposal")}>
           <h6>{name}</h6>
           <article className={cx("text-box")}>
             <div className={cx("session-info-link")} onClick={this.jumpToProposalPage.bind(this)}>
-              { description.length > 200 ? description.substr(0, 200) + '...' : description }
+              { abstractText.length > 200 ? abstractText.substr(0, 200) + '...' : abstractText }
             </div>
             <div className={cx("session-type")}><small className={cx("text-alt")}><span className={cx("highlight")}>{sessionType}</span></small></div>
           </article>
@@ -53,7 +56,7 @@ class Proposal extends Component {
 Proposal.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  abstract: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   speakerName: PropTypes.string.isRequired,
   speakerOneLiner: PropTypes.string.isRequired,
