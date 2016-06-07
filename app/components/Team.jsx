@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from 'css/main';
 import Speaker from 'components/Speaker';
 import defaultSpeakerPic from 'images/default_speaker.png';
+import _ from 'lodash';
 
 const cx = classNames.bind(styles);
 
@@ -37,7 +38,7 @@ const Team = ({ team }) => {
         <p className={cx("text-alt")}>Who's behind the Reversim Summit?</p>
         <br />
         <br />
-      {teamMembers}
+        {_.chunk(teamMembers, 3).map((member, i) => <div key={i} className={cx("row")}>{member}</div>)}
 
       </div>
     </section>

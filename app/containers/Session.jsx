@@ -9,6 +9,7 @@ import SocialShare from 'components/SocialShare';
 import {updateProposal} from 'actions/proposals';
 import NotificationSystem from 'react-notification-system';
 import ga from 'react-ga';
+import ReactMarkdown from 'react-markdown';
 
 import styles from 'css/main';
 
@@ -93,7 +94,6 @@ class Session extends Component {
       } else {
         proposalType = "Full Featured (30-40 min.)";
       }
-      const abstractParagraphs = abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
 
       return (
         <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
@@ -121,6 +121,7 @@ class Session extends Component {
               <span className={cx("col-xs-12")}>
                 <textarea id="abstract" ref="abstract" required defaultValue={abstract} />
               </span>
+              <small className={cx("col-xs-8")}>Markdown syntax is supported</small>
             </fieldset>
 
             <fieldset className={cx("col-xs-2", "col-xs-offset-2")} style={{marginTop: '30px'}}>
@@ -145,12 +146,11 @@ class Session extends Component {
       } else {
         proposalType = "Full Featured (30-40 min.)";
       }
-      const abstractParagraphs = abstract && abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
 
       return (
         <div>
           <p><small className={cx("text-alt")}><span className={cx("highlight")}>{proposalType}</span></small></p>
-          {abstractParagraphs}
+          <ReactMarkdown source={abstract} className={cx("markdown-block")} />
           { this.isSpeaker() ? <div className={cx("row", "pull-right")} style={{margin: '50px 0'}}><a href="#" onClick={this.toggleEdit.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit</a></div> : undefined }
           <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} />
         </div>
@@ -173,7 +173,7 @@ class Session extends Component {
         speakers = currentProposal.speaker_ids.map((speaker, i) => {
           return (
             <div className={cx("align-center")} key={i}>
-              <Speaker name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} bio={speaker.bio} linkedin={speaker.linkedin} twitter={speaker.twitter}></Speaker>
+              <Speaker name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} bio={speaker.bio} linkedin={speaker.linkedin} twitter={speaker.twitter} stackOverflow={speaker.stackOverflow} />
               {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} state={{ from: pathname }} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
             </div>
           );

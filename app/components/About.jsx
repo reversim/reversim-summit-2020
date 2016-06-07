@@ -46,7 +46,6 @@ class About extends Component {
             <div className={cx("container")}>
               <span data-icon className={cx('icon', 'section-icon', 'icon-seo-icons-37')}></span>
               <h3>About</h3>
-              <p className={cx("text-alt")}>About the conference, topics, important dates, etc.</p>
               <br />
               <br />
 

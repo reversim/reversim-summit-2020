@@ -190,7 +190,7 @@ class MyProfile extends Component {
                     </div>
 
                     <div className={cx('col-md-4')}>
-                      <Speaker name={this.state.name} imageUrl={user.picture || defaultPic} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter} stackOverflow={this.state.stackOverflow}></Speaker>
+                      <Speaker name={this.state.name} imageUrl={user.picture || defaultPic} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter} stackOverflow={this.state.stackOverflow} />
                     </div>
 
                 </section>

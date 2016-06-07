@@ -5,6 +5,7 @@ import BaseLayout from 'containers/BaseLayout';
 import {fetchUserProposals } from 'actions/users';
 import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
+import ReactMarkdown from 'react-markdown';
 
 import styles from 'css/main';
 
@@ -35,8 +36,6 @@ class MyProposals extends Component {
             type = "Full Featured (30-40 min.)";
           }
 
-          const abstractParagraphs = proposal.abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
-
           return (
             <section className={cx("section")} style={ {padding: '0 30px 60px'} } key={i}>
               <div>
@@ -44,7 +43,7 @@ class MyProposals extends Component {
                   <article>
                     <h5>{proposal.title}</h5>
                       <p><small className={cx("text-alt")}><span className={cx("highlight")}>{type}</span></small></p>
-                      {abstractParagraphs}
+                      <ReactMarkdown source={proposal.abstract} className={cx("markdown-block")} />
                       <Link to={`session/${proposal.id}`} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{ margin: '20px 0 0' }}>View</Link>
                   </article>
                 </div>

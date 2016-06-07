@@ -110,7 +110,7 @@ class Submit extends Component {
                       <h6>Full Featured sessions (30-40 minutes)</h6>
                       <p>Full feature are frontal presentations b/w 30 - 40 minutes. They will be held either in the large room (500 ppl) or the small room (200 ppl) in two parallel tracks.</p>
                       <br />
-                      <h6>Lightning Talks (5 minutes)</h6>
+                      <h6>Lightning Sessions (5 minutes)</h6>
                       <p>Lightning are speedy 5 min sessions. They will be presented in a series in which each presenter has exactly 20 slides, 15 sec per slide, slides are auto advanced and in total 5 min. No break b/w the sessions. It's fun, it's speedy, it's concise and it's breathtaking :-)</p>
                       <br />
                       <h6>Open Source in Israel (10 minutes)</h6>
@@ -215,10 +215,12 @@ class Submit extends Component {
                             <fieldset>
                               <span className={cx("col-xs-12")}>
                                 <label htmlFor="abstract">Abstract</label>
+
                               </span>
                               <span className={cx("col-xs-8")}>
                                 <textarea id="abstract" ref="abstract" required />
                               </span>
+                              <small className={cx("col-xs-8")}>Markdown syntax is supported</small>
                             </fieldset>
 
                             <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>

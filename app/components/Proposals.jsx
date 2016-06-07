@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from 'css/main';
 import Proposal from 'components/Proposal';
 import { Link } from 'react-router';
+import _ from 'lodash';
 
 const cx = classNames.bind(styles);
 
@@ -32,11 +33,12 @@ const Proposals = ({data}) => {
   return (
     <section id="proposals" className={cx('section', 'align-center')} style={ {paddingTop: '25px'} }>
       <div className={cx('container')}>
-        <span data-icon className={cx('icon', 'section-icon', 'icon-badges-votes-08')}></span>
+        <span data-icon className={cx('icon', 'section-icon', 'icon-chat-messages-09')}></span>
         <h3>Proposals</h3>
-      <p className={cx("text-alt")} style={ {marginBottom: '80px'} }>Newest proposals</p>
-      { proposalsBlocks }
-      { data && data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
+        { _.chunk(proposalsBlocks, 2).map((block, i) => <div key={i} className={cx("row")}>{block}</div>) }
+        <div className={cx("container")}>
+          { data && data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
+        </div>
       </div>
     </section>
   );

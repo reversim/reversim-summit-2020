@@ -5,6 +5,7 @@ import BaseLayout from 'containers/BaseLayout';
 import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
 import { fetchProposals } from 'actions/proposals';
+import ReactMarkdown from 'react-markdown';
 
 import styles from 'css/main';
 
@@ -33,8 +34,6 @@ class AllProposals extends Component {
             type = "Full Featured (30-40 min.)";
           }
 
-          const abstractParagraphs = proposal.abstract.split('\n').map((paragraph, i) => <p key={i}>{paragraph}</p>);
-
           return (
             <section className={cx("section", "container")} style={ {padding: '0 30px 60px'} } key={i}>
               <div className={cx("col-md-8", "col-md-offset-1")}>
@@ -42,14 +41,14 @@ class AllProposals extends Component {
                   <article>
                     <h5>{proposal.title}</h5>
                       <p><small className={cx("text-alt")}><span className={cx("highlight")}>{type}</span></small></p>
-                      {abstractParagraphs}
+                      <ReactMarkdown source={proposal.abstract} className={cx("markdown-block")} />
                       <Link to={`session/${proposal.id}`} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{ margin: '20px 0 0' }}>View</Link>
                   </article>
                 </div>
               </div>
               <div className={cx("col-md-3")}>
               { proposal.speaker_ids.map((speaker, i) => {
-                return (<Speaker key={i} name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} linkedin={speaker.linkedin} twitter={speaker.twitter} stackOverflow={speaker.stackOverflow}></Speaker>);
+                return (<Speaker key={i} name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} linkedin={speaker.linkedin} twitter={speaker.twitter} stackOverflow={speaker.stackOverflow} />);
               })  }
               </div>
             	</section>

@@ -25,3 +25,45 @@
   cursor: pointer;
   margin-right: 10px;
 }
+
+.markdown-block h1 {
+  font-size: 24px;
+}
+.markdown-block h2 {
+  font-size: 22px;
+}
+.markdown-block h3 {
+  font-size: 20px;
+}
+.markdown-block h4 {
+  font-size: 18px;
+}
+.markdown-block h5 {
+  font-size: 16px;
+}
+.markdown-block h6 {
+  font-size: 14px;
+}
+
+.markdown-block img {
+  max-width: 200px;
+}
+
+.markdown-block ul {
+   list-style-type: disc;
+   list-style-position: inside;
+}
+.markdown-block ol {
+   list-style-type: decimal;
+   list-style-position: inside;
+}
+.markdown-block ul ul, .markdown-block ol ul {
+   list-style-type: circle;
+   list-style-position: inside;
+   margin-left: 15px;
+}
+.markdown-block ol ol, .markdown-block ul ol {
+   list-style-type: lower-latin;
+   list-style-position: inside;
+   margin-left: 15px;
+}

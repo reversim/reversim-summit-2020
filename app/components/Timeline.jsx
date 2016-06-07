@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
+import Scroll, { Link as ScrollLink } from 'react-scroll';
 
 const cx = classNames.bind(styles);
 
@@ -48,7 +49,7 @@ const Timeline = () => {
                         <article>
                           <p className={cx("description")}>
                           We've decided that we will not define a list of tracks upfront, rather open up the submission to any topic.
-                          Later on we will choose the best talks and sort them by topic relevance, so that attendees would be able to focus on tracks and room.</p>
+                          Later on we will choose the best sessions and sort them by topic relevance, so that attendees would be able to focus on tracks and room.</p>
                         <p className={cx("description")}>
                         This means that we want submission on any topic that may interest developers, product folks, UX etc.
                         Topics might include startups, mobile, web, devops, data processing, scaling, programming languages, api design, data science, gaming, computer vision and more...
@@ -83,8 +84,8 @@ const Timeline = () => {
                       </a>
                       <div id="day1_auditorium1_time3" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
-                          <p className={cx("description")}>We have a wonderful group of moderators that would help you refine your submission and eventually select the proposed sessions.
-                          Please feel free to reach out to any of us if you have any questions.</p>
+                          <p className={cx("description")}>We have a <ScrollLink to="team" spy={true} smooth={true} offset={-50} duration={500}>wonderful group of moderators</ScrollLink> that would help you refine your submission and eventually select the proposed sessions.
+                          Please feel free to <a href="mailto:rs16-team@googlegroups.com">reach out</a> to any of us if you have any questions.</p>
                           <p className={cx("description")}>During the selection process we take into account various aspects, including relevance, popularity, interest, originality, presenters track record, diversity etc.</p>
                         </article>
                       </div>
@@ -127,7 +128,7 @@ const Timeline = () => {
                       </a>
                       <div id="day1_auditorium1_time7" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
-                          <p className={cx("description")}>See you in <a href="#location">Wix Auditorium</a>, Weizmann Institute of Science, Rehovot. 19-20 September, 2016.</p>
+                          <p className={cx("description")}>See you in <a href="#location">Weizmann Institute of Science</a>, Rehovot. 19-20 September, 2016.</p>
                         </article>
                       </div>
                     </div>

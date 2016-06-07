@@ -70,7 +70,7 @@ class Navigation extends Component {
       navigationElements = [
         <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } } onClick={this.collapseNav.bind(this)}>About</Link>,
         <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } } onClick={this.collapseNav.bind(this)}>Timeline</Link>,
-        <Link className={cx("navigation-link")} to="proposals" activeClassName={cx('active')} onClick={this.collapseNav.bind(this)}>Proposals</Link>,
+        <Link className={cx("navigation-link")} to="/proposals" activeClassName={cx('active')} onClick={this.collapseNav.bind(this)}>Proposals</Link>,
         <Link className={cx("navigation-link")} to="/" state={ { section: 'team' } } onClick={this.collapseNav.bind(this)}>Team</Link>,
         /*<Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } } onClick={this.collapseNav.bind(this)}>Sponsors</Link>*/,
         <Link className={cx("navigation-link")} to="/" state={ { section: 'location' } } onClick={this.collapseNav.bind(this)}>Location</Link>
