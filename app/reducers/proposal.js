@@ -10,7 +10,10 @@ import {
     GET_PROPOSAL_FAILURE,
     CREATE_PROPOSAL_REQUEST,
     CREATE_PROPOSAL_FAILURE,
-    UPDATE_PROPOSAL_SUCCESS
+    UPDATE_PROPOSAL_SUCCESS,
+    ATTEND_SESSION_REQUEST,
+    ATTEND_SESSION_FAILURE,
+    ATTEND_SESSION_SUCCESS
 } from 'types';
 
 
@@ -58,6 +61,19 @@ export default function proposal(state = {
         case UPDATE_PROPOSAL_SUCCESS:
             return Object.assign({}, state, {
                 currentProposal: Object.assign({}, state.currentProposal, action.data)
+            });
+        case ATTEND_SESSION_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case ATTEND_SESSION_FAILURE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                currentProposal: Object.assign({}, state.currentProposal, { attended: false })
+            });
+        case ATTEND_SESSION_SUCCESS:
+            return Object.assign({}, state, {
+                currentProposal: Object.assign({}, state.currentProposal, { attended: true })
             });
 
         default:

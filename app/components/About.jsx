@@ -49,7 +49,7 @@ class About extends Component {
               <br />
               <br />
 
-            <div className={cx('tabs-wrapper', 'tabs-horizontal')}>
+            <div className={cx('tabs-wrapper', 'tabs-horizontal')} style={{height: '717px'}}>
               <div className={cx('nav-wrapper')}>
                 <ul className={cx('nav', 'nav-tabs')}>
                   <li className={this.state.activeTab === 0 ? cx("active") : ""}><a href="#horizontal_tab1" onClick={this.onTabClicked.bind(this)(0)} data-toggle="tab">
@@ -71,6 +71,10 @@ class About extends Component {
                     </div>
                     <div className={cx('col-sm-7', 'align-left')}>
                       <h6>About Reversim Summit</h6>
+                      <p>The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too.</p>
+                      <p>This is the fourth Reversim Summit. The summits of <a href="http://summit2013.reversim.com">2013</a> and <a href="http://summit2014.reversim.com">2014</a> (TLV Campus) and <a href="http://summit2015.reversim.com">2015</a> (Technion) also featured community content. Watch previous years&#39; sessions to get the general feel of the Revesim Summit spirit.</p>
+                      <br />
+                      <h6>About Reversim Podcast</h6>
                       <p>
                         <a href="http://reversim.com/">Reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by <a href="https://twitter.com/orilahav">Ori Lahav</a> and <a href="http://tavory.com/">Ran Tavory</a> which brings together software developers and product, with over 300 recorded episodes and a few thousands listners.
                       </p>
@@ -92,19 +96,33 @@ class About extends Component {
                   </div>
 
                   <div id="horizontal_tab3" className={this.tabContentClass(2)}>
-                    <div className={cx('col-sm-5', 'img-column')}>
+                    <div className={cx('col-sm-3', 'img-column')}>
                       <img src={aboutSponsors} alt="" className={cx("img-responsive")} />
                     </div>
-                    <div className={cx('col-sm-7', 'align-left')}>
-                      <h6>Sponsors apply</h6>
-                      <p>Thank you for your interest in becoming a Reversim sponsor! While our speakers and attendees are what makes the conference tick, it is our sponsors that allow us to keep tickets cheap, bring in international speakers and make the conference experience the best it can possibly be.</p>
-                      <br />
-                      <h6>Why become a sponsor?</h6>
-                      <p>As a sponsor you’ll contribute to the success of the conference by providing monetary aid or rendering services.</p>
-                      <p>More information about sponsorship packages will be published soon.</p>
+                    <div className={cx('col-sm-8', 'col-xs-offset-1', 'align-left')}>
+                      <h6>Sponsorship plan</h6>
+                      <p>We feature a sponsorship plan for companies relevant to the conference attendees. The plan includes:</p>
+                      <span className={cx('h7')}>Featured job description</span>
+                      <ul className={cx('with-bullets')}>
+                        <li>A featured job description near your company name at the sponsors page in our site, with a link to your site.</li>
+                        <li>A link to your careers / jobs page from the sponsors page in our site.</li>
+                      </ul>
+                      <span className={cx('h7')}>A Thank-you before the keynote sessions</span>
+                      <p>We will thank all sponsors before the daily keynote session.</p>
+                      <span className={cx('h7')}>Website</span>
+                      <ul className={cx('with-bullets')}>
+                        <li>A logo in the home page of the Reversim conference site.</li>
+                        <li>A section in the sponsors page in the Reversim conference site, with a link to the company’s home page.</li>
+                      </ul>
+                      <span className={cx('h7')}>Video</span>
+                      <p>All major conference sessions are video-recorded and will be freely available on the web. Sponsors logos will appear in the cover page appearing before each session.</p>
+                      <span className={cx('h7')}>Tickets</span>
+                      <p>Tickets are free, but they tend to vanish quickly. We provide each sponsor with 4 unnamed reservations that can be given to last-minute attendees.</p>
                       <br />
                       <h6>Becoming a sponsor</h6>
-                      <p>To become a sponsor, <a href="mailto:adam@matan.name">contact the organization team</a>. We will reach back to you.</p>
+                      <p>The sponsorship plan cost is 15,000 NIS + V.A.T.</p>
+                      <p>We do encourage sponsors to submit sessions. In fact, sessions by sponsors have been some of the best we had in previous summits. However, these sessions go through our independent submission and moderation process.</p>
+                      <p>To become a sponsor, please contact <a href="mailto:adam@matan.name">Adam matan</a>.</p>
                     </div>
                   </div>
                 </div>

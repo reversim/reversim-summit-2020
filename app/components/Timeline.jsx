@@ -42,7 +42,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-bullhorn')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 2</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 9</strong>
                         <h6 className={cx("title")}>Call for Papers Period Begins<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time1" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
@@ -66,7 +66,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-ban')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 30</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>July 8</strong>
                         <h6 className={cx("title")}>Call for Papers Period Ends<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
 
@@ -79,7 +79,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-comments')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Early July</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid July</strong>
                       <h6 className={cx("title")}>Review Starts<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time3" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
@@ -111,7 +111,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-ticket')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mig August</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid August</strong>
                       <h6 className={cx("title")}>Open Registration<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                     </div>

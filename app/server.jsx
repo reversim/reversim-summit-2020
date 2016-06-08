@@ -7,11 +7,15 @@ import createRoutes from 'routes';
 import configureStore from 'store/configureStore';
 import preRenderMiddleware from 'middlewares/preRenderMiddleware';
 import header from 'components/Meta';
+import removeMd from 'remove-markdown';
+import summitSocialLogo from 'images/summit2016_social.png';
 
 const clientConfig = {
   host: process.env.HOSTNAME || 'localhost',
   port: process.env.PORT || '3000'
 };
+
+const reversimSocialMediaImage = "http://1.bp.blogspot.com/-dgtZLgzwzpU/UQxClcR57BI/AAAAAAAAMb8/Da3xz5hjLNo/s300/reversim-logo-white.png";
 
 // configure baseURL for axios requests (for serverside API calls)
 axios.defaults.baseURL = `http://${clientConfig.host}:${clientConfig.port}`;
@@ -93,13 +97,42 @@ export default function render(req, res) {
           </Provider>
         );
 
+        let socialTags;
+        if (req.url.match(/\/session\//g)) {
+          const { title } = initialState.proposal.currentProposal;
+          let baseUrl = req.protocol + '://' + req.get('host');
+
+          // add meta tags for social share- session page
+          socialTags = [
+            // search engines
+            { name: "description", content: "Reversim Summit 2016 Session" },
+
+            // twitter
+            // { name: "twitter:card", content: "CARD" },
+            { name: "twitter:title", content: title },
+            { name: "twitter:site", content: "Reversim Summit 2016" },
+            { name: "twitter:description", content: "Reversim Summit 2016 Session" },
+            { name: "twitter:image:src", content: baseUrl + summitSocialLogo },
+
+            // facebook
+            { property: "og:type", content: "article" },
+            { property: "og:title", content: title },
+            { property: "og:description", content: "Reversim Summit 2016 Session" },
+            { property: "og:site_name", content: "Reversim Summit 2016"},
+            { property: "og:image", content: baseUrl + summitSocialLogo },
+            { property: "og:url", content: baseUrl + req.url },
+          ]
+        }
+
+        let headerTags = header(socialTags);
+
         res.status(200).send(`
           <!doctype html>
-          <html ${header.htmlAttributes.toString()}>
+          <html ${headerTags.htmlAttributes.toString()}>
             <head>
-              ${header.title.toString()}
-              ${header.meta.toString()}
-              ${header.link.toString()}
+              ${headerTags.title.toString()}
+              ${headerTags.meta.toString()}
+              ${headerTags.link.toString()}
             </head>
             <body>
               <div id="app">${componentHTML}</div>

@@ -26,14 +26,15 @@ export function transformUser(user) {
   return user;
 }
 
-export function transformProposal(proposal) {
+export function transformProposal(proposal, session) {
   if (_.isObject(proposal)) {
     return {
       id: proposal.id,
       title: proposal.title,
       abstract: proposal.abstract,
       type: proposal.type,
-      speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map(transformUser)
+      speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map(transformUser),
+      attended: session && proposal.attendees && session.passport && session.passport.user ? _.includes(proposal.attendees.map(a => a.toHexString()), session.passport.user) : false
     }
   }
 

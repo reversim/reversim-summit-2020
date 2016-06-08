@@ -67,3 +67,20 @@
    list-style-position: inside;
    margin-left: 15px;
 }
+
+ul.with-bullets {
+   list-style-type: disc;
+   list-style-position: inside;
+}
+
+ul.with-bullets ul {
+   list-style-type: circle;
+   list-style-position: inside;
+   margin-left: 15px;
+}
+
+.header-bg {
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}

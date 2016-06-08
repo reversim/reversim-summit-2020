@@ -34,7 +34,7 @@ export function get(req, res) {
             return res.status(500).send('Something went wrong getting the data');
         }
 
-        return res.json(transformProposal(proposal));
+        return res.json(transformProposal(proposal, req.session));
     });
 }
 
@@ -108,10 +108,29 @@ export function remove(req, res) {
     });
 }
 
+/**
+ * Attend a proposal
+ */
+export function attend(req, res) {
+  if (req.session.passport && req.session.passport.user) {
+    Proposal.findOneAndUpdate({ id: req.params.id, attendees: { $nin: [req.session.passport.user] } }, { $push: {'attendees': req.session.passport.user} }, (err, obj) => {
+        if (err) {
+          console.log(`Error in proposals/attend query: ${err}`);
+          return res.status(500).send('Something went wrong getting the data');
+        }
+
+        return res.status(200).send('Marked as attended');
+    });
+  } else {
+    return res.status(403).send('Unauthorized');
+  }
+}
+
 export default {
     all,
     get,
     add,
     update,
-    remove
+    remove,
+    attend
 };

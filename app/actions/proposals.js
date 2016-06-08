@@ -19,8 +19,8 @@ polyfill();
  * @param String endpoint
  * @return Promise
  */
-function makeProposalsRequest(method, id, data, api = '/proposal') {
-    return request[method](api + (id ? ('/' + id) : ''), data);
+function makeProposalsRequest(method, id, data, action, api = '/proposal') {
+    return request[method](api + (id ? ('/' + id) : '') + (action ? `/${action}` : ''), data);
 }
 
 function guid() {
@@ -67,11 +67,19 @@ export function fetchProposals() {
     };
 }
 
-export function fetchProposal(id) {
+export function fetchProposal(params) {
     return {
         type: types.GET_PROPOSAL,
+        id: params.id,
+        promise: makeProposalsRequest('get', params.id)
+    };
+}
+
+export function attendSession(id) {
+    return {
+        type: types.ATTEND_SESSION,
         id: id,
-        promise: makeProposalsRequest('get', id)
+        promise: makeProposalsRequest('post', id, null, 'attend')
     };
 }
 

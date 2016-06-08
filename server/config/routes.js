@@ -72,6 +72,7 @@ export default (app) => {
     app.post('/proposal/:id', proposalsController.add);
     app.put('/proposal/:id', proposalsController.update);
     app.delete('/proposal/:id', proposalsController.remove);
+    app.post('/proposal/:id/attend', proposalsController.attend);
   } else {
     console.warn(unsupportedMessage('proposalsController routes'));
   }

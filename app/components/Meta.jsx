@@ -10,16 +10,17 @@ if (__DEVSERVER__) {
   config.link = config.link.filter(l => l.rel !== 'stylesheet');
 }
 
-const Meta = () => (
+const Meta = ({extraMeta}) => (
   <Helmet
     htmlAttributes={{"lang": "en", "amp": undefined}}
-    title="Reversim Summit 2016" meta={config.meta}
+    title="Reversim Summit 2016" meta={config.meta.concat(extraMeta || [])}
     link={config.link}
   />
 )
 
 
-ReactDOMServer.renderToString(<Meta />);
-const header = Helmet.rewind();
+export default function header(extraMeta) {
+  ReactDOMServer.renderToString(<Meta extraMeta={extraMeta} />);
 
-export default header;
+  return Helmet.rewind();
+}

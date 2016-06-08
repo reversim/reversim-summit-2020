@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Link } from 'react-router';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
-import {fetchProposal} from 'actions/proposals';
 import Speaker from 'components/Speaker';
 import SocialShare from 'components/SocialShare';
-import {updateProposal} from 'actions/proposals';
+import {updateProposal, attendSession, fetchProposal, fetchProposalServerSideRendering, fetchProposals} from 'actions/proposals';
 import NotificationSystem from 'react-notification-system';
 import ga from 'react-ga';
 import ReactMarkdown from 'react-markdown';
@@ -18,6 +18,10 @@ import defaultSpeakerPic from 'images/default_speaker.png'
 const cx = classNames.bind(styles)
 
 class Session extends Component {
+
+    static need = [
+      fetchProposal
+    ];
 
     constructor(props) {
         super(props);
@@ -32,12 +36,31 @@ class Session extends Component {
     }
 
     componentWillMount() {
-      const { params: { id } } = this.props;
-      this.props.dispatch(fetchProposal(id)).then(() => this.setState({ proposalType: this.props.currentProposal.type }));
+      const { location: { query }, currentProposal } = this.props;
+
+      if (query && query.attend && query.attend === "true") {
+        this.attendSession();
+      }
     }
 
     handleProposalTypeChange(event) {
       this.setState({ proposalType: event.target.value });
+    }
+
+    attendSession(event) {
+      event && event.preventDefault();
+
+      const { dispatch, params: { id }, user: { authenticated }, currentProposal: { attended }, location: { pathname } } = this.props;
+
+      if (!attended && authenticated && !this.isSpeaker()) {
+        dispatch(attendSession(id)).then(() => ga.event({
+          category: 'Session',
+          action: 'Attend Session',
+          value: id
+        }));
+      } else if (!authenticated && window) {
+        window.location.href = `/auth/google?returnTo=${pathname}?attend=true`
+      }
     }
 
     handleSubmit(event) {
@@ -136,7 +159,7 @@ class Session extends Component {
     }
 
     previewSession() {
-      const { currentProposal: { title, abstract, type }, user: { id } } = this.props;
+      const { currentProposal: { title, abstract, type, attended }, user: { id, authenticated } } = this.props;
 
       let proposalType;
       if (type === 'ossil') {
@@ -147,21 +170,44 @@ class Session extends Component {
         proposalType = "Full Featured (30-40 min.)";
       }
 
+      let action;
+      if (this.isSpeaker()) {
+        action = <div className={cx("row", "pull-right")} style={{margin: '50px 0'}}><a href="#" onClick={this.toggleEdit.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit</a></div>
+      } else if (authenticated && attended) {
+        // action = <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>We will count you in. Thanks for the cooperation!</div>
+      } else if (!attended) {
+        // action = <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>
+        //             Will you attend this session {!authenticated ? "(You must be logged in)" : undefined}? <a href="#" onClick={this.attendSession.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{width:'20px'}}>Yes!</a>
+        //          </div>
+      }
+
+      let canUseDom = typeof window !== 'undefined' && window.document && window.document.createElement;
+
       return (
         <div>
           <p><small className={cx("text-alt")}><span className={cx("highlight")}>{proposalType}</span></small></p>
           <ReactMarkdown source={abstract} className={cx("markdown-block")} />
-          { this.isSpeaker() ? <div className={cx("row", "pull-right")} style={{margin: '50px 0'}}><a href="#" onClick={this.toggleEdit.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit</a></div> : undefined }
-          <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} />
+          { action }
+          { canUseDom ? <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} /> : undefined }
         </div>
       );
     }
 
     toggleEdit(event) {
       event.preventDefault();
+      const { params: { id }, currentProposal: { type } } = this.props;
+
+      if (!this.state.isEditing) {
+        this.setState({ proposalType: type });
+      }
 
       if (this.isSpeaker()) {
         this.setState({ isEditing: !this.state.isEditing });
+        ga.event({
+          category: 'Session',
+          action: 'Toggle edit',
+          value: id
+        });
       }
     }
 
@@ -186,7 +232,7 @@ class Session extends Component {
       }
 
       return (<div>
-                <section id="register" className={cx('section', 'overlay', currentProposal ? `bg-${currentProposal.type}-session` : undefined, 'light-text', 'align-center')}>
+                <section id="register" className={cx('section', 'overlay', 'header-bg', currentProposal ? `bg-${currentProposal.type}-session` : undefined, 'light-text', 'align-center')}>
                   <div className={cx("container")}>
                     <h2>{currentProposal ? currentProposal.title : undefined}</h2>
                   </div>

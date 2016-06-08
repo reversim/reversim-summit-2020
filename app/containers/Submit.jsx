@@ -88,19 +88,23 @@ class Submit extends Component {
                       <h5>Topics</h5>
                       <p>You may get a good sense of the topics we're interested in by looking into previous events: <a href="http://summit2013.reversim.com">Reversim Summit 2013</a> and <a href="http://summit2014.reversim.com">Reversim Summit 2014</a> and <a href="http://summit2015.reversim.com">Reversim Summit 2015</a>.</p>
                       <p>Apart from that, here's a good grocery list of topics just to give you ideas. We are interested in everything including:</p>
-                        <ul>
+                      <div className={cx('container')}>
+                        <ul className={cx('with-bullets', 'col-md-4')}>
                           <li>Software development</li>
-                          <li>Software product development</li>
+                          <li>Product management</li>
                           <li>UX</li>
                           <li>Startups</li>
                           <li>Mobile</li>
                           <li>Web</li>
+                        </ul>
+                        <ul className={cx('with-bullets', 'col-md-4')}>
                           <li>Devops</li>
                           <li>Data processing</li>
                           <li>Scaling</li>
                           <li>Software company culture</li>
                           <li>Tooling</li>
                         </ul>
+                      </div>
 
                       <p>There is no predefined list of topics, if you’d like to speak about something interesting, we want it!</p>
                       <p>We do not set out with a predefined list of tracks. We would like to leave the topics (tracks) open and only after accepting the submissions we will split the sessions into tracks, but we shall not rule out a single good session just b/c it's not a natural fit to any of the predefined list, so don't worry so much about categorizing your submissions.</p>
@@ -117,10 +121,22 @@ class Submit extends Component {
                       <p>We are especially interested in open source projects made in israel or created by Israelis. We will have a special stage for that.</p>
                     </div>
 
+                    <div style={{marginTop: '50px'}} className={cx('col-md-8', 'col-md-offset-2')}>
+                      <h5>FAQ</h5>
+                      <span className={cx('h7')}>What Language?</span>
+                      <p>C. Just kidding. The default language is Hebrew. This is not an international event, it's a local event for local developers and by local developers. There are awesome developers here in Israel. Having said that, if you as a speaker would prefer to speak in English that's totally fine.</p>
+                      <p>If you are a non Israeli speaker and would like to present in this conference, you are most welcome, that's perfectly fine, you may do so in English, just be aware that most of the contents is going to be in Hebrew.</p>
+                      <br />
+                      <span className={cx('h7')}>What do you get for X?</span>
+                    <p>Registration will open about a month before the event. If you've registered on time, all is well. If not, <strong>every submitter gets a single personal ticket</strong>, regardless of whether your session got accepted or not (assuming quality submission). <strong>Accepted speakers get a personal ticket +1</strong> (so you can do a friend a favor)</p>
+                    </div>
+
+
+
                     <div style={{marginTop: '50px'}} className={cx('col-md-12', 'col-md-offset-2')}>
                       <h5>Submission</h5>
                       <p>You may submit multiple proposals.</p>
-                      <p>Call for paper ends: <strong>June 30 midnight UTC</strong>. No kidding.</p>
+                      <p>Call for paper ends: <strong>July 8 midnight UTC</strong>. No kidding.</p>
 
                         <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
                           <h6>Bio</h6>
@@ -200,7 +216,7 @@ class Submit extends Component {
                                 <label htmlFor="title">Title</label>
                               </span>
                               <span className={cx("col-xs-5")}>
-                                <input id="title" ref="title" type="text" required />
+                                <input id="title" ref="title" type="text" required maxLength="100" />
                               </span>
                             </fieldset>
 

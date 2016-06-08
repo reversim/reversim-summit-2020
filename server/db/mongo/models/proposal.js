@@ -13,7 +13,10 @@ const ProposalSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     }],
-    votes: {},
+    attendees: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     comments: [String],
     editing: Boolean,
     deleted: Boolean,

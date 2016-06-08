@@ -44,7 +44,7 @@ class MyProposals extends Component {
                     <h5>{proposal.title}</h5>
                       <p><small className={cx("text-alt")}><span className={cx("highlight")}>{type}</span></small></p>
                       <ReactMarkdown source={proposal.abstract} className={cx("markdown-block")} />
-                      <Link to={`session/${proposal.id}`} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{ margin: '20px 0 0' }}>View</Link>
+                      <Link to={`/session/${proposal.id}`} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{ margin: '20px 0 0' }}>View</Link>
                   </article>
                 </div>
               </div>
@@ -55,7 +55,7 @@ class MyProposals extends Component {
         return (
             <BaseLayout currentPath={this.props.location.pathname} name="my-proposals">
 
-              <section id="register" className={cx('section', 'overlay', 'bg-my-proposals', 'light-text', 'align-center')}>
+              <section id="register" className={cx('section', 'overlay', 'header-bg', 'bg-my-proposals', 'light-text', 'align-center')}>
                 <div className={cx("container")}>
                   <h1>My Proposals</h1>
                 </div>
