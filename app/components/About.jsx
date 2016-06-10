@@ -49,7 +49,7 @@ class About extends Component {
               <br />
               <br />
 
-            <div className={cx('tabs-wrapper', 'tabs-horizontal')} style={{height: '717px'}}>
+            <div className={cx('tabs-wrapper', 'tabs-horizontal')} style={{minHeight: '717px'}}>
               <div className={cx('nav-wrapper')}>
                 <ul className={cx('nav', 'nav-tabs')}>
                   <li className={this.state.activeTab === 0 ? cx("active") : ""}><a href="#horizontal_tab1" onClick={this.onTabClicked.bind(this)(0)} data-toggle="tab">
@@ -71,14 +71,13 @@ class About extends Component {
                     </div>
                     <div className={cx('col-sm-7', 'align-left')}>
                       <h6>About Reversim Summit</h6>
-                      <p>The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too.</p>
+                      <p>Reversim summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too.</p>
                       <p>This is the fourth Reversim Summit. The summits of <a href="http://summit2013.reversim.com">2013</a> and <a href="http://summit2014.reversim.com">2014</a> (TLV Campus) and <a href="http://summit2015.reversim.com">2015</a> (Technion) also featured community content. Watch previous years&#39; sessions to get the general feel of the Revesim Summit spirit.</p>
                       <br />
                       <h6>About Reversim Podcast</h6>
                       <p>
                         <a href="http://reversim.com/">Reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by <a href="https://twitter.com/orilahav">Ori Lahav</a> and <a href="http://tavory.com/">Ran Tavory</a> which brings together software developers and product, with over 300 recorded episodes and a few thousands listners.
                       </p>
-                      <p>The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too.</p>
                     </div>
                   </div>
 

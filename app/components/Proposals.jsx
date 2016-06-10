@@ -35,6 +35,8 @@ const Proposals = ({data}) => {
       <div className={cx('container')}>
         <span data-icon className={cx('icon', 'section-icon', 'icon-chat-messages-09')}></span>
         <h3>Proposals</h3>
+        <br />
+        <br />
         { _.chunk(proposalsBlocks, 2).map((block, i) => <div key={i} className={cx("row")}>{block}</div>) }
         <div className={cx("container")}>
           { data && data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }

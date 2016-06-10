@@ -13,6 +13,7 @@ export default (req, accessToken, refreshToken, profile, done) => {
         user.profile.name = user.profile.displayName || profile._json.displayName;
         user.profile.gender = user.profile.gender || profile._json.gender;
         user.profile.picture = (profile.photos[0].value || profile._json.image.url).replace(/\?sz=\d+/,"");
+        user.created_at = new Date();
         user.save((err) => {
           done(err, user, { message: 'Google account has been linked.' });
         });
@@ -37,6 +38,7 @@ export default (req, accessToken, refreshToken, profile, done) => {
       user.profile.name = profile.displayName || profile._json.displayName;
       user.profile.gender = user.profile.gender || profile._json.gender;
       user.profile.picture = (profile.photos[0].value || profile._json.image.url).replace(/\?sz=\d+/,"");
+      user.created_at = new Date();
       return user.save((err) => {
         done(err, user);
       });

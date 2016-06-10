@@ -34,6 +34,7 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Proposal'
   }],
+  created_at: Date,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
   google: {}

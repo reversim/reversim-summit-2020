@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
+import _ from 'lodash';
 
 import config from 'helmconfig.js';
 
@@ -13,7 +14,7 @@ if (__DEVSERVER__) {
 const Meta = ({extraMeta}) => (
   <Helmet
     htmlAttributes={{"lang": "en", "amp": undefined}}
-    title="Reversim Summit 2016" meta={config.meta.concat(extraMeta || [])}
+    title="Reversim Summit 2016" meta={_.uniqBy((extraMeta || []).concat(config.meta), "property")}
     link={config.link}
   />
 )

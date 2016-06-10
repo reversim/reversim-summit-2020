@@ -236,7 +236,7 @@ class Submit extends Component {
                               <span className={cx("col-xs-8")}>
                                 <textarea id="abstract" ref="abstract" required />
                               </span>
-                              <small className={cx("col-xs-8")}>Markdown syntax is supported</small>
+                              <small className={cx("col-xs-8")}>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.</small>
                             </fieldset>
 
                             <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>

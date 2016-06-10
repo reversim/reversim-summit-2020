@@ -32,6 +32,11 @@ import maskIcon from 'images/safari-pinned-tab.svg';
 
 import msTile from 'images/mstile-144x144.png';
 
+import summitSocialLogo from 'images/summit2016_social.png';
+
+const baseUrl = "http://summit2016.reversim.com";
+
+
 const config = {
   link: [
     // Add to homescreen for Chrome on Android
@@ -80,6 +85,22 @@ const config = {
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },
     { name: 'msapplication-TileImage', content: msTile },
+    { name: "twitter:image:src", content: baseUrl + summitSocialLogo },
+
+    // twitter
+    // { name: "twitter:card", content: "CARD" },
+    { name: "twitter:title", content: "Reversim Summit 2016" },
+    { name: "twitter:site", content: "Reversim Summit 2016" },
+    { name: "twitter:description", content: "The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too." },
+
+    // facebook
+    { property: "og:type", content: "article" },
+    { property: "og:title", content: "Reversim Summit 2016" },
+    { property: "og:description", content: "The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too." },
+    { property: "og:site_name", content: "Reversim Summit 2016"},
+    { property: "og:url", content: "http://summit2016.reversim.com" },
+    { property: "og:image", content: baseUrl + summitSocialLogo },
+    { }
   ]
 };
 
