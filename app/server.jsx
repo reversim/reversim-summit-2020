@@ -98,9 +98,9 @@ export default function render(req, res) {
         );
 
         let socialTags;
+        let baseUrl = req.protocol + '://' + req.get('host');
         if (req.url.match(/\/session\//g)) {
           const { title } = initialState.proposal.currentProposal;
-          let baseUrl = req.protocol + '://' + req.get('host');
 
           // add meta tags for social share- session page
           socialTags = [
@@ -121,6 +121,23 @@ export default function render(req, res) {
             { property: "og:site_name", content: "Reversim Summit 2016"},
             { property: "og:image", content: baseUrl + summitSocialLogo },
             { property: "og:url", content: baseUrl + req.url },
+          ]
+        } else {
+          socialTags = [
+            // twitter
+            { name: "twitter:card", content: "CARD" },
+            { name: "twitter:title", content: "Reversim Summit 2016" },
+            { name: "twitter:site", content: "Reversim Summit 2016" },
+            { name: "twitter:description", content: "The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too." },
+            { name: "twitter:image:src", content: baseUrl + summitSocialLogo },
+
+            // facebook
+            { property: "og:type", content: "article" },
+            { property: "og:title", content: "Reversim Summit 2016" },
+            { property: "og:description", content: "The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too." },
+            { property: "og:site_name", content: "Reversim Summit 2016"},
+            { property: "og:url", content: "http://summit2016.reversim.com" },
+            { property: "og:image", content: baseUrl + summitSocialLogo },
           ]
         }
 

@@ -6,6 +6,7 @@ import About from 'components/About';
 import Timeline from 'components/Timeline';
 import Proposals from 'components/Proposals';
 import CFP from 'components/CFP';
+import Register from 'components/Register';
 import Sponsors from 'components/Sponsors';
 import Team from 'components/Team';
 import Location from 'components/Location';
@@ -14,7 +15,7 @@ import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { fetchProposals } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
-import { Element } from 'react-scroll';
+import { Element, Link as ScrollLink } from 'react-scroll';
 import ReactDOM from 'react-dom';
 
 import styles from 'css/main';
@@ -64,7 +65,7 @@ class Home extends Component {
                               <h5 className={cx('base-font')}>Call for papers is now open!</h5>
                               <div className={cx('btns-container')}>
                                   <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link>
-                                {/*<a href="#" className={cx('btn', 'btn-outline')} data-modal-link="0">REGISTER</a>*/}
+                                  <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>REGISTER</ScrollLink>
                               </div>
                           </div>
                       </div>
@@ -80,6 +81,10 @@ class Home extends Component {
 
                   <Element name="timeline" ref="timeline">
                     <Timeline />
+                  </Element>
+
+                  <Element name="register" ref="register">
+                    <Register />
                   </Element>
 
                   <Element name="proposals" ref="proposals">

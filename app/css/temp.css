@@ -7096,6 +7096,10 @@ button[type="submit"] .loading {
 .bg1.overlay:before {
   opacity: 0.9;
 }
+.bg2.overlay:before {
+  background-color: #282f43;
+  opacity: 0.85;
+}
 .bg4.overlay:before {
   background-color: #282f43;
   opacity: 0.85;

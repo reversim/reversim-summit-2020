@@ -11,10 +11,9 @@ if (__DEVSERVER__) {
   config.link = config.link.filter(l => l.rel !== 'stylesheet');
 }
 
-const Meta = ({extraMeta}) => (
-  <Helmet
+const Meta = ({extraMeta}) => (<Helmet
     htmlAttributes={{"lang": "en", "amp": undefined}}
-    title="Reversim Summit 2016" meta={_.uniqBy((extraMeta || []).concat(config.meta), "property")}
+    title="Reversim Summit 2016" meta={config.meta.concat(extraMeta || [])}
     link={config.link}
   />
 )
