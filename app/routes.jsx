@@ -20,12 +20,12 @@ export default (store) => {
   const requireAuth = (nextState, replace, callback) => {
     const { user: { authenticated }} = store.getState();
     if (!authenticated) {
-      // replace({
-      //   pathname: '/auth/google?returnTo='+nextState.location.pathname,
-      //   state: { nextPathname: nextState.location.pathname }
-      // });
+       replace({
+         pathname: '/auth/google?returnTo='+nextState.location.pathname,
+         state: { nextPathname: nextState.location.pathname }
+       });
       // store.dispatch(openLoginModal());
-      window.location.href = `/auth/google?returnTo=${nextState.location.pathname}`;
+      //window.location.href = `/auth/google?returnTo=${nextState.location.pathname}`;
     }
     callback();
   };

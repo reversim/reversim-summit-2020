@@ -56,7 +56,7 @@ export default (app) => {
       passport.authenticate('google'), function(req, res) {
         if (req.session.returnTo) {
           console.log('redirecting to '+req.session.returnTo);
-          res.redirect(`/${req.session.returnTo}`);
+          res.redirect(`${req.session.returnTo}`);
           delete req.session.returnTo;
         } else {
           res.redirect('/');

@@ -6664,7 +6664,7 @@ button[type="submit"] .loading {
     background-color: rgba(255, 255, 255, 0.26);
   }
   .header-wrapper {
-    height: auto;
+    /*height: auto;*/
     min-height: 90px;
   }
   .header-wrapper > .container {
