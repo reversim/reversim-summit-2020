@@ -88,7 +88,7 @@ class Home extends Component {
                   </Element>
 
                   <Element name="proposals" ref="proposals">
-                    <Proposals data={proposals} />
+                    <Proposals data={proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
                   </Element>
 
                   <CFP />

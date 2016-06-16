@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
  */
 const maxProposalsInSection = 4;
 
-const Proposals = ({data}) => {
+const Proposals = ({data, isReversimTeamMember}) => {
   const proposalsBlocks = data && data.slice(0, Math.min(maxProposalsInSection, data.length)).map((proposal, i) => {
     return (
       <Proposal
@@ -27,7 +27,7 @@ const Proposals = ({data}) => {
       speakerOneLiner={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].oneLiner : undefined }
       speakerEmail={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].email : undefined }
       speakerPhoto={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].picture : undefined }
-      isReversimTeamMember={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].isReversimTeamMember : undefined }
+      isReversimTeamMember={ isReversimTeamMember }
       />
     );
   })
