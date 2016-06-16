@@ -14,6 +14,8 @@ export function transformUser(user) {
       proposals: user.proposals && user.proposals.map(transformProposal),
       name: user.profile && user.profile.name,
       oneLiner: user.profile && user.profile.oneLiner,
+      email: user.email,
+      isReversimTeamMember: user.isReversimTeamMember,
       bio: user.profile && user.profile.bio,
       gender: user.profile && user.profile.gender,
       picture: user.profile && user.profile.picture,

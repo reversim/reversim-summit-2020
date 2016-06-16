@@ -25,7 +25,9 @@ const Proposals = ({data}) => {
       type={ proposal.type }
       speakerName={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].name : undefined }
       speakerOneLiner={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].oneLiner : undefined }
+      speakerEmail={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].email : undefined }
       speakerPhoto={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].picture : undefined }
+      isReversimTeamMember={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].isReversimTeamMember : undefined }
       />
     );
   })

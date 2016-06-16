@@ -4987,6 +4987,7 @@ button[type="submit"] .loading {
 }
 .proposal .author-block .company {
   display: inline-block;
+  width: 100%;
 }
 .session-info-link {
   position: relative;

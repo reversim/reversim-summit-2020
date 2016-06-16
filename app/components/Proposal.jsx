@@ -19,7 +19,7 @@ class Proposal extends Component {
   }
 
   render() {
-    const { id, name, abstract, type, speakerName, speakerOneLiner, speakerPhoto } = this.props;
+    const { id, name, abstract, type, speakerName, speakerOneLiner, speakerEmail, speakerPhoto, isReversimTeamMember } = this.props;
 
     let sessionType;
     if (type === 'ossil') {
@@ -31,6 +31,8 @@ class Proposal extends Component {
     }
 
     let abstractText = removeMd(abstract);
+
+    let emailVisibility = isReversimTeamMember ? 'shown' : 'hidden';
 
     return (
       <div className={cx("col-sm-6")}>
@@ -46,6 +48,7 @@ class Proposal extends Component {
             <div className={cx("photo-container")} style={ {backgroundImage: `url(${speakerPhoto})` } }></div>
           <strong className={cx("name")}>{speakerName}</strong>
           <small className={cx('text-alt', 'company')}>{speakerOneLiner}</small>
+          <small className={cx('text-alt', 'email', emailVisibility)}>{speakerEmail}</small>
           </div>
         </div>
       </div>
