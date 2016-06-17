@@ -24,6 +24,9 @@ class AllProposals extends Component {
     }
 
     render() {
+
+        var isReversimTeamMember = this.props.user.isReversimTeamMember;
+
         const proposalsBlocks = this.props.proposals.map((proposal, i) => {
           let type;
           if (proposal.type === 'ossil') {
@@ -48,7 +51,8 @@ class AllProposals extends Component {
               </div>
               <div className={cx("col-md-3")}>
               { proposal.speaker_ids.map((speaker, i) => {
-                return (<Speaker key={i} name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} linkedin={speaker.linkedin} twitter={speaker.twitter} stackOverflow={speaker.stackOverflow} />);
+                  let email = isReversimTeamMember ? speaker.email : '';
+                return (<Speaker key={i} name={speaker.name} email={email} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} linkedin={speaker.linkedin} twitter={speaker.twitter} stackOverflow={speaker.stackOverflow} isReversimTeamMember={isReversimTeamMember} />);
               })  }
               </div>
             	</section>

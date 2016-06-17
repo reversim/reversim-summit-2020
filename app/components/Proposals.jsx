@@ -16,6 +16,7 @@ const maxProposalsInSection = 4;
 
 const Proposals = ({data, isReversimTeamMember}) => {
   const proposalsBlocks = data && data.slice(0, Math.min(maxProposalsInSection, data.length)).map((proposal, i) => {
+        let email = isReversimTeamMember ? (proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].email : undefined) : '';
     return (
       <Proposal
       key={ i }
@@ -25,7 +26,7 @@ const Proposals = ({data, isReversimTeamMember}) => {
       type={ proposal.type }
       speakerName={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].name : undefined }
       speakerOneLiner={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].oneLiner : undefined }
-      speakerEmail={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].email : undefined }
+      speakerEmail={ email }
       speakerPhoto={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].picture : undefined }
       isReversimTeamMember={ isReversimTeamMember }
       />
