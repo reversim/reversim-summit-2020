@@ -20,7 +20,7 @@ export function all(req, res) {
 
         //console.log('proposal all returning '+JSON.stringify(proposals));
 
-        return res.json(proposals.map(transformProposal));
+        return res.json(proposals.map((proposal) => {return transformProposal(proposal, req.user)}));
     });
 }
 

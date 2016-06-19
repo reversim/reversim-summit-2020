@@ -7,5 +7,5 @@ export { deserializeUser, google, local };
 export default {
   deserializeUser,
   google,
-  local,
+  local
 };

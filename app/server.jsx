@@ -163,6 +163,7 @@ export default function render(req, res) {
       })
       .catch((err) => {
         console.error('Error in server.jsx '+err);
+        console.error('stack: '+err.stack);
         res.status(500).json(err);
       });
     } else {

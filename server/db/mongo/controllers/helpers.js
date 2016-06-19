@@ -3,7 +3,7 @@ import users from './users';
 import proposals from './proposals';
 import _ from 'lodash';
 
-export function transformUser(user) {
+export function transformUser(user, emailAllowed) {
   if (user._doc) {
     user = user._doc;
   }
@@ -14,7 +14,7 @@ export function transformUser(user) {
       proposals: user.proposals && user.proposals.map(transformProposal),
       name: user.profile && user.profile.name,
       oneLiner: user.profile && user.profile.oneLiner,
-      email: user.email,
+      email: emailAllowed && user.email,
       isReversimTeamMember: user.isReversimTeamMember,
       bio: user.profile && user.profile.bio,
       gender: user.profile && user.profile.gender,
@@ -28,15 +28,18 @@ export function transformUser(user) {
   return user;
 }
 
-export function transformProposal(proposal, session) {
+export function transformProposal(proposal, loggedInUser) {
   if (_.isObject(proposal)) {
     return {
       id: proposal.id,
       title: proposal.title,
       abstract: proposal.abstract,
       type: proposal.type,
-      speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map(transformUser),
-      attended: session && proposal.attendees && session.passport && session.passport.user ? _.includes(proposal.attendees.map(a => a.toHexString()), session.passport.user) : false
+      speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
+        let emailAllowed = loggedInUser && loggedInUser.isReversimTeamMember;
+        return transformUser(user, emailAllowed);
+      }),
+      attended: proposal.attendees && loggedInUser ? _.includes(proposal.attendees.map(a => a.toHexString()), loggedInUser) : false
     }
   }
 
