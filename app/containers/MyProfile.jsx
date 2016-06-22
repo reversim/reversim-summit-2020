@@ -216,8 +216,8 @@ class MyProfile extends Component {
                                linkedin={this.state.linkedin}
                                twitter={this.state.twitter}
                                stackOverflow={this.state.stackOverflow} />
-                      <button className={cx("btn", "btn-sm", "col-xs-12")} onClick={onFileWrapperClick}>
-                        Upload Picture
+                      <button className={cx("btn", "btn-sm", "col-xs-12")} style={{'letter-spacing':'0.3em'}} onClick={onFileWrapperClick}>
+                        Upload Picture (1MB max size)
                         <input type='file' className={cx('hidden')} onChange={this.onImageSelected.bind(this)}/>
                       </button>
                     </div>
