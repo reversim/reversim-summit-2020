@@ -2,6 +2,13 @@ import User from '../models/user';
 import passport from 'passport';
 import {transformUser, transformProposal} from './helpers';
 import _ from 'lodash';
+import cloudinary from 'cloudinary';
+
+cloudinary.config({
+  cloud_name: 'dtltonc5g',
+  api_key: '478363387677438',
+  api_secret: 'ezLey1P-aVWlOhAv-cvJdRmcK-w'
+});
 
 /**
  * POST /login
@@ -66,10 +73,12 @@ export function signUp(req, res, next) {
 export function update(req, res) {
   const omitKeys = ['id', '_id', '_v', 'google'];
   const data = _.omit(req.body, omitKeys);
+  console.log('update body is: '+JSON.stringify(data));
 
   User.findOneAndUpdate({ '_id': req.session.passport.user }, data, (err, user) => {
     if (err) {
       console.log(`Error in users/update query: ${err}`);
+      console.error('stack: '+err.stack);
       return res.status(500).send('Something went wrong');
     }
 
@@ -79,11 +88,31 @@ export function update(req, res) {
   });
 }
 
+export function uploadProfilePicture(req, res) {
+  cloudinary.uploader.upload(req.body.imageBinary, function(result) {
+    console.log('uploadProfilePicture started...');
+
+    User.findOneAndUpdate({ '_id': req.body.id }, {'profile.picture': result.url}, (err, user) => {
+      if (err) {
+        console.log(`Error in users/uploadProfilePicture query: ${err}`);
+        console.error('stack: '+err.stack);
+        return res.status(500).send('Something went wrong');
+      }
+
+      console.log('uploadProfilePicture successfully');
+
+      return res.status(200).send({message: 'uploadProfilePicture success', imageUrl: result.url});
+    });
+  });
+
+}
+
 export function getReversimTeam(req, res) {
     //console.log('proposal all started...');
     User.find({ isReversimTeamMember: true }).exec((err, users) => {
         if (err) {
           console.log(`Error in users/getReversimTeam query: ${err}`);
+          console.error('stack: '+err.stack);
           return res.status(500).send('Something went wrong');
         }
 
@@ -121,5 +150,6 @@ export default {
   update,
   signUp,
   getProposals,
-  getReversimTeam
+  getReversimTeam,
+  uploadProfilePicture
 };

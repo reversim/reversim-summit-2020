@@ -77,6 +77,29 @@ function updateUserError(message) {
   };
 }
 
+function beginUploadProfileImage(imageBinary, message) {
+  return {
+    type: types.UPLOAD_PROFILE_IMAGE,
+    imageBinary,
+    message
+  };
+}
+
+function uploadProfileImageSuccess(imageUrl, message) {
+  return {
+    type: types.UPLOAD_PROFILE_IMAGE_SUCCESS,
+    imageUrl,
+    message
+  };
+}
+
+function uploadProfileImageError(message) {
+  return {
+    type: types.UPLOAD_PROFILE_IMAGE_FAILURE,
+    message
+  };
+}
+
 // Log Out Action Creators
 function beginLogout() {
   return { type: types.LOGOUT_USER};
@@ -186,5 +209,24 @@ export function fetchReversimTeam() {
   return {
       type: types.GET_REVERSIM_TEAM,
       promise: makeUserRequest('get', null, '/team')
+  };
+}
+
+export function uploadProfileImage(data) {
+
+  return dispatch => {
+    dispatch(beginUploadProfileImage(data.imageBinary, 'going to server soon...'));
+    return makeUserRequest('post', data, '/profileImage')
+        .then(response => {
+          if (response.status === 200) {
+            dispatch(uploadProfileImageSuccess(response.data.imageUrl, response.data.message));
+
+          } else {
+            dispatch(uploadProfileImageError('Oops! Something went wrong'));
+          }
+        })
+        .catch(err => {
+          dispatch(uploadProfileImageError(err));
+        });
   };
 }

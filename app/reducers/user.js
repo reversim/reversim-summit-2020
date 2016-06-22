@@ -19,6 +19,10 @@ import {
   GET_REVERSIM_TEAM_REQUEST,
   GET_REVERSIM_TEAM_SUCCESS,
   GET_REVERSIM_TEAM_FAILURE,
+  UPLOAD_PROFILE_IMAGE,
+  UPLOAD_PROFILE_IMAGE_REQUEST,
+  UPLOAD_PROFILE_IMAGE_SUCCESS,
+  UPLOAD_PROFILE_IMAGE_FAILURE,
  } from 'types';
 
 const initialState = {
@@ -92,6 +96,14 @@ export default function user(state = initialState, action = {}) {
         twitter: action.data['profile.twitter'],
         trackRecord: action.data['profile.trackRecord'],
       });
+    case UPLOAD_PROFILE_IMAGE:
+      return Object.assign({}, state, {
+        picture: action.imageBinary
+      });
+    case UPLOAD_PROFILE_IMAGE_SUCCESS:
+      return Object.assign({}, state, {
+        picture: action.imageUrl
+      });
     case OPEN_LOGIN_MODAL:
       return Object.assign({}, state, {
         isLoginModalOpen: true
@@ -102,7 +114,7 @@ export default function user(state = initialState, action = {}) {
       });
     case GET_USER_PROPOSALS_REQUEST:
       return Object.assign({}, state, {
-        isWaiting: true,
+        isWaiting: true
       });
     case GET_USER_PROPOSALS_SUCCESS:
       return Object.assign({}, state, {

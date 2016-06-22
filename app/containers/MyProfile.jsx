@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
 import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
-import {updateUser} from 'actions/users';
+import {updateUser, uploadProfileImage} from 'actions/users';
 import NotificationSystem from 'react-notification-system';
 import ga from 'react-ga';
 
@@ -14,6 +14,10 @@ import styles from 'css/main';
 import defaultPic from 'images/default_speaker.png'
 
 const cx = classNames.bind(styles);
+
+function onFileWrapperClick(event) {
+  if (event.target.childNodes.length === 4) event.target.childNodes[3].click();
+}
 
 class MyProfile extends Component {
     constructor(props) {
@@ -88,6 +92,22 @@ class MyProfile extends Component {
 
       const { dispatch } = this.props;
       dispatch(goBack());
+    }
+
+    onImageSelected(e) {
+      const { dispatch, user: { id } } = this.props;
+      var files = e.target.files;
+      var f = files[0];
+      var reader = new FileReader();
+
+      reader.onload = (function() {
+        return function(e) {
+          dispatch(uploadProfileImage({id: id, imageBinary: e.target.result}));
+        };
+      })(f);
+
+      reader.readAsDataURL(f);
+
     }
 
     render() {
@@ -190,7 +210,16 @@ class MyProfile extends Component {
                     </div>
 
                     <div className={cx('col-md-4')}>
-                      <Speaker name={this.state.name} imageUrl={user.picture || defaultPic} oneLiner={this.state.oneLiner} bio={this.state.bio} linkedin={this.state.linkedin} twitter={this.state.twitter} stackOverflow={this.state.stackOverflow} />
+                      <Speaker name={this.state.name} imageUrl={user.picture || defaultPic}
+                               oneLiner={this.state.oneLiner}
+                               bio={this.state.bio}
+                               linkedin={this.state.linkedin}
+                               twitter={this.state.twitter}
+                               stackOverflow={this.state.stackOverflow} />
+                      <button className={cx("btn", "btn-sm", "col-xs-12")} onClick={onFileWrapperClick}>
+                        Upload Picture
+                        <input type='file' className={cx('hidden')} onChange={this.onImageSelected.bind(this)}/>
+                      </button>
                     </div>
 
                 </section>

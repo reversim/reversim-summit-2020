@@ -19,6 +19,7 @@ export default (app) => {
     app.post('/updateUser', usersController.update);
     app.get('/user/proposals', usersController.getProposals);
     app.get('/team', usersController.getReversimTeam);
+    app.post('/profileImage', usersController.uploadProfilePicture);
   } else {
     console.warn(unsupportedMessage('users routes'));
   }
