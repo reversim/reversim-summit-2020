@@ -63,7 +63,7 @@ class Navigation extends Component {
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>,
         <Link className={cx("navigation-link")} to="proposals" onClick={this.collapseNav.bind(this)}>Proposals</Link>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Team</ScrollLink>,
-        /*<ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Sponsors</ScrollLink>*/,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Sponsors</ScrollLink>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Location</ScrollLink>
       ];
     } else {
@@ -72,7 +72,7 @@ class Navigation extends Component {
         <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } } onClick={this.collapseNav.bind(this)}>Timeline</Link>,
         <Link className={cx("navigation-link")} to="/proposals" activeClassName={cx('active')} onClick={this.collapseNav.bind(this)}>Proposals</Link>,
         <Link className={cx("navigation-link")} to="/" state={ { section: 'team' } } onClick={this.collapseNav.bind(this)}>Team</Link>,
-        /*<Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } } onClick={this.collapseNav.bind(this)}>Sponsors</Link>*/,
+        <Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } } onClick={this.collapseNav.bind(this)}>Sponsors</Link>,
         <Link className={cx("navigation-link")} to="/" state={ { section: 'location' } } onClick={this.collapseNav.bind(this)}>Location</Link>
       ];
     }

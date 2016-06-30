@@ -93,12 +93,12 @@ class Home extends Component {
 
                   <CFP />
 
-                {/*<Element name="sponsors"  ref="sponsors">
-                    <Sponsors />
-                  </Element>*/}
-
                   <Element name="team" ref="team">
                     <Team team={team} />
+                  </Element>
+
+                  <Element name="sponsors"  ref="sponsors">
+                    <Sponsors />
                   </Element>
 
                   <Element name="location" ref="location">
