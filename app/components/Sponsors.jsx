@@ -87,10 +87,20 @@ export default class Sponsors extends Component {
         featuredJobLink: 'http://outbrain.mytribehr.com/careers'
       }
     },
+    {
+      name: 'My Heritage',
+      logo: myHeritageLogo,
+      url: 'http://www.myheritage.com',
+      info: {
+        height: 300,
+        description: 'At MyHeritage, we bring together incredibly bright minds, and all the newest technologies and languages. The result is a culture of constant innovation. With 82 million users, 28 million family trees, and 6.8 billion records, as an engineer at MyHeritage, you’ll overcome exciting scale challenges to build a line of products with massive global impact.',
+        featuredJobInfo: 'Are you obsessed with performance and scale challenges? Do you lose hours of sleep thinking about how to reduce ten milliseconds from an SQL query? If you’re looking for challenges with server solutions and running cutting-edge NoSQL big data architecture, then look no further. Our complex environment of over 2.6 billion individual profiles, and over 6 billion historical records, will ensure that you’ll help solve big data challenges (using Hadoop, Cassandra, and other NoSQL solutions) while working in continuous integration and deployment. We\'re growing fast and have opportunities for DevOps experts, Backend and Frontend developers. Join us - Make history!',
+        featuredJobLink: 'http://grnh.se/18ochs'
+      }
+    },
   ]).concat(_.shuffle([
     { name: 'Wix', logo: wixLogo, url: 'http://www.wix.com' },
     { name: 'aol', logo: aolLogo, url: 'http://www.aol.com' },
-    { name: 'My Heritage', logo: myHeritageLogo, url: 'http://www.myheritage.com' },
     { name: 'Klarna', logo: klarnaLogo, url: 'http://www.klarna.com' },
     { name: 'Fiverr', logo: fiverrLogo, url: 'http://www.fiverr.com' }
   ]));
