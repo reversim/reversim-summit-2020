@@ -15,6 +15,7 @@ import appsFlyerLogo from 'images/sponsors/apps_flyer.png';
 import myHeritageLogo from 'images/sponsors/my_heritage.png';
 import klarnaLogo from 'images/sponsors/klarna.png';
 import fiverrLogo from 'images/sponsors/fiverr.png';
+import similarWebLogo from 'images/sponsors/similarWeb.png'
 
 const cx = classNames.bind(styles);
 
@@ -98,11 +99,32 @@ export default class Sponsors extends Component {
         featuredJobLink: 'http://grnh.se/18ochs'
       }
     },
+    {
+      name: 'Fiverr',
+      logo: fiverrLogo,
+      url: 'http://www.fiverr.com',
+      info: {
+        height: 300,
+        description: 'Founded in 2010 with offices in New York City, Chicago, Miami, San Francisco and Tel Aviv, Fiverr is the world\'s most transacted marketplace for digital services. Fiverr is shaping the future of work, every day, by shifting the freelance economy online.',
+        featuredJobInfo: 'Labs SW Engineer- The labs team is responsible for the evolution of Fiverr\'s Infrastructure toolset, architecture, innovation and Big Data. We are looking for a  talented Software Engineer, with a positive "sure! I can do that." attitude to join our Labs Engineering team. Fiverr\'s mission is to disrupt the freelance industry and you will play a major part in the architecture, design and implementation of our application platform.',
+        featuredJobLink: 'https://www.fiverr.com/jobs/544'
+      }
+    },
+    {
+      name: 'Similar Web',
+      logo: similarWebLogo,
+      url: 'https://www.similarweb.com/',
+      info: {
+        height: 300,
+        description: 'SimilarWeb is a digital market intelligence company used by 100,000s of businesses for global cross-device strategic insights.',
+        featuredJobInfo: 'If you are passionate about data and solving challenging problems than your place is with us. We are currently looking for senior .NET, big-data, front-end, automation, and production engineers as well as researchers for our data science team.',
+        featuredJobLink: 'https://www.similarweb.com/corp/jobs/'
+      }
+    },
   ]).concat(_.shuffle([
     { name: 'Wix', logo: wixLogo, url: 'http://www.wix.com' },
     { name: 'aol', logo: aolLogo, url: 'http://www.aol.com' },
     { name: 'Klarna', logo: klarnaLogo, url: 'http://www.klarna.com' },
-    { name: 'Fiverr', logo: fiverrLogo, url: 'http://www.fiverr.com' }
   ]));
 
   openSponsorModal(info) {
