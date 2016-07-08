@@ -105,7 +105,7 @@ export default class Sponsors extends Component {
       url: 'http://www.fiverr.com',
       info: {
         height: 300,
-        description: 'Founded in 2010 with offices in New York City, Chicago, Miami, San Francisco and Tel Aviv, Fiverr is the world\'s most transacted marketplace for digital services. Fiverr is shaping the future of work, every day, by shifting the freelance economy online.',
+        description: 'Founded in 2010 with offices in New York City, Chicago, Miami, San Francisco and Tel Aviv, Fiverr® is the world\'s most transacted marketplace for digital services. Fiverr is shaping the future of work, every day, by shifting the freelance economy online.',
         featuredJobInfo: 'Labs SW Engineer- The labs team is responsible for the evolution of Fiverr\'s Infrastructure toolset, architecture, innovation and Big Data. We are looking for a  talented Software Engineer, with a positive "sure! I can do that." attitude to join our Labs Engineering team. Fiverr\'s mission is to disrupt the freelance industry and you will play a major part in the architecture, design and implementation of our application platform.',
         featuredJobLink: 'https://www.fiverr.com/jobs/544'
       }

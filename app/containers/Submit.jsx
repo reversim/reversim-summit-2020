@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
 import {createProposal} from 'actions/proposals';
 import { push } from 'react-router-redux';
 import {updateUser} from 'actions/users';
 import ga from 'react-ga';
+import features from 'features';
 
 import styles from 'css/main';
 
@@ -68,18 +70,136 @@ class Submit extends Component {
       }
     }
 
+    renderSubmissionForm() {
+      const { user } = this.props;
+
+      return (
+        <div style={{marginTop: '50px'}} className={cx('col-md-12', 'col-md-offset-2')}>
+          <h5>Submission</h5>
+          <p>You may submit multiple proposals.</p>
+          <p>Call for paper ends: <strong>July 8 midnight UTC</strong>. No kidding.</p>
+
+            <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
+              <h6>Bio</h6>
+              <fieldset>
+                <span className={cx("col-xs-12")}>
+                  <label htmlFor="fullname">Full name</label>
+                </span>
+                <span className={cx("col-xs-5")}>
+                  <input id="fullname" ref="fullname" type="text" defaultValue={user.name} required />
+                </span>
+              </fieldset>
+
+              <fieldset>
+                <span className={cx("col-xs-12")}>
+                  <label htmlFor="email">Email</label>
+                </span>
+                <span className={cx("col-xs-5")}>
+                  {user.email}
+                </span>
+                <small className={cx("col-xs-4")}>So we can get in touch with you. Email is only visible to moderators</small>
+              </fieldset>
+
+              <fieldset>
+                <span className={cx("col-xs-12")}>
+                  <label htmlFor="oneLiner">One Liner</label>
+                </span>
+                <span className={cx("col-xs-5")}>
+                  <input id="oneLiner" ref="oneLiner" type="text" defaultValue={user.oneLiner} />
+                </span>
+                <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
+              </fieldset>
+
+              <fieldset>
+                <span className={cx("col-xs-12")}>
+                  <label htmlFor="linkedin">Linkedin Profile</label>
+                </span>
+                <span className={cx("col-xs-5")}>
+                  <input id="linkedin" ref="linkedin" type="url" defaultValue={user.linkedin} />
+                </span>
+                <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
+              </fieldset>
+
+              <fieldset>
+                <span className={cx("col-xs-12")}>
+                  <label htmlFor="twitter">Twitter @name</label>
+                </span>
+                <span className={cx("col-xs-5")}>
+                  <input id="twitter" ref="twitter" type="text" defaultValue={user.twitter} placeholder="@Reversim" />
+                </span>
+                <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
+              </fieldset>
+
+              <fieldset>
+                <span className={cx("col-xs-12")}>
+                  <label htmlFor="bio">Short Bio</label>
+                </span>
+                <span className={cx("col-xs-5")}>
+                  <textarea id="bio" ref="bio" defaultValue={user.bio} />
+                </span>
+                <small className={cx("col-xs-3")}>This will be presented on the website</small>
+              </fieldset>
+
+              <fieldset>
+                <span className={cx("col-xs-12")}>
+                  <label htmlFor="trackRecord">Track record as speaker</label>
+                </span>
+                <span className={cx("col-xs-5")}>
+                  <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord} />
+                </span>
+                <small className={cx("col-xs-3")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
+              </fieldset>
+
+              <br />
+              <h6>Proposal</h6>
+                <fieldset>
+                  <span className={cx("col-xs-12")}>
+                    <label htmlFor="title">Title</label>
+                  </span>
+                  <span className={cx("col-xs-5")}>
+                    <input id="title" ref="title" type="text" required maxLength="100" />
+                  </span>
+                </fieldset>
+
+                <fieldset>
+                  <span className={cx("col-xs-5")}>
+                    <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "full"} value="full" /> <label htmlFor="full">Full Featured (30-40 min.)</label></div>
+                    <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "lightning"} value="lightning" /> <label htmlFor="lightning">Lightning Talk (5 min.)</label></div>
+                    <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "ossil"} value="ossil" /> <label htmlFor="ossil">Open Source in Israel (10 min.)</label></div>
+                  </span>
+                </fieldset>
+
+                <fieldset>
+                  <span className={cx("col-xs-12")}>
+                    <label htmlFor="abstract">Abstract</label>
+
+                  </span>
+                  <span className={cx("col-xs-8")}>
+                    <textarea id="abstract" ref="abstract" required />
+                  </span>
+                  <small className={cx("col-xs-8")}>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.</small>
+                </fieldset>
+
+                <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>
+                  <input type="submit" value="submit" className={cx('btn', 'btn-lg')} />
+                </fieldset>
+            </form>
+        </div>
+      )
+    }
+
     render() {
-        const { user } = this.props;
+        const { location } = this.props;
 
         return (
-            <BaseLayout currentPath={this.props.location.pathname} name="submission-page">
+            <BaseLayout currentPath={location.pathname} name="submission-page">
 
               <section id="submission-info" className={cx('section')}>
                 <div className={cx('container')}>
                   <div className={cx('align-center')}>
                     <span data-icon className={cx('icon', 'section-icon', 'icon-multimedia-12')}></span>
                     <h3>Reversim Summit 2016 - Submission</h3>
-                  <p className={cx("text-alt")}>Read carefully before submission!</p>
+                  <p className={cx("text-alt")}>{ features('submission', false, location.query) ? 'Read carefully before submission!' : 'Call for papers is now closed' }</p>
                     <br />
                     <br />
                   </div>
@@ -131,119 +251,7 @@ class Submit extends Component {
                     <p>Registration will open about a month before the event. If you've registered on time, all is well. If not, <strong>every submitter gets a single personal ticket</strong>, regardless of whether your session got accepted or not (assuming quality submission). <strong>Accepted speakers get a personal ticket +1</strong> (so you can do a friend a favor)</p>
                     </div>
 
-
-
-                    <div style={{marginTop: '50px'}} className={cx('col-md-12', 'col-md-offset-2')}>
-                      <h5>Submission</h5>
-                      <p>You may submit multiple proposals.</p>
-                      <p>Call for paper ends: <strong>July 8 midnight UTC</strong>. No kidding.</p>
-
-                        <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
-                          <h6>Bio</h6>
-                          <fieldset>
-                            <span className={cx("col-xs-12")}>
-                              <label htmlFor="fullname">Full name</label>
-                            </span>
-                            <span className={cx("col-xs-5")}>
-                              <input id="fullname" ref="fullname" type="text" defaultValue={user.name} required />
-                            </span>
-                          </fieldset>
-
-                          <fieldset>
-                            <span className={cx("col-xs-12")}>
-                              <label htmlFor="email">Email</label>
-                            </span>
-                            <span className={cx("col-xs-5")}>
-                              {user.email}
-                            </span>
-                            <small className={cx("col-xs-4")}>So we can get in touch with you. Email is only visible to moderators</small>
-                          </fieldset>
-
-                          <fieldset>
-                            <span className={cx("col-xs-12")}>
-                              <label htmlFor="oneLiner">One Liner</label>
-                            </span>
-                            <span className={cx("col-xs-5")}>
-                              <input id="oneLiner" ref="oneLiner" type="text" defaultValue={user.oneLiner} />
-                            </span>
-                            <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
-                          </fieldset>
-
-                          <fieldset>
-                            <span className={cx("col-xs-12")}>
-                              <label htmlFor="linkedin">Linkedin Profile</label>
-                            </span>
-                            <span className={cx("col-xs-5")}>
-                              <input id="linkedin" ref="linkedin" type="url" defaultValue={user.linkedin} />
-                            </span>
-                            <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
-                          </fieldset>
-
-                          <fieldset>
-                            <span className={cx("col-xs-12")}>
-                              <label htmlFor="twitter">Twitter @name</label>
-                            </span>
-                            <span className={cx("col-xs-5")}>
-                              <input id="twitter" ref="twitter" type="text" defaultValue={user.twitter} placeholder="@Reversim" />
-                            </span>
-                            <small className={cx("col-xs-4")}>Optional. will be presented on the website</small>
-                          </fieldset>
-
-                          <fieldset>
-                            <span className={cx("col-xs-12")}>
-                              <label htmlFor="bio">Short Bio</label>
-                            </span>
-                            <span className={cx("col-xs-5")}>
-                              <textarea id="bio" ref="bio" defaultValue={user.bio} />
-                            </span>
-                            <small className={cx("col-xs-3")}>This will be presented on the website</small>
-                          </fieldset>
-
-                          <fieldset>
-                            <span className={cx("col-xs-12")}>
-                              <label htmlFor="trackRecord">Track record as speaker</label>
-                            </span>
-                            <span className={cx("col-xs-5")}>
-                              <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord} />
-                            </span>
-                            <small className={cx("col-xs-3")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
-                          </fieldset>
-
-                          <br />
-                          <h6>Proposal</h6>
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label htmlFor="title">Title</label>
-                              </span>
-                              <span className={cx("col-xs-5")}>
-                                <input id="title" ref="title" type="text" required maxLength="100" />
-                              </span>
-                            </fieldset>
-
-                            <fieldset>
-                              <span className={cx("col-xs-5")}>
-                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "full"} value="full" /> <label htmlFor="full">Full Featured (30-40 min.)</label></div>
-                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "lightning"} value="lightning" /> <label htmlFor="lightning">Lightning Talk (5 min.)</label></div>
-                                <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "ossil"} value="ossil" /> <label htmlFor="ossil">Open Source in Israel (10 min.)</label></div>
-                              </span>
-                            </fieldset>
-
-                            <fieldset>
-                              <span className={cx("col-xs-12")}>
-                                <label htmlFor="abstract">Abstract</label>
-
-                              </span>
-                              <span className={cx("col-xs-8")}>
-                                <textarea id="abstract" ref="abstract" required />
-                              </span>
-                              <small className={cx("col-xs-8")}>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.</small>
-                            </fieldset>
-
-                            <fieldset className={cx("col-xs-4", "col-xs-offset-3")} style={{marginTop: '30px'}}>
-                              <input type="submit" value="submit" className={cx('btn', 'btn-lg')} />
-                            </fieldset>
-                        </form>
-                    </div>
+                    { features('submission', false, location.query) ? this.renderSubmissionForm() : <div style={{marginTop: '50px'}} className={cx('col-md-12', 'col-md-offset-2')}><h6>Call for papers is closed for submission. You can view the submitted proposals <Link to="proposals">here</Link>.</h6></div> }
                 </div>
               </section>
 

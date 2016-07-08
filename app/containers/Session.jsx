@@ -10,6 +10,7 @@ import {updateProposal, attendSession, fetchProposal, fetchProposalServerSideRen
 import NotificationSystem from 'react-notification-system';
 import ga from 'react-ga';
 import ReactMarkdown from 'react-markdown';
+import features from 'features';
 
 import styles from 'css/main';
 
@@ -52,7 +53,7 @@ class Session extends Component {
 
       const { dispatch, params: { id }, user: { authenticated }, currentProposal: { attended }, location: { pathname } } = this.props;
 
-      if (!attended && authenticated && !this.isSpeaker()) {
+      if (!attended && authenticated && !this.isSpeaker()) { // TODO: fix
         dispatch(attendSession(id)).then(() => ga.event({
           category: 'Session',
           action: 'Attend Session',
@@ -159,7 +160,7 @@ class Session extends Component {
     }
 
     previewSession() {
-      const { currentProposal: { title, abstract, type, attended }, user: { id, authenticated } } = this.props;
+      const { currentProposal: { title, abstract, type, attended }, user: { id, authenticated }, location } = this.props;
 
       let proposalType;
       if (type === 'ossil') {
@@ -171,14 +172,17 @@ class Session extends Component {
       }
 
       let action;
-      if (this.isSpeaker()) {
+      if (features('submission', false, location.query) && this.isSpeaker()) {
         action = <div className={cx("row", "pull-right")} style={{margin: '50px 0'}}><a href="#" onClick={this.toggleEdit.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit</a></div>
-      } else if (authenticated && attended) {
-        // action = <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>We will count you in. Thanks for the cooperation!</div>
-      } else if (!attended) {
-        // action = <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>
-        //             Will you attend this session {!authenticated ? "(You must be logged in)" : undefined}? <a href="#" onClick={this.attendSession.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{width:'20px'}}>Yes!</a>
-        //          </div>
+      } else if (features('voting', false, location.query)) {
+        // voting is open
+        if (authenticated && attended) {
+          action = <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>We will count you in. Thanks for the cooperation!</div>
+        } else if (!attended) {
+          action = <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>
+                      Will you attend this session {!authenticated ? "(You must be logged in)" : undefined}? <a href="#" onClick={this.attendSession.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{width:'20px'}}>Yes!</a>
+                   </div>
+        }
       }
 
       let canUseDom = typeof window !== 'undefined' && window.document && window.document.createElement;
