@@ -30,8 +30,6 @@ function getOverrides(params) {
 export default function getFeatureValue(name, defaultValue, params) {
   let overrides = getOverrides(params);
 
-  console.log(overrides);
-
   if (features_spec[name] !== undefined &&
       overrides[name] !== undefined) {
     return overrides[name];

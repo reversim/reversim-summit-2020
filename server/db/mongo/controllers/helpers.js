@@ -35,6 +35,7 @@ export function transformProposal(proposal, loggedInUser) {
       title: proposal.title,
       abstract: proposal.abstract,
       type: proposal.type,
+      tags: proposal.tags,
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
         let emailAllowed = loggedInUser && loggedInUser.isReversimTeamMember;
         return transformUser(user, emailAllowed);

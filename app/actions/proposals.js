@@ -67,6 +67,13 @@ export function fetchProposals() {
     };
 }
 
+export function fetchTags() {
+    return {
+        type: types.GET_TAGS,
+        promise: makeProposalsRequest('get', 'tags')
+    };
+}
+
 export function fetchProposal(params) {
     return {
         type: types.GET_PROPOSAL,

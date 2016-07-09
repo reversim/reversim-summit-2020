@@ -69,6 +69,7 @@ export default (app) => {
   // proposal routes
   if (proposalsController) {
     app.get('/proposal', proposalsController.all);
+    app.get('/proposal/tags', proposalsController.tags);
     app.get('/proposal/:id', proposalsController.get);
     app.post('/proposal/:id', proposalsController.add);
     app.put('/proposal/:id', proposalsController.update);

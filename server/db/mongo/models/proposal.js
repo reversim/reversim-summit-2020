@@ -18,6 +18,7 @@ const ProposalSchema = new mongoose.Schema({
       ref: 'User'
     }],
     comments: [String],
+    tags: [String],
     editing: Boolean,
     deleted: Boolean,
     status: String,

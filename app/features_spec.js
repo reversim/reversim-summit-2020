@@ -1,4 +1,5 @@
 export default {
-  submission: true,
-  voting: false
+  submission: false,
+  voting: false,
+  tagging: true
 }

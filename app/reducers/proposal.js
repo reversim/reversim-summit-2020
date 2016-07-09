@@ -13,7 +13,8 @@ import {
     UPDATE_PROPOSAL_SUCCESS,
     ATTEND_SESSION_REQUEST,
     ATTEND_SESSION_FAILURE,
-    ATTEND_SESSION_SUCCESS
+    ATTEND_SESSION_SUCCESS,
+    GET_TAGS_SUCCESS
 } from 'types';
 
 
@@ -75,6 +76,8 @@ export default function proposal(state = {
             return Object.assign({}, state, {
                 currentProposal: Object.assign({}, state.currentProposal, { attended: true })
             });
+        case GET_TAGS_SUCCESS:
+          return Object.assign({}, state, { tags: action.req.data });
 
         default:
             return state;

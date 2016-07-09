@@ -25,6 +25,22 @@ export function all(req, res) {
 }
 
 /**
+ * Tags List
+ */
+export function tags(req, res) {
+    Proposal.aggregate([
+      { $project: { tags: 1 } },
+      { $unwind: "$tags" },
+      { $group: { _id: "$tags" } }
+    ]).exec().then(tags => {
+      return res.json(tags.map(tag => tag._id));
+    }).catch(err => {
+      console.log(`Error in proposals/tags query: ${err}`);
+      return res.status(500).send('Something went wrong getting the data');
+    });
+}
+
+/**
  * Single Proposal
  */
 export function get(req, res) {
@@ -132,5 +148,6 @@ export default {
     add,
     update,
     remove,
-    attend
+    attend,
+    tags
 };
