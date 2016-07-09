@@ -9,6 +9,7 @@ import preRenderMiddleware from 'middlewares/preRenderMiddleware';
 import header from 'components/Meta';
 import removeMd from 'remove-markdown';
 import summitSocialLogo from 'images/summit2016_social.png';
+import { setFeatureOverrides, parseFeatureOverridesFromQuery } from 'features';
 
 const clientConfig = {
   host: process.env.HOSTNAME || 'localhost',
@@ -83,6 +84,9 @@ export default function render(req, res) {
     } else if (redirect) {
       res.redirect(302, redirect.pathname + redirect.search);
     } else if (props) {
+      let featureOverrides = parseFeatureOverridesFromQuery(props.location.query);
+      setFeatureOverrides(featureOverrides);
+
       // This method waits for all render component
       // promises to resolve before returning to browser
       preRenderMiddleware(
@@ -155,6 +159,7 @@ export default function render(req, res) {
             <body>
               <div id="app">${componentHTML}</div>
               <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
+              <script>window.__FT_OVERRIDES__ = ${JSON.stringify(featureOverrides)};</script>
               <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
               <script type="text/javascript" charset="utf-8" src="/assets/app.js"></script>
             </body>

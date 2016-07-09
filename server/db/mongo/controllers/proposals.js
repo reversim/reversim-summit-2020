@@ -11,16 +11,33 @@ import {transformProposal} from './helpers';
  * List
  */
 export function all(req, res) {
-    //console.log('proposal all started...');
     Proposal.find({}, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
         if (err) {
             console.log(`Error in proposals/all query: ${err}`);
             return res.status(500).send('Something went wrong getting the data');
         }
 
-        //console.log('proposal all returning '+JSON.stringify(proposals));
+        let result = proposals.map((proposal) => transformProposal(proposal, req.user));
 
-        return res.json(proposals.map((proposal) => {return transformProposal(proposal, req.user)}));
+        if (req.query.group === 'tags') {
+          let groups = {};
+
+          result.forEach(proposal => {
+            if (proposal.tags === undefined || proposal.tags.length === 0) {
+              groups['Untagged'] = groups['Untagged'] || [];
+              groups['Untagged'].push(proposal);
+            } else {
+              proposal.tags.forEach(tag => {
+                groups[tag] = groups[tag] || [];
+                groups[tag].push(proposal);
+              });
+            }
+          });
+
+          result = groups;
+        }
+
+        return res.json(result);
     });
 }
 

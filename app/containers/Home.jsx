@@ -63,9 +63,9 @@ class Home extends Component {
                           <div className={cx('container')}>
                               <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>19-20.sep <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>Weizmann Institute of Science</h5>
                               <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
-                              <h5 className={cx('base-font')}>Call for papers is now { features('submission', false, location.query) ? 'open!' : 'closed' }</h5>
+                              <h5 className={cx('base-font')}>Call for papers is now { features('submission', false) ? 'open!' : 'closed' }</h5>
                               <div className={cx('btns-container')}>
-                                  {features('submission', false, location.query) ? <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link> : <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>}
+                                  {features('submission', false) ? <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link> : <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>}
                                   <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>REGISTER</ScrollLink>
                               </div>
                           </div>
@@ -89,10 +89,10 @@ class Home extends Component {
                   </Element>
 
                   <Element name="proposals" ref="proposals">
-                    <Proposals data={proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
+                    <Proposals data={ features('proposalsPageGroupedByTags', false) ? Object.keys(proposals) : proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
                   </Element>
 
-                  { features('submission', false, location.query) ? <CFP /> : undefined }
+                  { features('submission', false) ? <CFP /> : undefined }
 
                   <Element name="team" ref="team">
                     <Team team={team} />

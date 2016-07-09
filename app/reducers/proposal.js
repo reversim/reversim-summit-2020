@@ -16,7 +16,8 @@ import {
     ATTEND_SESSION_SUCCESS,
     GET_TAGS_SUCCESS
 } from 'types';
-
+import _ from 'lodash';
+import features from 'features';
 
 export default function proposal(state = {
     proposals: [],
@@ -37,7 +38,15 @@ export default function proposal(state = {
                 isFetching: false
             });
         case GET_PROPOSAL_REQUEST:
-            let proposals = state.proposals.filter(p => p.id === action.id);
+            let proposals = [];
+            console.log(state.proposals)
+            if (state.proposals.filter === undefined) {
+              proposals = _.values(state.proposals);
+            } else {
+              proposals = state.proposals;
+            }
+
+            proposals = proposals.filter(p => p.id === action.id);
             return Object.assign({}, state, {
                 isFetching: true,
                 currentProposal: proposals.length > 0 ? proposals[0] : undefined

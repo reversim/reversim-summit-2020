@@ -1,12 +1,14 @@
-import features_spec from './features_spec'
+import features_spec from './features_spec';
 
 const FT_OVERRIDE_PARAM = 'ft_ovr';
 const FT_OVERRIDE_SPLIT_CHAR = '|';
 const FT_OVERRIDE_VALUE_CHAR = '>';
 
+let overrides = {};
+
 // you can override by ft_ovr query string param:
 // e.g. ?ft_ovr=submission>true|voting>false
-function getOverrides(params) {
+export function parseFeatureOverridesFromQuery(params) {
   if (params && params[FT_OVERRIDE_PARAM]) {
     let overrides = params[FT_OVERRIDE_PARAM].split(FT_OVERRIDE_SPLIT_CHAR);
 
@@ -27,9 +29,11 @@ function getOverrides(params) {
   return {};
 }
 
-export default function getFeatureValue(name, defaultValue, params) {
-  let overrides = getOverrides(params);
+export function setFeatureOverrides(newOverrides) {
+  overrides = newOverrides;
+}
 
+export default function getFeatureValue(name, defaultValue) {
   if (features_spec[name] !== undefined &&
       overrides[name] !== undefined) {
     return overrides[name];

@@ -84,3 +84,13 @@ ul.with-bullets ul {
   background-repeat:   no-repeat;
   background-position: center center;
 }
+
+.active-tag {
+  background-color: #0275d8;
+}
+
+.session-tag {
+  display: inline-block;
+  margin: 0 15px 10px 0;
+  font-size: 90%;
+}

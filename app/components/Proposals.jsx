@@ -4,6 +4,7 @@ import styles from 'css/main';
 import Proposal from 'components/Proposal';
 import { Link } from 'react-router';
 import _ from 'lodash';
+import features from 'features';
 
 const cx = classNames.bind(styles);
 

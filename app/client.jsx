@@ -6,11 +6,14 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createRoutes from 'routes';
 import configureStore from 'store/configureStore';
 import preRenderMiddleware from 'middlewares/preRenderMiddleware';
+import { setFeatureOverrides } from 'features';
 import ga from 'react-ga';
 
 // Grab the state from a global injected into
 // server-generated HTML
 const initialState = window.__INITIAL_STATE__;
+
+setFeatureOverrides(window.__FT_OVERRIDES__);
 
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
@@ -51,8 +54,11 @@ function onUpdate() {
   // Read more: https://github.com/choonkending/react-webpack-node/pull/203#discussion_r60839356
   if (window.__INITIAL_STATE__ !== null) {
     window.__INITIAL_STATE__ = null;
+    window.__FT_OVERRIDES__ = null;
     return;
   }
+
+  setFeatureOverrides({});
 
   const { components, params } = this.state;
 

@@ -5,6 +5,7 @@
 import { polyfill } from 'es6-promise';
 import request from 'axios';
 import * as types from 'types';
+import features from 'features';
 
 polyfill();
 
@@ -61,9 +62,14 @@ export function createProposalFailure(data) {
 
 // Fetch posts logic
 export function fetchProposals() {
+    let endpoint = '/proposal';
+    if (features('proposalsPageGroupedByTags', false)) {
+      endpoint += '?group=tags';
+    }
+
     return {
         type: types.GET_PROPOSALS,
-        promise: makeProposalsRequest('get')
+        promise: makeProposalsRequest('get', null, null, null, endpoint)
     };
 }
 

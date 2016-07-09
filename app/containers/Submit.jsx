@@ -199,7 +199,7 @@ class Submit extends Component {
                   <div className={cx('align-center')}>
                     <span data-icon className={cx('icon', 'section-icon', 'icon-multimedia-12')}></span>
                     <h3>Reversim Summit 2016 - Submission</h3>
-                  <p className={cx("text-alt")}>{ features('submission', false, location.query) ? 'Read carefully before submission!' : 'Call for papers is now closed' }</p>
+                  <p className={cx("text-alt")}>{ features('submission', false) ? 'Read carefully before submission!' : 'Call for papers is now closed' }</p>
                     <br />
                     <br />
                   </div>
@@ -251,7 +251,7 @@ class Submit extends Component {
                     <p>Registration will open about a month before the event. If you've registered on time, all is well. If not, <strong>every submitter gets a single personal ticket</strong>, regardless of whether your session got accepted or not (assuming quality submission). <strong>Accepted speakers get a personal ticket +1</strong> (so you can do a friend a favor)</p>
                     </div>
 
-                    { features('submission', false, location.query) ? this.renderSubmissionForm() : <div style={{marginTop: '50px'}} className={cx('col-md-12', 'col-md-offset-2')}><h6>Call for papers is closed for submission. You can view the submitted proposals <Link to="proposals">here</Link>.</h6></div> }
+                    { features('submission', false) ? this.renderSubmissionForm() : <div style={{marginTop: '50px'}} className={cx('col-md-12', 'col-md-offset-2')}><h6>Call for papers is closed for submission. You can view the submitted proposals <Link to="proposals">here</Link>.</h6></div> }
                 </div>
               </section>
 

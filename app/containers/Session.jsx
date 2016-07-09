@@ -30,9 +30,9 @@ class SessionForm extends Component {
   }
 
   taggingEnabled() {
-    const { queryString, user: { isReversimTeamMember } } = this.props;
+    const { user: { isReversimTeamMember } } = this.props;
 
-    return features('tagging', false, queryString) && isReversimTeamMember;
+    return features('tagging', false) && isReversimTeamMember;
   }
 
   componentWillMount() {
@@ -187,8 +187,7 @@ SessionForm.propTypes = {
   currentProposal: PropTypes.object,
   onCancel: PropTypes.func.isRequired,
   onFinishEdit: PropTypes.func.isRequired,
-  allTags: PropTypes.array,
-  queryString: PropTypes.array
+  allTags: PropTypes.array
 };
 
 SessionForm = connect((state) => {
@@ -262,11 +261,11 @@ class Session extends Component {
       }
 
       let action, voting;
-      if (isReversimTeamMember || features('submission', false, location.query) && this.isSpeaker()) {
+      if (isReversimTeamMember || features('submission', false) && this.isSpeaker()) {
         action = <div className={cx("row", "pull-right")} style={{margin: '50px 0'}}><a href="#" onClick={this.toggleEdit.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit</a></div>
       }
 
-      if (features('voting', false, location.query) && !this.isSpeaker()) {
+      if (features('voting', false) && !this.isSpeaker()) {
         // voting is open
         if (authenticated && attended) {
           voting = <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>We will count you in. Thanks for the cooperation!</div>
@@ -280,8 +279,8 @@ class Session extends Component {
       let canUseDom = typeof window !== 'undefined' && window.document && window.document.createElement;
 
       let proposalTags;
-      if (features('tagging', false, location.query)) {
-        proposalTags = <p><small className={cx("text-alt")}>{tags.map((tag, index) => <span style={{marginRight: 20}} key={index}>#{tag}</span>)}</small></p>
+      if (features('tagging', false) && tags && tags.length > 0) {
+        proposalTags = <p><small className={cx("text-alt")}>{tags.map((tag, index) => <span className={cx('session-tag')} key={index}>#{tag}</span>)}</small></p>
       }
 
       return (
@@ -328,7 +327,7 @@ class Session extends Component {
 
       let sessionBody;
       if (currentProposal) {
-        sessionBody = this.state.isEditing ? <SessionForm queryString={ query } notificationSystem={this.refs.notificationSystem} onFinishEdit={this.toggleEdit.bind(this)} onCancel={this.toggleEdit.bind(this)} /> : this.previewSession()
+        sessionBody = this.state.isEditing ? <SessionForm notificationSystem={this.refs.notificationSystem} onFinishEdit={this.toggleEdit.bind(this)} onCancel={this.toggleEdit.bind(this)} /> : this.previewSession()
       }
 
       return (<div>
