@@ -12,6 +12,7 @@ import ga from 'react-ga';
 import ReactMarkdown from 'react-markdown';
 import features from 'features';
 import TagInput from 'components/react-categorized-tag-input';
+import Recommender from 'components/Recommender';
 
 import styles from 'css/main';
 
@@ -291,6 +292,7 @@ class Session extends Component {
           { voting }
           { action }
           { canUseDom ? <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} /> : undefined }
+          { features('recommendations', false) ? <Recommender id={this.props.currentProposal.id} /> : undefined }
         </div>
       );
     }

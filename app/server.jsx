@@ -105,7 +105,10 @@ export default function render(req, res) {
         let socialTags;
         let baseUrl = req.protocol + '://' + req.get('host');
         if (req.url.match(/\/session\//g)) {
-          const { title } = initialState.proposal.currentProposal;
+          let title = 'Reversim Summit 2016';
+          if (initialState && initialState.proposal && initialState.currentProposal) {
+            title = initialState.proposal.currentProposal.title;
+          }
 
           // add meta tags for social share- session page
           socialTags = [
@@ -158,8 +161,10 @@ export default function render(req, res) {
             </head>
             <body>
               <div id="app">${componentHTML}</div>
-              <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
-              <script>window.__FT_OVERRIDES__ = ${JSON.stringify(featureOverrides)};</script>
+              <script>
+                window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+                window.__FT_OVERRIDES__ = ${JSON.stringify(featureOverrides)};
+              </script>
               <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
               <script type="text/javascript" charset="utf-8" src="/assets/app.js"></script>
             </body>

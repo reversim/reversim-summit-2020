@@ -14,7 +14,9 @@ import {
     ATTEND_SESSION_REQUEST,
     ATTEND_SESSION_FAILURE,
     ATTEND_SESSION_SUCCESS,
-    GET_TAGS_SUCCESS
+    GET_TAGS_SUCCESS,
+    GET_RECOMMENDATIONS_REQUEST,
+    GET_RECOMMENDATIONS_SUCCESS
 } from 'types';
 import _ from 'lodash';
 import features from 'features';
@@ -23,6 +25,13 @@ export default function proposal(state = {
     proposals: [],
     currentProposal: undefined
 }, action) {
+    let proposals = [];
+    if (state.proposals.filter === undefined) {
+      proposals = _.values(state.proposals);
+    } else {
+      proposals = state.proposals;
+    }
+
     switch (action.type) {
         case GET_PROPOSALS_REQUEST:
             return Object.assign({}, state, {
@@ -38,23 +47,15 @@ export default function proposal(state = {
                 isFetching: false
             });
         case GET_PROPOSAL_REQUEST:
-            let proposals = [];
-            console.log(state.proposals)
-            if (state.proposals.filter === undefined) {
-              proposals = _.values(state.proposals);
-            } else {
-              proposals = state.proposals;
-            }
-
             proposals = proposals.filter(p => p.id === action.id);
             return Object.assign({}, state, {
                 isFetching: true,
-                currentProposal: proposals.length > 0 ? proposals[0] : undefined
+                currentProposal: Object.assign({}, proposals.length > 0 ? proposals[0] : undefined, { recommendations: state.currentProposal && state.currentProposal.recommendations })
             });
         case GET_PROPOSAL_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                currentProposal: action.req.data
+                currentProposal: Object.assign({}, action.req.data, { recommendations: state.currentProposal && state.currentProposal.recommendations })
             });
         case GET_PROPOSAL_FAILURE:
             return Object.assign({}, state, {
@@ -87,6 +88,14 @@ export default function proposal(state = {
             });
         case GET_TAGS_SUCCESS:
           return Object.assign({}, state, { tags: action.req.data });
+        case GET_RECOMMENDATIONS_REQUEST:
+          return Object.assign({}, state, {
+            currentProposal: Object.assign({}, state.currentProposal, { recommendations: _.take(_.shuffle(proposals), 3) })
+          });
+        case GET_RECOMMENDATIONS_SUCCESS:
+          return Object.assign({}, state, {
+            currentProposal: Object.assign({}, state.currentProposal, { recommendations: action.req.data })
+          });
 
         default:
             return state;

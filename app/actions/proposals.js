@@ -80,6 +80,13 @@ export function fetchTags() {
     };
 }
 
+export function fetchRecommendationsFor(id) {
+    return {
+        type: types.GET_RECOMMENDATIONS,
+        promise: makeProposalsRequest('get', id, null, 'recommendations')
+    };
+}
+
 export function fetchProposal(params) {
     return {
         type: types.GET_PROPOSAL,

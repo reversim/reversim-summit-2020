@@ -6,6 +6,9 @@ import Proposal from '../models/proposal';
 import User from '../models/user';
 import mongoose from 'mongoose';
 import {transformProposal} from './helpers';
+import googleImages from 'google-images';
+
+let googleImagesClient = googleImages('005342563877306396899:quttpwc7xiy', 'AIzaSyCaU9MwJI_VvyIliUwedA4tbrU-AZUUd6Y');
 
 /**
  * List
@@ -38,6 +41,72 @@ export function all(req, res) {
         }
 
         return res.json(result);
+    });
+}
+
+/**
+ * Recommendations
+ */
+const totalRecommendations = 3;
+const randomRecommendations = 2;
+
+export function getRecommendations(req, res) {
+  Proposal.findOne({ 'id': req.params.id }).exec()
+    .catch(err => {
+      console.log(`Error in recommendations/first query: ${err}`);
+      return res.status(500).send('Something went wrong getting the data');
+    })
+    .then(proposal => {
+      let totalIntersectedTags = Math.min(totalRecommendations - randomRecommendations, proposal.tags.length);
+      let intersectedTags = _.take(_.shuffle(proposal.tags), totalIntersectedTags);
+
+      let query = {
+        id: { '$ne': proposal.id },
+        tags: {
+          '$elemMatch': {
+            '$in': intersectedTags
+          }
+        }
+      };
+      if (req.session.passport && req.session.passport.user) {
+        query['speaker_ids'] = {
+          '$elemMatch': {
+            '$ne': req.session.passport.user
+          }
+        }
+      }
+
+      return Proposal.find(query).populate('speaker_ids').limit(totalRecommendations - randomRecommendations).exec();
+    })
+    .catch(err => {
+      console.log(`Error in recommendations/second query: ${err}`);
+      return res.status(500).send('Something went wrong getting the data');
+    })
+    .then(recommendations => {
+      let query = {
+        id: {
+          '$nin': [
+            req.params.id,
+            ...recommendations.map(r => r.id)
+          ]
+        }
+      };
+      if (req.session.passport && req.session.passport.user) {
+        query['speaker_ids'] = {
+          '$elemMatch': {
+            '$ne': req.session.passport.user
+          }
+        }
+      }
+
+      Proposal.find(query).populate('speaker_ids').exec().then(randomRecommendations => {
+        return _.shuffle([
+          ...recommendations,
+          ..._.take(_.shuffle(randomRecommendations), totalRecommendations - recommendations.length)
+        ]);
+      }).then(recs => {
+        return res.json(recs.map(proposal => transformProposal(proposal, req.user)));
+      });
     });
 }
 
@@ -166,5 +235,6 @@ export default {
     update,
     remove,
     attend,
-    tags
+    tags,
+    getRecommendations
 };
