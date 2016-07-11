@@ -16,7 +16,7 @@ const Speaker = ({name, email, imageUrl, oneLiner, bio, linkedin, twitter, stack
     <div>
       <div className={cx("speaker")}>
         <div className={cx('photo-wrapper', 'rounded')} style={{width: '40%'}}>
-          <img src={imageUrl} alt={name} className={cx("img-responsive")} />
+          <img src={imageUrl.replace("upload/v", "upload/w_250/v")} alt={name} className={cx("img-responsive")} />
         </div>
         <h3 className={cx("name")}>{name}</h3>
         <div className={cx('text-alt', emailVisibility)}>{email}</div>
