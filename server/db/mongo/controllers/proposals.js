@@ -20,7 +20,7 @@ export function all(req, res) {
             return res.status(500).send('Something went wrong getting the data');
         }
 
-        let result = proposals.map((proposal) => transformProposal(proposal, req.user));
+        let result = proposals.map((proposal) => transformProposal(proposal, req.user, req.query && req.query.overrideDetails === 'true'));
 
         if (req.query.group === 'tags') {
           let groups = {};

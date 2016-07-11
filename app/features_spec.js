@@ -2,6 +2,6 @@ export default {
   submission: false,
   voting: false,
   tagging: true,
-  proposalsPageGroupedByTags: false,
+  proposalsPageGroupedByTags: true,
   recommendations: true
 }

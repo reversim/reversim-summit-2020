@@ -121,10 +121,20 @@ export default class Sponsors extends Component {
         featuredJobLink: 'https://www.similarweb.com/corp/jobs/'
       }
     },
+    {
+      name: 'Klarna',
+      logo: klarnaLogo,
+      url: 'http://www.klarnaisrael.com/',
+      info: {
+        height: 300,
+        description: 'We make online shopping as smooth, simple and safe.',
+        featuredJobInfo: 'Web Application Engineer - Klarna Engineering is the driving force behind Klarna\'s global growth. Our work is full of fascinating problems: How do we build delightfully simple products in a complex marketplace? How do we make hundreds of real time credit decisions based on limited data, every minute? How do we provide high availability while working in a micro service architecture where teams deliver new features daily? Fortunately, we have some good solutions: We hire quality-driven engineers from diverse backgrounds, encourage them to grow continually and make it easy for them to get their voices heard. We\'re always on the lookout for curious, friendly and ambitious people to join us.',
+        featuredJobLink: 'http://www.klarnaisrael.com/join/'
+      }
+    },
   ]).concat(_.shuffle([
     { name: 'Wix', logo: wixLogo, url: 'http://www.wix.com' },
-    { name: 'aol', logo: aolLogo, url: 'http://www.aol.com' },
-    { name: 'Klarna', logo: klarnaLogo, url: 'http://www.klarna.com' },
+    { name: 'Aol', logo: aolLogo, url: 'http://www.aol.com' },
   ]));
 
   openSponsorModal(info) {

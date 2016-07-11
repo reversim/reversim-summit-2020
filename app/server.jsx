@@ -106,7 +106,7 @@ export default function render(req, res) {
         let baseUrl = req.protocol + '://' + req.get('host');
         if (req.url.match(/\/session\//g)) {
           let title = 'Reversim Summit 2016';
-          if (initialState && initialState.proposal && initialState.currentProposal) {
+          if (initialState && initialState.proposal && initialState.proposal.currentProposal) {
             title = initialState.proposal.currentProposal.title;
           }
 

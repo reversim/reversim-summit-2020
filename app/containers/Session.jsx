@@ -288,7 +288,7 @@ class Session extends Component {
         <div>
           <p><small className={cx("text-alt")}><span className={cx("highlight")}>{proposalType}</span></small></p>
           {proposalTags}
-          <ReactMarkdown source={abstract} className={cx("markdown-block")} />
+          <ReactMarkdown source={abstract || ''} className={cx("markdown-block")} />
           { voting }
           { action }
           { canUseDom ? <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} /> : undefined }

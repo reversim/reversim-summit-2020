@@ -28,7 +28,7 @@ export function transformUser(user, emailAllowed) {
   return user;
 }
 
-export function transformProposal(proposal, loggedInUser) {
+export function transformProposal(proposal, loggedInUser, overrideDetails) {
   if (_.isObject(proposal)) {
     return {
       id: proposal.id,
@@ -37,7 +37,7 @@ export function transformProposal(proposal, loggedInUser) {
       type: proposal.type,
       tags: proposal.tags,
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
-        let emailAllowed = loggedInUser && loggedInUser.isReversimTeamMember;
+        let emailAllowed = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
         return transformUser(user, emailAllowed);
       }),
       attended: proposal.attendees && loggedInUser ? _.includes(proposal.attendees.map(a => a.toHexString()), loggedInUser) : false
