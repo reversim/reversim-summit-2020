@@ -313,14 +313,21 @@ class Session extends Component {
     }
 
     renderSessionInfo() {
-      const { currentProposal, user: { id }, location: { pathname, query } } = this.props;
+      const { currentProposal, user: { id, isReversimTeamMember }, location: { pathname, query } } = this.props;
 
       let speakers;
       if (currentProposal && currentProposal.speaker_ids) {
         speakers = currentProposal.speaker_ids.map((speaker, i) => {
           return (
             <div className={cx("align-center")} key={i}>
-              <Speaker name={speaker.name} imageUrl={speaker.picture || defaultSpeakerPic} oneLiner={speaker.oneLiner} bio={speaker.bio} linkedin={speaker.linkedin} twitter={speaker.twitter} stackOverflow={speaker.stackOverflow} />
+              <Speaker  name={speaker.name}
+                        imageUrl={speaker.picture || defaultSpeakerPic}
+                        oneLiner={speaker.oneLiner}
+                        bio={speaker.bio}
+                        linkedin={speaker.linkedin}
+                        twitter={speaker.twitter}
+                        stackOverflow={speaker.stackOverflow}
+                        isReversimTeamMember={isReversimTeamMember} />
               {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} state={{ from: pathname }} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
             </div>
           );

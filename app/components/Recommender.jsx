@@ -36,7 +36,7 @@ class Recommender extends Component {
       <div className={cx("row")} key={index} style={{marginBottom: 20}}>
         <div className={cx("col-xs-2", "photo-wrapper")}>
           <Link to={`/session/${proposal.id}`}>
-            <img src={proposal.speaker_ids[0].picture} alt={proposal.title} className={cx("img-responsive")} style={{borderRadius: 10}} />
+            <img src={proposal.speaker_ids && proposal.speaker_ids[0].picture} alt={proposal.title} className={cx("img-responsive")} style={{borderRadius: 10}} />
           </Link>
         </div>
         <div className={cx("col-xs-10")}>

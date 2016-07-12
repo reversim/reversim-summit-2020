@@ -94,3 +94,22 @@ ul.with-bullets ul {
   margin: 0 15px 10px 0;
   font-size: 90%;
 }
+
+.proposal-content-container {
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+
+  overflow: hidden;
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0.01+0,1+100 */
+  -moz-mask-image: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.01) 100%); /* FF3.6-15 */
+  -webkit-mask-image: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.01) 100%); /* Chrome10-25,Safari5.1-6 */
+  mask-image: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.01) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.proposal-preview-expanded .proposal-content-container {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0.01+0,1+100 */
+  -moz-mask-image: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+  -webkit-mask-image: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  mask-image: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}

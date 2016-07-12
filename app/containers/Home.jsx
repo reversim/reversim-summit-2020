@@ -18,6 +18,7 @@ import { fetchReversimTeam } from 'actions/users';
 import { Element, Link as ScrollLink } from 'react-scroll';
 import ReactDOM from 'react-dom';
 import features from 'features';
+import _ from 'lodash';
 
 import styles from 'css/main';
 import homeStyles from 'css/components/home';
@@ -89,7 +90,7 @@ class Home extends Component {
                   </Element>
 
                   <Element name="proposals" ref="proposals">
-                    <Proposals data={ features('proposalsPageGroupedByTags', false) ? Object.keys(proposals) : proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
+                    <Proposals data={proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
                   </Element>
 
                   { features('submission', false) ? <CFP /> : undefined }
@@ -115,14 +116,14 @@ class Home extends Component {
 
 Home.propTypes = {
   user: PropTypes.object,
-  proposals: PropTypes.array,
+  proposals: PropTypes.any,
   reversimTweets: PropTypes.array
 };
 
 function mapStateToProps(state) {
     return {
         user: state.user,
-        proposals: state.proposal.proposals,
+        proposals: features('proposalsPageGroupedByTags', false) ? _.chain(state.proposal.proposals).valuesIn().flatten().shuffle().take(4).value() : state.proposal.proposals,
         reversimTweets: state.tweets.reversim
     };
 }
