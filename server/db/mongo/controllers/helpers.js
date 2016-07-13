@@ -3,7 +3,7 @@ import users from './users';
 import proposals from './proposals';
 import _ from 'lodash';
 
-export function transformUser(user, emailAllowed) {
+export function transformUser(user, isReversimMember) {
   if (user._doc) {
     user = user._doc;
   }
@@ -14,7 +14,8 @@ export function transformUser(user, emailAllowed) {
       proposals: user.proposals && user.proposals.map(transformProposal),
       name: user.profile && user.profile.name,
       oneLiner: user.profile && user.profile.oneLiner,
-      email: emailAllowed && user.email,
+      email: isReversimMember && user.email,
+      trackRecord: isReversimMember && user.profile.trackRecord,
       isReversimTeamMember: user.isReversimTeamMember,
       bio: user.profile && user.profile.bio,
       gender: user.profile && user.profile.gender,
@@ -37,8 +38,8 @@ export function transformProposal(proposal, loggedInUser, overrideDetails) {
       type: proposal.type,
       tags: proposal.tags,
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
-        let emailAllowed = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
-        return transformUser(user, emailAllowed);
+        let isReversimMember = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
+        return transformUser(user, isReversimMember);
       }),
       attended: proposal.attendees && loggedInUser ? _.includes(proposal.attendees.map(a => a.toHexString()), loggedInUser) : false
     }

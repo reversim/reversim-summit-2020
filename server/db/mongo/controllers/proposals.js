@@ -136,7 +136,7 @@ export function get(req, res) {
             return res.status(500).send('Something went wrong getting the data');
         }
 
-        return res.json(transformProposal(proposal, req.session));
+        return res.json(transformProposal(proposal, req.user));
     });
 }
 

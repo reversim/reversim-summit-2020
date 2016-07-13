@@ -250,7 +250,7 @@ class Session extends Component {
     }
 
     previewSession() {
-      const { currentProposal: { title, abstract, type, attended, tags }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
+      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
 
       let proposalType;
       if (type === 'ossil') {
@@ -284,11 +284,21 @@ class Session extends Component {
         proposalTags = <p><small className={cx("text-alt")}>{tags.map((tag, index) => <span className={cx('session-tag')} key={index}>#{tag}</span>)}</small></p>
       }
 
+      let speakerTrackRecord;
+      if (isReversimTeamMember) {
+        speakerTrackRecord =
+          <div style={{marginTop: 30}}>
+            <h6>Speaker{speaker_ids.length > 1 ? 's' : undefined} Track Record</h6>
+            {speaker_ids.map((speaker, i) => <ReactMarkdown key={i} source={speaker.trackRecord || ''} className={cx("markdown-block")} />)}
+          </div>
+      }
+
       return (
         <div>
           <p><small className={cx("text-alt")}><span className={cx("highlight")}>{proposalType}</span></small></p>
           {proposalTags}
           <ReactMarkdown source={abstract || ''} className={cx("markdown-block")} />
+          { speakerTrackRecord }
           { voting }
           { action }
           { canUseDom ? <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} /> : undefined }
@@ -318,6 +328,7 @@ class Session extends Component {
       let speakers;
       if (currentProposal && currentProposal.speaker_ids) {
         speakers = currentProposal.speaker_ids.map((speaker, i) => {
+          let email = isReversimTeamMember ? speaker.email : undefined;
           return (
             <div className={cx("align-center")} key={i}>
               <Speaker  name={speaker.name}
@@ -327,6 +338,7 @@ class Session extends Component {
                         linkedin={speaker.linkedin}
                         twitter={speaker.twitter}
                         stackOverflow={speaker.stackOverflow}
+                        email={email}
                         isReversimTeamMember={isReversimTeamMember} />
               {this.isSpeaker(speaker._id) ? <Link to={`my-profile`} state={{ from: pathname }} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit Bio</Link> : undefined}
             </div>

@@ -39,7 +39,8 @@ Speaker.propTypes = {
   bio: PropTypes.string,
   linkedin: PropTypes.string,
   twitter: PropTypes.string,
-  stackOverflow: PropTypes.string
+  stackOverflow: PropTypes.string,
+  isReversimTeamMember: PropTypes.bool
 };
 
 export default Speaker;
