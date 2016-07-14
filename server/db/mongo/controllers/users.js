@@ -136,10 +136,6 @@ export function getProposals(req, res) {
           return res.json(user.proposals.map(transformProposal));
       });
     } else {
-      console.log("----------------------------------------");
-      console.log(req.session);
-      console.log("----------------------------------------");
-
       return res.status(500).send('Something went wrong getting the data');
     }
 }
