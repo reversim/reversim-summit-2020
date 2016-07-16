@@ -215,7 +215,16 @@ export function remove(req, res) {
  */
 export function attend(req, res) {
   if (req.session.passport && req.session.passport.user) {
-    Proposal.findOneAndUpdate({ id: req.params.id, attendees: { $nin: [req.session.passport.user] } }, { $push: {'attendees': req.session.passport.user} }, (err, obj) => {
+    let query, update;
+    if (req.body.value === true) {
+      query = { id: req.params.id, attendees: { $nin: [req.session.passport.user] } };
+      update = { $push: {'attendees': req.session.passport.user } };
+    } else {
+      query = { id: req.params.id, attendees: { $in: [req.session.passport.user] } };
+      update = { $pull: {'attendees': req.session.passport.user} };
+    }
+
+    Proposal.findOneAndUpdate(query, update, (err, obj) => {
         if (err) {
           console.log(`Error in proposals/attend query: ${err}`);
           return res.status(500).send('Something went wrong getting the data');

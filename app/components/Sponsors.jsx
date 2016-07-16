@@ -138,11 +138,11 @@ export default class Sponsors extends Component {
   ]));
 
   openSponsorModal(info) {
-    this.setState({ isSponsorModalOpen: true, modalContent: info })
+    this.setState({ isSponsorModalOpen: true, modalContent: info });
   }
 
   closeSponsorModal() {
-    this.setState({ isSponsorModalOpen: false })
+    this.setState({ isSponsorModalOpen: false });
   }
 
   renderSponsor(sponsor, index) {

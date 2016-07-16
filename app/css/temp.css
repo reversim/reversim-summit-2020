@@ -3190,9 +3190,9 @@ li {
 }
 .btn:active,
 .btn.pressed {
-  -webkit-box-shadow: inset 0 65px 0 rgba(0, 0, 0, 0.06);
+  /*-webkit-box-shadow: inset 0 65px 0 rgba(0, 0, 0, 0.06);
   -moz-box-shadow: inset 0 65px 0 rgba(0, 0, 0, 0.06);
-  box-shadow: inset 0 65px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 65px 0 rgba(0, 0, 0, 0.06);*/
 }
 .btn.btn-lg {
   min-width: 200px;
@@ -3238,7 +3238,7 @@ li {
   box-shadow: inset 0 65px 0 transparent;
 }
 .btn.btn-outline-clr:hover,
-.btn.btn-outline-clr:focus,
+/*.btn.btn-outline-clr:focus,*/
 .btn.btn-outline-clr:active,
 .btn.btn-outline-clr.hovered,
 .btn.btn-outline-clr.pressed,

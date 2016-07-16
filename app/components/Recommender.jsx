@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchRecommendationsFor } from 'actions/proposals';
 import _ from 'lodash';
+import ga from 'react-ga';
 
 const cx = classNames.bind(styles);
 
@@ -31,16 +32,24 @@ class Recommender extends Component {
     this.loadRecommendations(this.props.id);
   }
 
+  reportToGoogleAnalytics(id) {
+    ga.event({
+      category: 'Session',
+      action: 'Clicked on Recommended Session',
+      label: id
+    });
+  }
+
   renderSingleRecommendation(proposal, index) {
     return (
       <div className={cx("row")} key={index} style={{marginBottom: 20}}>
         <div className={cx("col-xs-2", "photo-wrapper")}>
-          <Link to={`/session/${proposal.id}`}>
+          <Link to={`/session/${proposal.id}`} onClick={() => this.reportToGoogleAnalytics(proposal.id)}>
             <img src={proposal.speaker_ids && proposal.speaker_ids[0].picture} alt={proposal.title} className={cx("img-responsive")} style={{borderRadius: 10}} />
           </Link>
         </div>
         <div className={cx("col-xs-10")}>
-          <Link to={`/session/${proposal.id}`}>
+          <Link to={`/session/${proposal.id}`} onClick={() => this.reportToGoogleAnalytics(proposal.id)}>
             <p style={{color: '#000', fontSize: '110%'}}>{proposal.title}</p>
           </Link>
         </div>
@@ -54,7 +63,7 @@ class Recommender extends Component {
     if (recommendations && recommendations.length > 0) {
       return (
         <div className={cx("row")}>
-          <div className={cx("col-xs-12")}>
+          <div className={cx("col-xs-12")} style={{marginTop: 25}}>
             <p className={cx('h7')} style={{marginBottom: 20}}>You might also be interested in</p>
             { _.shuffle(recommendations).map((r, i) => this.renderSingleRecommendation(r, i)) }
           </div>

@@ -113,3 +113,88 @@ ul.with-bullets ul {
   -webkit-mask-image: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
   mask-image: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
+
+.all-proposals-action-button {
+  margin: 20px 20px 0 0;
+}
+
+.attend-button,
+.attend-button:active,
+.attend-button:focus  {
+  border: 0;
+  background: #ffffff !important;
+}
+
+.attend-button .fa {
+  margin: 0;
+  padding: 0;
+  font-size: 125%;
+  transition: all 0.1s ease;
+  -webkit-transition: all 0.1s ease;
+}
+
+.attend-button:active .fa {
+  /*-ms-transform: scale(2, 2);
+  -webkit-transform: scale(2, 2);
+  transform: scale(2, 2);*/
+  /*transform: rotate(180deg);*/
+  /*-webkit-transform: rotate(180deg);*/
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  0 {
+    -ms-transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -ms-transform: scale(3);
+    -moz-transform: scale(3);
+    -webkit-transform: scale(3);
+    -o-transform: scale(3);
+    transform: scale(3);
+  }
+  100% {
+    -ms-transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.attend-button.attend-button-enabled .fa {
+  -webkit-animation: rotating 0.3s ease;
+  -moz-animation: rotating 0.3s ease;
+  -ms-animation: rotating 0.3s ease;
+  -o-animation: rotating 0.3s ease;
+  animation: rotating 0.3s ease;
+}
+
+.attend-button.attend-button-enabled,
+.attend-button.attend-button-enabled .fa {
+  color: #1ac6ff !important;
+}
+
+.attend-button.attend-button-disabled,
+.attend-button.attend-button-disabled .fa  {
+  color: #9f9f9f !important;
+}

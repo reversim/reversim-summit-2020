@@ -30,6 +30,7 @@ export function transformUser(user, isReversimMember) {
 }
 
 export function transformProposal(proposal, loggedInUser, overrideDetails) {
+
   if (_.isObject(proposal)) {
     return {
       id: proposal.id,
@@ -41,7 +42,7 @@ export function transformProposal(proposal, loggedInUser, overrideDetails) {
         let isReversimMember = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
         return transformUser(user, isReversimMember);
       }),
-      attended: proposal.attendees && loggedInUser ? _.includes(proposal.attendees.map(a => a.toHexString()), loggedInUser) : false
+      attended: proposal.attendees && (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false)
     }
   }
 

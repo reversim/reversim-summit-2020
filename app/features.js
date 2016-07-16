@@ -2,7 +2,7 @@ import features_spec from './features_spec';
 
 const FT_OVERRIDE_PARAM = 'ft_ovr';
 const FT_OVERRIDE_SPLIT_CHAR = '|';
-const FT_OVERRIDE_VALUE_CHAR = '>';
+const FT_OVERRIDE_VALUE_CHAR = '$';
 
 let overrides = {};
 
@@ -42,4 +42,12 @@ export default function getFeatureValue(name, defaultValue) {
   } else {
     return defaultValue;
   }
+}
+
+export function canUseDom() {
+  return typeof window !== 'undefined' && window.document && window.document.createElement;
+}
+
+export function canUseLocalStorage() {
+  return typeof window !== 'undefined' && window.localStorage;
 }

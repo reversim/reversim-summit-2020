@@ -6,6 +6,7 @@ import { manualLogin, signUp, toggleLoginMode } from 'actions/users';
 import stylesLogin from 'css/components/login';
 import styles from 'css/main';
 import ga from 'react-ga';
+import features from 'features';
 
 const cxLogin = classNames.bind(stylesLogin);
 const cx = classNames.bind(styles);
@@ -21,16 +22,27 @@ class LoginOrRegister extends Component {
   }
 
   render() {
+    let actions;
+    if (features('submission', false) & features('voting', false)) {
+      actions = 'submit a proposal and mark your favorite sessions';
+    } else if (features('voting', false)) {
+      actions = 'mark your favorite sessions';
+    } else if (features('submission', false)) {
+      actions = 'submit a proposal';
+    } else {
+      actions = ''
+    }
+
     return (
       <div className={cxLogin('login')}>
         <div className={cxLogin('container')}>
-          <div className={cx('align-center')}>
-            <h5>Login</h5>
-            <div className={cxLogin('alternative')}>
-              In order to submit a proposal you must be logged-in
+          <div className={cx('align-center')} style={{marginTop: 20}}>
+            <h6>Please Login</h6>
+          <div className={cxLogin('alternative')} style={{width: 300, margin: '15px auto'}}>
+              {`In order to ${actions} you must be logged-in`}
             </div>
             <div className={cx('align-center')}>
-              <ga.OutboundLink eventLabel="Login" to="/auth/google" className={cx('btn', 'gmail-btn')}>Login with Google</ga.OutboundLink>
+              <a href={`/auth/google${this.props.loginQueryString ? `?${this.props.loginQueryString}` : ''}`} className={cx('btn', 'gmail-btn')}>Login with Google</a>
             </div>
           </div>
         </div>
@@ -41,7 +53,8 @@ class LoginOrRegister extends Component {
 
 LoginOrRegister.propTypes = {
   user: PropTypes.object,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  loginQueryString: PropTypes.string
 };
 
 // Function passed in to `connect` to subscribe to Redux store updates.

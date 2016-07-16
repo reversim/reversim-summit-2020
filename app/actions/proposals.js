@@ -95,17 +95,32 @@ export function fetchProposal(params) {
     };
 }
 
-export function attendSession(id) {
-    return {
-        type: types.ATTEND_SESSION,
-        id: id,
-        promise: makeProposalsRequest('post', id, null, 'attend')
-    };
+export function attendSession(id, value) {
+  let newValue = value === undefined ? true : value;
+
+  let basePayload = {
+    id,
+    value: newValue
+  }
+
+  return dispatch => {
+    dispatch(Object.assign({}, basePayload, { type: types.ATTEND_SESSION_REQUEST }));
+
+    return makeProposalsRequest('post', id, { value: newValue }, 'attend')
+      .then(response => {
+        if (response.status === 200) {
+          return dispatch(Object.assign({}, basePayload, { type: types.ATTEND_SESSION_SUCCESS }));
+        } else {
+          return dispatch(Object.assign({}, basePayload, { type: types.ATTEND_SESSION_FAILURE }));
+        }
+      });
+  };
 }
 
-function updateProposalSuccess(data, message) {
+function updateProposalSuccess(id, data, message) {
   return {
     type: types.UPDATE_PROPOSAL_SUCCESS,
+    id,
     data,
     message
   };
@@ -123,7 +138,10 @@ export function updateProposal(id, data) {
     return makeProposalsRequest('put', id, data)
       .then(response => {
         if (response.status === 200) {
-          dispatch(updateProposalSuccess(data, response.data.message));
+          dispatch(updateProposalSuccess(id, data, response.data.message));
+          if (features('proposalsPageGroupedByTags', false)) {
+            dispatch(fetchProposals())
+          }
         } else {
           dispatch(updateProposalError('Oops! Something went wrong'));
         }
