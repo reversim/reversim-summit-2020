@@ -85,6 +85,13 @@ ul.with-bullets ul {
   background-position: center center;
 }
 
+.archived-session-header {
+  filter:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /></filter></svg>#filter');
+  -webkit-filter:grayscale(100%);
+  filter:grayscale(100%);
+  opacity: 0.7;
+}
+
 .active-tag {
   background-color: #0275d8;
 }
@@ -114,17 +121,7 @@ ul.with-bullets ul {
   mask-image: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-.all-proposals-action-button {
-  margin: 20px 20px 0 0;
-}
-
-.attend-button,
-.attend-button:active,
-.attend-button:focus  {
-  border: 0;
-  background: #ffffff !important;
-}
-
+.proposals-list-action-button .fa,
 .attend-button .fa {
   margin: 0;
   padding: 0;
@@ -133,30 +130,38 @@ ul.with-bullets ul {
   -webkit-transition: all 0.1s ease;
 }
 
-.attend-button:active .fa {
-  /*-ms-transform: scale(2, 2);
-  -webkit-transform: scale(2, 2);
-  transform: scale(2, 2);*/
-  /*transform: rotate(180deg);*/
-  /*-webkit-transform: rotate(180deg);*/
+.proposals-list-action-button {
+  margin: 0;
+  min-width: 140px;
+  padding: 14px 20px 13px;
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  max-width: 100%;
+  font-family: "PT Sans Caption", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+  letter-spacing: 0.4em;
+  overflow: hidden;
 }
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
-  from {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+.attend-button,
+.attend-button:active,
+.attend-button:focus,
+.proposals-list-action-button:hover,
+.proposals-list-action-button:active,
+.proposals-list-action-button:focus {
+  text-decoration: none;
 }
+
+.proposals-list-action-button:hover {
+  color: #159ac6;
+}
+
 @keyframes rotating {
   0 {
     -ms-transform: scale(1);
@@ -165,12 +170,19 @@ ul.with-bullets ul {
     -o-transform: scale(1);
     transform: scale(1);
   }
-  50% {
-    -ms-transform: scale(3);
-    -moz-transform: scale(3);
-    -webkit-transform: scale(3);
-    -o-transform: scale(3);
-    transform: scale(3);
+  25% {
+    -ms-transform: scale(2) rotateX(0deg);
+    -moz-transform: scale(2) rotateX(0deg);
+    -webkit-transform: scale(2) rotateX(0deg);
+    -o-transform: scale(2) rotateX(0deg);
+    transform: scale(2) rotateX(0deg);
+  }
+  75% {
+    -ms-transform: scale(2) rotateX(360deg);
+    -moz-transform: scale(2) rotateX(360deg);
+    -webkit-transform: scale(2) rotateX(360deg);
+    -o-transform: scale(2) rotateX(360deg);
+    transform: scale(2) rotateX(360deg);
   }
   100% {
     -ms-transform: scale(1);
@@ -181,12 +193,58 @@ ul.with-bullets ul {
   }
 }
 
+@keyframes no {
+  0 {
+    -ms-transform: translateX(5px);
+    -moz-transform: translateX(5px);
+    -webkit-transform: translateX(5px);
+    -o-transform: translateX(5px);
+    transform: translateX(5px);
+  }
+  25% {
+    -ms-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -webkit-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+    transform: translateX(-10px);
+  }
+  50% {
+    -ms-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -webkit-transform: translateX(10px);
+    -o-transform: translateX(10px);
+    transform: translateX(10px);
+  }
+  75% {
+    -ms-transform: translateX(-5px);
+    -moz-transform: translateX(-5px);
+    -webkit-transform: translateX(-5px);
+    -o-transform: translateX(-5px);
+    transform: translateX(-5px);
+  }
+  100% {
+    -ms-transform: translateX(0px);
+    -moz-transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    -o-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+
 .attend-button.attend-button-enabled .fa {
-  -webkit-animation: rotating 0.3s ease;
-  -moz-animation: rotating 0.3s ease;
-  -ms-animation: rotating 0.3s ease;
-  -o-animation: rotating 0.3s ease;
-  animation: rotating 0.3s ease;
+  -webkit-animation: rotating 0.5s ease;
+  -moz-animation: rotating 0.5s ease;
+  -ms-animation: rotating 0.5s ease;
+  -o-animation: rotating 0.5s ease;
+  animation: rotating 0.5s ease;
+}
+
+.attend-button.attend-button-disabled .fa {
+  -webkit-animation: no 0.3s linear;
+  -moz-animation: no 0.3s linear;
+  -ms-animation: no 0.3s linear;
+  -o-animation: no 0.3s linear;
+  animation: no 0.3s linear;
 }
 
 .attend-button.attend-button-enabled,
@@ -196,5 +254,58 @@ ul.with-bullets ul {
 
 .attend-button.attend-button-disabled,
 .attend-button.attend-button-disabled .fa  {
-  color: #9f9f9f !important;
+  color: #6c6c6c !important;
+}
+
+.attend-button.attend-button-disabled:hover,
+.attend-button.attend-button-disabled:hover .fa  {
+  color: #000 !important;
+}
+
+.recommendation img {
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+
+.recommendation:hover img {
+  opacity: 0.6;
+}
+
+.recommendation:hover a {
+  text-decoration: none;
+}
+
+.recommendation p {
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+}
+
+.recommendation:hover p {
+  color: #808080 !important;
+}
+
+.question {
+  margin: 30px 0;
+}
+
+.question .q {
+  font-weight: bold;
+}
+
+.favorite-session-enter {
+  opacity: 0.01;
+}
+
+.favorite-session-enter.favorite-session-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.favorite-session-leave {
+  opacity: 1;
+}
+
+.favorite-session-leave.favorite-session-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }

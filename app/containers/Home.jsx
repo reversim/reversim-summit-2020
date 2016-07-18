@@ -123,7 +123,7 @@ Home.propTypes = {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        proposals: features('proposalsPageGroupedByTags', false) ? _.chain(state.proposal.proposals).valuesIn().flatten().shuffle().take(4).value() : state.proposal.proposals,
+        proposals: !features('submission', false) ? _.chain(state.proposal.proposals).valuesIn().flatten().shuffle().take(4).value() : state.proposal.proposals,
         reversimTweets: state.tweets.reversim
     };
 }

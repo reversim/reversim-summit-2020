@@ -1,7 +1,7 @@
 export default {
   submission: false,
-  voting: false,
+  voting: true,
   tagging: true,
-  proposalsPageGroupedByTags: false,
+  proposalsPageGroupedByTags: true,
   recommendations: true
 }

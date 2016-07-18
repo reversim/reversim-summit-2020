@@ -6,15 +6,12 @@ import Proposal from '../models/proposal';
 import User from '../models/user';
 import mongoose from 'mongoose';
 import {transformProposal} from './helpers';
-import googleImages from 'google-images';
-
-let googleImagesClient = googleImages('005342563877306396899:quttpwc7xiy', 'AIzaSyCaU9MwJI_VvyIliUwedA4tbrU-AZUUd6Y');
 
 /**
  * List
  */
 export function all(req, res) {
-    Proposal.find({}, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
+    Proposal.find({ status: { $ne: 'archived' } }, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
         if (err) {
             console.log(`Error in proposals/all query: ${err}`);
             return res.status(500).send('Something went wrong getting the data');
@@ -62,6 +59,7 @@ export function getRecommendations(req, res) {
 
       let query = {
         id: { '$ne': proposal.id },
+        status: { $ne: 'archived' },
         tags: {
           '$elemMatch': {
             '$in': intersectedTags
@@ -89,7 +87,8 @@ export function getRecommendations(req, res) {
             req.params.id,
             ...recommendations.map(r => r.id)
           ]
-        }
+        },
+        status: { $ne: 'archived' }
       };
       if (req.session.passport && req.session.passport.user) {
         query['speaker_ids'] = {
@@ -217,10 +216,10 @@ export function attend(req, res) {
   if (req.session.passport && req.session.passport.user) {
     let query, update;
     if (req.body.value === true) {
-      query = { id: req.params.id, attendees: { $nin: [req.session.passport.user] } };
+      query = { id: req.params.id, status: { $ne: 'archived' }, attendees: { $nin: [req.session.passport.user] } };
       update = { $push: {'attendees': req.session.passport.user } };
     } else {
-      query = { id: req.params.id, attendees: { $in: [req.session.passport.user] } };
+      query = { id: req.params.id, status: { $ne: 'archived' }, attendees: { $in: [req.session.passport.user] } };
       update = { $pull: {'attendees': req.session.passport.user} };
     }
 

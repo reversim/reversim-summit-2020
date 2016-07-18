@@ -38,6 +38,7 @@ export function transformProposal(proposal, loggedInUser, overrideDetails) {
       abstract: proposal.abstract,
       type: proposal.type,
       tags: proposal.tags,
+      status: proposal.status,
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
         let isReversimMember = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
         return transformUser(user, isReversimMember);

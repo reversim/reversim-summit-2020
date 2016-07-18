@@ -15,6 +15,7 @@ import SessionForm from 'components/SessionForm';
 import NotificationSystem from 'react-notification-system';
 import Attend, { AttendListButton } from 'components/Attend';
 import LoginOrRegister from 'components/LoginOrRegister';
+import ProposalPreview from 'components/ProposalPreview';
 import ga from 'react-ga';
 
 import styles from 'css/main';
@@ -23,8 +24,7 @@ import defaultSpeakerPic from 'images/default_speaker.png'
 
 const cx = classNames.bind(styles);
 
-const CollapsedProposalHeight = 80;
-const votingOBKey = 'voting_ob';
+const showAttendOnBoardingKey = 'show_attend_on_boarding';
 
 class VotingOnBoarding extends Component {
   constructor(props) {
@@ -51,137 +51,13 @@ class VotingOnBoarding extends Component {
                             } } /> button (you can try here!).
         </p>
         <p className={cx('align-left')} style={{width: '95%', marginTop: 30}}>
-          Attendance count is confidential, and nobody else, except the moderation team, will see the results.
+          Attendance count is <strong>confidential</strong>, and nobody else, except the moderation team, will see the results. You can find more info <Link to='/attending-faq'>here</Link>.
           { !authenticated ? 'You must be logged in to mark your favorite sessions!' : undefined }
         </p>
         <div style={{margin: '20px 0'}}>
           { authenticated ? <a href="#" onClick={onClose} className={cx('btn', 'btn-sm')}>Start Reviewing</a> : <a href='/auth/google?returnTo=/proposals' className={cx('btn', 'btn-sm', 'gmail-btn')}>Login to Review</a> }
         </div>
       </div>
-    );
-  }
-}
-
-class ProposalPreview extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false,
-      contentHeight: CollapsedProposalHeight
-    }
-  }
-
-  toggleFullView(event) {
-    event.preventDefault();
-
-    let newState = { isOpen: !this.state.isOpen };
-    if (this.state.isOpen === false) {
-      newState.contentHeight = ReactDOM.findDOMNode(this.refs['proposal-content']).clientHeight;
-    } else {
-      newState.contentHeight = CollapsedProposalHeight
-    }
-
-    this.setState(newState);
-  }
-
-  editSession(event) {
-    event.preventDefault();
-
-    const { proposal, triggerEdit } = this.props;
-
-    if (triggerEdit !== undefined) {
-      triggerEdit(proposal);
-    }
-  }
-
-  render() {
-    const { user: { isReversimTeamMember }, proposal, location, triggerLoginModal } = this.props;
-
-    let type;
-    if (proposal.type === 'ossil') {
-      type = "Open Source in Israel (10 min.)";
-    } else if (proposal.type === 'lightning') {
-      type = "Lightning Talk (5 min.)";
-    } else {
-      type = "Full Featured (30-40 min.)";
-    }
-
-    let proposalTags;
-    if (features('tagging', false) && proposal.tags && proposal.tags.length > 0) {
-      proposalTags = <small className={cx("text-alt")}>{proposal.tags.map((tag, index) => <span className={cx('session-tag')} style={{margin: '0 15px 0px 0'}} key={index}>#{tag}</span>)}</small>
-    }
-
-    let viewButton;
-    let actionButtonSize = 'col-xs-2'
-    if (features('proposalsPageGroupedByTags', false)) {
-      viewButton =
-        <a className={cx((this.state.isOpen ? actionButtonSize : 'col-xs-3'), 'btn', 'btn-outline-clr', 'btn-sm', 'all-proposals-action-button', 'preview-proposal-button')} href={proposal.id} onClick={this.toggleFullView.bind(this)}>
-          { this.state.isOpen ? 'Close' : 'View More' }
-        </a>
-    } else {
-      viewButton = <Link to={`/session/${proposal.id}`} className={cx(actionButtonSize, 'btn', 'btn-outline-clr', 'btn-sm', 'all-proposals-action-button')}>View</Link>
-    }
-
-    let contentContainerStyle = {};
-    if (features('proposalsPageGroupedByTags')) {
-      contentContainerStyle = { maxHeight: this.state.contentHeight };
-    }
-
-    let showEditButton = isReversimTeamMember && (features('proposalsPageGroupedByTags') ? this.state.isOpen : true)
-
-    let voting;
-    if (features('voting')) {
-      voting =
-        <div className={cx('col-xs-11', 'col-md-4')}>
-          <Attend type='list'
-                  to={proposal.id}
-                  speakers={proposal.speaker_ids && proposal.speaker_ids.map(s => s._id)}
-                  value={proposal.attended}
-                  guestState={<AttendListButton value={false} onClick={triggerLoginModal} />}
-                  location={location} />
-        </div>
-    }
-
-    return (
-      <section className={cx({"section": true, "container": true, "proposal-preview-expanded": this.state.isOpen })} style={ {padding: '0 30px 60px 0'} }>
-        <div className={cx("col-md-8")} style={{paddingLeft: 0}}>
-          <div className={cx('align-left')}>
-            <article>
-              { features('proposalsPageGroupedByTags', false) ? <h6>{proposal.title}</h6> : <h5>{proposal.title}</h5>}
-                <p><small style={{marginRight: 30}} className={cx("text-alt")}><span className={cx("highlight")}>{type}</span></small> {proposalTags}</p>
-
-                <div className={cx({"proposal-content-container": features('proposalsPageGroupedByTags', false) })} style={contentContainerStyle} ref="proposalPreview">
-                  <div ref="proposal-content">
-                    <ReactMarkdown source={proposal.abstract} className={cx("markdown-block")} />
-                    { features('proposalsPageGroupedByTags') ? <p><small><Link to={`/session/${proposal.id}`}>Permalink</Link></small></p> : undefined }
-                  </div>
-                </div>
-                <div className={cx('row')}>
-                    <div className={cx('col-xs-12')}>
-                      { viewButton }
-                      { showEditButton ? <a onClick={this.editSession.bind(this)} href="#" className={cx(actionButtonSize, 'btn', 'btn-outline-clr', 'btn-sm', 'all-proposals-action-button')}>Edit</a> : undefined }
-                      { voting }
-                    </div>
-                </div>
-            </article>
-          </div>
-        </div>
-        <div className={cx("col-md-3")}>
-        { proposal.speaker_ids && proposal.speaker_ids.map((speaker, i) => {
-            let email = isReversimTeamMember ? speaker.email : undefined;
-            return (<Speaker  key={i}
-                              name={speaker.name}
-                              email={email}
-                              imageUrl={speaker.picture || defaultSpeakerPic}
-                              oneLiner={speaker.oneLiner}
-                              linkedin={speaker.linkedin}
-                              twitter={speaker.twitter}
-                              stackOverflow={speaker.stackOverflow}
-                              isReversimTeamMember={isReversimTeamMember} />);
-        })  }
-        </div>
-      </section>
     );
   }
 }
@@ -204,7 +80,7 @@ class AllProposals extends Component {
 
     componentDidMount() {
       this.setState({
-        showOnBoardingModal: features('voting', false) && canUseLocalStorage() && (window.localStorage.getItem(votingOBKey) === undefined || window.localStorage.getItem(votingOBKey) !== 'true')
+        showOnBoardingModal: features('voting', false) && canUseLocalStorage() && (window.localStorage.getItem(showAttendOnBoardingKey) === undefined || window.localStorage.getItem(showAttendOnBoardingKey) !== 'true')
       })
     }
 
@@ -228,7 +104,7 @@ class AllProposals extends Component {
     }
 
     renderProposalsGroupedByTags() {
-      let tags = Object.keys(this.props.proposals);
+      let tags = Object.keys(this.props.proposals).sort();
 
       return (
           <div style={{marginTop: 20}}>
@@ -283,16 +159,15 @@ class AllProposals extends Component {
       event.preventDefault();
 
       this.setState({ showOnBoardingModal: false });
-      localStorage.setItem(votingOBKey, true);
+      localStorage.setItem(showAttendOnBoardingKey, true);
     }
 
     render() {
       const { user: { authenticated } } = this.props;
 
       let mainSection;
-
       if (features('proposalsPageGroupedByTags', false)) {
-        let tags = Object.keys(this.props.proposals);
+        let tags = Object.keys(this.props.proposals).sort();
 
         mainSection =
           <StickyContainer ref="tags-container">
@@ -306,6 +181,23 @@ class AllProposals extends Component {
           </StickyContainer>
       } else {
         mainSection = this.renderAllProposals()
+      }
+
+      let votingInfoSection;
+      if (features('voting', false)) {
+        votingInfoSection =
+          <div className={cx('alert', 'alert-info')} style={{marginBottom: 40}} role="alert">
+            <strong>Mark your favorite sessions!</strong>
+            <p>
+              You can now review the proposals and mark your favorite sessions by clicking on <strong>Will Attend</strong> button.
+            </p>
+            <p>
+              The proposals you marked as favorite will always be available in <Link to='/my-favorites' style={{color: '#000'}}>my favorites</Link> page.
+            </p>
+            <p>
+              Have any questions about the process? more info <Link to='/attending-faq' style={{color: '#000'}}>here</Link>.
+            </p>
+          </div>
       }
 
       return (
@@ -335,7 +227,7 @@ class AllProposals extends Component {
                 <VotingOnBoarding onClose={this.closeOnBoardingModal.bind(this)} authenticated={authenticated} />
             </Rodal>
 
-            <section id="register" className={cx('section', 'overlay', 'header-bg', 'bg-my-proposals', 'light-text', 'align-center')}>
+            <section className={cx('section', 'overlay', 'header-bg', 'bg-my-proposals', 'light-text', 'align-center')}>
               <div className={cx("container")}>
                 <h1>Reversim Summit 2016 - Proposals</h1>
               </div>
@@ -343,6 +235,7 @@ class AllProposals extends Component {
 
             <section id="all-proposals" className={cx('section', 'container')}>
               <div className={cx("col-md-11", "col-md-offset-1")}>
+                {votingInfoSection}
                 {mainSection}
               </div>
             </section>

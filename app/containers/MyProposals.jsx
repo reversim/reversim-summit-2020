@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
-import {fetchUserProposals } from 'actions/users';
+import { fetchUserProposals } from 'actions/users';
 import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
 import ReactMarkdown from 'react-markdown';

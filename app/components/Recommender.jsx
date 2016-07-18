@@ -42,8 +42,8 @@ class Recommender extends Component {
 
   renderSingleRecommendation(proposal, index) {
     return (
-      <div className={cx("row")} key={index} style={{marginBottom: 20}}>
-        <div className={cx("col-xs-2", "photo-wrapper")}>
+      <div className={cx('row', 'recommendation')} key={index} style={{marginBottom: 20}}>
+        <div className={cx('col-xs-2', 'photo-wrapper')}>
           <Link to={`/session/${proposal.id}`} onClick={() => this.reportToGoogleAnalytics(proposal.id)}>
             <img src={proposal.speaker_ids && proposal.speaker_ids[0].picture} alt={proposal.title} className={cx("img-responsive")} style={{borderRadius: 10}} />
           </Link>
@@ -62,7 +62,7 @@ class Recommender extends Component {
 
     if (recommendations && recommendations.length > 0) {
       return (
-        <div className={cx("row")}>
+        <div className={cx('row')}>
           <div className={cx("col-xs-12")} style={{marginTop: 25}}>
             <p className={cx('h7')} style={{marginBottom: 20}}>You might also be interested in</p>
             { _.shuffle(recommendations).map((r, i) => this.renderSingleRecommendation(r, i)) }

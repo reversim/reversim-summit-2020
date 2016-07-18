@@ -16,7 +16,7 @@ function transformTweet(tweet) {
 export function reversimUserFeed(req, res, next) {
   client.get('statuses/user_timeline', { screen_name: 'reversim', count: 3, trim_user: false }, function(error, tweets, response) {
     if (error) {
-      console.log(`Error fetching tweets: ${error}`);
+      console.log(`Error fetching tweets: ${JSON.stringify(error)}`);
       return res.status(500).send('Something went wrong');
     }
 

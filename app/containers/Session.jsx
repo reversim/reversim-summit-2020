@@ -39,8 +39,13 @@ class Session extends Component {
     componentWillReceiveProps(newProps) {
       const { dispatch, user, location: { query }, currentProposal } = newProps;
 
-      if (features('voting', false) && currentProposal && !currentProposal.attended && query && query.attend) {
-        Attend.attendSession(dispatch, currentProposal.id, user.id, currentProposal.speaker_ids.map(s => s._id), true);
+      if (features('voting', false) &&
+          currentProposal &&
+          !currentProposal.attended &&
+          currentProposal.status !== 'archived' &&
+          query &&
+          query.attend) {
+        Attend.attendSession(dispatch, currentProposal.id, user.id, currentProposal.speaker_ids.map(s => s._id), true, 'Login');
       }
     }
 
@@ -89,10 +94,17 @@ class Session extends Component {
 
       let voting;
       if (features('voting', false) && speaker_ids) {
-        voting =
-          <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>
-            <Attend to={this.props.currentProposal.id} speakers={speaker_ids.map(s => s._id)} value={attended} location={location.pathname} />
-          </div>
+        if (this.props.currentProposal.status === 'archived') {
+          voting =
+            <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>
+              This session was archived.
+            </div>
+        } else {
+          voting =
+            <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>
+              <Attend to={this.props.currentProposal.id} speakers={speaker_ids.map(s => s._id)} value={attended} location={location.pathname} />
+            </div>
+        }
       }
 
       return (
@@ -153,20 +165,30 @@ class Session extends Component {
         sessionBody = this.state.isEditing ? <SessionForm proposal={currentProposal} notificationSystem={this.refs.notificationSystem} onFinishEdit={this.toggleEdit.bind(this)} onCancel={this.toggleEdit.bind(this)} /> : this.previewSession()
       }
 
+      let archivedWarning =
+        <div className={cx('row')}>
+          <div className={cx('col-md-10', 'col-md-offset-1')}>
+            <div className={cx("alert", "alert-warning")} role="alert">This session was archived and is no longer a candidate for Reversim Summit 2016.</div>
+          </div>
+        </div>
+
       return (<div>
-                <section id="register" className={cx('section', 'overlay', 'header-bg', currentProposal ? `bg-${currentProposal.type}-session` : undefined, 'light-text', 'align-center')}>
+                <section id="register" className={cx('section', 'overlay', currentProposal ? `${currentProposal.status}-session-header` : '', 'header-bg', currentProposal ? `bg-${currentProposal.type}-session` : undefined, 'light-text', 'align-center')}>
                   <div className={cx("container")}>
                     <h2>{currentProposal ? currentProposal.title : undefined}</h2>
                   </div>
                 </section>
 
                 <section id="session-info" className={cx('section', 'container')}>
+
+                  { currentProposal && currentProposal.status === 'archived' ? archivedWarning : undefined }
+
                   <div className={cx('col-md-6', 'col-md-offset-1')}>
                     { sessionBody }
                   </div>
 
                   <div className={cx('col-md-4', 'col-md-offset-1')}>
-                    {speakers}
+                    { speakers }
                   </div>
                 </section>
               </div>);

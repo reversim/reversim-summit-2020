@@ -10,9 +10,9 @@ const cx = classNames.bind(styles);
 
 const totalRecommendations = 3;
 
-export const AttendListButton = ({ value, onClick, style }) => {
+export const AttendListButton = ({ value, onClick, style, dataOrigin }) => {
   return (
-    <a style={style} className={cx('btn', 'attend-button', (value ? 'attend-button-enabled' : 'attend-button-disabled'), 'btn-sm', 'all-proposals-action-button')} href="#" onClick={onClick}>
+    <a style={style} data-origin={dataOrigin} className={cx('proposals-list-action-button', 'attend-button', (value ? 'attend-button-enabled' : 'attend-button-disabled'))} href="#" onClick={onClick}>
       <span className={cx('fa', value ? 'fa-user-plus' : 'fa-user-times')} aria-hidden="true"></span> Will Attend
     </a>
   )
@@ -23,11 +23,11 @@ class Attend extends Component {
     super(props);
   }
 
-  static attendSession(dispatch, sessionId, userId, speakers, value) {
+  static attendSession(dispatch, sessionId, userId, speakers, value, origin) {
     if (userId && !Attend.isSpeaker(userId, speakers)) {
       dispatch(attendSession(sessionId, value)).then(() => ga.event({
-        category: 'Session',
-        action: 'Attend Session',
+        category: origin || 'Unknown',
+        action: value ? 'Attend Session' : 'Unvote Session',
         label: sessionId
       }));
     }
@@ -44,25 +44,25 @@ class Attend extends Component {
   getStyles() {
     return {
       session: {
-        authenticated_voted: <span>We will count you in. Thanks for the cooperation!</span>,
-        authenticated: <span>Will you attend this session? <a href="#" onClick={this.attendSession.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{width:'20px'}}>Yes!</a></span>,
-        not_authenticated: <span>Will you attend this session (You must be logged in)? <a href="#" onClick={this.attendSession.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')} style={{width:'20px'}}>Yes!</a></span>
+        authenticated_voted: <span>We will count you in. Thanks for the cooperation! (won't come? <a href="#" onClick={this.toggleAttendance.bind(this)} data-origin="Session" style={{width:'20px'}}>click here</a>)</span>,
+        authenticated: <span>Will you attend this session? <a href="#" onClick={this.toggleAttendance.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')} data-origin="Session" style={{width:'20px'}}>Yes!</a></span>,
+        not_authenticated: <span>Will you attend this session (You must be logged in)? <a href="#" onClick={this.toggleAttendance.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')} data-origin="Session" style={{width:'20px'}}>Yes!</a></span>
       },
       list: {
-        authenticated_voted: <AttendListButton value={this.props.value} onClick={this.attendSession.bind(this)} />,
-        authenticated: <AttendListButton value={this.props.value} onClick={this.attendSession.bind(this)} />,
+        authenticated_voted: <AttendListButton dataOrigin="Proposals" style={this.props.style} value={this.props.value} onClick={this.toggleAttendance.bind(this)} />,
+        authenticated: <AttendListButton  dataOrigin="Proposals" style={this.props.style} value={this.props.value} onClick={this.toggleAttendance.bind(this)} />,
         not_authenticated: <span></span>
       }
     }
   }
 
-  attendSession(event) {
+  toggleAttendance(event) {
     event && event.preventDefault();
 
     const { dispatch, to, user: { authenticated, id }, value, location, speakers } = this.props;
 
     if (authenticated && !this.isSpeaker()) {
-      Attend.attendSession(dispatch, to, id, speakers, !value);
+      Attend.attendSession(dispatch, to, id, speakers, !value, event.target.getAttribute('data-origin'));
     } else if (!authenticated && window) {
       window.location.href = `/auth/google?returnTo=${location}?attend=true`;
     }

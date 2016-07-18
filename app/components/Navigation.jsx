@@ -8,6 +8,7 @@ import { push } from 'react-router-redux';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 import Scroll, { Link as ScrollLink } from 'react-scroll';
+import features from 'features';
 
 import logoImg from 'images/reversim_logo.png';
 import logoImg2x from 'images/reversim_logo@2x.png';
@@ -112,6 +113,9 @@ class Navigation extends Component {
                           </li>
                           <li className={cx("navigation-item")}>
                             <Link to="/my-proposals" className={cx('navigation-link')}>My Proposals</Link>
+                          </li>
+                          <li className={cx("navigation-item")}>
+                            <Link to="/my-favorites" className={cx('navigation-link')}>Favorite Sessions</Link>
                           </li>
                           <li className={cx("navigation-item")}>
                             <a onClick={this.logout.bind(this)} className={cx('navigation-link')}>Logout</a>

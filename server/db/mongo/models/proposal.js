@@ -21,7 +21,10 @@ const ProposalSchema = new mongoose.Schema({
     tags: [String],
     editing: Boolean,
     deleted: Boolean,
-    status: String,
+    status: {
+      type: String,
+      default: 'proposed'
+    },
     created_at: Date,
     updated_at: Date
 });

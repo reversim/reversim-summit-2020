@@ -9,7 +9,10 @@ import AllProposals from 'containers/AllProposals';
 import MyProfile from 'containers/MyProfile';
 import LoginOrRegister from 'components/LoginOrRegister';
 import Session from 'containers/Session';
+import AttendingFAQ from 'containers/AttendingFAQ';
+import MyFavorites from 'containers/MyFavorites';
 import { openLoginModal } from 'actions/users';
+import features from 'features';
 
 /*
  * @param {Redux Store}
@@ -53,6 +56,8 @@ export default (store) => {
         <Route path="/my-proposals" component={MyProposals} onEnter={requireAuth} />
         <Route path="/proposals" component={AllProposals} />
         <Route path="/my-profile" component={MyProfile} onEnter={requireAuth} />
+        <Route path="/my-favorites" component={MyFavorites} onEnter={requireAuth} />
+        { features('voting', false) ? <Route path="/attending-faq" component={AttendingFAQ} /> : undefined }
       </Route>
   );
 };
