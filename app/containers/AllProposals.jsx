@@ -203,7 +203,17 @@ class AllProposals extends Component {
       return (
           <BaseLayout currentPath={this.props.location.pathname} name="all-proposals">
             <NotificationSystem ref="notificationSystem" style={{ NotificationItem: { DefaultStyle: { marginTop: '120px', padding: '20px' } } } } />
-
+            <svg width="0" height="0" viewBox="0 0 2000 80">
+              <defs>
+                <mask id="textFade">
+                  <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="100%">
+                    <stop offset="0.5" stopColor="white" />
+                    <stop offset="1" stopColor="black" stopOpacity="0.5"/>
+                  </linearGradient>
+                  <rect x="0" y="0" width="100%" height="100%" fill="url(#gradient)"/>
+                </mask>
+              </defs>
+            </svg>
             <Rodal  visible={this.state.editingSession}
                     width={700}
                     height={600}
