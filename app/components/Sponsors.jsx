@@ -132,9 +132,19 @@ export default class Sponsors extends Component {
         featuredJobLink: 'http://www.klarnaisrael.com/join/'
       }
     },
+    {
+      name: 'Aol',
+      logo: aolLogo,
+      url: 'http://www.aol.co.il/',
+      info: {
+        height: 300,
+        description: 'A Verizon company, we disrupt content production, distribution and monetization, delivering 500 million global consumers monthly via TechCrunch, The Huffington Post, MAKERS and more',
+        featuredJobInfo: 'Front End Software Developer- Ready to scale up your talents? Join our global team shaping how the world experiences the internet, supporting 500 million+ monthly visits, 2 billion+ videos per month, collecting 1 million events/sec that add 100 terabytes+ of new raw data every day to our backend systems. Work in JAVA, JavaScript, AngularJS, JQuery, Hadoop, Cassandra, Scala, Vertica, MongoDB and CouchDB and more.',
+        featuredJobLink: 'http://www.aol.co.il/#career'
+      }
+    },
   ]).concat(_.shuffle([
     { name: 'Wix', logo: wixLogo, url: 'http://www.wix.com' },
-    { name: 'Aol', logo: aolLogo, url: 'http://www.aol.com' },
   ]));
 
   openSponsorModal(info) {

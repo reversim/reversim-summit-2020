@@ -84,9 +84,8 @@ export default class ProposalPreview extends Component {
     let voting;
     if (features('voting')) {
       voting =
-        <div className={cx('col-xs-12', 'col-md-4')}>
+        <div className={cx('col-xs-12', 'col-md-4')} width>
           <Attend type='list'
-                  style={{width: '100%'}}
                   to={proposal.id}
                   speakers={proposal.speaker_ids && proposal.speaker_ids.map(s => s._id)}
                   value={proposal.attended}

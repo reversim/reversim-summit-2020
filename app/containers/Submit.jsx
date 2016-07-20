@@ -62,7 +62,7 @@ class Submit extends Component {
           'profile.oneLiner': oneLiner
         }))
         .then(() => dispatch(createProposal(title, abstract, proposalType, [id])))
-        .then((result) => dispatch(push(`session/${result.id}`)))
+        .then((result) => dispatch(push(`/session/${result.id}`)))
         .catch(e => ga.exception({
           description: `Error on submit: ${e}`,
           fatal: true

@@ -15,7 +15,7 @@ class Proposal extends Component {
   jumpToProposalPage() {
     const { dispatch, id } = this.props;
 
-    dispatch(push(`session/${id}`));
+    dispatch(push(`/session/${id}`));
   }
 
   render() {

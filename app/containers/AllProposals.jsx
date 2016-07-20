@@ -17,6 +17,7 @@ import Attend, { AttendListButton } from 'components/Attend';
 import LoginOrRegister from 'components/LoginOrRegister';
 import ProposalPreview from 'components/ProposalPreview';
 import ga from 'react-ga';
+import shuffler from 'shuffle-seed';
 
 import styles from 'css/main';
 
@@ -109,10 +110,15 @@ class AllProposals extends Component {
       return (
           <div style={{marginTop: 20}}>
             { tags.map((tag, index) => {
+              let shuffledProposals = this.props.proposals[tag];
+              if (this.props.user.id !== undefined) {
+                shuffledProposals = shuffler.shuffle(shuffledProposals, this.props.user.id);
+              }
+
               return (
                 <Element key={index} name={tag} ref={tag} style={{marginBottom: 50}}>
                   <h4 style={ {marginBottom: 30} }>{tag}</h4>
-                {this.props.proposals[tag].map((proposal, i) => {
+                {shuffledProposals.map((proposal, i) => {
                   return (
                     <ProposalPreview  triggerLoginModal={() => this.openLoginModal(proposal.id)}
                                       triggerEdit={this.editSession.bind(this)}
