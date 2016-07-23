@@ -63,9 +63,9 @@ export function createProposalFailure(data) {
 // Fetch posts logic
 export function fetchProposals() {
     let endpoint = '/proposal';
-    if (features('proposalsPageGroupedByTags', false)) {
-      endpoint += '?group=tags';
-    }
+    // if (features('proposalsPageGroupedByTags', false)) {
+    //   endpoint += '?group=tags';
+    // }
 
     return {
         type: types.GET_PROPOSALS,
@@ -139,9 +139,6 @@ export function updateProposal(id, data) {
       .then(response => {
         if (response.status === 200) {
           dispatch(updateProposalSuccess(id, data, response.data.message));
-          if (features('proposalsPageGroupedByTags', false)) {
-            dispatch(fetchProposals())
-          }
         } else {
           dispatch(updateProposalError('Oops! Something went wrong'));
         }

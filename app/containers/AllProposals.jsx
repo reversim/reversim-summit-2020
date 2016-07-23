@@ -6,7 +6,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
 import { Element, Link as ScrollLink } from 'react-scroll';
-import { fetchProposals } from 'actions/proposals';
+import { fetchProposals, fetchTags } from 'actions/proposals';
 import ReactMarkdown from 'react-markdown';
 import features, { canUseLocalStorage } from 'features';
 import ReactDOM from 'react-dom';
@@ -18,6 +18,7 @@ import LoginOrRegister from 'components/LoginOrRegister';
 import ProposalPreview from 'components/ProposalPreview';
 import ga from 'react-ga';
 import shuffler from 'shuffle-seed';
+import _ from 'lodash';
 
 import styles from 'css/main';
 
@@ -66,7 +67,8 @@ class VotingOnBoarding extends Component {
 class AllProposals extends Component {
 
     static need = [  // eslint-disable-line
-        fetchProposals
+        fetchProposals,
+        fetchTags
     ];
 
     constructor(props) {
@@ -75,7 +77,8 @@ class AllProposals extends Component {
         this.state = {
           votedSessionIdAsGuest: undefined,
           editingSession: undefined,
-          showOnBoardingModal: false
+          showOnBoardingModal: false,
+          filter: []
         }
     }
 
@@ -85,23 +88,24 @@ class AllProposals extends Component {
       })
     }
 
-    renderAllProposals() {
+    renderProposals() {
       const { proposals, user, location: { pathname } } = this.props;
 
-      if (proposals.map !== undefined) {
-        return proposals.map((proposal, i) => {
-          return (
-            <ProposalPreview  triggerLoginModal={() => this.openLoginModal(proposal.id)}
-                              triggerEdit={this.editSession.bind(this)}
-                              proposal={proposal}
-                              user={user}
-                              key={i}
-                              location={pathname} />
-          );
-        });
+      let proposalsToRender = proposals;
+      if (this.state.filter && this.state.filter.length > 0) {
+        proposalsToRender = proposals.filter(p => _.every(this.state.filter, tag => p.tags.indexOf(tag) >= 0));
       }
 
-      return;
+      return proposalsToRender.map((proposal, i) => {
+        return (
+          <ProposalPreview  triggerLoginModal={() => this.openLoginModal(proposal.id)}
+                            triggerEdit={this.editSession.bind(this)}
+                            proposal={proposal}
+                            user={user}
+                            key={i}
+                            location={pathname} />
+        );
+      });
     }
 
     renderProposalsGroupedByTags() {
@@ -168,25 +172,35 @@ class AllProposals extends Component {
       localStorage.setItem(showAttendOnBoardingKey, true);
     }
 
+    filterTag(tag) {
+      event.preventDefault();
+
+      if (this.state.filter) {
+        if (this.state.filter.indexOf(tag) >= 0) {
+          this.setState({ filter: this.state.filter.filter(t => t !== tag) });
+        } else {
+          this.setState({ filter: [...this.state.filter, tag] });
+        }
+      } else {
+        this.setState({ filter: [tag] })
+      }
+
+      ga.event({ category: 'Proposals', action: 'Click on Tag', label: tag});
+    }
+
     render() {
-      const { user: { authenticated } } = this.props;
+      const { user: { authenticated }, tags } = this.props;
 
-      let mainSection;
-      if (features('proposalsPageGroupedByTags', false)) {
-        let tags = Object.keys(this.props.proposals).sort();
-
-        mainSection =
+      let tagsBar;
+      if (features('proposalsPageGroupedByTags', false) && tags) {
+        tagsBar =
           <StickyContainer ref="tags-container">
             <Sticky style={{backgroundColor: '#fff', zIndex: 4}}>
               <div style={{padding: '15px 0'}}>
-                { tags.map((tag, index) => <ScrollLink onClick={() => ga.event({ category: 'Proposals', action: 'Click on Tag', label: tag})} activeClass={cx('active-tag')} to={tag} key={index} className={cx('label', 'label-info', 'session-tag')} spy={true} smooth={true} offset={-280} duration={250}>{tag}</ScrollLink>) }
+                { tags.map((tag, index) => <a onClick={(event) => { event.preventDefault; this.filterTag(tag) }} className={cx({'active-tag': this.state.filter && this.state.filter.indexOf(tag) >= 0, 'label': true, 'label-info': true, 'session-tag': true})} key={index}>{tag}</a> )}
               </div>
             </Sticky>
-
-            { this.renderProposalsGroupedByTags() }
           </StickyContainer>
-      } else {
-        mainSection = this.renderAllProposals()
       }
 
       let votingInfoSection;
@@ -204,6 +218,11 @@ class AllProposals extends Component {
               Have any questions about the process? more info <Link to='/attending-faq' style={{color: '#000'}}>here</Link>.
             </p>
           </div>
+      }
+
+      let filteredTagsHeader;
+      if (features('proposalsPageGroupedByTags') && this.state.filter && this.state.filter.length > 0) {
+        filteredTagsHeader = <h4 style={ {marginBottom: 30} }>{this.state.filter.join(', ')}</h4>
       }
 
       return (
@@ -252,7 +271,9 @@ class AllProposals extends Component {
             <section id="all-proposals" className={cx('section', 'container')}>
               <div className={cx("col-md-11", "col-md-offset-1")}>
                 {votingInfoSection}
-                {mainSection}
+                {tagsBar}
+                {filteredTagsHeader}
+                {this.renderProposals()}
               </div>
             </section>
         </BaseLayout>
@@ -269,10 +290,16 @@ AllProposals.propTypes = {
 AllProposals.defaultProps = { };
 
 function mapStateToProps(state) {
-    return {
+    let propsFromState = {
         user: state.user,
         proposals: state.proposal.proposals
     };
+
+    if (features('proposalsPageGroupedByTags', false)) {
+      propsFromState.tags = state.proposal.tags;
+    }
+
+    return propsFromState;
 }
 
 // Read more about where to place `connect` here:

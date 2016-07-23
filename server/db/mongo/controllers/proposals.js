@@ -6,6 +6,9 @@ import Proposal from '../models/proposal';
 import User from '../models/user';
 import mongoose from 'mongoose';
 import {transformProposal} from './helpers';
+import shuffler from 'shuffle-seed';
+
+const shuffleProposals = true;
 
 /**
  * List
@@ -37,7 +40,11 @@ export function all(req, res) {
           result = groups;
         }
 
-        return res.json(result);
+        if (shuffleProposals && req.user && req.user.id) {
+          return res.json(shuffler.shuffle(result, req.user.id))
+        } else {
+          return res.json(result);
+        }
     });
 }
 
@@ -118,7 +125,7 @@ export function tags(req, res) {
       { $unwind: "$tags" },
       { $group: { _id: "$tags" } }
     ]).exec().then(tags => {
-      return res.json(tags.map(tag => tag._id));
+      return res.json(tags.map(tag => tag._id).sort());
     }).catch(err => {
       console.log(`Error in proposals/tags query: ${err}`);
       return res.status(500).send('Something went wrong getting the data');

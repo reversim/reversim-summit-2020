@@ -25,11 +25,7 @@ class MyFavorites extends Component {
     MyFavorites() {
       const { proposals } = this.props;
 
-      if (features('proposalsPageGroupedByTags', false)) {
-        return _.chain(proposals).valuesIn().flatten().filter(p => p.attended === true).uniqBy('id').value();
-      } else {
-        return proposals.filter(p => p.attended === true)
-      }
+      return proposals.filter(p => p.attended === true)
     }
 
     render() {

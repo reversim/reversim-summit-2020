@@ -23,30 +23,13 @@ import features from 'features';
 
 function updateProposal(state, id, data) {
   let newState = {};
-  if (features('proposalsPageGroupedByTags', false)) {
-    let proposals = {};
-    Object.keys(state.proposals).forEach(tag => {
-      let proposalIndex = state.proposals[tag].findIndex(p => p.id === id);
-      if (proposalIndex >= 0) {
-        proposals[tag] = [
-          ...state.proposals[tag].slice(0, proposalIndex),
-          Object.assign({}, state.proposals[tag][proposalIndex], data),
-          ...state.proposals[tag].slice(proposalIndex + 1)
-        ];
-      } else {
-        proposals[tag] = state.proposals[tag];
-      }
-    });
 
-    newState.proposals = proposals;
-  } else {
-    let proposalIndex = state.proposals.findIndex(p => p.id === id);
-    newState.proposals = [
-      ...state.proposals.slice(0, proposalIndex),
-      Object.assign({}, state.proposals[proposalIndex], data),
-      ...state.proposals.slice(proposalIndex + 1)
-    ];
-  }
+  let proposalIndex = state.proposals.findIndex(p => p.id === id);
+  newState.proposals = [
+    ...state.proposals.slice(0, proposalIndex),
+    Object.assign({}, state.proposals[proposalIndex], data),
+    ...state.proposals.slice(proposalIndex + 1)
+  ];
 
   if (state.currentProposal !== undefined) {
     newState.currentProposal = Object.assign({}, state.currentProposal, data);
@@ -106,14 +89,12 @@ export default function proposal(state = {
             };
         case UPDATE_PROPOSAL_SUCCESS:
             newState = {};
-            if (!features('proposalsPageGroupedByTags', false)) {
-              let proposalIndex = state.proposals.findIndex(p => p.id === action.id);
-              newState.proposals = [
-                ...state.proposals.slice(0, proposalIndex),
-                Object.assign({}, state.proposals[proposalIndex], action.data),
-                ...state.proposals.slice(proposalIndex + 1)
-              ];
-            }
+            let proposalIndex = state.proposals.findIndex(p => p.id === action.id);
+            newState.proposals = [
+              ...state.proposals.slice(0, proposalIndex),
+              Object.assign({}, state.proposals[proposalIndex], action.data),
+              ...state.proposals.slice(proposalIndex + 1)
+            ];
 
             if (state.currentProposal !== undefined) {
               newState.currentProposal = Object.assign({}, state.currentProposal, action.data);
