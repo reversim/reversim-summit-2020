@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Navigation from 'components/Navigation';
 import About from 'components/About';
+import Networking from 'components/Networking';
 import Timeline from 'components/Timeline';
 import Proposals from 'components/Proposals';
 import CFP from 'components/CFP';
@@ -106,6 +107,14 @@ class Home extends Component {
                   <Element name="location" ref="location">
                     <Location />
                   </Element>
+
+                  { features('networking', false) ?
+                      <Element name="networking" ref="networking">
+                        <Networking />
+                      </Element>
+                      : undefined }
+
+
 
                   <Footer tweets={reversimTweets} />
               </div>
