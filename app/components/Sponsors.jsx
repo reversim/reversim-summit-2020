@@ -143,8 +143,19 @@ export default class Sponsors extends Component {
         featuredJobLink: 'http://www.aol.co.il/#career'
       }
     },
+    {
+      name: 'Wix',
+      logo: wixLogo,
+      url: 'http://www.wix.engineering/',
+      info: {
+        height: 300,
+        description: 'At Wix Engineering we develop some of the most innovative cloud-based web applications that influence our 85+ million users worldwide.',
+        featuredJobInfo: 'We hire Software Engineers who love their work, are passionate about technology and believe that nothing is impossible. We don\'t care which technology you speak, we just want to make sure you play it amazingly. We\'re growing quickly, but function like a start-up –meaning you\'ll have the chance to make a real impact.',
+        featuredJobLink: 'http://www.wix.com/jobs/home'
+      }
+    },
   ]).concat(_.shuffle([
-    { name: 'Wix', logo: wixLogo, url: 'http://www.wix.com' },
+    // Add logos here
   ]));
 
   openSponsorModal(info) {

@@ -32,6 +32,8 @@ export function transformUser(user, isReversimMember) {
 export function transformProposal(proposal, loggedInUser, overrideDetails) {
 
   if (_.isObject(proposal)) {
+    let isReversimMember = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
+
     return {
       id: proposal.id,
       title: proposal.title,
@@ -40,9 +42,9 @@ export function transformProposal(proposal, loggedInUser, overrideDetails) {
       tags: proposal.tags,
       status: proposal.status,
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
-        let isReversimMember = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
         return transformUser(user, isReversimMember);
       }),
+      total: (proposal.attendees && isReversimMember) ? proposal.attendees.length : undefined,
       attended: proposal.attendees && (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false)
     }
   }
