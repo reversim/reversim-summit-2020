@@ -15,7 +15,8 @@ import appsFlyerLogo from 'images/sponsors/apps_flyer.png';
 import myHeritageLogo from 'images/sponsors/my_heritage.png';
 import klarnaLogo from 'images/sponsors/klarna.png';
 import fiverrLogo from 'images/sponsors/fiverr.png';
-import similarWebLogo from 'images/sponsors/similarWeb.png'
+import similarWebLogo from 'images/sponsors/similarWeb.png';
+import facebookLogo from 'images/sponsors/facebook.png';
 
 const cx = classNames.bind(styles);
 
@@ -155,7 +156,7 @@ export default class Sponsors extends Component {
       }
     },
   ]).concat(_.shuffle([
-    // Add logos here
+    { name: 'Facebook', logo: facebookLogo, url: 'https://www.facebook.com/careers/' },
   ]));
 
   openSponsorModal(info) {
