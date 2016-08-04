@@ -3,6 +3,6 @@ export default {
   voting: false,
   tagging: true,
   proposalsPageGroupedByTags: true,
-  networking: false,
+  networking: true,
   recommendations: true
 }

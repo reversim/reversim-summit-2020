@@ -66,15 +66,16 @@ class Networking extends Component {
                                 </div>
                                 <div className={cx('col-sm-7', 'align-left')}>
                                     <h6>We would like to see more women in Reversim!</h6>
-                                    <p><b>Networking lunch for women</b> - We invite all women who register for the summit to join us for a networking lunch for women.
-                                        We will introduce ourselves and share our stories during lunch.
+                                    <p> We invite all of the women who register for the summit to join us for a <b>networking lunch for women</b> on the first day of the summit.
+                                        <br/>
+                                        We will introduce ourselves and share our stories.
+                                        <br/>
                                         (Depending on the number of women who register we may split into several groups.)
                                     </p>
                                     <br />
-                                    <h6>Encourage women to register</h6>
+                                    <h6>We encourage women to register</h6>
                                     <p>
-                                        If you want to register for the summit but have no one to come with, or have any other concerns, we invite you to join our <a href="https://www.facebook.com/groups/1762800823976512/" target="_blank">facebook group.</a> You can talk to women who participated in the last event. You can also connect with other women before the event and arrange to meet.
-                                        If you prefer, we can also match you with a “buddy” for the duration of the event.
+                                        If you want to register for the summit but have no one to come with, or have any other concerns, we invite you to join our <a href="https://www.facebook.com/groups/1762800823976512/" target="_blank">facebook group.</a> You can talk to women who participated in the past events. You can also connect with other women before the event and arrange to meet.
                                     </p>
                                 </div>
                             </div>
