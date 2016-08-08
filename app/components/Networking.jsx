@@ -73,6 +73,8 @@ class Networking extends Component {
                                         (Depending on the number of women who register we may split into several groups.)
                                     </p>
                                     <br />
+                                    <p>If you plan to join us - please let us know <a href="https://goo.gl/forms/LfILI5tFIRzZ19Mo1" target="_blank">here</a></p>
+                                    <br />
                                     <h6>We encourage women to register</h6>
                                     <p>
                                         If you want to register for the summit but have no one to come with, or have any other concerns, we invite you to join our <a href="https://www.facebook.com/groups/1762800823976512/" target="_blank">facebook group.</a> You can talk to women who participated in the past events. You can also connect with other women before the event and arrange to meet.
