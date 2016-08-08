@@ -155,8 +155,19 @@ export default class Sponsors extends Component {
         featuredJobLink: 'http://www.wix.com/jobs/home'
       }
     },
+    {
+      name: 'Facebook',
+      logo: facebookLogo,
+      url: 'https://www.facebook.com/careers/',
+      info: {
+        height: 300,
+        description: 'Founded in 2004, Facebook’s mission is to give people the power to share and make the world more open and connected. People use Facebook to stay connected with friends and family, do discover what’s going on in the world, and to share and express what matters to them.',
+        featuredJobInfo: 'We are currently building our engineering team here at Tel Aviv and looking for the best people to join us. We work on some of the most interesting and important company initiatives to make the world more open and connected. Just an example: we develop internet.org and providing billions of users, mainly in developing countries, an available and affordable connection to the internet.',
+        featuredJobLink: 'https://www.facebook.com/careers/locations/tel-aviv'
+      }
+    },
   ]).concat(_.shuffle([
-    { name: 'Facebook', logo: facebookLogo, url: 'https://www.facebook.com/careers/' },
+    // Add sponsors here
   ]));
 
   openSponsorModal(info) {
