@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Proposal from '../models/proposal';
 import User from '../models/user';
 import mongoose from 'mongoose';
-import {transformProposal} from './helpers';
+import {transformProposal, transformUser} from './helpers';
 import shuffler from 'shuffle-seed';
 
 const shuffleProposals = true;
@@ -243,6 +243,22 @@ export function attend(req, res) {
   }
 }
 
+/**
+ * Get Speakers
+ */
+export function speakers(req, res) {
+    Proposal.find({ status: 'accepted' }, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
+        if (err) {
+            console.log(`Error in proposals/speakers query: ${err}`);
+            return res.status(500).send('Something went wrong getting the data');
+        }
+
+        let result = _.uniq(_.flatMap(proposals, proposal => proposal.speaker_ids), '_id').map(transformUser);
+
+        return res.json(result);
+    });
+}
+
 export default {
     all,
     get,
@@ -251,5 +267,6 @@ export default {
     remove,
     attend,
     tags,
-    getRecommendations
+    getRecommendations,
+    speakers
 };

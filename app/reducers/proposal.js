@@ -16,7 +16,8 @@ import {
     ATTEND_SESSION_SUCCESS,
     GET_TAGS_SUCCESS,
     GET_RECOMMENDATIONS_REQUEST,
-    GET_RECOMMENDATIONS_SUCCESS
+    GET_RECOMMENDATIONS_SUCCESS,
+    GET_SPEAKERS_SUCCESS
 } from 'types';
 import _ from 'lodash';
 import features from 'features';
@@ -40,6 +41,8 @@ function updateProposal(state, id, data) {
 
 export default function proposal(state = {
     proposals: [],
+    accepted: [],
+    speakers: [],
     currentProposal: undefined
 }, action) {
     let proposals = [];
@@ -58,7 +61,8 @@ export default function proposal(state = {
         case GET_PROPOSALS_SUCCESS:
             return Object.assign({}, state, {
                 isFetching: false,
-                proposals: action.req.data
+                proposals: action.req.data,
+                accepted: action.req.data.filter(proposal => proposal.status === 'accepted')
             });
         case GET_PROPOSALS_FAILURE:
             return Object.assign({}, state, {
@@ -114,6 +118,10 @@ export default function proposal(state = {
         case GET_RECOMMENDATIONS_SUCCESS:
           return Object.assign({}, state, {
             currentProposal: Object.assign({}, state.currentProposal, { recommendations: action.req.data })
+          });
+        case GET_SPEAKERS_SUCCESS:
+          return Object.assign({}, state, {
+            speakers: action.req.data
           });
 
         default:

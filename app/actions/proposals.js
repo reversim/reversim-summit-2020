@@ -73,6 +73,13 @@ export function fetchProposals() {
     };
 }
 
+export function fetchSpeakers() {
+    return {
+        type: types.GET_SPEAKERS,
+        promise: makeProposalsRequest('get', null, null, null, '/api/speakers')
+    };
+}
+
 export function fetchTags() {
     return {
         type: types.GET_TAGS,

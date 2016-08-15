@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Link } from 'react-router';
+import moment from 'moment';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
 import Speaker from 'components/Speaker';
@@ -62,7 +63,7 @@ class Session extends Component {
     }
 
     previewSession() {
-      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids, status }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
+      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids, status, hall, time }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
 
       let proposalType;
       if (type === 'ossil') {
@@ -76,7 +77,7 @@ class Session extends Component {
       let action;
       const showEditButton =
         isReversimTeamMember ||
-        features('editAcceptedProposals', false) && this.isSpeaker() && status === 'accepted' || 
+        features('editAcceptedProposals', false) && this.isSpeaker() && status === 'accepted' ||
         features('submission', false) && this.isSpeaker();
 
       if (showEditButton) {
@@ -112,10 +113,18 @@ class Session extends Component {
         }
       }
 
+      let sessionInfo;
+      if (status === 'accepted' && (time !== undefined || hall !== undefined) && features('publishAgenda', false)) {
+        sessionInfo = <strong>{ time !== undefined ? moment(time).format("dddd, MMM Do, HH:mm") + '  //  ' : undefined } { hall !== undefined ? hall : undefined }</strong>
+      }
+
       return (
         <div>
-          <p><small className={cx("text-alt")}><span className={cx("highlight")}>{proposalType}</span></small></p>
-          {proposalTags}
+          <div style={{marginBottom: 20}}>
+            <p><small className={cx("text-alt")}><span className={cx("highlight")}>{proposalType}</span></small></p>
+            { proposalTags }
+            { sessionInfo }
+          </div>
           <ReactMarkdown source={abstract || ''} className={cx("markdown-block")} />
           { speakerTrackRecord }
           { voting }

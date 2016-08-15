@@ -55,33 +55,48 @@ class Navigation extends Component {
 
   render() {
     const { user: { isLoginModalOpen, authenticated }, currentPath } = this.props;
-      let networkingHiddenClass = features('networking', false) ? '' : 'hidden';
 
     let navigationElements;
     if (currentPath === '/') {
       // Home navigation
       navigationElements = [
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>,
-        <Link className={cx("navigation-link")} to="proposals" onClick={this.collapseNav.bind(this)}>Proposals</Link>,
+        features('publishAgenda', false) ? (
+          <Link className={cx("navigation-link")} to="agenda" onClick={this.collapseNav.bind(this)}>Agenda</Link>
+        ) : (
+          <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>
+        ),
+        features('publishAgenda', false) ? (
+          <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="speakers" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Speakers</ScrollLink>
+        ) : (
+          <Link className={cx("navigation-link")} to="proposals" onClick={this.collapseNav.bind(this)}>Proposals</Link>
+        ),
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Team</ScrollLink>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Sponsors</ScrollLink>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Location</ScrollLink>,
-        <ScrollLink className={cx("navigation-link", networkingHiddenClass)} activeClass={cx('active')} to="networking" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Networking</ScrollLink>
+        features('networking', false) ? <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="networking" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Networking</ScrollLink> : undefined
       ];
     } else {
       navigationElements = [
         <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } } onClick={this.collapseNav.bind(this)}>About</Link>,
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } } onClick={this.collapseNav.bind(this)}>Timeline</Link>,
-        <Link className={cx("navigation-link")} to="/proposals" activeClassName={cx('active')} onClick={this.collapseNav.bind(this)}>Proposals</Link>,
+        features('publishAgenda', false) ? (
+          <Link className={cx("navigation-link")} to="agenda" onClick={this.collapseNav.bind(this)}>Agenda</Link>
+        ) : (
+          <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } } onClick={this.collapseNav.bind(this)}>Timeline</Link>
+        ),
+        features('publishAgenda', false) ? (
+          <Link className={cx("navigation-link")} to="/" state={ { section: 'speakers' } } onClick={this.collapseNav.bind(this)}>Speakers</Link>
+        ) : (
+          <Link className={cx("navigation-link")} to="/proposals" activeClassName={cx('active')} onClick={this.collapseNav.bind(this)}>Proposals</Link>
+        ),
         <Link className={cx("navigation-link")} to="/" state={ { section: 'team' } } onClick={this.collapseNav.bind(this)}>Team</Link>,
         <Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } } onClick={this.collapseNav.bind(this)}>Sponsors</Link>,
         <Link className={cx("navigation-link")} to="/" state={ { section: 'location' } } onClick={this.collapseNav.bind(this)}>Location</Link>,
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'networking' } } onClick={this.collapseNav.bind(this)}>Networking</Link>
+        features('networking', false) ? <Link className={cx("navigation-link")} to="/" state={ { section: 'networking' } } onClick={this.collapseNav.bind(this)}>Networking</Link> : undefined
       ];
     }
 
-    navigationElements = navigationElements.map((elem, i) => <li className={cx("navigation-item")} key={i}>{elem}</li>);
+    navigationElements = navigationElements.filter(elem => elem !== undefined).map((elem, i) => <li className={cx("navigation-item")} key={i}>{elem}</li>);
 
     return (
       <header className={cx('header', 'header-black')}>

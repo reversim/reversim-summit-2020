@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Navigation from 'components/Navigation';
 import About from 'components/About';
+import Speakers from 'components/Speakers';
 import Networking from 'components/Networking';
 import Timeline from 'components/Timeline';
 import Proposals from 'components/Proposals';
@@ -14,7 +15,7 @@ import Location from 'components/Location';
 import Footer from 'components/Footer';
 import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
-import { fetchProposals } from 'actions/proposals';
+import { fetchProposals, fetchSpeakers } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
 import { Element, Link as ScrollLink } from 'react-scroll';
 import ReactDOM from 'react-dom';
@@ -31,7 +32,8 @@ class Home extends Component {
 
     static need = [  // eslint-disable-line
         fetchReversimTeam,
-        fetchProposals
+        fetchProposals,
+        fetchSpeakers
     ];
 
     constructor(props) {
@@ -50,7 +52,7 @@ class Home extends Component {
     }
 
     render() {
-        const { proposals, user: { team }, reversimTweets, location } = this.props;
+        const { speakers, proposals, user: { team }, reversimTweets, location } = this.props;
         this.jumpToLocation();
 
         return (
@@ -65,9 +67,16 @@ class Home extends Component {
                           <div className={cx('container')}>
                               <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>19-20.sep <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>Weizmann Institute of Science</h5>
                               <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
-                              <h5 className={cx('base-font')}>Call for papers is now { features('submission', false) ? 'open!' : 'closed' }</h5>
+                              <h5 className={cx('base-font')}>
+                                {features('publishAgenda', false) ?
+                                  ''
+                                  : 'Call for papers is now ' + (features('submission', false) ? 'open!' : 'closed')
+                                }
+                              </h5>
                               <div className={cx('btns-container')}>
-                                  {features('submission', false) ? <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link> : <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>}
+                                { features('publishAgenda', false) ? <Link to="agenda" className={cx('btn')}>VIEW AGENDA</Link> :
+                                    features('submission', false) ? <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link> : <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>
+                                }
                                   <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>REGISTER</ScrollLink>
                               </div>
                           </div>
@@ -82,17 +91,27 @@ class Home extends Component {
                     <About />
                   </Element>
 
-                  <Element name="timeline" ref="timeline">
-                    <Timeline />
-                  </Element>
+                  { features('publishAgenda', false) ?
+                    <Element name="speakers" ref="speakers">
+                      <Speakers speakers={speakers} />
+                    </Element>
+                    : undefined }
+
+                  { features('publishAgenda', false) === false ?
+                    <Element name="timeline" ref="timeline">
+                      <Timeline />
+                    </Element>
+                    : undefined }
 
                   <Element name="register" ref="register">
                     <Register />
                   </Element>
 
-                  <Element name="proposals" ref="proposals">
-                    <Proposals data={proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
-                  </Element>
+                  { features('publishAgenda', false) === false ?
+                    <Element name="proposals" ref="proposals">
+                      <Proposals data={proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
+                    </Element>
+                    : undefined }
 
                   { features('submission', false) ? <CFP /> : undefined }
 
@@ -126,14 +145,16 @@ class Home extends Component {
 Home.propTypes = {
   user: PropTypes.object,
   proposals: PropTypes.any,
-  reversimTweets: PropTypes.array
+  reversimTweets: PropTypes.array,
+  speakers: PropTypes.array
 };
 
 function mapStateToProps(state) {
     return {
         user: state.user,
         proposals: !features('submission', false) ? _.chain(state.proposal.proposals).shuffle().take(4).value() : state.proposal.proposals,
-        reversimTweets: state.tweets.reversim
+        reversimTweets: state.tweets.reversim,
+        speakers: state.proposal.speakers
     };
 }
 

@@ -5,5 +5,6 @@ export default {
   proposalsPageGroupedByTags: true,
   networking: true,
   recommendations: true,
-  editAcceptedProposals: true
+  editAcceptedProposals: true,
+  publishAgenda: true
 }
