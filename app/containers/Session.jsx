@@ -62,7 +62,7 @@ class Session extends Component {
     }
 
     previewSession() {
-      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
+      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids, status }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
 
       let proposalType;
       if (type === 'ossil') {
@@ -74,7 +74,12 @@ class Session extends Component {
       }
 
       let action;
-      if (isReversimTeamMember || features('submission', false) && this.isSpeaker()) {
+      const showEditButton =
+        isReversimTeamMember ||
+        features('editAcceptedProposals', false) && this.isSpeaker() && status === 'accepted' || 
+        features('submission', false) && this.isSpeaker();
+
+      if (showEditButton) {
         action = <div className={cx("row", "pull-right")} style={{margin: '50px 0'}}><a href="#" onClick={this.toggleEdit.bind(this)} className={cx('btn', 'btn-outline-clr', 'btn-sm')}>Edit</a></div>
       }
 
