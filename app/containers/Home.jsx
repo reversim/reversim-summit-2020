@@ -13,6 +13,7 @@ import Sponsors from 'components/Sponsors';
 import Team from 'components/Team';
 import Location from 'components/Location';
 import Footer from 'components/Footer';
+import AgendaSection from 'components/AgendaSection';
 import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { fetchProposals, fetchSpeakers } from 'actions/proposals';
@@ -41,10 +42,12 @@ class Home extends Component {
     }
 
     jumpToLocation() {
-      const { location: { state } } = this.props;
+      const { location: { state, pathname } } = this.props;
 
-      if (state && state.section) {
-        let elem = ReactDOM.findDOMNode(this.refs[state.section])
+      let pageSection = pathname.replace('/', '').trim() || (state && state.section);
+
+      if (pageSection !== undefined && pageSection !== '') {
+        let elem = ReactDOM.findDOMNode(this.refs[pageSection])
         if (elem) {
           elem.scrollIntoView();
         }
@@ -52,7 +55,7 @@ class Home extends Component {
     }
 
     render() {
-        const { speakers, proposals, user: { team }, reversimTweets, location } = this.props;
+        const { speakers, proposals, user: { team }, reversimTweets, location, acceptedProposals } = this.props;
         this.jumpToLocation();
 
         return (
@@ -74,10 +77,10 @@ class Home extends Component {
                                 }
                               </h5>
                               <div className={cx('btns-container')}>
-                                { features('publishAgenda', false) ? <Link to="agenda" className={cx('btn')}>VIEW AGENDA</Link> :
+                                { features('publishAgenda', false) ? <Link to="register" className={cx('btn')}>GET TICKETS</Link> :
                                     features('submission', false) ? <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link> : <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>
                                 }
-                                  <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>REGISTER</ScrollLink>
+                                  <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>VIEW AGENDA</ScrollLink>
                               </div>
                           </div>
                       </div>
@@ -90,6 +93,12 @@ class Home extends Component {
                   <Element name="about" ref="about">
                     <About />
                   </Element>
+
+                  { features('publishAgenda', false) ?
+                    <Element name="agenda" ref="agenda">
+                      <AgendaSection acceptedProposals={acceptedProposals} />
+                    </Element>
+                  : undefined }
 
                   { features('publishAgenda', false) ?
                     <Element name="speakers" ref="speakers">
@@ -146,13 +155,15 @@ Home.propTypes = {
   user: PropTypes.object,
   proposals: PropTypes.any,
   reversimTweets: PropTypes.array,
-  speakers: PropTypes.array
+  speakers: PropTypes.array,
+  acceptedProposals: PropTypes.array
 };
 
 function mapStateToProps(state) {
     return {
         user: state.user,
         proposals: !features('submission', false) ? _.chain(state.proposal.proposals).shuffle().take(4).value() : state.proposal.proposals,
+        acceptedProposals: features('publishAgenda', false) ? state.proposal.accepted : [],
         reversimTweets: state.tweets.reversim,
         speakers: state.proposal.speakers
     };

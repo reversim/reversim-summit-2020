@@ -5,6 +5,7 @@ import {Link} from 'react-router';
 import ReactMarkdown from 'react-markdown';
 import features from 'features';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 import Attend, { AttendListButton } from 'components/Attend';
 import styles from 'css/main';
 
@@ -89,7 +90,7 @@ export default class ProposalPreview extends Component {
                   to={proposal.id}
                   speakers={proposal.speaker_ids && proposal.speaker_ids.map(s => s._id)}
                   value={proposal.attended}
-                  guestState={<AttendListButton value={false} onClick={triggerLoginModal} />}
+                  guestState={triggerLoginModal && <AttendListButton value={false} onClick={triggerLoginModal} />}
                   location={location} />
         </div>
     }
@@ -105,6 +106,9 @@ export default class ProposalPreview extends Component {
                 <div className={cx({"proposal-content-container": features('proposalsPageGroupedByTags', false) })} style={contentContainerStyle} ref="proposalPreview">
                   <div ref="proposal-content">
                     <ReactMarkdown source={proposal.abstract} className={cx("markdown-block")} />
+                    { proposal.status === 'accepted' && proposal.startTime !== undefined ? (
+                      <strong style={{marginBottom: 20}}>{ moment(proposal.startTime).format("dddd, MMM Do, HH:mm") + '  //  ' } { proposal.hall !== undefined ? proposal.hall : undefined }</strong>
+                    ) : undefined }
                   { features('proposalsPageGroupedByTags') ? <p><small><Link to={`/session/${proposal.id}`} className={cx('small')}>Permalink</Link></small></p> : undefined }
                   </div>
                 </div>

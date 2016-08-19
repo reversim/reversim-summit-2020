@@ -90,7 +90,7 @@ export function fetchTags() {
 export function fetchRecommendationsFor(id) {
     return {
         type: types.GET_RECOMMENDATIONS,
-        promise: makeProposalsRequest('get', id, null, 'recommendations')
+        promise: makeProposalsRequest('get', id, null, features('publishAgenda', false) ? 'recommendations?onlyAccepted=true' : 'recommendations')
     };
 }
 

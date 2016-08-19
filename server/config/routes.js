@@ -18,7 +18,7 @@ export default (app) => {
     app.post('/logout', usersController.logout);
     app.post('/updateUser', usersController.update);
     app.get('/user/proposals', usersController.getProposals);
-    app.get('/team', usersController.getReversimTeam);
+    app.get('/api/team', usersController.getReversimTeam);
     app.post('/profileImage', usersController.uploadProfilePicture);
   } else {
     console.warn(unsupportedMessage('users routes'));

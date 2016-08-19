@@ -55,6 +55,12 @@ const totalRecommendations = 3;
 const randomRecommendations = 2;
 
 export function getRecommendations(req, res) {
+  let onlyAcceptedProposals = {};
+
+  if (req.query.onlyAccepted) {
+    onlyAcceptedProposals = { status: 'accepted' }
+  }
+
   Proposal.findOne({ 'id': req.params.id }).exec()
     .catch(err => {
       console.log(`Error in recommendations/first query: ${err}`);
@@ -81,7 +87,7 @@ export function getRecommendations(req, res) {
         }
       }
 
-      return Proposal.find(query).populate('speaker_ids').limit(totalRecommendations - randomRecommendations).exec();
+      return Proposal.find(Object.assign({}, query, onlyAcceptedProposals)).populate('speaker_ids').limit(totalRecommendations - randomRecommendations).exec();
     })
     .catch(err => {
       console.log(`Error in recommendations/second query: ${err}`);
@@ -105,7 +111,7 @@ export function getRecommendations(req, res) {
         }
       }
 
-      Proposal.find(query).populate('speaker_ids').exec().then(randomRecommendations => {
+      Proposal.find(Object.assign({}, query, onlyAcceptedProposals)).populate('speaker_ids').exec().then(randomRecommendations => {
         return _.shuffle([
           ...recommendations,
           ..._.take(_.shuffle(randomRecommendations), totalRecommendations - recommendations.length)

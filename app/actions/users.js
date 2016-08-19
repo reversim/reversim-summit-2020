@@ -208,7 +208,7 @@ export function logOut() {
 export function fetchReversimTeam() {
   return {
       type: types.GET_REVERSIM_TEAM,
-      promise: makeUserRequest('get', null, '/team')
+      promise: makeUserRequest('get', null, '/api/team')
   };
 }
 

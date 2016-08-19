@@ -25,7 +25,8 @@ const ProposalSchema = new mongoose.Schema({
       type: String,
       default: 'proposed'
     },
-    time: Date,
+    startTime: Date,
+    endTime: Date,
     hall: String,
     created_at: Date,
     updated_at: Date

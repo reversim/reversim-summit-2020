@@ -44,7 +44,8 @@ export function transformProposal(proposal, loggedInUser, overrideDetails) {
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
         return transformUser(user, isReversimMember);
       }),
-      time: proposal.time,
+      startTime: proposal.startTime,
+      endTime: proposal.endTime,
       hall: proposal.hall,
       total: (proposal.attendees && isReversimMember) ? proposal.attendees.length : undefined,
       attended: proposal.attendees && (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false)

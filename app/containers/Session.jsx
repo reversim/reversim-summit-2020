@@ -63,7 +63,7 @@ class Session extends Component {
     }
 
     previewSession() {
-      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids, status, hall, time }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
+      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids, status, hall, startTime, endTime }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
 
       let proposalType;
       if (type === 'ossil') {
@@ -114,8 +114,8 @@ class Session extends Component {
       }
 
       let sessionInfo;
-      if (status === 'accepted' && (time !== undefined || hall !== undefined) && features('publishAgenda', false)) {
-        sessionInfo = <strong>{ time !== undefined ? moment(time).format("dddd, MMM Do, HH:mm") + '  //  ' : undefined } { hall !== undefined ? hall : undefined }</strong>
+      if (status === 'accepted' && (startTime !== undefined || hall !== undefined) && features('publishAgenda', false)) {
+        sessionInfo = <strong>{ startTime !== undefined ? moment(startTime).format("dddd, MMM Do, HH:mm") + '  //  ' : undefined } { hall !== undefined ? hall : undefined }</strong>
       }
 
       return (
