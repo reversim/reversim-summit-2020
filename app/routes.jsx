@@ -11,7 +11,7 @@ import LoginOrRegister from 'components/LoginOrRegister';
 import Session from 'containers/Session';
 import AttendingFAQ from 'containers/AttendingFAQ';
 import MyFavorites from 'containers/MyFavorites';
-import Agenda from 'containers/Agenda';
+import Schedule from 'containers/Schedule';
 import { openLoginModal } from 'actions/users';
 import features from 'features';
 
@@ -59,10 +59,11 @@ export default (store) => {
         <Route path="/my-profile" component={MyProfile} onEnter={requireAuth} />
         <Route path="/my-favorites" component={MyFavorites} onEnter={requireAuth} />
         <Route path="/team" component={Home} />
+        <Redirect from="/agenda" to="/schedule" />
         { features('voting', false) ? <Route path="/attending-faq" component={AttendingFAQ} /> : undefined }
         { features('publishAgenda', false) ? <Route path="/speakers" component={Home} /> : undefined }
-        {/* { features('publishAgenda', false) ? <Route path="/agenda" component={Agenda} /> : undefined } */}
-        <Route path="/agenda" component={Agenda} />
+        {/* { features('publishAgenda', false) ? <Route path="/agenda" component={Schedule} /> : undefined } */}
+        <Route path="/schedule" component={Schedule} />
       </Route>
   );
 };

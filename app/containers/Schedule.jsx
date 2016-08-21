@@ -6,7 +6,7 @@ import { fetchProposals } from 'actions/proposals';
 import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
 import ReactMarkdown from 'react-markdown';
-import AgendaElement from 'components/Agenda';
+import ScheduleElement from 'components/Schedule';
 import ProposalPreview from 'components/ProposalPreview';
 
 import styles from 'css/main';
@@ -15,7 +15,7 @@ import defaultSpeakerPic from 'images/default_speaker.png';
 
 const cx = classNames.bind(styles)
 
-class Agenda extends Component {
+class Schedule extends Component {
 
     static need = [  // eslint-disable-line
         fetchProposals
@@ -50,10 +50,10 @@ class Agenda extends Component {
             <BaseLayout currentPath={this.props.location.pathname} name="agenda">
               <section id="agenda" className={cx('section', 'align-center')}>
                 <div className={cx("container")}>
-                  <h3>Agenda</h3>
+                  <h3>Schedule</h3>
                   <br />
                   <br />
-                  <AgendaElement acceptedProposals={acceptedProposals} />
+                  <ScheduleElement acceptedProposals={acceptedProposals} />
                   {sessions}
                 </div>
               </section>
@@ -62,13 +62,13 @@ class Agenda extends Component {
     }
 }
 
-Agenda.propTypes = {
+Schedule.propTypes = {
   user: PropTypes.object,
   acceptedProposals: PropTypes.array,
   dispatch: PropTypes.func.isRequired,
 };
 
-Agenda.defaultProps = { };
+Schedule.defaultProps = { };
 
 function mapStateToProps(state) {
     return {
@@ -79,4 +79,4 @@ function mapStateToProps(state) {
 
 // Read more about where to place `connect` here:
 // https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
-export default connect(mapStateToProps)(Agenda);
+export default connect(mapStateToProps)(Schedule);

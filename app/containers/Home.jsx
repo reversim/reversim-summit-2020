@@ -13,7 +13,7 @@ import Sponsors from 'components/Sponsors';
 import Team from 'components/Team';
 import Location from 'components/Location';
 import Footer from 'components/Footer';
-import AgendaSection from 'components/AgendaSection';
+import ScheduleSection from 'components/ScheduleSection';
 import { Link } from 'react-router';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { fetchProposals, fetchSpeakers } from 'actions/proposals';
@@ -80,7 +80,7 @@ class Home extends Component {
                                 { features('publishAgenda', false) ? <Link to="register" className={cx('btn')}>GET TICKETS</Link> :
                                     features('submission', false) ? <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link> : <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>
                                 }
-                                  <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>VIEW AGENDA</ScrollLink>
+                                  <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>VIEW SCHEDULE</ScrollLink>
                               </div>
                           </div>
                       </div>
@@ -95,8 +95,8 @@ class Home extends Component {
                   </Element>
 
                   { features('publishAgenda', false) ?
-                    <Element name="agenda" ref="agenda">
-                      <AgendaSection acceptedProposals={acceptedProposals} />
+                    <Element name="schedule" ref="schedule">
+                      <ScheduleSection acceptedProposals={acceptedProposals} />
                     </Element>
                   : undefined }
 

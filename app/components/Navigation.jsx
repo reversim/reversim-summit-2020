@@ -62,7 +62,7 @@ class Navigation extends Component {
       navigationElements = [
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
         features('publishAgenda', false) ? (
-          <Link className={cx("navigation-link")} to="agenda" onClick={this.collapseNav.bind(this)}>Agenda</Link>
+          <Link className={cx("navigation-link")} to="schedule" onClick={this.collapseNav.bind(this)}>Schedule</Link>
         ) : (
           <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>
         ),
@@ -80,7 +80,7 @@ class Navigation extends Component {
       navigationElements = [
         <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } } onClick={this.collapseNav.bind(this)}>About</Link>,
         features('publishAgenda', false) ? (
-          <Link className={cx("navigation-link")} to="agenda" onClick={this.collapseNav.bind(this)}>Agenda</Link>
+          <Link className={cx("navigation-link")} to="schedule" onClick={this.collapseNav.bind(this)}>Schedule</Link>
         ) : (
           <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } } onClick={this.collapseNav.bind(this)}>Timeline</Link>
         ),

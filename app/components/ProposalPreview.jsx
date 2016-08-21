@@ -49,7 +49,7 @@ export default class ProposalPreview extends Component {
   }
 
   render() {
-    const { user: { isReversimTeamMember }, proposal, location, triggerLoginModal } = this.props;
+    const { user, proposal, location, triggerLoginModal } = this.props;
 
     let type;
     if (proposal.type === 'ossil') {
@@ -80,7 +80,7 @@ export default class ProposalPreview extends Component {
       contentContainerStyle = { maxHeight: this.state.contentHeight };
     }
 
-    let showEditButton = isReversimTeamMember && this.props.triggerEdit && (features('proposalsPageGroupedByTags') ? this.state.isOpen : true)
+    let showEditButton = user !== undefined && user.isReversimTeamMember && this.props.triggerEdit && (features('proposalsPageGroupedByTags') ? this.state.isOpen : true)
 
     let voting;
     if (features('voting')) {
@@ -124,7 +124,7 @@ export default class ProposalPreview extends Component {
         </div>
         <div className={cx("col-md-3")}>
         { proposal.speaker_ids && proposal.speaker_ids.map((speaker, i) => {
-            let email = isReversimTeamMember ? speaker.email : undefined;
+            let email = user !== undefined && user.isReversimTeamMember ? speaker.email : undefined;
             return (<Speaker  key={i}
                               name={speaker.name}
                               email={email}
@@ -133,7 +133,7 @@ export default class ProposalPreview extends Component {
                               linkedin={speaker.linkedin}
                               twitter={speaker.twitter}
                               stackOverflow={speaker.stackOverflow}
-                              isReversimTeamMember={isReversimTeamMember} />);
+                              isReversimTeamMember={user ? user.isReversimTeamMember : undefined} />);
         })  }
         </div>
       </section>
