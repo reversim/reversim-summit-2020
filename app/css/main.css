@@ -309,3 +309,12 @@ ul.with-bullets ul {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+.full-talk {
+  clear: both;
+  display: flex;
+}
+
+.full-talks-container {
+  display: flex;
+}

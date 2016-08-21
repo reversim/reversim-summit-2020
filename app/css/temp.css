@@ -3611,6 +3611,9 @@ button.btn.btn-block {
   min-height: 65px;
   padding: 15px;
   background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .schedule .tab-content-schedule .schedule-item:last-child {
   margin-bottom: 0;

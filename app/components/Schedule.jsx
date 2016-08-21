@@ -174,7 +174,7 @@ class TimeSlot extends Component {
     } else if (Children.count(children) === 2) {
       return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-6')));
     } else if (Children.count(children) === 3) {
-      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-4')));
+      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-4', 'full-talk')));
     } else if (Children.count(children) === 4) {
       return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-3')));
     } else {
@@ -191,7 +191,7 @@ class TimeSlot extends Component {
       <div className={cx('container', 'time-slot')}>
         <div className={cx('col-xs-1', 'time')}>{time}</div>
         <div className={cx('col-xs-11', 'sessions')}>
-          <div className={cx('row')}>
+          <div className={cx('row', 'full-talks-container')}>
             {children}
           </div>
           {
