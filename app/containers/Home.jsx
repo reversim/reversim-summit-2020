@@ -15,12 +15,14 @@ import Location from 'components/Location';
 import Footer from 'components/Footer';
 import ScheduleSection from 'components/ScheduleSection';
 import { Link } from 'react-router';
+import Rodal from 'components/Rodal';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { fetchProposals, fetchSpeakers } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
 import { Element, Link as ScrollLink } from 'react-scroll';
 import ReactDOM from 'react-dom';
 import features from 'features';
+import ga from 'react-ga';
 import _ from 'lodash';
 
 import styles from 'css/main';
@@ -39,6 +41,10 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+          isRegistrationModalOpen: false
+        }
     }
 
     jumpToLocation() {
@@ -54,9 +60,36 @@ class Home extends Component {
       }
     }
 
+    startRegistrationModal(event) {
+      event.preventDefault();
+
+      ga.modalview('registration');
+
+      this.setState({ isRegistrationModalOpen: true });
+    }
+
+    closeRegistrationModal(event) {
+      event.preventDefault();
+
+      this.setState({ isRegistrationModalOpen: false });
+    }
+
     render() {
         const { speakers, proposals, user: { team }, reversimTweets, location, acceptedProposals } = this.props;
         this.jumpToLocation();
+
+        let leftButton, rightButton;
+        rightButton = <ScrollLink to={ features('publishAgenda', false) ? 'schedule' : 'timeline' } className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-50} duration={500}>VIEW SCHEDULE</ScrollLink>;
+
+        if (features('startRegistration', false)) {
+          leftButton = <a href="#" onClick={this.startRegistrationModal.bind(this)} className={cx('btn')}>GET TICKETS</a>;
+        } else if (features('publishAgenda', false)) {
+          leftButton = <ScrollLink to='register' className={cx('btn')} spy={true} smooth={true} offset={-80} duration={500}>REGISTER</ScrollLink>;;
+        } else if (features('submission', false)) {
+          leftButton = <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link>;
+        } else {
+          leftButton = <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>;
+        }
 
         return (
           <StickyContainer>
@@ -77,10 +110,7 @@ class Home extends Component {
                                 }
                               </h5>
                               <div className={cx('btns-container')}>
-                                { features('publishAgenda', false) ? <Link to="register" className={cx('btn')}>GET TICKETS</Link> :
-                                    features('submission', false) ? <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link> : <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>
-                                }
-                                  <ScrollLink to="register" className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-100} duration={500}>VIEW SCHEDULE</ScrollLink>
+                                {leftButton} {rightButton}
                               </div>
                           </div>
                       </div>
@@ -146,6 +176,15 @@ class Home extends Component {
 
                   <Footer tweets={reversimTweets} />
               </div>
+
+              <Rodal  visible={this.state.isRegistrationModalOpen}
+                      width={700}
+                      height={700}
+                      onClose={this.closeRegistrationModal.bind(this)}>
+                <div style={ {width: '100%', textAlign: 'left'} }>
+                  <iframe  src="//eventbrite.com/tickets-external?eid=26992112134&ref=etckt" frameborder="0" height="201" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
+                </div>
+              </Rodal>
           </StickyContainer>
         );
     }

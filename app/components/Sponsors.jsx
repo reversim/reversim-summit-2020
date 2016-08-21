@@ -17,6 +17,7 @@ import klarnaLogo from 'images/sponsors/klarna.png';
 import fiverrLogo from 'images/sponsors/fiverr.png';
 import similarWebLogo from 'images/sponsors/similarWeb.png';
 import facebookLogo from 'images/sponsors/facebook.png';
+import akamaiLogo from 'images/sponsors/akamai.png';
 
 const cx = classNames.bind(styles);
 
@@ -168,6 +169,11 @@ export default class Sponsors extends Component {
     },
   ]).concat(_.shuffle([
     // Add sponsors here
+    {
+      name: 'Akamai',
+      logo: akamaiLogo,
+      url: 'http://www.akamai.com'
+    }
   ]));
 
   openSponsorModal(info) {
