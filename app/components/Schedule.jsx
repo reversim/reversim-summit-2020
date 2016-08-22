@@ -1,4 +1,5 @@
-import React, { Component, Children } from 'react';
+import React, { Component, Children, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import styles from 'css/main';
 import ga from 'react-ga';
@@ -6,8 +7,12 @@ import _ from 'lodash';
 import moment from 'moment';
 import { Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
+import { canUseDom } from 'features';
 import Speaker from 'components/Speaker';
+import { push } from 'react-router-redux';
 const cx = classNames.bind(styles);
+
+const mdWidth = 992;
 
 class Day extends Component {
   constructor(props) {
@@ -37,11 +42,14 @@ class GroupedSession extends Component {
   togglePreview(session) {
     return (event) => {
       event.preventDefault();
-
-      const { togglePreview } = this.props;
+      const { fromProposal, dispatch } = this.props;
 
       if (session) {
-        togglePreview(session);
+        if (canUseDom() && window.innerWidth < mdWidth) {
+          dispatch(push(`/session/${session.id}`));
+        } else {
+          this.props.togglePreview(session);
+        }
       }
     }
   }
@@ -57,7 +65,9 @@ class GroupedSession extends Component {
 
     return (
         <div className={cx({'schedule-item': true, 'clickable-schedule-item': this.props.togglePreview !== undefined, 'active': activeSession})} onClick={this.togglePreview.bind(this)}>
-          <div className={cx('h7')} style={{marginBottom: 15}}>{title}</div>
+          <div style={{marginBottom: 15}}>
+            <span className={cx('h7')}>{title}</span> <em style={{display:'block'}} className={cx('hidden-md', 'hidden-lg', 'small')}>{ fromProposals.length > 0 && fromProposals[0].hall }</em>
+          </div>
           <ul>
             {sessions}
           </ul>
@@ -73,11 +83,14 @@ class Session extends Component {
 
   togglePreview(event) {
     event.preventDefault();
-
-    const { fromProposal, togglePreview } = this.props;
+    const { fromProposal, dispatch } = this.props;
 
     if (fromProposal) {
-      togglePreview(fromProposal);
+      if (canUseDom() && window.innerWidth < mdWidth) {
+        dispatch(push(`/session/${fromProposal.id}`));
+      } else {
+        this.props.togglePreview(fromProposal);
+      }
     }
   }
 
@@ -99,10 +112,25 @@ class Session extends Component {
         <div className={cx({'schedule-item': true, 'clickable-schedule-item': this.props.togglePreview !== undefined, 'active': activeSession})} onClick={this.togglePreview.bind(this)}>
           <div className={cx('h7')}>{title}</div>
           {speakerInfo}
+          <em className={cx('hidden-md', 'hidden-lg', 'small')}>{ fromProposal && fromProposal.hall }</em>
         </div>
     );
   }
 }
+
+Session.propTypes = {
+  fromProposal: PropTypes.object,
+  togglePreview: PropTypes.func,
+  dispatch: PropTypes.func.isRequired
+};
+
+function mapStateToProps(state) {
+    return {
+
+    };
+}
+
+const SessionWithDispatch = connect(mapStateToProps)(Session);
 
 class AuditoriumNavItem extends Component {
   constructor(props) {
@@ -172,11 +200,11 @@ class TimeSlot extends Component {
     if (Children.count(children) === 1) {
       return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-12', 'text-center')));
     } else if (Children.count(children) === 2) {
-      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-6')));
+      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-md-6', 'col-xs-12')));
     } else if (Children.count(children) === 3) {
-      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-4', 'full-talk')));
+      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-md-4', 'col-xs-12', 'full-talk')));
     } else if (Children.count(children) === 4) {
-      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-xs-3')));
+      return Children.map(children, (child, i) => this.transformSingleSession(child, cx('col-md-3', 'col-xs-12')));
     } else {
       return children;
     }
@@ -196,7 +224,7 @@ class TimeSlot extends Component {
           </div>
           {
             this.state.previewSession ? (
-              <div className={cx('schedule-preview-wrapper', 'row')}>
+              <div className={cx('schedule-preview-wrapper', 'row', 'hidden-xs')}>
                 <div className={cx('col-xs-10', 'col-xs-offset-1', 'schedule-preview')}>
                   <div className={cx("col-md-8")} style={{paddingLeft: 0}}>
                     {this.state.previewSession.type === 'ossil' || this.state.previewSession.type === 'lightning' ? <h6>{this.state.previewSession.title}</h6> : undefined}
@@ -263,10 +291,12 @@ class Schedule extends Component {
   }
 
   render() {
+    const { dispatch } = this.props;
+
     return (
       <div className={cx('row', 'schedule')}>
 
-        <ul className={cx('nav', 'nav-schedule')}>
+        <ul className={cx('nav', 'nav-schedule', 'days-nav')}>
           <li className={cx({"active": this.isDayActive(1)})}><a href="#" onClick={this.changeDay.bind(this)(1)}><h5 className={cx("highlight")}>Day 1</h5><p className={cx("text-alt")}>19/09/2016</p></a></li>
           <li className={cx({"active": this.isDayActive(2)})}><a href="#" onClick={this.changeDay.bind(this)(2)}><h5 className={cx("highlight")}>Day 2</h5><p className={cx("text-alt")}>20/09/2016</p></a></li>
         </ul>
@@ -285,6 +315,7 @@ class Schedule extends Component {
 
             <TimeSlot time='10:00'>
               <Session
+                dispatch={dispatch}
                 title='Welcome + Keynote'
                 fromProposal={this.getProposal('e00bb311-882d-6766-6411-1cc3930289d9')} />
             </TimeSlot>
@@ -295,16 +326,16 @@ class Schedule extends Component {
 
             <TimeSlot time='11:10'>
               <Session
-                fromProposal={this.getProposal('da9ee1e1-e427-66c6-a659-2034cf715e25')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('da9ee1e1-e427-66c6-a659-2034cf715e25')} />
 
               <Session
-                fromProposal={this.getProposal('38c6e7f0-3c48-1f82-e9c2-2a9a529fb498')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('38c6e7f0-3c48-1f82-e9c2-2a9a529fb498')} />
 
               <Session
-                fromProposal={this.getProposal('5b94f5f9-f823-19fa-c32d-592d8e1b995e')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('5b94f5f9-f823-19fa-c32d-592d8e1b995e')} />
             </TimeSlot>
 
             <TimeSlot time='11:50'>
@@ -313,16 +344,16 @@ class Schedule extends Component {
 
             <TimeSlot time='12:00'>
               <Session
-                fromProposal={this.getProposal('7861a35f-d40e-6b2c-bcc4-674cdb96a3c6')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('7861a35f-d40e-6b2c-bcc4-674cdb96a3c6')} />
 
               <Session
-                fromProposal={this.getProposal('a6be3746-f4a3-93e6-a9dd-39c2b6486c07')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('a6be3746-f4a3-93e6-a9dd-39c2b6486c07')} />
 
               <Session
-                fromProposal={this.getProposal('b4616643-299e-6b95-dec1-3956dc1b9e3d')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('b4616643-299e-6b95-dec1-3956dc1b9e3d')} />
             </TimeSlot>
 
             <TimeSlot time='12:40'>
@@ -331,6 +362,7 @@ class Schedule extends Component {
 
             <TimeSlot time='13:40'>
               <GroupedSession
+                dispatch={dispatch}
                 title='Lightning Talks'
                 fromProposals={this.getProposals([
                   '376b38bb-52fa-ead7-2b81-19b2a3281182',
@@ -339,16 +371,13 @@ class Schedule extends Component {
                   '3c3ef8e4-8593-2b5c-0df1-9946d6dcb3b2',
                   '84fed3e0-843a-6549-d0fd-647f07d660b5',
                   'd4a93e38-e9d6-fa63-8fd3-35b09aff5c04'
-                ])}
-                expanded={false} />
+                ])} />
 
               <Session
-                title=''
-                expanded={false} />
+                title='' />
 
               <Session
-                title=''
-                expanded={false} />
+                title='' />
             </TimeSlot>
 
             <TimeSlot time='14:20'>
@@ -357,16 +386,16 @@ class Schedule extends Component {
 
             <TimeSlot time='14:30'>
               <Session
-                fromProposal={this.getProposal('e332ff16-5b9c-c95c-8f94-edd561046654')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('e332ff16-5b9c-c95c-8f94-edd561046654')} />
 
               <Session
-                fromProposal={this.getProposal('fac30d98-a041-a099-6514-e8599ebad53f')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('fac30d98-a041-a099-6514-e8599ebad53f')} />
 
               <Session
-                fromProposal={this.getProposal('d4a1524a-e442-843c-8347-55bc4059e316')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('d4a1524a-e442-843c-8347-55bc4059e316')} />
             </TimeSlot>
 
             <TimeSlot time='15:00'>
@@ -375,22 +404,21 @@ class Schedule extends Component {
 
             <TimeSlot time='15:10'>
               <GroupedSession
+                dispatch={dispatch}
                 title='Open Source Israel'
                 fromProposals={this.getProposals([
                   'a7234211-4edc-d6fb-ee8d-181f210d63b2',
                   'afce4ef2-e1d5-b170-db6d-e69df4d327ed',
                   '0c6e6c08-50c1-1923-257f-ce420fbe3e2e',
                   '0f686920-ef11-f26a-b55b-532f703485f7'
-                ])}
-                expanded={false} />
+                ])} />
 
               <Session
-                title=''
-                expanded={false} />
+                title='' />
 
               <Session
-                fromProposal={this.getProposal('4c8947e4-881b-ee63-698a-090944af5ffb')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('4c8947e4-881b-ee63-698a-090944af5ffb')} />
             </TimeSlot>
 
             <TimeSlot time='15:50'>
@@ -399,16 +427,16 @@ class Schedule extends Component {
 
             <TimeSlot time='16:10'>
               <Session
-                fromProposal={this.getProposal('106eada0-a4f5-229a-cad5-f0e1b2af4e94')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('106eada0-a4f5-229a-cad5-f0e1b2af4e94')} />
 
               <Session
-                fromProposal={this.getProposal('a3060d0f-5721-a9a1-9075-0bceaf672a69')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('a3060d0f-5721-a9a1-9075-0bceaf672a69')} />
 
               <Session
-                fromProposal={this.getProposal('17a8dae8-3955-68bf-14f5-48a5371b30cf')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('17a8dae8-3955-68bf-14f5-48a5371b30cf')} />
             </TimeSlot>
 
             <TimeSlot time='16:50'>
@@ -417,16 +445,16 @@ class Schedule extends Component {
 
             <TimeSlot time='17:00'>
               <Session
-                fromProposal={this.getProposal('9eecf51c-25c0-fbef-a514-abe734acd933')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('9eecf51c-25c0-fbef-a514-abe734acd933')} />
 
               <Session
-                fromProposal={this.getProposal('d42405d7-9413-dd17-809b-48d47b64eef5')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('d42405d7-9413-dd17-809b-48d47b64eef5')} />
 
               <Session
-                fromProposal={this.getProposal('e1230b05-1e24-4f66-cdf2-adc50f73c55e')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('e1230b05-1e24-4f66-cdf2-adc50f73c55e')} />
             </TimeSlot>
 
             <TimeSlot time='17:40'>
@@ -449,6 +477,7 @@ class Schedule extends Component {
 
             <TimeSlot time='10:00'>
               <Session
+                dispatch={dispatch}
                 title='Welcome + Keynote'
                 fromProposal={this.getProposal('03430616-cc38-4381-ef47-f2ba4b9867c3')} />
             </TimeSlot>
@@ -459,16 +488,16 @@ class Schedule extends Component {
 
             <TimeSlot time='11:10'>
               <Session
-                fromProposal={this.getProposal('dca9c1fd-b847-6839-c80f-77981ebe157b')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('dca9c1fd-b847-6839-c80f-77981ebe157b')} />
 
               <Session
-                fromProposal={this.getProposal('9faf7ca7-e749-2d32-f19f-8f8f5928efed')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('9faf7ca7-e749-2d32-f19f-8f8f5928efed')} />
 
               <Session
-                fromProposal={this.getProposal('4d01de61-dc1c-beb0-194b-3823ff446ef1')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('4d01de61-dc1c-beb0-194b-3823ff446ef1')} />
             </TimeSlot>
 
             <TimeSlot time='11:50'>
@@ -477,16 +506,16 @@ class Schedule extends Component {
 
             <TimeSlot time='12:00'>
               <Session
-                fromProposal={this.getProposal('00a9fa70-cd08-191e-a13f-091a74732178')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('00a9fa70-cd08-191e-a13f-091a74732178')} />
 
               <Session
-                fromProposal={this.getProposal('79ab3edd-860e-ccac-15d2-9e9d84958b7d')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('79ab3edd-860e-ccac-15d2-9e9d84958b7d')} />
 
               <Session
-                fromProposal={this.getProposal('b49d88c3-a346-8580-f32f-c0f0995e829f')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('b49d88c3-a346-8580-f32f-c0f0995e829f')} />
             </TimeSlot>
 
             <TimeSlot time='12:40'>
@@ -495,6 +524,7 @@ class Schedule extends Component {
 
             <TimeSlot time='13:40'>
               <GroupedSession
+                dispatch={dispatch}
                 title='Lightning Talks'
                 fromProposals={this.getProposals([
                   '6889b59a-c832-a2d9-a77c-86e7fb4bbda8',
@@ -503,16 +533,13 @@ class Schedule extends Component {
                   'c145ca50-ba54-2238-b256-d253a90fd547',
                   '9fc853de-8503-20da-ec68-98eee1cb046d',
                   '76be4439-4190-89cf-983c-715c1082cf7d'
-                ])}
-                expanded={false} />
+                ])} />
 
               <Session
-                title=''
-                expanded={false} />
+                title='' />
 
               <Session
-                title=''
-                expanded={false} />
+                title='' />
             </TimeSlot>
 
             <TimeSlot time='14:20'>
@@ -521,16 +548,16 @@ class Schedule extends Component {
 
             <TimeSlot time='14:30'>
               <Session
-                fromProposal={this.getProposal('49e134d7-71a7-2a6c-a736-acc7886d628b')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('49e134d7-71a7-2a6c-a736-acc7886d628b')} />
 
               <Session
-                fromProposal={this.getProposal('17c7ad9d-8e74-3dbd-b98d-bf08711ba067')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('17c7ad9d-8e74-3dbd-b98d-bf08711ba067')} />
 
               <Session
-                fromProposal={this.getProposal('ddffb679-7379-875d-be34-5229baca2104')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('ddffb679-7379-875d-be34-5229baca2104')} />
             </TimeSlot>
 
             <TimeSlot time='15:00'>
@@ -539,22 +566,21 @@ class Schedule extends Component {
 
             <TimeSlot time='15:10'>
               <GroupedSession
+                dispatch={dispatch}
                 title='Open Source Israel'
                 fromProposals={this.getProposals([
                   'bc845832-7415-cdb9-3f58-6638e3f3e187',
                   '235320b6-6145-5bbb-3f49-8dc54066f496',
                   '750bb2f3-066f-1fc3-f0b9-76074bc217ea',
                   '9656687f-2329-7e80-6e09-fcca29a48be6'
-                ])}
-                expanded={false} />
+                ])} />
 
               <Session
-                title=''
-                expanded={false} />
+                title='' />
 
               <Session
-                fromProposal={this.getProposal('366e5777-d273-dde2-94f8-3248a3cdacbb')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('366e5777-d273-dde2-94f8-3248a3cdacbb')} />
             </TimeSlot>
 
             <TimeSlot time='15:50'>
@@ -563,16 +589,16 @@ class Schedule extends Component {
 
             <TimeSlot time='16:10'>
               <Session
-                fromProposal={this.getProposal('fe55ef2c-0beb-e5c1-f3b5-eac89fcb2ea7')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('fe55ef2c-0beb-e5c1-f3b5-eac89fcb2ea7')} />
 
               <Session
-                fromProposal={this.getProposal('ceb637ef-bce8-d099-411f-37f0b69a4e9a')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('ceb637ef-bce8-d099-411f-37f0b69a4e9a')} />
 
               <Session
-                fromProposal={this.getProposal('de7ad17c-eb2d-906c-5e69-5fe43f481f95')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('de7ad17c-eb2d-906c-5e69-5fe43f481f95')} />
             </TimeSlot>
 
             <TimeSlot time='16:50'>
@@ -581,16 +607,16 @@ class Schedule extends Component {
 
             <TimeSlot time='17:00'>
               <Session
-                fromProposal={this.getProposal('b2fcd845-f7c7-e10f-d061-c74a5fbf7129')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('b2fcd845-f7c7-e10f-d061-c74a5fbf7129')} />
 
               <Session
-                fromProposal={this.getProposal('9253832a-4869-4d15-2faf-33d5ea74cea9')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('9253832a-4869-4d15-2faf-33d5ea74cea9')} />
 
               <Session
-                fromProposal={this.getProposal('82d5147e-3d89-967d-2d13-b4bf2bf78da3')}
-                expanded={false} />
+                dispatch={dispatch}
+                fromProposal={this.getProposal('82d5147e-3d89-967d-2d13-b4bf2bf78da3')} />
             </TimeSlot>
 
             <TimeSlot time='17:40'>
@@ -614,4 +640,15 @@ class Schedule extends Component {
   }
 }
 
-export default Schedule;
+
+Schedule.propTypes = {
+  user: PropTypes.object,
+  acceptedProposals: PropTypes.array
+};
+
+function mapStateToProps(state) {
+    return {
+    };
+}
+
+export default connect(mapStateToProps)(Schedule);

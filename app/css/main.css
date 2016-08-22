@@ -310,11 +310,30 @@ ul.with-bullets ul {
   transition: opacity 300ms ease-in;
 }
 
-.full-talk {
-  clear: both;
-  display: flex;
+@media(min-width: 992px) {
+  .full-talk {
+    clear: both;
+    display: flex;
+  }
+
+  .full-talks-container {
+    display: flex;
+  }
 }
 
-.full-talks-container {
-  display: flex;
+@media(max-width: 767px) {
+  .nav.days-nav {
+    position: relative;
+    box-shadow: none;
+    z-index: 0;
+  }
+
+  .nav.days-nav > li {
+    float: left;
+    width: 50%;
+  }
+
+  .nav.days-nav > li * {
+    text-align: center;
+  }
 }
