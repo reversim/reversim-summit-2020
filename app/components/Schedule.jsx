@@ -59,7 +59,11 @@ class GroupedSession extends Component {
 
     let sessions = (fromProposals || []).map((session, i) => {
       return (
-        <li key={i} className={cx('grouped-session')}><a href='#' className={cx({'active': session.id === activeSession})} onClick={this.togglePreview(session).bind(this)}>{session.title}</a></li>
+        <li key={i} className={cx('grouped-session')}>
+          <a href='#' className={cx({'active': session.id === activeSession})} onClick={this.togglePreview(session).bind(this)}>{session.title}</a>
+          <br />
+          <strong className={cx('highlight', 'speaker-name')}>{((session && session.speaker_ids && session.speaker_ids.map(s => s.name)) || []).join(', ')}</strong>
+        </li>
       );
     })
 
@@ -97,13 +101,13 @@ class Session extends Component {
   render() {
     let { title, speakers, fromProposal, togglePreview, activeSession } = this.props;
 
-    if (fromProposal) {
+    if (fromProposal && fromProposal.speaker_ids) {
       title = title !== undefined ?  `${title}: ${fromProposal.title}` : fromProposal.title;
       speakers = fromProposal.speaker_ids.map(s => s.name)
     }
 
     let speakerInfo;
-    if (fromProposal && fromProposal.speaker_ids && fromProposal.speaker_ids.length > 0) {
+    if (speakers) {
       speakerInfo =
         <strong className={cx('highlight', 'speaker-name')}>{(speakers || []).join(', ')}</strong>
     }
@@ -287,7 +291,9 @@ class Schedule extends Component {
   getProposals(ids) {
     if (this.props.acceptedProposals === undefined) return null;
 
-    return this.props.acceptedProposals.filter(p => ids.indexOf(p.id) !== -1);
+    return ids.map(id => this.props.acceptedProposals[this.props.acceptedProposals.findIndex(proposal => proposal.id === id)]);
+
+    // return this.props.acceptedProposals.filter(p => ids.indexOf(p.id) !== -1);
   }
 
   render() {
@@ -310,7 +316,7 @@ class Schedule extends Component {
 
           <Day active={this.isDayActive(1)}>
             <TimeSlot time='08:00'>
-              <Session title='Registration' />
+              <Session dispatch={dispatch} title='Registration' />
             </TimeSlot>
 
             <TimeSlot time='10:00'>
@@ -321,7 +327,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='10:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='11:10'>
@@ -339,7 +345,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='11:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='12:00'>
@@ -357,7 +363,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='12:40'>
-              <Session title='Lunch' />
+              <Session dispatch={dispatch} title='Lunch' />
             </TimeSlot>
 
             <TimeSlot time='13:40'>
@@ -365,23 +371,25 @@ class Schedule extends Component {
                 dispatch={dispatch}
                 title='Lightning Talks'
                 fromProposals={this.getProposals([
+                  'd4a93e38-e9d6-fa63-8fd3-35b09aff5c04',
+                  '84fed3e0-843a-6549-d0fd-647f07d660b5',
+                  '623d431b-0a8a-af0a-cc5c-7ab9a686e570',
                   '376b38bb-52fa-ead7-2b81-19b2a3281182',
                   '88ca8cc1-3d3f-492a-ddb8-c841fc3362ba',
-                  '623d431b-0a8a-af0a-cc5c-7ab9a686e570',
                   '3c3ef8e4-8593-2b5c-0df1-9946d6dcb3b2',
-                  '84fed3e0-843a-6549-d0fd-647f07d660b5',
-                  'd4a93e38-e9d6-fa63-8fd3-35b09aff5c04'
                 ])} />
 
               <Session
+                dispatch={dispatch}
                 title='' />
 
               <Session
+                dispatch={dispatch}
                 title='' />
             </TimeSlot>
 
             <TimeSlot time='14:20'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='14:30'>
@@ -399,7 +407,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='15:00'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='15:10'>
@@ -408,12 +416,13 @@ class Schedule extends Component {
                 title='Open Source Israel'
                 fromProposals={this.getProposals([
                   'a7234211-4edc-d6fb-ee8d-181f210d63b2',
-                  'afce4ef2-e1d5-b170-db6d-e69df4d327ed',
                   '0c6e6c08-50c1-1923-257f-ce420fbe3e2e',
+                  'afce4ef2-e1d5-b170-db6d-e69df4d327ed',
                   '0f686920-ef11-f26a-b55b-532f703485f7'
                 ])} />
 
               <Session
+                dispatch={dispatch}
                 title='' />
 
               <Session
@@ -422,7 +431,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='15:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='16:10'>
@@ -440,7 +449,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='16:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='17:00'>
@@ -458,21 +467,21 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='17:40'>
-              <Session title='Beer Break' />
+              <Session dispatch={dispatch} title='TBD' />
             </TimeSlot>
 
             <TimeSlot time='18:00'>
-              <Session title='Special Show' />
+              <Session dispatch={dispatch} title='Special Show' />
             </TimeSlot>
 
             <TimeSlot time='19:00'>
-              <Session title='Goodbye' />
+              <Session dispatch={dispatch} title='Goodbye' />
             </TimeSlot>
           </Day>
 
           <Day active={this.isDayActive(2)}>
             <TimeSlot time='08:00'>
-              <Session title='Registration' />
+              <Session dispatch={dispatch} title='Registration' />
             </TimeSlot>
 
             <TimeSlot time='10:00'>
@@ -483,7 +492,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='10:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='11:10'>
@@ -497,11 +506,11 @@ class Schedule extends Component {
 
               <Session
                 dispatch={dispatch}
-                fromProposal={this.getProposal('4d01de61-dc1c-beb0-194b-3823ff446ef1')} />
+                fromProposal={this.getProposal('b49d88c3-a346-8580-f32f-c0f0995e829f')} />
             </TimeSlot>
 
             <TimeSlot time='11:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='12:00'>
@@ -515,11 +524,11 @@ class Schedule extends Component {
 
               <Session
                 dispatch={dispatch}
-                fromProposal={this.getProposal('b49d88c3-a346-8580-f32f-c0f0995e829f')} />
+                fromProposal={this.getProposal('4d01de61-dc1c-beb0-194b-3823ff446ef1')} />
             </TimeSlot>
 
             <TimeSlot time='12:40'>
-              <Session title='Lunch' />
+              <Session dispatch={dispatch} title='Lunch' />
             </TimeSlot>
 
             <TimeSlot time='13:40'>
@@ -527,23 +536,25 @@ class Schedule extends Component {
                 dispatch={dispatch}
                 title='Lightning Talks'
                 fromProposals={this.getProposals([
-                  '6889b59a-c832-a2d9-a77c-86e7fb4bbda8',
                   'b8cdb69a-a176-044a-88f6-bb67e8c36964',
                   '525504a6-d694-a0eb-f112-02b88e661ccc',
+                  '6889b59a-c832-a2d9-a77c-86e7fb4bbda8',
                   'c145ca50-ba54-2238-b256-d253a90fd547',
-                  '9fc853de-8503-20da-ec68-98eee1cb046d',
-                  '76be4439-4190-89cf-983c-715c1082cf7d'
+                  '76be4439-4190-89cf-983c-715c1082cf7d',
+                  '9fc853de-8503-20da-ec68-98eee1cb046d'
                 ])} />
 
               <Session
+                dispatch={dispatch}
                 title='' />
 
               <Session
+                dispatch={dispatch}
                 title='' />
             </TimeSlot>
 
             <TimeSlot time='14:20'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='14:30'>
@@ -561,7 +572,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='15:00'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='15:10'>
@@ -569,22 +580,23 @@ class Schedule extends Component {
                 dispatch={dispatch}
                 title='Open Source Israel'
                 fromProposals={this.getProposals([
-                  'bc845832-7415-cdb9-3f58-6638e3f3e187',
+                  '9656687f-2329-7e80-6e09-fcca29a48be6',
                   '235320b6-6145-5bbb-3f49-8dc54066f496',
+                  'bc845832-7415-cdb9-3f58-6638e3f3e187',
                   '750bb2f3-066f-1fc3-f0b9-76074bc217ea',
-                  '9656687f-2329-7e80-6e09-fcca29a48be6'
                 ])} />
 
               <Session
+                dispatch={dispatch}
                 title='' />
 
               <Session
                 dispatch={dispatch}
-                fromProposal={this.getProposal('366e5777-d273-dde2-94f8-3248a3cdacbb')} />
+                fromProposal={this.getProposal('46721c9e-726c-dcd8-d89e-b6199345ea69')} />
             </TimeSlot>
 
             <TimeSlot time='15:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='16:10'>
@@ -602,7 +614,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='16:50'>
-              <Session title='Break' />
+              <Session dispatch={dispatch} title='Break' />
             </TimeSlot>
 
             <TimeSlot time='17:00'>
@@ -620,15 +632,15 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='17:40'>
-              <Session title='Beer Break' />
+              <Session dispatch={dispatch} title='TBD' />
             </TimeSlot>
 
             <TimeSlot time='18:00'>
-              <Session title='Hall of Shame' />
+              <Session dispatch={dispatch} title='Hall of Shame' />
             </TimeSlot>
 
             <TimeSlot time='19:00'>
-              <Session title='Goodbye' />
+              <Session dispatch={dispatch} title='Goodbye' />
             </TimeSlot>
           </Day>
 

@@ -6,6 +6,6 @@ export default {
   networking: true,
   recommendations: true,
   editAcceptedProposals: true,
-  publishAgenda: false,
+  publishAgenda: true,
   startRegistration: false
 }

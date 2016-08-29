@@ -105,7 +105,7 @@ class Home extends Component {
                               <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
                               <h5 className={cx('base-font')}>
                                 {features('publishAgenda', false) ?
-                                  ''
+                                  'Agenda was Published!'
                                   : 'Call for papers is now ' + (features('submission', false) ? 'open!' : 'closed')
                                 }
                               </h5>

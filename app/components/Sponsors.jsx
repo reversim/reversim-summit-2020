@@ -18,6 +18,7 @@ import fiverrLogo from 'images/sponsors/fiverr.png';
 import similarWebLogo from 'images/sponsors/similarWeb.png';
 import facebookLogo from 'images/sponsors/facebook.png';
 import akamaiLogo from 'images/sponsors/akamai.png';
+import oracleLogo from 'images/sponsors/oracle-ravello.png';
 
 const cx = classNames.bind(styles);
 
@@ -165,6 +166,17 @@ export default class Sponsors extends Component {
         description: 'Founded in 2004, Facebook’s mission is to give people the power to share and make the world more open and connected. People use Facebook to stay connected with friends and family, do discover what’s going on in the world, and to share and express what matters to them.',
         featuredJobInfo: 'We are currently building our engineering team here at Tel Aviv and looking for the best people to join us. We work on some of the most interesting and important company initiatives to make the world more open and connected. Just an example: we develop internet.org and providing billions of users, mainly in developing countries, an available and affordable connection to the internet.',
         featuredJobLink: 'https://www.facebook.com/careers/locations/tel-aviv'
+      }
+    },
+    {
+      name: 'Oracle Ravello',
+      logo: oracleLogo,
+      url: 'https://www.ravellosystems.com',
+      info: {
+        height: 300,
+        description: 'At Oracle Ravello we develop a cutting edge cloud virtualization service - enabling *any* workload to run in *any* cloud.',
+        featuredJobInfo: 'At Oracle\'s Ravello we work on extremely diverse technologies, by a very small team. From the bits and bytes of the x86 architecture, through virtualization and operating systems internals, networking and storage, and all the way up to highly scalable and resilient SaaS backend and frontend and all the required infrastructure to operate it - we have it all. We value professionalism and responsibility, being a team player and you owning your features and components all the way from inception to production.',
+        featuredJobLink: 'https://www.ravellosystems.com/jobs'
       }
     },
   ]).concat(_.shuffle([
