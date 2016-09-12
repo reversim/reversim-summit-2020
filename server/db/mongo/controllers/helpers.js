@@ -3,15 +3,21 @@ import users from './users';
 import proposals from './proposals';
 import _ from 'lodash';
 
-export function transformUser(user, isReversimMember) {
+function isReversimTeamMember(loggedInUser) {
+  return loggedInUser && loggedInUser.isReversimTeamMember;
+}
+
+export function transformUser(user, loggedInUser, overrideDetails) {
   if (user._doc) {
     user = user._doc;
   }
 
+  let isReversimMember = overrideDetails || isReversimTeamMember(loggedInUser);
+
   if (_.isObject(user) && _.has(user, 'profile')) {
     return {
       _id: user._id,
-      proposals: user.proposals && user.proposals.map(transformProposal),
+      proposals: user.proposals && user.proposals.map(p => transformProposal(p, loggedInUser, overrideDetails)),
       name: user.profile && user.profile.name,
       oneLiner: user.profile && user.profile.oneLiner,
       email: isReversimMember && user.email,
@@ -32,7 +38,7 @@ export function transformUser(user, isReversimMember) {
 export function transformProposal(proposal, loggedInUser, overrideDetails) {
 
   if (_.isObject(proposal)) {
-    let isReversimMember = overrideDetails || (loggedInUser && loggedInUser.isReversimTeamMember);
+    let isReversimMember = overrideDetails || isReversimTeamMember(loggedInUser);
 
     return {
       id: proposal.id,
@@ -42,7 +48,7 @@ export function transformProposal(proposal, loggedInUser, overrideDetails) {
       tags: proposal.tags,
       status: proposal.status,
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
-        return transformUser(user, isReversimMember);
+        return transformUser(user, loggedInUser, overrideDetails);
       }),
       startTime: proposal.startTime,
       endTime: proposal.endTime,

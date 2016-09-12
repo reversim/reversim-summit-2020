@@ -259,7 +259,7 @@ export function speakers(req, res) {
             return res.status(500).send('Something went wrong getting the data');
         }
 
-        let result = _.uniq(_.flatMap(proposals, proposal => proposal.speaker_ids), '_id').map(transformUser);
+        let result = _.uniq(_.flatMap(proposals, proposal => proposal.speaker_ids), '_id').map(u => transformUser(u, req.user));
 
         return res.json(result);
     });

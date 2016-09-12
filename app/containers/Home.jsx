@@ -91,6 +91,15 @@ class Home extends Component {
           leftButton = <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>;
         }
 
+        let buttonsMsg;
+        if (features('startRegistration', false)) {
+          buttonsMsg = 'Tickets for Reversim Summit 2016 are available!'
+        } else if (features('publishAgenda', false)) {
+          buttonsMsg = 'Agenda was Published!';
+        } else {
+          buttonsMsg = 'Call for papers is now ' + (features('submission', false) ? 'open!' : 'closed')
+        }
+
         return (
           <StickyContainer>
               <div className={cx('home')}>
@@ -104,10 +113,7 @@ class Home extends Component {
                               <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>19-20.sep <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>Weizmann Institute of Science</h5>
                               <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
                               <h5 className={cx('base-font')}>
-                                {features('publishAgenda', false) ?
-                                  'Agenda was Published!'
-                                  : 'Call for papers is now ' + (features('submission', false) ? 'open!' : 'closed')
-                                }
+                                {buttonsMsg}
                               </h5>
                               <div className={cx('btns-container')}>
                                 {leftButton} {rightButton}

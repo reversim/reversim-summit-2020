@@ -65,7 +65,7 @@ export default class Sponsors extends Component {
       info: {
         height: 400,
         description: 'AppsFlyer is the leading mobile attribution and analytics platform, enabling app marketers and brands measure their user accusition, in-app user engagement tracking, lifetime value analysis, ROI and retargeting attribution.',
-        featuredJobInfo: 'If you have passion to big data processing, this is the place for you. Come to play around with more than 8 billion events per day in real-time and batch, using Spark, Mesos, Memsql, Druid and Kafka. New systems and technologies, architecture changes and data insights are part of the daily work in this team.',
+        featuredJobInfo: 'If you have passion to BigData processing, this is the place for you. Come to play around with more than 8 billion events per day in real-time and batch, using Spark, Mesos, Memsql, Druid and Kafka. New systems and technologies, architecture changes and data insights are part of the daily work in this team.',
         featuredJobLink: 'https://www.appsflyer.com/jobs/senior-data-developer/'
       }
     },
@@ -98,7 +98,7 @@ export default class Sponsors extends Component {
       info: {
         height: 300,
         description: 'At MyHeritage, we bring together incredibly bright minds, and all the newest technologies and languages. The result is a culture of constant innovation. With 82 million users, 28 million family trees, and 6.8 billion records, as an engineer at MyHeritage, you’ll overcome exciting scale challenges to build a line of products with massive global impact.',
-        featuredJobInfo: 'Are you obsessed with performance and scale challenges? Do you lose hours of sleep thinking about how to reduce ten milliseconds from an SQL query? If you’re looking for challenges with server solutions and running cutting-edge NoSQL big data architecture, then look no further. Our complex environment of over 2.6 billion individual profiles, and over 6 billion historical records, will ensure that you’ll help solve big data challenges (using Hadoop, Cassandra, and other NoSQL solutions) while working in continuous integration and deployment. We\'re growing fast and have opportunities for DevOps experts, Backend and Frontend developers. Join us - Make history!',
+        featuredJobInfo: 'Are you obsessed with performance and scale challenges? Do you lose hours of sleep thinking about how to reduce ten milliseconds from an SQL query? If you’re looking for challenges with server solutions and running cutting-edge NoSQL BigData architecture, then look no further. Our complex environment of over 2.6 billion individual profiles, and over 6 billion historical records, will ensure that you’ll help solve BigData challenges (using Hadoop, Cassandra, and other NoSQL solutions) while working in continuous integration and deployment. We\'re growing fast and have opportunities for DevOps experts, Backend and Frontend developers. Join us - Make history!',
         featuredJobLink: 'http://grnh.se/18ochs'
       }
     },
@@ -109,7 +109,7 @@ export default class Sponsors extends Component {
       info: {
         height: 300,
         description: 'Founded in 2010 with offices in New York City, Chicago, Miami, San Francisco and Tel Aviv, Fiverr® is the world\'s most transacted marketplace for digital services. Fiverr is shaping the future of work, every day, by shifting the freelance economy online.',
-        featuredJobInfo: 'Labs SW Engineer- The labs team is responsible for the evolution of Fiverr\'s Infrastructure toolset, architecture, innovation and Big Data. We are looking for a  talented Software Engineer, with a positive "sure! I can do that." attitude to join our Labs Engineering team. Fiverr\'s mission is to disrupt the freelance industry and you will play a major part in the architecture, design and implementation of our application platform.',
+        featuredJobInfo: 'Labs SW Engineer- The labs team is responsible for the evolution of Fiverr\'s Infrastructure toolset, architecture, innovation and BigData. We are looking for a  talented Software Engineer, with a positive "sure! I can do that." attitude to join our Labs Engineering team. Fiverr\'s mission is to disrupt the freelance industry and you will play a major part in the architecture, design and implementation of our application platform.',
         featuredJobLink: 'https://www.fiverr.com/jobs/544'
       }
     },
@@ -179,13 +179,19 @@ export default class Sponsors extends Component {
         featuredJobLink: 'https://www.ravellosystems.com/jobs'
       }
     },
-  ]).concat(_.shuffle([
-    // Add sponsors here
     {
       name: 'Akamai',
       logo: akamaiLogo,
-      url: 'http://www.akamai.com'
-    }
+      url: 'http://www.akamai.com',
+      info: {
+        height: 300,
+        description: 'Akamai is the global leader in Content Delivery Network (CDN) services, making the Internet business ready—fast, reliable, and secure—for its customers. We operate the most pervasive, highly distributed CDN—with more than 200,000 servers in 110 or more countries—delivering up to 30% of all Web traffic.',
+        featuredJobInfo: 'We\'re currently looking for software engineers and test/automation engineers with strong Java background to join our web and cloud security teams! As a part of these teams, you\'ll be working on innovating and developing new and groundbreaking Security and BigData products in the largest scales.',
+        featuredJobLink: 'https://akamaijobs.referrals.selectminds.com/via/MichalF-39kEz/jobs/search/123169'
+      }
+    },
+  ]).concat(_.shuffle([
+    // Add sponsors here
   ]));
 
   openSponsorModal(info) {

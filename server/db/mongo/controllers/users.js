@@ -116,7 +116,7 @@ export function getReversimTeam(req, res) {
           return res.status(500).send('Something went wrong');
         }
 
-        return res.json(users.map(transformUser));
+        return res.json(users.map(u => transformUser(u, req.user)));
     });
 }
 
@@ -133,7 +133,7 @@ export function getProposals(req, res) {
             return res.status(500).send('Something went wrong');
           }
 
-          return res.json(user.proposals.map(transformProposal));
+          return res.json(user.proposals.map(p => transformProposal(p, req.user)));
       });
     } else {
       return res.status(500).send('Something went wrong getting the data');

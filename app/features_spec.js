@@ -2,10 +2,10 @@ export default {
   submission: false,
   voting: false,
   tagging: true,
-  proposalsPageGroupedByTags: false,
+  proposalsPageGroupedByTags: true,
   networking: true,
   recommendations: true,
   editAcceptedProposals: true,
   publishAgenda: true,
-  startRegistration: false
+  startRegistration: true
 }
