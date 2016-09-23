@@ -301,6 +301,9 @@ class Schedule extends Component {
 
     return (
       <div className={cx('row', 'schedule')}>
+        <div style={{marginBottom: 20}}>
+          <a href='https://www.google.com/calendar/render?cid=NXRwMG82YWlsNGY3a25mN3ZqdjNjamhsZ2NAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ' className={cx('btn', 'btn-sm', 'btn-outline-clr')}>Add to your Google calendar</a>
+        </div>
 
         <ul className={cx('nav', 'nav-schedule', 'days-nav')}>
           <li className={cx({"active": this.isDayActive(1)})}><a href="#" onClick={this.changeDay.bind(this)(1)}><h5 className={cx("highlight")}>Day 1</h5><p className={cx("text-alt")}>19/09/2016</p></a></li>
@@ -373,7 +376,7 @@ class Schedule extends Component {
                 fromProposals={this.getProposals([
                   'd4a93e38-e9d6-fa63-8fd3-35b09aff5c04',
                   '84fed3e0-843a-6549-d0fd-647f07d660b5',
-                  '623d431b-0a8a-af0a-cc5c-7ab9a686e570',
+                  '525504a6-d694-a0eb-f112-02b88e661ccc',
                   '376b38bb-52fa-ead7-2b81-19b2a3281182',
                   '88ca8cc1-3d3f-492a-ddb8-c841fc3362ba',
                   '3c3ef8e4-8593-2b5c-0df1-9946d6dcb3b2',
@@ -471,7 +474,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='18:00'>
-              <Session dispatch={dispatch} title='Special Show' />
+              <Session dispatch={dispatch} fromProposal={this.getProposal('ee7df39b-fc25-e5b8-33b0-37772188c3ce')} />
             </TimeSlot>
 
             <TimeSlot time='19:00'>
@@ -537,7 +540,7 @@ class Schedule extends Component {
                 title='Lightning Talks'
                 fromProposals={this.getProposals([
                   'b8cdb69a-a176-044a-88f6-bb67e8c36964',
-                  '525504a6-d694-a0eb-f112-02b88e661ccc',
+                  '623d431b-0a8a-af0a-cc5c-7ab9a686e570',
                   '6889b59a-c832-a2d9-a77c-86e7fb4bbda8',
                   'c145ca50-ba54-2238-b256-d253a90fd547',
                   '76be4439-4190-89cf-983c-715c1082cf7d',
@@ -632,7 +635,7 @@ class Schedule extends Component {
             </TimeSlot>
 
             <TimeSlot time='17:40'>
-              <Session dispatch={dispatch} title='TBD' />
+              <Session dispatch={dispatch} title='Pizza & Beer Break' />
             </TimeSlot>
 
             <TimeSlot time='18:00'>

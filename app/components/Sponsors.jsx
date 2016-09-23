@@ -19,6 +19,7 @@ import similarWebLogo from 'images/sponsors/similarWeb.png';
 import facebookLogo from 'images/sponsors/facebook.png';
 import akamaiLogo from 'images/sponsors/akamai.png';
 import oracleLogo from 'images/sponsors/oracle-ravello.png';
+import vonageLogo from 'images/sponsors/vonage.png';
 
 const cx = classNames.bind(styles);
 
@@ -190,6 +191,17 @@ export default class Sponsors extends Component {
         featuredJobLink: 'https://akamaijobs.referrals.selectminds.com/via/MichalF-39kEz/jobs/search/123169'
       }
     },
+    {
+      name: 'Vonage',
+      logo: vonageLogo,
+      url: 'http://www.joinvonage-il.com/',
+      info: {
+        height: 300,
+        description: 'A leading provider of cloud communications services for consumers and businesses.',
+        featuredJobInfo: 'Looking for a senior backend engineer, to be the architect, designer, and coder of unified communication platforms that serve millions of users, mainly in Java and using the latest technologies such as: AWS, Terraform, micro-service architecture, MongoDB, and Docker.',
+        featuredJobLink: 'http://www.joinvonage-il.com/senior-backend-engineer'
+      }
+    }
   ]).concat(_.shuffle([
     // Add sponsors here
   ]));

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Navigation from 'components/Navigation';
 import About from 'components/About';
+import Messages from 'components/Messages';
 import Speakers from 'components/Speakers';
 import Networking from 'components/Networking';
 import Timeline from 'components/Timeline';
@@ -126,6 +127,10 @@ class Home extends Component {
                       <Navigation currentPath={this.props.location.pathname} />
                   </Sticky>
 
+                  <Element name="messages" ref="messages">
+                    <Messages />
+                  </Element>
+
                   <Element name="about" ref="about">
                     <About />
                   </Element>
@@ -185,10 +190,10 @@ class Home extends Component {
 
               <Rodal  visible={this.state.isRegistrationModalOpen}
                       width={700}
-                      height={700}
+                      height={400}
                       onClose={this.closeRegistrationModal.bind(this)}>
                 <div style={ {width: '100%', textAlign: 'left'} }>
-                  <iframe  src="//eventbrite.com/tickets-external?eid=26992112134&ref=etckt" frameborder="0" height="201" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
+                  <iframe  src="//eventbrite.com/tickets-external?eid=26992112134&ref=etckt" frameborder="0" height="400" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
                 </div>
               </Rodal>
           </StickyContainer>
