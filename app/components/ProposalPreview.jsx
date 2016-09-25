@@ -109,7 +109,7 @@ export default class ProposalPreview extends Component {
                     { proposal.status === 'accepted' && proposal.startTime !== undefined ? (
                       <strong style={{marginBottom: 20}}>{ moment(proposal.startTime).format("dddd, MMM Do, HH:mm") + '  //  ' } { proposal.hall !== undefined ? proposal.hall : undefined }</strong>
                     ) : undefined }
-                  { features('proposalsPageGroupedByTags') ? <p><small><Link to={`/session/${proposal.id}`} className={cx('small')}>Permalink</Link></small></p> : undefined }
+                  { features('proposalsPageGroupedByTags') && <p><small><Link to={`/session/${proposal.id}`} className={cx('small')}>Permalink</Link></small></p> }
                   </div>
                 </div>
                 <div className={cx('row')}>

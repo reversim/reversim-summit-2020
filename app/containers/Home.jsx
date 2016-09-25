@@ -80,9 +80,15 @@ class Home extends Component {
         this.jumpToLocation();
 
         let leftButton, rightButton;
-        rightButton = <ScrollLink to={ features('publishAgenda', false) ? 'schedule' : 'timeline' } className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-50} duration={500}>VIEW SCHEDULE</ScrollLink>;
+        if (features('viewSlides', false)) {
+          rightButton = <Link to="schedule" className={cx('btn', 'btn-outline')}>SLIDES</Link>;
+        } else {
+          rightButton = <ScrollLink to={ features('publishAgenda', false) ? 'schedule' : 'timeline' } className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-50} duration={500}>VIEW SCHEDULE</ScrollLink>;
+        }
 
-        if (features('startRegistration', false)) {
+        if (features('viewSlides', false)) {
+          leftButton = <a href="#" className={cx('btn')}>VIDEOS (SOON)</a>;
+        } else if (features('startRegistration', false)) {
           leftButton = <a href="#" onClick={this.startRegistrationModal.bind(this)} className={cx('btn')}>GET TICKETS</a>;
         } else if (features('publishAgenda', false)) {
           leftButton = <ScrollLink to='register' className={cx('btn')} spy={true} smooth={true} offset={-80} duration={500}>REGISTER</ScrollLink>;;
@@ -93,7 +99,9 @@ class Home extends Component {
         }
 
         let buttonsMsg;
-        if (features('startRegistration', false)) {
+        if (features('viewSlides', false)) {
+          buttonsMsg = 'The summit is over. Thanks to all the participants! See you in Reversim Summit 2017!'
+        } else if (features('startRegistration', false)) {
           buttonsMsg = 'Tickets for Reversim Summit 2016 are available!'
         } else if (features('publishAgenda', false)) {
           buttonsMsg = 'Agenda was Published!';

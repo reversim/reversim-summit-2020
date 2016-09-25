@@ -63,7 +63,7 @@ class Session extends Component {
     }
 
     previewSession() {
-      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids, status, hall, startTime, endTime }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
+      const { currentProposal: { title, abstract, type, attended, tags, speaker_ids, status, hall, startTime, endTime, slides_gdrive_id, video_url }, user: { id, authenticated, isReversimTeamMember }, location } = this.props;
 
       let proposalType;
       if (type === 'ossil') {
@@ -99,7 +99,7 @@ class Session extends Component {
       }
 
       let voting;
-      if (features('voting', false) && speaker_ids) {
+      if (speaker_ids) {
         if (this.props.currentProposal.status === 'archived') {
           voting =
             <div className={cx("row", "h7")} style={ {margin: '30px 0'} }>
@@ -118,6 +118,16 @@ class Session extends Component {
         sessionInfo = <strong>{ startTime !== undefined ? moment(startTime).format("dddd, MMM Do, HH:mm") + '  //  ' : undefined } { hall !== undefined ? hall : undefined }</strong>
       }
 
+      let video;
+      if (video_url && video_url.trim().length > 0) {
+        video = <div style={{marginTop: 40, marginBottom: 40}}><iframe width="600" height="315" src={video_url} frameborder="0" allowfullscreen></iframe></div>
+      }
+
+      let slides;
+      if (slides_gdrive_id && slides_gdrive_id.trim().length > 0) {
+        slides = <div style={{marginTop: 40, marginBottom: 40}}><iframe src={`https://docs.google.com/viewer?srcid=${slides_gdrive_id}&pid=explorer&efh=false&a=v&chrome=false&embedded=true`} width="600" height="480"></iframe></div>
+      }
+
       return (
         <div>
           <div style={{marginBottom: 20}}>
@@ -127,10 +137,12 @@ class Session extends Component {
           </div>
           <ReactMarkdown source={abstract || ''} className={cx("markdown-block")} />
           { speakerTrackRecord }
-          { voting }
+          { features('voting', false) && voting }
           { action }
+          { features('viewSlides', false) && video }
+          { features('viewSlides', false) && slides }
           { canUseDom() ? <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} /> : undefined }
-          { features('recommendations', false) ? <Recommender id={this.props.currentProposal.id} /> : undefined }
+          { features('recommendations', false) && <Recommender id={this.props.currentProposal.id} /> }
         </div>
       );
     }
