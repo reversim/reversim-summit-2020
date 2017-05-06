@@ -32,6 +32,7 @@ var commonLoaders = [
 ];
 
 module.exports = {
+    devtool: 'eval',
     // The configuration for the server-side rendering
     name: "server-side rendering",
     context: path.join(__dirname, "..", "app"),
