@@ -1,8 +1,8 @@
 {
   "name": "react-webpack-node",
-  "version": "1.7.10",
-  "description": "A simple Node.js app using Express 4 with Webpack, React, alt, ImmutableJS",
-  "repository": "https://github.com/choonkending/react-webpack-node",
+  "version": "1.0.0",
+  "description": "Website for reversim summit 2017 http://summit2017.reversim.com",
+  "repository": "https://github.com/rantav/reversim-summit-2017",
   "main": "index.js",
   "scripts": {
     "babel": "babel --presets es2015,stage-0 --ignore node_modules,public",
@@ -14,11 +14,11 @@
     "dev": "cross-env NODE_ENV=development nodemon",
     "build:dev": "cross-env NODE_ENV=development webpack --colors --config ./webpack/webpack.config.dev-server.js",
     "build:prod": "cross-env NODE_ENV=production webpack --colors --config ./webpack/webpack.config.prod.js",
-    "build:node": "cross-env NODE_ENV=production npm run babel -- ./server -d ./compiled",
-    "build": "npm run clean && npm run build:prod && npm run build:node",
+    "build:node": "cross-env NODE_ENV=production yarn babel -- ./server -d ./compiled",
+    "build": "yarn clean && yarn build:prod && yarn build:node",
     "test": "cross-env NODE_ENV=test karma start",
-    "test:watch": "cross-env NODE_ENV=test npm test -- --watch --no-single-run",
-    "postinstall": "npm run build"
+    "test:watch": "cross-env NODE_ENV=test yarn test -- --watch --no-single-run",
+    "postinstall": "yarn build"
   },
   "author": "Choon Ken Ding",
   "license": "MIT",
