@@ -14,6 +14,7 @@ const Location = () => {
   return (
     <section id="location">
     		<div className={cx("contacts-wrapper")}>
+					<div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, zIndex: 1 }} onClick={onOverlayClick}></div>
           <LocationMap />
 
     			<div className={cx('container', 'contacts-on-map-container')}>
@@ -39,5 +40,9 @@ const Location = () => {
     	</section>
   );
 };
+
+function onOverlayClick(e) {
+	e.target.style.pointerEvents = 'none';
+}
 
 export default Location;
