@@ -8,3 +8,4 @@ compiled
 .vscode
 env.sh
 .private
+webpack-stats.json
