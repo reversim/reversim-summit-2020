@@ -29,9 +29,11 @@ export default (passport) => {
   * credentials and calls done providing a user, as well
   * as options specifying a client ID, client secret, and callback URL.
   */
-  passport.use(new GoogleStrategy({
-    clientID: google.clientID,
-    clientSecret: google.clientSecret,
-    callbackURL: google.callbackURL
-  }, dbPassport.google));
+  if (google.clientID) {
+    passport.use(new GoogleStrategy({
+      clientID: google.clientID,
+      clientSecret: google.clientSecret,
+      callbackURL: google.callbackURL
+    }, dbPassport.google));
+  }
 };
