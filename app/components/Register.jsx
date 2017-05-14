@@ -14,20 +14,20 @@ const cx = classNames.bind(styles);
 const Register = () => {
   let registrationText, registrationHeader;
   if (features('startRegistration', false)) {
-    registrationHeader = <h2>Get a Ticket for Reversim Summit 2016</h2>;
+    registrationHeader = <h2>Get a Ticket for Reversim Summit 2017</h2>;
 
     registrationText =
       <div>
-        <p>Tickets for Reversim Summit 2016 are available!</p>
+        <p>Tickets for Reversim Summit 2017 are available!</p>
         <p>Join Reversim Summit Google group and stay tuned!</p>
       </div>;
 
   } else {
-    registrationHeader = <h2>Register to Reversim Summit 2016</h2>;
+    registrationHeader = <h2>Register to Reversim Summit 2017</h2>;
 
     registrationText =
       <div>
-        <p>Registration will be opened on mid August.</p>
+        <p>Registration will be opened on mid September.</p>
         <p>Join Reversim Summit Google group and stay tuned!</p>
       </div>;
   }

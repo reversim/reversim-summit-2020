@@ -13,7 +13,7 @@ if (__DEVSERVER__) {
 
 const Meta = ({extraMeta}) => (<Helmet
     htmlAttributes={{"lang": "en", "amp": undefined}}
-    title="Reversim Summit 2016" meta={config.meta.concat(extraMeta || [])}
+    title="Reversim Summit 2017" meta={config.meta.concat(extraMeta || [])}
     link={config.link}
   />
 )

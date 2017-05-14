@@ -64,16 +64,6 @@ class Footer extends Component {
               <img src={reversimLogoFooter} alt="autograph" />
               </div>
             </div>
-
-            <div className={cx('col-md-4', 'col-lg-3', 'col-lg-offset-1')}>
-              <div className={cx('widget', 'twitter-widget')}>
-                <h6 className={cx("widget-head")}><span className={cx('fa', 'fa-twitter')}></span> Twitter Feed</h6>
-
-                <ul className={cx("tweets-list")}>
-                  {tweetElements}
-                </ul>
-              </div>
-            </div>
           </div>
 
           <div className={cx("footer-base")}>
@@ -81,7 +71,7 @@ class Footer extends Component {
 
               <div className={cx("col-md-6")}>
                 <ul className={cx("footer-nav")}>
-                  <li className={cx("footer-nav-item")}><a href="mailto:adam@matan.name">Contact</a></li>
+                  <li className={cx("footer-nav-item")}><a href="mailto:shlomi.hassan@gmail.com">Contact</a></li>
                   <li className={cx("footer-nav-item")}><a href="http://confcodeofconduct.com/">Code of Conduct</a></li>
                 </ul>
               </div>
@@ -92,7 +82,7 @@ class Footer extends Component {
                 <li className={cx("socials-nav-item")}><a href="https://www.facebook.com/groups/806177629478248/"><span className={cx('fa', 'fa-facebook')}></span></a></li>
                 </ul>
 
-                <p className={cx("text-alt")}><small>All Rights Reserved © 2016</small></p>
+                <p className={cx("text-alt")}><small>All Rights Reserved © 2017</small></p>
               </div>
 
             </div>

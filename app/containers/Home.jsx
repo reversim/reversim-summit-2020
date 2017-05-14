@@ -82,6 +82,8 @@ class Home extends Component {
         let leftButton, rightButton;
         if (features('viewSlides', false)) {
           rightButton = <Link to="schedule" className={cx('btn', 'btn-outline')}>SLIDES</Link>;
+        } else if (!features('startRegistration', false)) {
+
         } else {
           rightButton = <ScrollLink to={ features('publishAgenda', false) ? 'schedule' : 'timeline' } className={cx('btn', 'btn-outline')} spy={true} smooth={true} offset={-50} duration={500}>VIEW SCHEDULE</ScrollLink>;
         }
@@ -94,6 +96,8 @@ class Home extends Component {
           leftButton = <ScrollLink to='register' className={cx('btn')} spy={true} smooth={true} offset={-80} duration={500}>REGISTER</ScrollLink>;;
         } else if (features('submission', false)) {
           leftButton = <Link to="submit" className={cx('btn')}>SUBMIT PROPOSAL</Link>;
+        } else if (!features('startRegistration', false)) {
+
         } else {
           leftButton = <Link to="proposals" className={cx('btn')}>VIEW PROPOSALS</Link>;
         }
@@ -105,6 +109,8 @@ class Home extends Component {
           buttonsMsg = 'Tickets for Reversim Summit 2016 are available!'
         } else if (features('publishAgenda', false)) {
           buttonsMsg = 'Agenda was Published!';
+        } else if (!features('startRegistration', false)) {
+          buttonsMsg = 'Coming soon!';
         } else {
           buttonsMsg = 'Call for papers is now ' + (features('submission', false) ? 'open!' : 'closed')
         }
@@ -112,15 +118,19 @@ class Home extends Component {
         return (
           <StickyContainer>
               <div className={cx('home')}>
+                <Sticky style={{zIndex: 5}}>
+                  <Navigation currentPath={this.props.location.pathname} />
+                </Sticky>
+
                   <section id="hero" className={cx('hero-section', 'bg1', 'bg-cover', 'window-height', 'light-text')}>
-                      <ul className={cx("socials-nav")}>
+                    {/*<ul className={cx("socials-nav")}>
                           <li className={cx('socials-nav-item')}><a href="https://twitter.com/reversim"><span className={cx('fa', 'fa-twitter')}></span></a></li>
                           <li className={cx('socials-nav-item')}><a href="https://www.facebook.com/groups/806177629478248/"><span className={cx('fa', 'fa-facebook')}></span></a></li>
-                      </ul>
+                      </ul>*/}
                       <div className={cx('heading-block', 'centered-block', 'align-center')}>
                           <div className={cx('container')}>
-                              <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>19-20.sep <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>Weizmann Institute of Science</h5>
-                              <h1 className={cx('extra-heading')}>Reversim Summit 2016</h1>
+                              <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>15-16.Oct <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>College of Management</h5>
+                              <h1 className={cx('extra-heading')}>Reversim Summit 2017</h1>
                               <h5 className={cx('base-font')}>
                                 {buttonsMsg}
                               </h5>
@@ -131,13 +141,9 @@ class Home extends Component {
                       </div>
                   </section>
 
-                  <Sticky style={{zIndex: 5}}>
-                      <Navigation currentPath={this.props.location.pathname} />
-                  </Sticky>
-
-                  <Element name="messages" ref="messages">
+                {/*<Element name="messages" ref="messages">
                     <Messages />
-                  </Element>
+                  </Element>*/}
 
                   <Element name="about" ref="about">
                     <About />
@@ -165,7 +171,7 @@ class Home extends Component {
                     <Register />
                   </Element>
 
-                  { features('publishAgenda', false) === false ?
+                  { features('publishAgenda', false) === false  && features('startRegistration') ?
                     <Element name="proposals" ref="proposals">
                       <Proposals data={proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
                     </Element>
@@ -177,9 +183,11 @@ class Home extends Component {
                     <Team team={team} />
                   </Element>
 
+                { features('sponsored') ?
                   <Element name="sponsors"  ref="sponsors">
                     <Sponsors />
                   </Element>
+                  : undefined }
 
                   <Element name="location" ref="location">
                     <Location />

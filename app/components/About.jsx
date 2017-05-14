@@ -72,7 +72,7 @@ class About extends Component {
                     <div className={cx('col-sm-7', 'align-left')}>
                       <h6>About Reversim Summit</h6>
                       <p>Reversim summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too.</p>
-                      <p>This is the fourth Reversim Summit. The summits of <a href="http://summit2013.reversim.com">2013</a> and <a href="http://summit2014.reversim.com">2014</a> (TLV Campus) and <a href="http://summit2015.reversim.com">2015</a> (Technion) also featured community content. Watch previous years&#39; sessions to get the general feel of the Revesim Summit spirit.</p>
+                      <p>This is the fifth(!) Reversim Summit. The summits of <a href="http://summit2013.reversim.com">2013</a> and <a href="http://summit2014.reversim.com">2014</a> (TLV Campus), <a href="http://summit2015.reversim.com">2015</a> (Technion) and <a href="http://summit2016.reversim.com">2016</a> (Weizmann Institute of Science) also featured community content. Watch previous years&#39; sessions to get the general feel of the Revesim Summit spirit.</p>
                       <br />
                       <h6>About Reversim Podcast</h6>
                       <p>

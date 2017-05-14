@@ -1,12 +1,13 @@
 export default {
-  submission: true,
+  submission: false,
   voting: false,
   tagging: true,
   proposalsPageGroupedByTags: false,
-  networking: true,
+  networking: false,
   recommendations: true,
   editAcceptedProposals: true,
   publishAgenda: false,
-  startRegistration: true,
-  viewSlides: true
+  startRegistration: false,
+  viewSlides: false,
+  sponsored: false
 }

@@ -2493,6 +2493,7 @@ li {
 }
 .container {
   position: relative;
+  padding: 0;
 }
 .bg-cover {
   -webkit-background-size: cover;

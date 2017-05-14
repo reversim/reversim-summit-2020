@@ -42,7 +42,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-bullhorn')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 9</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 20</strong>
                         <h6 className={cx("title")}>Call for Papers Period Begins<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time1" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
@@ -66,7 +66,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-ban')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>July 8</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>July 20</strong>
                         <h6 className={cx("title")}>Call for Papers Period Ends<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
 
@@ -79,7 +79,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-comments')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid July</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid August</strong>
                       <h6 className={cx("title")}>Review Starts<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time3" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
@@ -98,7 +98,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-calendar')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid August</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid September</strong>
                       <h6 className={cx("title")}>Review Ends, Publish Agenda<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                     </div>
@@ -111,7 +111,7 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-ticket')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid August</strong>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid September</strong>
                       <h6 className={cx("title")}>Open Registration<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                     </div>
@@ -123,12 +123,12 @@ const Timeline = () => {
                         <span className={cx('fa', 'fa-group')}></span>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>September 19-20</strong>
-                        <h6 className={cx("title")}>Reversim Summit 2016<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>October 15-16</strong>
+                        <h6 className={cx("title")}>Reversim Summit 2017<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time7" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
-                          <p className={cx("description")}>See you in <ScrollLink to="location" spy={true} smooth={true} offset={-50} duration={500}>Weizmann Institute of Science</ScrollLink>, Rehovot. 19-20 September, 2016.</p>
+                          <p className={cx("description")}>See you in <ScrollLink to="location" spy={true} smooth={true} offset={-50} duration={500}>the College of Management</ScrollLink>, Rishon LeTsiyon. 15-16 October, 2017.</p>
                         </article>
                       </div>
                     </div>

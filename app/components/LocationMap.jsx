@@ -15,10 +15,10 @@ const LocationMap = () => {
     googleMapElement={
       <GoogleMap
         defaultZoom={16}
-        defaultCenter={{ lat: 31.9052004, lng: 34.8090827 }}
+        defaultCenter={{ lat: 31.969843, lng: 34.7684663 }}
       >
         <Marker
-        position={ { lat: 31.9052004, lng: 34.8090827 } }
+        position={ { lat: 31.969843, lng: 34.7684663 } }
         defaultAnimation={2}
         />
       </GoogleMap>

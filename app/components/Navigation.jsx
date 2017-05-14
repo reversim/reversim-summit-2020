@@ -57,7 +57,14 @@ class Navigation extends Component {
     const { user: { isLoginModalOpen, authenticated }, currentPath } = this.props;
 
     let navigationElements;
-    if (currentPath === '/') {
+    if (!features('startRegistration')) {
+      navigationElements = [
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Team</ScrollLink>,
+        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Location</ScrollLink>,
+      ];
+    } else if (currentPath === '/') {
       // Home navigation
       navigationElements = [
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
@@ -101,7 +108,7 @@ class Navigation extends Component {
     return (
       <header className={cx('header', 'header-black')}>
     		<div className={cx("header-wrapper")}>
-    			<div className={cx("container")}>
+    			<div className={cx("container-fluid")}>
     				<div className={cx("col-sm-2", "col-xs-12", "navigation-header")}>
     					<Link to="/" className={cx("logo")}>
     						<img src={logoImg} alt="Reversim" width="143" height="63" className={cx("retina-hide")} />
@@ -120,7 +127,7 @@ class Navigation extends Component {
     							{navigationElements}
     						</ul>
 
-                { authenticated ? (
+                {/* authenticated ? (
                   <div className={cx("pull-right")}>
                     <ul>
                       <li className={cx('navigation-item', 'dropdown')}>
@@ -144,7 +151,7 @@ class Navigation extends Component {
                   </div>
                 ) : (
                   <a href="/auth/google" className={cx("pull-right", "btn", "btn-outline-clr", "buy-btn")}>Login</a>
-                )}
+                )*/}
     					</div>
     				</div>
     			</div>
