@@ -9,5 +9,6 @@ export default {
   publishAgenda: false,
   startRegistration: false,
   viewSlides: false,
-  sponsored: false
+  sponsored: false,
+  timelineFinalized: false
 }

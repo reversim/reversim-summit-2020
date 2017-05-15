@@ -161,7 +161,7 @@ class Home extends Component {
                     </Element>
                     : undefined }
 
-                  { features('publishAgenda', false) === false ?
+                  { features('timelineFinalized') && (features('publishAgenda', false) === false) ?
                     <Element name="timeline" ref="timeline">
                       <Timeline />
                     </Element>

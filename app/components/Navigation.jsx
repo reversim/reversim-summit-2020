@@ -60,7 +60,7 @@ class Navigation extends Component {
     if (!features('startRegistration')) {
       navigationElements = [
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>,
+        features('timelineFinalized') ? <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink> : undefined,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Team</ScrollLink>,
         <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Location</ScrollLink>,
       ];
