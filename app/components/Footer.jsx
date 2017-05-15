@@ -71,7 +71,7 @@ class Footer extends Component {
 
               <div className={cx("col-md-6")}>
                 <ul className={cx("footer-nav")}>
-                  <li className={cx("footer-nav-item")}><a href="mailto:shlomi.hassan@gmail.com">Contact</a></li>
+                  <li className={cx("footer-nav-item")}><a href="mailto:rs17team@googlegroups.com">Contact</a></li>
                   <li className={cx("footer-nav-item")}><a href="http://confcodeofconduct.com/">Code of Conduct</a></li>
                 </ul>
               </div>
