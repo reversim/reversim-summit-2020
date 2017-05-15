@@ -21,6 +21,7 @@ export default (app) => {
 
   app.set('view cache', false);
 
+  app.use(require('force-ssl-heroku'));
   app.use(bodyParser.json({limit: '50mb'}));
   app.use(bodyParser.urlencoded({limit: '50mb', extended: true})); // for parsing application/x-www-form-urlencoded
   app.use(methodOverride());
