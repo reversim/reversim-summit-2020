@@ -121,7 +121,7 @@ class About extends Component {
                       <h6>Becoming a sponsor</h6>
                       <p>The sponsorship plan cost is 15,000 NIS + V.A.T.</p>
                       <p>We do encourage sponsors to submit sessions. In fact, sessions by sponsors have been some of the best we had in previous summits. However, these sessions go through our independent submission and moderation process.</p>
-                      <p>To become a sponsor, please contact <a href="mailto:shlomi.hassan@gmail.com">Adam matan</a>.</p>
+                      <p>To become a sponsor, please contact <a href="mailto:shlomi.hassan@gmail.com">Shlomi Hassan</a>.</p>
                     </div>
                   </div>
                 </div>
