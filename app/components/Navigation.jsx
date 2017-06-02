@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { logOut, openLoginModal, closeLoginModal } from 'actions/users';
 import LoginOrRegister from 'components/LoginOrRegister';
 import { push } from 'react-router-redux';
+import navItems from 'data/nav-items';
 
 import classNames from 'classnames/bind';
 import styles from 'css/main';
@@ -20,6 +21,7 @@ class Navigation extends Component {
     super(props);
 
     this.state = { isNavCollapsed: true }
+    this.renderNavItem = this.renderNavItem.bind(this);
   }
 
   logout(event) {
@@ -53,57 +55,21 @@ class Navigation extends Component {
     this.setState({ isNavCollapsed: !!!this.state.isNavCollapsed });
   }
 
+  renderNavItem(item, i) {
+    let link;
+    if (item.noScroll) {
+      link = <Link className={cx("navigation-link")} to={item.to} onClick={this.collapseNav.bind(this)}>{item.text}</Link>;
+    } else {
+      link = <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to={item.to} spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>{item.text}</ScrollLink>
+    }
+
+    return <li className={cx("navigation-item")} key={i}>{link}</li>;
+  }
+
   render() {
     const { user: { isLoginModalOpen, authenticated }, currentPath } = this.props;
 
-    let navigationElements;
-    if (!features('startRegistration')) {
-      navigationElements = [
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
-        features('timelineFinalized') ? <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink> : undefined,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Team</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Location</ScrollLink>,
-      ];
-    } else if (currentPath === '/') {
-      // Home navigation
-      navigationElements = [
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="about" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>About</ScrollLink>,
-        features('publishAgenda', false) ? (
-          <Link className={cx("navigation-link")} to="schedule" onClick={this.collapseNav.bind(this)}>Schedule</Link>
-        ) : (
-          <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="timeline" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Timeline</ScrollLink>
-        ),
-        features('publishAgenda', false) ? (
-          <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="speakers" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Speakers</ScrollLink>
-        ) : (
-          <Link className={cx("navigation-link")} to="proposals" onClick={this.collapseNav.bind(this)}>Proposals</Link>
-        ),
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="team" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Team</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="sponsors" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Sponsors</ScrollLink>,
-        <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="location" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Location</ScrollLink>,
-        features('networking', false) ? <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to="networking" spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>Networking</ScrollLink> : undefined
-      ];
-    } else {
-      navigationElements = [
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'about' } } onClick={this.collapseNav.bind(this)}>About</Link>,
-        features('publishAgenda', false) ? (
-          <Link className={cx("navigation-link")} to="schedule" onClick={this.collapseNav.bind(this)}>Schedule</Link>
-        ) : (
-          <Link className={cx("navigation-link")} to="/" state={ { section: 'timeline' } } onClick={this.collapseNav.bind(this)}>Timeline</Link>
-        ),
-        features('publishAgenda', false) ? (
-          <Link className={cx("navigation-link")} to="/" state={ { section: 'speakers' } } onClick={this.collapseNav.bind(this)}>Speakers</Link>
-        ) : (
-          <Link className={cx("navigation-link")} to="/proposals" activeClassName={cx('active')} onClick={this.collapseNav.bind(this)}>Proposals</Link>
-        ),
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'team' } } onClick={this.collapseNav.bind(this)}>Team</Link>,
-        <Link className={cx("navigation-link")}  to="/" state={ { section: 'sponsors' } } onClick={this.collapseNav.bind(this)}>Sponsors</Link>,
-        <Link className={cx("navigation-link")} to="/" state={ { section: 'location' } } onClick={this.collapseNav.bind(this)}>Location</Link>,
-        features('networking', false) ? <Link className={cx("navigation-link")} to="/" state={ { section: 'networking' } } onClick={this.collapseNav.bind(this)}>Networking</Link> : undefined
-      ];
-    }
-
-    navigationElements = navigationElements.filter(elem => elem !== undefined).map((elem, i) => <li className={cx("navigation-item")} key={i}>{elem}</li>);
+    let navigationElements = navItems(currentPath).map(this.renderNavItem);// todo send navItems in props
 
     return (
       <header className={cx('header', 'header-black')}>
@@ -161,7 +127,6 @@ class Navigation extends Component {
   }
 }
 
-// <Link className={cx("pull-right", "buy-btn")} to="/login">Login</Link>
 
 Navigation.propTypes = {
   user: PropTypes.object,
