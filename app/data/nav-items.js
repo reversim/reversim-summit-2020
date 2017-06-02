@@ -1,7 +1,5 @@
 import features from 'features';
 
-let items;
-
 const about = { to: "about", text: "About" };
 const team = { to: "team", text: "Team" };
 const location = { to: "location", text: "Location" };
@@ -15,8 +13,7 @@ const networking = { to: "networking", text: "Networking", feature: "networking"
 export default (currentPath) => {
   if (!features('startRegistration')) return [about, team, location];
 
-
-  items = [
+  let items = [
     about, schedule, timeline, speakers, proposals, team, sponsors, location, networking
   ];
 

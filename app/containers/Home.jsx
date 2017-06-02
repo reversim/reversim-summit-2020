@@ -2,19 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import Navigation from 'components/Navigation';
-import About from 'components/About';
-import Messages from 'components/Messages';
-import Speakers from 'components/Speakers';
-import Networking from 'components/Networking';
-import Timeline from 'components/Timeline';
-import Proposals from 'components/Proposals';
-import CFP from 'components/CFP';
-import Register from 'components/Register';
-import Sponsors from 'components/Sponsors';
-import Team from 'components/Team';
-import Location from 'components/Location';
 import Footer from 'components/Footer';
-import ScheduleSection from 'components/ScheduleSection';
 import { Link } from 'react-router';
 import Rodal from 'components/Rodal';
 import { StickyContainer, Sticky } from 'react-sticky';
@@ -25,6 +13,7 @@ import ReactDOM from 'react-dom';
 import features from 'features';
 import ga from 'react-ga';
 import _ from 'lodash';
+import homeSections from 'data/home-sections';
 
 import styles from 'css/main';
 import homeStyles from 'css/components/home';
@@ -75,6 +64,12 @@ class Home extends Component {
       this.setState({ isRegistrationModalOpen: false });
     }
 
+    renderSection(section) {
+      return (<Element name={section.name} ref={section.name} key={section.name}>
+        {React.createElement(section.el, { name: section.name, ...section.props })}
+      </Element>);
+    }
+
     render() {
         const { speakers, proposals, user: { team }, reversimTweets, location, acceptedProposals } = this.props;
         this.jumpToLocation();
@@ -115,93 +110,37 @@ class Home extends Component {
           buttonsMsg = 'Call for papers is now ' + (features('submission', false) ? 'open!' : 'closed')
         }
 
+        const sectionElements = homeSections(this.props).map(this.renderSection);
+
         return (
           <StickyContainer>
               <div className={cx('home')}>
                 <Sticky style={{zIndex: 5}}>
-                  <Navigation currentPath={this.props.location.pathname} />
+                <Navigation currentPath={this.props.location.pathname} />
                 </Sticky>
 
-                  <section id="hero" className={cx('hero-section', 'bg1', 'bg-cover', 'window-height', 'light-text')}>
-                    {/*<ul className={cx("socials-nav")}>
-                          <li className={cx('socials-nav-item')}><a href="https://twitter.com/reversim"><span className={cx('fa', 'fa-twitter')}></span></a></li>
-                          <li className={cx('socials-nav-item')}><a href="https://www.facebook.com/groups/806177629478248/"><span className={cx('fa', 'fa-facebook')}></span></a></li>
-                      </ul>*/}
-                      <div className={cx('heading-block', 'centered-block', 'align-center')}>
-                          <div className={cx('container')}>
-                              <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>15-16.Oct <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>College of Management</h5>
-                              <h1 className={cx('extra-heading')}>Reversim Summit 2017</h1>
-                              <h5 className={cx('base-font')}>
-                                {buttonsMsg}
-                              </h5>
-                              <div className={cx('btns-container')}>
-                                {leftButton} {rightButton}
-                              </div>
-                          </div>
-                      </div>
-                  </section>
+                <section id="hero" className={cx('hero-section', 'bg1', 'bg-cover', 'window-height', 'light-text')}>
+                  {/*<ul className={cx("socials-nav")}>
+                        <li className={cx('socials-nav-item')}><a href="https://twitter.com/reversim"><span className={cx('fa', 'fa-twitter')}></span></a></li>
+                        <li className={cx('socials-nav-item')}><a href="https://www.facebook.com/groups/806177629478248/"><span className={cx('fa', 'fa-facebook')}></span></a></li>
+                    </ul>*/}
+                    <div className={cx('heading-block', 'centered-block', 'align-center')}>
+                        <div className={cx('container')}>
+                            <h5 className={cx('heading-alt')} style={ {marginBottom: '8px'} }><span className={cx('fa', 'fa-calendar-o', 'base-clr-txt')}></span>15-16.Oct <span className={cx('fa', 'fa-map-marker', 'base-clr-txt')} style={ {marginLeft: '14px'} }></span>College of Management</h5>
+                            <h1 className={cx('extra-heading')}>Reversim Summit 2017</h1>
+                            <h5 className={cx('base-font')}>
+                              {buttonsMsg}
+                            </h5>
+                            <div className={cx('btns-container')}>
+                              {leftButton} {rightButton}
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-                {/*<Element name="messages" ref="messages">
-                    <Messages />
-                  </Element>*/}
+                {sectionElements}
 
-                  <Element name="about" ref="about">
-                    <About />
-                  </Element>
-
-                  { features('publishAgenda', false) ?
-                    <Element name="schedule" ref="schedule">
-                      <ScheduleSection acceptedProposals={acceptedProposals} />
-                    </Element>
-                  : undefined }
-
-                  { features('publishAgenda', false) ?
-                    <Element name="speakers" ref="speakers">
-                      <Speakers speakers={speakers} />
-                    </Element>
-                    : undefined }
-
-                  { features('timelineFinalized') && (features('publishAgenda', false) === false) ?
-                    <Element name="timeline" ref="timeline">
-                      <Timeline />
-                    </Element>
-                    : undefined }
-
-                  <Element name="register" ref="register">
-                    <Register />
-                  </Element>
-
-                  { features('publishAgenda', false) === false  && features('startRegistration') ?
-                    <Element name="proposals" ref="proposals">
-                      <Proposals data={proposals} isReversimTeamMember={this.props.user.isReversimTeamMember} />
-                    </Element>
-                    : undefined }
-
-                  { features('submission', false) ? <CFP /> : undefined }
-
-                  <Element name="team" ref="team">
-                    <Team team={team} />
-                  </Element>
-
-                { features('sponsored') ?
-                  <Element name="sponsors"  ref="sponsors">
-                    <Sponsors />
-                  </Element>
-                  : undefined }
-
-                  <Element name="location" ref="location">
-                    <Location />
-                  </Element>
-
-                  { features('networking', false) ?
-                      <Element name="networking" ref="networking">
-                        <Networking />
-                      </Element>
-                      : undefined }
-
-
-
-                  <Footer tweets={reversimTweets} />
+                <Footer tweets={reversimTweets} />
               </div>
 
               <Rodal  visible={this.state.isRegistrationModalOpen}
