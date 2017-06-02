@@ -4208,12 +4208,6 @@ karma@^0.13.22:
     source-map "^0.5.3"
     useragent "^2.1.6"
 
-kerberos@0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/kerberos/-/kerberos-0.0.20.tgz#5d0d3d739e804530a082b73f969d3c2c78826496"
-  dependencies:
-    nan "~2.2"
-
 keycode@^2.1.1:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.1.9.tgz#964a23c54e4889405b4861a5c9f0480d45141dfa"
@@ -4954,10 +4948,6 @@ mute-stream@0.0.5:
 nan@^2.3.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
-
-nan@~2.2:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.2.1.tgz#d68693f6b34bb41d66bc68b3a4f9defc79d7149b"
 
 natives@^1.1.0:
   version "1.1.0"

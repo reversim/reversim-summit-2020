@@ -90,7 +90,6 @@
     "invariant": "^2.2.1",
     "isomorphic-fetch": "^2.2.1",
     "json-loader": "^0.5.4",
-    "kerberos": "0.0.20",
     "less": "^2.7.1",
     "lodash": "^4.6.1",
     "method-override": "^2.3.5",
