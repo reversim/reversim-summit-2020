@@ -337,3 +337,32 @@ ul.with-bullets ul {
     text-align: center;
   }
 }
+
+.display-block {
+  display: block;
+}
+
+header > .container {
+  top: 2.5em;
+  transition: top 0.3s;
+}
+
+header.fixed {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 5px rgba(0, 0, 0, .2), 0 1px 0 rgba(255, 255, 255, .15);
+  transition: background 0.3s;
+}
+
+header.fixed .container {
+  top: 0;
+}
+
+header.fixed .navigation-link {
+  color: #262627;
+}
+
+@media (max-width: 767px) {
+  header > .container {
+    top: 0;
+  }
+}

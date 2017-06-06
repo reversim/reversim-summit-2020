@@ -2250,7 +2250,7 @@ body > .container {
 img {
   max-width: 100%;
 }
-.retina-show {
+.retina-show, .retina-show.display-block {
   display: none;
 }
 .base-clr-bd,
@@ -2622,9 +2622,9 @@ li {
   .img-column {
     padding-bottom: 20px;
   }
-  .heading-block {
-    padding: 80px 0;
-  }
+  /*.heading-block {*/
+    /*padding: 80px 0;*/
+  /*}*/
   .hero-heading-top {
     top: 30px;
   }
@@ -2633,9 +2633,9 @@ li {
   }
 }
 @media (max-width: 767px) {
-  body {
-    padding-top: 91px;
-  }
+  /*body {*/
+    /*padding-top: 91px;*/
+  /*}*/
   .fullwidth-section-bg {
     position: relative;
   }
@@ -2650,12 +2650,12 @@ li {
   .wrapper {
     width: 100%;
   }
-  .bg-cover {
-    background-attachment: scroll;
-  }
-  .heading-block {
-    padding: 40px 0;
-  }
+  /*.bg-cover {*/
+    /*background-attachment: scroll;*/
+  /*}*/
+  /*.heading-block {*/
+    /*padding: 40px 0;*/
+  /*}*/
   .hero-heading-top {
     position: relative;
     top: auto;
@@ -2675,12 +2675,14 @@ li {
   }
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .retina-hide {
+  .retina-hide, .retina-hide.display-block {
     display: none;
   }
   .retina-show {
-    display: block;
     display: initial;
+  }
+  .retina-show.display-block {
+    display: block;
   }
 }
 /* ----------------------------------------------------------------------------
@@ -6456,7 +6458,7 @@ button[type="submit"] .loading {
 .navigation-header {
   zoom: 1;
   display: inline-block;
-  padding: 15px 0 0;
+  padding: 0;
 }
 .navigation-header:before,
 .navigation-header:after {
@@ -6468,7 +6470,7 @@ button[type="submit"] .loading {
 }
 .navigation-header .logo {
   display: inline-block;
-  padding: 3px 0;
+  padding: 0;
   font-family: "PT Sans Caption", Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 23px;
   font-weight: 700;
@@ -6494,11 +6496,13 @@ button[type="submit"] .loading {
 }
 .navigation-list {
   text-align: left;
+  margin-bottom: 0;
 }
 .navigation-item {
   margin-left: 21px;
   display: inline-block;
-  padding: 34px 0 16px;
+  padding: 15px 0;
+  margin-bottom: 0;
 }
 .navigation-item:first-child {
   margin-left: 0;
@@ -6573,10 +6577,10 @@ button[type="submit"] .loading {
   padding: 7px 0;
   font-family: "PT Sans Caption", Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.26em;
-  color: #262627;
+  color: #fff;
   border-style: solid;
   border-width: 0 0 2px;
   border-color: transparent;
@@ -6734,18 +6738,24 @@ button[type="submit"] .loading {
   }
   .navigation-header {
     padding: 18px 15px 13px 35px;
+    /*background: rgba(255,255,255,0.95);*/
   }
-  .navigation-header .logo {
-    padding: 12px 0;
-  }
+  /*.navigation-header .logo {*/
+    /*padding: 12px 0;*/
+  /*}*/
   .navigation-container {
     padding: 0;
     text-align: center;
   }
   .navbar-collapse {
     max-height: none;
-    background-color: #ffffff;
+    background-color: rgba(255,255,255,0.98);
     padding: 30px 0;
+    margin: 0 30px;
+    border-radius: 4px;
+  }
+  header.fixed .navbar-collapse {
+    background-color: transparent;
   }
   .navbar-collapse.in,
   .navbar-collapse.collapsing {
@@ -7123,7 +7133,7 @@ button[type="submit"] .loading {
     Theme styles
 ---------------------------------------------------------------------------- */
 .bg1 {
-  background-image: url("../images/backgrounds/bg1.jpg");
+  background-image: url("../images/hero.jpg");
 }
 .bg2 {
   background-image: url("../images/backgrounds/bg2.jpg");
@@ -7184,7 +7194,20 @@ button[type="submit"] .loading {
 .hero-section {
   z-index: 1;
   overflow: hidden;
+  position: relative;
 }
+
+.hero-section:after {
+  content: '';
+  background: rgba(0,30,60,0.7);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
 .stat-section,
 .signup-section {
   padding: 50px 0 48px;

@@ -70,7 +70,7 @@ class Home extends Component {
     }
 
     render() {
-        const { speakers, proposals, user: { team }, reversimTweets, location, acceptedProposals } = this.props;
+        const { reversimTweets } = this.props;
         this.jumpToLocation();
 
         let leftButton, rightButton;
