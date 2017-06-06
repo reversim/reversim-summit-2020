@@ -36,13 +36,8 @@ export default (allProps) => {
     const passFeature = features(item.feature, false);
     return item.isNot ? !passFeature : passFeature;
   }).map(item => {
-    const props = {};
     if (item.props) {
-      item.props.forEach(prop => {
-        props[prop] = _.get(allProps, prop);
-      });
-
-      item.props = props;
+      item.props = item.props.map(prop => _.get(allProps, prop));
     }
     return item;
   });
