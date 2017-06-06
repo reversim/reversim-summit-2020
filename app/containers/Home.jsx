@@ -5,7 +5,6 @@ import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
 import { Link } from 'react-router';
 import Rodal from 'components/Rodal';
-import { StickyContainer, Sticky } from 'react-sticky';
 import { fetchProposals, fetchSpeakers } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
 import { Element, Link as ScrollLink } from 'react-scroll';
@@ -113,11 +112,9 @@ class Home extends Component {
         const sectionElements = homeSections(this.props).map(this.renderSection);
 
         return (
-          <StickyContainer>
+          <div>
               <div className={cx('home')}>
-                <Sticky style={{zIndex: 5}}>
                 <Navigation currentPath={this.props.location.pathname} />
-                </Sticky>
 
                 <section id="hero" className={cx('hero-section', 'bg1', 'bg-cover', 'window-height', 'light-text')}>
                   {/*<ul className={cx("socials-nav")}>
@@ -151,7 +148,7 @@ class Home extends Component {
                   <iframe  src="//eventbrite.com/tickets-external?eid=26992112134&ref=etckt" frameborder="0" height="400" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
                 </div>
               </Rodal>
-          </StickyContainer>
+          </div>
         );
     }
 }
