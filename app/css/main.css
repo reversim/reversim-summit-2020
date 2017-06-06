@@ -361,6 +361,10 @@ header.fixed .navigation-link {
   color: #262627;
 }
 
+header.fixed .logo img {
+  filter: brightness(0.45);
+}
+
 @media (max-width: 767px) {
   header > .container {
     top: 0;

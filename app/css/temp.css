@@ -5421,7 +5421,7 @@ button[type="submit"] .loading {
 .socials-nav {
   position: absolute;
   top: 50px;
-  right: 0;
+  right: 12em;
   text-align: center;
 }
 .socials-nav-item {
@@ -5448,6 +5448,7 @@ button[type="submit"] .loading {
 @media (max-width: 767px) {
   .socials-nav {
     left: 0;
+    right: 0;
   }
 }
 @media (max-width: 480px) {
