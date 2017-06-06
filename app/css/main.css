@@ -365,4 +365,19 @@ header.fixed .navigation-link {
   header > .container {
     top: 0;
   }
+
+  .small-block {
+    display: block;
+  }
+}
+
+.buttons-msg {
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 2rem;
+  border: 5px solid #fff;
+  top: 40px;
+  position: relative;
+  letter-spacing: 1px;
+  max-width: 80%;
 }
