@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Link as ScrollLink } from 'react-scroll';
 import features from 'features';
 import classNames from 'classnames/bind';
 

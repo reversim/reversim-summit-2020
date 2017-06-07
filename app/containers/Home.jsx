@@ -7,7 +7,7 @@ import Hero from 'components/Hero';
 import Rodal from 'components/Rodal';
 import { fetchProposals, fetchSpeakers } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
-import { Element, Link as ScrollLink } from 'react-scroll';
+import { Element } from 'react-scroll';
 import ReactDOM from 'react-dom';
 import features from 'features';
 import ga from 'react-ga';
