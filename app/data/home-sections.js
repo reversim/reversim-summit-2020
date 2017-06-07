@@ -20,10 +20,10 @@ const sections = [
   { name: "about", el: About },
   { name: "schedule", el: ScheduleSection, feature: 'publishAgenda', props: ['acceptedProposals'] },
   { name: "speakers", el: Speakers, props: ['speakers'], feature: 'publishAgenda' },
+  { name: "cfp", el: CFP, feature: "submission" },
   { name: "timeline", el: Timeline, feature: 'timelineFinalized' },
   { name: "register", el: Register },
   { name: "proposals", el: Proposals, props: ['proposals', 'isReversimTeamMember'], feature: 'timelineFinalized' },
-  { name: "cfp", el: CFP, feature: "submission" },
   { name: "team", el: Team, props: ['user.team'] },
   { name: "sponsors", el: Sponsors, feature: 'sponsored' },
   { name: "location", el: Location, props: ['location'] },
@@ -36,8 +36,14 @@ export default (allProps) => {
     const passFeature = features(item.feature, false);
     return item.isNot ? !passFeature : passFeature;
   }).map(item => {
+    const props = {};
     if (item.props) {
-      item.props = item.props.map(prop => _.get(allProps, prop));
+      item.props.forEach(prop => {
+        let propName = prop.includes(".") ? prop.split(".").slice(-1)[0] : prop;
+        props[propName] = _.get(allProps, prop);
+      });
+
+      item.props = props;
     }
     return item;
   });
