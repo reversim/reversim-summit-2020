@@ -34,10 +34,13 @@
 .rodal-close {
     position: absolute;
     cursor: pointer;
-    top: 16px;
-    right: 16px;
-    width: 16px;
-    height: 16px;
+    top: -12px;
+    right: -12px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    border: 1px solid #ccc;
 }
 
 .rodal-close:before,
@@ -45,9 +48,9 @@
     position: absolute;
     content: '';
     height: 2px;
-    width: 100%;
+    width: 60%;
     top: 50%;
-    left: 0;
+    left: 20%;
     margin-top: -1px;
     background: #999;
     border-radius: 100%;

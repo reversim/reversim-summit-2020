@@ -4,20 +4,16 @@ import classNames from 'classnames/bind';
 import Navigation from 'components/Navigation';
 import Footer from 'components/Footer';
 import Hero from 'components/Hero';
-import Rodal from 'components/Rodal';
 import { fetchProposals, fetchSpeakers } from 'actions/proposals';
 import { fetchReversimTeam } from 'actions/users';
 import { Element } from 'react-scroll';
 import ReactDOM from 'react-dom';
 import features from 'features';
-import ga from 'react-ga';
 import _ from 'lodash';
 import homeSections from 'data/home-sections';
 
 import styles from 'css/main';
-import homeStyles from 'css/components/home';
 
-const cxHome = classNames.bind(homeStyles);
 const cx = classNames.bind(styles)
 
 class Home extends Component {
@@ -28,12 +24,8 @@ class Home extends Component {
         fetchSpeakers
     ];
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-          isRegistrationModalOpen: false
-        }
+    componentDidMount() {
+      this.jumpToLocation();
     }
 
     jumpToLocation() {
@@ -49,20 +41,6 @@ class Home extends Component {
       }
     }
 
-    startRegistrationModal(event) {
-      event.preventDefault();
-
-      ga.modalview('registration');
-
-      this.setState({ isRegistrationModalOpen: true });
-    }
-
-    closeRegistrationModal(event) {
-      event.preventDefault();
-
-      this.setState({ isRegistrationModalOpen: false });
-    }
-
     renderSection(section) {
       return (<Element name={section.name} ref={section.name} key={section.name}>
         {React.createElement(section.el, { name: section.name, ...section.props })}
@@ -70,7 +48,6 @@ class Home extends Component {
     }
 
     render() {
-        this.jumpToLocation();
         const sectionElements = homeSections(this.props).map(this.renderSection);
 
         return (
@@ -81,15 +58,6 @@ class Home extends Component {
                 {sectionElements}
                 <Footer tweets={this.props.reversimTweets} />
               </div>
-
-              <Rodal  visible={this.state.isRegistrationModalOpen}
-                      width={700}
-                      height={400}
-                      onClose={this.closeRegistrationModal.bind(this)}>
-                <div style={ {width: '100%', textAlign: 'left'} }>
-                  <iframe  src="//eventbrite.com/tickets-external?eid=26992112134&ref=etckt" frameborder="0" height="400" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe>
-                </div>
-              </Rodal>
           </div>
         );
     }

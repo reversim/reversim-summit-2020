@@ -10,5 +10,6 @@ export default {
   startRegistration: false,
   viewSlides: false,
   sponsored: false,
-  timelineFinalized: false
+  timelineFinalized: false,
+  preCFP: true
 }

@@ -4,22 +4,16 @@ import styles from 'css/main';
 import Proposal from 'components/Proposal';
 import { Link } from 'react-router';
 import _ from 'lodash';
-import features from 'features';
 
 const cx = classNames.bind(styles);
 
-/*
- * Note: This is kept as a container-level component,
- *  i.e. We should keep this as the container that does the data-fetching
- *  and dispatching of actions if you decide to have any sub-components.
- */
 const maxProposalsInSection = 4;
 
-const Proposals = ({data, isReversimTeamMember}) => {
-  const proposalsBlocks = data && data.slice(0, Math.min(maxProposalsInSection, data.length)).map((proposal, i) => {
-        let email = isReversimTeamMember ? (proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].email : undefined) : '';
-    return (
-      <Proposal
+function renderProposal(proposal, i, isReversimTeamMember) {
+  let email = isReversimTeamMember ? (proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].email : undefined) : '';
+
+  return (
+    <Proposal
       key={ i }
       id={ proposal.id }
       name={ proposal.title }
@@ -30,9 +24,16 @@ const Proposals = ({data, isReversimTeamMember}) => {
       speakerEmail={ email }
       speakerPhoto={ proposal.speaker_ids.length > 0 ? proposal.speaker_ids[0].picture : undefined }
       isReversimTeamMember={ isReversimTeamMember }
-      />
-    );
-  })
+    />
+  );
+}
+
+const Proposals = ({data, isReversimTeamMember}) => {
+  if (!data || data.length === 0) return null;
+
+  const proposalsBlocks = data
+          .slice(0, Math.min(maxProposalsInSection, data.length))
+          .map((proposal, i) => renderProposal(proposal, i, isReversimTeamMember));
 
   return (
     <section id="proposals" className={cx('section', 'align-center')} style={ {paddingTop: '25px'} }>
@@ -43,7 +44,7 @@ const Proposals = ({data, isReversimTeamMember}) => {
         <br />
         { _.chunk(proposalsBlocks, 2).map((block, i) => <div key={i} className={cx("row")}>{block}</div>) }
         <div className={cx("container")}>
-          { data && data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
+          { data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
         </div>
       </div>
     </section>

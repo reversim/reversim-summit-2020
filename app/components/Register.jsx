@@ -32,8 +32,15 @@ const Register = () => {
       </div>;
   }
 
+  // if 'submission' and not 'timelineFinalized' then the CFP section is adjacent to register section, which creates a bad visual.
+
+  let bg = 'bg2';
+  if (features('submission') && !features('timelineFinalized')) {
+    bg = '';
+  }
+
   return (
-    <section id="register" className={cx('section', 'overlay', 'overlay-clr', 'bg-cover', 'bg2', 'light-text', 'align-center')}>
+    <section id="register" className={cx('section', 'overlay', 'overlay-clr', 'bg-cover', bg, 'light-text', 'align-center')}>
       <div className={cx("container")}>
         {registrationHeader}
         {registrationText}

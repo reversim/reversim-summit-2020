@@ -2515,7 +2515,7 @@ li {
   left: 0;
   bottom: 0;
   content: "";
-  background-color: #262627;
+  background-color: rgba(0,30,60,0.7);
   z-index: -1;
 }
 .overlay.overlay-clr .fa,
@@ -3361,7 +3361,8 @@ button.btn.btn-block {
   color: #000000;
 }
 .btns-container {
-  padding: 27px 0 40px;
+  position: relative;
+  top: 76px;
 }
 .btns-block {
   padding: 20px 0;
@@ -3375,22 +3376,13 @@ button.btn.btn-block {
 .btns-block .btn {
   margin-bottom: 10px;
 }
-@media (max-width: 991px) {
-  .btns-container {
-    padding: 20px 0 35px;
-  }
-}
-@media (max-width: 767px) {
-  .btns-container .btn {
-    margin: 0 auto 20px;
-  }
-}
 @media (max-width: 480px) {
   .btns-container {
-    padding: 20px 15px;
+    padding: 0 15px;
   }
   .btns-container .btn {
     display: block;
+    margin: 0 auto 20px;
   }
   .btn,
   .header .buy-btn {
@@ -7131,16 +7123,16 @@ button[type="submit"] .loading {
     Theme styles
 ---------------------------------------------------------------------------- */
 .bg1 {
-  background-image: url("../images/hero.jpg");
+  background-image: url("../images/2016/hero.jpg");
 }
 .bg2 {
-  background-image: url("../images/backgrounds/bg2.jpg");
+  background-image: url("../images/2016/register-bg.jpg");
 }
 .bg3 {
   background-image: url("../images/backgrounds/bg3.jpg");
 }
 .bg4 {
-  background-image: url("../images/backgrounds/bg4.jpg");
+  background-image: url("../images/2016/");
 }
 .bg5 {
   background-image: url("../images/backgrounds/bg5.jpg");
@@ -7167,12 +7159,10 @@ button[type="submit"] .loading {
   opacity: 0.9;
 }
 .bg2.overlay:before {
-  background-color: #282f43;
-  opacity: 0.85;
+  background-color: rgba(30,60,90,0.7);
 }
 .bg4.overlay:before {
-  background-color: #282f43;
-  opacity: 0.85;
+  background-color: rgba(30,60,90,0.7);
 }
 .bg5.overlay:before {
   background-color: #262627;

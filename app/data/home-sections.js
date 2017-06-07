@@ -14,23 +14,23 @@ import Team from 'components/Team';
 import Location from 'components/Location';
 import ScheduleSection from 'components/ScheduleSection';
 
-
-const sections = [
-  { name: "messages", el: Messages },
-  { name: "about", el: About },
-  { name: "schedule", el: ScheduleSection, feature: 'publishAgenda', props: ['acceptedProposals'] },
-  { name: "speakers", el: Speakers, props: ['speakers'], feature: 'publishAgenda' },
-  { name: "cfp", el: CFP, feature: "submission" },
-  { name: "timeline", el: Timeline, feature: 'timelineFinalized' },
-  { name: "register", el: Register },
-  { name: "proposals", el: Proposals, props: ['proposals', 'isReversimTeamMember'], feature: 'timelineFinalized' },
-  { name: "team", el: Team, props: ['user.team'] },
-  { name: "sponsors", el: Sponsors, feature: 'sponsored' },
-  { name: "location", el: Location, props: ['location'] },
-  { name: "networking", el: Networking, feature: "networking" }
-];
-
 export default (allProps) => {
+
+  const sections = [
+    { name: "messages", el: Messages },
+    { name: "about", el: About },
+    { name: "schedule", el: ScheduleSection, feature: 'publishAgenda', props: ['acceptedProposals'] },
+    { name: "speakers", el: Speakers, props: ['speakers'], feature: 'publishAgenda' },
+    { name: "cfp", el: CFP, feature: "submission" },
+    { name: "timeline", el: Timeline, feature: 'timelineFinalized' },
+    { name: "register", el: Register },
+    { name: "proposals", el: Proposals, props: ['proposals', 'isReversimTeamMember'], feature: 'timelineFinalized' },
+    { name: "team", el: Team, props: ['user.team'] },
+    { name: "sponsors", el: Sponsors, feature: 'sponsored' },
+    { name: "location", el: Location, props: ['location'] },
+    { name: "networking", el: Networking, feature: "networking" }
+  ];
+
   return sections.filter(item => {
     if (!item.feature) return true;
     const passFeature = features(item.feature, false);
