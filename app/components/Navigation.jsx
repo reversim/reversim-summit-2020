@@ -99,8 +99,8 @@ class Navigation extends Component {
         <div className={cx("container")}>
           <div className={cx("col-sm-2", "col-xs-12", "navigation-header")}>
             <Link to="/" className={cx("logo")}>
-              <img src={logoImg} alt="Reversim" height="63" className={cx("retina-hide", "display-block")} />
-              <img src={logoImg2x} alt="Reversim" height="53" className={cx("retina-show", "display-block")} />
+              <img src={logoImg} alt="Reversim" className={cx("retina-hide", "display-block")} />
+              <img src={logoImg2x} alt="Reversim" height="47" className={cx("retina-show", "display-block")} />
             </Link>
             <button className={cx("navbar-toggle", "collapsed")} onClick={this.toggleHamburgerNav.bind(this)} aria-expanded="false" aria-controls="navigation">
               <span className={cx("icon-bar")}></span>
