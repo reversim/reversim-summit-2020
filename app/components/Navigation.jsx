@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logOut, openLoginModal, closeLoginModal } from 'actions/users';
-import LoginOrRegister from 'components/LoginOrRegister';
+import { logOut } from 'actions/users';
 import { push } from 'react-router-redux';
 import navItems from 'data/nav-items';
 
@@ -50,10 +49,10 @@ class Navigation extends Component {
   logout(event) {
     event.preventDefault();
 
-    const { dispatch, currentPath } = this.props;
+    const { dispatch, isHome } = this.props;
     dispatch(logOut());
 
-    if (currentPath !== '/') {
+    if (!isHome) {
       dispatch(push('/'));
     }
   }
@@ -90,12 +89,12 @@ class Navigation extends Component {
   }
 
   render() {
-    const { user: { isLoginModalOpen, authenticated }, currentPath } = this.props;
+    const { user: { authenticated }, isHome } = this.props;
 
-    let navigationElements = navItems(currentPath).map(this.renderNavItem);// todo send navItems in props
+    let navigationElements = navItems(isHome).map(this.renderNavItem);// todo send navItems in props
 
     return (
-      <header className={cx('navbar-fixed-top', { fixed: this.state.fixed })}>
+      <header className={cx('navbar-fixed-top', { fixed: this.state.fixed, "not-home": !isHome })}>
         <div className={cx("container")}>
           <div className={cx("col-sm-2", "col-xs-12", "navigation-header")}>
             <Link to="/" className={cx("logo")}>
@@ -115,7 +114,7 @@ class Navigation extends Component {
                 {navigationElements}
               </ul>
 
-              {/* authenticated ? (
+              { authenticated ? (
                 <div className={cx("pull-right")}>
                   <ul>
                     <li className={cx('navigation-item', 'dropdown')}>
@@ -139,7 +138,7 @@ class Navigation extends Component {
                 </div>
               ) : (
                 <a href="/auth/google" className={cx("pull-right", "btn", "btn-outline-clr", "buy-btn")}>Login</a>
-              )*/}
+              )}
             </div>
           </div>
         </div>
@@ -151,7 +150,7 @@ class Navigation extends Component {
 
 Navigation.propTypes = {
   user: PropTypes.object,
-  currentPath: PropTypes.string,
+  isHome: PropTypes.bool,
   dispatch: PropTypes.func.isRequired
 };
 

@@ -4,7 +4,6 @@ import { goBack, push } from 'react-router-redux';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
 import Speaker from 'components/Speaker';
-import {Link} from 'react-router';
 import {updateUser, uploadProfileImage} from 'actions/users';
 import NotificationSystem from 'react-notification-system';
 import ga from 'react-ga';
@@ -23,7 +22,7 @@ class MyProfile extends Component {
     constructor(props) {
         super(props);
 
-        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter, stackOverflow }} = props;
+        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter, stackOverflow, trackRecord } } = props;
         if (!authenticated) {
           dispatch(push('/'))
         }
@@ -34,8 +33,9 @@ class MyProfile extends Component {
           oneLiner,
           linkedin,
           twitter,
-          stackOverflow
-        }
+          stackOverflow,
+          trackRecord
+        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -51,6 +51,7 @@ class MyProfile extends Component {
       const linkedin = formElements.linkedin.value;
       const twitter = formElements.twitter.value;
       const stackOverflow = formElements.stackOverflow.value;
+      const teamMemberToken = window.location.hash.slice(1);
 
       const { dispatch, user: { authenticated, id, email }, location: { state } } = this.props;
 
@@ -62,7 +63,8 @@ class MyProfile extends Component {
           'profile.linkedin': linkedin,
           'profile.twitter': twitter,
           'profile.oneLiner': oneLiner,
-          'profile.stackOverflow': stackOverflow
+          'profile.stackOverflow': stackOverflow,
+          teamMemberToken
         })).then(() => {
           if (state && state.from) {
             dispatch(push(state.from));
@@ -100,18 +102,58 @@ class MyProfile extends Component {
       var f = files[0];
       var reader = new FileReader();
 
-      reader.onload = (function() {
-        return function(e) {
-          dispatch(uploadProfileImage({id: id, imageBinary: e.target.result}));
-        };
-      })(f);
+      reader.onload = function(e) {
+        dispatch(uploadProfileImage({ id, imageBinary: e.target.result }));
+      };
 
       reader.readAsDataURL(f);
 
     }
 
+    renderField({ label, id, required, text, caption, subtitle, placeholder, inputType, multiline, fullRow }, index) {
+      if (caption === undefined && !required) {
+        caption = 'Optional. will be presented on the website';
+      }
+
+      let valueComp;
+
+      if (text) valueComp = text;
+      else valueComp = React.DOM[multiline ? 'textarea' : 'input']({
+        id,
+        ref: id,
+        type: inputType || "text",
+        value: this.state[id],
+        placeholder,
+        onChange: this.previewProfile.bind(this),
+        required
+      });
+
+      return (
+        <fieldset className="row" style={{ marginBottom: 15 }} key={index}>
+          <span className={cx("col-xs-12")}>
+            <label htmlFor={id}>{label}</label>
+            { subtitle ? <small className="text-muted">{subtitle}</small> : undefined }
+          </span>
+          <span className={cx(`col-xs-${fullRow ? '12' : '6'}`)}>
+            {valueComp}
+          </span>
+          { caption ? <small className={cx("col-xs-6")}>{caption}</small> : undefined }
+        </fieldset>
+      );
+    }
+
     render() {
         const { user } = this.props;
+        const fields = [
+          { label: "Full name", id: "name", isRequired: true },
+          { label: "Email", text: user.email, caption: "So we can get in touch with you. Email is only visible to moderators" },
+          { label: "One liner", id: "oneLiner" },
+          { label: "LinkedIn profile", id: "linkedin", inputType: "url" },
+          { label: "Twitter handle", id: "twitter", placeholder: "@Reversim" },
+          { label: "Stack Overflow profile", id: "stackOverflow", inputType: "url" },
+          { label: "Short Bio", id: "bio", multiline: true, fullRow: true, caption: null },
+          { label: "Track record as speaker", id: "trackRecord", multiline: true, subtitle: 'Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)', caption: null, fullRow: true },
+        ].map(this.renderField.bind(this));
 
         return (
             <BaseLayout currentPath={this.props.location.pathname} name="my-profile">
@@ -119,92 +161,18 @@ class MyProfile extends Component {
 
                 <section id="my-profile" className={cx('section', 'container')}>
                     <div className={cx('col-md-7', 'col-md-offset-1')}>
-                      <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
+                      <form onSubmit={this.handleSubmit} className={cx('form')}>
                         <h6>Bio</h6>
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="name">Full name</label>
-                          </span>
-                          <span className={cx("col-xs-6")}>
-                            <input id="name" ref="name" type="text" value={this.state.name} onChange={this.previewProfile.bind(this)} required />
-                          </span>
-                        </fieldset>
 
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="email">Email</label>
-                          </span>
-                          <span className={cx("col-xs-6")}>
-                            {user.email}
-                          </span>
-                          <small className={cx("col-xs-6")}>So we can get in touch with you. Email is only visible to moderators</small>
-                        </fieldset>
+                        {fields}
 
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="oneLiner">One Liner</label>
-                          </span>
-                          <span className={cx("col-xs-6")}>
-                            <input id="oneLiner" ref="oneLiner" type="text" value={this.state.oneLiner} onChange={this.previewProfile.bind(this)} />
-                          </span>
-                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
-                        </fieldset>
-
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="linkedin">Linkedin Profile</label>
-                          </span>
-                          <span className={cx("col-xs-6")}>
-                            <input id="linkedin" ref="linkedin" type="url" value={this.state.linkedin} onChange={this.previewProfile.bind(this)} />
-                          </span>
-                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
-                        </fieldset>
-
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="twitter">Twitter @name</label>
-                          </span>
-                          <span className={cx("col-xs-6")}>
-                            <input id="twitter" ref="twitter" type="text" placeholder="@Reversim" value={this.state.twitter} onChange={this.previewProfile.bind(this)} />
-                          </span>
-                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
-                        </fieldset>
-
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="stackOverflow">Stack Overflow Profile</label>
-                          </span>
-                          <span className={cx("col-xs-6")}>
-                            <input id="stackOverflow" ref="stackOverflow" type="url" value={this.state.stackOverflow} onChange={this.previewProfile.bind(this)} />
-                          </span>
-                          <small className={cx("col-xs-6")}>Optional. will be presented on the website</small>
-                        </fieldset>
-
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="bio">Short Bio</label>
-                          </span>
-                          <span className={cx("col-xs-12")}>
-                          <textarea id="bio" ref="bio" value={this.state.bio} onChange={this.previewProfile.bind(this)} />
-                          </span>
-                        </fieldset>
-
-                        <fieldset>
-                          <span className={cx("col-xs-12")}>
-                            <label htmlFor="trackRecord">Track record as speaker</label>
-                          </span>
-                          <span className={cx("col-xs-6")}>
-                            <textarea id="trackRecord" ref="trackRecord" defaultValue={user.trackRecord} />
-                          </span>
-                          <small className={cx("col-xs-6")}>Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)</small>
-                        </fieldset>
-
-                        <fieldset className={cx("col-xs-2", "col-xs-offset-2")} style={{marginTop: '30px'}}>
-                          <input type="submit" value="save" className={cx('btn', 'btn-sm')} />
-                        </fieldset>
-
-                        <fieldset className={cx("col-xs-2", "col-xs-offset-2")} style={{marginTop: '30px'}}>
-                          <button title="cancel" className={cx('btn', 'btn-sm', 'btn-outline-clr')} onClick={this.cancel.bind(this)}>Cancel</button>
+                        <fieldset className="row">
+                          <div className="col-xs-2 col-xs-offset-2">
+                            <input type="submit" value="save" className={cx('btn', 'btn-sm')} style={{marginTop: '30px'}}/>
+                          </div>
+                          <div className="col-xs-2 col-xs-offset-2">
+                            <button title="cancel" className={cx('btn', 'btn-sm', 'btn-outline-clr')} onClick={this.cancel.bind(this)} style={{marginTop: '30px'}}>Cancel</button>
+                          </div>
                         </fieldset>
                       </form>
                     </div>

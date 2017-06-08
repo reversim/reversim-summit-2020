@@ -53,7 +53,7 @@ class Home extends Component {
         return (
           <div>
               <div className={cx('home')}>
-                <Navigation currentPath={this.props.location.pathname} />
+                <Navigation isHome={true} />
                 <Hero/>
                 {sectionElements}
                 <Footer tweets={this.props.reversimTweets} />

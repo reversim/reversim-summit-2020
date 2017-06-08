@@ -3,6 +3,7 @@ import passport from 'passport';
 import {transformUser, transformProposal} from './helpers';
 import _ from 'lodash';
 import cloudinary from 'cloudinary';
+import { teamMemberToken } from '../../../config/secrets';
 
 cloudinary.config({
   cloud_name: 'dtltonc5g',
@@ -71,8 +72,16 @@ export function signUp(req, res, next) {
  * Update a user
  */
 export function update(req, res) {
-  const omitKeys = ['id', '_id', '_v', 'google'];
+  const omitKeys = ['id', '_id', '_v', 'google', 'teamMemberToken'];
   const data = _.omit(req.body, omitKeys);
+
+  console.log("teamMemberToken: " + req.body.teamMemberToken);
+  console.log("teamMemberToken2: " + teamMemberToken);
+
+  if (req.body.teamMemberToken === teamMemberToken) {
+    data.isReversimTeamMember = true;
+  }
+
   console.log('update body is: '+JSON.stringify(data));
 
   User.findOneAndUpdate({ '_id': req.session.passport.user }, data, (err, user) => {
@@ -107,6 +116,15 @@ export function uploadProfilePicture(req, res) {
 
 }
 
+const reversimTeam = [
+  'Lidan Hifi',
+  'Amit Zur',
+  'Adam Matan',
+  'Shlomi Hassan',
+  'Ori Lahav',
+  'Ran Tavory'
+].map(x => x.toLowerCase());
+
 export function getReversimTeam(req, res) {
     //console.log('proposal all started...');
     User.find({ isReversimTeamMember: true }).exec((err, users) => {
@@ -116,7 +134,12 @@ export function getReversimTeam(req, res) {
           return res.status(500).send('Something went wrong');
         }
 
-        return res.json(users.map(u => transformUser(u, req.user)));
+        let ret = users
+          .sort((a,b) => {
+            return reversimTeam.indexOf(b.profile.name.toLowerCase()) - reversimTeam.indexOf(a.profile.name.toLowerCase());
+          })
+          .map(u => transformUser(u, req.user));
+        return res.json(ret);
     });
 }
 

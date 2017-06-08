@@ -342,31 +342,35 @@ ul.with-bullets ul {
   display: block;
 }
 
-header > .container {
+header:not(.not-home) > .container {
   top: 2.5em;
   transition: top 0.3s;
 }
 
-header.fixed {
+header:not(.not-home).fixed {
   background: rgba(255,255,255,0.95);
   box-shadow: 0 0 5px rgba(0, 0, 0, .2), 0 1px 0 rgba(255, 255, 255, .15);
   transition: background 0.3s;
 }
 
-header.fixed .container {
+header:not(.not-home).fixed .container {
   top: 0;
 }
 
-header.fixed .navigation-link {
+header:not(.not-home).fixed .navigation-link {
   color: #262627;
 }
 
-header.fixed .logo img {
+header:not(.not-home).fixed .logo img {
   filter: brightness(0.45);
 }
 
+header.not-home {
+  background: rgba(0,30,60,0.95);
+}
+
 @media (max-width: 767px) {
-  header > .container {
+  header:not(.not-home) > .container {
     top: 0;
   }
 
@@ -385,4 +389,8 @@ header.fixed .logo img {
   position: relative;
   letter-spacing: 1px;
   max-width: 80%;
+}
+
+.base-layout {
+  padding-top: 88px;
 }
