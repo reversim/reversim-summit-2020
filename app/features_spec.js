@@ -11,5 +11,6 @@ export default {
   viewSlides: false,
   sponsored: false,
   timelineFinalized: false,
-  preCFP: true
+  preCFP: true,
+  team: false
 }

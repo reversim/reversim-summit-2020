@@ -25,7 +25,7 @@ export default (allProps) => {
     { name: "timeline", el: Timeline, feature: 'timelineFinalized' },
     { name: "register", el: Register },
     { name: "proposals", el: Proposals, props: ['proposals', 'isReversimTeamMember'], feature: 'timelineFinalized' },
-    { name: "team", el: Team, props: ['user.team'] },
+    { name: "team", el: Team, props: ['user.team'], feature: "team" },
     { name: "sponsors", el: Sponsors, feature: 'sponsored' },
     { name: "location", el: Location, props: ['location'] },
     { name: "networking", el: Networking, feature: "networking" }

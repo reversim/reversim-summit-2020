@@ -1,7 +1,7 @@
 import features from 'features';
 
 const about = { to: "about", text: "About" };
-const team = { to: "team", text: "Team" };
+const team = { to: "team", text: "Team", feature: "team" };
 const location = { to: "location", text: "Location" };
 const schedule = { to: "schedule", text: "Schedule", feature: 'publishAgenda', noScroll: true };
 const timeline = { to: "timeline", text: "Timeline", feature: 'timelineFinalized' };
