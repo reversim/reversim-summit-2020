@@ -74,7 +74,7 @@ Home.propTypes = {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        proposals: !features('submission', false) ? _.chain(state.proposal.proposals).shuffle().take(4).value() : state.proposal.proposals,
+        proposals: state.proposal.proposals,
         acceptedProposals: features('publishAgenda', false) ? state.proposal.accepted : [],
         reversimTweets: state.tweets.reversim,
         speakers: state.proposal.speakers
