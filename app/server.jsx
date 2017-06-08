@@ -9,7 +9,7 @@ import preRenderMiddleware from 'middlewares/preRenderMiddleware';
 import ssrAuth from 'middlewares/preRenderAuthenticationMiddleware';
 import header from 'components/Meta';
 import removeMd from 'remove-markdown';
-import summitSocialLogo from 'images/summit2016_social.png';
+import summitSocialLogo from 'images/summit2017_social.png';
 import {setFeatureOverrides, parseFeatureOverridesFromQuery} from 'features';
 
 const clientConfig = {
