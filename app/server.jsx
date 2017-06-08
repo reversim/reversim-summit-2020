@@ -116,7 +116,7 @@ export default function render(req, res) {
           let socialTags;
           let baseUrl = req.protocol + '://' + req.get('host');
           if (req.url.match(/\/session\//g)) {
-            let title = 'Reversim Summit 2016';
+            let title = 'Reversim Summit 2017';
             if (initialState && initialState.proposal && initialState.proposal.currentProposal) {
               title = initialState.proposal.currentProposal.title;
             }
@@ -124,15 +124,15 @@ export default function render(req, res) {
             // add meta tags for social share- session page
             socialTags = [
               // search engines
-              {name: "description", content: "Reversim Summit 2016 Session"},
+              {name: "description", content: "Reversim Summit 2017 Session"},
 
               // twitter
               // { name: "twitter:card", content: "CARD" },
               {name: "twitter:title", content: title},
-              {name: "twitter:site", content: "Reversim Summit 2016"},
+              {name: "twitter:site", content: "Reversim Summit 2017"},
               {
                 name: "twitter:description",
-                content: "Reversim Summit 2016 Session"
+                content: "Reversim Summit 2017 Session"
               },
               {name: "twitter:image:src", content: baseUrl + summitSocialLogo},
 
@@ -141,9 +141,9 @@ export default function render(req, res) {
               {property: "og:title", content: title},
               {
                 property: "og:description",
-                content: "Reversim Summit 2016 Session"
+                content: "Reversim Summit 2017 Session"
               },
-              {property: "og:site_name", content: "Reversim Summit 2016"},
+              {property: "og:site_name", content: "Reversim Summit 2017"},
               {property: "og:image", content: baseUrl + summitSocialLogo},
               {property: "og:url", content: baseUrl + req.url},
             ]
@@ -151,8 +151,8 @@ export default function render(req, res) {
             socialTags = [
               // twitter
               {name: "twitter:card", content: "CARD"},
-              {name: "twitter:title", content: "Reversim Summit 2016"},
-              {name: "twitter:site", content: "Reversim Summit 2016"},
+              {name: "twitter:title", content: "Reversim Summit 2017"},
+              {name: "twitter:site", content: "Reversim Summit 2017"},
               {
                 name: "twitter:description",
                 content: "The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too."
@@ -161,13 +161,13 @@ export default function render(req, res) {
 
               // facebook
               {property: "og:type", content: "article"},
-              {property: "og:title", content: "Reversim Summit 2016"},
+              {property: "og:title", content: "Reversim Summit 2017"},
               {
                 property: "og:description",
                 content: "The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too."
               },
-              {property: "og:site_name", content: "Reversim Summit 2016"},
-              {property: "og:url", content: "http://summit2016.reversim.com"},
+              {property: "og:site_name", content: "Reversim Summit 2017"},
+              {property: "og:url", content: "http://summit2017.reversim.com"},
               {property: "og:image", content: baseUrl + summitSocialLogo},
             ]
           }
