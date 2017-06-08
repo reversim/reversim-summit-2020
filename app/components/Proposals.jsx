@@ -28,11 +28,11 @@ function renderProposal(proposal, i, isReversimTeamMember) {
   );
 }
 
-const Proposals = ({data, isReversimTeamMember}) => {
-  if (!data || data.length === 0) return null;
+const Proposals = ({proposals, isReversimTeamMember}) => {
+  if (!proposals || proposals.length === 0) return null;
 
-  const proposalsBlocks = data
-          .slice(0, Math.min(maxProposalsInSection, data.length))
+  const proposalsBlocks = _.shuffle(proposals)
+          .slice(0, Math.min(maxProposalsInSection, proposals.length))
           .map((proposal, i) => renderProposal(proposal, i, isReversimTeamMember));
 
   return (
@@ -44,7 +44,7 @@ const Proposals = ({data, isReversimTeamMember}) => {
         <br />
         { _.chunk(proposalsBlocks, 2).map((block, i) => <div key={i} className={cx("row")}>{block}</div>) }
         <div className={cx("container")}>
-          { data.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
+          { proposals.length > maxProposalsInSection ? <Link to="proposals" className={cx('btn', 'btn-outlibtn-sm')} style={{ margin: '20px 0 0' }}>More Proposals</Link> : undefined }
         </div>
       </div>
     </section>
