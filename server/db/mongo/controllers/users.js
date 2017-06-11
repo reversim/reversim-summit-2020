@@ -101,7 +101,7 @@ export function uploadProfilePicture(req, res) {
   cloudinary.uploader.upload(req.body.imageBinary, function(result) {
     console.log('uploadProfilePicture started...');
 
-    User.findOneAndUpdate({ '_id': req.body.id }, {'profile.picture': result.url}, (err, user) => {
+    User.findOneAndUpdate({ '_id': req.body.id }, {'profile.picture': result.secure_url}, (err, user) => {
       if (err) {
         console.log(`Error in users/uploadProfilePicture query: ${err}`);
         console.error('stack: '+err.stack);
@@ -110,7 +110,7 @@ export function uploadProfilePicture(req, res) {
 
       console.log('uploadProfilePicture successfully');
 
-      return res.status(200).send({message: 'uploadProfilePicture success', imageUrl: result.url});
+      return res.status(200).send({message: 'uploadProfilePicture success', imageUrl: result.secure_url});
     });
   });
 
