@@ -75,9 +75,6 @@ export function update(req, res) {
   const omitKeys = ['id', '_id', '_v', 'google', 'teamMemberToken'];
   const data = _.omit(req.body, omitKeys);
 
-  console.log("teamMemberToken: " + req.body.teamMemberToken);
-  console.log("teamMemberToken2: " + teamMemberToken);
-
   if (req.body.teamMemberToken === teamMemberToken) {
     data.isReversimTeamMember = true;
   }

@@ -4,9 +4,10 @@
 import _ from 'lodash';
 import Proposal from '../models/proposal';
 import User from '../models/user';
-import mongoose from 'mongoose';
+import { slackUrl } from '../../../config/secrets';
 import {transformProposal, transformUser} from './helpers';
 import shuffler from 'shuffle-seed';
+import request from 'axios';
 
 const shuffleProposals = true;
 
@@ -182,6 +183,38 @@ export function add(req, res) {
               }
             }
           );
+        });
+
+        Promise.all(proposal.speaker_ids.map(speaker_id => {
+          return User.findOne({ _id: speaker_id });
+        })).then(speakers => {
+
+          request({
+            url: slackUrl,
+            method: "POST",
+            data: {
+              username: "CFP Alert",
+              text: ":boom:we got us a new proposal!:boom:",
+              channel: "#cfp",
+              attachments: [
+                {
+                  title: proposal.title,
+                  author_name: speakers.map(speaker => speaker.profile.name).join(" & "),
+                  author_link: `https://summit2017.reversim.com/session/${proposal.id}`,
+                  author_icon: speakers[0].profile.picture
+                },
+                {
+                  "title": "tags",
+                  "color": "#ef6c00",
+                  "text": proposal.tags ? proposal.tags.join(", ") : ""
+                },
+                {
+                  text: proposal.abstract,
+                  color: "#0073cf"
+                }
+              ]
+            }
+          });
         });
 
         return res.status(200).send('OK');

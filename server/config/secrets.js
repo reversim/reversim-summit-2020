@@ -10,6 +10,7 @@ try {
 
 export const sessionSecret = process.env.SESSION_SECRET || 'Your Session Secret goes here';
 export const teamMemberToken = pass.TEAM_MEMBER_TOKEN || process.env.TEAM_MEMBER_TOKEN;
+export const slackUrl = pass.SLACK_URL || process.env.SLACK_URL;
 export const google = {
   clientID: pass.GOOGLE_CLIENTID || process.env.GOOGLE_CLIENTID,
   clientSecret: pass.GOOGLE_SECRET || process.env.GOOGLE_SECRET,
