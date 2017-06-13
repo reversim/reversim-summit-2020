@@ -36,8 +36,6 @@ export default class Hero extends React.Component {
   getLeftButton() {
     if (features('viewSlides', false)) {
       return <a href="#" className={cx('btn')}>VIDEOS (SOON)</a>;
-    } else if (features('preCFP')) {
-      return <a className={cx('btn')} href="https://groups.google.com/forum/#!forum/reversim-summit/join">Join the list to get updates</a>;
     } else if (features('startRegistration', false)) {
       return <a href="#" onClick={this.startRegistrationModal.bind(this)} className={cx('btn')}>GET TICKETS</a>;
     } else if (features('publishAgenda', false)) {
@@ -65,7 +63,7 @@ export default class Hero extends React.Component {
     if (features('viewSlides', false)) {
       return <span>The summit is over.<br/>Thanks to all the participants!<br/>See you in Reversim Summit 2018 !</span>
     } else if (features('preCFP')) {
-      return 'Coming Soon !';
+      return <div>Coming Soon !<a href="https://groups.google.com/forum/#!forum/reversim-summit/join" style={{marginTop: 14, display: "block", fontSize: "1rem", textDecoration: "underline"}}>Join the list to get updates</a></div>;
     } else if (features('startRegistration')) {
       return 'Tickets for Reversim Summit 2017 are available !'
     } else if (features('publishAgenda')) {
