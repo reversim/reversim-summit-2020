@@ -36,6 +36,8 @@ export default class Hero extends React.Component {
   getLeftButton() {
     if (features('viewSlides', false)) {
       return <a href="#" className={cx('btn')}>VIDEOS (SOON)</a>;
+    } else if (features('preCFP')) {
+      return <a className={cx('btn')} href="https://groups.google.com/forum/#!forum/reversim-summit/join">Join the list to get updates</a>;
     } else if (features('startRegistration', false)) {
       return <a href="#" onClick={this.startRegistrationModal.bind(this)} className={cx('btn')}>GET TICKETS</a>;
     } else if (features('publishAgenda', false)) {
