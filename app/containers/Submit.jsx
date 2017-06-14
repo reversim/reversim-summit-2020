@@ -202,7 +202,7 @@ class Submit extends Component {
 
         return (
             <BaseLayout currentPath={location.pathname} name="submission-page" background="rgb(192, 200, 203)" topBg="#3f7488">
-              <section id="submission-info" className={cx('section')}>
+              <section id="submission-info" className={cx('section', 'submission-info')}>
                 <div className={cx('container')}>
                   <div className={cx('row')}>
                     <div className={cx('col-md-8', 'col-md-offset-2')} style={{background: 'white', boxShadow: '0 1px 4px 0 rgba(0,0,0,0.37)', padding: 30}}>

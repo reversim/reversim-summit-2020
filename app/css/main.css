@@ -408,7 +408,7 @@ header.not-home {
   height: 300px;
 }
 
-#submission-info h5 {
+.submission-info h5 {
   background: #10a587;
   margin-left: -30px;
   margin-right: 150px;
@@ -417,7 +417,7 @@ header.not-home {
   color: white;
 }
 
-#submission-info h4 {
+.submission-info h4 {
   background: rgba(0,30,60,0.95);
   color: white;
   margin-left: -60px;
