@@ -1,18 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { goBack, push } from 'react-router-redux';
-import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
 import Speaker from 'components/Speaker';
 import {updateUser, uploadProfileImage} from 'actions/users';
 import NotificationSystem from 'react-notification-system';
+import FormField from 'components/FormField';
 import ga from 'react-ga';
 
-import styles from 'css/main';
+import { cx } from 'css/styles';
 
 import defaultPic from 'images/default_speaker.png'
-
-const cx = classNames.bind(styles);
 
 function onFileWrapperClick(event) {
   if (event.target.childNodes.length === 4) event.target.childNodes[3].click();
@@ -22,7 +20,7 @@ class MyProfile extends Component {
     constructor(props) {
         super(props);
 
-        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter, stackOverflow, trackRecord } } = props;
+        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter, stackOverflow, trackRecord, phone } } = props;
         if (!authenticated) {
           dispatch(push('/'))
         }
@@ -34,7 +32,8 @@ class MyProfile extends Component {
           linkedin,
           twitter,
           stackOverflow,
-          trackRecord
+          trackRecord,
+          phone
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,6 +50,7 @@ class MyProfile extends Component {
       const linkedin = formElements.linkedin.value;
       const twitter = formElements.twitter.value;
       const stackOverflow = formElements.stackOverflow.value;
+      const phone = formElements.phone.value;
       const teamMemberToken = window.location.hash.slice(1);
 
       const { dispatch, user: { authenticated, id, email }, location: { state } } = this.props;
@@ -63,6 +63,7 @@ class MyProfile extends Component {
           'profile.linkedin': linkedin,
           'profile.twitter': twitter,
           'profile.oneLiner': oneLiner,
+          'profile.phone': phone,
           'profile.stackOverflow': stackOverflow,
           teamMemberToken
         })).then(() => {
@@ -110,36 +111,8 @@ class MyProfile extends Component {
 
     }
 
-    renderField({ label, id, required, text, caption, subtitle, placeholder, inputType, multiline, fullRow }, index) {
-      if (caption === undefined && !required) {
-        caption = 'Optional. will be presented on the website';
-      }
-
-      let valueComp;
-
-      if (text) valueComp = text;
-      else valueComp = React.DOM[multiline ? 'textarea' : 'input']({
-        id,
-        ref: id,
-        type: inputType || "text",
-        value: this.state[id],
-        placeholder,
-        onChange: this.previewProfile.bind(this),
-        required
-      });
-
-      return (
-        <fieldset className="row" style={{ marginBottom: 15 }} key={index}>
-          <span className={cx("col-xs-12")}>
-            <label htmlFor={id}>{label}</label>
-            { subtitle ? <small className="text-muted">{subtitle}</small> : undefined }
-          </span>
-          <span className={cx(`col-xs-${fullRow ? '12' : '6'}`)}>
-            {valueComp}
-          </span>
-          { caption ? <small className={cx("col-xs-6")}>{caption}</small> : undefined }
-        </fieldset>
-      );
+    renderField(props, index) {
+      return <FormField key={index} {...props} value={this.state[props.id]} onChange={this.previewProfile.bind(this)}/>;
     }
 
     render() {
@@ -151,6 +124,7 @@ class MyProfile extends Component {
           { label: "LinkedIn profile", id: "linkedin", inputType: "url" },
           { label: "Twitter handle", id: "twitter", placeholder: "@Reversim" },
           { label: "Stack Overflow profile", id: "stackOverflow", inputType: "url" },
+          { label: "Phone number", id: "phone", inputType: "tel" },
           { label: "Short Bio", id: "bio", multiline: true, fullRow: true, caption: null },
           { label: "Track record as speaker", id: "trackRecord", multiline: true, subtitle: 'Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)', caption: null, fullRow: true },
         ].map(this.renderField.bind(this));
@@ -184,7 +158,7 @@ class MyProfile extends Component {
                                linkedin={this.state.linkedin}
                                twitter={this.state.twitter}
                                stackOverflow={this.state.stackOverflow} />
-                      <button className={cx("btn", "btn-sm", "col-xs-12")} style={{'letter-spacing':'0.3em'}} onClick={onFileWrapperClick}>
+                      <button className={cx("btn", "btn-sm", "col-xs-12")} style={{ letterSpacing: '0.3em'}} onClick={onFileWrapperClick}>
                         Upload Picture (1MB max size)
                         <input type='file' className={cx('hidden')} onChange={this.onImageSelected.bind(this)}/>
                       </button>

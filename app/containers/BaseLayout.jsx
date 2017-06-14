@@ -4,10 +4,11 @@ import Footer from 'components/Footer';
 
 import { cx } from 'css/styles';
 
-const BaseLayout = ({name, currentPath, children}) => {
+const BaseLayout = ({name, currentPath, background, topBg, children}) => {
   return (
-      <div className={cx(name, 'base-layout')}>
+      <div className={cx(name, 'base-layout')} style={{background}}>
         <Navigation isHome={currentPath === '/'} />
+        { topBg ? <div className={cx('base-layout-bg-top')} style={{background: topBg}}/> : undefined }
         {children}
         <Footer />
       </div>

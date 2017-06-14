@@ -28,7 +28,8 @@ export function transformUser(user, loggedInUser, overrideDetails) {
       picture: user.profile && user.profile.picture,
       linkedin: user.profile && user.profile.linkedin,
       twitter: user.profile && user.profile.twitter,
-      stackOverflow: user.profile && user.profile.stackOverflow
+      stackOverflow: user.profile && user.profile.stackOverflow,
+      phone: user.profile && user.profile.phone
     };
   }
 

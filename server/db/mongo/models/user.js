@@ -22,6 +22,7 @@ const UserSchema = new mongoose.Schema({
     oneLiner: { type: String, default: '' },
     bio: { type: String, default: '' },
     gender: { type: String, default: '' },
+    phone: { type: String, default: '' },
     location: { type: String, default: '' },
     website: { type: String, default: '' },
     picture: { type: String, default: '' },

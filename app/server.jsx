@@ -47,6 +47,7 @@ export default function render(req, res) {
       linkedin: req.user && req.user.profile.linkedin,
       twitter: req.user && req.user.profile.twitter,
       stackOverflow: req.user && req.user.profile.stackOverflow,
+      phone: req.user && req.user.profile.phone,
       id: req.user && req.user._id,
       proposals: req.user && req.user.proposals
     }
