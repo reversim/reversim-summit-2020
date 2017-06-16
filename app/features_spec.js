@@ -12,5 +12,5 @@ export default {
   sponsored: false,
   timelineFinalized: false,
   preCFP: true,
-  team: false
+  team: true
 }
