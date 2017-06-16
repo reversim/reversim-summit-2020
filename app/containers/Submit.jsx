@@ -16,7 +16,7 @@ const Title = (props) => {
     <div className={cx('align-center')}>
       <span data-icon className={cx('icon', 'section-icon', 'icon-multimedia-12')}></span>
       <h3>Reversim Summit 2016 - Submission</h3>
-      <p className={cx("text-alt")}>{ features('submission', false) ? 'Read carefully before submission!' : 'Call for papers is now closed' }</p>
+      <p className={cx("text-alt")} style={{ margin: 20}}>{ features('submission', false) ? 'Read carefully before submission!' : 'Call for papers is now closed' }</p>
     </div>
   )
 };
@@ -64,7 +64,7 @@ const Topics = (props) => {
 
 const Faq = (props) => {
   return (
-    <div style={{marginTop: '50px'}}>
+    <div style={{marginTop: 40}}>
       <h4>FAQ</h4>
       <span className={cx('h7')}>What Language?</span>
       <p>C. Just kidding. The default language is Hebrew. This is not an international event, it's a local event for local developers and by local developers. There are awesome developers here in Israel. Having said that, if you as a speaker would prefer to speak in English that's totally fine.</p>
@@ -87,11 +87,14 @@ class Submit extends Component {
         }
 
         this.state = {
-          proposalType: 'full'
+          proposalType: 'full',
+          abstractLen: 0,
+          abstractErr: true
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleProposalTypeChange = this.handleProposalTypeChange.bind(this);
+        this.onChangeAbstract = this.onChangeAbstract.bind(this)
     }
 
     handleProposalTypeChange(event) {
@@ -116,6 +119,13 @@ class Submit extends Component {
         const proposalType = this.state.proposalType;
         const abstract = formElements.abstract.value;
 
+        if (abstract.length > 800 || abstract.length < 400) {
+          const y = formElements.abstract.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 150;
+          window.scrollTo(0, y);
+          formElements.abstract.focus();
+          return;
+        }
+
         dispatch(updateUser({
           'profile.name': fullname,
           'profile.bio': bio,
@@ -133,6 +143,16 @@ class Submit extends Component {
       }
     }
 
+    onChangeAbstract(e) {
+      const val = e.target.value;
+      const abstractLen = val.length;
+      const abstractErr = val.length < 400 ? 'low' : val.length > 800 ? 'high' : null;
+      this.setState({
+        abstractLen,
+        abstractErr
+      });
+    }
+
     renderSubmissionForm() {
       const { user } = this.props;
 
@@ -143,7 +163,7 @@ class Submit extends Component {
       ];
 
       return (
-        <div style={{marginTop: '50px'}}>
+        <div style={{marginTop: 40}}>
           <h4>Submission</h4>
           <p>You may submit up to 3 proposals.</p>
           <p>Call for paper ends: <strong>July 20th midnight UTC</strong>. No kidding.</p>
@@ -153,8 +173,8 @@ class Submit extends Component {
 
             <h6>Public information</h6>
             <small>The following information will be presented in the website</small>
-            <FormField id="fullname" label="Full name" required={true} placeholder="Your name" value={user.name}/>
-            <FormField id="oneLiner" label="One Liner" value={user.oneLiner} />
+            <FormField id="fullname" label="Full name" required={true} placeholder="Your name" value={user.name} />
+            <FormField id="oneLiner" label="One Liner" value={user.oneLiner} maxLength={100} subtitle="Maximum 100 characters"/>
             <FormField id="linkedin" label="Linkedin Profile" value={user.linkedin} inputType="url"/>
             <FormField id="twitter" label="Twitter @name" value={user.twitter} placeholder="@Reversim"/>
             <FormField id="bio" label="Short Bio" value={user.bio} placeholder="" required={true} multiline={true} fullRow={true}/>
@@ -162,18 +182,18 @@ class Submit extends Component {
 
             <h6>Private information</h6>
             <small>The following information will be available <b>only to the organizing committee</b></small>
-            <FormField id="email" label="Email" text={user.email} caption="So we can get in touch with you. Email is only visible to moderators" />
+            <FormField id="email" label="Email" text={user.email} required={true}/>
             <FormField id="phone" label="Phone number" required={true} placeholder="05x-xxxxxxx" value={user.phone}/>
             <FormField id="trackRecord" label="Track record as speaker" value={user.trackRecord} placeholder="" required={true} multiline={true} fullRow={true} subtitle="Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)"/>
 
             <h5>Talk proposal</h5>
-            <small>Tell us about your talk</small>
+            <small style={{marginBottom:24}}>Tell us about your talk</small>
 
             <h6>Public information</h6>
             <small>The following information will be presented in the website</small>
             <FormField id="title" label="Title" required={true} placeholder="Title of your talk" maxLength="100"/>
             <FormField id="proposalType" inputType="radio" required={true} onChange={this.handleProposalTypeChange.bind(this)} values={proposalTypes} value={this.state.proposalType}/>
-            <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder="Between 500-800 characters" subtitle="Markdown syntax is supported. You can edit your proposal at any given time during the CFP period." fullRow={true} caption={null}/>
+            <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder="Between 500-800 characters" subtitle={<span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><span className={cx({'abstract-err': this.state.abstractErr})}>{this.state.abstractLen}/800</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
 
             <h6>Private information</h6>
             <small>The following information will be available <b>only to the organizing committee</b></small>
@@ -191,7 +211,7 @@ class Submit extends Component {
 
     renderSubmissionClosed() {
       return (
-        <div style={{marginTop: '50px'}} className={cx('col-md-12', 'col-md-offset-2')}>
+        <div style={{marginTop: 40}} className={cx('col-md-12', 'col-md-offset-2')}>
           <h6>Call for papers is closed for submission. You can view the submitted proposals <Link to="proposals">here</Link>.</h6>
         </div>
       );

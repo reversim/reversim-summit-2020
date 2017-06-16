@@ -19,7 +19,7 @@ const Radio = ({ id, value, values: radioValues, onChange }) => {
 };
 
 
-export default ({ label, id, required, text, caption, subtitle, placeholder, inputType, multiline, fullRow, onChange, value, values }) => {
+export default ({ label, id, required, text, caption, subtitle, placeholder, inputType, multiline, fullRow, onChange, value, values, minLength, maxLength }) => {
   if (inputType === "radio") return (
     <Radio {...{ id, value, values, onChange }} />
   );
@@ -37,7 +37,9 @@ export default ({ label, id, required, text, caption, subtitle, placeholder, inp
     defaultValue: value,
     placeholder,
     onChange,
-    required
+    required,
+    minLength,
+    maxLength
   });
 
   return (

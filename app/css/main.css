@@ -410,10 +410,9 @@ header.not-home {
 
 .submission-info h5 {
   background: #10a587;
-  margin-left: -30px;
-  margin-right: 150px;
   padding-left: 30px;
   line-height: 1.5;
+  margin: 30px 150px 6px -30px;
   color: white;
 }
 
@@ -423,5 +422,15 @@ header.not-home {
   margin-left: -60px;
   padding-left: 30px;
   margin-right: 80px;
+  margin-bottom: 25px;
   line-height: 1.5;
+}
+
+.submission-info h5 + small,
+.submission-info h6 + small {
+  margin-bottom: 24px;
+}
+
+.abstract-err {
+  color: red;
 }
