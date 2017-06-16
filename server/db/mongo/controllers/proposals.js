@@ -8,6 +8,7 @@ import { slackUrl } from '../../../config/secrets';
 import {transformProposal, transformUser} from './helpers';
 import shuffler from 'shuffle-seed';
 import request from 'axios';
+import ENV from '../../../config/appConfig';
 
 const shuffleProposals = true;
 
@@ -195,7 +196,7 @@ export function add(req, res) {
             data: {
               username: "CFP Alert",
               text: ":boom:we got us a new proposal!:boom:",
-              channel: "#cfp",
+              channel: ENV === 'development' ? null : "#cfp",
               attachments: [
                 {
                   title: proposal.title,
