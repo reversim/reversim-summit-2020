@@ -190,19 +190,21 @@ export function add(req, res) {
           return User.findOne({ _id: speaker_id });
         })).then(speakers => {
 
+          const authorName = speakers.map(speaker => speaker.profile.name).join(" & ");
           request({
             url: slackUrl,
             method: "POST",
             data: {
               username: "CFP Alert",
-              text: ":boom:we got us a new proposal!:boom:",
-              channel: ENV === 'development' ? null : "#cfp",
+              text: `${authorName} submitted: ${proposal.title}`,
+              channel: ENV === 'production' ? "#cfp" : null,
               attachments: [
                 {
                   title: proposal.title,
-                  author_name: speakers.map(speaker => speaker.profile.name).join(" & "),
+                  author_name: authorName,
                   author_link: `https://summit2017.reversim.com/session/${proposal.id}`,
-                  author_icon: speakers[0].profile.picture
+                  author_icon: speakers[0].profile.picture,
+                  text: speakers[0].email
                 },
                 {
                   "title": "tags",
