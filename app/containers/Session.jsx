@@ -205,7 +205,7 @@ class Session extends Component {
                   </div>
                 </section>
 
-                <section id="session-info" className={cx('section', 'container')}>
+                <section id="session-info" className={cx('section', 'container')} style={{marginTop:24}}>
 
                   { currentProposal && currentProposal.status === 'archived' ? archivedWarning : undefined }
 
@@ -213,7 +213,7 @@ class Session extends Component {
                     { sessionBody }
                   </div>
 
-                  <div className={cx('col-md-4', 'col-md-offset-1')}>
+                  <div className={cx('col-md-4', 'col-md-offset-1')} style={{marginBottom:24}}>
                     { speakers }
                   </div>
                 </section>
@@ -221,8 +221,6 @@ class Session extends Component {
     }
 
     render() {
-        const { currentProposal } = this.props;
-
         return (
             <BaseLayout currentPath={this.props.location.pathname} name="session-page">
                 <NotificationSystem ref="notificationSystem" style={{ NotificationItem: { DefaultStyle: { marginTop: '120px', padding: '20px' } } } } />

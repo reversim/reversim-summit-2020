@@ -61,7 +61,7 @@ class MyProposals extends Component {
                 </div>
               </section>
 
-              <section id="my-proposals" className={cx('section', 'container')}>
+              <section id="my-proposals" className={cx('section', 'container')} style={{marginTop:24}}>
                   <div className={cx('col-md-7', 'col-md-offset-1')}>
                     {proposalsBlocks}
                   </div>
