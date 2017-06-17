@@ -42,16 +42,18 @@ export default ({ label, id, required, text, caption, subtitle, placeholder, inp
     maxLength
   });
 
+  const valueClass = fullRow ? 'col-xs-12' : ['col-xs-12', 'col-sm-6'];
+
   return (
-    <fieldset className="row" style={{ marginBottom: 15 }}>
+    <fieldset className="row">
       <span className={cx("col-xs-12")}>
         <label htmlFor={id}>{label}</label>
         { subtitle ? <small style={{display:'block'}}className="text-muted">{subtitle}</small> : undefined }
       </span>
-      <span className={cx(`col-xs-${fullRow ? '12' : '6'}`)}>
+      <span className={cx(valueClass)}>
         {valueComp}
       </span>
-      { caption ? <small className={cx("col-xs-6")}>{caption}</small> : undefined }
+      { caption ? <small className={cx("col-sm-6")}>{caption}</small> : undefined }
     </fieldset>
   );
 };

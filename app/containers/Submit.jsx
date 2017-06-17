@@ -200,7 +200,7 @@ class Submit extends Component {
             <FormField id="outline" label="Outline" required={true} multiline={true} placeholder="TODO: length (it will be funny if this stays after release :)" subtitle="Describe the topics you will cover and an outline of the story you are telling. Include timing and slide details." fullRow={true} caption={null}/>
 
             <fieldset className={cx("row")} style={{marginTop: '30px'}}>
-              <div className={cx("col-xs-4", "col-xs-offset-3")}>
+              <div className={cx("text-center")}>
                 <input type="submit" value="submit" className={cx('btn', 'btn-lg')} />
               </div>
             </fieldset>
@@ -225,7 +225,7 @@ class Submit extends Component {
               <section id="submission-info" className={cx('section', 'submission-info')}>
                 <div className={cx('container')}>
                   <div className={cx('row')}>
-                    <div className={cx('col-md-8', 'col-md-offset-2')} style={{background: 'white', boxShadow: '0 1px 4px 0 rgba(0,0,0,0.37)', padding: 30}}>
+                    <div className={cx('col-xs-10', 'col-xs-offset-1', 'col-sm-8', 'col-sm-offset-2')} style={{background: 'white', boxShadow: '0 1px 4px 0 rgba(0,0,0,0.37)', padding: 30}}>
                       <Title/>
                       <Topics/>
                       <Faq/>
