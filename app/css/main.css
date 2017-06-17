@@ -447,4 +447,9 @@ fieldset.row {
   fieldset.row input {
     margin-bottom: 0;
   }
+
+  .btn-sm-center {
+    margin: 12px auto;
+  }
 }
+

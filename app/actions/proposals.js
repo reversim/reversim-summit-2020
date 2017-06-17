@@ -41,7 +41,8 @@ export function createProposalRequest(data) {
         title: data.title,
         abstract: data.abstract,
         proposalType: data.type,
-        speaker_ids: data.speaker_ids
+        speaker_ids: data.speaker_ids,
+        tags: data.tags
     };
 }
 
@@ -153,7 +154,7 @@ export function updateProposal(id, data) {
   };
 }
 
-export function createProposal(title, abstract, type, speaker_ids) {
+export function createProposal(title, abstract, type, speaker_ids, tags) {
     return (dispatch, getState) => {
         // If the text box is empty
         // if (text.trim().length <= 0) return;
@@ -167,7 +168,8 @@ export function createProposal(title, abstract, type, speaker_ids) {
             title,
             abstract,
             type,
-            speaker_ids
+            speaker_ids,
+            tags
         };
 
         // Conditional dispatch

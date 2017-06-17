@@ -2,12 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import BaseLayout from 'containers/BaseLayout';
-import {createProposal} from 'actions/proposals';
+import {createProposal, fetchTags} from 'actions/proposals';
 import { push } from 'react-router-redux';
+import { findBestMatch } from 'string-similarity';
 import {updateUser} from 'actions/users';
 import ga from 'react-ga';
 import features from 'features';
 import FormField from 'components/FormField';
+import Tags from 'components/Tags';
+import Rodal from 'components/Rodal';
+
 
 import { cx } from 'css/styles';
 
@@ -78,6 +82,10 @@ const Faq = (props) => {
 
 class Submit extends Component {
 
+    static need = [
+      fetchTags
+    ];
+
     constructor(props) {
         super(props);
 
@@ -89,12 +97,15 @@ class Submit extends Component {
         this.state = {
           proposalType: 'full',
           abstractLen: 0,
-          abstractErr: true
+          abstractErr: true,
+          tags: []
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleProposalTypeChange = this.handleProposalTypeChange.bind(this);
-        this.onChangeAbstract = this.onChangeAbstract.bind(this)
+        this.onChangeAbstract = this.onChangeAbstract.bind(this);
+        this.onAddTag = this.onAddTag.bind(this);
+        this.onDeleteTag = this.onDeleteTag.bind(this);
     }
 
     handleProposalTypeChange(event) {
@@ -118,6 +129,7 @@ class Submit extends Component {
         const title = formElements.title.value;
         const proposalType = this.state.proposalType;
         const abstract = formElements.abstract.value;
+        const tags = this.state.tags.map(tag => tag.text);
 
         if (abstract.length > 800 || abstract.length < 400) {
           const y = formElements.abstract.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 150;
@@ -134,7 +146,7 @@ class Submit extends Component {
           'profile.twitter': twitter,
           'profile.oneLiner': oneLiner
         }))
-        .then(() => dispatch(createProposal(title, abstract, proposalType, [id])))
+        .then(() => dispatch(createProposal(title, abstract, proposalType, [id], tags)))
         .then((result) => dispatch(push(`/session/${result.id}`)))
         .catch(e => ga.exception({
           description: `Error on submit: ${e}`,
@@ -153,8 +165,37 @@ class Submit extends Component {
       });
     }
 
+    onAddTag(tag) {
+      if (this.props.tagSuggestions.indexOf(tag) === -1) {
+        this.setState({ newTagPending: tag });
+      } else {
+        this.addTag(tag);
+      }
+    }
+
+    addTag(tag) {
+      let tags = this.state.tags;
+      tags.push({
+        id: tags.length + 1,
+        text: tag
+      });
+      this.setState({tags: tags});
+    }
+
+    onDeleteTag(i) {
+      let tags = this.state.tags;
+      tags.splice(i, 1);
+      this.setState({tags: tags});
+    }
+
     renderSubmissionForm() {
-      const { user } = this.props;
+      const { user, tagSuggestions } = this.props;
+      const { tags, proposalType, abstractErr, abstractLen, newTagPending } = this.state;
+      let bestMatch;
+
+      if (newTagPending) {
+        bestMatch = findBestMatch(newTagPending, tagSuggestions).bestMatch.target;
+      }
 
       const proposalTypes = [
         { value: "full", text: "Full Featured (30-40 min.)" },
@@ -192,8 +233,20 @@ class Submit extends Component {
             <h6>Public information</h6>
             <small>The following information will be presented in the website</small>
             <FormField id="title" label="Title" required={true} placeholder="Title of your talk" maxLength="100"/>
-            <FormField id="proposalType" inputType="radio" required={true} onChange={this.handleProposalTypeChange.bind(this)} values={proposalTypes} value={this.state.proposalType}/>
-            <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder="Between 500-800 characters" subtitle={<span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><span className={cx({'abstract-err': this.state.abstractErr})}>{this.state.abstractLen}/800</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
+            <FormField id="proposalType" inputType="radio" required={true} onChange={this.handleProposalTypeChange.bind(this)} values={proposalTypes} value={proposalType}/>
+            <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder="Between 500-800 characters" subtitle={<span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><span className={cx({'abstract-err': abstractErr})}>{abstractLen}/800</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
+            <Tags tags={tags} suggestions={tagSuggestions} handleAddition={this.onAddTag} handleDelete={this.onDeleteTag} readOnly={this.state.tags.length===2}/>
+            <Rodal visible={!!newTagPending} onClose={() => { this.setState({ newTagPending: null })}}>
+              <div style={{textAlign: 'center'}}>
+                <h6 style={{marginTop:16}}>Before you add a new tag...</h6>
+                <p>There might be an existing tag like this already.</p>
+                { bestMatch ? <p>Did you mean <b>{bestMatch}</b>?</p> : undefined }
+                <div style={{marginTop:24}}>
+                  { bestMatch ? <button style={{ textTransform: 'none', letterSpacing: 1, fontWeight:400}} className={cx('btn', 'btn-sm', 'btn-sm-center')} onClick={(e) => { e.preventDefault(); this.addTag(bestMatch); this.setState({ newTagPending:null }); }}>Add <b>{bestMatch}</b></button> : undefined }
+                  <button style={{ textTransform: 'none', letterSpacing: 1, fontWeight:400}} className={cx('btn', 'btn-outline-clr', 'btn-sm', 'btn-sm-center')} onClick={(e) => { e.preventDefault(); this.addTag(newTagPending); this.setState({ newTagPending:null }); }}>Add <b>{newTagPending}</b></button>
+                </div>
+              </div>
+            </Rodal>
 
             <h6>Private information</h6>
             <small>The following information will be available <b>only to the organizing committee</b></small>
@@ -246,7 +299,8 @@ Submit.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+      user: state.user,
+      tagSuggestions: state.proposal.tags
     };
 }
 
