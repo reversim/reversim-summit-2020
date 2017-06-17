@@ -29,7 +29,13 @@ const Topics = (props) => {
   return (
     <div>
       <h4>Topics</h4>
-      <p>You may get a good sense of the topics we're interested in by looking into previous events: <a href="http://summit2013.reversim.com">Reversim Summit 2013</a> and <a href="http://summit2014.reversim.com">Reversim Summit 2014</a> and <a href="http://summit2015.reversim.com">Reversim Summit 2015</a>.</p>
+      <p>You may get a good sense of the topics we're interested in by looking into previous events:</p>
+      <ul>
+        <li><a href="http://summit2013.reversim.com">Reversim Summit 2013</a></li>
+        <li><a href="http://summit2014.reversim.com">Reversim Summit 2014</a></li>
+        <li><a href="http://summit2015.reversim.com">Reversim Summit 2015</a></li>
+        <li><a href="http://summit2016.reversim.com">Reversim Summit 2016</a></li>
+      </ul>
       <p>Apart from that, here's a good grocery list of topics just to give you ideas. We are interested in everything including:</p>
       <div className={cx('container')}>
         <ul className={cx('with-bullets', 'col-md-4')}>
@@ -52,10 +58,11 @@ const Topics = (props) => {
       <p>There is no predefined list of topics, if you’d like to speak about something interesting, we want it!</p>
       <p>We do not set out with a predefined list of tracks. We would like to leave the topics (tracks) open and only after accepting the submissions we will split the sessions into tracks, but we shall not rule out a single good session just b/c it's not a natural fit to any of the predefined list, so don't worry so much about categorizing your submissions.</p>
       <p>Generally speaking - we are not looking for “intro to something software” or “something software 101”. We’re looking for something of greater depth. However, we are open to session “intro to something that isn’t software”, as long is this something is of general interest, for example “intro to moonwalking and breakdance”</p>
+      <p>We are looking for deep, hard-core technical sessions which exemplify outstanding and unique work or learnings which derive from your personal experience.</p>
       <br /><p>There are three possible session types you may submit:</p>
 
       <h6>Full Featured sessions (30-40 minutes)</h6>
-      <p>Full feature are frontal presentations b/w 30 - 40 minutes. They will be held either in the large room (500 ppl) or the small room (200 ppl) in two parallel tracks.</p>
+      <p>Full feature are frontal presentations b/w 30 - 40 minutes. They will be held either in the large room (500 attendees) or the small room (200 attendees) in two parallel tracks.</p>
       <br />
       <h6>Lightning Sessions (5 minutes)</h6>
       <p>Lightning are speedy 5 min sessions. They will be presented in a series in which each presenter has exactly 20 slides, 15 sec per slide, slides are auto advanced and in total 5 min. No break b/w the sessions. It's fun, it's speedy, it's concise and it's breathtaking :-)</p>
@@ -72,7 +79,7 @@ const Faq = (props) => {
       <h4>FAQ</h4>
       <span className={cx('h7')}>What Language?</span>
       <p>C. Just kidding. The default language is Hebrew. This is not an international event, it's a local event for local developers and by local developers. There are awesome developers here in Israel. Having said that, if you as a speaker would prefer to speak in English that's totally fine.</p>
-      <p>If you are a non Israeli speaker and would like to present in this conference, you are most welcome, that's perfectly fine, you may do so in English, just be aware that most of the contents is going to be in Hebrew.</p>
+      <p>Non-Hebrew speakers are most welcome, but bear in mind that most of the contents is going to be in Hebrew.</p>
       <br />
       <span className={cx('h7')}>What do you get for X?</span>
       <p>Registration will open about a month before the event. If you've registered on time, all is well. If not, <strong>every submitter gets a single personal ticket</strong>, regardless of whether your session got accepted or not (assuming quality submission). <strong>Accepted speakers get a personal ticket +1</strong> (so you can do a friend a favor)</p>
@@ -222,7 +229,7 @@ class Submit extends Component {
             <FormField id="phone" label="Phone number" required={true} placeholder="05x-xxxxxxx" value={user.phone}/>
             <FormField id="trackRecord" label="Track record as speaker" value={user.trackRecord} placeholder="" required={true} multiline={true} fullRow={true} subtitle="Your speaker track record will vastly improve your chances of getting accepted. The track record should include links to your presentations, most preferable videos of them (plus slides)"/>
 
-            <h5>Talk proposal</h5>
+            <h5>Session proposal</h5>
             <small style={{marginBottom:24}}>Tell us about your talk</small>
 
             <h6>Public information</h6>
@@ -245,7 +252,7 @@ class Submit extends Component {
 
             <h6>Private information</h6>
             <small>The following information will be available <b>only to the organizing committee</b></small>
-            <FormField id="outline" label="Outline" required={true} multiline={true} placeholder="TODO: length (it will be funny if this stays after release :)" subtitle="Describe the topics you will cover and an outline of the story you are telling. Include timing and slide details." fullRow={true} caption={null}/>
+            <FormField id="outline" label="Outline" required={true} multiline={true} placeholder="" subtitle="Describe the outline of your session. An outline is a single bullet per planned slide with a short sentence of what the slide is about. (it’s OK to later change it, but please lay out your current plan). This is crucial information for being able to accept your session so please provide quality outline. Sessions with low quality outline will unfortunately not be considered." fullRow={true} caption={null}/>
 
             <fieldset className={cx("row")} style={{marginTop: '30px'}}>
               <div className={cx("text-center")}>
