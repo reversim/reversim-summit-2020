@@ -89,11 +89,6 @@ class Submit extends Component {
     constructor(props) {
         super(props);
 
-        const {dispatch, user: { authenticated }} = props;
-        if (!authenticated) {
-          dispatch(push('/'))
-        }
-
         this.state = {
           proposalType: 'full',
           abstractLen: 0,
@@ -264,14 +259,32 @@ class Submit extends Component {
 
     renderSubmissionClosed() {
       return (
-        <div style={{marginTop: 40}} className={cx('col-md-12', 'col-md-offset-2')}>
+        <div style={{marginTop: 40}} className={cx('col-md-10', 'col-md-offset-1')}>
           <h6>Call for papers is closed for submission. You can view the submitted proposals <Link to="proposals">here</Link>.</h6>
         </div>
       );
     }
 
+    renderNonAuthenticated() {
+        return (
+          <div style={{textAlign:'center'}}>
+            <hr/>
+            <h6>Login with Google is required in order to submit a proposal</h6>
+            <a style={{backgroundColor:"#4cae4c"}} href="/auth/google" className={cx("btn", "btn-info", "btn-outline-clr1", "buy-btn")}>Login</a>
+          </div>
+        );
+    }
+
     render() {
-        const { location } = this.props;
+        const { location, user: { authenticated } } = this.props;
+        let bottomContent;
+        if (!authenticated) {
+          bottomContent = this.renderNonAuthenticated();
+        } else if (features('submission', false)) {
+          bottomContent = this.renderSubmissionForm();
+        } else {
+          this.renderSubmissionClosed()
+        }
 
         return (
             <BaseLayout currentPath={location.pathname} name="submission-page" background="rgb(192, 200, 203)" topBg="#3f7488">
@@ -282,7 +295,7 @@ class Submit extends Component {
                       <Title/>
                       <Topics/>
                       <Faq/>
-                      { features('submission', false) ? this.renderSubmissionForm() : this.renderSubmissionClosed() }
+                      { bottomContent }
                     </div>
                   </div>
                 </div>

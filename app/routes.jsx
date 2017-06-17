@@ -52,7 +52,7 @@ export default (store) => {
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="/login" component={LoginOrRegister} onEnter={redirectAuth} />
-        <Route path="/submit" component={Submit} onEnter={requireAuth} />
+        <Route path="/submit" component={Submit} />
         <Route path="/session/:id" component={Session} />
         <Route path="/my-proposals" component={MyProposals} onEnter={requireAuth} />
         <Route path="/proposals" component={AllProposals} />
