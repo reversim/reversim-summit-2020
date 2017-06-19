@@ -11,6 +11,7 @@ import header from 'components/Meta';
 import removeMd from 'remove-markdown';
 import summitSocialLogo from 'images/summit2017_social.png';
 import {setFeatureOverrides, parseFeatureOverridesFromQuery} from 'features';
+import { GOOGLE_MAPS_TOKEN } from '../server/config/appConfig';
 
 const clientConfig = {
   host: process.env.HOSTNAME || 'localhost',
@@ -189,7 +190,7 @@ export default function render(req, res) {
       window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
       window.__FT_OVERRIDES__ = ${JSON.stringify(featureOverrides)};
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=${GOOGLE_MAPS_TOKEN}"></script>
     <script type="text/javascript" charset="utf-8" src="/assets/app.js"></script>
   </body>
   </html>
