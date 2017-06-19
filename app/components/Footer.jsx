@@ -10,18 +10,18 @@ const cx = classNames.bind(styles);
 
 class Footer extends Component {
 
-    static need = [  // eslint-disable-line
-        fetchReversimTweets
-    ];
+    // static need = [  // eslint-disable-line
+    //     fetchReversimTweets
+    // ];
 
     constructor(props) {
         super(props);
     }
 
-    componentWillMount() {
-      const { dispatch } = this.props;
-      dispatch(fetchReversimTweets());
-    }
+    // componentWillMount() {
+    //   const { dispatch } = this.props;
+    //   dispatch(fetchReversimTweets());
+    // }
 
     render() {
       const { reversimTweets } = this.props
