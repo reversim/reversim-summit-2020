@@ -7,12 +7,13 @@ const DB_TYPES = require('./constants').DB_TYPES;
  * - POSTGRES: Postgresql
  * - NONE: There is no DB connection
  */
-
+var fs = require("fs");
+var path = require("path");
 let pass = {};
 try {
-  pass = require('../../.private/pass.json');
+  pass = JSON.parse(fs.readFileSync(path.resolve('.private', 'pass.json')).toString());
 } catch(ex) {
-  console.log("Couldn't find local pass file. Relying on env (2)");
+  console.log("Couldn't find local pass file. Relying on env (2)", ex);
 }
 
 function defaultExport() {}
