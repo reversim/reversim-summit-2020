@@ -6495,7 +6495,7 @@ react-sticky@^5.0.2:
 
 react-tag-input@amitzur/react-tags:
   version "4.7.1"
-  resolved "https://codeload.github.com/amitzur/react-tags/tar.gz/a6cd869b8992f2f0dea8c9bdf83a8f2522bd130a"
+  resolved "https://codeload.github.com/amitzur/react-tags/tar.gz/321080ee9ffdf2a99cc38967b91d243f955309d0"
   dependencies:
     lodash "^4.14.1"
     prop-types "^15.5.8"

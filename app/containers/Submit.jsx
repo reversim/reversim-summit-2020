@@ -11,9 +11,19 @@ import features from 'features';
 import FormField from 'components/FormField';
 import Tags from 'components/Tags';
 import Rodal from 'components/Rodal';
+import _ from 'lodash';
 
 
 import { cx } from 'css/styles';
+
+const PREDEFINED_TAGS = [
+  'UI/UX',
+  'Frontend',
+  'Machine Learning',
+  'Devops',
+  'Product Management',
+  'Open Source'
+];
 
 const Title = (props) => {
   return (
@@ -168,7 +178,9 @@ class Submit extends Component {
     }
 
     onAddTag(tag) {
-      if (this.props.tagSuggestions.indexOf(tag) === -1) {
+      if (this.state.tags.map(t => t.text).indexOf(tag) > -1) {
+        return;
+      } else if (this.props.tagSuggestions.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) {
         this.setState({ newTagPending: tag });
       } else {
         this.addTag(tag);
@@ -191,9 +203,13 @@ class Submit extends Component {
     }
 
     renderSubmissionForm() {
-      const { user, tagSuggestions } = this.props;
+      const { user } = this.props;
+      let { tagSuggestions } = this.props;
       const { tags, proposalType, abstractErr, abstractLen, newTagPending } = this.state;
-      let bestMatch;
+      let bestMatch, predefinedTags, tagStrs = this.state.tags.map(t => t.text);
+
+      tagSuggestions = _.uniq(_.without(PREDEFINED_TAGS.concat(tagSuggestions), ...tagStrs));
+      predefinedTags = _.without(PREDEFINED_TAGS, ...tagStrs);
 
       if (newTagPending) {
         bestMatch = findBestMatch(newTagPending, tagSuggestions).bestMatch.target;
@@ -237,11 +253,18 @@ class Submit extends Component {
             <FormField id="title" label="Title" required={true} placeholder="Title of your talk" maxLength="100"/>
             <FormField id="proposalType" inputType="radio" required={true} onChange={this.handleProposalTypeChange.bind(this)} values={proposalTypes} value={proposalType}/>
             <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder="Between 500-800 characters" subtitle={<span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><span className={cx({'abstract-err': abstractErr})}>{abstractLen}/800</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
-            <Tags tags={tags} suggestions={tagSuggestions} handleAddition={this.onAddTag} handleDelete={this.onDeleteTag} readOnly={this.state.tags.length===2}/>
+            <Tags
+                  tags={tags}
+                  predefinedSuggestions={predefinedTags}
+                  suggestions={tagSuggestions}
+                  handleAddition={this.onAddTag}
+                  handleDelete={this.onDeleteTag}
+                  readOnly={this.state.tags.length===2} />
+
             <Rodal visible={!!newTagPending} onClose={() => { this.setState({ newTagPending: null })}}>
               <div style={{textAlign: 'center'}}>
-                <h6 style={{marginTop:16}}>Before you add a new tag...</h6>
-                <p>There might be an existing tag like this already.</p>
+                <h6 style={{marginTop:16}}>'{newTagPending}' doesn't exist</h6>
+                <p>Before adding a new tag, please check if there's already an existing tag like this one.</p>
                 { bestMatch ? <p>Did you mean <b>{bestMatch}</b>?</p> : undefined }
                 <div style={{marginTop:24}}>
                   { bestMatch ? <button style={{ textTransform: 'none', letterSpacing: 1, fontWeight:400}} className={cx('btn', 'btn-sm', 'btn-sm-center')} onClick={(e) => { e.preventDefault(); this.addTag(bestMatch); this.setState({ newTagPending:null }); }}>Add <b>{bestMatch}</b></button> : undefined }
