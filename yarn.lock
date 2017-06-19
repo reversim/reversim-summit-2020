@@ -6493,9 +6493,9 @@ react-sticky@^5.0.2:
   dependencies:
     prop-types "^15.5.8"
 
-"react-tag-input@https://github.com/amitzur/react-tags.git":
+react-tag-input@amitzur/react-tags:
   version "4.7.1"
-  resolved "https://github.com/amitzur/react-tags.git#a6cd869b8992f2f0dea8c9bdf83a8f2522bd130a"
+  resolved "https://codeload.github.com/amitzur/react-tags/tar.gz/a6cd869b8992f2f0dea8c9bdf83a8f2522bd130a"
   dependencies:
     lodash "^4.14.1"
     prop-types "^15.5.8"
