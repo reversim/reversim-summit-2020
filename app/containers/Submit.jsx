@@ -17,12 +17,12 @@ import _ from 'lodash';
 import { cx } from 'css/styles';
 
 const PREDEFINED_TAGS = [
-  'UI/UX',
   'Frontend',
-  'Machine Learning',
-  'Devops',
-  'Product Management',
-  'Open Source'
+  'Backend',
+  'Mobile',
+  'Infrastructure',
+  'Product',
+  'Culture'
 ];
 
 const Title = (props) => {
