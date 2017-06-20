@@ -453,3 +453,16 @@ fieldset.row {
   }
 }
 
+.video-wrapper {
+  padding-bottom: 50%;
+  height: 0;
+  position: relative;
+}
+
+.video-wrapper > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

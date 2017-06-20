@@ -39,7 +39,17 @@ const Topics = (props) => {
   return (
     <div>
       <h4>Topics</h4>
-      <p>You may get a good sense of the topics we're interested in by looking into previous events:</p>
+      <div className="row" style={{marginBottom:20}}>
+        <div className="col-md-6">
+          <p>We've made a video for you to understand better what we're after. At the end of the video there's also an <b>example submission</b>.</p>
+        </div>
+        <div className="col-md-5">
+          <div className={cx('video-wrapper')}>
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/2A6cLeXLLII" frameBorder="0" allowFullScreen></iframe>
+          </div>
+        </div>
+      </div>
+      <p>You may also get a good sense of the topics we're interested in by looking into previous events:</p>
       <ul>
         <li><a href="http://summit2013.reversim.com">Reversim Summit 2013</a></li>
         <li><a href="http://summit2014.reversim.com">Reversim Summit 2014</a></li>
@@ -91,7 +101,7 @@ const Faq = (props) => {
       <p>C. Just kidding. The default language is Hebrew. This is not an international event, it's a local event for local developers and by local developers. There are awesome developers here in Israel. Having said that, if you as a speaker would prefer to speak in English that's totally fine.</p>
       <p>Non-Hebrew speakers are most welcome, but bear in mind that most of the contents is going to be in Hebrew.</p>
       <br />
-      <span className={cx('h7')}>What do you get for X?</span>
+      <span className={cx('h7')}>Submitters’ perks</span>
       <p>Registration will open about a month before the event. If you've registered on time, all is well. If not, <strong>every submitter gets a single personal ticket</strong>, regardless of whether your session got accepted or not (assuming quality submission). <strong>Accepted speakers get a personal ticket +1</strong> (so you can do a friend a favor)</p>
     </div>
   )
