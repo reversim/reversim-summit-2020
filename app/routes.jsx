@@ -55,7 +55,7 @@ export default (store) => {
         <Route path="/submit" component={Submit} />
         <Route path="/session/:id" component={Session} />
         <Route path="/my-proposals" component={MyProposals} onEnter={requireAuth} />
-        <Route path="/proposals" component={AllProposals} />
+        { !features('preCFP', false) && !features('submission', false) ? <Route path="/proposals" component={AllProposals} /> : undefined }
         <Route path="/my-profile" component={MyProfile} onEnter={requireAuth} />
         <Route path="/my-favorites" component={MyFavorites} onEnter={requireAuth} />
         <Route path="/team" component={Home} />
