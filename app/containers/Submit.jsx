@@ -25,6 +25,9 @@ const PREDEFINED_TAGS = [
   'Culture'
 ];
 
+const ABSTRACT_MAX=700;
+const ABSTRACT_MIN=280;
+
 const Title = (props) => {
   return (
     <div className={cx('align-center')}>
@@ -153,7 +156,7 @@ class Submit extends Component {
         const abstract = formElements.abstract.value;
         const tags = this.state.tags.map(tag => tag.text);
 
-        if (abstract.length > 800 || abstract.length < 400) {
+        if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
           const y = formElements.abstract.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 150;
           window.scrollTo(0, y);
           formElements.abstract.focus();
@@ -180,7 +183,7 @@ class Submit extends Component {
     onChangeAbstract(e) {
       const val = e.target.value;
       const abstractLen = val.length;
-      const abstractErr = val.length < 400 ? 'low' : val.length > 800 ? 'high' : null;
+      const abstractErr = val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
       this.setState({
         abstractLen,
         abstractErr
@@ -264,7 +267,7 @@ class Submit extends Component {
             <small>The following information will be presented in the website</small>
             <FormField id="title" label="Title" required={true} placeholder="Title of your talk" maxLength="100"/>
             <FormField id="proposalType" inputType="radio" required={true} onChange={this.handleProposalTypeChange.bind(this)} values={proposalTypes} value={proposalType}/>
-            <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder="Between 500-800 characters" subtitle={<span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><span className={cx({'abstract-err': abstractErr})}>{abstractLen}/800</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
+            <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`} subtitle={<span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><span className={cx({'abstract-err': abstractErr})}>{abstractLen}/{ABSTRACT_MAX}</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
             <Tags
                   tags={tags}
                   predefinedSuggestions={predefinedTags}
