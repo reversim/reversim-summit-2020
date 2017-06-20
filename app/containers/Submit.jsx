@@ -267,6 +267,7 @@ class Submit extends Component {
             <small>The following information will be presented in the website</small>
             <FormField id="title" label="Title" required={true} placeholder="Title of your talk" maxLength="100"/>
             <FormField id="proposalType" inputType="radio" required={true} onChange={this.handleProposalTypeChange.bind(this)} values={proposalTypes} value={proposalType}/>
+            <FormField id="video_url" label="Link to video" required={true} placeholder="e.g. http://youtu.be/xxxx" subtitle={<span><b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.<br/><b>New speakers</b>: A short video introducing them and the planned session outline. Example can be found <a href="https://www.youtube.com/watch?v=2A6cLeXLLII">in this video</a>.</span>} caption={null}/>
             <FormField id="abstract" label="Abstract" required={true} multiline={true} placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`} subtitle={<span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><span className={cx({'abstract-err': abstractErr})}>{abstractLen}/{ABSTRACT_MAX}</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
             <Tags
                   tags={tags}
