@@ -3,7 +3,7 @@ import { cx } from 'css/styles';
 
 const Radio = ({ id, value, values: radioValues, onChange }) => {
   return (
-    <fieldset className="row" style={{ marginBottom: 15 }}>
+    <fieldset className={cx("row")} style={{ marginBottom: 15 }}>
       <span className={cx("col-xs-12")}>
         {radioValues.map((val, i) => {
           const optionId = `${id}${i}`;
@@ -45,7 +45,7 @@ export default ({ label, id, required, text, caption, subtitle, placeholder, inp
   const valueClass = fullRow ? 'col-xs-12' : ['col-xs-12', 'col-sm-6'];
 
   return (
-    <fieldset className="row">
+    <fieldset className={cx("row")}>
       <span className={cx("col-xs-12")}>
         <label htmlFor={id}>{label}</label>
         { subtitle ? <small style={{display:'block'}}className="text-muted">{subtitle}</small> : undefined }

@@ -8,7 +8,6 @@ import configureStore from 'store/configureStore';
 import preRenderMiddleware from 'middlewares/preRenderMiddleware';
 import { setFeatureOverrides } from 'features';
 import ga from 'react-ga';
-import tagStyles from 'css/components/react-tags.css';
 
 // Grab the state from a global injected into
 // server-generated HTML

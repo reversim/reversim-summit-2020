@@ -178,9 +178,10 @@ class Submit extends Component {
     }
 
     onAddTag(tag) {
+      const { tagSuggestions } = this.props;
       if (this.state.tags.map(t => t.text).indexOf(tag) > -1) {
         return;
-      } else if (this.props.tagSuggestions.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) {
+      } else if ((tagSuggestions && tagSuggestions.indexOf(tag) === -1) && PREDEFINED_TAGS.indexOf(tag) === -1) {
         this.setState({ newTagPending: tag });
       } else {
         this.addTag(tag);
