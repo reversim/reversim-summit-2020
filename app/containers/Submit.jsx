@@ -208,6 +208,7 @@ class Submit extends Component {
       const { tags, proposalType, abstractErr, abstractLen, newTagPending } = this.state;
       let bestMatch, predefinedTags, tagStrs = this.state.tags.map(t => t.text);
 
+      tagSuggestions = tagSuggestions || [];
       tagSuggestions = _.uniq(_.without(PREDEFINED_TAGS.concat(tagSuggestions), ...tagStrs));
       predefinedTags = _.without(PREDEFINED_TAGS, ...tagStrs);
 
