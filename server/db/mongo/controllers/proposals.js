@@ -8,7 +8,7 @@ import { slackUrl } from '../../../config/secrets';
 import {transformProposal, transformUser} from './helpers';
 import shuffler from 'shuffle-seed';
 import request from 'axios';
-import ENV from '../../../config/appConfig';
+import { ENV } from '../../../config/appConfig';
 
 const shuffleProposals = true;
 
