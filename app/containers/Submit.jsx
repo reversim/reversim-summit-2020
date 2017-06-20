@@ -191,7 +191,7 @@ class Submit extends Component {
     addTag(tag) {
       let tags = this.state.tags;
       tags.push({
-        id: tags.length + 1,
+        id: tag,
         text: tag
       });
       this.setState({tags: tags});
