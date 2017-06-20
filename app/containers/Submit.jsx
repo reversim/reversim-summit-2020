@@ -39,11 +39,11 @@ const Topics = (props) => {
   return (
     <div>
       <h4>Topics</h4>
-      <div className="row" style={{marginBottom:20}}>
-        <div className="col-md-6">
+      <div className={cx("row")} style={{marginBottom:20}}>
+        <div className={cx("col-md-6")}>
           <p>We've made a video for you to understand better what we're after. At the end of the video there's also an <b>example submission</b>.</p>
         </div>
-        <div className="col-md-5">
+        <div className={cx("col-md-5")}>
           <div className={cx('video-wrapper')}>
             <iframe width="100%" height="auto" src="https://www.youtube.com/embed/2A6cLeXLLII" frameBorder="0" allowFullScreen></iframe>
           </div>
