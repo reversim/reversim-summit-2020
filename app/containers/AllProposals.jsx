@@ -264,7 +264,7 @@ class AllProposals extends Component {
 
             <section className={cx('section', 'overlay', 'header-bg', 'bg-my-proposals', 'light-text', 'align-center')}>
               <div className={cx("container")}>
-                <h1>Reversim Summit 2016 - Proposals</h1>
+                <h1>Reversim Summit 2017 - Proposals</h1>
               </div>
             </section>
 

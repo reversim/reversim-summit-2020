@@ -194,7 +194,7 @@ class Session extends Component {
       let archivedWarning =
         <div className={cx('row')}>
           <div className={cx('col-md-10', 'col-md-offset-1')}>
-            <div className={cx("alert", "alert-warning")} role="alert">This session was archived and is no longer a candidate for Reversim Summit 2016.</div>
+            <div className={cx("alert", "alert-warning")} role="alert">This session was archived and is no longer a candidate for Reversim Summit 2017.</div>
           </div>
         </div>
 

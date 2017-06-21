@@ -34,7 +34,7 @@ import msTile from 'images/mstile-144x144.png';
 
 import summitSocialLogo from 'images/summit2016_social.png';
 
-const baseUrl = "http://summit2016.reversim.com";
+const baseUrl = "http://summit2017.reversim.com";
 
 
 const config = {
@@ -70,7 +70,7 @@ const config = {
     // Setting IE=edge tells Internet Explorer to use the latest engine to render the page and execute Javascript
     { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
     //  Meta descriptions are commonly used on search engine result pages to display preview snippets for a given page.
-    { name: 'description', content: 'Reversim Summit 2016' },
+    { name: 'description', content: 'Reversim Summit 2017' },
     // Mobile Safari introduced this tag to let web developers control the viewport's size and scale
     // The width property controls the size of the viewport, the initial-scale property controls
     // the zoom level when the page is first loaded
@@ -80,7 +80,7 @@ const config = {
     // Add to homescreen for Safari on IOS
     { name: 'apple-mobile-web-app-capable', content: 'yes' },
     { name: 'apple-mobile-web-app-status-bar-style', content: 'black' },
-    { name: 'apple-mobile-web-app-title', content: 'Reversim Summit 2016' },
+    { name: 'apple-mobile-web-app-title', content: 'Reversim Summit 2017' },
     // Tile icon for Win8 (144x144 + tile color)
     { name: 'msapplication-TileColor', content: '#da532c' },
     { name: 'theme-color', content: '#ffffff' },

@@ -32,7 +32,7 @@ const Title = (props) => {
   return (
     <div className={cx('align-center')}>
       <span data-icon className={cx('icon', 'section-icon', 'icon-multimedia-12')}></span>
-      <h3>Reversim Summit 2016 - Submission</h3>
+      <h3>Reversim Summit 2017 - Submission</h3>
       <p className={cx("text-alt")} style={{ margin: 20}}>{ features('submission', false) ? 'Read carefully before submission!' : 'Call for papers is now closed' }</p>
     </div>
   )
