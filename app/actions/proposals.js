@@ -154,7 +154,7 @@ export function updateProposal(id, data) {
   };
 }
 
-export function createProposal(title, abstract, type, speaker_ids, tags) {
+export function createProposal(title, abstract, type, speaker_ids, tags, outline, video_url) {
     return (dispatch, getState) => {
         // If the text box is empty
         // if (text.trim().length <= 0) return;
@@ -169,7 +169,9 @@ export function createProposal(title, abstract, type, speaker_ids, tags) {
             abstract,
             type,
             speaker_ids,
-            tags
+            tags,
+            outline,
+            video_url
         };
 
         // Conditional dispatch

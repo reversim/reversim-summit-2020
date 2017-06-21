@@ -56,6 +56,7 @@ export function transformProposal(proposal, loggedInUser, overrideDetails) {
       hall: proposal.hall,
       slides_gdrive_id: proposal.slides_gdrive_id,
       video_url: proposal.video_url,
+      outline: proposal.outline,
       total: (proposal.attendees && isReversimMember) ? proposal.attendees.length : undefined,
       attended: proposal.attendees && (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false)
     }

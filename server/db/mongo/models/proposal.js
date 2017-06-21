@@ -8,6 +8,7 @@ const ProposalSchema = new mongoose.Schema({
     id: String,
     title: String,
     abstract: String,
+    outline: String,
     type: String,
     speaker_ids: [{
       type: mongoose.Schema.Types.ObjectId,

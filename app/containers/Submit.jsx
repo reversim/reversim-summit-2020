@@ -150,10 +150,13 @@ class Submit extends Component {
         const trackRecord = formElements.trackRecord.value;
         const linkedin = formElements.linkedin.value;
         const twitter = formElements.twitter.value;
+        const phone = formElements.phone.value;
 
         const title = formElements.title.value;
         const proposalType = this.state.proposalType;
         const abstract = formElements.abstract.value;
+        const outline = formElements.outline.value;
+        const video_url = formElements.video_url.value;
         const tags = this.state.tags.map(tag => tag.text);
 
         if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
@@ -169,9 +172,10 @@ class Submit extends Component {
           'profile.trackRecord': trackRecord,
           'profile.linkedin': linkedin,
           'profile.twitter': twitter,
-          'profile.oneLiner': oneLiner
+          'profile.oneLiner': oneLiner,
+          'profile.phone': phone
         }))
-        .then(() => dispatch(createProposal(title, abstract, proposalType, [id], tags)))
+        .then(() => dispatch(createProposal(title, abstract, proposalType, [id], tags, outline, video_url)))
         .then((result) => dispatch(push(`/session/${result.id}`)))
         .catch(e => ga.exception({
           description: `Error on submit: ${e}`,
