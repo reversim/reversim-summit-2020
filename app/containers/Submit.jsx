@@ -310,7 +310,7 @@ In this session I will present our open-sourced package that analyzed our micros
 
             <h6>Private information</h6>
             <small>The following information will be available <b>only to the organizing committee</b></small>
-            <FormField id="video_url" label="Link to video" required={true} placeholder="e.g. http://youtu.be/xxxx" subtitle={<span><b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.<br/><b>New speakers</b>: A short video introducing you and the planned session outline. Example can be found <a href="https://www.youtube.com/watch?v=2A6cLeXLLII">in this video</a>.</span>} caption={null}/>
+            <FormField id="video_url" label="Link to video" required={true} placeholder="e.g. http://youtu.be/xxxx" subtitle={<span><b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.<br/><b>New speakers</b>: A short video introducing you and the planned session outline. Example can be found <a href="https://www.youtube.com/watch?v=2A6cLeXLLII" target="_blank">in this video</a>.</span>} caption={null}/>
             <FormField id="outline" label="Outline" required={true} multiline={true} placeholder="" subtitle={<span>The outline should include the main subjects you intend to cover with a timing estimation and total timing. A general overview is fine, we don’t expect a per-slide description for now. <br/><br/><b>For example:</b><br/>
 
 &bull; 2m Introduction: Who am I and my professional background<br/>
