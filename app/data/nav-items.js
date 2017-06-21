@@ -12,7 +12,7 @@ const networking = { to: "networking", text: "Networking", feature: "networking"
 
 export default (isHome) => {
   let items = [
-    about, schedule, timeline, speakers, proposals, team, sponsors, location, networking
+    about, schedule, timeline, speakers, /*proposals,*/ team, sponsors, location, networking
   ];
 
   if (!isHome) {
