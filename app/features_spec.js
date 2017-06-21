@@ -1,5 +1,5 @@
 export default {
-  submission: false,
+  submission: true,
   voting: false,
   tagging: true,
   proposalsPageGroupedByTags: false,
@@ -11,6 +11,6 @@ export default {
   viewSlides: false,
   sponsored: false,
   timelineFinalized: false,
-  preCFP: true,
+  preCFP: false,
   team: true
 }
