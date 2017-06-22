@@ -20,7 +20,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
 
 // Initialize Google Analytics
-ga.initialize('UA-78776133-1');
+ga.initialize('UA-36904731-4');
 
 /**
  *  Fix Hash links
