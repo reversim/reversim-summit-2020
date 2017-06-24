@@ -21,6 +21,7 @@ const routes = createRoutes(store);
 
 // Initialize Google Analytics
 ga.initialize('UA-36904731-4');
+ga.pageview(window.location.pathname);
 
 /**
  *  Fix Hash links

@@ -105,6 +105,7 @@ export default class Hero extends React.Component {
             </div>
           </div>
         </div>
+        { features('startRegistration', false) ?
         <Rodal  visible={this.state.isRegistrationModalOpen}
                 width={700}
                 height={400}
@@ -112,7 +113,7 @@ export default class Hero extends React.Component {
           <div style={ {width: '100%', height: '100%', textAlign: 'left'} }>
             <iframe src="//eventbrite.com/tickets-external?eid=26992112134&ref=etckt" frameBorder="0" style={{width:"100%", height:"100%", border:"none"}}></iframe>
           </div>
-        </Rodal>
+        </Rodal> : undefined }
       </section>
     );
   }
