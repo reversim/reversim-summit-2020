@@ -63,6 +63,7 @@ export function createProposalFailure(data) {
 
 // Fetch posts logic
 export function fetchProposals() {
+    console.log("fetch proposals");
     let endpoint = '/proposal';
     // if (features('proposalsPageGroupedByTags', false)) {
     //   endpoint += '?group=tags';
@@ -70,7 +71,10 @@ export function fetchProposals() {
 
     return {
         type: types.GET_PROPOSALS,
-        promise: makeProposalsRequest('get', null, null, null, endpoint)
+        promise: makeProposalsRequest('get', null, null, null, endpoint).then(resp => {
+          console.log("fetch proposals complete", resp.data.length);
+          return resp;
+        })
     };
 }
 

@@ -107,6 +107,7 @@ export default function render(req, res) {
           authenticated ? ssrAuth() : null;
         })
         .then(() => {
+          console.log("ssr begins");
           const initialState = escapeTags(store.getState());
           const componentHTML = renderToString(
             <Provider store={store}>
