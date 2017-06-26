@@ -21,6 +21,7 @@ const reversimSocialMediaImage = "http://1.bp.blogspot.com/-dgtZLgzwzpU/UQxClcR5
 
 // configure baseURL for axios requests (for serverside API calls)
 axios.defaults.baseURL = `http://${clientConfig.host}:${clientConfig.port}`;
+console.log("axios.defaults.baseURL", axios.defaults.baseURL);
 
 /*
  * Export render function to be used in server/config/routes.js
