@@ -19,6 +19,7 @@ export default function promiseMiddleware() {
         return true;
       })
       .catch(error => {
+        console.error(error);
         next({ ...rest, error, type: FAILURE });
         return false;
       });
