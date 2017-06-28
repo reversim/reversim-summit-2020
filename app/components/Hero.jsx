@@ -73,7 +73,7 @@ export default class Hero extends React.Component {
       const remaining = Math.floor((endDay - today) / 86400000);
       const isOpen = features('submission', false),
         status = isOpen ? 'open !' : 'closed';
-      return <div>Call for papers is now {status}{ isOpen && <small style={{textTransform:'none', color: 'white'}}><br/><span className="days-remaining">{remaining}</span> days remaining, see <ScrollLink to="timeline" smooth={true} offset={-50} style={{cursor:'pointer'}}>timeline</ScrollLink> here</small>}</div>
+      return <div>Call for papers is now {status}{ isOpen && <small style={{textTransform:'none', color: 'white'}}><br/><span className={cx("days-remaining")}>{remaining}</span> days remaining, see <ScrollLink to="timeline" smooth={true} offset={-50} style={{cursor:'pointer'}}>timeline</ScrollLink> here</small>}</div>
     }
   }
 
