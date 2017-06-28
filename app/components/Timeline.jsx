@@ -80,12 +80,26 @@ const Timeline = () => {
                     <div className={cx('panel', 'schedule-item')}>
                       <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
                         <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
+                          <span className={cx('fa', 'fa-hand-o-up')}></span>
+                        </div>
+                        <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>July 20</strong>
+                      </div>
+                      <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
+                        <h6 className={cx("title")}>Public Voting Starts<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                      </a>
+                    </div>
+                    {/*  Lecture end  */}
+
+                    {/*  Lecture start  */}
+                    <div className={cx('panel', 'schedule-item')}>
+                      <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
+                        <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
                           <span className={cx('fa', 'fa-comments')}></span>
                         </div>
                         <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Early August</strong>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <h6 className={cx("title")}>Review Starts<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                        <h6 className={cx("title")}>Review Starts (End of Public Voting)<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time3" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
