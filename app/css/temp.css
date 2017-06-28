@@ -5869,7 +5869,17 @@ button[type="submit"] .loading {
 .speaker .photo-wrapper.rounded {
   border-radius: 50%;
   overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.2s;
 }
+
+.speaker .photo-wrapper.rounded:hover {
+  border-radius: 2px;
+  transform: scale(0.8);
+}
+
 .speaker .photo-wrapper img {
   display: block;
   max-width: 100%;
