@@ -10,7 +10,7 @@ export default {
   startRegistration: false,
   viewSlides: false,
   sponsored: false,
-  timelineFinalized: false,
+  timelineFinalized: true,
   preCFP: false,
   team: true
 }

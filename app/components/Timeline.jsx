@@ -38,11 +38,13 @@ const Timeline = () => {
 
                     {/*  Lecture start  */}
                     <div className={cx('panel', 'schedule-item')}>
-                      <div className={cx("lecture-icon-wrapper")}>
-                        <span className={cx('fa', 'fa-bullhorn')}></span>
+                      <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
+                        <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
+                          <span className={cx('fa', 'fa-bullhorn')}></span>
+                        </div>
+                        <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 20</strong>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>June 20</strong>
                         <h6 className={cx("title")}>Call for Papers Period Begins<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time1" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
@@ -62,25 +64,28 @@ const Timeline = () => {
 
                     {/*  Lecture start  */}
                     <div className={cx('panel', 'schedule-item')}>
-                      <div className={cx("lecture-icon-wrapper")}>
-                        <span className={cx('fa', 'fa-ban')}></span>
+                      <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
+                        <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
+                          <span className={cx('fa', 'fa-ban')}></span>
+                        </div>
+                        <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>July 20</strong>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>July 20</strong>
                         <h6 className={cx("title")}>Call for Papers Period Ends<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
-
                     </div>
                     {/*  Lecture end  */}
 
                     {/*  Lecture start  */}
                     <div className={cx('panel', 'schedule-item')}>
-                      <div className={cx("lecture-icon-wrapper")}>
-                        <span className={cx('fa', 'fa-comments')}></span>
+                      <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
+                        <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
+                          <span className={cx('fa', 'fa-comments')}></span>
+                        </div>
+                        <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Early August</strong>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid August</strong>
-                      <h6 className={cx("title")}>Review Starts<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                        <h6 className={cx("title")}>Review Starts<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time3" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
@@ -94,12 +99,14 @@ const Timeline = () => {
 
                     {/*  Lecture start  */}
                     <div className={cx('panel', 'schedule-item')}>
-                      <div className={cx("lecture-icon-wrapper")}>
-                        <span className={cx('fa', 'fa-calendar')}></span>
+                      <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
+                        <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
+                          <span className={cx('fa', 'fa-calendar')}></span>
+                        </div>
+                        <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid September</strong>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid September</strong>
-                      <h6 className={cx("title")}>Review Ends, Publish Agenda<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                        <h6 className={cx("title")}>Review Ends, Publish Agenda<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                     </div>
                     {/*  Lecture end  */}
@@ -107,23 +114,27 @@ const Timeline = () => {
 
                     {/*  Lecture start  */}
                     <div className={cx('panel', 'schedule-item')}>
-                      <div className={cx("lecture-icon-wrapper")}>
-                        <span className={cx('fa', 'fa-ticket')}></span>
+                      <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
+                        <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
+                          <span className={cx('fa', 'fa-ticket')}></span>
+                        </div>
+                        <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid September</strong>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>Mid September</strong>
-                      <h6 className={cx("title")}>Open Registration<i className={cx('icon', 'icon-arrows-06')}></i></h6>
+                        <h6 className={cx("title")}>Open Registration<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                     </div>
                     {/*  Lecture end  */}
 
                     {/*  Lecture start  */}
                     <div className={cx('panel', 'schedule-item')}>
-                      <div className={cx("lecture-icon-wrapper")}>
-                        <span className={cx('fa', 'fa-group')}></span>
+                      <div style={{display:'flex', alignItems: 'center', marginBottom: 10}}>
+                        <div className={cx("lecture-icon-wrapper")} style={{marginRight: 16}}>
+                          <span className={cx('fa', 'fa-group')}></span>
+                        </div>
+                        <strong style={{lineHeight: 1}} className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>October 15-16</strong>
                       </div>
                       <a data-toggle="collapse" className={cx("schedule-item-toggle")}>
-                        <strong className={cx('time', 'highlight')}><span className={cx('icon', 'icon-office-24')}></span>October 15-16</strong>
                         <h6 className={cx("title")}>Reversim Summit 2017<i className={cx('icon', 'icon-arrows-06')}></i></h6>
                       </a>
                       <div id="day1_auditorium1_time7" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
