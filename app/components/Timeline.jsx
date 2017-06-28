@@ -90,7 +90,7 @@ const Timeline = () => {
                       <div id="day1_auditorium1_time3" className={cx('panel-collapse', 'collapse', 'in', 'schedule-item-body')}>
                         <article>
                           <p className={cx("description")}>We have a <ScrollLink to="team" spy={true} smooth={true} offset={-50} duration={500}>wonderful group of moderators</ScrollLink> that would help you refine your submission and eventually select the proposed sessions.
-                          Please feel free to <a href="mailto:rs16-team@googlegroups.com">reach out</a> to any of us if you have any questions.</p>
+                          Please feel free to <a href="mailto:rs17team@googlegroups.com">reach out</a> to any of us if you have any questions.</p>
                           <p className={cx("description")}>During the selection process we take into account various aspects, including relevance, popularity, interest, originality, presenters track record, diversity etc.</p>
                         </article>
                       </div>
