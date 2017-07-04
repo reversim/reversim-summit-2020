@@ -93,7 +93,7 @@ class AllProposals extends Component {
 
       let proposalsToRender = proposals;
       if (this.state.filter && this.state.filter.length > 0) {
-        proposalsToRender = proposals.filter(p => _.every(this.state.filter, tag => p.tags.indexOf(tag) >= 0));
+        proposalsToRender = proposals.filter(p => _.some(this.state.filter, tag => p.tags.indexOf(tag) >= 0));
       }
 
       return proposalsToRender.map((proposal, i) => {
@@ -189,7 +189,18 @@ class AllProposals extends Component {
     }
 
     render() {
-      const { user: { authenticated }, tags } = this.props;
+      const { user: { authenticated }, tags, proposals } = this.props;
+      const tagCount = {};
+      proposals.forEach(p => {
+        p.tags.forEach(tag => {
+          tagCount[tag] = tagCount[tag] !== undefined ? tagCount[tag] + 1 : 1;
+        });
+      });
+      const sortedTags = tags.sort((t1, t2) => {
+        const diff = tagCount[t2] - tagCount[t1];
+        return diff || (t2 > t1 ? 1 : -1);
+      });
+      const totalCount = this.state.filter && this.state.filter.length ? this.state.filter.reduce((prev, tag) => tagCount[tag] + prev, 0) : proposals.length;
 
       let tagsBar;
       if (features('proposalsPageGroupedByTags', false) && tags) {
@@ -197,7 +208,7 @@ class AllProposals extends Component {
           <StickyContainer ref="tags-container">
             <Sticky style={{backgroundColor: '#fff', zIndex: 4}}>
               <div style={{padding: '15px 0'}}>
-                { tags.map((tag, index) => <a onClick={(event) => { event.preventDefault; this.filterTag(tag) }} className={cx({'active-tag': this.state.filter && this.state.filter.indexOf(tag) >= 0, 'label': true, 'label-info': true, 'session-tag': true})} key={index}>{tag}</a> )}
+                { sortedTags.map((tag, index) => <a onClick={(event) => { event.preventDefault; this.filterTag(tag) }} className={cx({'active-tag': this.state.filter && this.state.filter.indexOf(tag) >= 0, 'label': true, 'label-info': true, 'session-tag': true})} key={index}>{tag} ({tagCount[tag]})</a> )}
               </div>
             </Sticky>
           </StickyContainer>
@@ -220,15 +231,18 @@ class AllProposals extends Component {
           </div>
       }
 
-      let filteredTagsHeader;
+      let subheaderContent;
       if (features('proposalsPageGroupedByTags') && this.state.filter && this.state.filter.length > 0) {
-        filteredTagsHeader = <h4 style={ {marginBottom: 30} }>{this.state.filter.join(', ')}</h4>
+        subheaderContent = this.state.filter.join(', ') + '(' + totalCount + ')'
+      } else {
+        subheaderContent = 'All proposals (' + totalCount + ')';
       }
+      const subheader = <h4 style={ {marginBottom: 30, letterSpacing: 1} }>{subheaderContent}</h4>
 
       return (
           <BaseLayout currentPath={this.props.location.pathname} name="all-proposals">
             <NotificationSystem ref="notificationSystem" style={{ NotificationItem: { DefaultStyle: { marginTop: '120px', padding: '20px' } } } } />
-            <svg width="0" height="0" viewBox="0 0 2000 80">
+            <svg width="0" height="0" viewBox="0 0 2000 80" style={{display:'none'}}>
               <defs>
                 <mask id="textFade">
                   <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="100%">
@@ -268,11 +282,11 @@ class AllProposals extends Component {
               </div>
             </section>
 
-            <section id="all-proposals" className={cx('section', 'container')}>
+            <section id="all-proposals" className={cx('section', 'container')} style={{ marginTop: 60 }}>
               <div className={cx("col-md-11", "col-md-offset-1")}>
                 {votingInfoSection}
                 {tagsBar}
-                {filteredTagsHeader}
+                {subheader}
                 {this.renderProposals()}
               </div>
             </section>
