@@ -94,6 +94,7 @@ export default function user(state = initialState, action = {}) {
         bio: action.data['profile.bio'],
         linkedin: action.data['profile.linkedin'],
         twitter: action.data['profile.twitter'],
+        github: action.data['profile.github'],
         trackRecord: action.data['profile.trackRecord'],
       });
     case UPLOAD_PROFILE_IMAGE:

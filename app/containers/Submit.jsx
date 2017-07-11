@@ -152,6 +152,7 @@ class Submit extends Component {
         const trackRecord = formElements.trackRecord.value;
         const linkedin = formElements.linkedin.value;
         const twitter = formElements.twitter.value;
+        const github = formElements.github.value;
         const phone = formElements.phone.value;
 
         const title = formElements.title.value;
@@ -174,6 +175,7 @@ class Submit extends Component {
           'profile.trackRecord': trackRecord,
           'profile.linkedin': linkedin,
           'profile.twitter': twitter,
+          'profile.github': github,
           'profile.oneLiner': oneLiner,
           'profile.phone': phone
         }))
@@ -256,6 +258,7 @@ class Submit extends Component {
             <FormField id="fullname" label="Full name" required={true} placeholder="Your name" value={user.name} />
             <FormField id="oneLiner" label="One Liner" value={user.oneLiner} maxLength={100} subtitle={<span>Maximum 100 characters<br/><b>Example</b>: COBOL developer at Acme Corp</span>}/>
             <FormField id="linkedin" label="Linkedin Profile" value={user.linkedin} inputType="url"/>
+            <FormField id="github" label="GitHub username" value={user.github} placeholder="mrdoob"/>
             <FormField id="twitter" label="Twitter @name" value={user.twitter} placeholder="@Reversim"/>
             <FormField id="bio" label="Short Bio" value={user.bio} placeholder="" required={true} multiline={true} fullRow={true} subtitle={<span>Tell everybody a little bit about yourself. Useful sentences can be:<br/><br/>
               “A front-end developer for the last X years”<br/>

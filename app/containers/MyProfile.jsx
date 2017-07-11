@@ -20,7 +20,7 @@ class MyProfile extends Component {
     constructor(props) {
         super(props);
 
-        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter, stackOverflow, trackRecord, phone } } = props;
+        const { dispatch, user: { authenticated, name, bio, oneLiner, linkedin, twitter, github, stackOverflow, trackRecord, phone } } = props;
         if (!authenticated) {
           dispatch(push('/'))
         }
@@ -31,6 +31,7 @@ class MyProfile extends Component {
           oneLiner,
           linkedin,
           twitter,
+          github,
           stackOverflow,
           trackRecord,
           phone
@@ -49,6 +50,7 @@ class MyProfile extends Component {
       const trackRecord = formElements.trackRecord.value;
       const linkedin = formElements.linkedin.value;
       const twitter = formElements.twitter.value;
+      const github = formElements.github.value;
       const stackOverflow = formElements.stackOverflow.value;
       const phone = formElements.phone.value;
       const teamMemberToken = window.location.hash.slice(1);
@@ -62,6 +64,7 @@ class MyProfile extends Component {
           'profile.trackRecord': trackRecord,
           'profile.linkedin': linkedin,
           'profile.twitter': twitter,
+          'profile.github': github,
           'profile.oneLiner': oneLiner,
           'profile.phone': phone,
           'profile.stackOverflow': stackOverflow,
@@ -123,6 +126,7 @@ class MyProfile extends Component {
           { label: "One liner", id: "oneLiner" },
           { label: "LinkedIn profile", id: "linkedin", inputType: "url" },
           { label: "Twitter handle", id: "twitter", placeholder: "@Reversim" },
+          { label: "GitHub username", id: "github", placeholder: "mrdoob" },
           { label: "Stack Overflow profile", id: "stackOverflow", inputType: "url" },
           { label: "Phone number", id: "phone", inputType: "tel" },
           { label: "Short Bio", id: "bio", multiline: true, fullRow: true, caption: null },
@@ -157,6 +161,7 @@ class MyProfile extends Component {
                                bio={this.state.bio}
                                linkedin={this.state.linkedin}
                                twitter={this.state.twitter}
+                               github={this.state.github}
                                stackOverflow={this.state.stackOverflow} />
                       <button className={cx("btn", "btn-sm", "col-xs-12")} style={{ letterSpacing: '0.3em'}} onClick={onFileWrapperClick}>
                         Upload Picture (1MB max size)

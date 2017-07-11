@@ -133,6 +133,7 @@ export default class ProposalPreview extends Component {
                               linkedin={speaker.linkedin}
                               twitter={speaker.twitter}
                               stackOverflow={speaker.stackOverflow}
+                              github={speaker.github}
                               isReversimTeamMember={user ? user.isReversimTeamMember : undefined} />);
         })  }
         </div>

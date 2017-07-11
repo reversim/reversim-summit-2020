@@ -20,6 +20,7 @@ const Team = ({ team }) => {
         bio={member.bio}
         linkedin={member.linkedin}
         twitter={member.twitter}
+        github={member.github}
         stackOverflow={member.stackOverflow} />
       </div>
     );

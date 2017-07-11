@@ -29,6 +29,7 @@ export function transformUser(user, loggedInUser) {
       linkedin: user.profile && user.profile.linkedin,
       twitter: user.profile && user.profile.twitter,
       stackOverflow: user.profile && user.profile.stackOverflow,
+      github: user.profile && user.profile.github,
       phone: isReversimMember && user.profile && user.profile.phone
     };
   }

@@ -25,6 +25,7 @@ const Speakers = ({ speakers }) => {
         bio={person.bio}
         linkedin={person.linkedin}
         twitter={person.twitter}
+        github={person.github}
         stackOverflow={person.stackOverflow} />
       </div>
     );

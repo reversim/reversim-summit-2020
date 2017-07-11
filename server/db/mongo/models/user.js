@@ -28,6 +28,7 @@ const UserSchema = new mongoose.Schema({
     picture: { type: String, default: '' },
     trackRecord: { type: String, default: '' },
     linkedin: { type: String, default: '' },
+    github: { type: String, default: '' },
     twitter: { type: String, default: '' },
     stackOverflow: { type: String, default: '' }
   },

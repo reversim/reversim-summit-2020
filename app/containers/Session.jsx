@@ -177,6 +177,7 @@ class Session extends Component {
                         bio={speaker.bio}
                         linkedin={speaker.linkedin}
                         twitter={speaker.twitter}
+                        github={speaker.github}
                         stackOverflow={speaker.stackOverflow}
                         email={email}
                         isReversimTeamMember={isReversimTeamMember} />

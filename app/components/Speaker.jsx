@@ -4,12 +4,13 @@ import styles from 'css/main';
 
 const cx = classNames.bind(styles);
 
-const Speaker = ({name, email, imageUrl, oneLiner, bio, linkedin, twitter, stackOverflow, isReversimTeamMember}) => {
+const Speaker = ({name, email, imageUrl, oneLiner, bio, linkedin, twitter, github, stackOverflow, isReversimTeamMember}) => {
   const twitterButton = twitter ? <li><a href={'https://twitter.com/' + twitter}><span className={cx('fa', 'fa-twitter')}></span></a></li> : undefined;
   const linkedInButton = linkedin ? <li><a href={linkedin}><span className={cx('fa', 'fa-linkedin')}></span></a></li> : undefined;
   const stackOverflowButton = stackOverflow ? <li><a href={stackOverflow}><span className={cx('fa', 'fa-stack-overflow')}></span></a></li> : undefined;
+  const githubButton = github ? <li><a href={'https://github.com/' + github}><span className={cx('fa', 'fa-github')}></span></a></li> : undefined;
   const bioParagaphs = bio ? bio.split('\n').map((paragraph, i) => <p className={cx("bio")} key={i}>{paragraph}</p>) : undefined;
-  
+
   let emailVisibility = isReversimTeamMember ? 'shown' : 'hidden';
 
   return (
@@ -23,6 +24,7 @@ const Speaker = ({name, email, imageUrl, oneLiner, bio, linkedin, twitter, stack
         {bioParagaphs}
         <ul className={cx("speaker-socials")}>
           {twitterButton}
+          {githubButton}
           {linkedInButton}
           {stackOverflowButton}
         </ul>

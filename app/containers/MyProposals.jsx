@@ -24,7 +24,7 @@ class MyProposals extends Component {
     }
 
     render() {
-        const { name, picture, oneLiner, bio, linkedin, twitter, stackOverflow, proposals } = this.props.user;
+        const { name, picture, oneLiner, bio, linkedin, twitter, github, stackOverflow, proposals } = this.props.user;
 
         const proposalsBlocks = proposals.map((proposal, i) => {
           let type;
@@ -67,7 +67,7 @@ class MyProposals extends Component {
                   </div>
 
                   <div className={cx('col-md-4')}>
-                    <Speaker name={name} imageUrl={picture || defaultSpeakerPic} oneLiner={oneLiner} bio={bio} linkedin={linkedin} twitter={twitter} stackOverflow={stackOverflow} />
+                    <Speaker name={name} imageUrl={picture || defaultSpeakerPic} oneLiner={oneLiner} bio={bio} linkedin={linkedin} github={github} twitter={twitter} stackOverflow={stackOverflow} />
                   </div>
 
               </section>
