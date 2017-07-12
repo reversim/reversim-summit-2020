@@ -98,7 +98,8 @@ class Session extends Component {
           </div>
       }
 
-      let sessionOutline = isReversimTeamMember && (
+      console.log("outline", outline);
+      let sessionOutline = isReversimTeamMember && outline && (
         <div style={{marginTop: 30}}>
           <h6>Session outline</h6>
           <ReactMarkdown source={outline.replace(/\n/g, '<br/>')} className={cx("markdown-block")}/>
