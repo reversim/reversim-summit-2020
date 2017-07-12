@@ -94,7 +94,7 @@ class Session extends Component {
         speakerTrackRecord =
           <div style={{marginTop: 30}}>
             <h6>Speaker{speaker_ids && speaker_ids.length > 1 ? 's' : undefined} Track Record</h6>
-            {speaker_ids && speaker_ids.map((speaker, i) => <ReactMarkdown key={i} source={speaker.trackRecord || ''} className={cx("markdown-block")} />)}
+            {speaker_ids && speaker_ids.map((speaker, i) => <ReactMarkdown key={i} source={speaker.trackRecord && speaker.trackRecord.replace(/\n/g, '<br/>') || ''} className={cx("markdown-block")} />)}
           </div>
       }
 
