@@ -4,36 +4,53 @@ import classNames from 'classnames/bind';
 import {updateProposal, fetchTags} from 'actions/proposals';
 import ga from 'react-ga';
 import features from 'features';
-import TagInput from 'components/react-categorized-tag-input';
+import { findBestMatch } from 'string-similarity';
+import Tags from 'components/Tags';
+import Rodal from 'components/Rodal';
+import _ from 'lodash';
+import FormField from 'components/FormField';
+
 
 import styles from 'css/main';
 
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
+
+const PREDEFINED_TAGS = [
+  'Frontend',
+  'Backend',
+  'Mobile',
+  'Infrastructure',
+  'Product',
+  'Culture'
+];
+
+const ABSTRACT_MAX=700;
+const ABSTRACT_MIN=280;
 
 class SessionForm extends Component {
-  constructor(props) {
-    super(props)
 
+  constructor(props) {
+    super(props);
+
+    const abstractLength = props.proposal.abstract.length;
     this.state = {
       proposalType: 'full',
-      tags: []
-    }
-  }
+      abstractLen: abstractLength,
+      abstractErr: abstractLength < ABSTRACT_MIN || abstractLength > ABSTRACT_MAX,
+      tags: (props.proposal.tags && props.proposal.tags.map(tag => ({ id: tag, text: tag }))) || []
+    };
 
-  taggingEnabled() {
-    const { user: { isReversimTeamMember } } = this.props;
-
-    return features('tagging', false) && isReversimTeamMember;
+    this.onAddTag = this.onAddTag.bind(this);
+    this.onDeleteTag = this.onDeleteTag.bind(this);
+    this.onChangeAbstract = this.onChangeAbstract.bind(this);
   }
 
   componentWillMount() {
     const { dispatch, proposal: { type, tags } } = this.props;
 
-    if (this.taggingEnabled()) {
-      dispatch(fetchTags());
-    }
+    this.setState({ proposalType: type });
 
-    this.setState({ proposalType: type, tags: tags.map(tag => { return { category: 'Topics', title: tag } }) });
+    dispatch(fetchTags());
   }
 
   isSpeaker(userId) { // TODO: Duplicate, refactor
@@ -52,6 +69,17 @@ class SessionForm extends Component {
     this.setState({ proposalType: event.target.value });
   }
 
+  onChangeAbstract(e) {
+    const val = e.target.value;
+    const abstractLen = val.length;
+    const abstractErr = val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
+    this.setState({
+      abstractLen,
+      abstractErr
+    });
+  }
+
+
   handleSubmit(event) {
     event.preventDefault();
 
@@ -63,16 +91,26 @@ class SessionForm extends Component {
       const title = formElements.title.value;
       const proposalType = this.state.proposalType;
       const abstract = formElements.abstract.value;
+      const outline = formElements.outline.value;
+      const video_url = formElements.video_url.value;
+
+
+      if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
+        const y = formElements.abstract.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 150;
+        window.scrollTo(0, y);
+        formElements.abstract.focus();
+        return;
+      }
 
       let updatedProposal = {
-        title: title,
+        title,
         type: proposalType,
-        abstract: abstract
+        abstract,
+        outline,
+        video_url
       };
 
-      if (this.taggingEnabled()) {
-        updatedProposal.tags = this.state.tags.map(tag => tag.title);
-      }
+      updatedProposal.tags = this.state.tags.map(tag => tag.text);
 
       dispatch(updateProposal(proposal.id, updatedProposal))
       .then(() => {
@@ -90,46 +128,48 @@ class SessionForm extends Component {
     }
   }
 
-  render() {
-    const { allTags, proposal: { title, abstract, type, tags }, user: { id, isReversimTeamMember } } = this.props;
-
-    let proposalType;
-    if (type === 'ossil') {
-      proposalType = "Open Source in Israel (10 min.)";
-    } else if (type === 'lightning') {
-      proposalType = "Lightning Talk (5 min.)";
+  onAddTag(tag) {
+    const { tagSuggestions } = this.props;
+    if (this.state.tags.map(t => t.text).indexOf(tag) > -1) {
+      return;
+    } else if ((tagSuggestions && tagSuggestions.indexOf(tag) === -1) && PREDEFINED_TAGS.indexOf(tag) === -1) {
+      this.setState({ newTagPending: tag });
     } else {
-      proposalType = "Full Featured (30-40 min.)";
+      this.addTag(tag);
     }
+  }
 
-    let categories = [ {
-      id: 'topics',
-      title: 'Topics',
-      type: 'topic',
-      items: allTags || []
-    } ]
+  addTag(tag) {
+    let tags = this.state.tags;
+    tags.push({
+      id: tag,
+      text: tag
+    });
+    this.setState({tags: tags});
+  }
 
-    let tagsInput;
-    if (this.taggingEnabled()) {
-      tagsInput =
-        <fieldset>
-          <span className={cx("col-xs-12")}>
-            <label htmlFor="title">Tags</label>
-          </span>
-          <span className={cx("col-xs-12")}>
-            <TagInput
-              categories={categories}
-              addNew={true}
-              onChange={(tags) => this.setState({tags})}
-              value={this.state.tags}
-            />
-          </span>
-        </fieldset>
+  onDeleteTag(i) {
+    let tags = this.state.tags;
+    tags.splice(i, 1);
+    this.setState({tags: tags});
+  }
+
+  render() {
+    const { proposal: { title, abstract, outline, video_url } } = this.props;
+    let { tagSuggestions } = this.props;
+    const { tags, newTagPending, abstractErr, abstractLen } = this.state;
+    let bestMatch, predefinedTags, tagStrs = this.state.tags.map(t => t.text);
+    tagSuggestions = tagSuggestions || [];
+    tagSuggestions = _.uniq(_.without(PREDEFINED_TAGS.concat(tagSuggestions), ...tagStrs));
+    predefinedTags = _.without(PREDEFINED_TAGS, ...tagStrs);
+
+    if (newTagPending) {
+      bestMatch = findBestMatch(newTagPending, tagSuggestions).bestMatch.target;
     }
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)} className={cx('form')}>
-          <fieldset>
+          <fieldset className="row">
             <span className={cx("col-xs-12")}>
               <label htmlFor="title">Title</label>
             </span>
@@ -138,9 +178,15 @@ class SessionForm extends Component {
             </span>
           </fieldset>
 
-          {tagsInput}
+          <Tags
+            tags={tags}
+            predefinedSuggestions={predefinedTags}
+            suggestions={tagSuggestions}
+            handleAddition={this.onAddTag}
+            handleDelete={this.onDeleteTag}
+            readOnly={this.state.tags.length===2} />
 
-          <fieldset>
+          <fieldset className="row" style={{marginTop:40}}>
             <span className={cx("col-xs-12")}>
               <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "full"} value="full" /> <label htmlFor="full">Full Featured (30-40 min.)</label></div>
               <div><input type="radio" name="proposalType" id="proposalType" ref="proposalType" onChange={this.handleProposalTypeChange.bind(this)} checked={this.state.proposalType === "lightning"} value="lightning" /> <label htmlFor="lightning">Lightning Talk (5 min.)</label></div>
@@ -148,15 +194,13 @@ class SessionForm extends Component {
             </span>
           </fieldset>
 
-          <fieldset>
-            <span className={cx("col-xs-12")}>
-              <label htmlFor="abstract">Abstract</label>
-            </span>
-            <span className={cx("col-xs-12")}>
-              <textarea id="abstract" ref="abstract" required defaultValue={abstract} />
-            </span>
-            <small className={cx("col-xs-8")}>Markdown syntax is supported</small>
-          </fieldset>
+        <FormField id="abstract" label="Abstract" value={abstract} required={true} multiline={true} placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`} subtitle={<span>Between {ABSTRACT_MIN}-{ABSTRACT_MAX} characters (the length of 2-5 tweets). Markdown syntax is supported.<br/><br/><span className={cx({'abstract-err': abstractErr})}>{abstractLen}/{ABSTRACT_MAX}</span></span>} fullRow={true} caption={null} onChange={this.onChangeAbstract}/>
+
+        <FormField id="video_url" value={video_url} label="Link to video" required={true} placeholder="e.g. http://youtu.be/xxxx" subtitle={<span><b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.<br/><b>New speakers</b>: A short video introducing you and the planned session outline. Example can be found <a href="https://www.youtube.com/watch?v=2A6cLeXLLII" target="_blank">in this video</a>.</span>} caption={null}/>
+
+        <div style={{marginTop:40}}>
+          <FormField id="outline" value={outline} label="Outline" required={true} multiline={true} placeholder="" subtitle={<span>The outline should include the main subjects you intend to cover with a timing estimation and total timing. A general overview is fine, we don’t expect a per-slide description for now.<br/><br/></span>} fullRow={true} caption={null}/>
+        </div>
 
           <fieldset className={cx("col-xs-2", "col-xs-offset-2")} style={{marginTop: '30px'}}>
             <input type="submit" value="save" className={cx('btn', 'btn-sm')} />
@@ -165,6 +209,18 @@ class SessionForm extends Component {
           <fieldset className={cx("col-xs-2", "col-xs-offset-2")} style={{marginTop: '30px'}}>
             <button title="cancel" className={cx('btn', 'btn-sm', 'btn-outline-clr')} onClick={this.props.onCancel}>Cancel</button>
           </fieldset>
+
+          <Rodal visible={!!newTagPending} onClose={() => { this.setState({ newTagPending: null })}}>
+            <div style={{textAlign: 'center'}}>
+              <h6 style={{marginTop:16}}>'{newTagPending}' doesn't exist</h6>
+              <p>Before adding a new tag, please check if there's already an existing tag like this one.</p>
+              { bestMatch ? <p>Did you mean <b>{bestMatch}</b>?</p> : undefined }
+              <div style={{marginTop:24}}>
+                { bestMatch ? <button style={{ textTransform: 'none', letterSpacing: 1, fontWeight:400}} className={cx('btn', 'btn-sm', 'btn-sm-center')} onClick={(e) => { e.preventDefault(); this.addTag(bestMatch); this.setState({ newTagPending:null }); }}>Add <b>{bestMatch}</b></button> : undefined }
+                <button style={{ textTransform: 'none', letterSpacing: 1, fontWeight:400}} className={cx('btn', 'btn-outline-clr', 'btn-sm', 'btn-sm-center')} onClick={(e) => { e.preventDefault(); this.addTag(newTagPending); this.setState({ newTagPending:null }); }}>Add <b>{newTagPending}</b></button>
+              </div>
+            </div>
+          </Rodal>
       </form>
     );
   }
@@ -182,7 +238,7 @@ SessionForm.propTypes = {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        allTags: state.proposal.tags
+      tagSuggestions: state.proposal.tags
     }
 }
 
