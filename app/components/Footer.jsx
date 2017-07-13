@@ -59,7 +59,7 @@ class Footer extends Component {
             <div className={cx("col-md-4")}>
               <div className={cx('widget', 'about-widget')}>
                 <h6 className={cx("widget-head")}>About <span className={cx("highlight")}>Reversim</span></h6>
-              <p className={cx("text-alt")}><small><a href="http://reversim.com/">Reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by <a href="https://twitter.com/orilahav">Ori Lahav</a> and <a href="http://tavory.com/">Ran Tavory</a> which brings together software developers and product, with over 300 recorded episodes and a few thousands listners.</small></p>
+              <p className={cx("text-alt")}><small><a href="http://reversim.com/">Reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by <a href="https://twitter.com/orilahav">Ori Lahav</a> and <a href="http://tavory.com/">Ran Tavory</a> which brings together software developers and product, with over 300 recorded episodes and a few thousands listeners.</small></p>
                 <p className={cx("text-alt")}><small>The summit is our intention to create a conference for developers by developers. Like in the podcast, we bring you the content we are interested in, and we hope you will be too.</small></p>
               <img src={reversimLogoFooter} alt="autograph" />
               </div>

@@ -48,7 +48,7 @@ export default ({ label, id, required, text, caption, subtitle, placeholder, inp
     <fieldset className={cx("row")}>
       <span className={cx("col-xs-12")}>
         <label htmlFor={id}>{label}</label>
-        { subtitle ? <small style={{display:'block'}}className="text-muted">{subtitle}</small> : undefined }
+        { subtitle ? <small style={{display:'block'}} className="text-muted">{subtitle}</small> : undefined }
       </span>
       <span className={cx(valueClass)}>
         {valueComp}
