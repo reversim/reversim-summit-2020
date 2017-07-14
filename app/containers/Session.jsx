@@ -157,7 +157,7 @@ class Session extends Component {
           { features('voting', false) && voting }
           { action }
           { features('viewSlides', false) && slides }
-          { canUseDom() ? <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #ReversimSummit16: ${title}` : `#ReversimSummit16: ${title}`} /> : undefined }
+          { canUseDom() ? <SocialShare url={window.location.href} title={this.isSpeaker() ? `My proposal to #reversim : ${title}` : `#reversim : ${title}`} /> : undefined }
           { features('recommendations', false) && <Recommender id={this.props.currentProposal.id} /> }
         </div>
       );
