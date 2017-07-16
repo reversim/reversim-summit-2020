@@ -40,7 +40,9 @@ export function transformUser(user, loggedInUser) {
 export function transformProposal(proposal, loggedInUser) {
 
   if (_.isObject(proposal)) {
-    let isReversimMember = isReversimTeamMember(loggedInUser);
+    const isTeamMember = isReversimTeamMember(loggedInUser);
+    const isAuthor =  loggedInUser && proposal.speaker_ids && proposal.speaker_ids.some(speaker => String(speaker._id) === String(loggedInUser._id));
+    const canViewPrivate = isTeamMember || isAuthor;
 
     return {
       id: proposal.id,
@@ -48,7 +50,7 @@ export function transformProposal(proposal, loggedInUser) {
       abstract: proposal.abstract,
       type: proposal.type,
       tags: proposal.tags,
-      status: isReversimMember && proposal.status,
+      status: canViewPrivate && proposal.status,
       speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
         return transformUser(user, loggedInUser);
       }),
@@ -56,9 +58,9 @@ export function transformProposal(proposal, loggedInUser) {
       endTime: proposal.endTime,
       hall: proposal.hall,
       slides_gdrive_id: proposal.slides_gdrive_id,
-      video_url: isReversimMember && proposal.video_url,
-      outline: isReversimMember && proposal.outline,
-      total: (proposal.attendees && isReversimMember) ? proposal.attendees.length : undefined,
+      video_url: canViewPrivate && proposal.video_url,
+      outline: canViewPrivate && proposal.outline,
+      total: (proposal.attendees && canViewPrivate) ? proposal.attendees.length : undefined,
       attended: proposal.attendees && (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false)
     }
   }
