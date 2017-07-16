@@ -44,6 +44,8 @@ export function transformProposal(proposal, loggedInUser) {
     const isAuthor =  loggedInUser && proposal.speaker_ids && proposal.speaker_ids.some(speaker => String(speaker._id) === String(loggedInUser._id));
     const canViewPrivate = isTeamMember || isAuthor;
 
+    console.log("transformProposal, proposal=", proposal.id, "loggedInUser=", loggedInUser && loggedInUser._id, "isAuthor=", isAuthor, "isTeamMember=", isTeamMember);
+
     return {
       id: proposal.id,
       title: proposal.title,
