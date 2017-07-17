@@ -90,8 +90,10 @@ export default function render(req, res) {
 
   match({routes, location: req.url}, (err, redirect, props) => {
     if (err) {
+      authenticated ? ssrAuth() : null;
       res.status(500).json(err);
     } else if (redirect) {
+      authenticated ? ssrAuth() : null;
       res.redirect(302, redirect.pathname + redirect.search);
     } else if (props) {
       let featureOverrides = parseFeatureOverridesFromQuery(props.location.query);
@@ -204,6 +206,7 @@ export default function render(req, res) {
           res.status(500).json(err);
         });
     } else {
+      authenticated ? ssrAuth() : null;
       res.sendStatus(404);
     }
   });
