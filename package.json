@@ -101,6 +101,7 @@
     "passport-local": "^1.0.0",
     "pg": "^4.5.3",
     "pg-hstore": "^2.3.2",
+    "pluralize": "^5.0.0",
     "postcss-import": "^8.0.2",
     "postcss-loader": "^0.8.2",
     "postcss-mixins": "^4.0.1",
