@@ -10,8 +10,6 @@ import shuffler from 'shuffle-seed';
 import request from 'axios';
 import { ENV } from '../../../config/appConfig';
 
-const shuffleProposals = true;
-
 /**
  * List
  */
@@ -42,11 +40,9 @@ export function all(req, res) {
           result = groups;
         }
 
-        if (shuffleProposals && req.user && req.user.id) {
-          return res.json(shuffler.shuffle(result, req.user.id))
-        } else {
-          return res.json(result);
-        }
+        const shuffleSeed = (req.user && req.user.id) ? req.user.id : String(Date.now());
+        console.log("seed", shuffleSeed);
+        return res.json(shuffler.shuffle(result, shuffleSeed));
     });
 }
 
