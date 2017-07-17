@@ -26,7 +26,7 @@ class AttendingFAQ extends Component {
       },
       {
         q: "How many sessions can I click on WILL ATTEND?",
-        a: "You may click on how many sessions you like. There's no limit. Click one or click hundred, every click counts the same. (it doesn't matter how many you click for counting your clicks)."
+        a: "You may click on how many sessions you like. There's no limit. Click one or click a hundred, every click counts the same (it doesn't matter how many you click for counting your clicks)."
       },
       {
         q: "Can I unclick (undo my click)?",
@@ -34,7 +34,7 @@ class AttendingFAQ extends Component {
       },
       {
         q: "When does the voting ends?",
-        a: "Voting ends end of day Sat night **July 23**. There's only a few days left."
+        a: "Voting ends end of day Sun night **July 30**. There's only a few days left."
       },
       {
         q: "Who sees the results?",
@@ -42,19 +42,19 @@ class AttendingFAQ extends Component {
       },
       {
         q: "Is WILL ATTEND just like VOTING?",
-        a: "Yes and no. The purpose of this process is to measure interest and improve engagement. We want you to tell us what interest you and we will use this information in order to priorotize our work. BUT - you should click only if you find the topic and and the presenter for this topic interesting and you want to spend 5m or 1/2h listening to it. Being good friends with the spekaer is the wrong reason to vote. Showing interest in the session is the right reason to vote. Keep in mind that all votes are confidential."
+        a: "Yes and no. The purpose of this process is to measure interest and improve engagement. We want you to tell us what interests you and we will use this information in order to prioritize our work. BUT - you should click only if you find the topic and and the presenter for this topic interesting and you want to spend 5m or 1/2h listening to it. Being good friends with the spekaer is the wrong reason to vote. Showing interest in the session is the right reason to vote. Keep in mind that all votes are confidential."
       },
       {
         q: "If I clicked WILL ATTEND - does that mean I'm registered to the conference?",
-        a: "No. Registration will open mid August. By clicking you merely are showing interest. that's all, you're not yet registered."
+        a: "No. Registration will open mid September. By clicking you are merely showing interest. That's all, you're not yet registered."
       }
-    ]
+    ];
 
     render() {
         return (
             <BaseLayout currentPath={this.props.location.pathname} name="attending-faq">
 
-              <section id="register" className={cx('section', 'container')}>
+              <section id="register" className={cx('section', 'container')} style={{ marginTop: 60 }}>
                 <div className={cx('col-xs-12', 'col-md-offset-2', 'col-md-8')}>
                   <h3 className={cx('text-center')} style={{marginBottom: 80}}>I Will Attend - Q&A</h3>
 
@@ -67,9 +67,10 @@ class AttendingFAQ extends Component {
                   )
                 })}
 
-                <h5 className={cx('text-center')} style={{marginTop: 80}}>So, are you ready to mark your favorite sessions?  <Link to='/proposals' className={cx('btn', 'btn-lg')} style={{marginTop: 30}}>Start reviewing</Link></h5>
                 </div>
               </section>
+              <h5 className={cx('text-center')} style={{marginTop: 40}}>So, are you ready to mark your favorite sessions?</h5>
+              <div className={cx('text-center')} style={{marginBottom: 40}}><Link to='/proposals' className={cx('btn', 'btn-lg')} style={{marginTop: 30}}>Start reviewing</Link></div>
 
             </BaseLayout>
         );
