@@ -57,7 +57,7 @@ class MyFavorites extends Component {
               </div>
             </section>
 
-            <section id="my-favorites" className={cx('section', 'container')}>
+            <section id="my-favorites" className={cx('section', 'container')} style={{ marginTop: 60 }}>
               { favorites && favorites.length > 0 ? (
                 <div className={cx("col-md-11", "col-md-offset-1")}>
                   { renderedFavorites }

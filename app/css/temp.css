@@ -6582,7 +6582,7 @@ button[type="submit"] .loading {
   letter-spacing: 0.26em;
   color: #fff;
   border-style: solid;
-  border-width: 0 0 2px;
+  border-width: 0;
   border-color: transparent;
   cursor: pointer;
 }
@@ -6619,6 +6619,17 @@ button[type="submit"] .loading {
     letter-spacing: 0.13em;
   }
 }
+
+@media (max-width: 768px) {
+  .navigation-header .logo {
+    padding-top: 8px;
+  }
+}
+
+header {
+  padding: 6px 0;
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
   .header .navigation-list {
     padding-left: 15px;

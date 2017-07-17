@@ -116,7 +116,7 @@ class Navigation extends Component {
 
               { authenticated ? (
                 <div className={cx("pull-right")}>
-                  <ul>
+                  <ul style={{marginBottom: 0}}>
                     <li className={cx('navigation-item', 'dropdown')}>
                       <a className={cx('navigation-link', 'dropdown-toggle', 'header-login')} data-toggle="dropdown">{this.props.user.name || this.props.user.email} <i className={cx('fa', 'fa-caret-down')}></i></a>
                       <ul className={cx("dropdown-menu")}>

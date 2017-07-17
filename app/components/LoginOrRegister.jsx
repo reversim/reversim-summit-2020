@@ -35,7 +35,7 @@ class LoginOrRegister extends Component {
 
     return (
       <div className={cxLogin('login')}>
-        <div className={cxLogin('container')}>
+        <div className={cxLogin({ 'container': !this.props.small })}>
           <div className={cx('align-center')} style={{marginTop: 20}}>
             <h6>Please Login</h6>
           <div className={cxLogin('alternative')} style={{width: 300, margin: '15px auto'}}>
