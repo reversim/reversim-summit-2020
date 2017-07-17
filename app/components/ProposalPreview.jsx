@@ -68,7 +68,7 @@ export default class ProposalPreview extends Component {
     let viewButton;
     if (features('proposalsPageGroupedByTags', false)) {
       viewButton =
-        <a className={cx(this.state.isOpen ? 'col-xs-6' : 'col-xs-12', 'col-md-3', 'proposals-list-action-button', 'preview-proposal-button')} href={`/session/${proposal.id}`} onClick={this.toggleFullView.bind(this)}>
+        <a className={cx(this.state.isOpen ? 'col-xs-6' : 'col-xs-12', 'col-md-4', 'proposals-list-action-button', 'preview-proposal-button')} href={`/session/${proposal.id}`} onClick={this.toggleFullView.bind(this)}>
           <span className={cx('fa', this.state.isOpen ? 'fa-arrow-up' : 'fa-arrow-down')}></span> { this.state.isOpen ? 'Close' : 'View More' }
         </a>
     } else {
