@@ -98,7 +98,6 @@ class Session extends Component {
           </div>
       }
 
-      console.log("outline", outline);
       let sessionOutline = isReversimTeamMember && outline && (
         <div style={{marginTop: 30}}>
           <h6>Session outline</h6>
