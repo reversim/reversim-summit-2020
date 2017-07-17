@@ -85,7 +85,7 @@ export default function render(req, res) {
   }
 
   function escapeTags(state) {
-    return JSON.parse(JSON.stringify(state).replace(/<\//g, ""));
+    return JSON.parse(JSON.stringify(state).replace(/<\//g, "").replace(/\u2028/g, ""));
   }
 
   match({routes, location: req.url}, (err, redirect, props) => {
