@@ -2,14 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 import BaseLayout from 'containers/BaseLayout';
-import { StickyContainer, Sticky } from 'react-sticky';
-import Speaker from 'components/Speaker';
 import {Link} from 'react-router';
 import { Element, Link as ScrollLink } from 'react-scroll';
 import { fetchProposals, fetchTags } from 'actions/proposals';
-import ReactMarkdown from 'react-markdown';
 import features, { canUseLocalStorage } from 'features';
-import ReactDOM from 'react-dom';
 import Rodal from 'components/Rodal';
 import SessionForm from 'components/SessionForm';
 import NotificationSystem from 'react-notification-system';
@@ -19,10 +15,9 @@ import ProposalPreview from 'components/ProposalPreview';
 import ga from 'react-ga';
 import shuffler from 'shuffle-seed';
 import _ from 'lodash';
+import pluralize from 'pluralize';
 
 import styles from 'css/main';
-
-import defaultSpeakerPic from 'images/default_speaker.png'
 
 const cx = classNames.bind(styles);
 
@@ -88,15 +83,10 @@ class AllProposals extends Component {
       })
     }
 
-    renderProposals() {
-      const { proposals, user, location: { pathname } } = this.props;
+    renderProposals(proposals) {
+      const { user, location: { pathname } } = this.props;
 
-      let proposalsToRender = proposals;
-      if (this.state.filter && this.state.filter.length > 0) {
-        proposalsToRender = proposals.filter(p => _.some(this.state.filter, tag => p.tags.indexOf(tag) >= 0));
-      }
-
-      return proposalsToRender.map((proposal, i) => {
+      return proposals.map((proposal, i) => {
         return (
           <ProposalPreview  triggerLoginModal={() => this.openLoginModal(proposal.id)}
                             triggerEdit={this.editSession.bind(this)}
@@ -173,8 +163,6 @@ class AllProposals extends Component {
     }
 
     filterTag(tag) {
-      event.preventDefault();
-
       if (this.state.filter) {
         if (this.state.filter.indexOf(tag) >= 0) {
           this.setState({ filter: this.state.filter.filter(t => t !== tag) });
@@ -186,6 +174,18 @@ class AllProposals extends Component {
       }
 
       ga.event({ category: 'Proposals', action: 'Click on Tag', label: tag});
+    }
+
+    filterByType(type) {
+      if (this.state.typeFilter === type) {
+        this.setState({
+          typeFilter: null
+        })
+      } else {
+        this.setState({
+          typeFilter: type
+        });
+      }
     }
 
     render() {
@@ -200,18 +200,24 @@ class AllProposals extends Component {
         const diff = tagCount[t2] - tagCount[t1];
         return diff || (t2 > t1 ? 1 : -1);
       });
-      const totalCount = this.state.filter && this.state.filter.length ? this.state.filter.reduce((prev, tag) => tagCount[tag] + prev, 0) : proposals.length;
+
+      let proposalsToRender = proposals;
+      if (this.state.filter && this.state.filter.length > 0) {
+        proposalsToRender = proposals.filter(p => _.some(this.state.filter, tag => p.tags.indexOf(tag) >= 0));
+      }
+
+      if (this.state.typeFilter) {
+        proposalsToRender = proposalsToRender.filter(p => p.type === this.state.typeFilter);
+      }
+
+      const totalCount = proposalsToRender.length;
 
       let tagsBar;
       if (features('proposalsPageGroupedByTags', false) && tags) {
         tagsBar =
-          <StickyContainer ref="tags-container">
-            <Sticky style={{backgroundColor: '#fff', zIndex: 4}}>
-              <div style={{padding: '15px 0'}}>
-                { sortedTags.map((tag, index) => <a onClick={(event) => { event.preventDefault; this.filterTag(tag) }} className={cx({'active-tag': this.state.filter && this.state.filter.indexOf(tag) >= 0, 'label': true, 'label-info': true, 'session-tag': true})} key={index}>{tag} ({tagCount[tag]})</a> )}
-              </div>
-            </Sticky>
-          </StickyContainer>
+          <div style={{padding: '15px 0'}}>
+            { sortedTags.map((tag, index) => <a onClick={(event) => { event.preventDefault; this.filterTag(tag) }} className={cx({'active-tag': this.state.filter && this.state.filter.indexOf(tag) >= 0, 'label': true, 'label-info': true, 'session-tag': true})} key={index}>{tag} ({tagCount[tag]})</a> )}
+          </div>
       }
 
       let votingInfoSection;
@@ -233,11 +239,21 @@ class AllProposals extends Component {
 
       let subheaderContent;
       if (features('proposalsPageGroupedByTags') && this.state.filter && this.state.filter.length > 0) {
-        subheaderContent = this.state.filter.join(', ') + '(' + totalCount + ')'
+        subheaderContent = this.state.filter.join(', ');
       } else {
-        subheaderContent = 'All proposals (' + totalCount + ')';
+        subheaderContent = 'All proposals';
       }
-      const subheader = <h4 style={ {marginBottom: 30, letterSpacing: 1} }>{subheaderContent}</h4>
+
+      const subheader = (
+        <div>
+          <h4 style={ {marginBottom: 20, letterSpacing: 1} }>{subheaderContent}</h4>
+          <div style={{ marginBottom: 20, marginLeft: -7 }}>
+            <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'full'})} onClick={() => this.filterByType('full')}>Full talks</button>
+            <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'lightning'})} onClick={() => this.filterByType('lightning')}>Lightning talks</button>
+            <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'ossil'})} onClick={() => this.filterByType('ossil')}>Open source</button>
+          </div>
+          <div style={{ marginBottom: 60 }}><small>Showing {totalCount} {pluralize('result', totalCount)}</small></div>
+        </div>);
 
       return (
           <BaseLayout currentPath={this.props.location.pathname} name="all-proposals">
@@ -287,7 +303,7 @@ class AllProposals extends Component {
                 {votingInfoSection}
                 {tagsBar}
                 {subheader}
-                {this.renderProposals()}
+                {this.renderProposals(proposalsToRender)}
               </div>
             </section>
         </BaseLayout>

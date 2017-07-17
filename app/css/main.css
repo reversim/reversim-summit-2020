@@ -480,3 +480,23 @@ fieldset.row {
   text-align: center;
   font-weight: bold;
 }
+
+.filter-btn, .filter-btn:focus {
+  background: transparent !important;
+  color: #1ac6ff !important;
+  letter-spacing: 1px;
+  border: 1px solid #1ac6ff !important;
+}
+
+.filter-btn:hover {
+  background: rgba(26, 198, 255, 0.13) !important;
+}
+
+.filter-btn:active {
+  background: rgba(26, 198, 255, 0.26) !important;
+}
+
+.filter-btn.active {
+  background: rgba(26, 198, 255, 0.75) !important;
+  color: white !important;
+}
