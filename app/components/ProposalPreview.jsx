@@ -65,7 +65,9 @@ export default class ProposalPreview extends Component {
         <div className={cx("col-md-8")} style={{paddingLeft: 0}}>
           <div className={cx('align-left')}>
             <article>
+              <Link to={`/session/${proposal.id}`} className={cx('title-link')}>
               { features('proposalsPageGroupedByTags', false) ? <h6>{proposal.title}</h6> : <h5>{proposal.title}</h5>}
+              </Link>
                 <p><small style={{marginRight: 30}} className={cx("text-alt")}><span className={cx("highlight")}>{type}</span></small> {proposalTags}</p>
 
                 <div className={cx({"proposal-content-container": features('proposalsPageGroupedByTags', false) })} ref="proposalPreview">
@@ -74,7 +76,7 @@ export default class ProposalPreview extends Component {
                     { proposal.status === 'accepted' && proposal.startTime !== undefined ? (
                       <strong style={{marginBottom: 20}}>{ moment(proposal.startTime).format("dddd, MMM Do, HH:mm") + '  //  ' } { proposal.hall !== undefined ? proposal.hall : undefined }</strong>
                     ) : undefined }
-                  { features('proposalsPageGroupedByTags') && <p><small><Link to={`/session/${proposal.id}`} className={cx('small')}>Permalink</Link></small></p> }
+                  { features('proposalsPageGroupedByTags') && <p><small><Link to={`/session/${proposal.id}`} className={cx('small')}>Show more</Link></small></p> }
                   </div>
                 </div>
                 <div className={cx('row')} style={{marginTop: 30}}>

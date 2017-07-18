@@ -500,3 +500,11 @@ fieldset.row {
   background: rgba(26, 198, 255, 0.75) !important;
   color: white !important;
 }
+
+a.title-link:hover > h6 {
+  color: #1ac6ff;
+}
+
+a.title-link:hover {
+  text-decoration: none;
+}
