@@ -215,8 +215,8 @@ class AllProposals extends Component {
         <div>
           <h4 style={ {marginBottom: 20, letterSpacing: 1} }>{subheaderContent}</h4>
           <div style={{ marginBottom: 20, marginLeft: -7 }}>
-            <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'full'})} onClick={() => this.filterByType('full')}>Full talks</button>
-            <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'lightning'})} onClick={() => this.filterByType('lightning')}>Lightning talks</button>
+            <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'full'})} onClick={() => this.filterByType('full')}>Full sessions</button>
+            <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'lightning'})} onClick={() => this.filterByType('lightning')}>Lightning sessions</button>
             <button className={cx('btn', 'btn-sm', 'filter-btn', { active: this.state.typeFilter === 'ossil'})} onClick={() => this.filterByType('ossil')}>Open source</button>
           </div>
           <div style={{ marginBottom: 60 }}><small>Showing {totalCount} {pluralize('result', totalCount)}</small></div>
