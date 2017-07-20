@@ -1,6 +1,6 @@
 export default {
   submission: true,
-  voting: false,
+  voting: true,
   tagging: true,
   proposalsPageGroupedByTags: true,
   networking: false,
@@ -9,7 +9,7 @@ export default {
   publishAgenda: false,
   startRegistration: false,
   viewSlides: false,
-  sponsored: false,
+  sponsored: true,
   timelineFinalized: true,
   preCFP: false,
   team: true

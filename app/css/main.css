@@ -508,3 +508,13 @@ a.title-link:hover > h6 {
 a.title-link:hover {
   text-decoration: none;
 }
+
+@media(max-width: 767px) {
+  .spons-logo img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    height: 110px;
+    width: auto;
+  }
+}

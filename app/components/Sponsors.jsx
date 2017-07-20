@@ -5,20 +5,20 @@ import _ from 'lodash';
 
 import outbrainLogo from 'images/sponsors/outbrain.png';
 import wixLogo from 'images/sponsors/wix.png';
-import datoramaLogo from 'images/sponsors/vonage.png';
+import datoramaLogo from 'images/sponsors/datorama.svg';
 import gigyaLogo from 'images/sponsors/gigya.png';
 import kenshooLogo from 'images/sponsors/kenshoo.png';
 import appsFlyerLogo from 'images/sponsors/apps_flyer.png';
-import myHeritageLogo from 'images/sponsors/my_heritage.png';
+import myHeritageLogo from 'images/sponsors/MH_logo.png';
 import klarnaLogo from 'images/sponsors/klarna.png';
-import livepersonLogo from 'images/sponsors/vonage.png';
-import tikalLogo from 'images/sponsors/vonage.png';
+import livepersonLogo from 'images/sponsors/liveperson.png';
+import tikalLogo from 'images/sponsors/tikal.jpg';
 import facebookLogo from 'images/sponsors/facebook.png';
 import akamaiLogo from 'images/sponsors/akamai.png';
-import oracleLogo from 'images/sponsors/oracle-ravello.png';
-import caprizaLogo from 'images/sponsors/vonage.png';
-import cloudinaryLogo from 'images/sponsors/vonage.png';
-import automatticLogo from 'images/sponsors/vonage.png';
+import oracleLogo from 'images/sponsors/oracle-logo.png';
+import caprizaLogo from 'images/sponsors/capriza.png';
+import cloudinaryLogo from 'images/sponsors/cloudinary.png';
+import automatticLogo from 'images/sponsors/automattic.png';
 
 const cx = classNames.bind(styles);
 
@@ -212,7 +212,7 @@ export default class Sponsors extends Component {
         <div key={index} className={cx('panel', 'align-left')} style={{marginTop: 50}}>
           <div className={cx('container')}>
           <div className={cx('row')}>
-            <div className={cx('col-sm-2', 'col-sm-offset-1', 'img-column')}>
+            <div className={cx('col-sm-2', 'col-sm-offset-1', 'spons-logo')} style={{marginBottom:20}}>
               <a href={url}><img src={logo} alt={name} className={cx('img-responsive')} /></a>
             </div>
             <div className={cx('col-sm-8')}>
@@ -237,7 +237,7 @@ export default class Sponsors extends Component {
   render() {
     return (
       <section id="sponsors" className={cx('section', 'align-center')}>
-        <div className={cx("container")}>
+        <div className={cx("container")} style={{paddingLeft:15, paddingRight:15}}>
           <span data-icon className={cx('icon', 'section-icon', 'icon-documents-bookmarks-12')}></span>
           <h3>Sponsors</h3>
           <p className={cx("text-alt")}>companies that <span className={cx("highlight")}>support</span> us</p>
