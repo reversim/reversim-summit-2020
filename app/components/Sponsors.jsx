@@ -47,7 +47,7 @@ export default class Sponsors extends Component {
       url: 'http://www.appsflyer.com',
       info: {
         height: 400,
-        description: 'AppsFlyer is the leading mobile attribution and analytics platform, enabling app marketers and brands measure their user accusition, in-app user engagement tracking, lifetime value analysis, ROI and retargeting attribution.',
+        description: 'AppsFlyer is the leading mobile attribution and analytics platform, enabling app marketers and brands measure their user acquisition, in-app user engagement tracking, lifetime value analysis, ROI and retargeting attribution.',
         featuredJobInfo: 'If you have passion to BigData processing, this is the place for you. Come to play around with more than 8 billion events per day in real-time and batch, using Spark, Mesos, Memsql, Druid and Kafka. New systems and technologies, architecture changes and data insights are part of the daily work in this team.',
         featuredJobLink: 'https://www.appsflyer.com/jobs/senior-data-developer/'
       }
@@ -70,7 +70,7 @@ export default class Sponsors extends Component {
       info: {
         height: 300,
         description: 'Outbrain is the inventor and leader in content discovery. We help people discover interesting content.',
-        featuredJobInfo: 'We are looking for an outstanding software engineer who is passionate about quality and bringing value to our users. You will be part of a small, tight-knit, dynamic, hands-on team that takes pride in high coding standards and modern development practices. Each member of our team is an development athlete/all-around-player. You should be able to build a product end-to-end, from the careful mastery of the front-end/client-side to the efficient and maintainable design of the back-end/server-side.',
+        featuredJobInfo: 'We are looking for an outstanding software engineer who is passionate about quality and bringing value to our users. You will be part of a small, tight-knit, dynamic, hands-on team that takes pride in high coding standards and modern development practices. Each member of our team is a development athlete/all-around-player. You should be able to build a product end-to-end, from the careful mastery of the front-end/client-side to the efficient and maintainable design of the back-end/server-side.',
         featuredJobLink: 'http://outbrain.mytribehr.com/careers'
       }
     },
@@ -102,7 +102,7 @@ export default class Sponsors extends Component {
       url: 'http://www.wix.engineering/',
       info: {
         height: 300,
-        description: <span>Wix.com is a leading cloud-based web development platform with more than 110 million users worldwide. Wix was founded on the belief that the Internet should be accessible to everyone to develop, create, and contribute.<br/><br/>Our Software Engineering culture is based on developers who love their work, are passionate about technology, and believe that nothing is impossible. We deploy hundreds of times a day and design our software for ease of change. We use TDD with Scala and JS to develop our microservices, encourage C/I, and we give back to the community by speaking at developer events and contributing to Open-Source. Wix\'s headquarters are in Tel Aviv, Israel with offices in Be\'er Sheva, San Francisco, New York, Miami, Berlin, Vilnius, Kyiv, and Dniepero.</span>,
+        description: <span>Wix.com is a leading cloud-based web development platform with more than 110 million users worldwide. Wix was founded on the belief that the Internet should be accessible to everyone to develop, create, and contribute.<br/><br/>Our Software Engineering culture is based on developers who love their work, are passionate about technology, and believe that nothing is impossible. We deploy hundreds of times a day and design our software for ease of change. We use TDD with Scala and JS to develop our microservices, encourage C/I, and we give back to the community by speaking at developer events and contributing to Open-Source. Wix's headquarters are in Tel Aviv, Israel with offices in Be'er Sheva, San Francisco, New York, Miami, Berlin, Vilnius, Kyiv, and Dniepero.</span>,
         featuredJobInfo: <span>At Wix’s Engineering group, lead developers shape the architecture of our services and product. They set the tone and standard of our developer culture, fusing facets of engineering, product management, DevOps, analytics, and technical management. They are also mentors, helping less-experienced engineers improve and hone their skills so that they are eventually capable of being tech leads themselves. The Wix development culture is transparent, highly technical, and agile. Because we ship often, we’ve happily adopted Continuous Delivery and Test-Driven Development. We code in Scala, Python, Go, Javascript and TypeScript. We develop and maintain highly scalable systems that support Wix’s tens of millions of users—and the people who visit their websites.<br/><br/>We strive to hire engineers who have ‘fire and forget’ abilities, and who are independent, innovative, and bold. Does this sound like you? We’re always looking for engineers who share our technical ethos!</span>,
         featuredJobLink: 'http://www.wix.com/jobs/home'
       }
