@@ -39,7 +39,7 @@ const Title = (props) => {
       <p className={cx("text-alt")} style={{ margin: '20px 20px 0' }}>{ features('submission', false) ? 'Read carefully before submission!' : 'Call for papers is now closed' }</p>
       <p style={{color: 'rgba(198, 40, 40, 0.75)', fontWeight:'bold'}}>
         Deadline:
-        { remainingDays ? <span>July 20<br/><span className={cx('days-remaining')} style={{padding: 0}}>{remainingDays}</span> days remaining </span> : 'Today!'}
+        { remainingDays > 0 ? <span>July 20<br/><span className={cx('days-remaining')} style={{padding: 0}}>{remainingDays}</span> days remaining </span> : 'Today!'}
       </p>
     </div>
   )
