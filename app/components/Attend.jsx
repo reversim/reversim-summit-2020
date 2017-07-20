@@ -64,7 +64,7 @@ class Attend extends Component {
     if (authenticated && !this.isSpeaker()) {
       Attend.attendSession(dispatch, to, id, speakers, !value, event.target.getAttribute('data-origin'));
     } else if (!authenticated && window) {
-      window.location.href = `/auth/google?returnTo=${location}?attend=true`;
+      window.location.href = `/auth/google?returnTo=${location}`;
     }
   }
 
