@@ -80,9 +80,9 @@ export default class Sponsors extends Component {
       url: 'http://www.myheritage.com',
       info: {
         height: 300,
-        description: 'At MyHeritage, we bring together incredibly bright minds, and all the newest technologies and languages. The result is a culture of constant innovation. With 82 million users, 28 million family trees, and 6.8 billion records, as an engineer at MyHeritage, you’ll overcome exciting scale challenges to build a line of products with massive global impact.',
-        featuredJobInfo: 'Are you obsessed with performance and scale challenges? Do you lose hours of sleep thinking about how to reduce ten milliseconds from an SQL query? If you’re looking for challenges with server solutions and running cutting-edge NoSQL BigData architecture, then look no further. Our complex environment of over 2.6 billion individual profiles, and over 6 billion historical records, will ensure that you’ll help solve BigData challenges (using Hadoop, Cassandra, and other NoSQL solutions) while working in continuous integration and deployment. We\'re growing fast and have opportunities for DevOps experts, Backend and Frontend developers. Join us - Make history!',
-        featuredJobLink: 'http://grnh.se/18ochs'
+        description: <span>As one of <a href="http://uk.businessinsider.com/coolest-tech-startups-in-israel-2017-5/#22-myheritage-online-family-tree-service-4">Israel's most successful start-ups</a>, with over 370 employees, MyHeritage is utilizing the latest technological advancements, such as DNA testing and advanced matching algorithms developed in-house, to discover, preserve and share the family histories of over 90 million users worldwide.<br/><br/>We invite you to join our <a href="http://www.meetup.com/MyHeritage-Meetup/">MyHeritage Meetup Group</a> to receive updates about upcoming events hosted in our office. Come along to discuss cross-technology challenges with our top-notch R&D team.</span>,
+        featuredJobInfo: 'Join us - Make history.',
+        featuredJobLink: 'https://careers.myheritage.com/positions/engineering'
       }
     },
     {
