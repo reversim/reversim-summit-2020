@@ -75,6 +75,14 @@ class AllProposals extends Component {
         }
     }
 
+    componentWillMount() {
+      const { dispatch, tags } = this.props;
+
+      if (!tags) {
+        dispatch(fetchTags());
+      }
+    }
+
     componentDidMount() {
       this.setState({
         showOnBoardingModal: features('voting', false) && canUseLocalStorage() && (window.localStorage.getItem(showAttendOnBoardingKey) === undefined || window.localStorage.getItem(showAttendOnBoardingKey) !== 'true')
@@ -163,7 +171,7 @@ class AllProposals extends Component {
           tagCount[tag] = tagCount[tag] !== undefined ? tagCount[tag] + 1 : 1;
         });
       });
-      const sortedTags = tags.sort((t1, t2) => {
+      const sortedTags = tags && tags.sort((t1, t2) => {
         const diff = tagCount[t2] - tagCount[t1];
         return diff || (t2 > t1 ? 1 : -1);
       });
@@ -301,4 +309,4 @@ function mapStateToProps(state) {
 
 // Read more about where to place `connect` here:
 // https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
-export default connect(mapStateToProps)(AllProposals);
+export default connect(mapStateToProps, dispatch => ({dispatch}))(AllProposals);
