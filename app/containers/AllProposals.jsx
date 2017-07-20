@@ -170,7 +170,7 @@ class AllProposals extends Component {
 
       let proposalsToRender = proposals;
       if (this.state.filter && this.state.filter.length > 0) {
-        proposalsToRender = proposals.filter(p => _.some(this.state.filter, tag => p.tags.indexOf(tag) >= 0));
+        proposalsToRender = proposals.filter(p => _.every(this.state.filter, tag => p.tags.indexOf(tag) >= 0));
       }
 
       if (this.state.typeFilter) {
