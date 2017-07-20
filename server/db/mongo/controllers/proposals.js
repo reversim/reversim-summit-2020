@@ -129,7 +129,7 @@ export function tags(req, res) {
       { $unwind: "$tags" },
       { $group: { _id: "$tags" } }
     ]).exec().then(tags => {
-      return res.json(tags.map(tag => tag._id).sort());
+      return res.json(tags.filter(tag => !!tag._id).map(tag => tag._id).sort());
     }).catch(err => {
       console.log(`Error in proposals/tags query: ${err}`);
       return res.status(500).send('Something went wrong getting the data');
