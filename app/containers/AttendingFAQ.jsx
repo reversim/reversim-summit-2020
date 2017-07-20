@@ -21,20 +21,24 @@ class AttendingFAQ extends Component {
 
     static data = [
       {
-        q: "Why should I mark sessions with WILL ATTEND? What does that mean?",
-        a: "We use this data to determine interest in the sessions. You should click WILL ATTEND if you find the session and its presenter interesting and you'd like to spend your time listening to it.\n\nYou can access your favorite sessions via [favorite sessions](/my-favorites) page (under profile dropdown, top right of this page)."
+        q: "What is the purpose of the vote?",
+        a: "The vote button reads WILL ATTEND and so is the purpose of it - to indicate that you are personally interested in attending this session. Please note - it’s not registration. By clicking WILL ATTEND you are not yet registered to the conference. Think of it as “I want to attend”. It helps in the selection of the sessions (but by no means is the only signal for that)"
       },
       {
-        q: "How many sessions can I click on WILL ATTEND?",
-        a: "You may click on how many sessions you like. There's no limit. Click one or click a hundred, every click counts the same (it doesn't matter how many you click for counting your clicks)."
+        q: "To how many sessions can I vote?",
+        a: "As many as you wish. You may vote for just one or all of them.\n\nTypically most people vote for a few dozen sessions."
       },
       {
-        q: "Can I unclick (undo my click)?",
-        a: "Yes you can. Just click the button again."
+        q: "Who can vote?",
+        a: "Anyone **can** vote. But you **should** vote only if you plan to attend the conference.\nSimply login and vote. Invite your friends and coworkers.\nBut keep in mind that the purpose of the vote is WILL ATTEND so vote only if you intend to come to the conference and of course are interested in this specific session."
       },
       {
-        q: "When does the voting ends?",
-        a: "Voting ends end of day Sun night **July 30**. There's only a few days left."
+        q: "Can I undo my vote?",
+        a: "Yes. Until the 31 you may vote and unvote freely. Simply click the WILL ATTEND button once more.\nVisit [https://summit2017.reversim.com/my-favorites](https://summit2017.reversim.com/my-favorites) to list the sessions you voted for."
+      },
+      {
+        q: "When does the voting end?",
+        a: "Voting ends end of day Mon night **July 31**. There's only a few days left."
       },
       {
         q: "Who sees the results?",
@@ -47,6 +51,26 @@ class AttendingFAQ extends Component {
       {
         q: "If I clicked WILL ATTEND - does that mean I'm registered to the conference?",
         a: "No. Registration will open mid September. By clicking you are merely showing interest. That's all, you're not yet registered."
+      },
+      {
+        q: "When will selected sessions and agenda be announced?",
+        a: "Around early-mid Sep."
+      },
+      {
+        q: "When will registration open?",
+        a: "Mid Sep"
+      },
+      {
+        q: "When is the conference?",
+        a: "Oct 15-16."
+      },
+      {
+        q: "Where can I get more updates?",
+        a: "You should follow us on Twitter [https://twitter.com/reversim](https://twitter.com/reversim) or join the Facebook group [https://www.facebook.com/groups/806177629478248/](https://www.facebook.com/groups/806177629478248/) or the mailing list [https://groups.google.com/forum/#!managemembers/reversim-summit](https://groups.google.com/forum/#!managemembers/reversim-summit)\n\nAnd/or occasionally visit the site [https://summit2017.reversim.com/](https://summit2017.reversim.com/)"
+      },
+      {
+        q: "I’m a submitter. What do I do now?",
+        a: "If you’re a submitter then you should have received another email with more details about what’s coming next.\n\nThank you and happy voting. You have until July 31. Hope to see you at the conference, RS17 team."
       }
     ];
 
