@@ -255,7 +255,7 @@ class AllProposals extends Component {
                     width={500}
                     height={250}
                     onClose={this.closeLoginModal.bind(this)}>
-              <LoginOrRegister loginQueryString={`returnTo=/session/${this.state.votedSessionIdAsGuest}?attend=true`} small={true} />
+              <LoginOrRegister loginQueryString={`returnTo=/session/${this.state.votedSessionIdAsGuest}`} small={true} />
             </Rodal>
 
             <Rodal  visible={this.state.showOnBoardingModal}

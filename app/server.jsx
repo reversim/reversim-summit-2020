@@ -121,8 +121,8 @@ export default function render(req, res) {
 
           let socialTags;
           let baseUrl = req.protocol + '://' + req.get('host');
+          let title = 'Reversim Summit 2017';
           if (req.url.match(/\/session\//g)) {
-            let title = 'Reversim Summit 2017';
             if (initialState && initialState.proposal && initialState.proposal.currentProposal) {
               title = initialState.proposal.currentProposal.title;
             }
@@ -178,7 +178,7 @@ export default function render(req, res) {
             ]
           }
 
-          let headerTags = header(socialTags);
+          let headerTags = header(`${title} | Reversim Summit 2017`, socialTags);
 
           res.status(200).send(`
         <!doctype html>
