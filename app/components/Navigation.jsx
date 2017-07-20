@@ -80,7 +80,7 @@ class Navigation extends Component {
   renderNavItem(item, i) {
     let link;
     if (item.noScroll) {
-      link = <Link className={cx("navigation-link")} to={item.to} onClick={this.collapseNav.bind(this)}>{item.text}</Link>;
+      link = <Link className={cx("navigation-link")} to={`/${item.to}`} onClick={this.collapseNav.bind(this)}>{item.text}</Link>;
     } else {
       link = <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to={item.to} spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>{item.text}</ScrollLink>
     }

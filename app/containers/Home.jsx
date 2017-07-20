@@ -36,7 +36,7 @@ class Home extends Component {
       if (pageSection !== undefined && pageSection !== '') {
         let elem = ReactDOM.findDOMNode(this.refs[pageSection])
         if (elem) {
-          elem.scrollIntoView();
+          setTimeout(() => elem.scrollIntoView(), 500);
         }
       }
     }

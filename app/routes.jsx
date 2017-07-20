@@ -59,6 +59,10 @@ export default (store) => {
         <Route path="/my-profile" component={MyProfile} onEnter={requireAuth} />
         <Route path="/my-favorites" component={MyFavorites} onEnter={requireAuth} />
         <Route path="/team" component={Home} />
+        <Route path="/about" component={Home} />
+        <Route path="/timeline" component={Home} />
+        <Route path="/sponsors" component={Home} />
+        <Route path="/location" component={Home} />
         <Route path="/networking" component={Home} />
         <Redirect from="/agenda" to="/schedule" />
         { features('voting', false) ? <Route path="/attending-faq" component={AttendingFAQ} /> : undefined }
