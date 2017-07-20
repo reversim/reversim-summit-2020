@@ -73,7 +73,12 @@ export default class Hero extends React.Component {
       const remaining = getRemainingCFPDays();
       const isOpen = features('submission', false),
         status = isOpen ? 'open !' : 'closed';
-      return <div>Call for papers is now {status}{ isOpen && <small style={{textTransform:'none', color: 'white'}}><br/><span className={cx("days-remaining")}>{remaining}</span> days remaining, see <ScrollLink to="timeline" smooth={true} offset={-50} style={{cursor:'pointer'}}>timeline</ScrollLink> here</small>}</div>
+      return (
+        <div>
+          Call for papers is now {status}{ isOpen && <small style={{textTransform:'none', color: 'white'}}><br/>
+          { remaining ? <span><span className={cx("days-remaining")}>{remaining}</span> days remaining, s</span> : 'Today is the last day! S' }ee <ScrollLink to="timeline" smooth={true} offset={-50} style={{cursor:'pointer'}}>timeline</ScrollLink> here</small>}
+        </div>
+      );
     }
   }
 
