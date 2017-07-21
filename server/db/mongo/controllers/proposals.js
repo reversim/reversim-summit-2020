@@ -327,23 +327,32 @@ const baseQuery = [
       $push: { $concat: ["$attendee.profile.name", " <", "$attendee.email", ">"] }
     },
     attendeeCount: { $sum: 1 }
-  }},
-  { $project: {
-    attendeeCount: 1,
-    link: 1,
-    title: 1,
-    speaker: 1,
-    attendees: 1
   }}
 ];
+
+const projectAttendeesRaw = { $project: {
+  attendeeCount: 1,
+  link: 1,
+  title: 1,
+  speaker: 1,
+  attendees: 1
+}};
+const projectAttendees = { $project: {
+  attendeeCount: 1,
+  link: 1,
+  title: 1,
+  speaker: 1
+}};
 const sortAttendees = { $sort: { attendeeCount: -1 }};
 
 const aggregateQuery = (isDataAdmin) => {
   if (isDataAdmin) {
-    return baseQuery.concat(sortAttendees);
+    return baseQuery.concat([
+      projectAttendeesRaw, sortAttendees
+    ]);
   } else {
     return baseQuery.concat([
-      { $project: { attendees: 0 }},
+      projectAttendees,
       sortAttendees
     ]);
   }
