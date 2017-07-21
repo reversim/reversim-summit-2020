@@ -83,6 +83,16 @@ class App extends React.Component {
       })
       .catch(err => {
         console.log("error when fetching data", err);
+        let str;
+        if (err.status === 401) {
+          str = "You do not have permission to access this data";
+        } else {
+          str = "Something went very very wrong...";
+        }
+
+        this.setState({
+          error: str
+        })
       })
   }
 
@@ -99,6 +109,9 @@ class App extends React.Component {
       <div className="dashboard">
         <Navbar location={window.location} logo={logoImg2x} items={items} />
         {this.renderProposals()}
+        { this.state.error && <div className="mt-5 text-center">
+          <h2 className="text-muted">{this.state.error}</h2>
+        </div>}
       </div>
     );
   }
