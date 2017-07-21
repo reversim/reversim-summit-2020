@@ -30,7 +30,7 @@ class Proposal extends React.Component {
   }
 
   render() {
-    const {title, speaker, attendeeCount, attendees, index} = this.props;
+    const {title, speaker, attendeeCount, link, attendees, index} = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -38,7 +38,7 @@ class Proposal extends React.Component {
       <div className="row align-items-center">
         <div className="col-auto ml-3" style={{fontSize:40, fontWeight:100, lineHeight:1}}>{index}.</div>
         <div className="col">
-          <h6 className="m-0">{title}</h6>
+          <h6 className="m-0"><a href={link} target="_blank" className="unstyled-link">{title}</a></h6>
           <div style={{fontWeight:300}}>{speaker}</div>
         </div>
         <div className="col-auto mr-3">
