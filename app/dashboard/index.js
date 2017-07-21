@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import Navbar from './Navbar';
 import logoImg2x from 'images/reversim_logo@2x.png';
-import './index.css';
 
 import http from 'axios';
 
