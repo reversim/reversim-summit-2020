@@ -297,10 +297,6 @@ export function speakers(req, res) {
     });
 }
 
-const dataAdmins = [
-  "5939265af195080017ad4def"
-];
-
 const baseQuery = [
   {$unwind: "$speaker_ids"},
   {$lookup: {
@@ -359,7 +355,7 @@ export function getAllAttendees(req, res) {
   }
 
   let query;
-  if (dataAdmins.includes(req.user.id)) {
+  if (req.user.isDataAdmin) {
     query = aggregateQuery(true);
   } else if (req.user.isReversimTeamMember) {
     query = aggregateQuery(false);

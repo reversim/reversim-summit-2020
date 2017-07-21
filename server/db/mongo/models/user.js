@@ -17,6 +17,7 @@ const UserSchema = new mongoose.Schema({
   password: String,
   tokens: Array,
   isReversimTeamMember: { type: Boolean, default: false },
+  isDataAdmin: { type: Boolean, default: false },
   profile: {
     name: { type: String, default: '' },
     oneLiner: { type: String, default: '' },
