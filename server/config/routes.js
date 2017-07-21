@@ -5,6 +5,8 @@ import passport from 'passport';
 import unsupportedMessage from '../db/unsupportedMessage';
 import { controllers, passport as passportConfig } from '../db';
 import tweetsController from './tweetsController';
+import express from 'express';
+import path from 'path';
 
 const usersController = controllers && controllers.users;
 const topicsController = controllers && controllers.topics;
@@ -77,7 +79,10 @@ export default (app) => {
     app.delete('/proposal/:id', proposalsController.remove);
     app.post('/proposal/:id/attend', proposalsController.attend);
     app.get('/api/speakers', proposalsController.speakers);
+    app.get('/api/proposal/attendees', proposalsController.getAllAttendees);
   } else {
     console.warn(unsupportedMessage('proposalsController routes'));
   }
+
+  app.use("/dashboard", express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
 };

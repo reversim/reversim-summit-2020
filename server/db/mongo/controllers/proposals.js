@@ -297,6 +297,82 @@ export function speakers(req, res) {
     });
 }
 
+const dataAdmins = [
+  "5939265af195080017ad4def"
+];
+
+const baseQuery = [
+  {$unwind: "$speaker_ids"},
+  {$lookup: {
+    localField: "speaker_ids",
+    from: "users",
+    foreignField: "_id",
+    as: "speaker"
+  }},
+  {$unwind: "$speaker"},
+  {$unwind: "$attendees"},
+  {$lookup: {
+    localField: "attendees",
+    from: "users",
+    foreignField: "_id",
+    as: "attendee"
+  }},
+  {$unwind: "$attendee"},
+  {$group: {
+    _id: "$id",
+    link: {
+      $first: {
+        $concat: ["https://summit2017.reversim.com/session/", "$id"]
+      }
+    },
+    title: { $first: "$title" },
+    speaker: { $first: "$speaker.profile.name" },
+    attendees: {
+      $push: { $concat: ["$attendee.profile.name", " <", "$attendee.email", ">"] }
+    },
+    attendeeCount: { $sum: 1 }
+  }},
+  { $project: {
+    attendeeCount: 1,
+    link: 1,
+    title: 1,
+    speaker: 1,
+    attendees: 1
+  }}
+];
+const sortAttendees = { $sort: { attendeeCount: -1 }};
+
+const aggregateQuery = (isDataAdmin) => {
+  if (isDataAdmin) {
+    return baseQuery.concat(sortAttendees);
+  } else {
+    return baseQuery.concat([
+      { $project: { attendees: 0 }},
+      sortAttendees
+    ]);
+  }
+};
+
+export function getAllAttendees(req, res) {
+  if (!req.user || !req.user.isReversimTeamMember) {
+    return res.send(401);
+  }
+
+  let query;
+  if (dataAdmins.includes(req.user.id)) {
+    query = aggregateQuery(true);
+  } else if (req.user.isReversimTeamMember) {
+    query = aggregateQuery(false);
+  }
+
+  Proposal.aggregate(query).exec().then(proposals => {
+    return res.json(proposals);
+  }).catch(err => {
+    console.log(`Error in proposal/attendees query: ${err}`);
+    return res.status(500).send('Something went wrong getting the data');
+  });
+}
+
 export default {
     all,
     get,
@@ -306,5 +382,6 @@ export default {
     attend,
     tags,
     getRecommendations,
-    speakers
+    speakers,
+    getAllAttendees
 };

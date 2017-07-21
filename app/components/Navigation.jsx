@@ -79,7 +79,9 @@ class Navigation extends Component {
 
   renderNavItem(item, i) {
     let link;
-    if (item.noScroll) {
+    if (item.external) {
+      link = <a className="navigation-link" href={`/${item.to}`}>{item.text}</a>
+    } else if (item.noScroll) {
       link = <Link className={cx("navigation-link")} to={`/${item.to}`} onClick={this.collapseNav.bind(this)}>{item.text}</Link>;
     } else {
       link = <ScrollLink className={cx("navigation-link")} activeClass={cx('active')} to={item.to} spy={true} smooth={true} offset={-50} duration={500} onClick={this.collapseNav.bind(this)}>{item.text}</ScrollLink>
@@ -91,7 +93,7 @@ class Navigation extends Component {
   render() {
     const { user: { authenticated }, isHome } = this.props;
 
-    let navigationElements = navItems(isHome).map(this.renderNavItem);// todo send navItems in props
+    let navigationElements = navItems(isHome, this.props.user).map(this.renderNavItem);// todo send navItems in props
 
     return (
       <header className={cx('navbar-fixed-top', { fixed: this.state.fixed, "not-home": !isHome })}>

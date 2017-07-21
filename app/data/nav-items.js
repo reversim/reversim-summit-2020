@@ -10,7 +10,7 @@ const proposals = { to: "proposals", text: "Proposals", feature: 'preCFP', isNot
 const sponsors = { to: "sponsors", text: "Sponsors", feature: "sponsored" };
 const networking = { to: "networking", text: "Networking", feature: "networking" };
 
-export default (isHome) => {
+export default (isHome, user) => {
   let items = [
     about, schedule, timeline, speakers, proposals, team, sponsors, location, networking
   ];
@@ -24,6 +24,10 @@ export default (isHome) => {
     const passFeature = features(item.feature, false);
     return item.isNot ? !passFeature : passFeature;
   });
+
+  if (user && user.isReversimTeamMember) {
+    items.push({ to: "dashboard", text: "Dashboard", external: true });
+  }
 
   return items;
 };

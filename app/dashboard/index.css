@@ -1,0 +1,13 @@
+.dashboard {
+    padding-top: 100px;
+}
+
+@media (max-width:575px) {
+    .navbar-brand img {
+        max-height: 70px;
+    }
+
+    .navbar-toggler-right {
+        top: 1.6rem;
+    }
+}

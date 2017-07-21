@@ -91,7 +91,8 @@ module.exports = [
     devtool: "source-map",
     context: path.join(__dirname, "..", "app"),
     entry: {
-      app: "./client"
+      app: "./client",
+      dashboard: "./dashboard/index.js"
     },
     output: {
       // The output directory as absolute path
