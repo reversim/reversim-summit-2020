@@ -36,19 +36,19 @@ class Proposal extends React.Component {
     return (
       <div className="proposal separator pb-4 mb-4">
       <div className="row align-items-center">
-        <div className="col-auto" style={{fontSize:40, fontWeight:100}}>{index}.</div>
+        <div className="col-auto ml-3" style={{fontSize:40, fontWeight:100, lineHeight:1}}>{index}.</div>
         <div className="col">
-          <h6>{title}</h6>
-          <div>{speaker}</div>
+          <h6 className="m-0">{title}</h6>
+          <div style={{fontWeight:300}}>{speaker}</div>
         </div>
         <div className="col-auto mr-3">
           <h3>{attendeeCount}</h3>
         </div>
-        {attendees && <button className="btn btn-link" onClick={this.toggle}>+</button>}
+        {attendees && <button className="btn btn-link" onClick={this.toggle}>{isOpen ? '\u2796' : '\u2795'}</button>}
       </div>
-        {isOpen && <div className="row no-gutters">
-          <div className="col-10 offset-1">
-            {attendees.map((a, i) => <div key={i}>{a}</div>)}
+        {isOpen && <div className="row no-gutters mt-3">
+          <div className="col-10 offset-1 text-muted">
+            {attendees.map((a, i) => <div key={i}>{i+1}. {a}</div>)}
           </div>
         </div>}
       </div>
