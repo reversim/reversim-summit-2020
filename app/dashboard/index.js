@@ -30,12 +30,13 @@ class Proposal extends React.Component {
   }
 
   render() {
-    const {title, speaker, attendeeCount, attendees} = this.props;
+    const {title, speaker, attendeeCount, attendees, index} = this.props;
     const { isOpen } = this.state;
 
     return (
       <div className="proposal separator pb-4 mb-4">
       <div className="row align-items-center">
+        <div className="col-auto" style={{fontSize:40, fontWeight:100}}>{index}.</div>
         <div className="col">
           <h6>{title}</h6>
           <div>{speaker}</div>
@@ -88,7 +89,7 @@ class App extends React.Component {
   renderProposals() {
     return (
       <div className="container">
-        {this.state.proposals.map((p, i) => <Proposal {...p} key={i}/>)}
+        {this.state.proposals.map((p, i) => <Proposal {...p} index={i+1} key={i}/>)}
       </div>
     );
   }
