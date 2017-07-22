@@ -127,19 +127,19 @@ class App extends React.Component {
           </div>
           <div className="row">
             <div className="col">
-              <h4>{ totalVotes }</h4>
+              <h4>{ totalVotes || "-"}</h4>
               <small>Total Votes</small>
             </div>
             <div className="col">
-              <h4>{ uniqueVoters }</h4>
+              <h4>{ uniqueVoters || "-"}</h4>
               <small>Unique voters</small>
             </div>
             <div className="col">
-              <h4>{ averagePerVoter.toFixed(2) }</h4>
+              <h4>{ averagePerVoter ? averagePerVoter.toFixed(2) : "-"}</h4>
               <small>Average per voter</small>
             </div>
             <div className="col">
-              <h4>{ votesPerHour.toFixed(2) }</h4>
+              <h4>{ votesPerHour ? votesPerHour.toFixed(2) : "-"}</h4>
               <small>Votes per hour</small>
             </div>
           </div>
