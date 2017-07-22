@@ -34,7 +34,7 @@ export default class Navbar extends React.Component {
     const logoImg = <img src={logo} alt="logo" className="img-fluid"/>;
     const logoLink = this.isHome() ? <ScrollLink to="hero" smooth={true} duration={300} className="navbar-brand">{logoImg}</ScrollLink> : <a className="navbar-brand" href="/">{logoImg}</a>;
     return (
-      <nav className="navbar navbar-inverse bg-primary navbar-toggleable fixed-top">
+      <nav className="navbar navbar-inverse bg-primary navbar-toggleable">
         <button className="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

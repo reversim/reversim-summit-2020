@@ -358,6 +358,28 @@ const aggregateQuery = (isDataAdmin) => {
   }
 };
 
+const attendDataQuery = [
+  { $unwind: "$attendees" },
+  { $group: {
+    _id: "$attendees",
+    totalPerVoter: {
+      $sum: 1
+    }
+  }},
+  { $group: {
+    _id: null,
+    uniqueVoters: {
+      $sum: 1
+    },
+    averagePerVoter: {
+      $avg: "$totalPerVoter"
+    },
+    totalVotes: {
+      $sum: "$totalPerVoter"
+    }
+  }}
+];
+
 export function getAllAttendees(req, res) {
   if (!req.user || !req.user.isReversimTeamMember) {
     return res.send(401);
@@ -370,8 +392,11 @@ export function getAllAttendees(req, res) {
     query = aggregateQuery(false);
   }
 
-  Proposal.aggregate(query).exec().then(proposals => {
-    return res.json(proposals);
+  Promise.all([
+    Proposal.aggregate(query).exec(),
+    Proposal.aggregate(attendDataQuery).exec()
+  ]).then(([proposals, data]) => {
+    return res.json({ proposals, data: data[0] });
   }).catch(err => {
     console.log(`Error in proposal/attendees query: ${err}`);
     return res.status(500).send('Something went wrong getting the data');

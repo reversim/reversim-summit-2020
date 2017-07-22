@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import pluralize from 'pluralize';
 import Navbar from './Navbar';
 import logoImg2x from 'images/reversim_logo@2x.png';
 
@@ -70,15 +71,17 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      proposals: []
+      proposals: [],
+      data: {}
     };
   }
 
   componentWillMount() {
     get("/api/proposal/attendees")
-      .then(proposals => {
+      .then(({ proposals, data }) => {
         this.setState({
-          proposals
+          proposals,
+          data
         });
       })
       .catch(err => {
@@ -104,11 +107,53 @@ class App extends React.Component {
     );
   }
 
+  renderData() {
+    const { data: { totalVotes, uniqueVoters, averagePerVoter } } = this.state;
+    const startTime = new Date(2017,6,21,7), endTime = new Date();
+    const elapsedHours = (endTime - startTime) / 1000 / 60 / 60;
+    const elapsedDays = elapsedHours / 24;
+    const remainderHours = (elapsedDays % 1) * 24;
+    const remainderMinutes = (remainderHours % 1) * 60;
+    const days = Math.floor(elapsedDays);
+    const hours = Math.floor(remainderHours);
+    const minutes = Math.floor(remainderMinutes);
+
+    const votesPerHour = totalVotes / elapsedHours;
+    return (
+      <div className="bg-info text-white text-center p-4 mb-4">
+        <div className="container">
+          <div className="row justify-content-center mb-4">
+            Voting started {days}&nbsp;{pluralize('day', days)}, {hours}&nbsp;{pluralize('hour', hours)} and {minutes}&nbsp;{pluralize('minute', minutes)} ago
+          </div>
+          <div className="row">
+            <div className="col">
+              <h4>{ totalVotes }</h4>
+              <small>Total Votes</small>
+            </div>
+            <div className="col">
+              <h4>{ uniqueVoters }</h4>
+              <small>Unique voters</small>
+            </div>
+            <div className="col">
+              <h4>{ averagePerVoter.toFixed(2) }</h4>
+              <small>Average per voter</small>
+            </div>
+            <div className="col">
+              <h4>{ votesPerHour.toFixed(2) }</h4>
+              <small>Votes per hour</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="dashboard">
         <Navbar location={window.location} logo={logoImg2x} items={items} />
-        {this.renderProposals()}
+        { this.renderData() }
+        { this.renderProposals() }
         { this.state.error && <div className="mt-5 text-center">
           <h2 className="text-muted">{this.state.error}</h2>
         </div>}
