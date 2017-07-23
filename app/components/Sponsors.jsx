@@ -123,9 +123,10 @@ export default class Sponsors extends Component {
       name: 'Datorama',
       logo: datoramaLogo,
       url: 'https://datorama.com',
-      description: 'Datorama is a global marketing analytics company providing the world’s first Marketing Integration Engine for enterprises, agencies, publishers and platforms. Datorama’s software-as-service (SaaS) platform gives marketers the ability to connect all of their data sources together, whether it’s a handful or hundreds, to form a single source of truth for more efficient reporting, better decision making and total control over their marketing performance. Datorama’s best-in-class combination of end-to-end data management, machine learning (AI) technology, and high-performance architecture makes it simple for data-driven marketers of all experience levels to connect, unify, analyze and act on all of their marketing data.',
-      featuredJobInfo: 'Datorama is proud to be an equal opportunity workplace and is an affirmative action employer. We are committed to equal employment opportunity regardless of race, color, ancestry, religion, sex, national origin, sexual orientation, age, citizenship, marital status, disability, gender identity or Veteran status.',
-      featuredJobLink: 'https://datorama.com/join-us/'
+      description: <span>Datorama is a data agnostic Marketing Integration Engine that centralizes all your data — wherever it comes from, whatever it looks like, however much it changes — and gives you the control to analyze, experiment, report and take action on all that data in real time.<br/><br/>Datorama's website - <a href="https://datorama.com">https://datorama.com</a></span>,
+      featuredJobInfo: <span>We're growing like crazy and need the best of the best to help us build what appears to be the hottest marketing analytics platform in the industry.<br/>The standards are high, you'll be working with extremely talented peers who expect you to be just as good and even better.<br/>We're obsessed with clean code, testing and continuous delivery, so you better be too.<br/><br/>Jobs - <a href="https://datorama.com/join-us/">https://datorama.com/join-us/</a></span>,
+      featuredJobLink: 'https://datorama.com/join-us/',
+      excludeWebsite: true
     },
     {
       name: 'LivePerson',
