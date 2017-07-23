@@ -99,7 +99,7 @@ export default class Sponsors extends Component {
       logo: oracleLogo,
       url: 'https://www.oracle.com',
       description: 'Oracle’s R&D organization is comprised of engineers with passion and expertise in solving difficult problems in highly scalable environments - from distributed systems and virtualized infrastructure to big-data and probabilistic modeling. A substantial organization with an entrepreneurial fast paced mentality - we are still only just starting; with a lot of positive energy, passion and fast decision making. If it’s in solving immense data-centric challenges like we do at Crosswise, or in changing the way companies consume the public cloud like we do at Ravello - at Oracle you can design and build innovative new systems from the ground up.',
-      featuredJobInfo: <span>From the bits and bytes of x86 architecture, through virtualization, networking and storage, and all the way up to highly scalable and resilient SaaS back-end and front-end We have it all at Ravellon<br/><br/>If you are into solving huge data-centric challenges by applying advanced data science and proprietary machine learning techniques We have it all at Crosswise<br/><br/>If you are top notch at what you do, a team player who gets the job done, a curious self-learner looking for ways to grow, a ROSH GADOL - you are a great fit.</span>,
+      featuredJobInfo: <span>From the bits and bytes of x86 architecture, through virtualization, networking and storage, and all the way up to highly scalable and resilient SaaS back-end and front-end - We have it all at <a href="https://cloud.ravellosystems.com/jobs/jobs-list.html#jobs-list">Ravello</a>.<br/><br/>If you are into solving huge data-centric challenges by applying advanced data science and proprietary machine learning techniques - We have it all at Crosswise.<br/><br/>If you are top notch at what you do, a team player who gets the job done, a curious self-learner looking for ways to grow, a ROSH GADOL - you are a great fit.</span>,
       featuredJobLink: 'https://www.ravellosystems.com/jobs',
       excludeWebsite: true
     },
@@ -169,9 +169,9 @@ export default class Sponsors extends Component {
           </div>
           <div className={cx('col-sm-8')}>
             <div className={cx('h7')}>About {name}</div>
-            <p>{description} {!excludeWebsite && <a href={url}>{name} website</a>}.</p>
+            <p>{description} {!excludeWebsite && <span><a href={url}>{name} website</a>.</span>}</p>
             {featuredJobLink && <div className={cx('h7')} style={{marginTop: 20}}>Featured Job</div> }
-            {featuredJobLink && <p>{featuredJobInfo} Interested? More info <a href={featuredJobLink}>here</a>.</p> }
+            {featuredJobLink && <p>{featuredJobInfo} {!excludeWebsite && <span>Interested? More info <a href={featuredJobLink}>here</a>.</span>}</p> }
           </div>
         </div>
         </div>
