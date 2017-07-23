@@ -15,13 +15,8 @@ polyfill();
  * @param String endpoint - defaults to /login
  * @return Promise
  */
-function makeUserRequest(method, data, api = '/login') {
-  return request({
-    url: api,
-    method,
-    data,
-    withCredentials: true
-  });
+function makeUserRequest(axiosInst, method, data, api = '/login') {
+  return (axiosInst || request)[method](api, data);
 }
 
 // Log In Action Creators
@@ -127,10 +122,10 @@ export function closeLoginModal() {
   return { type: types.CLOSE_LOGIN_MODAL };
 }
 
-export function fetchUserProposals() {
+export function fetchUserProposals(params, api) {
   return {
       type: types.GET_USER_PROPOSALS,
-      promise: makeUserRequest('get', null, '/user/proposals')
+      promise: makeUserRequest(api, 'get', null, '/user/proposals')
   };
 }
 
@@ -138,7 +133,7 @@ export function manualLogin(data) {
   return dispatch => {
     dispatch(beginLogin());
 
-    return makeUserRequest('post', data, '/login')
+    return makeUserRequest(null, 'post', data, '/login')
       .then(response => {
         if (response.status === 200) {
           dispatch(loginSuccess(response.data.message));
@@ -158,7 +153,7 @@ export function signUp(data) {
   return dispatch => {
     dispatch(beginSignUp());
 
-    return makeUserRequest('post', data, '/signup')
+    return makeUserRequest(null, 'post', data, '/signup')
       .then(response => {
         if (response.status === 200) {
           dispatch(signUpSuccess(response.data.message));
@@ -176,7 +171,7 @@ export function signUp(data) {
 
 export function updateUser(data) {
   return dispatch => {
-    return makeUserRequest('post', data, '/updateUser')
+    return makeUserRequest(null, 'post', data, '/updateUser')
       .then(response => {
         if (response.status === 200) {
           dispatch(updateUserSuccess(data, response.data.message));
@@ -205,11 +200,11 @@ export function logOut() {
   };
 }
 
-export function fetchReversimTeam() {
+export function fetchReversimTeam(params, api) {
   console.log("fetch reversim team");
   return {
       type: types.GET_REVERSIM_TEAM,
-      promise: makeUserRequest('get', null, '/api/team').then(resp => {
+      promise: makeUserRequest(api, 'get', null, '/api/team').then(resp => {
         console.log("fetch team complete", resp.data.length);
         return resp;
       })
@@ -220,7 +215,7 @@ export function uploadProfileImage(data) {
 
   return dispatch => {
     dispatch(beginUploadProfileImage(data.imageBinary, 'going to server soon...'));
-    return makeUserRequest('post', data, '/profileImage')
+    return makeUserRequest(null, 'post', data, '/profileImage')
         .then(response => {
           if (response.status === 200) {
             dispatch(uploadProfileImageSuccess(response.data.imageUrl, response.data.message));

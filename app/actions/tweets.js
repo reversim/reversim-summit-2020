@@ -4,16 +4,11 @@ import * as types from 'types';
 
 polyfill();
 
-function makeTweetsRequest(method, data, api = '/tweets') {
-  return request({
-    url: api,
-    method,
-    data,
-    withCredentials: true
-  });
+function makeTweetsRequest(axiosInst, method, data, api = '/tweets') {
+  return (axiosInst || request)[method](api, data);
 }
 
-export function fetchReversimTweets() {
+export function fetchReversimTweets(params, api) {
   return (dispatch, getState) => {
     const { tweets: { reversim } } = getState();
 
@@ -22,7 +17,7 @@ export function fetchReversimTweets() {
         type: types.GET_REVERSIM_TWEETS_REQUEST
       });
 
-      return makeTweetsRequest('get', null, '/tweets/reversim')
+      return makeTweetsRequest(api, 'get', null, '/tweets/reversim')
       .then(res => {
           if (res.status === 200) {
             return dispatch({

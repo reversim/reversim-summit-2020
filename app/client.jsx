@@ -8,6 +8,7 @@ import configureStore from 'store/configureStore';
 import preRenderMiddleware from 'middlewares/preRenderMiddleware';
 import { setFeatureOverrides } from 'features';
 import ga from 'react-ga';
+import axios from 'axios';
 
 // Grab the state from a global injected into
 // server-generated HTML
@@ -18,6 +19,8 @@ setFeatureOverrides(window.__FT_OVERRIDES__);
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store);
+
+const api = axios.create();
 
 // Initialize Google Analytics
 ga.initialize('UA-36904731-4');
@@ -68,7 +71,7 @@ function onUpdate() {
   // log page view to Google Analytics
   ga.pageview(window.location.pathname);
 
-  preRenderMiddleware(store.dispatch, components, params);
+  preRenderMiddleware(store.dispatch, components, params, api);
 }
 
 

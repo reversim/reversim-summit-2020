@@ -19,10 +19,6 @@ const clientConfig = {
 
 const reversimSocialMediaImage = "http://1.bp.blogspot.com/-dgtZLgzwzpU/UQxClcR57BI/AAAAAAAAMb8/Da3xz5hjLNo/s300/reversim-logo-white.png";
 
-// configure baseURL for axios requests (for serverside API calls)
-axios.defaults.baseURL = `http://${clientConfig.host}:${clientConfig.port}`;
-console.log("axios.defaults.baseURL", axios.defaults.baseURL);
-
 /*
  * Export render function to be used in server/config/routes.js
  * We grab the state passed in from the server and the req object from Express/Koa
@@ -78,38 +74,39 @@ export default function render(req, res) {
    * given location.
    */
 
-  //if user is authenticated, it creates an interceptor
-  //that adds current session cookie to next session to be used for server side rendering
-  if (authenticated) {
-    ssrAuth(req.headers.cookie);
-  }
-
   function escapeTags(state) {
     return JSON.parse(JSON.stringify(state).replace(/<\//g, "").replace(/\u2028/g, ""));
   }
 
   match({routes, location: req.url}, (err, redirect, props) => {
     if (err) {
-      authenticated ? ssrAuth() : null;
       res.status(500).json(err);
     } else if (redirect) {
-      authenticated ? ssrAuth() : null;
       res.redirect(302, redirect.pathname + redirect.search);
     } else if (props) {
       let featureOverrides = parseFeatureOverridesFromQuery(props.location.query);
       setFeatureOverrides(featureOverrides);
+
+      let api = axios;
+      // This allows us to fetch data from API server during SSR
+      // that requires authentication. Otherwise axios requests would not
+      // have the user session set.
+      if (authenticated) {
+        console.log("creating dedicated axios with cookie", req.headers.cookie);
+        api = axios.create({
+            headers: { cookie: req.headers.cookie },
+            baseURL: `http://${clientConfig.host}:${clientConfig.port}`
+        });
+      }
 
       // This method waits for all render component
       // promises to resolve before returning to browser
       preRenderMiddleware(
         store.dispatch,
         props.components,
-        props.params
+        props.params,
+        api
       )
-        .then(() => {
-          //after preRendering is complete, we destroy the interceptors
-          authenticated ? ssrAuth() : null;
-        })
         .then(() => {
           console.log("ssr begins");
           const initialState = escapeTags(store.getState());
@@ -206,7 +203,6 @@ export default function render(req, res) {
           res.status(500).json(err);
         });
     } else {
-      authenticated ? ssrAuth() : null;
       res.sendStatus(404);
     }
   });

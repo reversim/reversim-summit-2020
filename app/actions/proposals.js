@@ -20,8 +20,8 @@ polyfill();
  * @param String endpoint
  * @return Promise
  */
-function makeProposalsRequest(method, id, data, action, api = '/proposal') {
-    return request[method](api + (id ? ('/' + id) : '') + (action ? `/${action}` : ''), data);
+function makeProposalsRequest(axiosInst, method, id, data, action, api = '/proposal') {
+    return (axiosInst || request)[method](api + (id ? ('/' + id) : '') + (action ? `/${action}` : ''), data);
 }
 
 function guid() {
@@ -62,7 +62,7 @@ export function createProposalFailure(data) {
 }
 
 // Fetch posts logic
-export function fetchProposals() {
+export function fetchProposals(params, api) {
     console.log("fetch proposals");
     let endpoint = '/proposal';
     // if (features('proposalsPageGroupedByTags', false)) {
@@ -71,39 +71,39 @@ export function fetchProposals() {
 
     return {
         type: types.GET_PROPOSALS,
-        promise: makeProposalsRequest('get', null, null, null, endpoint).then(resp => {
+        promise: makeProposalsRequest(api, 'get', null, null, null, endpoint).then(resp => {
           console.log("fetch proposals complete", resp.data.length);
           return resp;
         })
     };
 }
 
-export function fetchSpeakers() {
+export function fetchSpeakers(params, api) {
     return {
         type: types.GET_SPEAKERS,
-        promise: makeProposalsRequest('get', null, null, null, '/api/speakers')
+        promise: makeProposalsRequest(api, 'get', null, null, null, '/api/speakers')
     };
 }
 
-export function fetchTags() {
+export function fetchTags(params, api) {
     return {
         type: types.GET_TAGS,
-        promise: makeProposalsRequest('get', 'tags')
+        promise: makeProposalsRequest(api, 'get', 'tags')
     };
 }
 
-export function fetchRecommendationsFor(id) {
+export function fetchRecommendationsFor(id, api) {
     return {
         type: types.GET_RECOMMENDATIONS,
-        promise: makeProposalsRequest('get', id, null, features('publishAgenda', false) ? 'recommendations?onlyAccepted=true' : 'recommendations')
+        promise: makeProposalsRequest(api, 'get', id, null, features('publishAgenda', false) ? 'recommendations?onlyAccepted=true' : 'recommendations')
     };
 }
 
-export function fetchProposal(params) {
+export function fetchProposal(params, api) {
     return {
         type: types.GET_PROPOSAL,
         id: params.id,
-        promise: makeProposalsRequest('get', params.id)
+        promise: makeProposalsRequest(api, 'get', params.id)
     };
 }
 
@@ -118,7 +118,7 @@ export function attendSession(id, value) {
   return dispatch => {
     dispatch(Object.assign({}, basePayload, { type: types.ATTEND_SESSION_REQUEST }));
 
-    return makeProposalsRequest('post', id, { value: newValue }, 'attend')
+    return makeProposalsRequest(null, 'post', id, { value: newValue }, 'attend')
       .then(response => {
         if (response.status === 200) {
           return dispatch(Object.assign({}, basePayload, { type: types.ATTEND_SESSION_SUCCESS }));
@@ -147,7 +147,7 @@ function updateProposalError(message) {
 
 export function updateProposal(id, data) {
   return dispatch => {
-    return makeProposalsRequest('put', id, data)
+    return makeProposalsRequest(null, 'put', id, data)
       .then(response => {
         if (response.status === 200) {
           dispatch(updateProposalSuccess(id, data, response.data.message));
@@ -190,7 +190,7 @@ export function createProposal(title, abstract, type, speaker_ids, tags, outline
         // First dispatch an optimistic update
         dispatch(createProposalRequest(data));
 
-        return makeProposalsRequest('post', id, data)
+        return makeProposalsRequest(null, 'post', id, data)
             .then(res => {
                 if (res.status === 200) {
                     // We can actually dispatch a CREATE_PROPOSAL_SUCCESS
