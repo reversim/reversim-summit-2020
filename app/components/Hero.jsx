@@ -77,6 +77,9 @@ export default class Hero extends React.Component {
         <div>
           Call for papers is now {status}{ isOpen && <small style={{textTransform:'none', color: 'white'}}><br/>
           { remaining > 0 ? <span><span className={cx("days-remaining")}>{remaining}</span> days remaining, s</span> : 'Today is the last day! S' }ee <ScrollLink to="timeline" smooth={true} offset={-50} style={{cursor:'pointer'}}>timeline</ScrollLink> here</small>}
+          { features('voting', false) && <div>
+            <small><Link to="proposals" style={{textTransform: 'none'}}>Vote for your favorite sessions now!</Link></small>
+          </div>}
         </div>
       );
     }
