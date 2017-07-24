@@ -189,7 +189,7 @@ export function logOut() {
   return dispatch => {
     dispatch(beginLogout());
 
-    return makeUserRequest('post', null, '/logout')
+    return makeUserRequest(null, 'post', null, '/logout')
       .then(response => {
         if (response.status === 200) {
           dispatch(logoutSuccess());

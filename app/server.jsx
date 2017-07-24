@@ -19,6 +19,10 @@ const clientConfig = {
 
 const reversimSocialMediaImage = "http://1.bp.blogspot.com/-dgtZLgzwzpU/UQxClcR57BI/AAAAAAAAMb8/Da3xz5hjLNo/s300/reversim-logo-white.png";
 
+// configure baseURL for axios requests (for serverside API calls)
+axios.defaults.baseURL = `http://${clientConfig.host}:${clientConfig.port}`;
+console.log("axios.defaults.baseURL", axios.defaults.baseURL);
+
 /*
  * Export render function to be used in server/config/routes.js
  * We grab the state passed in from the server and the req object from Express/Koa
@@ -94,8 +98,7 @@ export default function render(req, res) {
       if (authenticated) {
         console.log("creating dedicated axios with cookie", req.headers.cookie);
         api = axios.create({
-            headers: { cookie: req.headers.cookie },
-            baseURL: `http://${clientConfig.host}:${clientConfig.port}`
+            headers: { cookie: req.headers.cookie }
         });
       }
 
