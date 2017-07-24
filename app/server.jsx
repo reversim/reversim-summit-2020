@@ -98,7 +98,8 @@ export default function render(req, res) {
       if (authenticated) {
         console.log("creating dedicated axios with cookie", req.headers.cookie);
         api = axios.create({
-            headers: { cookie: req.headers.cookie }
+          headers: { cookie: req.headers.cookie },
+          baseURL: `http://${clientConfig.host}:${clientConfig.port}`
         });
       }
 
