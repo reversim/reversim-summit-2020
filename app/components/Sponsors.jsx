@@ -19,6 +19,7 @@ import oracleLogo from 'images/sponsors/oracle-logo.png';
 import caprizaLogo from 'images/sponsors/capriza.png';
 import cloudinaryLogo from 'images/sponsors/cloudinary.png';
 import automatticLogo from 'images/sponsors/automattic.png';
+import cellebriteLogo from 'images/sponsors/cellebrite.png'
 
 const cx = classNames.bind(styles);
 
@@ -42,9 +43,10 @@ export default class Sponsors extends Component {
       name: 'Apps Flyer',
       logo: appsFlyerLogo,
       url: 'http://www.appsflyer.com',
-      description: 'AppsFlyer is the leading mobile attribution and analytics platform, enabling app marketers and brands measure their user acquisition, in-app user engagement tracking, lifetime value analysis, ROI and retargeting attribution.',
-      featuredJobInfo: 'If you have passion to BigData processing, this is the place for you. Come to play around with more than 8 billion events per day in real-time and batch, using Spark, Mesos, Memsql, Druid and Kafka. New systems and technologies, architecture changes and data insights are part of the daily work in this team.',
-      featuredJobLink: 'https://www.appsflyer.com/jobs/senior-data-developer/'
+      description: <span>AppsFlyer’s technology is found on 98 percent of the world’s smartphones, making it the global leader in mobile attribution and marketing analytics. Data-driven marketers rely on AppsFlyer for independent measurement solutions and innovative tools to grow their mobile business. AppsFlyer’s platform processes billions of mobile actions every day, empowering mobile marketers and developers to maximize the return on their marketing investments. With AppsFlyer’s NativeTrackTM Attribution, Marketing Analytics Data, OneLink’s Deep linking capabilities and the Active Fraud Suite featuring DeviceRank, AppsFlyer is the go-to resource for the most successful mobile apps in the world. Trusted by Facebook, Google, Twitter, Pinterest, Snap Inc., Tencent, HBO, Playtika, Waze, Alibaba, Kayak and 12,000+ other leading brands and partners, AppsFlyer has 12 global o ces to support every app marketer around the world. To learn more, visit <a href="http://www.appsflyer.com">http://www.appsflyer.com</a>.</span>,
+      featuredJobInfo: <span>At AppsFlyer’s back-end development group we shape and improve our micro-services architecture on a daily basis. We work closely with DevOps, Product and Business Development to provide the leading mobile analytics solution while using cutting edge technologies.  We have a totally transparent, very dynamic and highly technical development culture. We ship fast and very often, a matter of days or hours between coding to production, while safely handling 10+ billion system events on any given day AppsFlyer R&D strives to hire highly independent, innovative and responsible engineers who share our passion for technology, quality and speed. If all of this sounds like you, don’t be a stranger, <a href="https://www.appsflyer.com/jobs/senior-backend-developer/">send your CV today</a>!</span>,
+      featuredJobLink: 'https://www.appsflyer.com/jobs/senior-backend-developer/',
+      excludeWebsite: true
     },
     {
       name: 'Kenshoo',
@@ -154,7 +156,15 @@ export default class Sponsors extends Component {
       name: 'Automattic',
       logo: automatticLogo,
       url: 'https://automattic.com/',
-      description: 'We are the people behind WordPress.com, WooCommerce, Jetpack, Simplenote, Longreads, VaultPress, Akismet, Gravatar, Polldaddy, Cloudup, and more. We believe in making the web a better place.'
+      description: 'We are the people behind WordPress.com, WooCommerce, Jetpack, Simplenote, Longreads, VaultPress, Akismet, Gravatar, Polldaddy, Cloudup, and more. We believe in making the web a better place.',
+      featuredJobInfo: <span>At Automattic, everyone works from the location they choose. We’re spread out all over the world in more than 50 countries.<br/><br/>Whether it is building new ways to interact with WordPress using modern JavaScript tools like React and Redux, or building a connected search platform for billions of readers using ElasticSearch and Kafka, we\'re looking for developers with a passion for creating experiences that users will rave about, the ability to iterate and ship ideas quickly, and a love of Open Source software.<br/><br/>Interested? Learn about Automattic and <a href="https://automattic.com/work-with-us/">the future of work</a>.</span>,
+      excludeWebsite: true
+    },
+    {
+      name: 'Cellebrite',
+      logo: cellebriteLogo,
+      url: 'http://www.cellebrite.com/',
+      description: <span>Cellebrite is a global company known for its breakthroughs in mobile data technology, delivering comprehensive solutions for mobile forensics & mobile lifecycle management.<br/>Our innovative platform help Law-Enforcement agencies worldwide to fight serious-crime by providing a high-end mobile forensics solution which extracts, decodes and analyses actionable data from mobile devices using a myriad of cutting-edge technologies ranging from byte-level data understanding and cryptanalysis to Big-Data Analytics and Neural-Networks based Machine Learning. Our solutions deployed to law enforcement, police and security agencies in over 100 countries.</span>
     },
   ]);
 
