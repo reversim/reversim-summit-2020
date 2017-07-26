@@ -158,6 +158,7 @@ export default class Sponsors extends Component {
       url: 'https://automattic.com/',
       description: 'We are the people behind WordPress.com, WooCommerce, Jetpack, Simplenote, Longreads, VaultPress, Akismet, Gravatar, Polldaddy, Cloudup, and more. We believe in making the web a better place.',
       featuredJobInfo: <span>At Automattic, everyone works from the location they choose. We’re spread out all over the world in more than 50 countries.<br/><br/>Whether it is building new ways to interact with WordPress using modern JavaScript tools like React and Redux, or building a connected search platform for billions of readers using ElasticSearch and Kafka, we\'re looking for developers with a passion for creating experiences that users will rave about, the ability to iterate and ship ideas quickly, and a love of Open Source software.<br/><br/>Interested? Learn about Automattic and <a href="https://automattic.com/work-with-us/">the future of work</a>.</span>,
+      featuredJobLink: "https://automattic.com/work-with-us/",
       excludeWebsite: true
     },
     {
