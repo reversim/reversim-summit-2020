@@ -365,6 +365,10 @@ header:not(.not-home).fixed .logo img {
   filter: brightness(0.45);
 }
 
+header:not(.not-home).fixed a.login-btn {
+  margin-top: 10px;
+}
+
 header.not-home {
   background: rgba(0,30,60,0.95);
 }
