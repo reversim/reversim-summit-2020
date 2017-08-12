@@ -19,7 +19,7 @@ import oracleLogo from 'images/sponsors/oracle-logo.png';
 import caprizaLogo from 'images/sponsors/capriza.png';
 import cloudinaryLogo from 'images/sponsors/cloudinary.png';
 import automatticLogo from 'images/sponsors/automattic.png';
-import cellebriteLogo from 'images/sponsors/cellebrite.png'
+import cellebriteLogo from 'images/sponsors/cellebrite.jpg';
 
 const cx = classNames.bind(styles);
 
@@ -88,20 +88,21 @@ export default class Sponsors extends Component {
       featuredJobInfo: <span>At Wix’s Engineering group, lead developers shape the architecture of our services and product. They set the tone and standard of our developer culture, fusing facets of engineering, product management, DevOps, analytics, and technical management. They are also mentors, helping less-experienced engineers improve and hone their skills so that they are eventually capable of being tech leads themselves. The Wix development culture is transparent, highly technical, and agile. Because we ship often, we’ve happily adopted Continuous Delivery and Test-Driven Development. We code in Scala, Python, Go, Javascript and TypeScript. We develop and maintain highly scalable systems that support Wix’s tens of millions of users—and the people who visit their websites.<br/><br/>We strive to hire engineers who have ‘fire and forget’ abilities, and who are independent, innovative, and bold. Does this sound like you? We’re always looking for engineers who share our technical ethos!</span>,
       featuredJobLink: 'http://www.wix.com/jobs/home'
     },
-    // {
-    //   name: 'Facebook',
-    //   logo: facebookLogo,
-    //   url: 'https://www.facebook.com/careers/',
-  //     description: 'Founded in 2004, Facebook’s mission is to give people the power to share and make the world more open and connected. People use Facebook to stay connected with friends and family, do discover what’s going on in the world, and to share and express what matters to them.',
-  //     featuredJobInfo: 'We are currently building our engineering team here at Tel Aviv and looking for the best people to join us. We work on some of the most interesting and important company initiatives to make the world more open and connected. Just an example: we develop internet.org and providing billions of users, mainly in developing countries, an available and affordable connection to the internet.',
-  //     featuredJobLink: 'https://www.facebook.com/careers/locations/tel-aviv'
-    // },
+    {
+      name: 'Facebook',
+      logo: facebookLogo,
+      url: 'https://www.facebook.com/careers/',
+      description: 'Founded in 2004, Facebook’s mission is to give people the power to build community and bring the world closer together. People use Facebook to stay connected with friends and family, to discover what’s going on in the world, and to share and express what matters to them.',
+      featuredJobInfo: <span>We are currently building our engineering team here in Tel Aviv and are looking for the best people to join us. Connecting people, building community and bringing the world closer together happens in real time. Our teams are small and nimble. We work quickly and collaboratively to build smarter, more meaningful solutions on a global scale. At Facebook Tel Aviv, we get to work on some of the most interesting and important company initiatives to bring the world closer together. Our teams are developing <a href="http://internet.org/">internet.org</a> and providing millions of users, mainly in developing countries, an available and affordable connection to the internet and with fb.lite, our teams are enabling users to access Facebook in areas with slow or unstable Internet connections, whilst using less data.<br/><br/>When you’re in charge of making a difference, there’s no limit to what you can do. Join us, <a href="https://www.facebook.com/careers/locations/tel-aviv">apply here</a>.<br/><br/>Stay Connected!<br/>Learn about Life at Facebook on Instagram via @facebooklife.<br/>Join our Facebook Careers Talent Community Page for the latest updates.</span>,
+      featuredJobLink: 'https://www.facebook.com/careers/locations/tel-aviv',
+      excludeWebsite: true
+    },
     {
       name: 'Oracle R&D',
       logo: oracleLogo,
       url: 'https://www.oracle.com',
       description: 'Oracle’s R&D organization is comprised of engineers with passion and expertise in solving difficult problems in highly scalable environments - from distributed systems and virtualized infrastructure to big-data and probabilistic modeling. A substantial organization with an entrepreneurial fast paced mentality - we are still only just starting; with a lot of positive energy, passion and fast decision making. If it’s in solving immense data-centric challenges like we do at Crosswise, or in changing the way companies consume the public cloud like we do at Ravello - at Oracle you can design and build innovative new systems from the ground up.',
-      featuredJobInfo: <span>From the bits and bytes of x86 architecture, through virtualization, networking and storage, and all the way up to highly scalable and resilient SaaS back-end and front-end - We have it all at <a href="https://cloud.ravellosystems.com/jobs/jobs-list.html#jobs-list">Ravello</a>.<br/><br/>If you are into solving huge data-centric challenges by applying advanced data science and proprietary machine learning techniques - We have it all at Crosswise.<br/><br/>If you are top notch at what you do, a team player who gets the job done, a curious self-learner looking for ways to grow, a ROSH GADOL - you are a great fit.</span>,
+      featuredJobInfo: <span>From the bits and bytes of x86 architecture, through virtualization, networking and storage, and all the way up to highly scalable and resilient SaaS back-end and front-end - We have it all at <a href="https://cloud.ravellosystems.com/jobs/jobs-list.html#jobs-list">Ravello</a>.<br/><br/>If you are into solving huge data-centric challenges by applying advanced data science and proprietary machine learning techniques - We have it all at <a href="https://www.crosswise.com/jobs/jobs-list.html">Crosswise</a>.<br/><br/>If you are top notch at what you do, a team player who gets the job done, a curious self-learner looking for ways to grow, a ROSH GADOL - you are a great fit.</span>,
       featuredJobLink: 'https://www.ravellosystems.com/jobs',
       excludeWebsite: true
     },
@@ -165,7 +166,9 @@ export default class Sponsors extends Component {
       name: 'Cellebrite',
       logo: cellebriteLogo,
       url: 'http://www.cellebrite.com/',
-      description: <span>Cellebrite is a global company known for its breakthroughs in mobile data technology, delivering comprehensive solutions for mobile forensics & mobile lifecycle management.<br/>Our innovative platform help Law-Enforcement agencies worldwide to fight serious-crime by providing a high-end mobile forensics solution which extracts, decodes and analyses actionable data from mobile devices using a myriad of cutting-edge technologies ranging from byte-level data understanding and cryptanalysis to Big-Data Analytics and Neural-Networks based Machine Learning. Our solutions deployed to law enforcement, police and security agencies in over 100 countries.</span>
+      description: <span>Cellebrite is a global company known for its breakthroughs in mobile data technology, delivering comprehensive solutions for mobile forensics & mobile lifecycle management.<br/>Our innovative platform help Law-Enforcement agencies worldwide to fight serious-crime by providing a high-end mobile forensics solution which extracts, decodes and analyses actionable data from mobile devices using a myriad of cutting-edge technologies ranging from byte-level data understanding and cryptanalysis to Big-Data Analytics and Neural-Networks based Machine Learning. Our solutions deployed to law enforcement, police and security agencies in over 100 countries.</span>,
+      featuredJobInfo: <span>At Cellebrite we embrace excellence, our engineering teams strive to embody our core company values: Impact you focus on a great result rather than only the process. Communication you show & listen rather than tell. Courage you don’t afraid to learn and master new domains. Innovation be cleaver and not always smart. Craftsmanship you design it, build it and ship it. <br/>We are looking for leaders (Fullstack, backend, Team leaders) with strong java background who will join our analytics platform and help us shape the world to a safer place.</span>,
+      featuredJobLink: "http://www.cellebrite.com/Careers/java-backend-team-leader-jb-487"
     },
   ]);
 
@@ -175,17 +178,17 @@ export default class Sponsors extends Component {
     return (
       <div key={index} className={cx('panel', 'align-left')} style={{marginTop: 50}}>
         <div className={cx('container')}>
-        <div className={cx('row')}>
-          <div className={cx('col-sm-2', 'col-sm-offset-1', 'spons-logo')} style={{marginBottom:20}}>
-            <a href={url}><img src={logo} alt={name} className={cx('img-responsive')} /></a>
+          <div className={cx('row')}>
+            <div className={cx('col-sm-2', 'col-sm-offset-1', 'spons-logo')} style={{marginBottom:20}}>
+              <a href={url}><img src={logo} alt={name} className={cx('img-responsive')} /></a>
+            </div>
+            <div className={cx('col-sm-8')}>
+              <div className={cx('h7')}>About {name}</div>
+              <p>{description} {!excludeWebsite && <span><a href={url}>{name} website</a>.</span>}</p>
+              {featuredJobLink && <div className={cx('h7')} style={{marginTop: 20}}>Featured Job</div> }
+              {featuredJobLink && <p>{featuredJobInfo} {!excludeWebsite && <span>Interested? More info <a href={featuredJobLink}>here</a>.</span>}</p> }
+            </div>
           </div>
-          <div className={cx('col-sm-8')}>
-            <div className={cx('h7')}>About {name}</div>
-            <p>{description} {!excludeWebsite && <span><a href={url}>{name} website</a>.</span>}</p>
-            {featuredJobLink && <div className={cx('h7')} style={{marginTop: 20}}>Featured Job</div> }
-            {featuredJobLink && <p>{featuredJobInfo} {!excludeWebsite && <span>Interested? More info <a href={featuredJobLink}>here</a>.</span>}</p> }
-          </div>
-        </div>
         </div>
       </div>
     );
