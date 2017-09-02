@@ -139,7 +139,7 @@ class Navigation extends Component {
                   </ul>
                 </div>
               ) : (
-                <a href="/auth/google" className={cx("pull-right", "btn", "btn-outline-clr", "buy-btn")}>Login</a>
+                <a href="/auth/google" className={cx("login-btn", "pull-right", "btn", "btn-outline-clr", "buy-btn")}>Login</a>
               )}
             </div>
           </div>
