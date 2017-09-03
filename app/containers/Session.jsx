@@ -77,7 +77,7 @@ class Session extends Component {
       let action;
       const showEditButton =
         isReversimTeamMember ||
-        features('editAcceptedProposals', false) && this.isSpeaker() && status === 'accepted' ||
+        features('editAcceptedProposals', false) && this.isSpeaker() ||
         features('submission', false) && this.isSpeaker();
 
       if (showEditButton) {
