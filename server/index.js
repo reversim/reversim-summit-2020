@@ -2,6 +2,7 @@ require("babel-register");
 require("dotenv").config();
 
 const express = require('express');
+const path = require('path');
 const { connect } = require('./db');
 const initPassport = require('./init/passport').default;
 const initExpress = require('./init/express').default;
@@ -40,7 +41,7 @@ initRoutes(app);
  * HTML
  */
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
 });
 
 app.listen(app.get('port'));
