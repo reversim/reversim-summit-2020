@@ -1,4 +1,21 @@
-.heroImg {
+.hero {
+    background: url('../images/hero-min.png') center;
+    background-size: cover;
     width: 100%;
     height: 100vh;
+    color: #fff;
+}
+
+.title {
+    font-size: 72px;
+}
+
+.cta {
+    border: 2px solid #fff;
+}
+
+.autoCenter {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }

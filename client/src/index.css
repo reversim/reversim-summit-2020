@@ -1,5 +1,13 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Raleway, sans-serif;
+}
+
+:global .font-pt {
+  font-family: 'PT Sans', sans-serif;
+}
+
+:global .font-raleway {
+  font-family: Raleway, sans-serif;
 }
