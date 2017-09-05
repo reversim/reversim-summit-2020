@@ -1,14 +1,11 @@
 require("babel-register");
-require("react-scripts/config/env");
+require("dotenv").config();
+
 const express = require('express');
 const { connect } = require('./db');
 const initPassport = require('./init/passport').default;
 const initExpress = require('./init/express').default;
 const initRoutes = require('./init/routes').default;
-
-process.env.GOOGLE_CLIENTID = process.env.REACT_APP_GOOGLE_CLIENTID;
-process.env.GOOGLE_SECRET = process.env.REACT_APP_GOOGLE_SECRET;
-
 
 const app = express();
 
@@ -42,6 +39,8 @@ initRoutes(app);
  * renderMiddleware matches the URL with react-router and renders the app into
  * HTML
  */
-// app.get('*', renderMiddleware);
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 app.listen(app.get('port'));

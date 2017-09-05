@@ -22,10 +22,14 @@ export default (passport) => {
   * credentials and calls done providing a user, as well
   * as options specifying a client ID, client secret, and callback URL.
   */
-  passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENTID,
-    clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK || '/auth/google/callback',
-    passReqToCallback: true,
-  }, dbPassport.google));
+  if (process.env.GOOGLE_CLIENTID) {
+    passport.use(new GoogleStrategy({
+      clientID: process.env.GOOGLE_CLIENTID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK || '/auth/google/callback',
+      passReqToCallback: true,
+    }, dbPassport.google));
+  } else {
+    console.warn("No google authentication found");
+  }
 };
