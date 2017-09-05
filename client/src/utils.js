@@ -1,0 +1,1 @@
+export const image = (src) => ({ uri: src });
