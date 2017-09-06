@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import Hero from './Hero';
-import Team from './Team';
-import About from './About';
+import homeSections from '../data/home-sections';
+
+const renderSection = ({ el }) => (
+    React.createElement(el)
+);
 
 class Home extends Component {
 
@@ -9,9 +11,7 @@ class Home extends Component {
         const {  } = this.props;
         return (
           <div>
-            <Hero />
-            <About />
-            <Team/>
+            { homeSections.map(renderSection) }
           </div>
         );
     }
