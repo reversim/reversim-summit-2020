@@ -26,6 +26,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "path": "^0.12.7",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-addons-transition-group": "^15.6.0",
     "shuffle-seed": "^1.1.6"
   },
   "scripts": {

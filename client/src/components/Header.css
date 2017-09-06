@@ -1,8 +1,6 @@
 .sectionHeader {
     font-size: 1.2em;
-    font-weight: bold;
     position: relative;
-    text-align: center;
 }
 
 .sectionHeader:before {

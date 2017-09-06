@@ -10,7 +10,7 @@ class Home extends Component {
         return (
           <div>
             <Hero />
-            <About title="About" />
+            <About />
             <Team/>
           </div>
         );
