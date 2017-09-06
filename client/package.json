@@ -35,6 +35,7 @@
     "react": "^15.6.1",
     "react-dev-utils": "^4.0.1",
     "react-dom": "^15.6.1",
+    "react-google-maps": "^7.3.0",
     "react-hot-loader": "next",
     "react-router-dom": "^4.2.2",
     "reactstrap": "^4.8.0",

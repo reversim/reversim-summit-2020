@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import homeSections from '../data/home-sections';
 
-const renderSection = ({ el }) => (
-    React.createElement(el)
+const renderSection = ({ el }, i) => (
+    React.createElement(el, { key: i})
 );
 
 class Home extends Component {

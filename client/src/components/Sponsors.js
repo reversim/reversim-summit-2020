@@ -6,7 +6,7 @@ import { Row, Col } from 'reactstrap';
 
 const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLink, excludeWebsite}) => {
   return (
-    <div>
+    <div key={name}>
       <div className="text-center">
         <a href={url} target="_blank"><img src={logo} className={s.sponsorImg}/></a>
       </div>
