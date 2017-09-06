@@ -31,7 +31,8 @@ export default (app) => {
   app.use(bodyParser.urlencoded({limit: '50mb', extended: true})); // for parsing application/x-www-form-urlencoded
   app.use(methodOverride());
 
-  app.use(express.static(path.join(process.cwd(), 'public')));
+  // Serve static files from the React app
+  app.use(express.static(path.resolve(__dirname, '..', '..', 'client', 'build')));
 
   // I am adding this here so that the Heroku deploy will work
   // Indicates the app is behind a front-facing proxy,
