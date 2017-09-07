@@ -1,0 +1,42 @@
+.navLink, .navLink:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.navItem {
+    color: white;
+}
+
+.logo {
+    max-height: 56px;
+    cursor: pointer;
+}
+
+.isWhite {
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2), 0 1px 0 rgba(255, 255, 255, .15);
+    transition: background 0.3s;
+}
+
+.isWhite .navLink,
+.isWhite .navItem {
+    color: #262627;
+}
+
+.isWhite .logo {
+    filter: brightness(0.45);
+}
+
+.isWhite a.login-btn {
+    margin-top: 10px;
+}
+
+.isNotHome {
+    box-shadow: none;
+}
+
+@media (max-width: 767px) {
+    .isHome > .container {
+        top: 0;
+    }
+}

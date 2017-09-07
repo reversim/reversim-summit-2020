@@ -5,7 +5,7 @@ import Header from './Header';
 import s from './Section.css';
 
 const Section = ({title, isFullWidth, bg, children}) => (
-  <section>
+  <section className="mt-5">
     <Header title={title}/>
     <Container fluid={isFullWidth} className={cn({ [s.fixedBackground]: bg, "text-white": bg })} style={bg && { backgroundImage: `url('${bg}')` }}>
       {children}

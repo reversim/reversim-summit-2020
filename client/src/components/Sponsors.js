@@ -11,7 +11,7 @@ const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLin
         <a href={url} target="_blank"><img src={logo} className={s.sponsorImg}/></a>
       </div>
       <Row noGutters={true}>
-        <Col sm="8" className="mx-auto separator pb-5 mb-5">
+        <Col sm={{ size: 8, offset: 2}} className="separator pb-5 mb-5">
           <h4>{name}</h4>
           <p>{description} {!excludeWebsite && <span><a href={url}>{name}'s website</a>.</span>}</p>
           {featuredJobLink && <h5>Featured job</h5> }
