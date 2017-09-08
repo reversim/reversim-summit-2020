@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Element} from 'react-scroll';
 import homeSections from '../data/home-sections';
-import Navbar from './Navbar';
+import Page from './Page';
+import store from '../store';
 
 const renderSection = ({name, el}, i) => (
   <Element name={name} key={i}>
-    {React.createElement(el)}
+    {React.createElement(el, store)}
   </Element>
 );
 
@@ -14,10 +15,9 @@ class Home extends Component {
   render() {
     const {} = this.props;
     return (
-      <div>
-        <Navbar isHome={true}/>
+      <Page isHome={true}>
         {homeSections.map(renderSection)}
-      </div>
+      </Page>
     );
   }
 
