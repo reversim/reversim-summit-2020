@@ -11,7 +11,7 @@ const SpeakerPage = ({ speakers, match: { params: { id } }}) => {
   const speaker = speakers.toJS().find(x => x._id === id);
   if (!speaker || !speaker.session) return null;
 
-  const { name, picture, oneLiner, bio, session } = speaker;
+  const { name, bio, session } = speaker;
 
   return <Page title={`${name} · Reversim Summit 2017`}>
     <div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>

@@ -11,7 +11,6 @@ const SessionPage = ({ sessions, match: { params: { id }}}) => {
   const session = sessions.find(s => s.id === id);
 
   if (!session) return null;
-  console.log(session);
 
   const { title, abstract, type, tags } = session;
   const speakers = session.speaker_ids;

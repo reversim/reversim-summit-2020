@@ -5,7 +5,7 @@ import s from './SpeakerPage.css';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
 
 const SpeakerShort = (speaker) => {
-  const { name, picture, oneLiner, bio, session } = speaker;
+  const { name, picture, oneLiner } = speaker;
 
   return <Row className="align-items-center my-4">
     <Col sm="auto">

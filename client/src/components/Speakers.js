@@ -16,7 +16,7 @@ const colors = [
 ];
 
 const SpeakerItem = (speaker, i) => {
-  return <Col xs="12" sm="6" lg="4" className="mb-4">
+  return <Col xs="12" sm="6" lg="4" className="mb-4" key={i}>
     <Speaker {...speaker} color={colors[i%colors.length]}/>
   </Col>
 };

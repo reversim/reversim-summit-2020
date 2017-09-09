@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
-import {Element} from 'react-scroll';
+import {Element, scroller} from 'react-scroll';
 import homeSections from '../data/home-sections';
 import Page from './Page';
 
 class Home extends Component {
+
+  componentDidMount() {
+    let { pathname } = window.location;
+    if (pathname) pathname = pathname.slice(1);
+    scroller.scrollTo(pathname, {
+      offset: -80
+    });
+  }
 
   renderSection = ({name, el}, i) => (
     <Element name={name} key={i}>
@@ -12,7 +20,6 @@ class Home extends Component {
   );
 
   render() {
-    console.log(this.props);
     return (
       <Page isHome={true}>
         {homeSections.map(this.renderSection)}
