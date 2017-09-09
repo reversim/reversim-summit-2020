@@ -11,7 +11,7 @@ class Page extends Component {
     render() {
         const { children, isHome } = this.props;
         return (
-            <div>
+            <div style={isHome ? {} : { paddingTop: 77 }}>
               <Navbar isHome={isHome}/>
               {children}
             </div>

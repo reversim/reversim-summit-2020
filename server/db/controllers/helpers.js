@@ -14,7 +14,7 @@ export function transformUser(user, loggedInUser) {
   if (_.isObject(user) && _.has(user, 'profile')) {
     return {
       _id: user._id,
-      proposals: user.proposals && user.proposals.map(p => transformProposal(p, loggedInUser)),
+      proposals: user.proposals && user.proposals.map(p => String(p)),
       name: user.profile && user.profile.name,
       oneLiner: user.profile && user.profile.oneLiner,
       email: isReversimMember && user.email,
@@ -44,6 +44,7 @@ export function transformProposal(proposal, loggedInUser) {
     // console.log("transformProposal, proposal=" + proposal.id, "loggedInUser=", loggedInUser && loggedInUser._id, "isAuthor=", isAuthor, "isTeamMember=", isTeamMember);
 
     return {
+      _id: String(proposal._id),
       id: proposal.id,
       title: proposal.title,
       abstract: proposal.abstract,

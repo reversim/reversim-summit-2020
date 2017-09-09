@@ -295,6 +295,17 @@ export function speakers(req, res) {
   });
 }
 
+export function sessions(req, res) {
+  Proposal.find({ status: 'accepted' }).populate('speaker_ids').exec((err, proposals) => {
+    if (err) {
+      console.log(`Error in proposals/speakers query: ${err}`);
+      return res.status(500).send('Something went wrong getting the data');
+    }
+
+    return res.json(proposals.map(p => transformProposal(p, req.user)));
+  });
+}
+
 const baseQuery = [
   {$unwind: "$speaker_ids"},
   {$lookup: {
@@ -411,5 +422,6 @@ export default {
   tags,
   getRecommendations,
   speakers,
+  sessions,
   getAllAttendees
 };

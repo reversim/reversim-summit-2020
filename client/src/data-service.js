@@ -1,7 +1,7 @@
 import { get } from './api';
 
-export async function getSpeakers() {
-  return await get("/api/speakers")
+export async function getSessions() {
+  return await get("/api/sessions");
 }
 
 export async function getTeam() {

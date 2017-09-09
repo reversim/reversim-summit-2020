@@ -52,6 +52,7 @@ export default (app) => {
   );
 
   // proposal routes
+  app.get('/api/sessions', proposalsController.sessions);
   app.get('/proposal', proposalsController.all);
   app.get('/proposal/:id/recommendations', proposalsController.getRecommendations);
   app.get('/proposal/tags', proposalsController.tags);

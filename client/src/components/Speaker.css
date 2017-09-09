@@ -1,3 +1,8 @@
+.speakerLinkWrap:hover,
+.speakerLinkWrap:focus {
+    text-decoration: none;
+}
+
 .speakerImg {
     width: 100px;
     height: 100px;

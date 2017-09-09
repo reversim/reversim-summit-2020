@@ -12,6 +12,7 @@ body {
 
 p {
   font-weight: 300;
+  line-height: 1.7;
 }
 
 h3 {
@@ -49,6 +50,15 @@ small {
   line-height: 1.2;
 }
 
+:global .line-height-17 {
+  line-height: 1.7;
+}
+
 :global .flex-1 {
   flex: 1;
+}
+
+:global .hero-page-img {
+  height: 320px;
+
 }

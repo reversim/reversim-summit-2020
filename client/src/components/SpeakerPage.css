@@ -1,0 +1,18 @@
+.speakerImg {
+    height: 160px;
+    width: 160px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.socialLinks {
+    font-size: 18px;
+}
+
+.socialLinks a {
+    color: rgba(0,30,60,0.7);
+    margin-right: 60px;
+    flex: 0 0 auto;
+}
