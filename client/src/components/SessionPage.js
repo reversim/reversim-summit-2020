@@ -6,6 +6,59 @@ import {getSessionTypeStr} from "../utils";
 import Tag from './Tag';
 import SpeakerShort from "./SpeakerShort";
 import ReactMarkdown from 'react-markdown';
+import { agenda1, agenda2 } from '../data/agenda';
+
+const agenda = [agenda1, agenda2];
+
+const _getDateAndTime = (index, id) => {
+  let day, time;
+  agenda[index].forEach(slot => {
+    if (time) return;
+
+    if (Array.isArray(slot.sessions)) {
+      slot.sessions.forEach(ss => {
+        if (ss === id) {
+          day = index;
+          time = slot.time;
+        } else if (ss && ss.sessions) {
+          ss.sessions.forEach(sss => {
+            if (sss === id) {
+              day = index;
+              time = slot.time;
+            }
+          });
+        }
+      });
+    } else if (typeof slot.sessions === "string") {
+      if (slot.sessions === id) {
+        day = index;
+        time = slot.time;
+      }
+    } else if (slot.shortSessions) {
+      slot.shortSessions.forEach(ss => {
+        if (ss === id) {
+          day = index;
+          time = slot.time;
+        }
+      })
+    }
+  });
+
+  if (time) {
+    return { day, time };
+  }
+};
+
+const getDateAndTime = id => {
+  let dayTime;
+  if (dayTime = _getDateAndTime(0, id)) return dayTime;
+  else return _getDateAndTime(1, id);
+};
+
+const dates = [
+  "October 15, 2017",
+  "October 16, 2017"
+];
 
 
 const SessionPage = ({ sessions, match: { params: { id }}}) => {
@@ -15,6 +68,8 @@ const SessionPage = ({ sessions, match: { params: { id }}}) => {
 
   const { title, abstract, type, tags } = session;
   const speakers = session.speaker_ids;
+
+  const dayTime = getDateAndTime(id);
 
   return (
     <Page title={`${session.title} · Reversim Summit 2017`}>
@@ -27,8 +82,8 @@ const SessionPage = ({ sessions, match: { params: { id }}}) => {
             <div className="d-flex text-muted mb-3">{tags.map(Tag)}</div>
             <Row className="align-items-center my-4">
               <Col>
-                <i className="fa fa-calendar-o mr-3"/><span className="mr-4">October 15, 2017</span> {/* TODO */}
-                <i className="fa fa-clock-o mr-3"/><span>14:15 - 15:00</span> {/* TODO */}
+                <i className="fa fa-calendar-o mr-3"/><span className="mr-4">{dates[dayTime.day]}</span> {/* TODO */}
+                <i className="fa fa-clock-o mr-3"/><span>{`${dayTime.time.substr(0,2)}:${dayTime.time.substr(2)}`}</span> {/* TODO */}
               </Col>
             </Row>
             <Row>

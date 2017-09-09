@@ -38,3 +38,8 @@
 .igniteSep {
     border-bottom: 1px dotted #333;
 }
+
+.agenda a {
+    text-decoration: none;
+    color: inherit;
+}

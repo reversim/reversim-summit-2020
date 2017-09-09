@@ -4,6 +4,7 @@ import {Col, Container, Row} from "reactstrap";
 import s from './Agenda.css';
 import cn from 'classnames';
 import { agenda1, agenda2 } from '../data/agenda';
+import {Link} from "react-router-dom";
 
 const _getSession = (sessions, id) => sessions.find(ss => ss.id === id);
 const getSession = (sessions, id) => {
@@ -20,8 +21,10 @@ const Time = ({tStr}) => (
 const ShortSessions = ({sessions}) => (
   <div className="mt-3">{sessions.map((ss,i) => (
     <div className={cn("mb-3 pb-2", {[s.igniteSep]: i < sessions.length-1})}>
-      <h5 className={cn("mr-4 mb-0", s.igniteName)}>{getSpeakerName(ss)}</h5>
-      <div>{ss.title}</div>
+      <Link to={`/session/${ss.id}`}>
+        <h5 className={cn("mr-4 mb-0", s.igniteName)}>{getSpeakerName(ss)}</h5>
+        <div>{ss.title}</div>
+      </Link>
     </div>
   ))}</div>
 );
@@ -35,10 +38,10 @@ const Session = ({text, session, shortSessions}) => {
       <ShortSessions sessions={session.sessions}/>
     </div>
   } else if (session) {
-    content = <div>
+    content = <Link to={`/session/${session.id}`}>
       <h5>{getSpeakerName(session)}</h5>
       <div>{session.title}</div>
-    </div>
+    </Link>
   } else if (shortSessions) {
     content = <ShortSessions sessions={shortSessions}/>
   }
@@ -76,7 +79,7 @@ const Agenda = ({ selectedDate, sessions, setSelectedDate }) => {
 
   return <Page title="Schedule · Reversim Summit 2017">
     <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
-    <Container>
+    <Container className={s.agenda}>
       <Row className="my-5a" style={{margin: '80px 0'}}>
         <Col sm={{offset:2, size: 4}} className="text-center">
           <h4 className={cn({[s.selected]: selectedDate === 0}, s.subtitle)} onClick={() => setSelectedDate(0)}>Day 1 - October 15, 2017</h4>
