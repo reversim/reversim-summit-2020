@@ -41,7 +41,7 @@ initRoutes(app);
  * HTML
  */
 // Serve static files from the React app
-app.use(express.static(path.resolve(__dirname, '..', '..', 'client', 'build')));
+app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));
 
 app.get('*', (req, res) => {
   console.log("!!!!");
