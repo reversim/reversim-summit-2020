@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 import {getSessionTypeStr} from "../utils";
 import Tag from './Tag';
 import SpeakerShort from "./SpeakerShort";
+import ReactMarkdown from 'react-markdown';
 
 
 const SessionPage = ({ sessions, match: { params: { id }}}) => {
@@ -35,7 +36,7 @@ const SessionPage = ({ sessions, match: { params: { id }}}) => {
                 {speakers.map(SpeakerShort)}
               </Col>
               <Col>
-                <p>{abstract}</p>
+                <ReactMarkdown source={abstract}/>
               </Col>
             </Row>
           </Col>

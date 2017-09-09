@@ -27,3 +27,5 @@ getSessions().then(sessions => {
       session: x.proposals.map(p => sessions.find(session => session._id === p)).filter(x => !!x)[0]
     }));
 });
+
+window.__store = store;
