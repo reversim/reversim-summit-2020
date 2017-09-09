@@ -6,7 +6,11 @@ import flatMap from 'lodash/flatMap';
 const store = observable({
   speakers: [],
   sessions: [],
-  team: []
+  team: [],
+  showTeamMember: null,
+  onTeamMemberClick: id => {
+    store.showTeamMember = store.showTeamMember === id ? null : id;
+  }
 });
 
 export default store;
