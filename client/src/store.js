@@ -13,5 +13,6 @@ getTeam().then(team => {
 });
 
 getSpeakers().then(speakers => {
+  console.log(speakers);
   store.speakers = speakers;
 });

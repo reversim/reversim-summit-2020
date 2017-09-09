@@ -7,7 +7,7 @@ import s from './Hero.css';
 class Hero extends Component {
 
   render() {
-    const {} = this.props;
+    // const {} = this.props;
     return (
       <section className={cn(s.hero, "d-flex", "align-items-center", "justify-content-center", "font-pt")}>
         <div>
@@ -23,8 +23,8 @@ class Hero extends Component {
             </div>
           </div>
           <div className="text-center">
-            <a href="https://twitter.com/reversim" target="_blank"><i className="fa fa-twitter"/></a>
-            <a href="https://www.facebook.com/groups/806177629478248/" target="_blank"><i className="fa fa-facebook"/></a>
+            <a href="https://twitter.com/reversim" target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter"/></a>
+            <a href="https://www.facebook.com/groups/806177629478248/" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"/></a>
           </div>
         </div>
       </section>

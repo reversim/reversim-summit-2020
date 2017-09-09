@@ -8,7 +8,7 @@ const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLin
   return (
     <div key={name}>
       <div className="text-center">
-        <a href={url} target="_blank"><img src={logo} className={s.sponsorImg}/></a>
+        <a href={url} target="_blank"><img src={logo} className={s.sponsorImg} alt={name}/></a>
       </div>
       <Row noGutters={true}>
         <Col sm={{ size: 8, offset: 2}} className="separator pb-5 mb-5">
@@ -22,7 +22,7 @@ const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLin
   )
 };
 
-const Sponsors = ({}) => {
+const Sponsors = () => {
   const sponsorsComponents = sponsorsData.map(Sponsor);
 
   return (

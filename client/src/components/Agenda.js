@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 class Agenda extends Component {
 
   render() {
-    const {} = this.props;
+    // const {} = this.props;
     return (
       <div>
         <Navbar/>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Section from "./Section";
-import { observer } from 'mobx-react';
 
 class Team extends Component {
 
@@ -15,4 +14,4 @@ class Team extends Component {
 
 }
 
-export default observer(Team);
+export default Team;

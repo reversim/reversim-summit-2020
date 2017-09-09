@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar as Navbar2, Collapse, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import navItems from '../data/nav-items';
@@ -66,7 +66,7 @@ class Navbar extends Component {
     const { fixed } = this.state;
     const items = navItems(isHome);
 
-    const logo = <img className={s.logo} src={logoImg} onClick={onNavItemClick("/")}/>
+    const logo = <img className={s.logo} src={logoImg} onClick={onNavItemClick("/")} alt="Reversim Summit 2017"/>
 
     const navbarBrand = isHome ?
       <ScrollLink className='navbar-brand mr-5' activeClass='active' to="hero" spy={true} smooth={true} offset={-50} duration={500}>{logo}</ScrollLink> :

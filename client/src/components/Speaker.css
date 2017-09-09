@@ -1,0 +1,149 @@
+.speakerImg {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left top;
+    position: relative;
+    overflow: hidden;
+}
+
+/*.speakerImg:before {*/
+    /*content: '';*/
+    /*position: absolute;*/
+    /*top: -60px;*/
+    /*bottom: -60px;*/
+    /*border-left: 10px solid rgb(171,81,194);*/
+    /*transform: rotate(45deg) translateX(0);*/
+    /*left: -60px;*/
+/*}*/
+
+.speakerImg:after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    right: -60px;
+    bottom: -60px;
+    mix-blend-mode: color;
+    transform: rotate(45deg) translate(0, 0);
+    transition: transform 500ms;
+}
+
+.speakerImg:hover:after {
+    transform: rotate(45deg) translate(180px, -180px);
+}
+
+.speakerLinks {
+
+}
+
+.speaker .speakerLinks a {
+    color: rgba(0,30,60,0.7);
+}
+
+/* colors */
+
+.speaker.purple .speakerLinks {
+    background: rgba(171,81,194, 0.7);
+}
+
+.speaker.purple .speakerImg:after {
+    background: rgba(171,81,194, 0.7);
+}
+
+.speaker.purple .speakerInfo {
+    background: rgb(171,81,194);
+    color: white;
+}
+
+.speaker.gold .speakerLinks {
+    background: rgba(230,172,57, 0.7);
+}
+
+.speaker.gold .speakerImg:after {
+    background: rgba(230,172,57, 0.7);
+}
+
+.speaker.gold .speakerInfo {
+    background: rgba(230,172,57, 1);
+    color: white;
+}
+
+.speaker.cyan .speakerLinks {
+    background: rgba(0,191,191, 0.5);
+}
+
+.speaker.cyan .speakerImg:after {
+    background: rgba(0,191,191, 0.5);
+}
+
+.speaker.cyan .speakerInfo {
+    background: rgba(0,191,191, 1);
+    color: white;
+}
+
+.speaker.blue .speakerLinks {
+    background: rgba(153,216,255, 0.7);
+}
+
+.speaker.blue .speakerImg:after {
+    background: rgba(153,216,255, 0.7);
+}
+
+.speaker.blue .speakerInfo {
+    background: rgba(153,216,255, 1);
+    color: #333;
+}
+
+.speaker.pink .speakerLinks {
+    background: rgba(255,204,229, 0.7);
+}
+
+.speaker.pink .speakerImg:after {
+    background: rgba(255,204,229, 0.7);
+}
+
+.speaker.pink .speakerInfo {
+    background: rgba(255,204,229, 1);
+    color: #333;
+}
+
+.speaker.yellow .speakerLinks {
+    background: rgba(255,246,153, 0.5);
+}
+
+.speaker.yellow .speakerImg:after {
+    background: rgba(255,246,153, 0.5);
+}
+
+.speaker.yellow .speakerInfo {
+    background: rgba(255,246,153, 1);
+    color: #333;
+}
+
+.speaker.green .speakerLinks {
+    background: rgba(102,187,106, 0.7);
+}
+
+.speaker.green .speakerImg:after {
+    background: rgba(102,187,106, 0.7);
+}
+
+.speaker.green .speakerInfo {
+    background: rgba(102,187,106, 1);
+    color: white;
+}
+
+.speaker.orange .speakerLinks {
+    background: rgba(239,108,0, 0.7);
+}
+
+.speaker.orange .speakerImg:after {
+    background: rgba(239,108,0, 0.7);
+}
+
+.speaker.orange .speakerInfo {
+    background: rgba(239,108,0, 1);
+    color: white;
+}

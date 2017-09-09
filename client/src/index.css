@@ -29,6 +29,10 @@ h5 {
   font-weight: bold;
 }
 
+small {
+  font-size: 12px;
+}
+
 :global .font-pt {
   font-family: 'PT Sans', sans-serif;
 }
@@ -39,4 +43,12 @@ h5 {
 
 :global .separator {
   border-bottom: 1px solid #c9c9c9;
+}
+
+:global .line-height-12 {
+  line-height: 1.2;
+}
+
+:global .flex-1 {
+  flex: 1;
 }

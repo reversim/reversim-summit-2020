@@ -1,4 +1,4 @@
-import { get, post, put } from './api';
+import { get } from './api';
 
 export async function getSpeakers() {
   return await get("/api/speakers")
