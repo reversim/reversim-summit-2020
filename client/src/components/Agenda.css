@@ -1,0 +1,40 @@
+.timeCol {
+    flex: 0 0 100px;
+    align-self: flex-start;
+}
+
+.tableCol:nth-child(3) {
+    color: #AB51C2;
+}
+
+.tableCol:nth-child(4) {
+    color: #EF6C00;
+}
+
+.subtitle {
+    cursor: pointer;
+}
+
+.muted {
+    background: #f1f1f1;
+}
+
+.selected {
+    color: #29B6F6;
+}
+
+.tall {
+    font-size: 36px;
+}
+
+.small {
+    font-size: 18px;
+}
+
+.igniteName {
+    flex: 0 0 160px;
+}
+
+.igniteSep {
+    border-bottom: 1px dotted #333;
+}

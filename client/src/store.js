@@ -10,7 +10,9 @@ const store = observable({
   showTeamMember: null,
   onTeamMemberClick: id => {
     store.showTeamMember = store.showTeamMember === id ? null : id;
-  }
+  },
+  selectedDate: 0,
+  setSelectedDate: i => store.selectedDate = i
 });
 
 export default store;
