@@ -77,7 +77,7 @@ const Agenda = ({ selectedDate, sessions, setSelectedDate }) => {
   return <Page title="Schedule · Reversim Summit 2017">
     <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
     <Container>
-      <Row className="my-5">
+      <Row className="my-5a" style={{margin: '80px 0'}}>
         <Col sm={{offset:2, size: 4}} className="text-center">
           <h4 className={cn({[s.selected]: selectedDate === 0}, s.subtitle)} onClick={() => setSelectedDate(0)}>Day 1 - October 15, 2017</h4>
         </Col>

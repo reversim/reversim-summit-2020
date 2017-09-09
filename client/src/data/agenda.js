@@ -59,52 +59,57 @@ export const agenda1 = [
 
 export const agenda2 = [
   { time: "0800", text: "Registration" },
-  { time: "0900", text: "Early Session", sessions: "3c1e5e0a-9774-7ff8-043b-c421a71e8b31" },
-  { time: "1000", text: "Welcome + Keynote", sessions: "3c1e5e0a-9774-7ff8-043b-c421a71e8b31" },
+  { time: "0900", text: "Early Session", sessions: [null,"75691af5-ce4e-2d67-ae2a-603c2f12e397",null] },
+  { time: "1000", text: "Welcome + Keynote", sessions: "b89383ea-ba2a-7e2d-425d-e0c2f2fe27d0" },
   { time: "1050", text: "Break", muted: true },
   { time: "1110", sessions: [
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31"
+    "21bd03f7-c711-2e1d-6a95-f6998beec2b9",
+    "c1380280-bad1-d498-fd3f-c664995c5c99",
+    "e273ba54-ca58-0cf9-940f-cceb86bd98b7"
   ]},
   { time: "1150", text: "Break", muted: true },
   { time: "1200", sessions: [
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31"
+    "ba5a920e-6596-bc62-d5b7-16d141e9e8bc",
+    "9d15b17d-d73a-9c77-d196-4307126b9be9",
+    "a0188f4a-825e-d83b-52c3-d7d5e1859955"
   ] },
   { time: "1240", text: "Lunch", muted: true },
   { time: "1340", text: "Ignites", shortSessions: [
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31"
+    "0e493b6e-220a-2208-c7da-40e81aab982d",
+    "0717532c-78ac-f849-efad-6a2e882244e9",
+    "516fc501-a1ad-0097-cbae-5f069d524c03",
+    "b193b43d-8d12-775c-a01c-c0f1805e9794",
+    "87fceb26-f76e-c412-15e3-8eed45c31b9f",
+    "ba169253-ab97-86ca-74e2-beceb1bc523c",
+    "48d882bc-1088-a1e3-45d5-9014072e58c6"
   ] },
   { time: "1420", text: "Break", muted: true },
   { time: "1430", sessions: [
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31"
+    "e9f4d8fb-75af-eb68-103b-2ccb24d49a7b",
+    "b114c756-2011-dcd5-7c0d-714edacdb764",
+    "1fe6e617-1f01-4c70-357c-d0be588d1775"
   ] },
   { time: "1500", text: "Break", muted: true },
-  { time: "1510", sessions: [
-    null,
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31"
+  { time: "1510", sessions: [{ text: "OSS in Israel", sessions: [
+    "e27df61b-a45d-bb0f-ce90-c127df244eee",
+    "f9afbecf-8eff-0aa1-9108-ff233d259af7",
+    "57a4c603-bbe9-da61-08b5-f3703bd250dd",
+    "397b1985-f55c-988c-8a7f-309b7198b729"
+  ]},
+    "ac719d2a-ea06-7a00-6153-68d99e78cc1e",
+    null
   ] },
   { time: "1550", text: "Break", muted: true },
   { time: "1610", sessions: [
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31"
+    null, //???
+    "cbcc3966-0df2-f37a-0590-857f5401791a",
+    "b4cf69e6-4cbc-1663-332b-528bc400deea"
   ] },
   { time: "1650", text: "Break", muted: true },
   { time: "1700", sessions: [
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31",
-    "3c1e5e0a-9774-7ff8-043b-c421a71e8b31"
+    "5675c068-d551-b49e-95c1-66d03c63b577",
+    "ce03940b-ad4b-369e-8163-26531341017f",
+    "d6cc3aba-4930-12a3-7ebb-88fa565d574c"
   ] },
   { time: "1740", text: "Beer Break", muted: true },
   { time: "1800", text: "Hall of Shame" },
