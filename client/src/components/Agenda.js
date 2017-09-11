@@ -57,7 +57,7 @@ const Session = ({text, session, shortSessions}) => {
     </div>
   } else if (session) {
     content = <Link to={`/session/${session.id}`}>
-      <div className="d-flex">
+      <div className="d-flex mb-4 mb-lg-0">
         {getSessionImgs(session)}
         <div>
           <h5>{getSpeakerName(session)}</h5>
@@ -69,7 +69,7 @@ const Session = ({text, session, shortSessions}) => {
     content = <ShortSessions sessions={shortSessions}/>
   }
 
-  return <Col className={s.tableCol}>
+  return <Col className={s.tableCol} xs="12" lg={true}>
     {text && <div className={s.tall}>{text}</div> }
     {content}
   </Col>
@@ -92,7 +92,11 @@ const Line = ({time, sessions, text, shortSessions, muted, allSessions}) => {
       <Col xs="auto" className={cn(s.timeCol, "pl-3")}>
         <Time tStr={time}/>
       </Col>
-      {cols}
+      <Col>
+        <Row>
+          {cols}
+        </Row>
+      </Col>
     </Row>
   )
 };
@@ -104,22 +108,22 @@ const dates = [
 
 const agendas = [agenda1, agenda2];
 
-const DayAgenda = ({ index, sessions }) => {
+const DayAgenda = ({ index, sessions, isLargeScreen }) => {
   return (
     <Container className={cn(s.agenda, "mb-5")}>
       <h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>{dates[index]}</h4>
-      <Row>
+      <Row className="hidden-md-down mb-4">
         <Col xs="auto" className={cn(s.timeCol, s.tableCol)}/>
-        <Col className={cn(s.tableCol, "text-center1")}>Main hall</Col>
-        <Col className={cn(s.tableCol, "text-center1")}>Class 2 - Media<br/>(near the main hall)</Col>
-        <Col className={cn(s.tableCol, "text-center1")}>Class 3 - Law</Col>
+        <Col className={cn(s.tableCol, "text-center1")}><h4>Main hall</h4></Col>
+        <Col className={cn(s.tableCol, "text-center1")}><h4>Class 2 - Media<br/>(near the main hall)</h4></Col>
+        <Col className={cn(s.tableCol, "text-center1")}><h4>Class 3 - Law</h4></Col>
       </Row>
-      {agendas[index].map(line => <Line {...line} allSessions={sessions}/>)}
+      {agendas[index].map(line => <Line {...line} allSessions={sessions} isLargeScreen={isLargeScreen}/>)}
     </Container>
   )
 };
 
-const Agenda = ({ selectedDate, sessions, setSelectedDate, ...props }) => {
+const Agenda = ({ sessions, ...props }) => {
   if (!sessions || !sessions.length) return null;
 
   return <Page title="Schedule · Reversim Summit 2017" {...props}>
