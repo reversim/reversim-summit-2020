@@ -34,6 +34,10 @@ small {
   font-size: 12px;
 }
 
+:global .font-size-lg {
+  font-size: 24px;
+}
+
 :global .font-pt {
   font-family: 'PT Sans', sans-serif;
 }
@@ -61,4 +65,18 @@ small {
 :global .hero-page-img {
   height: 320px;
 
+}
+
+:global .text-primary {
+  color: #29b6f6 !important;
+}
+
+:global a,
+:global a:hover,
+:global a:focus {
+  color: #29b6f6;
+}
+
+:global .bg-white {
+  background: rgba(255,255,255,0.85); /* TODO only for location */
 }

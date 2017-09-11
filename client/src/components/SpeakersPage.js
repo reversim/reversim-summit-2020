@@ -6,7 +6,7 @@ import shuffle from "lodash/shuffle";
 import Speaker from "./Speaker";
 
 const SpeakerItem = (speaker, i) => {
-  return <Col xs={{ size: 6, offset: 0}} className="mb-4" key={i}>
+  return <Col xs="12" sm="6" className="mb-4" key={i}>
     <Speaker {...speaker} color={colors[i%colors.length]} isFull={true}/>
   </Col>
 };

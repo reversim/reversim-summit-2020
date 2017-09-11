@@ -12,11 +12,11 @@ const Speaker = ({_id, name, bio, oneLiner, picture, color, isFull, ...props}) =
 
   return <Link to={`/speaker/${_id}`} className={s.speakerLinkWrap}>
     <div className={cn(s.speaker, s[color], { [s.isFull]: isFull})}>
-      <div className="d-flex">
+      <div className={cn({"d-flex": !isFull})}>
         <div style={{backgroundImage: `url('${picture}')`}} className={s.speakerImg}/>
         <div className={cn(s.speakerLinks, 'flex-1')}>
           {isFull ?
-            <p className="p-3">{bio}</p>
+            <p className="p-3 mb-0">{bio}</p>
             : <SpeakerSocialLinks {...props} className="h-100"/>
           }
         </div>

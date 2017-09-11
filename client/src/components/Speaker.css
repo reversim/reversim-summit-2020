@@ -40,13 +40,14 @@
 }
 
 .speaker.isFull .speakerImg {
-    min-height: 160px;
-    height: auto;
+    height: 160px;
     width: 160px;
+    float: left;
+    margin-right: 14px;
 }
 
-.speakerLinks {
-
+.speaker.isFull .speakerLinks {
+    min-height: 160px;
 }
 
 .speaker .speakerLinksFull a {

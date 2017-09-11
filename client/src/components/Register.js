@@ -8,8 +8,8 @@ const Register = () => (
     <div className="py-5 text-center">
       <h4>Register to</h4>
       <h3 className="mb-5">Reversim Summit 2017</h3>
-      <p className="mb-5">Registration is now open!</p>
-      <Button outline size="lg" color="primary">Register</Button>
+      <p className="mb-5">Registration opens in 2 days!</p>
+      {/*<Button outline size="lg" color="primary">Register</Button>*/}
     </div>
   </Section>
 );
