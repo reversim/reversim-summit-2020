@@ -50,9 +50,7 @@ const _getDateAndTime = (index, id) => {
 };
 
 const getDateAndTime = id => {
-  let dayTime;
-  if (dayTime = _getDateAndTime(0, id)) return dayTime;
-  else return _getDateAndTime(1, id);
+  return _getDateAndTime(0, id) || _getDateAndTime(1, id);
 };
 
 const dates = [
@@ -61,7 +59,7 @@ const dates = [
 ];
 
 
-const SessionPage = ({ sessions, match: { params: { id }}}) => {
+const SessionPage = ({ sessions, match: { params: { id }}, ...props}) => {
   const session = sessions.find(s => s.id === id);
 
   if (!session) return null;
@@ -72,7 +70,7 @@ const SessionPage = ({ sessions, match: { params: { id }}}) => {
   const dayTime = getDateAndTime(id);
 
   return (
-    <Page title={`${session.title} · Reversim Summit 2017`}>
+    <Page title={`${session.title} · Reversim Summit 2017`} {...props}>
       <div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>
       <Container className="mt-4">
         <Row>

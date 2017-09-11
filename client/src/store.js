@@ -1,5 +1,5 @@
 import { observable } from 'mobx';
-import { getSessions, getTeam } from './data-service';
+import { getSessions, getTeam, getMe } from './data-service';
 import uniq from 'lodash/uniq';
 import flatMap from 'lodash/flatMap';
 
@@ -12,7 +12,10 @@ const store = observable({
     store.showTeamMember = store.showTeamMember === id ? null : id;
   },
   selectedDate: 0,
-  setSelectedDate: i => store.selectedDate = i
+  setSelectedDate: i => store.selectedDate = i,
+  isSmallScreen: window.innerWidth < 576,
+  user: { isFetching: true },
+  onLogout: () => store.user = { authenticated: false }
 });
 
 export default store;
@@ -26,8 +29,15 @@ getSessions().then(sessions => {
   store.speakers = uniq(flatMap(sessions, session => session.speaker_ids), '_id')
     .map(x => ({
       ...x,
-      session: x.proposals.map(p => sessions.find(session => session._id === p)).filter(x => !!x)[0]
+      sessions: filterSessions(x.proposals)
     }));
 });
+
+getMe().then(user => {
+  user.sessions = filterSessions(user.proposals)
+  store.user = user;
+});
+
+const filterSessions = sessionIds => sessionIds.map(p => store.sessions.find(session => session._id === p)).filter(x => !!x)
 
 window.__store = store;

@@ -74,10 +74,10 @@ const Line = ({time, sessions, text, shortSessions, muted, allSessions}) => {
   )
 };
 
-const Agenda = ({ selectedDate, sessions, setSelectedDate }) => {
+const Agenda = ({ selectedDate, sessions, setSelectedDate, ...props }) => {
   if (!sessions || !sessions.length) return null;
 
-  return <Page title="Schedule · Reversim Summit 2017">
+  return <Page title="Schedule · Reversim Summit 2017" {...props}>
     <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
     <Container className={s.agenda}>
       <Row className="my-5a" style={{margin: '80px 0'}}>

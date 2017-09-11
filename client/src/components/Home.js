@@ -21,7 +21,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Page isHome={true}>
+      <Page isHome={true} {...this.props}>
         {homeSections.map(this.renderSection)}
       </Page>
     );

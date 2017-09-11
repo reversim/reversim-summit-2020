@@ -10,6 +10,32 @@ cloudinary.config({
   api_secret: 'ezLey1P-aVWlOhAv-cvJdRmcK-w'
 });
 
+export function me(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.status(200).json({
+      authenticated: true,
+      name: req.user && req.user.profile.name,
+      oneLiner: req.user && req.user.profile.oneLiner,
+      email: req.user && req.user.email,
+      isReversimTeamMember: req.user && req.user.isReversimTeamMember,
+      picture: req.user && req.user.profile.picture,
+      bio: req.user && req.user.profile.bio,
+      trackRecord: req.user && req.user.profile.trackRecord,
+      linkedin: req.user && req.user.profile.linkedin,
+      twitter: req.user && req.user.profile.twitter,
+      stackOverflow: req.user && req.user.profile.stackOverflow,
+      github: req.user && req.user.profile.github,
+      phone: req.user && req.user.profile.phone,
+      id: req.user && req.user._id,
+      proposals: req.user && req.user.proposals
+    })
+  } else {
+    return res.status(200).json({
+      authenticated: false
+    })
+  }
+}
+
 /**
  * POST /login
  */
@@ -37,7 +63,7 @@ export function login(req, res, next) {
 export function logout(req, res) {
   // Do email and password validation for the server
   req.logout();
-  res.redirect('/');
+  res.status(200).json({ success: true });
 }
 
 /**
@@ -160,6 +186,7 @@ export function getProposals(req, res) {
 }
 
 export default {
+  me,
   login,
   logout,
   update,

@@ -7,13 +7,13 @@ import {Link} from "react-router-dom";
 import Tag from './Tag';
 import SpeakerShort from "./SpeakerShort";
 
-const SpeakerPage = ({ speakers, match: { params: { id } }}) => {
+const SpeakerPage = ({ speakers, match: { params: { id } }, ...props}) => {
   const speaker = speakers.toJS().find(x => x._id === id);
-  if (!speaker || !speaker.session) return null;
+  if (!speaker || !speaker.sessions) return null;
 
-  const { name, bio, session } = speaker;
+  const { name, bio, sessions } = speaker;
 
-  return <Page title={`${name} · Reversim Summit 2017`}>
+  return <Page title={`${name} · Reversim Summit 2017`} {...props}>
     <div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>
     <Container>
       <Row>
@@ -23,11 +23,13 @@ const SpeakerPage = ({ speakers, match: { params: { id } }}) => {
             <p>{bio}</p>
           </Row>
           <h4 className="mb-4">{`${name.split(" ")[0]}'s Session`}</h4>
-          <div className="bg-faded p-3">
-            <p>{getSessionTypeStr(session.type)}</p>
-            <div className="d-flex text-muted mb-3">{session.tags.map(Tag)}</div>
-            <Link to={`/session/${session.id}`}><h5>{session.title}</h5></Link>
-          </div>
+          {sessions.map(session =>
+            <div className="bg-faded p-3 mb-4">
+              <p>{getSessionTypeStr(session.type)}</p>
+              <div className="d-flex text-muted mb-3">{session.tags.map(Tag)}</div>
+              <Link to={`/session/${session.id}`}><h5>{session.title}</h5></Link>
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

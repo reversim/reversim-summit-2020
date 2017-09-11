@@ -38,6 +38,7 @@
     "react": "^15.6.1",
     "react-dev-utils": "^4.0.1",
     "react-dom": "^15.6.1",
+    "react-ga": "^2.2.0",
     "react-google-maps": "^7.3.0",
     "react-hot-loader": "next",
     "react-router-dom": "^4.2.2",
@@ -56,7 +57,10 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
-  "proxy": "http://localhost:5001",
+  "proxy": {
+    "/api": { "target": "http://localhost:5001" },
+    "/auth": { "target": "http://localhost:5001" }
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"

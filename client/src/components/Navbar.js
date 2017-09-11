@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem } from 'reactstrap';
+import {Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import navItems from '../data/nav-items';
@@ -7,6 +7,7 @@ import cn from 'classnames';
 import s from './Navbar.css';
 import createHistory from 'history/createBrowserHistory'
 import logoImg from '../images/reversim_logo@2x.png';
+import Avatar from "./Avatar";
 
 const history = createHistory();
 
@@ -62,7 +63,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { isHome } = this.props;
+    const { isHome, isSmallScreen, user, onLogout } = this.props;
     const { fixed } = this.state;
     const items = navItems(isHome);
 
@@ -81,6 +82,14 @@ class Navbar extends Component {
             { items.map(NavbarItem) }
           </Nav>
         </Collapse>
+
+        { !isSmallScreen && <div className="ml-auto">
+          { user.authenticated ?
+            <Avatar {...user} onLogout={onLogout}/>
+            : <a href="/auth/google">
+            <Button outline color="secondary" onClick={this.login}>Login</Button>
+          </a> }
+        </div> }
       </Navbar2>
     );
   }

@@ -9,10 +9,10 @@ class Page extends Component {
   }
 
     render() {
-        const { children, isHome } = this.props;
+        const { children, isHome, user, isSmallScreen, onLogout } = this.props;
         return (
             <div style={isHome ? {} : { paddingTop: 77 }}>
-              <Navbar isHome={isHome}/>
+              <Navbar isHome={isHome} user={user} isSmallScreen={isSmallScreen} onLogout={onLogout}/>
               {children}
             </div>
         );

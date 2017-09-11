@@ -13,11 +13,12 @@ export default (app) => {
   // user routes
   app.post('/login', usersController.login);
   app.post('/signup', usersController.signUp);
-  app.post('/logout', usersController.logout);
+  app.post('/api/logout', usersController.logout);
   app.post('/updateUser', usersController.update);
   app.get('/user/proposals', usersController.getProposals);
   app.get('/api/team', usersController.getReversimTeam);
   app.post('/profileImage', usersController.uploadProfilePicture);
+  app.get('/api/me', usersController.me);
 
   // google auth
   // Redirect the user to Google for authentication. When complete, Google
