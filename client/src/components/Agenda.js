@@ -74,29 +74,35 @@ const Line = ({time, sessions, text, shortSessions, muted, allSessions}) => {
   )
 };
 
-const Agenda = ({ selectedDate, sessions, setSelectedDate, ...props }) => {
-  if (!sessions || !sessions.length) return null;
+const dates = [
+  'Day 1 - October 15, 2017',
+  'Day 2 - October 16, 2017'
+];
 
-  return <Page title="Schedule · Reversim Summit 2017" {...props}>
-    <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
-    <Container className={s.agenda}>
-      <Row className="my-5a" style={{margin: '80px 0'}}>
-        <Col sm={{offset:2, size: 4}} className="text-center">
-          <h4 className={cn({[s.selected]: selectedDate === 0}, s.subtitle)} onClick={() => setSelectedDate(0)}>Day 1 - October 15, 2017</h4>
-        </Col>
-        <Col sm="4" className="text-center">
-          <h4 className={cn({[s.selected]: selectedDate === 1}, s.subtitle)} onClick={() => setSelectedDate(1)}>Day 2 - October 16, 2017</h4>
-        </Col>
-      </Row>
+const agendas = [agenda1, agenda2];
+
+const DayAgenda = ({ index, sessions }) => {
+  return (
+    <Container className={cn(s.agenda, "mb-5")}>
+      <h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>{dates[index]}</h4>
       <Row>
         <Col className={cn(s.timeCol, s.tableCol)}/>
         <Col className={cn(s.tableCol, "text-center1")}>Main hall</Col>
         <Col className={cn(s.tableCol, "text-center1")}>Class 2 - Media<br/>(near the main hall)</Col>
         <Col className={cn(s.tableCol, "text-center1")}>Class 3 - Law</Col>
       </Row>
-      {selectedDate === 0 && agenda1.map(line => <Line {...line} allSessions={sessions}/>)}
-      {selectedDate === 1 && agenda2.map(line => <Line {...line} allSessions={sessions}/>)}
+      {agendas[index].map(line => <Line {...line} allSessions={sessions}/>)}
     </Container>
+  )
+}
+
+const Agenda = ({ selectedDate, sessions, setSelectedDate, ...props }) => {
+  if (!sessions || !sessions.length) return null;
+
+  return <Page title="Schedule · Reversim Summit 2017" {...props}>
+    <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
+    <DayAgenda index="0" sessions={sessions}/>
+    <DayAgenda index="1" sessions={sessions}/>
   </Page>
 };
 
