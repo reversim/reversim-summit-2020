@@ -3,7 +3,7 @@ const register = { to: "register", text: "Register" };
 const team =     { to: "team", text: "Team" };
 const location = { to: "location", text: "Location" };
 const speakers = { to: "speakers", text: "Speakers", noScroll: true };
-const sponsors = { to: "sponsors", text: "Sponsors" };
+const sponsors = { to: "sponsors", text: "Sponsors", noScroll: true };
 const schedule = { to: "schedule", text: "Schedule", noScroll: true };
 
 export default (isHome) => {

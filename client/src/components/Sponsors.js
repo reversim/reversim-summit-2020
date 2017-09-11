@@ -3,6 +3,7 @@ import sponsorsData from '../data/sponsors';
 import Section from "./Section";
 import s from './Sponsors.css';
 import { Row, Col } from 'reactstrap';
+import Page from "./Page";
 
 const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLink, excludeWebsite}) => {
   return (
@@ -22,14 +23,26 @@ const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLin
   )
 };
 
-const Sponsors = () => {
-  const sponsorsComponents = sponsorsData.map(Sponsor);
+const SponsorMini = ({ name, logo, url }) => (
+  <Col key={name} className="mr-5 mb-5">
+    <a href={url} target="_blank"><img src={logo} className={s.sponsorImg} alt={name}/></a>
+  </Col>
+);
 
-  return (
-    <Section title="Sponsors">
-      {sponsorsComponents}
-    </Section>
-  )
-};
+export const SponsorsSection = () => (
+  <Section title="Sponsors">
+    <Row>
+      {sponsorsData.map(SponsorMini)}
+    </Row>
+  </Section>
+);
+
+const Sponsors = (props) => (
+  <Page title="Sponsors · Reversim Summit 2017" {...props}>
+    <h1 className="text-center mt-5">Our sponsors</h1>
+    <p className="text-center mb-5">Here are the companies who made <b>Reversim Summit 2017</b> possible:</p>
+    {sponsorsData.map(Sponsor)}
+  </Page>
+);
 
 export default Sponsors;

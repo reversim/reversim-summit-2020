@@ -4,7 +4,7 @@ import Team from '../components/Team';
 import Register from '../components/Register';
 import SpeakersSection from '../components/SpeakersSection';
 import Location from '../components/Location';
-import Sponsors from '../components/Sponsors';
+import { SponsorsSection } from '../components/Sponsors';
 
 const homeSections = [
   { name: "hero",     el: Hero },
@@ -13,7 +13,7 @@ const homeSections = [
   { name: "speakers", el: SpeakersSection },
   { name: "location", el: Location },
   { name: "team",     el: Team },
-  { name: "sponsors", el: Sponsors }
+  { name: "sponsors", el: SponsorsSection }
 ];
 
 export default homeSections;
