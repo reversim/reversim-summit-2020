@@ -75,7 +75,6 @@ const SessionPage = ({ sessions, match: { params: { id }}, ...props}) => {
       <Container className="mt-4">
         <Row>
           <Col sm={{size: 8, offset: 2}}>
-            <h4>{title}</h4>
             <p>{getSessionTypeStr(type)}</p>
             <div className="d-flex text-muted mb-3">{tags.map(Tag)}</div>
             <Row className="align-items-center my-4">
@@ -84,14 +83,9 @@ const SessionPage = ({ sessions, match: { params: { id }}, ...props}) => {
                 <i className="fa fa-clock-o mr-3"/><span>{`${dayTime.time.substr(0,2)}:${dayTime.time.substr(2)}`}</span> {/* TODO */}
               </Col>
             </Row>
-            <Row>
-              <Col xs="12">
-                {speakers.map(SpeakerShort)}
-              </Col>
-              <Col>
-                <ReactMarkdown source={abstract}/>
-              </Col>
-            </Row>
+            {speakers.map(SpeakerShort)}
+            <h4>{title}</h4>
+            <ReactMarkdown source={abstract}/>
           </Col>
         </Row>
       </Container>

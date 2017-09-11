@@ -1,5 +1,5 @@
 export const agenda1 = [
-  { time: "0800-1000", text: "Registration", muted: true },
+  { time: "0800-1000", text: "Registration and light breakfast", muted: true },
   { time: "0900", text: "Early Session", sessions: [null,"d1d1e044-8627-5cce-c793-45f0a9442a1e",null] },
   { time: "1000", text: "Welcome + Keynote", sessions: "3c1e5e0a-9774-7ff8-043b-c421a71e8b31" },
   { time: "1050", text: "Break", muted: true },
@@ -58,7 +58,7 @@ export const agenda1 = [
 ];
 
 export const agenda2 = [
-  { time: "0800-1000", text: "Registration", muted: true },
+  { time: "0800-1000", text: "Registration and light breakfast", muted: true },
   { time: "0900", text: "Early Session", sessions: [null,"75691af5-ce4e-2d67-ae2a-603c2f12e397",null] },
   { time: "1000", text: "Welcome + Keynote", sessions: "b89383ea-ba2a-7e2d-425d-e0c2f2fe27d0" },
   { time: "1050", text: "Break", muted: true },

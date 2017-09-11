@@ -18,7 +18,7 @@ class Hero extends Component {
           </div>
           <div className="mb-3">
             <div className={cn(s.cta, "p-5", s.autoCenter, "d-inline-block", "text-center")}>
-              <h3 className="text-uppercase"><Link to="/schedule">Agenda</Link> is published!</h3>
+              <h3 className="text-uppercase"><Link to="/schedule">Schedule</Link> is published!</h3>
               {/*<div><Link className="font-raleway" to="/register">Register here!</Link></div>*/}
             </div>
           </div>
