@@ -1,5 +1,5 @@
 export const agenda1 = [
-  { time: "0800", text: "Registration" },
+  { time: "0800-1000", text: "Registration", muted: true },
   { time: "0900", text: "Early Session", sessions: [null,"d1d1e044-8627-5cce-c793-45f0a9442a1e",null] },
   { time: "1000", text: "Welcome + Keynote", sessions: "3c1e5e0a-9774-7ff8-043b-c421a71e8b31" },
   { time: "1050", text: "Break", muted: true },
@@ -27,7 +27,7 @@ export const agenda1 = [
   { time: "1420", text: "Break", muted: true },
   { time: "1430", sessions: [
     "94c6bc98-3287-0ba5-a729-308279d415fc",
-    "ae7d9c23-b30b-9b69-13c7-3ab4d4e58354",
+    "980eb393-c851-2207-162a-3d6c95c3e7c6",
     "099994f7-45fb-5d67-f7a9-98f9a6aa2834"
   ] },
   { time: "1500", text: "Break", muted: true },
@@ -37,7 +37,7 @@ export const agenda1 = [
     "5ffe1f3f-137a-405a-c420-08816400cc8e",
     "22001f52-fe1d-3164-733f-5dcb786095a0"
   ]},
-    "980eb393-c851-2207-162a-3d6c95c3e7c6",
+    "ae7d9c23-b30b-9b69-13c7-3ab4d4e58354",
     null
   ] },
   { time: "1550", text: "Break", muted: true },
@@ -58,7 +58,7 @@ export const agenda1 = [
 ];
 
 export const agenda2 = [
-  { time: "0800", text: "Registration" },
+  { time: "0800-1000", text: "Registration", muted: true },
   { time: "0900", text: "Early Session", sessions: [null,"75691af5-ce4e-2d67-ae2a-603c2f12e397",null] },
   { time: "1000", text: "Welcome + Keynote", sessions: "b89383ea-ba2a-7e2d-425d-e0c2f2fe27d0" },
   { time: "1050", text: "Break", muted: true },
@@ -101,7 +101,7 @@ export const agenda2 = [
   ] },
   { time: "1550", text: "Break", muted: true },
   { time: "1610", sessions: [
-    null, //???
+    "d86450a0-fd2b-4701-25c8-0716849a1de5",
     "cbcc3966-0df2-f37a-0590-857f5401791a",
     "b4cf69e6-4cbc-1663-332b-528bc400deea"
   ] },

@@ -25,16 +25,30 @@ getTeam().then(team => {
 });
 
 getSessions().then(sessions => {
-  store.sessions = sessions;
+  store.sessions = sessions.map(session => ({
+    ...session,
+    speaker_ids: session.speaker_ids.map(speaker => ({
+      ...speaker,
+      picture: speaker.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/")
+    }))
+  }));
+
   store.speakers = uniqBy(flatMap(sessions, session => session.speaker_ids), x => x._id)
     .map(x => ({
       ...x,
       sessions: filterSessions(x.proposals)
-    }));
+    }))
+    .sort((a, b) => {
+      if (a.name === "Sheizaf Rafaeli") return -1;
+      if (b.name === "Sheizaf Rafaeli") return 1;
+      if (a.name === "Randy Shoup") return -1;
+      if (b.name === "Randy Shoup") return 1;
+      return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    });
 });
 
 getMe().then(user => {
-  user.sessions = filterSessions(user.proposals)
+  user.sessions = filterSessions(user.proposals);
   store.user = user;
 });
 

@@ -2,7 +2,6 @@ import React from 'react';
 import Section from "./Section";
 import { Container, Row, Col } from 'reactstrap';
 import Speaker from './Speaker';
-import shuffle from 'lodash/shuffle';
 import { colors } from '../utils';
 
 const SpeakerItem = (speaker, i) => {
@@ -15,7 +14,7 @@ const SpeakersSection = ({speakers}) => {
   return <Section title="Speakers">
     <Container>
       <Row>
-        {shuffle(speakers.toJS()).map(SpeakerItem)}
+        {speakers.toJS().map(SpeakerItem)}
       </Row>
     </Container>
   </Section>

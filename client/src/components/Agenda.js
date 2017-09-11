@@ -13,17 +13,36 @@ const getSession = (sessions, id) => {
 };
 
 const getSpeakerName = (session) => session.speaker_ids.map(ss => ss.name).join(" & ");
+const getSpeakerPicture = (session) => session.speaker_ids.map(ss => ss.picture);
+const getSessionImgs = (session) => getSpeakerPicture(session).map(url => (
+  <div className={cn(s.speakerImg, "mr-3")} style={{backgroundImage: `url('${url}')`}} />
+));
 
-const Time = ({tStr}) => (
-  <div><span className={s.tall}>{tStr.substr(0,2)}</span><span className={s.small}>{tStr.substr(2)}</span></div>
-);
+const _Time = t => [<span className={s.tall}>{t.substr(0,2)}</span>,<span className={s.small}>{t.substr(2)}</span>];
+const Time = ({tStr}) => {
+  if (tStr.indexOf("-") > -1) {
+    const [t1, t2] = tStr.split("-");
+    return <div>
+      {_Time(t1)} &mdash; {_Time(t2)}
+    </div>
+  } else {
+    return <div>
+      {_Time(tStr)}
+    </div>
+  }
+};
 
 const ShortSessions = ({sessions}) => (
   <div className="mt-3">{sessions.map((ss,i) => (
     <div className={cn("mb-3 pb-2", {[s.igniteSep]: i < sessions.length-1})}>
       <Link to={`/session/${ss.id}`}>
-        <h5 className={cn("mr-4 mb-0", s.igniteName)}>{getSpeakerName(ss)}</h5>
-        <div>{ss.title}</div>
+        <div className="d-flex">
+          {getSessionImgs(ss)}
+          <div>
+            <h5 className={cn("mr-4 mb-0", s.igniteName)}>{getSpeakerName(ss)}</h5>
+            <div>{ss.title}</div>
+          </div>
+        </div>
       </Link>
     </div>
   ))}</div>
@@ -32,15 +51,19 @@ const ShortSessions = ({sessions}) => (
 const Session = ({text, session, shortSessions}) => {
   let content;
   if (session && session.sessions) {
-    console.log(session);
     content = <div>
       {session.text && <div className={s.tall}>{session.text}</div>}
       <ShortSessions sessions={session.sessions}/>
     </div>
   } else if (session) {
     content = <Link to={`/session/${session.id}`}>
-      <h5>{getSpeakerName(session)}</h5>
-      <div>{session.title}</div>
+      <div className="d-flex">
+        {getSessionImgs(session)}
+        <div>
+          <h5>{getSpeakerName(session)}</h5>
+          <div>{session.title}</div>
+        </div>
+      </div>
     </Link>
   } else if (shortSessions) {
     content = <ShortSessions sessions={shortSessions}/>
@@ -66,7 +89,7 @@ const Line = ({time, sessions, text, shortSessions, muted, allSessions}) => {
 
   return (
     <Row className={cn("align-items-center py-3", { [s.muted]: muted })}>
-      <Col className={s.timeCol}>
+      <Col xs="auto" className={cn(s.timeCol, "pl-3")}>
         <Time tStr={time}/>
       </Col>
       {cols}
@@ -86,7 +109,7 @@ const DayAgenda = ({ index, sessions }) => {
     <Container className={cn(s.agenda, "mb-5")}>
       <h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>{dates[index]}</h4>
       <Row>
-        <Col className={cn(s.timeCol, s.tableCol)}/>
+        <Col xs="auto" className={cn(s.timeCol, s.tableCol)}/>
         <Col className={cn(s.tableCol, "text-center1")}>Main hall</Col>
         <Col className={cn(s.tableCol, "text-center1")}>Class 2 - Media<br/>(near the main hall)</Col>
         <Col className={cn(s.tableCol, "text-center1")}>Class 3 - Law</Col>
@@ -94,7 +117,7 @@ const DayAgenda = ({ index, sessions }) => {
       {agendas[index].map(line => <Line {...line} allSessions={sessions}/>)}
     </Container>
   )
-}
+};
 
 const Agenda = ({ selectedDate, sessions, setSelectedDate, ...props }) => {
   if (!sessions || !sessions.length) return null;
