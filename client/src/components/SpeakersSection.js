@@ -3,17 +3,7 @@ import Section from "./Section";
 import { Container, Row, Col } from 'reactstrap';
 import Speaker from './Speaker';
 import shuffle from 'lodash/shuffle';
-
-const colors = [
-  'purple',
-  'gold',
-  'cyan',
-  'blue',
-  'pink',
-  'yellow',
-  'green',
-  'orange'
-];
+import { colors } from '../utils';
 
 const SpeakerItem = (speaker, i) => {
   return <Col xs="12" sm="6" lg="4" className="mb-4" key={i}>
@@ -21,7 +11,7 @@ const SpeakerItem = (speaker, i) => {
   </Col>
 };
 
-const Speakers = ({speakers}) => {
+const SpeakersSection = ({speakers}) => {
   return <Section title="Speakers">
     <Container>
       <Row>
@@ -31,4 +21,4 @@ const Speakers = ({speakers}) => {
   </Section>
 };
 
-export default Speakers;
+export default SpeakersSection;

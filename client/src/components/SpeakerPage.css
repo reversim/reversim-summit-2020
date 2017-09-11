@@ -11,6 +11,10 @@
     font-size: 18px;
 }
 
+.speakerShort a {
+    color: inherit;
+}
+
 .socialLinks a {
     color: rgba(0,30,60,0.7);
     margin-right: 60px;

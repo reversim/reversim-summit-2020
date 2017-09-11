@@ -85,7 +85,7 @@ const SessionPage = ({ sessions, match: { params: { id }}, ...props}) => {
               </Col>
             </Row>
             <Row>
-              <Col xs="12" sm="auto">
+              <Col xs="12">
                 {speakers.map(SpeakerShort)}
               </Col>
               <Col>

@@ -26,21 +26,32 @@
 .speakerImg:after {
     content: '';
     position: absolute;
-    top: -60px;
-    left: -60px;
-    right: -60px;
-    bottom: -60px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     mix-blend-mode: color;
-    transform: rotate(45deg) translate(0, 0);
-    transition: transform 500ms;
+    opacity: 1;
+    transition: all 300ms;
 }
 
 .speakerImg:hover:after {
-    transform: rotate(45deg) translate(180px, -180px);
+    opacity: 0;
+}
+
+.speaker.isFull .speakerImg {
+    min-height: 160px;
+    height: auto;
+    width: 160px;
 }
 
 .speakerLinks {
 
+}
+
+.speaker .speakerLinksFull a {
+    flex: 0 0 auto;
+    margin-right: 60px;
 }
 
 .speaker .speakerLinks a {
@@ -51,6 +62,7 @@
 
 .speaker.purple .speakerLinks {
     background: rgba(171,81,194, 0.7);
+    color: white;
 }
 
 .speaker.purple .speakerImg:after {
@@ -62,8 +74,13 @@
     color: white;
 }
 
+.speaker.purple .speakerLinksFull a {
+    color: white;
+}
+
 .speaker.gold .speakerLinks {
     background: rgba(230,172,57, 0.7);
+    color: white;
 }
 
 .speaker.gold .speakerImg:after {
@@ -75,8 +92,13 @@
     color: white;
 }
 
+.speaker.gold .speakerLinksFull a {
+    color: white;
+}
+
 .speaker.cyan .speakerLinks {
     background: rgba(0,191,191, 0.5);
+    color: white;
 }
 
 .speaker.cyan .speakerImg:after {
@@ -88,8 +110,14 @@
     color: white;
 }
 
+.speaker.cyan .speakerLinksFull a {
+    color: white;
+}
+
+
 .speaker.blue .speakerLinks {
     background: rgba(153,216,255, 0.7);
+    color: #333;
 }
 
 .speaker.blue .speakerImg:after {
@@ -101,8 +129,14 @@
     color: #333;
 }
 
+.speaker.blue .speakerLinksFull a {
+    color: #333;
+}
+
+
 .speaker.pink .speakerLinks {
     background: rgba(255,204,229, 0.7);
+    color: #333;
 }
 
 .speaker.pink .speakerImg:after {
@@ -114,8 +148,14 @@
     color: #333;
 }
 
+.speaker.pink .speakerLinksFull a {
+    color: #333;
+}
+
+
 .speaker.yellow .speakerLinks {
     background: rgba(255,246,153, 0.5);
+    color: #333;
 }
 
 .speaker.yellow .speakerImg:after {
@@ -127,8 +167,14 @@
     color: #333;
 }
 
+.speaker.yellow .speakerLinksFull a {
+    color: #333;
+}
+
+
 .speaker.green .speakerLinks {
     background: rgba(102,187,106, 0.7);
+    color: white;
 }
 
 .speaker.green .speakerImg:after {
@@ -140,8 +186,14 @@
     color: white;
 }
 
+.speaker.green .speakerLinksFull a {
+    color: white;
+}
+
+
 .speaker.orange .speakerLinks {
     background: rgba(239,108,0, 0.7);
+    color: white;
 }
 
 .speaker.orange .speakerImg:after {
@@ -150,5 +202,9 @@
 
 .speaker.orange .speakerInfo {
     background: rgba(239,108,0, 1);
+    color: white;
+}
+
+.speaker.orange .speakerLinksFull a {
     color: white;
 }

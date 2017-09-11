@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
+import Footer from "./Footer";
 
 
 class Page extends Component {
@@ -14,6 +15,7 @@ class Page extends Component {
             <div style={isHome ? {} : { paddingTop: 77 }}>
               <Navbar isHome={isHome} user={user} isSmallScreen={isSmallScreen} onLogout={onLogout}/>
               {children}
+              <Footer />
             </div>
         );
     }

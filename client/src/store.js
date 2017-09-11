@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { getSessions, getTeam, getMe } from './data-service';
-import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import flatMap from 'lodash/flatMap';
 
 const store = observable({
@@ -26,7 +26,7 @@ getTeam().then(team => {
 
 getSessions().then(sessions => {
   store.sessions = sessions;
-  store.speakers = uniq(flatMap(sessions, session => session.speaker_ids), '_id')
+  store.speakers = uniqBy(flatMap(sessions, session => session.speaker_ids), x => x._id)
     .map(x => ({
       ...x,
       sessions: filterSessions(x.proposals)
