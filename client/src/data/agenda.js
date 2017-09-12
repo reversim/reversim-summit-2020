@@ -42,7 +42,7 @@ export const agenda1 = [
   ] },
   { time: "1550", text: "Break", muted: true },
   { time: "1610", sessions: [
-    "51619b54-21a4-a5e5-d393-08deac134132",
+    "ba5a920e-6596-bc62-d5b7-16d141e9e8bc",
     "6ac729a2-1369-6613-6e27-84e1bd3bce7b",
     "84641a40-095a-b9a6-a9fc-9e0a539d2fdf"
   ] },
@@ -69,7 +69,7 @@ export const agenda2 = [
   ]},
   { time: "1150", text: "Break", muted: true },
   { time: "1200", sessions: [
-    "ba5a920e-6596-bc62-d5b7-16d141e9e8bc",
+    "51619b54-21a4-a5e5-d393-08deac134132",
     "9d15b17d-d73a-9c77-d196-4307126b9be9",
     "a0188f4a-825e-d83b-52c3-d7d5e1859955"
   ] },
