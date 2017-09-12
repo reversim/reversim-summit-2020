@@ -7,6 +7,7 @@ import Sponsors from "../components/Sponsors";
 
 export default [
   { path: "/", comp: Home },
+  { path: "/about", comp: Home },
   { path: "/schedule", comp: Agenda },
   { path: "/speakers", comp: SpeakersPage },
   { path: "/location", comp: Home },
