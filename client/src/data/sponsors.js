@@ -7,7 +7,7 @@ import appsFlyerLogo from '../images/sponsors/apps_flyer.png';
 import myHeritageLogo from '../images/sponsors/MH_logo.png';
 import klarnaLogo from '../images/sponsors/klarna.png';
 import livepersonLogo from '../images/sponsors/liveperson.png';
-import tikalLogo from '../images/sponsors/tikal.jpg';
+import tikalLogo from '../images/sponsors/tikal.png';
 import facebookLogo from '../images/sponsors/facebook.png';
 import akamaiLogo from '../images/sponsors/akamai.png';
 import oracleLogo from '../images/sponsors/oracle-logo.png';
@@ -135,9 +135,14 @@ const sponsors = _.shuffle([
     name: 'Tikal',
     logo: tikalLogo,
     url: 'https://www.tikalk.com/',
-    description: 'We are a global software company founded by experts in the open-source community. Our open-source approach provides our clients with value added services, assuring rapid development and easy customization, while eliminating the risk of being held captive by a specific vendor.',
+    description: <span>
+      We are a software company and a home for passionate developers with self-driven mission, to solve our client’s complex challenges while sharing our technological expertise with the community.<br/>
+      We help our clients build great software in various ways and platforms. Our services range from expert support services, aimed to boost development workflow and get the job done on-time, to personal consultancy and educational workshops.<br/><br/>
+      Staying close to the code<br/>
+      Working at Tikal means gaining hands-on experience in different platforms while staying close to the most innovative technologies out there. We encourage all our developers to work on diverse projects and empower them with valuable workshops and community events.<br/>
+      This is our way of keeping an interesting and challenging atmosphere, while enabling all our staff to always remain updated with new technologies.</span>,
     featuredJobInfo: '',
-    featuredJobLink: 'https://www.tikalk.com/careers/'
+    featuredJobLink: 'http://www.tikalk.com/careers/'
   },
   {
     name: 'Capriza',
