@@ -4,10 +4,12 @@ import SpeakerPage from '../components/SpeakerPage';
 import SessionPage from '../components/SessionPage';
 import SpeakersPage from "../components/SpeakersPage";
 import Sponsors from "../components/Sponsors";
+import RegisterPage from "../components/RegisterPage";
 
 export default [
   { path: "/", comp: Home },
   { path: "/about", comp: Home },
+  { path: "/register", comp: RegisterPage },
   { path: "/schedule", comp: Agenda },
   { path: "/speakers", comp: SpeakersPage },
   { path: "/location", comp: Home },
