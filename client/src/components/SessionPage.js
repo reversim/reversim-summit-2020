@@ -91,8 +91,7 @@ class SessionPage extends React.Component {
 		const {title, abstract, type, tags, outline} = session;
 		const speakers = session.speaker_ids;
 
-		const isAccepted = session.status === 'accepted';
-		const dayTime = isAccepted && getDateAndTime(this.props.match.params.id);
+		const dayTime = getDateAndTime(this.props.match.params.id);
 
 		return (
 			<Page title={`${session.title} · Reversim Summit 2017`} {...this.props}>
@@ -103,14 +102,14 @@ class SessionPage extends React.Component {
 							<p>{getSessionTypeStr(type)}</p>
 							<div className="d-flex text-muted mb-3">{tags.map(Tag)}</div>
 							<Row className="align-items-center my-4">
-								{ isAccepted && <Col>
+								{ dayTime && <Col>
 									<i className="fa fa-calendar-o mr-3"/><span className="mr-4">{dates[dayTime.day]}</span>
 									<i className="fa fa-clock-o mr-3"/><span>{`${dayTime.time.substr(0, 2)}:${dayTime.time.substr(2)}`}</span>
 								</Col>}
 							</Row>
 							{speakers.map(SpeakerShort)}
 							<h4>{title}</h4>
-							{!isAccepted && <div className="mb-3"><small title="Not participating in Reversim Summit 2017" className="py-1 px-2 bg-danger text-white">Proposal</small></div> }
+							{!dayTime && <div className="mb-3"><small title="Not participating in Reversim Summit 2017" className="py-1 px-2 bg-danger text-white">Proposal</small></div> }
 							<ReactMarkdown source={abstract}/>
 							{outline && <div>
 								<h4>Outline</h4>
