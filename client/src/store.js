@@ -1,5 +1,5 @@
 import { observable } from 'mobx';
-import { getSessions, getTeam, getMe } from './data-service';
+import { getSessions, getTeam, getProposal, getMe } from './data-service';
 import uniqBy from 'lodash/uniqBy';
 import flatMap from 'lodash/flatMap';
 
@@ -15,23 +15,28 @@ const store = observable({
   setSelectedDate: i => store.selectedDate = i,
   isSmallScreen: window.innerWidth < 576,
   user: { isFetching: true },
-  onLogout: () => store.user = { authenticated: false }
+  onLogout: () => store.user = { authenticated: false },
+	getProposal: (id) => getProposal(id).then(proposal => {
+    store.sessions = store.sessions.concat(processSession(proposal));
+  })
 });
 
 export default store;
+
+const processSession = session => ({
+	...session,
+	speaker_ids: session.speaker_ids.map(speaker => ({
+		...speaker,
+		picture: speaker.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/")
+	}))
+});;
 
 getTeam().then(team => {
   store.team = team;
 });
 
 getSessions().then(sessions => {
-  store.sessions = sessions.map(session => ({
-    ...session,
-    speaker_ids: session.speaker_ids.map(speaker => ({
-      ...speaker,
-      picture: speaker.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/")
-    }))
-  }));
+  store.sessions = sessions.map(processSession);
 
   store.speakers = uniqBy(flatMap(sessions, session => session.speaker_ids), x => x._id)
     .map(x => ({
@@ -48,7 +53,9 @@ getSessions().then(sessions => {
 });
 
 getMe().then(user => {
-  user.sessions = filterSessions(user.proposals);
+  if (user.proposals) {
+		user.sessions = filterSessions(user.proposals);
+  }
   store.user = user;
 });
 

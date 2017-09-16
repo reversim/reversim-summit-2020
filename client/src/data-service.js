@@ -15,3 +15,7 @@ export async function getMe() {
 export async function logout() {
   return await post("/api/logout");
 }
+
+export async function getProposal(id) {
+  return await get("/api/proposal/" + id);
+}
