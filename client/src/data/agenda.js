@@ -85,9 +85,9 @@ export const agenda2 = [
   ] },
   { time: "1420", text: "Break", muted: true },
   { time: "1430", sessions: [
-    "e9f4d8fb-75af-eb68-103b-2ccb24d49a7b",
+		"11896515-320d-537b-b8ce-a414a3def110",
     "b114c756-2011-dcd5-7c0d-714edacdb764",
-		"11896515-320d-537b-b8ce-a414a3def110"
+		"e9f4d8fb-75af-eb68-103b-2ccb24d49a7b"
   ] },
   { time: "1500", text: "Break", muted: true },
   { time: "1510", sessions: [{ text: "OSS in Israel", sessions: [
