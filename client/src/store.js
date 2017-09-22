@@ -36,9 +36,10 @@ getTeam().then(team => {
 });
 
 getSessions().then(sessions => {
-  store.sessions = sessions.map(processSession);
+  const processedSessions = sessions.map(processSession);
+  store.sessions = processedSessions;
 
-  store.speakers = uniqBy(flatMap(sessions, session => session.speaker_ids), x => x._id)
+  store.speakers = uniqBy(flatMap(processedSessions, session => session.speaker_ids), x => x._id)
     .map(x => ({
       ...x,
       sessions: filterSessions(x.proposals)
