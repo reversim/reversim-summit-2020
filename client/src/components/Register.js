@@ -9,7 +9,7 @@ const Register = () => (
     <div className="py-5 text-center">
       <h4>Register to</h4>
       <h3 className="mb-5">Reversim Summit 2017</h3>
-      <p className="mb-5">Registration opens in 2 days!</p>
+      <p className="mb-5">Registration is now open!</p> {/* TODO flag */}
       <Link to="/register"><Button outline size="lg" color="inverse">Register</Button></Link>
     </div>
   </Section>
