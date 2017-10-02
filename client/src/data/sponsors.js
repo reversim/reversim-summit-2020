@@ -104,7 +104,7 @@ const sponsors = _.shuffle([
     url: 'http://www.akamai.com',
     description: 'Akamai is the global leader in Content Delivery Network (CDN) services, making the Internet business ready—fast, reliable, and secure—for its customers. We operate the most pervasive, highly distributed CDN—with more than 200,000 servers in 110 or more countries—delivering up to 30% of all Web traffic.',
     featuredJobInfo: 'We\'re currently looking for software engineers and test/automation engineers with strong Java background to join our web and cloud security teams! As a part of these teams, you\'ll be working on innovating and developing new and groundbreaking Security and BigData products in the largest scales.',
-    featuredJobLink: 'https://akamaijobs.referrals.selectminds.com/via/MichalF-39kEz/jobs/search/123169'
+    featuredJobLink: 'https://akamaijobs.referrals.selectminds.com/'
   },
   {
     name: 'Cloudinary',
