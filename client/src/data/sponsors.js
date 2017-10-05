@@ -16,7 +16,7 @@ import cloudinaryLogo from '../images/sponsors/cloudinary.png';
 import automatticLogo from '../images/sponsors/automattic.png';
 import cellebriteLogo from '../images/sponsors/cellebrite.jpg';
 import clicktaleLogo from '../images/sponsors/clicktale.png';
-// import googleLogo from '../images/sponsors/google.png';
+import googleLogo from '../images/sponsors/google.png';
 // import amazonLogo from '../images/sponsors/amazon.png';
 
 import React from 'react';
@@ -175,14 +175,14 @@ const sponsors = _.shuffle([
     featuredJobInfo: 'We are looking for strong engineers who really love the challenges of high-scalability. We are already crunching tens of billions of signals a day and we are planning to go x5 or even x10 in the coming year. So, if tech challenges is your thing, come and join us!',
     featuredJobLink: "https://www.clicktale.com/company/careers/D740F"
   },
-  // {
-  //   name: 'Google',
-  //   logo: googleLogo,
-  //   url: '',
-  //   description: '',
-  //   featuredJobInfo: '',
-  //   featuredJobLink: ""
-  // },
+  {
+    name: 'Google',
+    logo: googleLogo,
+    url: 'https://careers.google.com/locations/tel-aviv-haifa/',
+    description: 'Google\'s software engineers develop the next-generation technologies that change how millions of users connect, explore, and interact with information and one another. Our ambitions reach far beyond just Search. Our products need to handle information at the scale of the web. We\'re looking for ideas from every area of computer science, including information retrieval, artificial intelligence, natural language processing, distributed computing, large-scale system design, networking, security, data compression, and user interface design; the list goes on and is growing every day. As a software engineer, you work on a small team and can switch teams and projects as our fast-paced business grows and evolves. We need our engineers to be versatile and passionate to tackle new problems as we continue to push technology forward.',
+    featuredJobInfo: '',
+    featuredJobLink: 'https://careers.google.com/jobs#!t=jo&jid=/google/full-stack-software-engineer-yigal-alon-98-tel-aviv-yafo-israel-1640920118&'
+  },
   // {
   //   name: 'Amazon',
   //   logo: amazonLogo,
