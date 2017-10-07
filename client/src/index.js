@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import { AppContainer } from 'react-hot-loader';
-import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker, { unregister } from './registerServiceWorker';
 
 const render = Component => {
   ReactDOM.render(
@@ -19,4 +19,4 @@ render(App);
 if (module.hot) {
   module.hot.accept('./components/App', () => { render(App) })
 }
-registerServiceWorker();
+unregister();
