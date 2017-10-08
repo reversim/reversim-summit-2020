@@ -10,7 +10,7 @@ const LocationPage = (props) => (
 			<h1 className="mb-5">Getting to Reversim Summit 2017</h1>
 			<h2 className="mb-5 line-height-17 text-center bg-faded p-4">
 				The conference will be held at:<br/>
-				<a className="unstyled-link" href="https://www.google.co.il/maps/dir//31.9706184,34.7716762/@31.9703272,34.7713409,18z?hl=iw" target="_blank">
+				<a className="unstyled-link" href="https://www.google.co.il/maps/dir//31.9706184,34.7716762/@31.9703272,34.7713409,18z?hl=iw" target="_blank" rel="noopener noreferrer">
 					<b>College of Management, 2 Elie Wiesel st., Rishon LeTsiyon <i className="ml-3 fa fa-external-link" style={{verticalAlign: 'middle'}}/></b>
 				</a>
 			</h2>
@@ -20,7 +20,7 @@ const LocationPage = (props) => (
 			<p className="font-size-lg">
 				<b className="text-underline">Public transportation</b><br/>You may use the train and get off at Moshe Dayan station, where our shuttle will take you to the college. The shuttle will run 8am-10am and then again at the end of the event.
 			</p>
-			<img className="img-fluid" src={gettingThere} />
+			<img className="img-fluid" src={gettingThere} alt="Getting to Reversim Summit 2017"/>
 			<div className="my-5">
 				<Map/>
 			</div>
