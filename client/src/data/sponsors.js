@@ -1,6 +1,6 @@
 import outbrainLogo from '../images/sponsors/outbrain.png';
 import wixLogo from '../images/sponsors/wix.png';
-import datoramaLogo from '../images/sponsors/datorama.svg';
+import datoramaLogo from '../images/sponsors/datorama.png';
 import gigyaLogo from '../images/sponsors/gigya.png';
 import kenshooLogo from '../images/sponsors/kenshoo.png';
 import appsFlyerLogo from '../images/sponsors/apps_flyer.png';
