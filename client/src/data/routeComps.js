@@ -13,7 +13,6 @@ export default [
   { path: "/schedule", comp: Agenda },
   { path: "/speakers", comp: SpeakersPage },
   { path: "/location", comp: Home },
-  { path: "/register", comp: Home },
   { path: "/sponsors", comp: Sponsors },
   { path: "/team", comp: Home },
   { path: "/speaker/:id", comp: SpeakerPage },
