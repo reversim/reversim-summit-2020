@@ -1,0 +1,12 @@
+.messages {
+    list-style: none;
+}
+
+.message {
+
+}
+
+.message i {
+    vertical-align: middle;
+    color: #29b6f6;
+}

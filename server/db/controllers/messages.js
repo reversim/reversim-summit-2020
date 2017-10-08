@@ -30,7 +30,7 @@ function addMessage(req, res) {
 			return res.status(500).send('error in adding message');
 		}
 
-		res.status(200).send({ success: true });
+		res.status(200).send(model);
 	});
 }
 

@@ -1,5 +1,5 @@
 import { observable } from 'mobx';
-import { getSessions, getTeam, getProposal, getMe, getMessages } from './data-service';
+import { getSessions, getTeam, getProposal, getMe, getMessages, addMessage, removeMessage } from './data-service';
 import uniqBy from 'lodash/uniqBy';
 import flatMap from 'lodash/flatMap';
 
@@ -30,6 +30,13 @@ const store = observable({
     store.user = { ...store.user, picture: url };
     const speaker = store.speakers.find(x => x.id === store.user.id);
     if (speaker) speaker.picutre = url;
+  },
+  onAddMessage: (text) => {
+    addMessage(text).then(msg => store.messages.push(msg));
+  },
+  onRemoveMessage: (id) => {
+    const index = store.messages.findIndex(x => x._id === id);
+    removeMessage(id).then(() => store.messages.splice(index, 1));
   }
 });
 
