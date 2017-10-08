@@ -8,6 +8,7 @@ import { controllers } from '../db';
 
 const usersController = controllers.users;
 const proposalsController = controllers.proposals;
+const messagesController = controllers.messages;
 
 export default (app) => {
   // user routes
@@ -64,6 +65,10 @@ export default (app) => {
   app.post('/api/proposal/:id/attend', proposalsController.attend);
   app.get('/api/speakers', proposalsController.speakers);
   app.get('/api/proposal/attendees', proposalsController.getAllAttendees);
+
+  app.get('/api/messages', messagesController.getMessages);
+  app.post('/api/message', messagesController.addMessage);
+  app.delete('/api/message/:id', messagesController.removeMessage);
 
   app.use("/dashboard", express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
 };

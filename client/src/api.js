@@ -30,8 +30,17 @@ const put = (
   headers
 }).then(resp => resp.data);
 
+const delete2 = (
+  url,
+  params = {}
+) => http.delete(url, {
+  params,
+  headers
+}).then(resp => resp.data);
+
 export {
   get,
   post,
-  put
+  put,
+	delete2
 }

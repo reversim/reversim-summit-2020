@@ -6,6 +6,7 @@ import SpeakersPage from "../components/SpeakersPage";
 import Sponsors from "../components/Sponsors";
 import RegisterPage from "../components/RegisterPage";
 import LocationPage from "../components/LocationPage";
+import AdminPage from '../components/AdminPage';
 
 export default [
   { path: "/", comp: Home },
@@ -18,4 +19,5 @@ export default [
   { path: "/team", comp: Home },
   { path: "/speaker/:id", comp: SpeakerPage },
   { path: "/session/:id", comp: SessionPage },
+  { path: "/admin", comp: AdminPage }
 ]
