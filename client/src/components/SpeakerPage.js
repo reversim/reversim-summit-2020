@@ -34,7 +34,7 @@ const SpeakerPage = ({ speakers, user, match: { params: { id } }, ...props}) => 
               const f = e.target.files[0];
               if (!f) return;
               const reader = new FileReader();
-              reader.onload = e2 => uploadPhoto(e2.target.result).then(({ imageUrl }) => props.onPhotoUploaded(imageUrl));
+              reader.onload = e2 => uploadPhoto(id, e2.target.result).then(({ imageUrl }) => props.onPhotoUploaded(imageUrl));
               reader.readAsDataURL(f);
               props.onUploadingPhoto();
             }}/>
