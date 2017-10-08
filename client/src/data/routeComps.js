@@ -5,6 +5,7 @@ import SessionPage from '../components/SessionPage';
 import SpeakersPage from "../components/SpeakersPage";
 import Sponsors from "../components/Sponsors";
 import RegisterPage from "../components/RegisterPage";
+import LocationPage from "../components/LocationPage";
 
 export default [
   { path: "/", comp: Home },
@@ -12,7 +13,7 @@ export default [
   { path: "/register", comp: RegisterPage },
   { path: "/schedule", comp: Agenda },
   { path: "/speakers", comp: SpeakersPage },
-  { path: "/location", comp: Home },
+  { path: "/location", comp: LocationPage },
   { path: "/sponsors", comp: Sponsors },
   { path: "/team", comp: Home },
   { path: "/speaker/:id", comp: SpeakerPage },

@@ -80,3 +80,14 @@ small {
 :global .bg-white {
   background: rgba(255,255,255,0.85); /* TODO only for location */
 }
+
+:global a.unstyled-link,
+:global a.unstyled-link:hover,
+:global a.unstyled-link:focus,
+:global a.unstyled-link:active {
+  color: inherit;
+}
+
+:global .text-underline {
+  text-decoration: underline;
+}

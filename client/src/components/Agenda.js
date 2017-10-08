@@ -5,6 +5,7 @@ import s from './Agenda.css';
 import cn from 'classnames';
 import { agenda1, agenda2 } from '../data/agenda';
 import {Link} from "react-router-dom";
+import CalendarLink from './CalendarLink';
 
 const _getSession = (sessions, id) => sessions.find(ss => ss.id === id);
 const getSession = (sessions, id) => {
@@ -123,11 +124,18 @@ const DayAgenda = ({ index, sessions, isLargeScreen }) => {
   )
 };
 
+const AddToCal = () => (
+  <div className="text-center mt-5">
+    <CalendarLink/>
+  </div>
+);
+
 const Agenda = ({ sessions, ...props }) => {
   if (!sessions || !sessions.length) return null;
 
   return <Page title="Schedule · Reversim Summit 2017" {...props}>
     <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
+    <AddToCal />
     <DayAgenda index="0" sessions={sessions}/>
     <DayAgenda index="1" sessions={sessions}/>
   </Page>

@@ -4,3 +4,13 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+@media (max-width:990px) {
+    .info {
+        left: 60px;
+        right: 60px;
+        top: auto;
+        bottom: 60px;
+        transform: none;
+    }
+}

@@ -24,7 +24,7 @@ const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLin
 };
 
 const SponsorMini = ({ name, logo, url }) => (
-  <Col key={name} className="mr-5 mb-5">
+  <Col key={name} className="mr-sm-5 mb-5" xs="12" md="auto">
     <a href={url} target="_blank"><img src={logo} className={s.sponsorImg} alt={name}/></a>
   </Col>
 );

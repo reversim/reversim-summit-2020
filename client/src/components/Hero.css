@@ -19,3 +19,21 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+@media (max-width:576px) {
+    .title {
+        font-size: 60px;
+    }
+}
+
+@media (max-width:460px) {
+    .title {
+        font-size: 48px;
+    }
+}
+
+@media (max-width:380px) {
+    .title {
+        font-size: 42px;
+    }
+}

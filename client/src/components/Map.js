@@ -3,12 +3,15 @@ import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 import s from './Map.css';
 
-
+const position = {
+  lat: 31.9706184,
+  lng: 34.7716762
+};
 
 const MapWithLoader = withScriptjs(withGoogleMap(() => {
-  const markerEl = <Marker position={{lat: 31.969843, lng: 34.7684663}} defaultAnimation={2}/>;
+  const markerEl = <Marker position={position} defaultAnimation={2}/>;
 
-  return <GoogleMap defaultZoom={16} defaultCenter={{lat: 31.969843, lng: 34.7684663}}>
+  return <GoogleMap defaultZoom={17} defaultCenter={position}>
     {markerEl}
   </GoogleMap>
 }));
