@@ -17,7 +17,7 @@ export default (app) => {
   app.post('/updateUser', usersController.update);
   app.get('/user/proposals', usersController.getProposals);
   app.get('/api/team', usersController.getReversimTeam);
-  app.post('/profileImage', usersController.uploadProfilePicture);
+  app.post('/api/profileImage', usersController.uploadProfilePicture);
   app.get('/api/me', usersController.me);
 
   // google auth

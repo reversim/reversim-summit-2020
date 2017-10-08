@@ -19,3 +19,7 @@ export async function logout() {
 export async function getProposal(id) {
   return await get("/api/proposal/" + id);
 }
+
+export async function uploadPhoto(data) {
+  return await post("/api/profileImage", { imageBinary: data });
+}
