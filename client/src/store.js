@@ -18,7 +18,18 @@ const store = observable({
   onLogout: () => store.user = { authenticated: false },
 	getProposal: (id) => getProposal(id).then(proposal => {
     store.sessions = store.sessions.concat(processSession(proposal));
-  })
+  }),
+	isUploadingPhoto: false,
+  onUploadingPhoto: () => {
+    store.isUploadingPhoto = true;
+  },
+  onPhotoUploaded: (url) => {
+    store.isUploadingPhoto = false;
+    console.log("user", store.user);
+    store.user = { ...store.user, picture: url };
+    const speaker = store.speakers.find(x => x.id === store.user.id);
+    if (speaker) speaker.picutre = url;
+  }
 });
 
 export default store;
