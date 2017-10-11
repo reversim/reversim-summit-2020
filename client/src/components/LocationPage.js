@@ -19,6 +19,9 @@ const LocationPage = (props) => (
 			</p>
 			<p className="font-size-lg">
 				<b className="text-underline">Public transportation</b><br/>You may use the train and get off at Moshe Dayan station, where our shuttle will take you to the college. The shuttle will run 8am-10am and then again at the end of the event.
+				<div>
+					<a href="https://www.colman.ac.il/node/6712" target="_blank">More info from the College of Management</a>
+				</div>
 			</p>
 			<img className="img-fluid" src={gettingThere} alt="Getting to Reversim Summit 2017"/>
 			<div className="my-5">
