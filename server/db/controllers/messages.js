@@ -1,10 +1,6 @@
 import Message from '../models/message';
 
 function getMessages(req, res) {
-	if (!req.user || !req.user.isReversimTeamMember) {
-		return res.send(401);
-	}
-
 	Message.find({}, null, { sort: { created_at: -1 }}).exec((err, messages) => {
 		if (err) {
 			console.log("error in getMessages", err);
