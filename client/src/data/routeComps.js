@@ -7,6 +7,7 @@ import Sponsors from "../components/Sponsors";
 import RegisterPage from "../components/RegisterPage";
 import LocationPage from "../components/LocationPage";
 import AdminPage from '../components/AdminPage';
+import WomenGathering from '../components/WomenGathering';
 
 export default [
   { path: "/", comp: Home },
@@ -19,5 +20,6 @@ export default [
   { path: "/team", comp: Home },
   { path: "/speaker/:id", comp: SpeakerPage },
   { path: "/session/:id", comp: SessionPage },
-  { path: "/admin", comp: AdminPage }
+  { path: "/admin", comp: AdminPage },
+  { path: "/women-gathering", comp: WomenGathering }
 ]

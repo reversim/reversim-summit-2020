@@ -76,7 +76,7 @@ const Session = ({text, session, shortSessions}) => {
   </Col>
 };
 
-const Line = ({time, sessions, text, shortSessions, muted, allSessions}) => {
+const Line = ({time, sessions, text, href, shortSessions, muted, allSessions}) => {
   let cols;
   if (Array.isArray(sessions)) {
     cols = sessions.map((sessionId, i) => <Session text={i === 0 && text} session={sessionId && getSession(allSessions, sessionId)}/>);
@@ -86,6 +86,10 @@ const Line = ({time, sessions, text, shortSessions, muted, allSessions}) => {
     cols = <Session text={text} shortSessions={shortSessions.map(ss => getSession(allSessions, ss))}/>
   } else {
     cols = <Session text={text}/>
+  }
+
+  if (href) {
+    cols = <Link to={href}>{cols}</Link>
   }
 
   return (
@@ -115,9 +119,9 @@ const DayAgenda = ({ index, sessions, isLargeScreen }) => {
       <h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>{dates[index]}</h4>
       <Row className="hidden-md-down mb-4">
         <Col xs="auto" className={cn(s.timeCol, s.tableCol)}/>
-        <Col className={cn(s.tableCol, "text-center1")}><h4>Main hall</h4></Col>
-        <Col className={cn(s.tableCol, "text-center1")}><h4>Class 2 - Media<br/>(near the main hall)</h4></Col>
-        <Col className={cn(s.tableCol, "text-center1")}><h4>Class 3 - Law</h4></Col>
+        <Col className={s.tableCol}><h4>Main hall</h4></Col>
+        <Col className={s.tableCol}><h4>Class 2 - Media<br/>(near the main hall)</h4></Col>
+        <Col className={s.tableCol}><h4>Class 3 - Law</h4></Col>
       </Row>
       {agendas[index].map(line => <Line {...line} allSessions={sessions} isLargeScreen={isLargeScreen}/>)}
     </Container>
