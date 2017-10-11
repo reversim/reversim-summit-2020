@@ -3,7 +3,8 @@
 }
 
 .message {
-
+    display: flex;
+    align-items: baseline;
 }
 
 .message i {

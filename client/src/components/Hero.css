@@ -2,8 +2,14 @@
     background: url('../images/hero-min.png') center;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     color: #fff;
+}
+
+@media (max-width:991px) {
+    .hero {
+        padding-top: 100px;
+    }
 }
 
 .title {
