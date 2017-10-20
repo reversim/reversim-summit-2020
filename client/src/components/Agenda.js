@@ -151,8 +151,8 @@ const Agenda = ({ sessions, ...props }) => {
   return <Page title="Schedule · Reversim Summit 2017" {...props}>
     <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
     <AddToCal />
-    {/*<DayAgenda index="0" sessions={sessions}/>*/}
-    <h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>
+    <DayAgenda index="0" sessions={sessions}/>
+    {/*<h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>*/}
     <DayAgenda index="1" sessions={sessions}/>
   </Page>
 };
