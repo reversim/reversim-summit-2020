@@ -27,7 +27,7 @@ const LocationPage = (props) => (
 				You may use the train and get off at Moshe Dayan station, where our shuttle will take you to the college. The shuttle will run 8am-10am and then again 6pm-7:30pm.
 			</Section>
 			<Section title="Bus">
-				<a href="https://www.colman.ac.il/node/6712" target="_blank">More info from the College of Management</a>
+				<a href="https://www.colman.ac.il/node/6712" target="_blank" rel="noopener noreferrer">More info from the College of Management</a>
 			</Section>
 			<img className="img-fluid" src={gettingThere} alt="Getting to Reversim Summit 2017"/>
 			<div className="my-5">
