@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import s from './Hero.css';
 import Messages from './Messages';
