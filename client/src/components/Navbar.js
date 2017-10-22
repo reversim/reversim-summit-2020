@@ -5,7 +5,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
 import s from './Navbar.css';
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createMemoryHistory'
 import logoImg from '../images/reversim_logo@2x.png';
 import Avatar from "./Avatar";
 
