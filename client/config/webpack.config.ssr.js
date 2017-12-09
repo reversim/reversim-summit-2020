@@ -2,6 +2,7 @@ const paths = require('./paths');
 const fs = require('fs');
 const { DefinePlugin } = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -101,6 +102,7 @@ module.exports = {
 		new ExtractTextPlugin({
 			filename: cssFilename,
 		}),
+		new InterpolateHtmlPlugin(env.raw),
 		new HtmlWebpackPlugin({
 			inject: true,
 			template: paths.appHtml,
