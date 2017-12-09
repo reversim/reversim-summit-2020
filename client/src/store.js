@@ -2,6 +2,7 @@ import { observable, extendObservable } from 'mobx';
 import { getSessions, getTeam, getProposal, getMe, getMessages, addMessage, removeMessage } from './data-service';
 import uniqBy from 'lodash/uniqBy';
 import flatMap from 'lodash/flatMap';
+import { isServer } from './utils';
 
 const store = observable({
   speakers: [],
@@ -45,8 +46,14 @@ const processSession = session => ({
 	...session,
 	speaker_ids: session.speaker_ids.map(speaker => ({
 		...speaker,
-		picture: speaker.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/")
-	}))
+		picture: speaker.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
+		get href() {
+			return isServer ? `${speaker._id}.html` : speaker._id;
+		}
+	})),
+	get href() {
+		return isServer ? `${session.id}.html` : session.id;
+	}
 });
 
 const filterSessions = sessionIds => sessionIds.map(p => store.sessions.find(session => session._id === p)).filter(x => !!x);
@@ -64,9 +71,12 @@ export async function initStore(initialState) {
 	store.sessions = processedSessions;
 
 	store.speakers = uniqBy(flatMap(processedSessions, session => session.speaker_ids), x => x._id)
-		.map(x => ({
-			...x,
-			sessions: filterSessions(x.proposals)
+		.map(speaker => ({
+			...speaker,
+			sessions: filterSessions(speaker.proposals),
+			get href() {
+				return isServer ? `${speaker._id}.html` : speaker._id;
+			}
 		}))
 		.sort((a, b) => {
 			if (a.name === "Sheizaf Rafaeli") return -1;
@@ -87,7 +97,7 @@ export async function initStore(initialState) {
 
 export default store;
 
-if (window !== "__server") {
+if (!isServer) {
 	initStore(window.__INITIAL_STATE__);
 	window.__store = store;
 }

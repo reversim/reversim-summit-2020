@@ -4,8 +4,8 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
 
-const Speaker = ({_id, name, bio, oneLiner, picture, color, isFull, ...props}) => (
-  <Link to={`/speaker/${_id}.html`} className={s.speakerLinkWrap}>
+const Speaker = ({name, bio, oneLiner, picture, color, isFull, href, ...props}) => (
+  <Link to={`/speaker/${href}`} className={s.speakerLinkWrap}>
     <div className={cn(s.speaker, s[color], { [s.isFull]: isFull})}>
       <div className={cn({"d-flex": !isFull})}>
         <div style={{backgroundImage: `url('${picture}')`}} className={s.speakerImg}/>

@@ -6,6 +6,7 @@ import cn from 'classnames';
 import { agenda1, agenda2 } from '../data/agenda';
 import {Link} from "react-router-dom";
 import CalendarLink from './CalendarLink';
+import { isServer } from '../utils';
 
 const _getSession = (sessions, id) => sessions.find(ss => ss.id === id);
 const getSession = (sessions, id) => {
@@ -36,7 +37,7 @@ const Time = ({tStr}) => {
 const ShortSessions = ({sessions}) => (
   <div className="mt-3">{sessions.map((ss,i) => (
     <div className={cn("mb-3 pb-2", {[s.igniteSep]: i < sessions.length-1})}>
-      <Link to={`/session/${ss.id}.html`}>
+      <Link to={`/session/${ss.href}`}>
         <div className="d-flex">
           {getSessionImgs(ss)}
           <div>
@@ -58,7 +59,7 @@ const Session = ({text, session, shortSessions, hall}) => {
       <ShortSessions sessions={session.sessions}/>
     </div>
   } else if (session) {
-    content = <Link to={`/session/${session.id}.html`}>
+    content = <Link to={`/session/${session.href}`}>
       <div className="d-flex mb-4 mb-lg-0">
         {getSessionImgs(session)}
         <div>
@@ -100,6 +101,7 @@ const Line = ({time, sessions, text, href, shortSessions, muted, allSessions}) =
   }
 
   if (href) {
+    if (isServer) href = `${href}.html`;
     cols = <Link to={href}>{cols}</Link>
   }
 

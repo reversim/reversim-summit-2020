@@ -16,3 +16,5 @@ export const colors = [
   'green',
   'orange'
 ];
+
+export const isServer = window === "__server";

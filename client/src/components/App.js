@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { StaticRouter as Router, Route } from 'react-router-dom';
+import { StaticRouter, BrowserRouter, Route } from 'react-router-dom';
 import routes from '../data/routeComps';
 import withStore from '../components/withStore';
 import { observer } from 'mobx-react';
 import ga from 'react-ga';
+import { isServer } from '../utils';
 
-// if (process.env.NODE_ENV !== "development") {
-//   ga.initialize('UA-36904731-4');
-//   ga.pageview(window.location.pathname);
-//
-// }
+if (!isServer && process.env.NODE_ENV !== "development") {
+  ga.initialize('UA-36904731-4');
+  ga.pageview(window.location.pathname);
+
+}
+
+const Router = isServer ? StaticRouter : BrowserRouter;
 
 class App extends Component {
 

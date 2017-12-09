@@ -15,7 +15,7 @@ export const agenda1 = [
     "1dd1f609-06db-b640-b836-a33ed3dc4f61"
   ] },
   { time: "1240", text: "Lunch", muted: true },
-  { time: "1310", text: "Women Gathering (outside)", muted: true, href: '/women-gathering.html' },
+  { time: "1310", text: "Women Gathering (outside)", muted: true, href: '/women-gathering' },
   { time: "1340", text: "Ignites", shortSessions: [
     "70c5d0d3-e3e1-710d-bc8a-09d5a6eabf69",
     "6746a1e4-9fe8-dbd9-4e83-b355c5be2e17",
