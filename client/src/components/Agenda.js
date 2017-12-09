@@ -36,7 +36,7 @@ const Time = ({tStr}) => {
 const ShortSessions = ({sessions}) => (
   <div className="mt-3">{sessions.map((ss,i) => (
     <div className={cn("mb-3 pb-2", {[s.igniteSep]: i < sessions.length-1})}>
-      <Link to={`/session/${ss.id}`}>
+      <Link to={`/session/${ss.id}.html`}>
         <div className="d-flex">
           {getSessionImgs(ss)}
           <div>
@@ -58,7 +58,7 @@ const Session = ({text, session, shortSessions, hall}) => {
       <ShortSessions sessions={session.sessions}/>
     </div>
   } else if (session) {
-    content = <Link to={`/session/${session.id}`}>
+    content = <Link to={`/session/${session.id}.html`}>
       <div className="d-flex mb-4 mb-lg-0">
         {getSessionImgs(session)}
         <div>

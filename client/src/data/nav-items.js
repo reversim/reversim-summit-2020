@@ -8,12 +8,12 @@ const schedule = { to: "schedule", text: "Schedule", noScroll: true, external: t
 
 export default (isHome) => {
   let items = [
-    about,
-    register,
+    // about,
+    // register,
     speakers,
     schedule,
     location,
-    team,
+    // team,
     sponsors
   ];
 

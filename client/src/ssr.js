@@ -13,7 +13,9 @@ process.on('unhandledRejection', err => {
 	throw err;
 });
 
-const indexHTML = fs.readFileSync(resolve(__dirname, '../build/index.html')).toString();
+const indexHTML = fs.readFileSync(resolve(__dirname, '../build/template.html'))
+	.toString()
+	.replace('<script type="text/javascript" src="render.js"></script>', '');
 
 const renderFile = (path, filename, folder = '') => {
 	console.log("rendering", path);
@@ -37,7 +39,7 @@ initStore().then(() => {
 				renderFile(`/session/${sessionId}`, `${sessionId}.html`, 'session');
 			});
 		} else {
-			const filename = path === '/' ? 'app.html' : `${path.slice(1)}.html`;
+			const filename = path === '/' ? 'index.html' : `${path.slice(1)}.html`;
 			renderFile(path, filename);
 		}
 	});
