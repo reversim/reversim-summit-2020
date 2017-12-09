@@ -9,7 +9,7 @@ import { SponsorsSection } from '../components/Sponsors';
 const homeSections = [
   { name: "hero",     el: Hero },
   { name: "about",    el: About },
-  { name: "register", el: Register },
+  // { name: "register", el: Register },
   { name: "speakers", el: SpeakersSection },
   { name: "location", el: Location },
   { name: "team",     el: Team },

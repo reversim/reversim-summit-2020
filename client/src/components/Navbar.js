@@ -5,11 +5,13 @@ import { Link as ScrollLink } from 'react-scroll';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
 import s from './Navbar.css';
-import createHistory from 'history/createBrowserHistory'
+import createMemoryHistory from 'history/createMemoryHistory';
+import createBrowserHistory from 'history/createBrowserHistory';
 import logoImg from '../images/reversim_logo@2x.png';
 import Avatar from "./Avatar";
+import { isServer } from '../utils';
 
-const history = createHistory();
+const history = isServer ? createMemoryHistory() : createBrowserHistory();
 
 const navLinkClass = cn("nav-link", s.navLink);
 
@@ -83,12 +85,12 @@ class Navbar extends Component {
           </Nav>
         </Collapse>
 
-        { !isSmallScreen && <div className="ml-auto">
-          { user.authenticated ?
+				{ !isServer && !isSmallScreen && <div className="ml-auto">
+					{ user.authenticated ?
             <Avatar {...user} onLogout={onLogout}/>
-            : <a href="/auth/google">
-            <Button outline color="secondary" onClick={this.login}>Login</Button>
-          </a> }
+						: <a href="/auth/google">
+              <Button outline color="secondary" onClick={this.login}>Login</Button>
+            </a> }
         </div> }
       </Navbar2>
     );

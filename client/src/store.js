@@ -1,7 +1,8 @@
-import { observable } from 'mobx';
+import { observable, extendObservable } from 'mobx';
 import { getSessions, getTeam, getProposal, getMe, getMessages, addMessage, removeMessage } from './data-service';
 import uniqBy from 'lodash/uniqBy';
 import flatMap from 'lodash/flatMap';
+import { isServer } from './utils';
 
 const store = observable({
   speakers: [],
@@ -18,6 +19,7 @@ const store = observable({
   user: { isFetching: true },
   onLogout: () => store.user = { authenticated: false },
 	getProposal: (id) => getProposal(id).then(proposal => {
+		console.log("!!!", proposal ? proposal.id : '@@@');
     store.sessions = store.sessions.concat(processSession(proposal));
   }),
 	isUploadingPhoto: false,
@@ -40,49 +42,62 @@ const store = observable({
   }
 });
 
-export default store;
-
 const processSession = session => ({
 	...session,
 	speaker_ids: session.speaker_ids.map(speaker => ({
 		...speaker,
-		picture: speaker.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/")
-	}))
-});;
-
-getTeam().then(team => {
-  store.team = team;
+		picture: speaker.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
+		get href() {
+			return isServer ? `${speaker._id}.html` : speaker._id;
+		}
+	})),
+	get href() {
+		return isServer ? `${session.id}.html` : session.id;
+	}
 });
 
-getSessions().then(sessions => {
-  const processedSessions = sessions.map(processSession);
-  store.sessions = processedSessions;
+const filterSessions = sessionIds => sessionIds.map(p => store.sessions.find(session => session._id === p)).filter(x => !!x);
 
-  store.speakers = uniqBy(flatMap(processedSessions, session => session.speaker_ids), x => x._id)
-    .map(x => ({
-      ...x,
-      sessions: filterSessions(x.proposals)
-    }))
-    .sort((a, b) => {
-      if (a.name === "Sheizaf Rafaeli") return -1;
-      if (b.name === "Sheizaf Rafaeli") return 1;
-      if (a.name === "Randy Shoup") return -1;
-      if (b.name === "Randy Shoup") return 1;
-      return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-    });
-});
+export async function initStore(initialState) {
+	if (initialState) {
+		extendObservable(store, initialState);
+		return;
+	}
 
-getMe().then(user => {
+  store.team = await getTeam();
+
+  const sessions = await getSessions();
+	const processedSessions = sessions.map(processSession);
+	store.sessions = processedSessions;
+
+	store.speakers = uniqBy(flatMap(processedSessions, session => session.speaker_ids), x => x._id)
+		.map(speaker => ({
+			...speaker,
+			sessions: filterSessions(speaker.proposals),
+			get href() {
+				return isServer ? `${speaker._id}.html` : speaker._id;
+			}
+		}))
+		.sort((a, b) => {
+			if (a.name === "Sheizaf Rafaeli") return -1;
+			if (b.name === "Sheizaf Rafaeli") return 1;
+			if (a.name === "Randy Shoup") return -1;
+			if (b.name === "Randy Shoup") return 1;
+			return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+		});
+
+	const user = await getMe();
   if (user.proposals) {
-		user.sessions = filterSessions(user.proposals);
+    user.sessions = filterSessions(user.proposals);
   }
-  store.user = user;
-});
+	store.user = user;
 
-getMessages().then(messages => {
-  store.messages = messages;
-});
+	store.messages = await getMessages();
+}
 
-const filterSessions = sessionIds => sessionIds.map(p => store.sessions.find(session => session._id === p)).filter(x => !!x)
+export default store;
 
-window.__store = store;
+if (!isServer) {
+	initStore(window.__INITIAL_STATE__);
+	window.__store = store;
+}

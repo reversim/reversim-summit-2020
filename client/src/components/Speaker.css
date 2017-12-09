@@ -3,6 +3,12 @@
     text-decoration: none;
 }
 
+.speakerInfo :global a,
+.speakerInfo :global a:hover,
+.speakerInfo :global a:focus {
+    color: inherit;
+}
+
 .speakerImg {
     width: 100px;
     height: 100px;

@@ -82,11 +82,8 @@ class SessionPage extends React.Component {
 
 	render() {
 		const session = this.findSession();
-		console.log("render", session);
 
 		if (!session) return <div>aaaaa</div>;
-
-		console.log("111");
 
 		const {title, abstract, type, tags, outline} = session;
 		const speakers = session.speaker_ids;
