@@ -13,7 +13,7 @@ const SpeakerShort = (speaker) => {
       <div className={s.speakerImg} style={{backgroundImage: `url('${picture}')`}}/>
     </Col>
     <Col>
-      <Link to={`/speaker/${_id}`}><h3>{name}</h3></Link>
+      <Link to={`/speaker/${_id}.html`}><h3>{name}</h3></Link>
       <div className="text-muted mb-2">{oneLiner}</div>
       <SpeakerSocialLinks {...speaker} className={cn(s.socialLinks, 'ml-0')}/>
     </Col>

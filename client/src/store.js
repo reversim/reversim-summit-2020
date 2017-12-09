@@ -18,6 +18,7 @@ const store = observable({
   user: { isFetching: true },
   onLogout: () => store.user = { authenticated: false },
 	getProposal: (id) => getProposal(id).then(proposal => {
+		console.log("!!!", proposal ? proposal.id : '@@@');
     store.sessions = store.sessions.concat(processSession(proposal));
   }),
 	isUploadingPhoto: false,

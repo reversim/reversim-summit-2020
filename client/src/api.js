@@ -1,5 +1,7 @@
 import http from 'axios';
 
+http.defaults.baseURL = 'https://summit2017.reversim.com';
+
 const headers = {
   Accept: 'application/json'
 };

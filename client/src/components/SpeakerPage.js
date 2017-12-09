@@ -47,7 +47,7 @@ const SpeakerPage = ({ speakers, user, match: { params: { id } }, ...props}) => 
             <div className="bg-faded p-3 mb-4" key={session.id}>
               <p>{getSessionTypeStr(session.type)}</p>
               <div className="d-flex text-muted mb-3">{session.tags.map(Tag)}</div>
-              <Link to={`/session/${session.id}`}><h5>{session.title}</h5></Link>
+              <Link to={`/session/${session.id}.html`}><h5>{session.title}</h5></Link>
             </div>
           )}
         </Col>

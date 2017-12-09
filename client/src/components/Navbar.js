@@ -18,7 +18,7 @@ const onNavItemClick = (name) => () => history.push(name);
 const NavbarItem = ({ to, text, noScroll, external }) => {
   let link;
   if (external) {
-    link = <a className={navLinkClass} href={`/${to}`}>{text}</a>
+    link = <a className={navLinkClass} href={`/${to}.html`}>{text}</a>
   } else if (noScroll) {
     link = <Link className={navLinkClass} to={`/${to}`} onClick={onNavItemClick(to)}>{text}</Link>;
   } else {
@@ -82,14 +82,6 @@ class Navbar extends Component {
             { items.map(NavbarItem) }
           </Nav>
         </Collapse>
-
-        { !isSmallScreen && <div className="ml-auto">
-          { user.authenticated ?
-            <Avatar {...user} onLogout={onLogout}/>
-            : <a href="/auth/google">
-            <Button outline color="secondary" onClick={this.login}>Login</Button>
-          </a> }
-        </div> }
       </Navbar2>
     );
   }

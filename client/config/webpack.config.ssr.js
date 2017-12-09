@@ -3,6 +3,7 @@ const fs = require('fs');
 const { DefinePlugin } = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 const externals = fs.readdirSync('node_modules')
@@ -10,7 +11,7 @@ const externals = fs.readdirSync('node_modules')
 	.reduce((acc, cur) => Object.assign(acc, { [cur]: 'commonjs ' + cur }), {});
 
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-const cssFilename = 'static/css/[name].[contenthash:8].css';
+const cssFilename = '/static/css/[name].[contenthash:8].css';
 const publicPath = paths.servedPath;
 const shouldUseRelativeAssetPaths = publicPath === './';
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
@@ -91,7 +92,7 @@ module.exports = {
 				loader: require.resolve('url-loader'),
 				options: {
 					limit: 10000,
-					name: 'static/media/[name].[hash:8].[ext]',
+					name: '/static/media/[name].[hash:8].[ext]',
 				},
 			},
 		]
@@ -100,7 +101,22 @@ module.exports = {
 		new ExtractTextPlugin({
 			filename: cssFilename,
 		}),
-
+		new HtmlWebpackPlugin({
+			inject: true,
+			template: paths.appHtml,
+			minify: {
+				// removeComments: false,
+				// collapseWhitespace: true,
+				// removeRedundantAttributes: true,
+				// useShortDoctype: true,
+				// removeEmptyAttributes: true,
+				// removeStyleLinkTypeAttributes: true,
+				// keepClosingSlash: true,
+				// minifyJS: true,
+				// minifyCSS: true,
+				// minifyURLs: true,
+			},
+		}),
 		new DefinePlugin({
 			window: '"__server"'
 		})
