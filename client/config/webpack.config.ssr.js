@@ -46,6 +46,24 @@ module.exports = {
 				loader: require.resolve('babel-loader')
 			},
 			{
+				test: /bootstrap\.scss$/,
+				loader: ExtractTextPlugin.extract(
+					Object.assign({
+						fallback: require.resolve('style-loader'),
+						use: [
+							{
+								loader: require.resolve('css-loader'),
+								options: { sourceMap: true, minimize: true }
+							},
+							{
+								loader: require.resolve('sass-loader'),
+								options: { sourceMap: true }
+							}
+						]
+					}, extractTextPluginOptions)
+				)
+			},
+			{
 				test: /\.css$/,
 				loader: ExtractTextPlugin.extract(
 					Object.assign(

@@ -153,6 +153,24 @@ module.exports = {
               compact: true,
             },
           },
+					{
+						test: /bootstrap\.scss$/,
+						loader: ExtractTextPlugin.extract(
+						  Object.assign({
+								fallback: require.resolve('style-loader'),
+								use: [
+									{
+										loader: require.resolve('css-loader'),
+										options: { sourceMap: true, minimize: true }
+									},
+									{
+										loader: require.resolve('sass-loader'),
+										options: { sourceMap: true }
+									}
+								]
+              }, extractTextPluginOptions)
+            )
+					},
           // The notation here is somewhat confusing.
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.

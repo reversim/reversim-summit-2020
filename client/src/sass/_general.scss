@@ -34,60 +34,56 @@ small {
   font-size: 12px;
 }
 
-:global .font-size-lg {
+.font-size-lg {
   font-size: 24px;
 }
 
-:global .font-pt {
+.font-pt {
   font-family: 'PT Sans', sans-serif;
 }
 
-:global .font-raleway {
+.font-raleway {
   font-family: Raleway, sans-serif;
 }
 
-:global .separator {
+.separator {
   border-bottom: 1px solid #c9c9c9;
 }
 
-:global .line-height-12 {
+.line-height-12 {
   line-height: 1.2;
 }
 
-:global .line-height-17 {
+.line-height-17 {
   line-height: 1.7;
 }
 
-:global .flex-1 {
+.flex-1 {
   flex: 1;
 }
 
-:global .hero-page-img {
+.hero-page-img {
   height: 320px;
 
 }
 
-:global .text-primary {
-  color: #29b6f6 !important;
-}
-
-:global a,
-:global a:hover,
-:global a:focus {
+a,
+a:hover,
+a:focus {
   color: #29b6f6;
 }
 
-:global .bg-white {
+.bg-white {
   background: rgba(255,255,255,0.85); /* TODO only for location */
 }
 
-:global a.unstyled-link,
-:global a.unstyled-link:hover,
-:global a.unstyled-link:focus,
-:global a.unstyled-link:active {
+a.unstyled-link,
+a.unstyled-link:hover,
+a.unstyled-link:focus,
+a.unstyled-link:active {
   color: inherit;
 }
 
-:global .text-underline {
+.text-underline {
   text-decoration: underline;
 }
