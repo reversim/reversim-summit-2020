@@ -6,7 +6,7 @@ import fs from 'fs';
 import { resolve } from 'path';
 import { toJS } from 'mobx';
 import App from './components/App';
-import './index.css';
+import './sass/bootstrap.scss';
 
 
 process.on('unhandledRejection', err => {
