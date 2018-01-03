@@ -29,6 +29,9 @@ You may import data for development. There's a shell script to do that, which ta
 ```
 $ ./scripts/import_dev_db.sh
 ```
+## Working locally
+#### Restarting the server
+Type `rs` in the server's terminal to restart.
 
 # License
 MIT
