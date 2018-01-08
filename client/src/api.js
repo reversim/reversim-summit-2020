@@ -1,7 +1,7 @@
 import http from 'axios';
 import { isServer } from './utils';
 
-if (isServer) http.defaults.baseURL = 'https://summit2017.reversim.com';
+if (isServer) http.defaults.baseURL = 'http://localhost:5001';
 
 const headers = {
   Accept: 'application/json'

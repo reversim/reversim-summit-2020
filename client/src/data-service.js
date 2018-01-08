@@ -1,5 +1,9 @@
 import { get, post, delete2 } from './api';
 
+export async function getProposals() {
+  return await get("/api/proposal");
+}
+
 export async function getSessions() {
   return await get("/api/sessions");
 }

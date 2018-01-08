@@ -1,5 +1,5 @@
 import { observable, extendObservable } from 'mobx';
-import { getSessions, getTeam, getProposal, getMe, getMessages, addMessage, removeMessage } from './data-service';
+import { getSessions, getProposals, getTeam, getProposal, getMe, getMessages, addMessage, removeMessage } from './data-service';
 import uniqBy from 'lodash/uniqBy';
 import flatMap from 'lodash/flatMap';
 import { isServer } from './utils';
@@ -7,6 +7,7 @@ import { isServer } from './utils';
 const store = observable({
   speakers: [],
   sessions: [],
+	proposals: [],
   team: [],
   messages: [],
   showTeamMember: null,
@@ -69,6 +70,9 @@ export async function initStore(initialState) {
   const sessions = await getSessions();
 	const processedSessions = sessions.map(processSession);
 	store.sessions = processedSessions;
+
+	const proposals = await getProposals();
+	store.proposals = proposals.map(processSession);
 
 	store.speakers = uniqBy(flatMap(processedSessions, session => session.speaker_ids), x => x._id)
 		.map(speaker => ({

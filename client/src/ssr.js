@@ -33,10 +33,14 @@ initStore().then(() => {
 				renderFile(`/speaker/${speakerId}`, `${speakerId}.html`, 'speaker');
 			});
 		} else if (path === "/session/:id") {
-			const { sessions } = store;
-			sessions.forEach((session) => {
+			const { proposals } = store;
+      proposals.forEach((session) => {
 				const sessionId = session.id;
-				renderFile(`/session/${sessionId}`, `${sessionId}.html`, 'session');
+				if (sessionId) {
+          renderFile(`/session/${sessionId}`, `${sessionId}.html`, 'session');
+				} else {
+					console.log("skipping session", session._id);
+				}
 			});
 		} else {
 			const filename = path === '/' ? 'index.html' : `${path.slice(1)}.html`;
