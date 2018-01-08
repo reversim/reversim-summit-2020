@@ -76,8 +76,8 @@ class SessionPage extends React.Component {
 	}
 
 	findSession() {
-		const { sessions, match: {params: {id}}} = this.props;
-		return sessions.find(s => s.id === id);
+		const { proposals, match: {params: {id}}} = this.props;
+		return proposals.find(s => s.id === id);
 	}
 
 	render() {
