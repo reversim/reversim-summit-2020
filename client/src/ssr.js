@@ -20,7 +20,7 @@ const indexHTML = fs.readFileSync(resolve(__dirname, '../build/template.html'))
 const renderFile = (path, filename, folder = '') => {
 	console.log("rendering", path);
 	let html = renderToString(createElement(App, { location: path }));
-	html = indexHTML.replace('<!--ssr-->', `${html}<script>window.__INITIAL_STATE__=${JSON.stringify(toJS(store))}</script>`);
+	html = indexHTML.replace('<!--ssr-->', html);
 	fs.writeFileSync(resolve(__dirname, '../build', folder, filename), html);
 };
 
