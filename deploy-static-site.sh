@@ -10,6 +10,7 @@ git co gh-pages
 git pull
 git rm -rf *.html *.png  session speaker static *.json *.ico *.js *.svg
 cp -r ~/tmp/rsbuild/* .
+rm -rf ~/tmp/rsbuild
 git add .
 git ci -am "deploy"
 git push
