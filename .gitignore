@@ -9,3 +9,4 @@ env.sh
 .private
 webpack-stats.json
 .env
+backup-*
