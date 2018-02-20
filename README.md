@@ -34,7 +34,7 @@ $ ./scripts/import_dev_db.sh
 Type `rs` in the server's terminal to restart.
 
 #### Installing mongo
-Basically, follow this link: https://docs.mongodb.com/manual/installation/
+Basically, follow this link: https://docs.mongodb.com/manual/installation/  
 The default database name is ReversimSummit, and it's defined in https://github.com/rantav/reversim-summit-2017/blob/master/server/db/constants.js
 
 It's possible to set a custom db connection string by: `MONGODB_URI=<your_db_url> yarn start` 
