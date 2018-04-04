@@ -3,6 +3,7 @@ import Page from "./Page";
 import {Container} from "reactstrap";
 import gettingThere from '../images/getting-there.png';
 import Map from "./Map";
+import { REVERSIM_SUMMIT } from '../utils';
 
 const Section = ({ title, children }) => (
 	<p className="font-size-lg">
@@ -11,9 +12,9 @@ const Section = ({ title, children }) => (
 );
 
 const LocationPage = (props) => (
-	<Page title="Getting there · Reversim Summit 2017" {...props}>
+	<Page title="Getting there" {...props}>
 		<Container>
-			<h1 className="mb-5">Getting to Reversim Summit 2017</h1>
+			<h1 className="mb-5">Getting to {REVERSIM_SUMMIT}</h1>
 			<h2 className="mb-5 line-height-17 text-center bg-faded p-4">
 				The conference will be held at:<br/>
 				<a className="unstyled-link" href="https://www.google.co.il/maps/dir//31.9706184,34.7716762/@31.9703272,34.7713409,18z?hl=iw" target="_blank" rel="noopener noreferrer">
@@ -29,7 +30,7 @@ const LocationPage = (props) => (
 			<Section title="Bus">
 				<a href="https://www.colman.ac.il/node/6712" target="_blank" rel="noopener noreferrer">More info from the College of Management</a>
 			</Section>
-			<img className="img-fluid" src={gettingThere} alt="Getting to Reversim Summit 2017"/>
+			<img className="img-fluid" src={gettingThere} alt={`Getting to {REVERSIM_SUMMIT}`}/>
 			<div className="my-5">
 				<Map/>
 			</div>

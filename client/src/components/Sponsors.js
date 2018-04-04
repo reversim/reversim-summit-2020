@@ -4,6 +4,7 @@ import Section from "./Section";
 import s from './Sponsors.css';
 import { Row, Col } from 'reactstrap';
 import Page from "./Page";
+import { REVERSIM_SUMMIT } from '../utils';
 
 const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLink, excludeWebsite}) => {
   return (
@@ -38,9 +39,9 @@ export const SponsorsSection = () => (
 );
 
 const Sponsors = (props) => (
-  <Page title="Sponsors · Reversim Summit 2017" {...props}>
+  <Page title="Sponsors" {...props}>
     <h1 className="text-center mt-5">Our sponsors</h1>
-    <p className="text-center mb-5">Here are the companies who made <b>Reversim Summit 2017</b> possible:</p>
+    <p className="text-center mb-5">Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:</p>
     {sponsorsData.map(Sponsor)}
   </Page>
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import Page from "./Page";
 import heroImg from '../images/session.png';
 import { Container, Row, Col } from 'reactstrap';
-import {getSessionTypeStr} from "../utils";
+import {getSessionTypeStr, REVERSIM_SUMMIT} from "../utils";
 import Tag from './Tag';
 import SpeakerShort from "./SpeakerShort";
 import ReactMarkdown from 'react-markdown';
@@ -54,7 +54,7 @@ const getDateAndTime = id => {
 };
 
 const dates = [
-  "October 15, 2017",
+  "October 15, 2017", // TODO change dates
   "October 16, 2017"
 ];
 
@@ -91,7 +91,7 @@ class SessionPage extends React.Component {
 		const dayTime = getDateAndTime(this.props.match.params.id);
 
 		return (
-			<Page title={`${session.title} · Reversim Summit 2017`} {...this.props}>
+			<Page title={session.title} {...this.props}>
 				<div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>
 				<Container className="mt-4">
 					<Row>
@@ -106,7 +106,7 @@ class SessionPage extends React.Component {
 							</Row>
 							{speakers.map(SpeakerShort)}
 							<h4>{title}</h4>
-							{!dayTime && <div className="mb-3"><small title="Not participating in Reversim Summit 2017" className="py-1 px-2 bg-danger text-white">Proposal</small></div> }
+							{!dayTime && <div className="mb-3"><small title={`Not participating in ${REVERSIM_SUMMIT}`} className="py-1 px-2 bg-danger text-white">Proposal</small></div> }
 							<ReactMarkdown source={abstract}/>
 							{outline && <div>
 								<h4>Outline</h4>

@@ -18,3 +18,5 @@ export const colors = [
 ];
 
 export const isServer = window === "__server";
+
+export const REVERSIM_SUMMIT = "Reversim Summit 2018";

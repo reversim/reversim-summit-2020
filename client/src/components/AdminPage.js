@@ -12,13 +12,13 @@ const state = observable({
 
 const AdminPage = observer(({ messages, onRemoveMessage, onAddMessage, ...props}) => {
 	if (!props.user.authenticated || !props.user.isReversimTeamMember) {
-		return <Page title="Admin · Reversim Summit 2017" {...props}>
+		return <Page title="Admin" {...props}>
 			<div>need to be authenticated as a team member</div>
 		</Page>
 	}
 
 	return (
-		<Page title="Admin · Reversim Summit 2017" {...props}>
+		<Page title="Admin" {...props}>
 			<Container>
 				<h1>Admin console</h1>
 				<h2>Messages</h2>

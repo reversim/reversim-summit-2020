@@ -10,6 +10,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import logoImg from '../images/reversim_logo@2x.png';
 import Avatar from "./Avatar";
 import { isServer } from '../utils';
+import { REVERSIM_SUMMIT } from '../utils';
 
 const history = isServer ? createMemoryHistory() : createBrowserHistory();
 
@@ -69,7 +70,7 @@ class Navbar extends Component {
     const { fixed } = this.state;
     const items = navItems(isHome);
 
-    const logo = <img className={s.logo} src={logoImg} onClick={onNavItemClick("/")} alt="Reversim Summit 2017"/>
+    const logo = <img className={s.logo} src={logoImg} onClick={onNavItemClick("/")} alt={REVERSIM_SUMMIT}/>
 
     const navbarBrand = isHome ?
       <ScrollLink className='navbar-brand mr-5' activeClass='active' to="hero" spy={true} smooth={true} offset={-50} duration={500}>{logo}</ScrollLink> :

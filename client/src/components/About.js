@@ -2,12 +2,13 @@ import React from 'react';
 import Section from './Section';
 import { Row, Col } from 'reactstrap';
 import aboutImg from '../images/about.png';
+import { REVERSIM_SUMMIT } from '../utils';
 
 const About = () => (
   <Section title="About">
     <Row>
       <Col className="pr-5 mb-5 ml-lg-auto" xs="12" lg="6">
-        <img className="d-block ml-auto img-fluid" src={aboutImg} alt="Reversim Summit 2017"/>
+        <img className="d-block ml-auto img-fluid" src={aboutImg} alt={REVERSIM_SUMMIT} />
       </Col>
       <Col>
         <h4 className="mb-4">General Info</h4>

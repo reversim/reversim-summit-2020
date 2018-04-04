@@ -120,7 +120,7 @@ const Line = ({time, sessions, text, href, shortSessions, muted, allSessions}) =
 };
 
 const dates = [
-  'Day 1 - October 15, 2017',
+  'Day 1 - October 15, 2017', // TODO change dates
   'Day 2 - October 16, 2017'
 ];
 
@@ -150,8 +150,8 @@ const AddToCal = () => (
 const Agenda = ({ sessions, ...props }) => {
   if (!sessions || !sessions.length) return null;
 
-  return <Page title="Schedule · Reversim Summit 2017" {...props}>
-    <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2017</h1>
+  return <Page title="Schedule" {...props}>
+    <h1 className="text-center font-weight-bold">Schedule for Reversim Summit 2018</h1>
     <AddToCal />
     <DayAgenda index="0" sessions={sessions}/>
     {/*<h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>*/}

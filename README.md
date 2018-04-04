@@ -1,5 +1,5 @@
-# Website for Reversim Summit 2017
-http://summit2017.reversim.com/
+# Website for Reversim Summit 2018
+http://summit2018.reversim.com/
 
 #### Authors:
 

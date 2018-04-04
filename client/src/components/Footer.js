@@ -31,7 +31,7 @@ const Footer = () => (
           <a href="https://www.facebook.com/groups/806177629478248/" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook"/></a>
         </Col>
         <Col xs="12" sm="auto">
-          <small className="text-muted">All Rights Reserved © 2017</small>
+          <small className="text-muted">All Rights Reserved © 2018</small>
         </Col>
       </Row>
     </Container>

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Footer from "./Footer";
+import { REVERSIM_SUMMIT } from '../utils';
 
 
 class Page extends Component {
 
   componentDidMount() {
-    document.title = this.props.title || "Reversim Summit 2017";
+    document.title = `${this.props.title} · ${REVERSIM_SUMMIT}` || REVERSIM_SUMMIT;
   }
 
     render() {

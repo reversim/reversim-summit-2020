@@ -17,7 +17,7 @@ const SpeakerPage = ({ speakers, user, match: { params: { id } }, ...props}) => 
   const { name, bio, sessions } = speaker;
   const isUser = id === user.id;
 
-  return <Page title={`${name} · Reversim Summit 2017`} user={user} {...props}>
+  return <Page title={name} user={user} {...props}>
     <div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>
     <Container>
       <Row>

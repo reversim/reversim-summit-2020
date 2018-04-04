@@ -11,7 +11,7 @@ const SpeakerItem = (speaker, i) => {
 };
 
 const SpeakesPage = ({ speakers, ...props}) => (
-  <Page title="" {...props}>
+  <Page title="Speakers" {...props}>
     <Container>
       <h1 className="text-center my-5">Meet our speakers</h1>
       <Row>
