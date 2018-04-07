@@ -40,7 +40,11 @@ const store = observable({
   onRemoveMessage: (id) => {
     const index = store.messages.findIndex(x => x._id === id);
     removeMessage(id).then(() => store.messages.splice(index, 1));
-  }
+  },
+
+	features: {
+  	submission: true
+	}
 });
 
 const processSession = session => ({

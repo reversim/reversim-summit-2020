@@ -1,0 +1,11 @@
+.daysRemaining {
+  background: #dee2e6;
+  padding: 2px 5px;
+  display: inline-block;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 12px;
+  box-sizing: content-box;
+  text-align: center;
+  font-weight: bold;
+}

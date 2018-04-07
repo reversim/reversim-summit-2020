@@ -5,18 +5,14 @@ import { Link as ScrollLink } from 'react-scroll';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
 import s from './Navbar.css';
-import createMemoryHistory from 'history/createMemoryHistory';
-import createBrowserHistory from 'history/createBrowserHistory';
 import logoImg from '../images/reversim_logo@2x.png';
 import Avatar from "./Avatar";
-import { isServer } from '../utils';
+import { isServer, navigateTo } from '../utils';
 import { REVERSIM_SUMMIT } from '../utils';
-
-const history = isServer ? createMemoryHistory() : createBrowserHistory();
 
 const navLinkClass = cn("nav-link", s.navLink);
 
-const onNavItemClick = (name) => () => history.push(name);
+const onNavItemClick = (name) => () => navigateTo(name);
 
 const NavbarItem = ({ to, text, noScroll, external }) => {
   let link;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './sass/bootstrap.scss';
+import 'rodal/lib/rodal.css';
 import App from './components/App';
 import { AppContainer } from 'react-hot-loader';
 import { unregister } from './registerServiceWorker';

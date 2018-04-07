@@ -1,10 +1,8 @@
-const proposalTypes = {
-  "full": "Full Featured (30-40 min.)",
-  "lightning": "Lightning Talk (5 min.)",
-  "ossil": "Open Source in Israel (10 min.)"
-};
+import createMemoryHistory from 'history/createMemoryHistory';
+import createBrowserHistory from 'history/createBrowserHistory';
+import { CFP_ENDS, PROPOSAL_TYPES } from './data/proposals';
 
-export const getSessionTypeStr = type => proposalTypes[type];
+export const getSessionTypeStr = type => PROPOSAL_TYPES[type];
 
 export const colors = [
   'purple',
@@ -18,5 +16,13 @@ export const colors = [
 ];
 
 export const isServer = window === "__server";
+const history = isServer ? createMemoryHistory() : createBrowserHistory();
+
+export const navigateTo = (route) => history.push(route);
 
 export const REVERSIM_SUMMIT = "Reversim Summit 2018";
+
+export const getRemainingCFPDays = () => {
+  const today = new Date();
+  return Math.ceil((CFP_ENDS - today) / 86400000);
+};
