@@ -3,7 +3,7 @@ import {Col, Container, Row} from "reactstrap";
 import footerLogoImg from '../images/reversim_logo_footer.png';
 
 const Footer = () => (
-  <footer className="bg-inverse text-white p-5">
+  <footer className="bg-gray-900 text-white p-5">
     <Container>
       <Row className="align-items-start mb-5">
         <Col xs="12" sm="auto">
