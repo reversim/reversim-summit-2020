@@ -28,7 +28,7 @@ export default ({ label, id, required, text, caption, subtitle, placeholder, inp
   let valueComp;
 
   if (text) valueComp = text;
-  else valueComp = React.DOM[multiline ? 'textarea' : 'input']({
+  else valueComp = React.createElement(multiline ? 'textarea' : 'input', {
     id,
     type: inputType || "text",
     defaultValue: value,
