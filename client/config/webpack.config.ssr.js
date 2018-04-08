@@ -27,7 +27,7 @@ const env = getClientEnvironment(publicUrl);
 module.exports = {
 	entry: paths.ssrJs,
 	output: {
-		path: paths.appBuild,
+		path: paths.appStatic,
 		filename: 'render.js',
 		libraryTarget: 'commonjs2',
 	},
