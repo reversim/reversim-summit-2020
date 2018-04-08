@@ -11,7 +11,8 @@ import {
 import ga from 'react-ga';
 import { daysRemaining } from './CFPPage.css';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
+import uniq from 'lodash/uniq';
+import without from 'lodash/without';
 import FormField from './FormField';
 import Tags from './Tags';
 import Rodal from 'rodal';
@@ -167,8 +168,8 @@ class SubmissionForm extends React.Component {
     let bestMatch, predefinedTags, tagStrs = this.state.tags.map(t => t.text);
 
     tagSuggestions = tagSuggestions || [];
-    tagSuggestions = _.uniq(_.without(PREDEFINED_TAGS.concat(tagSuggestions), ...tagStrs));
-    predefinedTags = _.without(PREDEFINED_TAGS, ...tagStrs);
+    tagSuggestions = uniq(without(PREDEFINED_TAGS.concat(tagSuggestions), ...tagStrs));
+    predefinedTags = without(PREDEFINED_TAGS, ...tagStrs);
 
     if (newTagPending) {
       bestMatch = findBestMatch(newTagPending, tagSuggestions).bestMatch.target;

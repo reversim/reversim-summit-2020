@@ -20,9 +20,9 @@ import googleLogo from '../images/sponsors/google.png';
 // import amazonLogo from '../images/sponsors/amazon.png';
 
 import React from 'react';
-import _ from 'lodash';
+import shuffle from 'lodash/shuffle';
 
-const sponsors = _.shuffle([
+const sponsors = shuffle([
   {
     name: 'Gigya',
     logo: gigyaLogo,
