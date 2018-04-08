@@ -14,7 +14,7 @@ const SpeakersSection = ({speakers}) => {
   return <Section title="Speakers">
     <Container>
       <Row>
-        {speakers.toJS().map(SpeakerItem)}
+        {speakers.map(SpeakerItem)}
       </Row>
     </Container>
   </Section>

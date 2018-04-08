@@ -10,7 +10,7 @@ import { uploadPhoto } from '../data-service';
 import { Button } from 'reactstrap';
 
 const SpeakerPage = ({ speakers, user, match: { params: { id } }, ...props}) => {
-  let speaker = speakers.toJS().find(x => x._id === id);
+  let speaker = speakers.find(x => x._id === id);
   if (!speaker) speaker = !user.isFetching && user;
   if (!speaker || !speaker.sessions) return null;
 

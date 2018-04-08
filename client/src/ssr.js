@@ -1,10 +1,9 @@
 import { createElement } from 'react';
+import { getInitialData } from './data-service';
 const { renderToString } = require('react-dom/server');
-import store, { initStore } from './store';
 import routes from './data/routeComps';
 import fs from 'fs';
 import { resolve } from 'path';
-import { toJS } from 'mobx';
 import App from './components/App';
 import './sass/bootstrap.scss';
 
@@ -24,7 +23,22 @@ const renderFile = (path, filename, folder = '') => {
 	fs.writeFileSync(resolve(__dirname, '../build', folder, filename), html);
 };
 
-initStore().then(() => {
+const initData = async () => {
+	const data = await getInitialData();
+
+  for (const userId in data.users) {
+    const user = data.users[userId];
+    user.href = `${user._id}.html`;
+  }
+
+  for (const proposal of data.proposals) {
+    proposal.href = `${proposal.id}.html`;
+  }
+
+  return data;
+};
+
+initData().then((store) => {
 	routes.forEach(({ path, comp }) => {
 		if (path === "/speaker/:id") {
 			const { speakers } = store;

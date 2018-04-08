@@ -1,14 +1,17 @@
 import Message from '../models/message';
 
-function getMessages(req, res) {
-	Message.find({}, null, { sort: { created_at: -1 }}).exec((err, messages) => {
-		if (err) {
-			console.log("error in getMessages", err);
-			return res.status(500).send('error in messages');
-		}
+async function getMessages(req, res) {
+	try {
+    const messages = await getAllMessages();
+    res.status(200).send(messages);
+	} catch(err) {
+    console.log("error in getMessages", err);
+    return res.status(500).send('error in messages');
+	}
+}
 
-		res.status(200).send(messages);
-	});
+function getAllMessages() {
+	return Message.find({}, null, { sort: { created_at: -1 }});
 }
 
 function addMessage(req, res) {
@@ -48,5 +51,6 @@ function removeMessage(req, res) {
 export default {
 	getMessages,
 	addMessage,
-	removeMessage
+	removeMessage,
+  getAllMessages
 }

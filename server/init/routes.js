@@ -4,7 +4,9 @@
 import express from 'express';
 import path from 'path';
 import passport from 'passport';
+import keyBy from 'lodash/keyBy';
 import { controllers } from '../db';
+import { transformProposal, transformUser } from '../db/controllers/helpers';
 
 const usersController = controllers.users;
 const proposalsController = controllers.proposals;
@@ -53,7 +55,32 @@ export default (app) => {
     }
   );
 
+  async function initial(req, res) {
+    const proposals = await proposalsController.getAllProposals();
+    const users = await proposalsController.getProposers(proposals);
+    const tags = proposalsController.getTags(proposals);
+    const user = usersController.getMe(req);
+    const team = await usersController.getTeam();
+    const messages = await messagesController.getAllMessages();
+
+    const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user))
+    const mappedUsers = users.map(user => transformUser(user, req.user))
+
+    res.json({
+      proposals: mappedProposals,
+      users: keyBy(mappedUsers, '_id'),
+      user,
+      tags,
+      team: team.map(user => transformUser(user, req.user)),
+      messages,
+
+      sessions: proposals.filter(p => p.status === 'accepted').map(p => transformProposal(p, req.user)), // TODO remove
+      speakers: mappedUsers
+    });
+  }
+
   // proposal routes
+  app.get('/api/initial', initial);
   app.get('/api/sessions', proposalsController.sessions);
   app.get('/api/proposal', proposalsController.all);
   app.get('/api/proposal/:id/recommendations', proposalsController.getRecommendations);
@@ -64,6 +91,7 @@ export default (app) => {
   app.delete('/api/proposal/:id', proposalsController.remove);
   app.post('/api/proposal/:id/attend', proposalsController.attend);
   app.get('/api/speakers', proposalsController.speakers);
+  app.get('/api/proposers', proposalsController.proposers);
   app.get('/api/proposal/attendees', proposalsController.getAllAttendees);
 
   app.get('/api/messages', messagesController.getMessages);

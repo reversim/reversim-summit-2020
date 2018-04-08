@@ -22,7 +22,7 @@ export function transformUser(user, loggedInUser) {
       isReversimTeamMember: user.isReversimTeamMember,
       bio: user.profile && user.profile.bio,
       gender: user.profile && user.profile.gender,
-      picture: user.profile && user.profile.picture,
+      picture: user.profile && user.profile.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
       linkedin: user.profile && user.profile.linkedin,
       twitter: user.profile && user.profile.twitter,
       stackOverflow: user.profile && user.profile.stackOverflow,
@@ -50,18 +50,18 @@ export function transformProposal(proposal, loggedInUser) {
       abstract: proposal.abstract,
       type: proposal.type,
       tags: proposal.tags,
-      status: canViewPrivate && proposal.status,
-      speaker_ids: proposal.speaker_ids && proposal.speaker_ids.map((user) => {
+      status: canViewPrivate ? proposal.status : undefined,
+      speaker_ids: proposal.speaker_ids ? proposal.speaker_ids.map((user) => {
         return transformUser(user, loggedInUser);
-      }),
+      }) : undefined,
       startTime: proposal.startTime,
       endTime: proposal.endTime,
       hall: proposal.hall,
       slides_gdrive_id: proposal.slides_gdrive_id,
-      video_url: canViewPrivate && proposal.video_url,
-      outline: canViewPrivate && proposal.outline,
+      video_url: canViewPrivate ? proposal.video_url : undefined,
+      outline: canViewPrivate ? proposal.outline : undefined,
       total: (proposal.attendees && canViewPrivate) ? proposal.attendees.length : undefined,
-      attended: proposal.attendees && (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false)
+      attended: proposal.attendees ? (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false) : undefined
     }
   }
 

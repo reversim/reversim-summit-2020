@@ -8,10 +8,17 @@ import {transformProposal, transformUser} from './helpers';
 import shuffler from 'shuffle-seed';
 import request from 'axios';
 
+const errorHandler = (res, err) => {
+  console.log(`Error in proposals query: ${err}`);
+  return res.status(500).send('Something went wrong getting the data');
+};
+
+
 /**
  * List
  */
-export function all(req, res) {
+function all(req, res) {
+  const start = Date.now();
   Proposal.find({ status: { $ne: 'archived' } }, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
     if (err) {
       console.log(`Error in proposals/all query: ${err}`);
@@ -38,8 +45,10 @@ export function all(req, res) {
       result = groups;
     }
 
-    const shuffleSeed = (req.user && req.user.id) ? req.user.id : String(Date.now());
-    console.log("seed", shuffleSeed);
+    const userId = req.user && req.user.id;
+    const shuffleSeed = userId || String(Date.now());
+    console.log("seed", shuffleSeed, "userId", userId || '?');
+    console.log(Date.now() - start);
     return res.json(shuffler.shuffle(result, shuffleSeed));
   });
 }
@@ -50,7 +59,7 @@ export function all(req, res) {
 const totalRecommendations = 3;
 const randomRecommendations = 2;
 
-export function getRecommendations(req, res) {
+function getRecommendations(req, res) {
   let onlyAcceptedProposals = {};
 
   if (req.query.onlyAccepted) {
@@ -121,31 +130,25 @@ export function getRecommendations(req, res) {
 /**
  * Tags List
  */
-export function tags(req, res) {
-  Proposal.aggregate([
-    { $project: { tags: 1 } },
-    { $unwind: "$tags" },
-    { $group: { _id: "$tags" } }
-  ]).exec().then(tags => {
-    return res.json(tags.filter(tag => !!tag._id).map(tag => tag._id).sort());
-  }).catch(err => {
-    console.log(`Error in proposals/tags query: ${err}`);
-    return res.status(500).send('Something went wrong getting the data');
-  });
+async function tags(req, res) {
+  try {
+    const tags = await getTagsFromDb();
+    res.json(tags.filter(tag => !!tag._id).map(tag => tag._id).sort());
+  } catch(err) {
+    errorHandler(res, err);
+  }
 }
 
 /**
  * Single Proposal
  */
-export function get(req, res) {
-  Proposal.findOne({'id': req.params.id}).populate('speaker_ids').exec((err, proposal) => {
-    if (err) {
-      console.log(`Error in proposals/get query: ${err}`);
-      return res.status(500).send('Something went wrong getting the data');
-    }
-
-    return res.json(transformProposal(proposal, req.user));
-  });
+async function get(req, res) {
+  try {
+    const proposal = await getProposal(req.params.id);
+    res.json(transformProposal(proposal, req.user))
+  } catch(err) {
+    errorHandler(res, err);
+  }
 }
 
 /**
@@ -239,7 +242,7 @@ export function update(req, res) {
 /**
  * Remove a proposal
  */
-export function remove(req, res) {
+function remove(req, res) {
   const query = { id: req.params.id };
   console.log('removing proposal '+JSON.stringify(query));
   Proposal.findOneAndRemove(query, (err) => {
@@ -255,7 +258,7 @@ export function remove(req, res) {
 /**
  * Attend a proposal
  */
-export function attend(req, res) {
+function attend(req, res) {
   if (req.session.passport && req.session.passport.user) {
     let query, update;
     if (req.body.value === true) {
@@ -282,28 +285,36 @@ export function attend(req, res) {
 /**
  * Get Speakers
  */
-export function speakers(req, res) {
-  Proposal.find({ status: 'accepted' }, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
-    if (err) {
-      console.log(`Error in proposals/speakers query: ${err}`);
-      return res.status(500).send('Something went wrong getting the data');
-    }
-
-    let result = _.uniq(_.flatMap(proposals, proposal => proposal.speaker_ids), '_id').map(u => transformUser(u, req.user));
-
-    return res.json(result);
-  });
+async function speakers(req, res) {
+  try {
+    const p = await getAcceptedProposals();
+    const users = await getProposers(p);
+    res.json(users.map(u => transformUser(u, req.user)));
+  } catch(err) {
+    errorHandler(res)
+  }
 }
 
-export function sessions(req, res) {
-  Proposal.find({ status: 'accepted' }).populate('speaker_ids').exec((err, proposals) => {
-    if (err) {
+function proposers(req, res) {
+  const start = Date.now();
+  getAllProposals()
+    .then(getProposers)
+    .then(users => res.json(users))
+    .then(() => console.log(Date.now() - start))
+    .catch(errorHandler(res));
+}
+
+function sessions(req, res) {
+  const start = Date.now();
+  getAcceptedProposals()
+    .then(proposals => res.json(proposals))
+    .then(() => console.log(Date.now() - start))
+    .catch(err => {
       console.log(`Error in proposals/speakers query: ${err}`);
       return res.status(500).send('Something went wrong getting the data');
-    }
+    });
 
-    return res.json(proposals.map(p => transformProposal(p, req.user)));
-  });
+  // return res.json(proposals.map(p => transformProposal(p, req.user)));
 }
 
 const baseQuery = [
@@ -389,7 +400,7 @@ const attendDataQuery = [
   }}
 ];
 
-export function getAllAttendees(req, res) {
+function getAllAttendees(req, res) {
   if (!req.user || !req.user.isReversimTeamMember) {
     return res.send(401);
   }
@@ -412,6 +423,36 @@ export function getAllAttendees(req, res) {
   });
 }
 
+function getProposers(proposals) {
+  const userIds = _.uniq(_.flatMap(proposals, proposal => proposal.speaker_ids), '_id');
+  return User.find({ _id: { $in: userIds }});
+}
+
+function getAllProposals() {
+  return Proposal.find({}, null, { sort: { created_at: -1 } });
+}
+
+function getAcceptedProposals() {
+  return Proposal.find({ status: 'accepted' }, null, { sort: { created_at: -1 } }).map()
+}
+
+function getTagsFromDb() {
+  return Proposal.aggregate([
+    { $project: { tags: 1 } },
+    { $unwind: "$tags" },
+    { $group: { _id: "$tags" } }
+  ]);
+}
+
+function getTags(proposals) {
+  return _.uniq(_.flatMap(proposals, p => p.tags)).sort();
+}
+
+function getProposal(id) {
+  return Proposal.findOne({ id }).populate('speaker_ids');
+}
+
+
 export default {
   all,
   get,
@@ -423,5 +464,10 @@ export default {
   getRecommendations,
   speakers,
   sessions,
-  getAllAttendees
+  proposers,
+  getAllAttendees,
+
+  getAllProposals,
+  getProposers,
+  getTags
 };

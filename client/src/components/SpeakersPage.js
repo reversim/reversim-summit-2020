@@ -15,7 +15,7 @@ const SpeakesPage = ({ speakers, ...props}) => (
     <Container>
       <h1 className="text-center my-5">Meet our speakers</h1>
       <Row>
-        {speakers.toJS().map(SpeakerItem)}
+        {speakers.map(SpeakerItem)}
       </Row>
     </Container>
 

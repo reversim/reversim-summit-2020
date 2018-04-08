@@ -11,14 +11,18 @@ cloudinary.config({
 });
 
 export function me(req, res, next) {
+  return res.status(200).json(getMe(req));
+}
+
+function getMe(req) {
   if (req.isAuthenticated()) {
-    return res.status(200).json({
+    return {
       authenticated: true,
       name: req.user && req.user.profile.name,
       oneLiner: req.user && req.user.profile.oneLiner,
       email: req.user && req.user.email,
       isReversimTeamMember: req.user && req.user.isReversimTeamMember,
-      picture: req.user && req.user.profile.picture,
+      picture: req.user && req.user.profile.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
       bio: req.user && req.user.profile.bio,
       trackRecord: req.user && req.user.profile.trackRecord,
       linkedin: req.user && req.user.profile.linkedin,
@@ -28,11 +32,11 @@ export function me(req, res, next) {
       phone: req.user && req.user.profile.phone,
       id: req.user && req.user._id,
       proposals: req.user && req.user.proposals
-    })
+    };
   } else {
-    return res.status(200).json({
+    return {
       authenticated: false
-    })
+    };
   }
 }
 
@@ -139,30 +143,32 @@ export function uploadProfilePicture(req, res) {
 }
 
 const reversimTeam = [
-  'Lidan Hifi',
+  'Gili Alperovitch',
   'Amit Zur',
-  'Adam Matan',
-  'Shlomi Hassan',
+  'Shlomi Noach',
   'Ori Lahav',
   'Ran Tavory'
 ].map(x => x.toLowerCase());
 
-export function getReversimTeam(req, res) {
-  //console.log('proposal all started...');
-  User.find({ isReversimTeamMember: true }).exec((err, users) => {
-    if (err) {
-      console.log(`Error in users/getReversimTeam query: ${err}`);
-      console.error('stack: '+err.stack);
-      return res.status(500).send('Something went wrong');
-    }
+export async function getReversimTeam(req, res) {
+  try {
+    const team = await getTeam();
+    return res.json(team.map(u => transformUser(u, req.user)));
+  } catch(err) {
+    return res.status(500).send('Something went wrong');
+  }
+}
 
-    let ret = users
-      .sort((a,b) => {
-        return reversimTeam.indexOf(b.profile.name.toLowerCase()) - reversimTeam.indexOf(a.profile.name.toLowerCase());
-      })
-      .map(u => transformUser(u, req.user));
-    return res.json(ret);
-  });
+async function getTeam() {
+  try {
+    const users = await User.find({ isReversimTeamMember: true });
+    return users.sort((a,b) => {
+      return reversimTeam.indexOf(b.profile.name.toLowerCase()) - reversimTeam.indexOf(a.profile.name.toLowerCase());
+    });
+  } catch(err) {
+    console.log(`Error in users/getReversimTeam query: ${err}`);
+    throw err;
+  }
 }
 
 /**
@@ -193,5 +199,7 @@ export default {
   signUp,
   getProposals,
   getReversimTeam,
-  uploadProfilePicture
+  uploadProfilePicture,
+  getMe,
+  getTeam
 };
