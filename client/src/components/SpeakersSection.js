@@ -6,7 +6,7 @@ import { colors } from '../utils';
 
 const SpeakerItem = (speaker, i) => {
   return <Col xs="12" sm="6" md="4" lg="3" className="mb-4" key={i}>
-    <Speaker {...speaker} color={colors[i%colors.length]}/>
+    <Speaker speaker={speaker} color={colors[i%colors.length]}/>
   </Col>
 };
 

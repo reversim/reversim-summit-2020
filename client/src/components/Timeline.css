@@ -1,0 +1,20 @@
+.timelineLine {
+  position: relative;
+}
+
+.timelineLine:before,
+.timelineLine:after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  height: 45px;
+  border-left: 1px dotted #ced4da;
+}
+
+.timelineLine:before {
+  top: -45px;
+}
+
+.timelineLine:after {
+  bottom: -45px;
+}

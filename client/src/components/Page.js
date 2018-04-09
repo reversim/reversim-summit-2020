@@ -11,10 +11,10 @@ class Page extends Component {
   }
 
     render() {
-        const { children, isHome, user, isSmallScreen, onLogout } = this.props;
+        const { children, isHome, user, isSmallScreen, onLogout, location } = this.props;
         return (
             <div style={isHome ? {} : { paddingTop: 77 }}>
-              <Navbar isHome={isHome} user={user} isSmallScreen={isSmallScreen} onLogout={onLogout}/>
+              <Navbar isHome={isHome} user={user} isSmallScreen={isSmallScreen} onLogout={onLogout} pathname={location.pathname} />
               {children}
               <Footer />
             </div>

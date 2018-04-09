@@ -59,7 +59,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { isHome, isSmallScreen, user, onLogout } = this.props;
+    const { isHome, isSmallScreen, user, onLogout, pathname } = this.props;
     const { fixed } = this.state;
     const items = navItems(isHome);
 
@@ -70,14 +70,17 @@ class Navbar extends Component {
       <Link className="navbar-brand mr-5" to="/">{logo}</Link>
 
     return (
-      <Navbar2 toggleable fixed="top" className={cn({ [s.isNotHome]: !isHome, [s.isWhite]: !isHome || fixed })}>
-        <NavbarToggler right onClick={this.toggle}/>
+      <Navbar2 expand fixed="top" className={cn({ [s.isNotHome]: !isHome, [s.isWhite]: !isHome || fixed })}>
+        <NavbarToggler onClick={this.toggle}/>
         {navbarBrand}
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav navbar>
             { items.map(NavbarItem) }
           </Nav>
         </Collapse>
+        { pathname !== '/cfp' && <Button color="primary" className="mr-4">
+          <Link to="/cfp" className="unstyled-link">Submit your session</Link>
+        </Button> }
 
 				{ !isServer && !isSmallScreen && <div className="ml-auto">
 					{ user.authenticated ?

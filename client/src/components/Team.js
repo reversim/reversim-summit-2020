@@ -22,7 +22,7 @@ class Team extends Component {
 
   teamMember = ({ _id, name, oneLiner, picture, bio }) => {
     const toggle = this.toggle(_id);
-    return <Col sm="6" md="4" lg="3" key={name} className={cn(s.teamMember, "text-center mb-5")} onClick={() => this.onTeamMemberClick(_id)}>
+    return <Col sm="6" md="4" lg="3" key={name} className={cn(s.teamMember, "text-center mb-5 cursor-pointer")} onClick={() => this.onTeamMemberClick(_id)}>
       <div className={cn(s.teamImg, "mx-auto mb-3")} style={{ backgroundImage: `url('${picture}')` }}/>
       <h4>{name}</h4>
       <p>{oneLiner}</p>

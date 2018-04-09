@@ -1,5 +1,5 @@
 import React, { Component, createElement } from 'react';
-import { StaticRouter, BrowserRouter, Route } from 'react-router-dom';
+import { StaticRouter, BrowserRouter, Route, withRouter } from 'react-router-dom';
 import routes from '../data/routeComps';
 import ga from 'react-ga';
 import { isServer } from '../utils';
@@ -33,7 +33,7 @@ class App extends Component {
       <Router location={this.props.location} context={{}}>
         <div>
           { routes.map(route=> (
-            <Route exact component={() => createElement(route.comp, { ...this.state })} path={route.path} key={route.path}/>
+            <Route exact component={() => createElement(withRouter(route.comp), { ...this.state })} path={route.path} key={route.path}/>
           ))}
         </div>
       </Router>

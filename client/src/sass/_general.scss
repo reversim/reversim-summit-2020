@@ -82,8 +82,13 @@ a.unstyled-link:hover,
 a.unstyled-link:focus,
 a.unstyled-link:active {
   color: inherit;
+  text-decoration: none;
 }
 
 .text-underline {
   text-decoration: underline;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Container, Input, Row } from 'reactstrap';
+import { Button, Col, Container, Input, Modal, Row } from 'reactstrap';
 import cn from 'classnames';
 import { getRemainingCFPDays, navigateTo, REVERSIM_SUMMIT } from '../utils';
 import Page from './Page';
@@ -15,7 +15,6 @@ import uniq from 'lodash/uniq';
 import without from 'lodash/without';
 import FormField from './FormField';
 import Tags from './Tags';
-import Rodal from 'rodal';
 
 
 
@@ -231,7 +230,7 @@ In this session I will present our open-sourced package that analyzed our micros
             handleDelete={this.onDeleteTag}
             readOnly={this.state.tags.length===2} />
 
-          <Rodal visible={!!newTagPending} onClose={() => { this.setState({ newTagPending: null })}}>
+          <Modal isOpen={!!newTagPending} toggle={() => { this.setState({ newTagPending: null })}}>
             <div className="text-center">
               <h6>'{newTagPending}' doesn't exist</h6>
               <p>Before adding a new tag, please check if there's already an existing tag like this one.</p>
@@ -241,7 +240,7 @@ In this session I will present our open-sourced package that analyzed our micros
                 <Button outline size="sm" onClick={(e) => { e.preventDefault(); this.addTag(newTagPending); this.setState({ newTagPending:null }); }}>Add <b>{newTagPending}</b></Button>
               </div>
             </div>
-          </Rodal>
+          </Modal>
 
           <h6>Private information</h6>
           <small>The following information will be available <b>only to the organizing committee</b></small>

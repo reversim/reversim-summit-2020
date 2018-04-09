@@ -11,7 +11,7 @@ const Location = () => (
     <div className={cn(s.info, "p-4 p-md-5 bg-white")}>
       <h3 className="pb-4">Location</h3>
       <Row className="pb-3">
-        <i className="fa fa-map-marker text-primary mr-3"/><span>College of Management,<br /> 2 Elie Wiesel st., Rishon LeTsiyon</span>
+        <i className="fa fa-map-marker text-primary mr-3"/><span>Tel Aviv University,<br /> Smolarz Auditorium</span>
       </Row>
       {/*<Row>*/}
         {/*<i className="fa fa-info text-primary mr-3"/><span>More info will be published soon</span>*/}

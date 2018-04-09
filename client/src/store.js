@@ -6,6 +6,7 @@ import { isServer } from './utils';
 const store = {
   proposals: [],
   users: [],
+  user: { isFetching: true },
   team: [],
   messages: [],
 	tags: [],
@@ -17,7 +18,6 @@ const store = {
   sessions: [], // TODO remove
 
   isSmallScreen: window.innerWidth < 576,
-  user: { isFetching: true },
   onLogout: () => store.user = { authenticated: false },
 
 	isUploadingPhoto: false,

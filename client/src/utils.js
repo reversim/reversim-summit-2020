@@ -26,3 +26,5 @@ export const getRemainingCFPDays = () => {
   const today = new Date();
   return Math.ceil((CFP_ENDS - today) / 86400000);
 };
+
+export const getSpeakerHref = (user) => isServer ? `${user._id}.html` : user._id;
