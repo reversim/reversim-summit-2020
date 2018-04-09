@@ -1,32 +1,11 @@
-import React, {Component} from 'react';
-import {Element, scroller} from 'react-scroll';
+import React, { createElement } from 'react';
 import homeSections from '../data/home-sections';
 import Page from './Page';
 
-class Home extends Component {
-
-  componentDidMount() {
-    let { pathname } = window.location;
-    if (pathname) pathname = pathname.slice(1);
-    scroller.scrollTo(pathname, {
-      offset: -80
-    });
-  }
-
-  renderSection = ({name, el}, i) => (
-    <Element name={name} key={i}>
-      {React.createElement(el, this.props)}
-    </Element>
-  );
-
-  render() {
-    return (
-      <Page isHome={true} {...this.props}>
-        {homeSections.map(this.renderSection)}
-      </Page>
-    );
-  }
-
-}
+const Home = (props) => (
+  <Page isHome={true} {...props}>
+    {homeSections.map(({ el }, i) => createElement(el, { key: i, ...props }))}
+  </Page>
+);
 
 export default Home;

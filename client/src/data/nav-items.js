@@ -1,16 +1,17 @@
 import { isServer } from '../utils';
 
-const about =    { to: "about", text: "About" };
-const register = { to: "register", text: "Register", noScroll: true };
+const register = { to: "register", text: "Register" };
 const team =     { to: "team", text: "Team" };
-const location = { to: "location", text: "Getting there", noScroll: true };
-const speakers = { to: "speakers", text: "Speakers", noScroll: true };
-const sponsors = { to: "sponsors", text: "Sponsors", noScroll: true };
-const schedule = { to: "schedule", text: "Schedule", noScroll: true };
+const location = { to: "location", text: "Getting there" };
+const speakers = { to: "speakers", text: "Speakers" };
+const sponsors = { to: "sponsors", text: "Sponsors" };
+const schedule = { to: "schedule", text: "Schedule" };
 
-export default (isHome) => {
+export default () => {
+	let items;
+
 	if (isServer) {
-		return [
+		items = [
 			speakers,
 			schedule,
 			location,
@@ -20,21 +21,16 @@ export default (isHome) => {
 			external: true,
 			to: `${item.to}.html`
 		}));
+	} else {
+		items = [
+      register,
+      speakers,
+      schedule,
+      location,
+      team,
+      sponsors
+    ];
 	}
 
-  let items = [
-		about,
-		register,
-		speakers,
-		schedule,
-		location,
-		team,
-		sponsors
-	];
-
-  if (!isHome) {
-    items = items.map(item => ({ noScroll: true, ...item }));
-  }
-
-  return items;
+	return items;
 }

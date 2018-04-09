@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
 import s from './Navbar.css';
@@ -14,14 +13,12 @@ const navLinkClass = cn("nav-link", s.navLink);
 
 const onNavItemClick = (name) => () => navigateTo(name);
 
-const NavbarItem = ({ to, text, noScroll, external }) => {
+const NavbarItem = ({ to, text, external }) => {
   let link;
   if (external) {
     link = <a className={navLinkClass} href={`/${to}`}>{text}</a>
-  } else if (noScroll) {
-    link = <Link className={navLinkClass} to={`/${to}`} onClick={onNavItemClick(to)}>{text}</Link>;
   } else {
-    link = <ScrollLink className={navLinkClass} activeClass='active' to={to} spy={true} smooth={true} offset={-50} duration={500} onClick={onNavItemClick(to)}>{text}</ScrollLink>
+    link = <Link className={navLinkClass} to={`/${to}`} onClick={onNavItemClick(to)}>{text}</Link>;
   }
   return (
     <NavItem key={to} className={s.navItem}>
@@ -69,7 +66,7 @@ class Navbar extends Component {
     const logo = <img className={s.logo} src={logoImg} onClick={onNavItemClick("/")} alt={REVERSIM_SUMMIT}/>
 
     const navbarBrand = isHome ?
-      <ScrollLink className='navbar-brand mr-5' activeClass='active' to="hero" spy={true} smooth={true} offset={-50} duration={500}>{logo}</ScrollLink> :
+      <a href='/'>{logo}</a> :
       <Link className="navbar-brand mr-5" to="/">{logo}</Link>
 
     return (
