@@ -199,7 +199,7 @@ export function add(req, res) {
             {
               title: proposal.title,
               author_name: authorName,
-              author_link: `https://summit2017.reversim.com/session/${proposal.id}`,
+              author_link: `https://summit2018.reversim.com/session/${proposal.id}`,
               author_icon: speakers[0].profile.picture,
               text: speakers[0].email
             },
