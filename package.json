@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node dev.js",
-    "postinstall": "cd server && yarn && cd ../client && yarn",
+    "start": "node server",
+    "dev": "node dev.js",
     "heroku-postbuild": "cd client && yarn --production=false && yarn build"
   },
   "dependencies": {
