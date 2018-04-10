@@ -10,7 +10,7 @@ import helmet from 'helmet';
 import { session as dbSession } from '../db';
 
 export default (app) => {
-  app.set('port', (process.env.SERVER_PORT || 5001));
+  app.set('port', (process.env.PORT || 5001));
 
   if (process.env.NODE_ENV === 'production') {
     app.use(gzip());
