@@ -11,32 +11,10 @@ cloudinary.config({
 });
 
 export function me(req, res, next) {
-  return res.status(200).json(getMe(req));
-}
-
-function getMe(req) {
   if (req.isAuthenticated()) {
-    return {
-      authenticated: true,
-      name: req.user && req.user.profile.name,
-      oneLiner: req.user && req.user.profile.oneLiner,
-      email: req.user && req.user.email,
-      isReversimTeamMember: req.user && req.user.isReversimTeamMember,
-      picture: req.user && req.user.profile.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
-      bio: req.user && req.user.profile.bio,
-      trackRecord: req.user && req.user.profile.trackRecord,
-      linkedin: req.user && req.user.profile.linkedin,
-      twitter: req.user && req.user.profile.twitter,
-      stackOverflow: req.user && req.user.profile.stackOverflow,
-      github: req.user && req.user.profile.github,
-      phone: req.user && req.user.profile.phone,
-      id: req.user && req.user._id,
-      proposals: req.user && req.user.proposals
-    };
+    return res.status(200).json(transformUser(req.user, req.user));
   } else {
-    return {
-      authenticated: false
-    };
+    return res.status(403).text('No logged in user');
   }
 }
 
@@ -200,6 +178,5 @@ export default {
   getProposals,
   getReversimTeam,
   uploadProfilePicture,
-  getMe,
   getTeam
 };

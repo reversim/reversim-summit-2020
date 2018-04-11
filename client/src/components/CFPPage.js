@@ -65,17 +65,17 @@ class SubmissionForm extends React.Component {
     newTagPending: null,
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const formElements = e.target.elements;
 
     const {
-      user: { authenticated, id },
-      updateUser,
+      user,
+      updateUserData,
       createProposal,
     } = this.props;
 
-    if (authenticated) {
+    if (user) {
       const fullname = formElements.fullname.value;
       const oneLiner = formElements.oneLiner.value;
       const bio = formElements.bio.value;
@@ -99,22 +99,25 @@ class SubmissionForm extends React.Component {
         return;
       }
 
-      updateUser({
-        'profile.name': fullname,
-        'profile.bio': bio,
-        'profile.trackRecord': trackRecord,
-        'profile.linkedin': linkedin,
-        'profile.twitter': twitter,
-        'profile.github': github,
-        'profile.oneLiner': oneLiner,
-        'profile.phone': phone
-      })
-        .then(() => createProposal(title, abstract, proposalType, [id], tags, outline, video_url))
-        .then((result) => Promise.resolve(navigateTo(`/session/${result.id}`)))
-        .catch(ex => ga.exception({
+      try {
+        await updateUserData(user._id, {
+          'profile.name': fullname,
+          'profile.bio': bio,
+          'profile.trackRecord': trackRecord,
+          'profile.linkedin': linkedin,
+          'profile.twitter': twitter,
+          'profile.github': github,
+          'profile.oneLiner': oneLiner,
+          'profile.phone': phone
+        });
+        const result = await createProposal(title, abstract, proposalType, [user._id], tags, outline, video_url);
+        navigateTo(`/session/${result.id}`);
+      } catch(ex) {
+        ga.exception({
           description: `Error on submit: ${ex}`,
           fatal: true
-        }));
+        });
+      }
     }
   };
 
@@ -269,7 +272,7 @@ const BottomContent = ({
   ...props,
 }) => {
   if (!submission) return <SubmissionClosed />;
-  else if (!user.authenticated) return <NonAuthenticated />;
+  else if (!user) return <NonAuthenticated />;
   else return <SubmissionForm user={user} {...props}/>
 };
 

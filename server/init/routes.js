@@ -59,17 +59,19 @@ export default (app) => {
     const proposals = await proposalsController.getAllProposals();
     const users = await proposalsController.getProposers(proposals);
     const tags = proposalsController.getTags(proposals);
-    const user = usersController.getMe(req);
+    const user = req.user;
     const team = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
 
-    const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user))
-    const mappedUsers = users.map(user => transformUser(user, req.user))
+    if (user && !users.find(u => u._id === user._id)) users.unshift(user);
+
+    const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user));
+    let mappedUsers = users.map(u => transformUser(u, req.user));
 
     res.json({
       proposals: mappedProposals,
       users: keyBy(mappedUsers, '_id'),
-      user,
+      user: user ? user._id : null,
       tags,
       team: team.map(user => transformUser(user, req.user)),
       messages,

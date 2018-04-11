@@ -9,7 +9,9 @@ export function transformUser(user, loggedInUser) {
     user = user._doc;
   }
 
-  let isReversimMember = isReversimTeamMember(loggedInUser);
+  const isTeamMember = isReversimTeamMember(loggedInUser);
+  const isLoggedInUser = loggedInUser && (String(loggedInUser._id) === String(user._id));
+  const canViewPrivate = isTeamMember || isLoggedInUser;
 
   if (_.isObject(user) && _.has(user, 'profile')) {
     return {
@@ -17,8 +19,8 @@ export function transformUser(user, loggedInUser) {
       proposals: user.proposals && user.proposals.map(p => String(p)),
       name: user.profile && user.profile.name,
       oneLiner: user.profile && user.profile.oneLiner,
-      email: isReversimMember && user.email,
-      trackRecord: isReversimMember && user.profile.trackRecord,
+      email: canViewPrivate && user.email,
+      trackRecord: canViewPrivate && user.profile.trackRecord,
       isReversimTeamMember: user.isReversimTeamMember,
       bio: user.profile && user.profile.bio,
       gender: user.profile && user.profile.gender,
@@ -27,7 +29,7 @@ export function transformUser(user, loggedInUser) {
       twitter: user.profile && user.profile.twitter,
       stackOverflow: user.profile && user.profile.stackOverflow,
       github: user.profile && user.profile.github,
-      phone: isReversimMember && user.profile && user.profile.phone
+      phone: canViewPrivate && user.profile && user.profile.phone
     };
   }
 

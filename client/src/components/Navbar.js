@@ -83,7 +83,7 @@ class Navbar extends Component {
         </Button> }
 
 				{ !isServer && !isSmallScreen && <div className="ml-auto">
-					{ user.authenticated ?
+					{ user ?
             <Avatar {...user} onLogout={onLogout}/>
 						: <a href="/auth/google">
               <Button outline color="secondary" onClick={this.login}>Login</Button>

@@ -44,3 +44,7 @@ export async function getInitialData() {
   return await get('/api/initial');
 }
 
+export async function updateUser(user) {
+  return await post('/updateUser', user);
+}
+

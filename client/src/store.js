@@ -6,7 +6,7 @@ import { isServer } from './utils';
 const store = {
   proposals: [],
   users: [],
-  user: { isFetching: true },
+  user: null,
   team: [],
   messages: [],
 	tags: [],
@@ -18,19 +18,6 @@ const store = {
   sessions: [], // TODO remove
 
   isSmallScreen: window.innerWidth < 576,
-  onLogout: () => store.user = { authenticated: false },
-
-	isUploadingPhoto: false,
-  onUploadingPhoto: () => {
-    store.isUploadingPhoto = true;
-  },
-  onPhotoUploaded: (url) => {
-    store.isUploadingPhoto = false;
-    console.log("user", store.user);
-    store.user = { ...store.user, picture: url };
-    const speaker = store.speakers.find(x => x.id === store.user.id);
-    if (speaker) speaker.picutre = url;
-  },
 
   onAddMessage: (text) => {
     addMessage(text).then(msg => store.messages.push(msg));
