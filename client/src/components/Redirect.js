@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 const Redirect = WrappedComponent => class extends Component {
   componentWillMount() {
     if (this.props.fetchComplete && !this.props.user) {
-      window.location.href = '/auth/google';
+      const to = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.href = `/auth/google?returnTo=${to}`;
     }
   }
 
