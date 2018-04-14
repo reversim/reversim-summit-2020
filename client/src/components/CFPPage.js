@@ -100,15 +100,15 @@ class SubmissionForm extends React.Component {
       }
 
       try {
-        await updateUserData(user._id, {
-          'profile.name': fullname,
-          'profile.bio': bio,
-          'profile.trackRecord': trackRecord,
-          'profile.linkedin': linkedin,
-          'profile.twitter': twitter,
-          'profile.github': github,
-          'profile.oneLiner': oneLiner,
-          'profile.phone': phone
+        await updateUserData({
+          name        : fullname,
+          bio         : bio,
+          trackRecord : trackRecord,
+          linkedin    : linkedin,
+          twitter     : twitter,
+          github      : github,
+          oneLiner    : oneLiner,
+          phone       : phone
         });
         const result = await createProposal(title, abstract, proposalType, [user._id], tags, outline, video_url);
         navigateTo(`/session/${result.id}`);

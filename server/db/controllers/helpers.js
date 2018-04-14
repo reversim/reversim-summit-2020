@@ -13,23 +13,23 @@ export function transformUser(user, loggedInUser) {
   const isLoggedInUser = loggedInUser && (String(loggedInUser._id) === String(user._id));
   const canViewPrivate = isTeamMember || isLoggedInUser;
 
-  if (_.isObject(user) && _.has(user, 'profile')) {
+  if (_.isObject(user)) {
     return {
       _id: user._id,
       proposals: user.proposals && user.proposals.map(p => String(p)),
-      name: user.profile && user.profile.name,
-      oneLiner: user.profile && user.profile.oneLiner,
+      name: user.name,
+      oneLiner: user.oneLiner,
       email: canViewPrivate && user.email,
-      trackRecord: canViewPrivate && user.profile.trackRecord,
+      trackRecord: canViewPrivate && user.trackRecord,
       isReversimTeamMember: user.isReversimTeamMember,
-      bio: user.profile && user.profile.bio,
-      gender: user.profile && user.profile.gender,
-      picture: user.profile && user.profile.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
-      linkedin: user.profile && user.profile.linkedin,
-      twitter: user.profile && user.profile.twitter,
-      stackOverflow: user.profile && user.profile.stackOverflow,
-      github: user.profile && user.profile.github,
-      phone: canViewPrivate && user.profile && user.profile.phone
+      bio: user.bio,
+      gender: user.gender,
+      picture: user.picture && user.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
+      linkedin: user.linkedin,
+      twitter: user.twitter,
+      stackOverflow: user.stackOverflow,
+      github: user.github,
+      phone: canViewPrivate && user.phone
     };
   }
 

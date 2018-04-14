@@ -1,7 +1,9 @@
 import Home from '../components/Home';
 // import Agenda from '../components/Agenda';
-// import SpeakerPage from '../components/SpeakerPage';
-// import SessionPage from '../components/SessionPage';
+import MyProfile from '../components/MyProfile';
+import SpeakerPage from '../components/SpeakerPage';
+import SpeakerEditPage from '../components/SpeakerEditPage';
+import SessionPage from '../components/SessionPage';
 // import SpeakersPage from "../components/SpeakersPage";
 // import Sponsors from "../components/Sponsors";
 // import RegisterPage from "../components/RegisterPage";
@@ -16,14 +18,16 @@ import TimelinePage from '../components/TimelinePage';
 export default [
   { path: "/", comp: Home },
   { path: "/about", comp: Home },
+  { path: "/profile", comp: MyProfile },
   // { path: "/register", comp: RegisterPage },
   // { path: "/schedule", comp: Agenda },
   // { path: "/speakers", comp: SpeakersPage },
   { path: "/location", comp: LocationPage },
   // { path: "/sponsors", comp: Sponsors },
   { path: "/team", comp: TeamPage },
-  // { path: "/speaker/:id", comp: SpeakerPage },
-  // { path: "/session/:id", comp: SessionPage },
+  { path: "/speaker/:id", comp: SpeakerPage },
+  { path: "/speaker/:id/edit", comp: SpeakerEditPage },
+  { path: "/session/:id", comp: SessionPage },
   { path: "/admin", comp: AdminPage },
   // { path: "/women-gathering", comp: WomenGathering },
   { path: "/cfp", comp: CFPPage },

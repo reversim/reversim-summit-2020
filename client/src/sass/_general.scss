@@ -34,8 +34,24 @@ small {
   font-size: 12px;
 }
 
+label {
+  display: block;
+  margin-bottom: $spacer;
+  letter-spacing: 0.6px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+}
+
 .font-size-lg {
-  font-size: 24px;
+  font-size: $font-size-lg;
+}
+
+.font-size-sm {
+  font-size: $font-size-sm;
 }
 
 .font-pt {
@@ -67,10 +83,12 @@ small {
 
 }
 
-a,
-a:hover,
-a:focus {
-  color: #29b6f6;
+.bg-gray-900 {
+  a,
+  a:hover,
+  a:focus {
+    color: $info;
+  }
 }
 
 .bg-white {

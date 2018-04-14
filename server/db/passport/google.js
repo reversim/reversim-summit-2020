@@ -10,9 +10,9 @@ export default (req, accessToken, refreshToken, profile, done) => {
       return User.findById(req.user.id, (findByIdErr, user) => {
         user.google = profile.id;
         user.tokens.push({ kind: 'google', accessToken });
-        user.profile.name = user.profile.displayName || profile._json.displayName;
-        user.profile.gender = user.profile.gender || profile._json.gender;
-        user.profile.picture = (profile.photos[0].value || profile._json.image.url).replace(/\?sz=\d+/,"");
+        user.name = user.name || profile._json.displayName;
+        user.gender = user.gender || profile._json.gender;
+        user.picture = (profile.photos[0].value || profile._json.image.url).replace(/\?sz=\d+/,"");
         user.created_at = new Date();
         user.save((err) => {
           done(err, user, { message: 'Google account has been linked.' });
@@ -35,9 +35,9 @@ export default (req, accessToken, refreshToken, profile, done) => {
       user.email = profile.emails[0].value || profile._json.emails[0].value;
       user.google = profile.id;
       user.tokens.push({ kind: 'google', accessToken });
-      user.profile.name = profile.displayName || profile._json.displayName;
-      user.profile.gender = user.profile.gender || profile._json.gender;
-      user.profile.picture = (profile.photos[0].value || profile._json.image.url).replace(/\?sz=\d+/,"");
+      user.name = profile.displayName || profile._json.displayName;
+      user.gender = user.profile.gender || profile._json.gender;
+      user.picture = (profile.photos[0].value || profile._json.image.url).replace(/\?sz=\d+/,"");
       user.created_at = new Date();
       return user.save((err) => {
         done(err, user);

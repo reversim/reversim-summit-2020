@@ -3,7 +3,7 @@
 }
 
 .sectionHeader:before {
-    color: #1ac6ff;
+    color: #6b1ee6;
     content: attr(data-text);
     display: block;
     font-size: 2em;
@@ -15,7 +15,7 @@
 }
 
 .sectionHeader:after {
-    border-bottom: 3px solid #1ac6ff;
+    border-bottom: 3px solid #6b1ee6;
     bottom: -0.8em;
     content: '';
     display: block;

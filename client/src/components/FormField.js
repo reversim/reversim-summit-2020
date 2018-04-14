@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { createElement } from 'react';
+import { Input } from 'reactstrap';
 
 const Radio = ({ id, value, values: radioValues, onChange }) => {
   return (
@@ -16,39 +17,30 @@ const Radio = ({ id, value, values: radioValues, onChange }) => {
 };
 
 
-export default ({ label, id, required, text, caption, subtitle, placeholder, inputType, multiline, fullRow, onChange, value, values, minLength, maxLength }) => {
+export default ({ label, id, required, text, subtitle, placeholder, inputType, multiline, onChange, value, values, minLength, maxLength, className }) => {
   if (inputType === "radio") return (
     <Radio {...{ id, value, values, onChange }} />
   );
 
-  if (caption === undefined && !required) {
-    caption = 'Optional. will be presented on the website';
-  }
-
   let valueComp;
 
   if (text) valueComp = text;
-  else valueComp = React.createElement(multiline ? 'textarea' : 'input', {
+  else valueComp = createElement(Input, {
     id,
-    type: inputType || "text",
+    type: multiline ? 'textarea' : (inputType || "text"),
     defaultValue: value,
     placeholder,
     onChange,
     required,
     minLength,
-    maxLength
+    maxLength,
   });
 
-  const valueClass = fullRow && 'col-sm-6';
-
   return (
-    <div>
+    <div className={className}>
       <label htmlFor={id}>{label}</label>
-      { subtitle && <small style={{display:'block'}} className="text-muted">{subtitle}</small> }
-      <span className={valueClass}>
-        {valueComp}
-      </span>
-      { caption && <small className="col-sm-6">{caption}</small> }
+      { subtitle && <small className="d-block text-muted mb-2">{subtitle}</small> }
+      {valueComp}
     </div>
   );
 };

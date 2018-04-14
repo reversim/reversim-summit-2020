@@ -187,7 +187,7 @@ export function add(req, res) {
       return User.findOne({ _id: speaker_id });
     })).then(speakers => {
 
-      const authorName = speakers.map(speaker => speaker.profile.name).join(" & ");
+      const authorName = speakers.map(speaker => speaker.name).join(" & ");
       request({
         url: process.env.SLACK_URL,
         method: "POST",
@@ -200,7 +200,7 @@ export function add(req, res) {
               title: proposal.title,
               author_name: authorName,
               author_link: `https://summit2018.reversim.com/session/${proposal.id}`,
-              author_icon: speakers[0].profile.picture,
+              author_icon: speakers[0].picture,
               text: speakers[0].email
             },
             {
@@ -342,9 +342,9 @@ const baseQuery = [
       }
     },
     title: { $first: "$title" },
-    speaker: { $first: "$speaker.profile.name" },
+    speaker: { $first: "$speaker.name" },
     attendees: {
-      $push: { $concat: ["$attendee.profile.name", " <", "$attendee.email", ">"] }
+      $push: { $concat: ["$attendee.name", " <", "$attendee.email", ">"] }
     },
     attendeeCount: { $sum: 1 }
   }}

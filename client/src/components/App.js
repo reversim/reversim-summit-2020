@@ -4,7 +4,7 @@ import routes from '../data/routeComps';
 import ga from 'react-ga';
 import { isServer } from '../utils';
 import store from '../store';
-import { getInitialData, uploadPhoto, updateUser } from '../data-service';
+import { getInitialData, uploadPhoto, updateUser, logout } from '../data-service';
 
 if (!isServer && process.env.NODE_ENV !== "development") {
   ga.initialize('UA-36904731-4');
@@ -12,12 +12,20 @@ if (!isServer && process.env.NODE_ENV !== "development") {
 
 }
 
-const userUpdater = (id, data) => state => ({
-  users: {
-    ...state.users,
-    [id]: { ...state.users[id], ...data }
+const userUpdater = (id, data) => state => {
+  const newUser = { ...state.users[id], ...data };
+  const newState = {
+    users: {
+      ...state.users,
+      [id]: newUser
+    }
+  };
+
+  if (state.user && state.user._id === id) {
+    newState.user = newUser;
   }
-});
+  return newState;
+};
 
 const Router = isServer ? StaticRouter : BrowserRouter;
 const initialDataPromise = getInitialData();
@@ -30,22 +38,26 @@ class App extends Component {
       this.setState({
         ...data,
         user,
+        fetchComplete: true
       })
     });
   }
 
-  onLogout = () => this.setState({ user: null });
+  onLogout = async () => {
+    await logout();
+    window.location.href = '/';
+  };
 
   updateUserData = async (data) => {
-    const userId = this.state.user;
-    if (!userId) return;
+    const { user } = this.state;
+    if (!user) return;
 
     await updateUser(data);
-    this.setState(userUpdater(userId, data));
+    this.setState(userUpdater(user._id, data));
   };
 
   updateUserPhoto = async (id, imgData) => {
-    const { imageUrl } = uploadPhoto(id, imgData);
+    const { imageUrl } = await uploadPhoto(id, imgData);
     this.setState(userUpdater(id, { picture: imageUrl }));
   };
 

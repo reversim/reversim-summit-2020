@@ -11,7 +11,7 @@ $gray-900: #212529;
 $black:    #000;
 
 $blue:    #29b6f6;
-$indigo:  #6610f2;
+$indigo:  #6b1ee6;
 $purple:  #6f42c1;
 $pink:    #e83e8c;
 $red:     #dc3545;
@@ -37,10 +37,11 @@ $colors: (
   "gray-dark":  $gray-800
 );
 
-$primary:       $blue;
+$primary:       $indigo;
+$primary-light: lighten($primary, 20%);
 $secondary:     $gray-600;
 $success:       $green;
-$info:          $cyan;
+$info:          $primary-light;
 $warning:       $yellow;
 $danger:        $red;
 $light:         $gray-100;
@@ -212,8 +213,8 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //// stylelint-enable value-keyword-case
 //
 //$font-size-base:              1rem; // Assumes the browser default, typically `16px`
-//$font-size-lg:                ($font-size-base * 1.25);
-//$font-size-sm:                ($font-size-base * .875);
+$font-size-lg:                24px;
+$font-size-sm:                12px;
 //
 //$font-weight-light:           300;
 //$font-weight-normal:          400;
@@ -229,7 +230,7 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //$h5-font-size:                $font-size-base * 1.25;
 //$h6-font-size:                $font-size-base;
 //
-//$headings-margin-bottom:      ($spacer / 2);
+$headings-margin-bottom:      ($spacer * 2);
 //$headings-font-family:        inherit;
 //$headings-font-weight:        500;
 //$headings-line-height:        1.2;
@@ -302,7 +303,7 @@ $font-family-sans-serif:      Raleway, sans-serif;
 ////
 //// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 //
-//$input-btn-padding-y:         .375rem;
+$input-btn-padding-y:         .75rem;
 //$input-btn-padding-x:         .75rem;
 //$input-btn-line-height:       $line-height-base;
 //
@@ -397,10 +398,10 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //$input-height-inner:                    ($font-size-base * $input-btn-line-height) + ($input-btn-padding-y * 2);
 //$input-height:                          calc(#{$input-height-inner} + #{$input-height-border});
 //
-//$input-height-inner-sm:                 ($font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2);
+$input-height-inner-sm:                 24px;
 //$input-height-sm:                       calc(#{$input-height-inner-sm} + #{$input-height-border});
 //
-//$input-height-inner-lg:                 ($font-size-lg * $input-btn-line-height-lg) + ($input-btn-padding-y-lg * 2);
+$input-height-inner-lg:                 48px;
 //$input-height-lg:                       calc(#{$input-height-inner-lg} + #{$input-height-border});
 //
 //$input-transition:                      border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -575,8 +576,8 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //$navbar-brand-font-size:            $font-size-lg;
 //// Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
 //$nav-link-height:                   ($font-size-base * $line-height-base + $nav-link-padding-y * 2);
-//$navbar-brand-height:               $navbar-brand-font-size * $line-height-base;
-//$navbar-brand-padding-y:            ($nav-link-height - $navbar-brand-height) / 2;
+$navbar-brand-height:               36px; // $navbar-brand-font-size * $line-height-base;
+$navbar-brand-padding-y:            5px; // ($nav-link-height - $navbar-brand-height) / 2;
 //
 //$navbar-toggler-padding-y:          .25rem;
 //$navbar-toggler-padding-x:          .75rem;

@@ -11,11 +11,11 @@ db.proposals.aggregate([
 	{ $unwind: "$speaker"},
 	{ $project: {
 		"_id": 0,
-		"speaker.profile.picture": 1,
-		"speaker.profile.name": 1
+		"speaker.picture": 1,
+		"speaker.name": 1
 	}},
 	{ $group: {
-		_id: "$speaker.profile.name",
-		picture: { $first: "$speaker.profile.picture" }
+		_id: "$speaker.name",
+		picture: { $first: "$speaker.picture" }
 	}}
 ]);

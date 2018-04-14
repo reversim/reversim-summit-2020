@@ -8,7 +8,7 @@ export const PREDEFINED_TAGS = [
 ];
 
 export const PROPOSAL_TYPES = {
-  "full": "Full Featured (30-40 min.)",
+  "full": "Full Featured (30 min.)",
   "lightning": "Lightning Talk (5 min.)",
   "ossil": "Open Source in Israel (10 min.)"
 };

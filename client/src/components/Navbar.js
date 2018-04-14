@@ -9,6 +9,12 @@ import Avatar from "./Avatar";
 import { isServer, navigateTo } from '../utils';
 import { REVERSIM_SUMMIT } from '../utils';
 
+const CFPCTA = () => (
+  <Button color="primary" className="mr-4">
+    <Link to="/cfp" className="unstyled-link">Submit session</Link>
+  </Button>
+);
+
 const navLinkClass = cn("nav-link", s.navLink);
 
 const onNavItemClick = (name) => () => navigateTo(name);
@@ -70,25 +76,33 @@ class Navbar extends Component {
       <Link className="navbar-brand mr-5" to="/">{logo}</Link>
 
     return (
-      <Navbar2 expand fixed="top" className={cn({ [s.isNotHome]: !isHome, [s.isWhite]: !isHome || fixed })}>
-        <NavbarToggler onClick={this.toggle}/>
+      <Navbar2 expand="sm" fixed="top" className={cn({ [s.isNotHome]: !isHome, [s.isWhite]: !isHome || fixed })}>
         {navbarBrand}
-        <Collapse isOpen={this.state.isOpen} navbar>
+        <div className="d-flex justify-content-between">
+          { isSmallScreen && pathname !== '/cfp' && <CFPCTA /> }
+          <NavbarToggler onClick={this.toggle}/>
+        </div>
+        <Collapse isOpen={this.state.isOpen} navbar className={cn({"bg-white border-bottom": isSmallScreen})}>
           <Nav navbar>
             { items.map(NavbarItem) }
+            { isSmallScreen && user && <div className="border-top">
+              <NavbarItem to={`/profile`} text="My profile" />
+            </div>}
+            { isSmallScreen && !user && <div className="border-top">
+              <NavbarItem to="/auth/google" text="Login" external={true} />
+            </div>}
           </Nav>
         </Collapse>
-        { pathname !== '/cfp' && <Button color="primary" className="mr-4">
-          <Link to="/cfp" className="unstyled-link">Submit your session</Link>
-        </Button> }
+        { !isSmallScreen && pathname !== '/cfp' && <CFPCTA /> }
 
-				{ !isServer && !isSmallScreen && <div className="ml-auto">
-					{ user ?
+        { !isServer && !isSmallScreen && <div className="ml-auto">
+          { user ?
             <Avatar {...user} onLogout={onLogout}/>
-						: <a href="/auth/google">
-              <Button outline color="secondary" onClick={this.login}>Login</Button>
+            : <a href="/auth/google">
+              <Button outline color="primary" onClick={this.login}>Login</Button>
             </a> }
         </div> }
+
       </Navbar2>
     );
   }

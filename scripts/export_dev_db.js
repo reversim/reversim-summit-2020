@@ -21,16 +21,16 @@ const PUBLIC_FIELDS = {
 		'isDataAdmin',
 		'proposals',
 		'created_at',
-		'profile.name',
-		'profile.oneLiner',
-		'profile.bio',
-		'profile.gender',
-		'profile.website',
-		'profile.picture',
-		'profile.linkedin',
-		'profile.twitter',
-		'profile.github',
-		'profile.stackOverflow'
+		'name',
+		'oneLiner',
+		'bio',
+		'gender',
+		'website',
+		'picture',
+		'linkedin',
+		'twitter',
+		'github',
+		'stackOverflow'
 	]
 };
 

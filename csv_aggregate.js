@@ -27,7 +27,7 @@ p.aggregate(
         }
       }
     },
-    speaker: "$speaker.profile.name",
+    speaker: "$speaker.name",
     email: "$speaker.email"
   }
   }

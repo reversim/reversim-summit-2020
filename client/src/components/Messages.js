@@ -7,7 +7,7 @@ const Messages = ({ messages }) => {
 	if (messages.length) {
 		return <ul className={cn(s.messages, "font-size-lg")}>
 				{messages.map(msg => (
-					<li key={msg._id} className={s.message}><i className="fa fa-info-circle mr-3"/>
+					<li key={msg._id} className={s.message}><i className="fa fa-info-circle mr-3 text-info"/>
 						<ReactMarkdown source={msg.text} />
 					</li>
 				))}

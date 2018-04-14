@@ -104,7 +104,7 @@ class SessionPage extends React.Component {
 									<i className="fa fa-clock-o mr-3"/><span>{`${dayTime.time.substr(0, 2)}:${dayTime.time.substr(2)}`}</span>
 								</Col>}
 							</Row>
-							{speakers.map(SpeakerShort)}
+							{speakers.map(speaker => <SpeakerShort speaker={speaker} />)}
 							<h4>{title}</h4>
 							{!dayTime && <div className="mb-3"><small title={`Not participating in ${REVERSIM_SUMMIT}`} className="py-1 px-2 bg-danger text-white">Proposal</small></div> }
 							<ReactMarkdown source={abstract}/>

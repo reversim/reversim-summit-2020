@@ -1,4 +1,4 @@
-import { get, post, delete2 } from './api';
+import { get, post, put, delete2 } from './api';
 
 export async function getProposals() {
   return await get("/api/proposal");
@@ -45,6 +45,6 @@ export async function getInitialData() {
 }
 
 export async function updateUser(user) {
-  return await post('/updateUser', user);
+  return await put('/api/user', user);
 }
 

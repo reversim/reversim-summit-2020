@@ -102,10 +102,11 @@ export function update(req, res) {
 }
 
 export function uploadProfilePicture(req, res) {
+  console.log(`uploadProfilePicture for ${req.body.id} started...`);
   cloudinary.uploader.upload(req.body.imageBinary, function(result) {
-    console.log('uploadProfilePicture started...');
+    console.log(`uploadProfilePicture for ${req.body.id} complete...`, result);
 
-    User.findOneAndUpdate({ '_id': req.body.id }, {'profile.picture': result.secure_url}, (err, user) => {
+    User.findOneAndUpdate({ '_id': req.body.id }, {picture: result.secure_url}, (err, user) => {
       if (err) {
         console.log(`Error in users/uploadProfilePicture query: ${err}`);
         console.error('stack: '+err.stack);
@@ -141,7 +142,7 @@ async function getTeam() {
   try {
     const users = await User.find({ isReversimTeamMember: true });
     return users.sort((a,b) => {
-      return reversimTeam.indexOf(b.profile.name.toLowerCase()) - reversimTeam.indexOf(a.profile.name.toLowerCase());
+      return reversimTeam.indexOf(b.name.toLowerCase()) - reversimTeam.indexOf(a.name.toLowerCase());
     });
   } catch(err) {
     console.log(`Error in users/getReversimTeam query: ${err}`);

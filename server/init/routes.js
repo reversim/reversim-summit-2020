@@ -17,7 +17,7 @@ export default (app) => {
   app.post('/login', usersController.login);
   app.post('/signup', usersController.signUp);
   app.post('/api/logout', usersController.logout);
-  app.post('/updateUser', usersController.update);
+  app.put('/api/user', usersController.update);
   app.get('/user/proposals', usersController.getProposals);
   app.get('/api/team', usersController.getReversimTeam);
   app.post('/api/profileImage', usersController.uploadProfilePicture);
@@ -69,7 +69,7 @@ export default (app) => {
     let mappedUsers = users.map(u => transformUser(u, req.user));
 
     res.json({
-      proposals: mappedProposals,
+      proposals: keyBy(mappedProposals, '_id'),
       users: keyBy(mappedUsers, '_id'),
       user: user ? user._id : null,
       tags,
