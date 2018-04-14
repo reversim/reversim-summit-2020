@@ -75,16 +75,28 @@ export function signUp(req, res, next) {
   });
 }
 
+export function registerTeamMember(req, res) {
+  if (req.body.token === process.env.TEAM_MEMBER_TOKEN) {
+    User.findOneAndUpdate({ '_id': req.session.passport.user }, { isReversimTeamMember: true }, (err, user) => {
+      if (err) {
+        console.log(`Error in registerTeamMember query: ${err}`);
+        console.error('stack: '+err.stack);
+        return res.status(500).send('Something went wrong');
+      }
+
+      return res.status(200).send('Updated successfully');
+    });
+  } else {
+    return res.status(404).send();
+  }
+}
+
 /**
  * Update a user
  */
 export function update(req, res) {
   const omitKeys = ['id', '_id', '_v', 'google', 'teamMemberToken'];
   const data = _.omit(req.body, omitKeys);
-
-  if (req.body.teamMemberToken === process.env.TEAM_MEMBER_TOKEN) {
-    data.isReversimTeamMember = true;
-  }
 
   console.log('update body is: '+JSON.stringify(data));
 
@@ -179,5 +191,6 @@ export default {
   getProposals,
   getReversimTeam,
   uploadProfilePicture,
-  getTeam
+  getTeam,
+  registerTeamMember
 };

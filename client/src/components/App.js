@@ -4,7 +4,7 @@ import routes from '../data/routeComps';
 import ga from 'react-ga';
 import { isServer } from '../utils';
 import store from '../store';
-import { getInitialData, uploadPhoto, updateUser, logout } from '../data-service';
+import { getInitialData, uploadPhoto, updateUser, logout, registerTeamMember } from '../data-service';
 
 if (!isServer && process.env.NODE_ENV !== "development") {
   ga.initialize('UA-36904731-4');
@@ -39,7 +39,12 @@ class App extends Component {
         ...data,
         user,
         fetchComplete: true
-      })
+      });
+
+      const __team = window.location.search.slice(1).split('&').map(x => x.split('=')).find(x => x[0] === '__team');
+      if (__team && user) {
+        registerTeamMember(__team[1]);
+      }
     });
   }
 

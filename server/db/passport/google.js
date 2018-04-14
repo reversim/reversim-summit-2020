@@ -1,4 +1,6 @@
 import User from '../models/user';
+import url from 'url';
+import qs from 'querystring';
 
 /* eslint-disable no-param-reassign */
 export default (req, accessToken, refreshToken, profile, done) => {
@@ -36,9 +38,16 @@ export default (req, accessToken, refreshToken, profile, done) => {
       user.google = profile.id;
       user.tokens.push({ kind: 'google', accessToken });
       user.name = profile.displayName || profile._json.displayName;
-      user.gender = user.profile.gender || profile._json.gender;
+      user.gender = user.gender || profile._json.gender;
       user.picture = (profile.photos[0].value || profile._json.image.url).replace(/\?sz=\d+/,"");
       user.created_at = new Date();
+
+      const __team = qs.parse(url.parse(req.session.returnTo || '').query).__team;
+      if (__team === process.env.TEAM_MEMBER_TOKEN) {
+        console.log(`registered user ${user.email} ${profile.id} as team member`);
+        user.isReversimTeamMember = true;
+      }
+
       return user.save((err) => {
         done(err, user);
       });

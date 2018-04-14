@@ -22,6 +22,7 @@ export default (app) => {
   app.get('/api/team', usersController.getReversimTeam);
   app.post('/api/profileImage', usersController.uploadProfilePicture);
   app.get('/api/me', usersController.me);
+  app.put('/api/team', usersController.registerTeamMember);
 
   // google auth
   // Redirect the user to Google for authentication. When complete, Google

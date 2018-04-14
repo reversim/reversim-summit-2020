@@ -48,3 +48,7 @@ export async function updateUser(user) {
   return await put('/api/user', user);
 }
 
+export async function registerTeamMember(token) {
+  return await put('/api/team', { token });
+}
+
