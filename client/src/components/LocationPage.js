@@ -1,7 +1,7 @@
 import React from 'react';
 import Page from "./Page";
 import {Container} from "reactstrap";
-import gettingThere from '../images/getting-there.png';
+// import gettingThere from '../images/getting-there.png';
 import Map from "./Map";
 import { REVERSIM_SUMMIT } from '../utils';
 

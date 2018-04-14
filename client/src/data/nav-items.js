@@ -1,6 +1,6 @@
 import { isServer } from '../utils';
 
-const register  = { to: "register", text: "Register" };
+// const register  = { to: "register", text: "Register" };
 const team 		  = { to: "team", text: "Team" };
 const location  = { to: "location", text: "Getting there" };
 const speakers  = { to: "speakers", text: "Speakers" };

@@ -2,8 +2,8 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Team from '../components/Team';
 // import Register from '../components/Register';
-import SpeakersSection from '../components/SpeakersSection';
-import Location from '../components/Location';
+// import SpeakersSection from '../components/SpeakersSection';
+// import Location from '../components/Location';
 // import { SponsorsSection } from '../components/Sponsors';
 import TimelineSection from '../components/TimelineSection';
 
