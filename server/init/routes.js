@@ -62,7 +62,7 @@ export default (app) => {
   async function initial(req, res) {
     const proposals = await proposalsController.getAllProposals();
     const users = await proposalsController.getProposers(proposals);
-    const tags = proposalsController.getTags(proposals);
+    const allTags = proposalsController.getTags(proposals);
     const user = req.user;
     const team = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
@@ -76,7 +76,7 @@ export default (app) => {
       proposals: keyBy(mappedProposals, '_id'),
       users: keyBy(mappedUsers, '_id'),
       user: user ? user._id : null,
-      tags,
+      allTags,
       team: team.map(user => transformUser(user, req.user)),
       messages,
 

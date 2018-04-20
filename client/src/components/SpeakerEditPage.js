@@ -14,7 +14,7 @@ class SpeakerEditPage extends React.Component {
         <Row>
           <Col sm={{ size: 8, offset: 2 }}>
             <h1 className="my-4">Edit <b>{speaker.name}'s</b> details</h1>
-            <SpeakerForm user={speaker} updateUserData={updateUserData} onSubmit={() => {}} />
+            <SpeakerForm user={speaker} updateUserData={updateUserData} />
           </Col>
         </Row>
       </Container>

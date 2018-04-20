@@ -1,18 +1,30 @@
-html {
-  font-family: Raleway, sans-serif;
-  font-size: 14px;
+@font-face {
+  font-family: Amstelvar;
+  src: url('./Amstelvar-Roman-VF.ttf');
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: Raleway, sans-serif;
-  font-size: 14px;
 }
 
 p {
-  font-weight: 300;
   line-height: 1.7;
+  border-bottom: 20px;
+}
+
+b {
+  font-weight: 600;
+}
+
+h1 {
+  font-family: Amstelvar, serif;
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 32px;
 }
 
 h3 {
@@ -26,6 +38,11 @@ h4 {
 }
 
 h5 {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+h6 {
   font-size: 14px;
   font-weight: bold;
 }
@@ -46,6 +63,17 @@ input {
   max-width: 320px;
 }
 
+input[type='radio'] {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+
+  & + label {
+    display: inline-block;
+  }
+}
+
+
 .font-size-lg {
   font-size: $font-size-lg;
 }
@@ -56,6 +84,10 @@ input {
 
 .font-pt {
   font-family: 'PT Sans', sans-serif;
+}
+
+.font-amstelvar {
+  font-family: Amstelvar, serif;
 }
 
 .font-raleway {

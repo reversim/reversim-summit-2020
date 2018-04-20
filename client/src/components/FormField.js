@@ -1,6 +1,8 @@
 import React, { createElement } from 'react';
 import { Input } from 'reactstrap';
 
+export const SPACING = "mb-6";
+
 const Radio = ({ id, value, values: radioValues, onChange }) => {
   return (
     <div className="mb-3">
@@ -34,6 +36,7 @@ export default ({ label, id, required, text, subtitle, placeholder, inputType, m
     required,
     minLength,
     maxLength,
+    rows: multiline ? 6 : undefined
   });
 
   return (

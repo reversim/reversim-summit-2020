@@ -1,11 +1,65 @@
 .daysRemaining {
   background: #dee2e6;
-  padding: 2px 5px;
+  padding: 2px 3px;
   display: inline-block;
   height: 24px;
-  line-height: 24px;
-  border-radius: 12px;
+  line-height: 20px;
+  border-radius: 14px;
   box-sizing: content-box;
   text-align: center;
   font-weight: bold;
+  letter-spacing: 1px;
+  min-width: 22px;
+  text-indent: 1px;
+}
+
+.titleInput input {
+  max-width: 500px;
+}
+
+.cfpCol {
+  position: relative;
+}
+
+/* xs */
+.heroImg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+}
+
+/* sm */
+@media (min-width: 576px) {
+  .heroImg {
+    height: 220px;
+  }
+
+  .cfpCol {
+    top: -50px;
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  .heroImg {
+    height: 280px;
+  }
+
+  .cfpCol {
+    top: -70px;
+  }
+}
+
+/* lg */
+@media (min-width: 992px) {
+  .heroImg {
+    height: 320px;
+  }
+}
+
+/* xl */
+@media (min-width: 1300px) {
+  .heroImg {
+    background-position-y: -60px;
+  }
 }
