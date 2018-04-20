@@ -3,11 +3,11 @@ import s from './Speaker.css';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
-import { getSpeakerHref } from '../utils';
+import { getHref } from '../utils';
 
 const Speaker = ({speaker, color, isFull, ...props}) => {
   const { name, bio, oneLiner, picture } = speaker;
-  return <Link to={`/speaker/${getSpeakerHref(speaker)}`} className={s.speakerLinkWrap}>
+  return <Link to={`/speaker/${getHref(speaker)}`} className={s.speakerLinkWrap}>
     <div className={cn(s.speaker, s[color], { [s.isFull]: isFull})}>
       <div className={cn({"d-flex": !isFull})}>
         <div style={{backgroundImage: `url('${picture}')`}} className={s.speakerImg}/>

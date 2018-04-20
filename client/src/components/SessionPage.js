@@ -77,7 +77,7 @@ class SessionPage extends React.Component {
 
 	findSession() {
 		const { proposals, match: {params: {id}}} = this.props;
-		return proposals.find(s => s.id === id);
+    return proposals[id];
 	}
 
 	render() {
@@ -85,8 +85,8 @@ class SessionPage extends React.Component {
 
 		if (!session) return <div>aaaaa</div>;
 
-		const {title, abstract, type, tags, outline} = session;
-		const speakers = session.speaker_ids;
+		const {title, abstract, type, tags, outline, categories} = session;
+		const speakers = session.speaker_ids.map(id => this.props.users[id]);
 
 		const dayTime = getDateAndTime(this.props.match.params.id);
 
@@ -96,22 +96,28 @@ class SessionPage extends React.Component {
 				<Container className="mt-4">
 					<Row>
 						<Col sm={{size: 8, offset: 2}}>
+							<h2>{title}</h2>
 							<p>{getSessionTypeStr(type)}</p>
-							<div className="d-flex text-muted mb-3">{tags.map(Tag)}</div>
-							<Row className="align-items-center my-4">
-								{ dayTime && <Col>
+							{ tags && tags.length ? <div className="d-flex text-muted mb-2">{tags.map(Tag)}</div> : undefined }
+              { dayTime && <Row className="align-items-center my-4">
+								<Col>
 									<i className="fa fa-calendar-o mr-3"/><span className="mr-4">{dates[dayTime.day]}</span>
 									<i className="fa fa-clock-o mr-3"/><span>{`${dayTime.time.substr(0, 2)}:${dayTime.time.substr(2)}`}</span>
-								</Col>}
-							</Row>
-							{speakers.map(speaker => <SpeakerShort speaker={speaker} />)}
-							<h4>{title}</h4>
-							{!dayTime && <div className="mb-3"><small title={`Not participating in ${REVERSIM_SUMMIT}`} className="py-1 px-2 bg-danger text-white">Proposal</small></div> }
+								</Col>
+							</Row> }
+							{!dayTime && <div className="mb-3"><small className="py-1 px-2 bg-danger text-white">Proposal</small></div> }
 							<ReactMarkdown source={abstract}/>
+              {categories && <div>
+                <h4>Categories</h4>
+                <p><ul>{categories.map(cat => <li className="mr-2">{cat}</li>)}</ul></p>
+              </div>}
 							{outline && <div>
 								<h4>Outline</h4>
 								<ReactMarkdown source={outline}/>
 							</div>}
+							<div className="border-top">
+                {speakers.map(speaker => <SpeakerShort speaker={speaker} hasLink={true} />)}
+							</div>
 						</Col>
 					</Row>
 				</Container>

@@ -169,18 +169,15 @@ export function add(req, res) {
     }
 
     // Update speakers proposals
-    proposal.speaker_ids.forEach(speaker_id => {
-      User.findByIdAndUpdate(
-        speaker_id,
-        { $push: {'proposals': model._id} },
-        { safe: true, upsert: true },
-        (err, model) => {
-          if (err) {
-            console.log(`Error in proposals/add/updateUser query: ${err}`);
-            return res.status(500).send('Something went wrong');
-          }
-        }
-      );
+    Promise.all(proposal.speaker_ids.map(speaker_id => User.findByIdAndUpdate(
+      speaker_id,
+      { $push: {'proposals': model._id} },
+      { safe: true, upsert: true }
+    ))).then(speakers => {
+      res.status(200).send(transformProposal(model, req.user));
+    }).catch(ex => {
+      console.log(`Error in proposals/add/updateUser query: ${ex}`);
+      return res.status(500).send('Something went wrong');
     });
 
     Promise.all(proposal.speaker_ids.map(speaker_id => {
@@ -216,8 +213,6 @@ export function add(req, res) {
         }
       });
     });
-
-    return res.status(200).send('OK');
   });
 }
 

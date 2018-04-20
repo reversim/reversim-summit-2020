@@ -7,12 +7,12 @@ import without from 'lodash/without';
 import cn from 'classnames';
 import { titleInput } from './CFPPage.css';
 import FormField, { SPACING } from './FormField';
-import Tags from './Tags';
+import Tags, { MAX_TAGS } from './Tags';
 import { navigateTo } from '../utils';
 import UserForm, { getUserData } from './UserForm';
 import {
   ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR, PREDEFINED_TAGS,
-  PROPOSAL_TYPES_ARR,
+  PROPOSAL_TYPES_ARR, CATEGORIES, MAX_CATEGORIES
 } from '../data/proposals';
 
 const TitleFieldCaption = () => (
@@ -46,6 +46,26 @@ const OutlineFieldCaption = () => (
 Total time: 37m</span>
 );
 
+const CategoryCheckbox = ({ name, description, onChange, checked, disabled }) => (
+  <label className={cn("d-flex align-items-center mb-4", { 'opacity-05': disabled })}>
+    <input className="mr-3" type="checkbox" checked={checked} onChange={() => onChange(name)} disabled={disabled} />
+    <div className={cn({ 'text-primary': checked })}>
+      <h5 className="mb-0">{name}</h5>
+      <small className={cn({ 'text-primary': checked, 'text-gray-600': !checked })}>{description}</small>
+    </div>
+  </label>
+);
+
+const CategoryOther = ({ onChange, onChangeInput, checked, disabled }) => (
+  <div className={cn("d-flex align-items-center mb-4", { 'opacity-05': disabled })}>
+    <input className="mr-3" type="checkbox" checked={checked} onChange={onChange} disabled={disabled} />
+    <label className={cn({ 'text-primary': checked })}>
+      <h5 className="mb-0">Other</h5>
+      <Input bsSize="sm" disabled={disabled} placeholder="lockpicking, moonwalking, etc." onChange={onChangeInput} />
+    </label>
+  </div>
+);
+
 
 class CFPForm extends Component {
 
@@ -55,6 +75,8 @@ class CFPForm extends Component {
     abstractErr: true,
     tags: [],
     newTagPending: null,
+    categories: [],
+    otherCategory: null,
   };
 
   handleSubmit = async (e) => {
@@ -73,9 +95,9 @@ class CFPForm extends Component {
       }
 
       try {
-        await updateUserData(getUserData(e));
-        const result = await createProposal(this.getProposalData(e));
-        navigateTo(`/session/${result.id}`);
+        await updateUserData(getUserData(formElements));
+        const result = await createProposal(this.getProposalData(formElements));
+        navigateTo(`/session/${result._id}`);
       } catch(ex) {
         ga.exception({
           description: `Error on submit: ${ex}`,
@@ -85,21 +107,24 @@ class CFPForm extends Component {
     }
   };
 
-  getProposalData = (e) => {
-    const formElements = e.target.elements;
+  getProposalData = (formElements) => {
     const title = formElements.title.value;
-    const proposalType = this.state.proposalType;
+    const type = this.state.proposalType;
     const outline = formElements.outline.value;
     const video_url = formElements.video_url.value;
+    const abstract = formElements.abstract.value;
     const tags = this.state.tags.map(tag => tag.text);
+    const categories = this.state.categories;
     const user = this.props.user;
 
     return {
       title,
-      proposalType,
+      type,
+      abstract,
       outline,
       video_url,
       tags,
+      categories,
       speaker_ids: [user._id],
     };
   };
@@ -149,6 +174,49 @@ class CFPForm extends Component {
     this.setState({ newTagPending: null });
   };
 
+  onCategoryChange = (name) => {
+    if (!name) return;
+    this.setState(state => {
+      if (CATEGORIES.find(cat => cat.name === name)) { // if it's a predefined category
+        if (state.categories.includes(name)) {
+          return { categories: without(state.categories, name) };
+        } else {
+          return { categories: uniq(state.categories.concat(name)) };
+        }
+      } else { // it's not predefined
+        const otherCategory = this.getOtherCategoryInState(state);
+        if (otherCategory) {
+          if (otherCategory !== name) {
+            return { categories: without(state.categories, otherCategory).concat(name) };
+          } else {
+            return { categories: without(state.categories, otherCategory) };
+          }
+        } else {
+          return { categories: uniq(state.categories.concat(name)) };
+        }
+      }
+    });
+  };
+
+  getOtherCategoryInState = (state) => {
+    return state.categories.find(cat => !CATEGORIES.find(cat2 => cat2.name === cat));
+  };
+
+  onCategoryInputChange = (e) => {
+    const value = e.target.value;
+    this.setState(state => {
+      const otherCategory = this.getOtherCategoryInState(state);
+      let newCategories = state.categories;
+      if (otherCategory !== null) {
+        newCategories = without(newCategories, otherCategory);
+      }
+      if (value) {
+        newCategories = newCategories.concat(value)
+      }
+      return { otherCategory: value, categories: newCategories };
+    });
+  };
+
 
   render() {
     const { user, allTags } = this.props;
@@ -185,7 +253,7 @@ class CFPForm extends Component {
             predefinedSuggestions={predefinedTags}
             handleAddition={this.onAddTag}
             handleDelete={this.onDeleteTag}
-            readOnly={this.state.tags.length===2}
+            readOnly={this.state.tags.length===MAX_TAGS}
             className={SPACING} />
 
           <Modal isOpen={!!newTagPending} toggle={this.toggleTagModal}>
@@ -202,6 +270,16 @@ class CFPForm extends Component {
 
           <h4 className="mb-0">Private information</h4>
           <p className="font-size-sm text-gray-600">The following information will be available <b>only to the organizing committee</b></p>
+
+          <label>Categories</label>
+          <small className="d-block text-muted mb-2">Choose 1 or 2 categories. This information will help us assign this session to one of the conference's tracks.</small>
+          {CATEGORIES.map(category => {
+            const checked = this.state.categories.includes(category.name);
+            return <CategoryCheckbox key={category.name} {...category} onChange={this.onCategoryChange} checked={checked} disabled={!checked && this.state.categories.length === MAX_CATEGORIES} />
+          })}
+          <CategoryOther checked={!!this.getOtherCategoryInState(this.state)} onChange={() => this.onCategoryChange(this.state.otherCategory)} onChangeInput={this.onCategoryInputChange} disabled={!this.getOtherCategoryInState(this.state) && this.state.categories.length === MAX_CATEGORIES} />
+
+
           <FormField id="video_url" label="Link to video" required={true} placeholder="e.g. http://youtu.be/xxxx" subtitle={<VideoUrlFieldCaption />} className={SPACING} />
           <FormField id="outline" label="Outline" required={true} multiline={true} placeholder="" subtitle={<OutlineFieldCaption />} className={SPACING} />
 

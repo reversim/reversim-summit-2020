@@ -14,7 +14,8 @@ const NoUserFound = (props) => (
   </Page>
 );
 
-export default Component => ({ match: { params: { id }}, user, users, fetchComplete, ...props }) => {
+export default Component => (props) => {
+  const { match: { params: { id }}, user, users, fetchComplete } = props;
   let speaker = users[id];
   if (!fetchComplete) return null;
   if (!speaker) return <NoUserFound user={user} {...props}/>;

@@ -63,7 +63,8 @@ input {
   max-width: 320px;
 }
 
-input[type='radio'] {
+input[type='radio'],
+input[type='checkbox'] {
   display: inline-block;
   width: auto;
   margin-right: 10px;
@@ -141,4 +142,8 @@ a.unstyled-link:active {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.opacity-05 {
+  opacity: 0.5;
 }

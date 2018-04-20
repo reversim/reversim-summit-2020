@@ -1,7 +1,7 @@
 import React from 'react';
 import Page from "./Page";
 import { Container, Row, Col } from 'reactstrap';
-import {getSessionTypeStr} from "../utils";
+import {getSessionTypeStr, getHref} from "../utils";
 import heroImg from '../images/speaker.png';
 import {Link} from "react-router-dom";
 import Tag from './Tag';
@@ -26,7 +26,7 @@ export class SpeakerPage extends React.Component {
 
   render() {
     const { speaker, proposals: allProposals, user, isUser } = this.props;
-    const { name, proposals, bio } = speaker;
+    const { name, proposals, bio, isReversimTeamMember } = speaker;
     const { isUploadingPhoto } = this.state;
 
 
@@ -38,6 +38,7 @@ export class SpeakerPage extends React.Component {
         <Row>
           <Col sm={{size: 8, offset: 2}}>
             <SpeakerShort speaker={speaker} editable={true} />
+            { isReversimTeamMember && <div className="mb-3"><small className="py-1 px-2 bg-danger text-white">Team member</small></div> }
             {isUser && <Button
               color="primary" className="mb-4 text-center" disabled={isUploadingPhoto}
               style={{ width: 150, position: 'relative', overflow: 'hidden' }}
@@ -66,10 +67,10 @@ export class SpeakerPage extends React.Component {
             </Row>
             {sessions.length ? <h4 className="mb-4">{`${name.split(" ")[0]}'s Proposals`}</h4> : null}
             {sessions.map(session =>
-              <div className="bg-faded p-3 mb-4" key={session.id}>
+              <div className="bg-faded p-3 mb-4" key={session._id}>
                 <p>{getSessionTypeStr(session.type)}</p>
                 <div className="d-flex text-muted mb-3">{session.tags.map(Tag)}</div>
-                <Link to={`/session/${session.href}`}><h5>{session.title}</h5></Link>
+                <Link to={`/session/${getHref(session)}`}><h5>{session.title}</h5></Link>
               </div>
             )}
           </Col>

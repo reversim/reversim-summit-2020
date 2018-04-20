@@ -4,7 +4,7 @@ import routes from '../data/routeComps';
 import ga from 'react-ga';
 import { isServer } from '../utils';
 import store from '../store';
-import { getInitialData, uploadPhoto, updateUser, logout, registerTeamMember } from '../data-service';
+import { getInitialData, uploadPhoto, updateUser, logout, registerTeamMember, addProposal } from '../data-service';
 
 if (!isServer && process.env.NODE_ENV !== "development") {
   ga.initialize('UA-36904731-4');
@@ -66,11 +66,16 @@ class App extends Component {
     this.setState(userUpdater(id, { picture: imageUrl }));
   };
 
+  createProposal = async (data) => {
+    return await addProposal(data);
+  };
+
   // This is passed down to route components
   actions = {
     onLogout: this.onLogout,
     updateUserPhoto: this.updateUserPhoto,
     updateUserData: this.updateUserData,
+    createProposal: this.createProposal,
   };
 
   state = store;

@@ -23,22 +23,7 @@ const renderFile = (path, filename, folder = '') => {
 	fs.writeFileSync(resolve(__dirname, '../build', folder, filename), html);
 };
 
-const initData = async () => {
-	const data = await getInitialData();
-
-  for (const userId in data.users) {
-    const user = data.users[userId];
-    user.href = `${user._id}.html`;
-  }
-
-  for (const proposal of data.proposals) {
-    proposal.href = `${proposal.id}.html`;
-  }
-
-  return data;
-};
-
-initData().then((store) => {
+getInitialData().then((store) => {
 	routes.forEach(({ path, comp }) => {
 		if (path === "/speaker/:id") {
 			const { speakers } = store;
@@ -49,7 +34,7 @@ initData().then((store) => {
 		} else if (path === "/session/:id") {
 			const { proposals } = store;
       proposals.forEach((session) => {
-				const sessionId = session.id;
+				const sessionId = session._id;
 				if (sessionId) {
           renderFile(`/session/${sessionId}`, `${sessionId}.html`, 'session');
 				} else {

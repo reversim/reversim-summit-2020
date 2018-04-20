@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import CalendarLink from './CalendarLink';
 import { isServer } from '../utils';
 
-const _getSession = (sessions, id) => sessions.find(ss => ss.id === id);
+const _getSession = (sessions, id) => sessions.find(ss => ss._id === id);
 const getSession = (sessions, id) => {
   if (id.sessions) return { ...id, sessions: id.sessions.map(x => _getSession(sessions, x)) };
   else return _getSession(sessions, id);

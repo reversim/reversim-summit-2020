@@ -67,7 +67,8 @@ export default (app) => {
     const team = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
 
-    if (user && !users.find(u => u._id === user._id)) users.unshift(user);
+    const userId = user && String(user._id);
+    if (userId && !users.find(u => String(u._id) === userId)) users.unshift(user);
 
     const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user));
     let mappedUsers = users.map(u => transformUser(u, req.user));
@@ -92,7 +93,7 @@ export default (app) => {
   app.get('/api/proposal/:id/recommendations', proposalsController.getRecommendations);
   app.get('/api/proposal/tags', proposalsController.tags);
   app.get('/api/proposal/:id', proposalsController.get);
-  app.post('/api/proposal/:id', proposalsController.add);
+  app.post('/api/proposal', proposalsController.add);
   app.put('/api/proposal/:id', proposalsController.update);
   app.delete('/api/proposal/:id', proposalsController.remove);
   app.post('/api/proposal/:id/attend', proposalsController.attend);

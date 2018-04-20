@@ -20,6 +20,10 @@ export async function logout() {
   return await post("/api/logout");
 }
 
+export async function addProposal(data) {
+  return await post("/api/proposal", data);
+}
+
 export async function getProposal(id) {
   return await get("/api/proposal/" + id);
 }

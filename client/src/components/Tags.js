@@ -3,6 +3,8 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import { Button } from 'reactstrap';
 import './ReactTags.css';
 
+export const MAX_TAGS = 3;
+
 const classNames = {
   tags: "ReactTags__tags",
   tagInput: "ReactTags__tagInput",
@@ -17,7 +19,7 @@ const classNames = {
 const Tags = ({ tags, suggestions, handleDelete, handleAddition, readOnly, predefinedSuggestions, className }) => (
   <div className={className}>
     <label>Tags</label>
-    <small className="d-block text-muted mb-2">Maximum 2 tags</small>
+    <small className="d-block text-muted mb-2">Maximum {MAX_TAGS} tags</small>
     <ReactTags tags={tags}
                suggestions={suggestions}
                readOnly={readOnly}
@@ -27,7 +29,7 @@ const Tags = ({ tags, suggestions, handleDelete, handleAddition, readOnly, prede
                autofocus={false}
                classNames={classNames} />
     { !readOnly && <div className="mt-2">Suggestions:{'\u00a0\u00a0'} {predefinedSuggestions.map(suggestion => (
-      <Button onClick={() => handleAddition(suggestion)} size="sm" color="link" className="text-underline">{suggestion}</Button>
+      <Button onClick={() => handleAddition(suggestion)} size="sm" color="link" className="text-underline" key={suggestion}>{suggestion}</Button>
     ))}</div> }
   </div>
 );

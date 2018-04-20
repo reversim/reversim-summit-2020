@@ -1,9 +1,7 @@
 import React from 'react';
 import FormField, { SPACING } from './FormField';
 
-export const getUserData = (e) => {
-  const formElements = e.target.elements;
-
+export const getUserData = (formElements) => {
   const fullname = formElements.fullname.value;
   const oneLiner = formElements.oneLiner.value;
   const bio = formElements.bio.value;

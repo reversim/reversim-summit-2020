@@ -13,7 +13,7 @@ class SpeakerForm extends React.Component {
 
     if (user) {
       try {
-        await updateUserData(getUserData(e));
+        await updateUserData(getUserData(e.target.elements));
       } catch(ex) {
         ga.exception({
           description: `Error on submit: ${ex}`,

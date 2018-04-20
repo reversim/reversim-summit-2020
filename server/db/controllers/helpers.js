@@ -15,7 +15,7 @@ export function transformUser(user, loggedInUser) {
 
   if (_.isObject(user)) {
     return {
-      _id: user._id,
+      _id: String(user._id),
       proposals: user.proposals && user.proposals.map(p => String(p)),
       name: user.name,
       oneLiner: user.oneLiner,
@@ -47,19 +47,17 @@ export function transformProposal(proposal, loggedInUser) {
 
     return {
       _id: String(proposal._id),
-      id: proposal.id,
       title: proposal.title,
       abstract: proposal.abstract,
       type: proposal.type,
       tags: proposal.tags,
       status: canViewPrivate ? proposal.status : undefined,
-      speaker_ids: proposal.speaker_ids ? proposal.speaker_ids.map((user) => {
-        return transformUser(user, loggedInUser);
-      }) : undefined,
+      speaker_ids: proposal.speaker_ids,
       startTime: proposal.startTime,
       endTime: proposal.endTime,
       hall: proposal.hall,
       slides_gdrive_id: proposal.slides_gdrive_id,
+      categories: canViewPrivate ? proposal.categories : undefined,
       video_url: canViewPrivate ? proposal.video_url : undefined,
       outline: canViewPrivate ? proposal.outline : undefined,
       total: (proposal.attendees && canViewPrivate) ? proposal.attendees.length : undefined,

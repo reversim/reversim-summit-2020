@@ -16,7 +16,7 @@ export const colors = [
 ];
 
 export const isServer = window === "__server";
-const history = isServer ? createMemoryHistory() : createBrowserHistory();
+export const history = isServer ? createMemoryHistory() : createBrowserHistory();
 
 export const navigateTo = (route) => history.push(route);
 
@@ -28,4 +28,4 @@ export const getRemainingCFPDays = () => {
   return Math.ceil((CFP_ENDS - today) / 86400000);
 };
 
-export const getSpeakerHref = (user) => isServer ? `${user._id}.html` : user._id;
+export const getHref = (obj) => isServer ? `${obj._id}.html` : obj._id;
