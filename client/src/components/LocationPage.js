@@ -21,7 +21,7 @@ const LocationPage = (props) => (
 					<b>Tel Aviv University, Smolarz Auditorium <i className="ml-3 fa fa-external-link" style={{verticalAlign: 'middle'}}/></b>
 				</a>
 			</h2>
-			<Section title="Parking">
+			{/*<Section title="Parking">
 				<div style={{textDecoration:'line-through'}}>
 					There is a large parking lot just outside the college to the service of our guests. A daily voucher costs 10ILS for the day and can be purchased onsite.
 				</div>
@@ -33,7 +33,7 @@ const LocationPage = (props) => (
 			</Section>
 			<Section title="Bus">
 				TBD
-			</Section>
+			</Section>*/}
 			<h4>
 				<a href="http://smolarz.tau.org.il/access.html" target="_blank" rel="noopener noreferrer">More info from Tel Aviv University</a>
 			</h4>

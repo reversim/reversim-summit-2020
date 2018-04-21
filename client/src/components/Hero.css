@@ -1,5 +1,5 @@
 .hero {
-    background: url('../images/hero.png') center;
+    background: url('../images/hero.jpg') center;
     background-size: cover;
     width: 100%;
     min-height: 100vh;
@@ -19,7 +19,7 @@
 
 @media (max-width:991px) {
     .hero {
-        background: url('../images/hero_small.png') center;
+        background: url('../images/hero_small.jpg') center;
         background-size: cover;
     }
 
