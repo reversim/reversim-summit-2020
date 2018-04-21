@@ -20,8 +20,12 @@ export async function logout() {
   return await post("/api/logout");
 }
 
-export async function addProposal(data) {
+export async function createProposal(data) {
   return await post("/api/proposal", data);
+}
+
+export async function updateProposal(id, proposal) {
+  return await put(`/api/proposal/${id}`, proposal);
 }
 
 export async function getProposal(id) {

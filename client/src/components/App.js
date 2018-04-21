@@ -4,7 +4,15 @@ import routes from '../data/routeComps';
 import ga from 'react-ga';
 import { isServer } from '../utils';
 import store from '../store';
-import { getInitialData, uploadPhoto, updateUser, logout, registerTeamMember, addProposal } from '../data-service';
+import {
+  getInitialData,
+  uploadPhoto,
+  updateUser,
+  logout,
+  registerTeamMember,
+  createProposal as doCreateProposal,
+  updateProposal as doUpdateProposal
+} from '../data-service';
 
 if (!isServer && process.env.NODE_ENV !== "development") {
   ga.initialize('UA-36904731-4');
@@ -67,7 +75,11 @@ class App extends Component {
   };
 
   createProposal = async (data) => {
-    return await addProposal(data);
+    return await doCreateProposal(data);
+  };
+
+  updateProposal = async (id, data) => {
+    return await doUpdateProposal(id, data);
   };
 
   // This is passed down to route components
@@ -76,6 +88,7 @@ class App extends Component {
     updateUserPhoto: this.updateUserPhoto,
     updateUserData: this.updateUserData,
     createProposal: this.createProposal,
+    updateProposal: this.updateProposal,
   };
 
   state = store;

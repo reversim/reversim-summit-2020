@@ -224,7 +224,7 @@ export function update(req, res) {
   req.body.updated_at = new Date();
   const data = _.omit(req.body, omitKeys);
 
-  Proposal.findOneAndUpdate({ id: req.params.id }, data, (err, obj) => {
+  Proposal.findOneAndUpdate({ _id: req.params.id }, data, (err, obj) => {
     if (err) {
       console.log(`Error in proposals/update query: ${err}`);
       return res.status(500).send('Something went wrong getting the data');
