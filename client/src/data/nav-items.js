@@ -25,7 +25,7 @@ export default () => {
 		}));
 	} else {
 		items = [
-      proposals,
+      // proposals,
       timeline,
       location,
       team
