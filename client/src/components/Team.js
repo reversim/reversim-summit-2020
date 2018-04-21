@@ -26,9 +26,9 @@ class Team extends Component {
       <div className={cn(s.teamImg, "mx-auto mb-3")} style={{ backgroundImage: `url('${picture}')` }}/>
       <h4>{name}</h4>
       <p>{oneLiner}</p>
-      <Modal isOpen={this.state.showTeamMember === _id} toggle={toggle}>
+      <Modal isOpen={this.state.showTeamMember === _id} toggle={toggle} className={s.teamMember}>
         <ModalHeader className={s.modalHeader} toggle={toggle}></ModalHeader>
-        <ModalBody className="text-center">
+        <ModalBody className="text-center mb-8">
           <div className={cn(s.teamImg, "mx-auto mb-3")} style={{ backgroundImage: `url('${picture}')` }}/>
           <h4>{name}</h4>
           <p>{oneLiner}</p>

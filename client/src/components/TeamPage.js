@@ -9,7 +9,7 @@ const TeamPage = ({ team, ...props }) => (
       <Row>
         <Col>
           <h1 className="text-center mb-10">Meet the team</h1>
-          { team.map(member => <TeamMember {...member} className="mb-8"/>)}
+          { team.map(member => <TeamMember key={member._id} {...member} className="mb-8"/>)}
         </Col>
       </Row>
     </Container>

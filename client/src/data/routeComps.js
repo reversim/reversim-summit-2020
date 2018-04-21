@@ -4,6 +4,7 @@ import MyProfile from '../components/MyProfile';
 import SpeakerPage from '../components/SpeakerPage';
 import SpeakerEditPage from '../components/SpeakerEditPage';
 import SessionPage from '../components/SessionPage';
+import SessionEditPage from '../components/SessionEditPage';
 // import SpeakersPage from "../components/SpeakersPage";
 // import Sponsors from "../components/Sponsors";
 // import RegisterPage from "../components/RegisterPage";
@@ -28,6 +29,7 @@ export default [
   { path: "/speaker/:id", comp: SpeakerPage },
   { path: "/speaker/:id/edit", comp: SpeakerEditPage },
   { path: "/session/:id", comp: SessionPage },
+  { path: "/session/:id/edit", comp: SessionEditPage },
   { path: "/admin", comp: AdminPage },
   // { path: "/women-gathering", comp: WomenGathering },
   { path: "/cfp", comp: CFPPage },

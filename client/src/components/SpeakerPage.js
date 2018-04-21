@@ -37,7 +37,7 @@ export class SpeakerPage extends React.Component {
       <Container>
         <Row>
           <Col sm={{size: 8, offset: 2}}>
-            <SpeakerShort speaker={speaker} editable={true} />
+            <SpeakerShort speaker={speaker} editable={isUser} />
             { isReversimTeamMember && <div className="mb-3"><small className="py-1 px-2 bg-danger text-white">Team member</small></div> }
             {isUser && <Button
               color="primary" className="mb-4 text-center" disabled={isUploadingPhoto}
