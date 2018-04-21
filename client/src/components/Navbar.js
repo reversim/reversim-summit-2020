@@ -6,7 +6,7 @@ import cn from 'classnames';
 import s from './Navbar.css';
 import logoImg from '../images/reversim_logo@2x.png';
 import Avatar from "./Avatar";
-import { isServer, navigateTo } from '../utils';
+import { isServer } from '../utils';
 import { REVERSIM_SUMMIT } from '../utils';
 import { getLoginUrl } from './Redirect';
 
@@ -18,14 +18,12 @@ const CFPCTA = () => (
 
 const navLinkClass = cn("nav-link", s.navLink);
 
-const onNavItemClick = (name) => () => navigateTo(name);
-
 const NavbarItem = ({ to, text, external }) => {
   let link;
   if (external) {
     link = <a className={navLinkClass} href={`/${to}`}>{text}</a>
   } else {
-    link = <Link className={navLinkClass} to={`/${to}`} onClick={onNavItemClick(to)}>{text}</Link>;
+    link = <Link className={navLinkClass} to={`/${to}`}>{text}</Link>;
   }
   return (
     <NavItem key={to} className={s.navItem}>
@@ -66,11 +64,11 @@ class Navbar extends Component {
   };
 
   render() {
-    const { isHome, isSmallScreen, user, onLogout, pathname } = this.props;
+    const { isHome, isSmallScreen, user, onLogout, pathname, history } = this.props;
     const { fixed } = this.state;
     const items = navItems(isHome);
 
-    const logo = <img className={s.logo} src={logoImg} onClick={onNavItemClick("/")} alt={REVERSIM_SUMMIT}/>
+    const logo = <img className={s.logo} src={logoImg} onClick={() => history.push("/")} alt={REVERSIM_SUMMIT}/>
 
     const navbarBrand = isHome ?
       <a href='/'>{logo}</a> :

@@ -75,7 +75,14 @@ class App extends Component {
   };
 
   createProposal = async (data) => {
-    return await doCreateProposal(data);
+    const proposal = await doCreateProposal(data);
+    this.setState(state => ({
+      proposals: {
+        ...state.proposals,
+        [proposal._id]: proposal
+      }
+    }));
+    return proposal;
   };
 
   updateProposal = async (id, data) => {

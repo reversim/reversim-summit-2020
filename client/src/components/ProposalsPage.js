@@ -32,7 +32,6 @@ const Proposal = ({ proposal: { title, type, speaker_ids, tags, abstract }, spea
       <ReactMarkdown source={abstract}/>
     </Col>
     <Col xs="2" sm="3" className="mb-4 ml-4">
-      {console.log('s', speakers)}
       {speakers.map(speaker => <SpeakerVertical key={speaker._id} speaker={speaker} />)}
     </Col>
   </Row>

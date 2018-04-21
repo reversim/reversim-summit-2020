@@ -6,7 +6,7 @@ import SessionPageRoute from './SessionPageRoute';
 import Redirect from './Redirect';
 import ProposalForm from './ProposalForm';
 import { ABSTRACT_MAX, ABSTRACT_MIN } from '../data/proposals';
-import { getHref, navigateTo } from '../utils';
+import { getHref } from '../utils';
 
 class SessionEditPage extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class SessionEditPage extends React.Component {
 
     try {
       await updateProposal(session._id, this.getProposalData(formElements));
-      navigateTo(`/session/${getHref(session)}`);
+      this.props.history.push(`/session/${getHref(session)}`);
     } catch(ex) {
       ga.exception({
         description: `Error on submit: ${ex}`,

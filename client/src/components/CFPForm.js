@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input } from 'reactstrap';
 import ga from 'react-ga';
-import { navigateTo } from '../utils';
 import UserForm, { getUserData } from './UserForm';
 import { ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR } from '../data/proposals';
 import ProposalForm from './ProposalForm';
@@ -19,7 +18,7 @@ class CFPForm extends Component {
     e.preventDefault();
     const formElements = e.target.elements;
 
-    const { user, updateUserData, createProposal } = this.props;
+    const { user, updateUserData, createProposal, history } = this.props;
 
     if (user) {
       const abstract = formElements.abstract.value;
@@ -33,7 +32,7 @@ class CFPForm extends Component {
       try {
         await updateUserData(getUserData(formElements));
         const result = await createProposal(this.getProposalData(formElements));
-        navigateTo(`/session/${result._id}`);
+        history.push(`/session/${result._id}`);
       } catch(ex) {
         ga.exception({
           description: `Error on submit: ${ex}`,
