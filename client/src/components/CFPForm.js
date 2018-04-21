@@ -49,7 +49,7 @@ class CFPForm extends Component {
     const outline = formElements.outline.value;
     const video_url = formElements.video_url.value;
     const abstract = formElements.abstract.value;
-    const tags = this.state.tags.map(tag => tag.text);
+    const tags = this.state.tags;
     const categories = this.state.categories;
     const user = this.props.user;
 

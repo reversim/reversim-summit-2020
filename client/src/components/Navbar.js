@@ -8,6 +8,7 @@ import logoImg from '../images/reversim_logo@2x.png';
 import Avatar from "./Avatar";
 import { isServer, navigateTo } from '../utils';
 import { REVERSIM_SUMMIT } from '../utils';
+import { getLoginUrl } from './Redirect';
 
 const CFPCTA = () => (
   <Button color="primary" className="mr-4">
@@ -89,7 +90,7 @@ class Navbar extends Component {
               <NavbarItem to={`/profile`} text="My profile" />
             </div>}
             { isSmallScreen && !user && <div className="border-top">
-              <NavbarItem to="/auth/google" text="Login" external={true} />
+              <NavbarItem to={getLoginUrl()} text="Login" external={true} />
             </div>}
           </Nav>
         </Collapse>
@@ -98,7 +99,7 @@ class Navbar extends Component {
         { !isServer && !isSmallScreen && <div className="ml-auto">
           { user ?
             <Avatar {...user} onLogout={onLogout}/>
-            : <a href="/auth/google">
+            : <a href={getLoginUrl()}>
               <Button outline color="primary" onClick={this.login}>Login</Button>
             </a> }
         </div> }

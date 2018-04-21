@@ -80,9 +80,6 @@ export default (app) => {
       allTags,
       team: team.map(user => transformUser(user, req.user)),
       messages,
-
-      sessions: proposals.filter(p => p.status === 'accepted').map(p => transformProposal(p, req.user)), // TODO remove
-      speakers: mappedUsers
     });
   }
 

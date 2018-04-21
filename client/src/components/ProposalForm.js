@@ -165,8 +165,7 @@ class ProposalForm extends Component {
     const { abstractLen, abstractErr, newTagPending} = this.state;
     let bestMatch, predefinedTags, tagObjs = tags.map(t => ({ id: t, text: t }));
 
-    let tagSuggestions = allTags || [];
-    tagSuggestions = uniq(without(PREDEFINED_TAGS.concat(tagSuggestions), ...tags));
+    const tagSuggestions = uniq(without(PREDEFINED_TAGS.concat(allTags), ...tags));
     predefinedTags = without(PREDEFINED_TAGS, ...tags);
 
     if (newTagPending) {

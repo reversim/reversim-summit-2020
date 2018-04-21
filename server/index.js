@@ -4,6 +4,7 @@ const { config } = require("dotenv");
 if (process.env.NODE_ENV !== 'production') {
   console.log('loading development env config');
   config({ path: path.resolve(__dirname, '..', '.env-development') });
+  config({ path: path.resolve(__dirname, '..', '.env') });
 } else {
   console.log('loading production env config');
   config();

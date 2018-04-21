@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
-function redirect() {
+export function getLoginUrl() {
   const to = encodeURIComponent(window.location.pathname + window.location.search);
-  window.location.href = `/auth/google?returnTo=${to}`;
+  return `/auth/google?returnTo=${to}`
+}
+
+function redirect() {
+  window.location.href = getLoginUrl();
 }
 
 const Redirect = WrappedComponent => class extends Component {

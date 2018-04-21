@@ -4,18 +4,15 @@ import { addMessage, removeMessage } from './data-service';
 import { isServer } from './utils';
 
 const store = {
-  proposals: [],
-  users: [],
+  proposals: {},
+  users: {},
   user: null,
   team: [],
   messages: [],
-	tags: [],
+  allTags: [],
   features: {
     submission: true
   },
-
-  speakers: [], // TODO remove
-  sessions: [], // TODO remove
 
   isSmallScreen: window.innerWidth < 576,
 

@@ -12,7 +12,7 @@ class SessionEditPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: props.session.categories,
+      categories: props.session.categories || [],
       tags: props.session.tags,
       proposalType: props.session.type
     }

@@ -40,7 +40,7 @@ export function transformProposal(proposal, loggedInUser) {
 
   if (_.isObject(proposal)) {
     const isTeamMember = isReversimTeamMember(loggedInUser);
-    const isAuthor =  loggedInUser && proposal.speaker_ids && proposal.speaker_ids.some(speaker => String(speaker._id) === String(loggedInUser._id));
+    const isAuthor =  loggedInUser && proposal.speaker_ids && proposal.speaker_ids.some(speakerId => String(speakerId) === String(loggedInUser._id));
     const canViewPrivate = isTeamMember || isAuthor;
 
     // console.log("transformProposal, proposal=" + proposal.id, "loggedInUser=", loggedInUser && loggedInUser._id, "isAuthor=", isAuthor, "isTeamMember=", isTeamMember);

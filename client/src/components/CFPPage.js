@@ -9,13 +9,14 @@ import CFPFaq from './CFPFaq';
 import CFPForm from './CFPForm';
 import smolarzImg from '../images/smolarz_hero.png';
 import { heroImg, cfpCol } from './CFPPage.css';
+import { getLoginUrl } from './Redirect';
 
 const NonAuthenticated = () => (
   <div className="text-center">
     <hr/>
     <h6>Login with Google is required in order to submit a proposal</h6>
     <Button outline color="gray-dark">
-      <a href="/auth/google">Login</a>
+      <a href={getLoginUrl()}>Login</a>
     </Button>
   </div>
 );
