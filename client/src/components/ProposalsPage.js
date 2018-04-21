@@ -4,38 +4,43 @@ import values from 'lodash/values';
 import heroImg from '../images/session.png';
 import { Col, Container, Row } from 'reactstrap';
 import ReactMarkdown from 'react-markdown';
-import { getSessionTypeStr } from '../utils';
+import { getSessionTypeStr, REVERSIM_SUMMIT } from '../utils';
 
 import cn from 'classnames';
 import s from './SpeakerPage.css';
 import { Link } from 'react-router-dom';
 import { getHref } from '../utils';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
+import Tag from './Tag';
 
-const SpeakerVertical = (speaker) => {
+const SpeakerVertical = ({ speaker }) => {
   const { name, picture, oneLiner } = speaker;
-  return <div className={cn("align-items-center my-4", s.speakerShort)}>
-    <div className={s.speakerImg} style={{ backgroundImage: `url('${picture}')` }} />
-    <Link to={`/speaker/${getHref(speaker)}`}><h3>{name}</h3></Link>
+  return <div className={cn("text-center", s.speakerShort)}>
+    <div className={cn(s.speakerImg, 'mx-auto mb-3')} style={{ backgroundImage: `url('${picture}')`, height: 100, width: 100 }} />
+    <Link to={`/speaker/${getHref(speaker)}`}><h4>{name}</h4></Link>
     <div className="text-muted mb-2">{oneLiner}</div>
-    <SpeakerSocialLinks {...speaker} className={cn(s.socialLinks, 'ml-0')}/>
+    <SpeakerSocialLinks {...speaker} className="justify-content-between" />
   </div>
 };
 
 
-const Proposal = ({ proposal: { title, type, speaker_ids, tags, abstract }, speakers }) => (
-  <Row>
-    <Col xs="10" sm={{ size: 7, offset: 1 }} className="mb-5">
-      <h4>{title}</h4>
-      <p>{getSessionTypeStr(type)}</p>
-      <div className="text-muted d-flex mb-3">{tags.map(tag => <span>{tag}</span>)}</div>
-      <ReactMarkdown source={abstract}/>
+const Proposal = (props) => {
+  const { proposal, speakers } = props;
+  const { title, type, tags, abstract } = proposal;
+  return <Row>
+    <Col xs="10" sm={{ size: 7, offset: 1 }} className="mb-12">
+      <Link className="unstyled-link" to={`/session/${getHref(proposal)}`}><h4>{title}</h4></Link>
+      <div className="d-flex mb-3 font-size-sm">
+        <div className="mr-10">{getSessionTypeStr(type)}</div>
+        <div className="text-muted d-flex">{tags.map(Tag)}</div>
+      </div>
+      <ReactMarkdown source={abstract} />
     </Col>
-    <Col xs="2" sm="3" className="mb-4 ml-4">
+    <Col xs="2" sm="3" className="mb-12 ml-4">
       {speakers.map(speaker => <SpeakerVertical key={speaker._id} speaker={speaker} />)}
     </Col>
-  </Row>
-);
+  </Row>;
+};
 
 const ProposalsPage = (props) => (
   <Page title="Proposals" {...props}>
@@ -43,6 +48,7 @@ const ProposalsPage = (props) => (
     <Container>
       <Row>
         <Col>
+          <h1 className="text-center my-6">Proposals to {REVERSIM_SUMMIT}</h1>
           {values(props.proposals).map(proposal => (
             <Proposal
               key={proposal._id}

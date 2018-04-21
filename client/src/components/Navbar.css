@@ -31,6 +31,15 @@
     margin-top: 10px;
 }
 
+.navbar:not(.isNotHome) {
+    padding-left: 28%;
+}
+@media (max-width:991px) {
+    .navbar:not(.isNotHome) {
+        padding-left: 20px;
+    }
+}
+
 .isNotHome {
     box-shadow: none;
 }

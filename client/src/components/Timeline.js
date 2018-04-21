@@ -8,7 +8,7 @@ const TimelineItem = ({ time, text, description, hasMargin }) => (
     <div className="d-flex align-items-center" style={{marginLeft:-60}}>
       <div className="rounded-circle border bg-white" style={{height:60, width:60}}/>
       <div className="ml-4">
-        <h4 className="line-height-17">{time}</h4>
+        <h4 className="line-height-17 text-primary">{time}</h4>
         <h4 className="font-weight-bold">{text}</h4>
       </div>
     </div>

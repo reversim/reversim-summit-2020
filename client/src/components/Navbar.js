@@ -9,6 +9,7 @@ import Avatar from "./Avatar";
 import { isServer } from '../utils';
 import { REVERSIM_SUMMIT } from '../utils';
 import { getLoginUrl } from './Redirect';
+import { cfp } from '../features';
 
 const CFPCTA = () => (
   <Button color="primary" className="mr-4">
@@ -75,10 +76,10 @@ class Navbar extends Component {
       <Link className="navbar-brand mr-5" to="/">{logo}</Link>
 
     return (
-      <Navbar2 expand="sm" fixed="top" className={cn({ [s.isNotHome]: !isHome, [s.isWhite]: !isHome || fixed })}>
+      <Navbar2 expand="sm" fixed="top" className={cn(s.navbar, { [s.isNotHome]: !isHome, [s.isWhite]: !isHome || fixed })}>
         {navbarBrand}
         <div className="d-flex justify-content-between">
-          { isSmallScreen && pathname !== '/cfp' && <CFPCTA /> }
+          { cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA /> }
           <NavbarToggler onClick={this.toggle}/>
         </div>
         <Collapse isOpen={this.state.isOpen} navbar className={cn({"bg-white border-bottom": isSmallScreen})}>
@@ -92,7 +93,7 @@ class Navbar extends Component {
             </div>}
           </Nav>
         </Collapse>
-        { !isSmallScreen && pathname !== '/cfp' && <CFPCTA /> }
+        { cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA /> }
 
         { !isServer && !isSmallScreen && <div className="ml-auto">
           { user ?
