@@ -13,7 +13,7 @@ import {
 } from '../data/proposals';
 
 const TitleFieldCaption = () => (
-  <span>Make it descriptive, concise, and appealing. You are welcome to review <a href="http://summit2016.reversim.com/#schedule" target="_blank" rel="noopener noreferrer">last year’s agenda</a>, or use the following examples:<br/><br/>
+  <span>Make it descriptive, concise, and appealing. You are welcome to review <a href="http://summit2017.reversim.com/schedule" target="_blank" rel="noopener noreferrer">last year’s agenda</a>, or use the following examples:<br/><br/>
             <ul><li><i>“How we optimized micro-service utilization using machine learning”</i></li>
 <li><i>“Writing on sand? Embracing CI-CD techniques in the HR team”</i></li>
 <li><i>“Effective Hackathon: How to re-write a project in 24 hours and save your startup”</i></li>
@@ -25,7 +25,7 @@ Reversim Summit is about deep-tech, and we will reject trivial introductory talk
 const AbstractFieldCaption = ({ abstractLen, abstractErr }) => (
   <span>Markdown syntax is supported. You can edit your proposal at any given time during the CFP period.<br/><br/><b>Example:</b><br/>Building an effective micro-service architecture is a non-trivial task. At example.com, we have accumulated more than 500 different micro-services over the years, ended up with a micro-service spaghetti, long latency, and inevitably -  a broken CI/CD pipeline.
 Then, we decided to remove human factor out of the equation.
-In this session I will present our open-sourced package that analyzed our microservice architecture as a graph, measured the load on each server, improved server utilization by 73% and brought our CI-CD pipeline back from the dead.<br/><br/><span className={cn({'text-red': abstractErr})}>{abstractLen}/{ABSTRACT_MAX}</span></span>
+In this session I will present our open-sourced package that analyzed our microservice architecture as a graph, measured the load on each server, improved server utilization by 73% and brought our CI-CD pipeline back from the dead.<br/><br/><span className={cn({'text-red': abstractErr}, 'font-weight-bold')}>{abstractLen}/{ABSTRACT_MAX}</span> (minimum {ABSTRACT_MIN} characters)</span>
 );
 
 const VideoUrlFieldCaption = () => (

@@ -22,7 +22,7 @@ const CFPIntro = () => (
     <p>We are looking for deep, hard-core technical sessions which exemplify outstanding and unique work or learnings which derive from your personal experience.</p>
     <p className="mt-8">There are three possible session types you may submit:</p>
     <h5 className="mt-4">Full Featured sessions (30 minutes)</h5>
-    <p>Full feature are frontal presentations of roughly 30 minutes. They will be held either in the large room (500 attendees) or the small room (200 attendees) in two parallel tracks.</p>
+    <p>Full feature are frontal presentations of roughly 30 minutes. They will be held either in the large room (500 attendees) or the small room (100-200 attendees) in 3 parallel tracks.</p>
     <p>Full featured sessions should select one of the following tracks:</p>
     <Row>
       <Col xs="auto">
