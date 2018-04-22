@@ -31,7 +31,7 @@ class CFPForm extends Component {
 
       const categories = this.state.categories;
       if (!categories.length) {
-        const y = formElements.categories.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 150;
+        const y = formElements.categories_hidden.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 750;
         window.scrollTo(0, y);
         return;
       }
