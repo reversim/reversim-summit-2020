@@ -63,7 +63,7 @@ const dates = [
 
 const SessionPage = (props) => {
   const { user, session, speakers, match: { params: { id } } } = props;
-  const {title, abstract, type, tags, outline, categories, video_url } = session;
+  const {title, abstract, type, tags, outline, categories } = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);
 
   const dayTime = getDateAndTime(id);
@@ -88,10 +88,6 @@ const SessionPage = (props) => {
             {categories && <div>
               <h4>Categories</h4>
               <ul>{categories.map(cat => <li key={cat} className="mr-2">{cat}</li>)}</ul>
-            </div>}
-            {video_url && <div className="mb-3">
-              <h4>Video URL</h4>
-              <div>{video_url}</div>
             </div>}
             {outline && <div>
               <h4>Outline</h4>

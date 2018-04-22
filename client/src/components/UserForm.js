@@ -10,6 +10,7 @@ export const getUserData = (formElements) => {
   const twitter = formElements.twitter.value;
   const github = formElements.github.value;
   const phone = formElements.phone.value;
+  const videoUrl = formElements.video_url.value;
 
   return {
     name        : fullname,
@@ -19,9 +20,18 @@ export const getUserData = (formElements) => {
     twitter     : twitter,
     github      : github,
     oneLiner    : oneLiner,
-    phone       : phone
+    phone       : phone,
+    video_url   : videoUrl,
   };
 };
+
+const VideoUrlFieldCaption = () => (
+  <span>
+    <b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.<br/>
+    <b>New speakers</b>: A short video introducing you and the planned session outline.<br/>
+    <i><b>Note</b>: If a video was already pasted in the track record field, it can be reused for this field.</i>
+  </span>
+);
 
 const UserForm = ({ user }) => (
   <div>
@@ -48,6 +58,7 @@ const UserForm = ({ user }) => (
         <ul><li>ExampleCon 2017, Sweden (Keynote speaker): “Modern Fortran development with ActiveX” (45 minutes). Video: , <a tabIndex="-1" target="_blank" href="https://www.youtube.com/watch?v=Nf_Y4MbUCLY" rel="noopener noreferrer">https://www.youtube.com/watch?v=Nf_Y4MbUCLY</a> slides: http://example.com/slide1</li>
           <li>EsoteriCon 2016, Tel Aviv: “How I sold my Piet program to MOMA for $20M” (20 minutes), Video: <a tabIndex="-1" target="_blank" href="https://youtu.be/DGXx56WqqJw" rel="noopener noreferrer">https://youtu.be/DGXx56WqqJw</a>, slides: http://example.com/slide2</li>
           <li>Israeli LOLCODE meetup (February 2015), Tel Aviv, “Is LOLCODE Turing complete?” (5 minutes),  Video: <a tabIndex="-1" target="_blank" href="https://www.youtube.com/watch?v=Wpx6XnankZ8" rel="noopener noreferrer">https://www.youtube.com/watch?v=Wpx6XnankZ8</a>, slides: http://example.com/slide3</li></ul></span>}/>
+    <FormField id="video_url" label="Link to video" required={true} value={user.video_url} placeholder="e.g. http://youtu.be/xxxx" subtitle={<VideoUrlFieldCaption />} className={SPACING} />
   </div>
 );
 

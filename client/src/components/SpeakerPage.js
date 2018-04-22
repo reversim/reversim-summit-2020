@@ -26,7 +26,7 @@ export class SpeakerPage extends React.Component {
 
   render() {
     const { speaker, proposals: allProposals, user, isUser } = this.props;
-    const { name, proposals, bio, isReversimTeamMember } = speaker;
+    const { name, proposals, bio, isReversimTeamMember, video_url, trackRecord } = speaker;
     const { isUploadingPhoto } = this.state;
 
 
@@ -65,14 +65,28 @@ export class SpeakerPage extends React.Component {
             <Row noGutters={true} className="mb-5">
               <p>{bio}</p>
             </Row>
-            {sessions.length ? <h4 className="mb-4">{`${name.split(" ")[0]}'s Proposals`}</h4> : null}
-            {sessions.map(session =>
-              <div className="bg-faded p-3 mb-4" key={session._id}>
-                <p>{getSessionTypeStr(session.type)}</p>
-                <div className="d-flex text-muted mb-3">{session.tags.map(Tag)}</div>
-                <Link to={`/session/${getHref(session)}`}><h5>{session.title}</h5></Link>
-              </div>
-            )}
+            {trackRecord && <div className="mb-3">
+              <h4>Track record</h4>
+              <div>{trackRecord}</div>
+            </div>}
+            {video_url && <div className="mb-3">
+              <h4>Video URL</h4>
+              <div>{video_url}</div>
+            </div>}
+            { sessions && sessions.length && <div className="mt-10">
+              <h4 className="mb-4">{`${name.split(" ")[0]}'s Proposals`}</h4>
+              {sessions.map(session =>
+                <Link to={`/session/${getHref(session)}`} className="unstyled-link">
+                  <div className="bg-gray-200 p-3 mb-4" key={session._id}>
+                  <h5>{session.title}</h5>
+                  <div className="d-flex mb-3 font-size-sm">
+                    <div className="mr-10">{getSessionTypeStr(session.type)}</div>
+                    <div className="text-muted d-flex">{session.tags.map(Tag)}</div>
+                  </div>
+                </div>
+                </Link>
+              )}
+            </div>}
           </Col>
         </Row>
       </Container>

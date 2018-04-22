@@ -38,7 +38,8 @@ const UserSchema = new mongoose.Schema({
   created_at: Date,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  google: {}
+  google: {},
+  video_url: String,
 });
 
 function encryptPassword(next) {

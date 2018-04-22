@@ -38,14 +38,14 @@ const PRIVATE_FIELDS = {
 	proposals: [
 		'outline',
 		'attendees',
-		'video_url',
 	],
 	users: [
 		'email',
 		'tokens',
 		'google',
-		'profile.phone',
-		'profile.trackRecord'
+		'phone',
+		'trackRecord',
+    'video_url',
 	]
 };
 

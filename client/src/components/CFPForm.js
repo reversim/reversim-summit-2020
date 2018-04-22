@@ -46,7 +46,6 @@ class CFPForm extends Component {
     const title = formElements.title.value;
     const type = this.state.proposalType;
     const outline = formElements.outline.value;
-    const video_url = formElements.video_url.value;
     const abstract = formElements.abstract.value;
     const tags = this.state.tags;
     const categories = this.state.categories;
@@ -57,7 +56,6 @@ class CFPForm extends Component {
       type,
       abstract,
       outline,
-      video_url,
       tags,
       categories,
       speaker_ids: [user._id],

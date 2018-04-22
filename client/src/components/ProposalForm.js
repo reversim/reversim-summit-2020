@@ -28,10 +28,6 @@ Then, we decided to remove human factor out of the equation.
 In this session I will present our open-sourced package that analyzed our microservice architecture as a graph, measured the load on each server, improved server utilization by 73% and brought our CI-CD pipeline back from the dead.<br/><br/><span className={cn({'text-red': abstractErr}, 'font-weight-bold')}>{abstractLen}/{ABSTRACT_MAX}</span> (minimum {ABSTRACT_MIN} characters)</span>
 );
 
-const VideoUrlFieldCaption = () => (
-  <span><b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.<br/><b>New speakers</b>: A short video introducing you and the planned session outline.</span>
-);
-
 const OutlineFieldCaption = () => (
   <span>The outline should include the main subjects you intend to cover with a timing estimation and total timing. A general overview is fine, we don’t expect a per-slide description for now. <br/><br/><b>For example:</b><br/>
     &bull; 2m Introduction: Who am I and my professional background<br/>
@@ -161,7 +157,7 @@ class ProposalForm extends Component {
   };
 
   render() {
-    const { allTags, categories, proposalType, tags, title, outline, abstract, video_url } = this.props;
+    const { allTags, categories, proposalType, tags, title, outline, abstract } = this.props;
     const { abstractLen, abstractErr, newTagPending} = this.state;
     let bestMatch, predefinedTags, tagObjs = tags.map(t => ({ id: t, text: t }));
 
@@ -211,8 +207,6 @@ class ProposalForm extends Component {
       })}
       <CategoryOther checked={!!this.getOtherCategoryInState(categories)} onChange={() => this.onCategoryChange(this.state.otherCategory)} onChangeInput={this.onCategoryInputChange} disabled={!this.getOtherCategoryInState(categories) && categories.length === MAX_CATEGORIES} />
 
-
-      <FormField id="video_url" label="Link to video" required={true} value={video_url} placeholder="e.g. http://youtu.be/xxxx" subtitle={<VideoUrlFieldCaption />} className={SPACING} />
       <FormField id="outline" label="Outline" required={true} multiline={true} value={outline} placeholder="" subtitle={<OutlineFieldCaption />} className={SPACING} />
 
     </div>

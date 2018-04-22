@@ -29,7 +29,8 @@ export function transformUser(user, loggedInUser) {
       twitter: user.twitter,
       stackOverflow: user.stackOverflow,
       github: user.github,
-      phone: canViewPrivate && user.phone
+      phone: canViewPrivate && user.phone,
+      video_url: canViewPrivate ? user.video_url : undefined,
     };
   }
 
@@ -58,7 +59,6 @@ export function transformProposal(proposal, loggedInUser) {
       hall: proposal.hall,
       slides_gdrive_id: proposal.slides_gdrive_id,
       categories: canViewPrivate ? proposal.categories : undefined,
-      video_url: canViewPrivate ? proposal.video_url : undefined,
       outline: canViewPrivate ? proposal.outline : undefined,
       total: (proposal.attendees && canViewPrivate) ? proposal.attendees.length : undefined,
       attended: proposal.attendees ? (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false) : undefined

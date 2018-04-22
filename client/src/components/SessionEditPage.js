@@ -47,7 +47,6 @@ class SessionEditPage extends React.Component {
     const title = formElements.title.value;
     const type = this.state.proposalType;
     const outline = formElements.outline.value;
-    const video_url = formElements.video_url.value;
     const abstract = formElements.abstract.value;
     const tags = this.state.tags;
     const categories = this.state.categories;
@@ -57,7 +56,6 @@ class SessionEditPage extends React.Component {
       type,
       abstract,
       outline,
-      video_url,
       tags,
       categories,
     };
@@ -68,7 +66,7 @@ class SessionEditPage extends React.Component {
   render() {
     const { session, allTags } = this.props;
     const { proposalType, categories, tags } = this.state;
-    const { title, outline, abstract, video_url } = session;
+    const { title, outline, abstract } = session;
 
     return <Page title={`Edit ${session.title}`} {...this.props}>
       <Container className="my-8">
@@ -85,7 +83,6 @@ class SessionEditPage extends React.Component {
                 title={title}
                 outline={outline}
                 abstract={abstract}
-                video_url={video_url}
               />
               <div className="text-center">
                 <Input type="submit" className="d-none"/>

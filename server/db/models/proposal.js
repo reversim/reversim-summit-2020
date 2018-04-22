@@ -27,7 +27,6 @@ const ProposalSchema = new mongoose.Schema({
     default: 'proposed'
   },
   slides_gdrive_id: String,
-  video_url: String,
   startTime: Date,
   endTime: Date,
   hall: String,
