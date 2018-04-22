@@ -32,6 +32,13 @@ class SessionEditPage extends React.Component {
       return;
     }
 
+    const categories = this.state.categories;
+    if (!categories.length) {
+      const y = formElements.categories_hidden.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 750;
+      window.scrollTo(0, y);
+      return;
+    }
+
     try {
       await updateProposal(session._id, this.getProposalData(formElements));
       this.props.history.push(`/session/${getHref(session)}`);

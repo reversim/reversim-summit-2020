@@ -201,6 +201,7 @@ class ProposalForm extends Component {
 
       <label>Categories</label>
       <small className="d-block text-muted mb-2">Choose 1 or 2 categories. This information will help us assign this session to one of the conference's tracks.</small>
+      <input type="hidden" id="categories_hidden" />
       {CATEGORIES.map(category => {
         const checked = categories.includes(category.name);
         return <CategoryCheckbox key={category.name} {...category} onChange={this.onCategoryChange} checked={checked} disabled={!checked && categories.length === MAX_CATEGORIES} />

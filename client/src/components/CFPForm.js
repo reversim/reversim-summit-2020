@@ -29,6 +29,13 @@ class CFPForm extends Component {
         return;
       }
 
+      const categories = this.state.categories;
+      if (!categories.length) {
+        const y = formElements.categories.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 150;
+        window.scrollTo(0, y);
+        return;
+      }
+
       try {
         await updateUserData(getUserData(formElements));
         const result = await createProposal(this.getProposalData(formElements));

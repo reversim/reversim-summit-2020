@@ -86,7 +86,13 @@ class App extends Component {
   };
 
   updateProposal = async (id, data) => {
-    return await doUpdateProposal(id, data);
+    await doUpdateProposal(id, data);
+    this.setState(state => ({
+      proposals: {
+        ...state.proposals,
+        [id]: {...state.proposals[id], ...data}
+      }
+    }))
   };
 
   // This is passed down to route components
