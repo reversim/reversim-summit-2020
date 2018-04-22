@@ -1,19 +1,20 @@
 import React from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Button } from 'reactstrap';
-import './ReactTags.css';
+import cn from 'classnames';
+import { tags as tagsClass, tagInput, tagInputField, selected, tag, remove, suggestions as suggestionsClass, activeSuggestion } from './ReactTags.css';
 
 export const MAX_TAGS = 3;
 
 const classNames = {
-  tags: "ReactTags__tags",
-  tagInput: "ReactTags__tagInput",
-  tagInputField: "ReactTags__tagInputField form-control",
-  selected: "ReactTags__selected",
-  tag: "ReactTags__tag",
-  remove: "ReactTags__remove",
-  suggestions: "ReactTags__suggestions",
-  activeSuggestion: "ReactTags__activeSuggestion",
+  tags: tagsClass,
+  tagInput,
+  tagInputField: cn(tagInputField, "form-control"),
+  selected,
+  tag,
+  remove,
+  suggestions: suggestionsClass,
+  activeSuggestion,
 };
 
 const Tags = ({ tags, suggestions, handleDelete, handleAddition, readOnly, predefinedSuggestions, className }) => (
