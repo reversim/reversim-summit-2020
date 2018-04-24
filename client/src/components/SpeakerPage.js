@@ -73,7 +73,7 @@ export class SpeakerPage extends React.Component {
               <h4>Video URL</h4>
               <div>{video_url}</div>
             </div>}
-            { sessions && sessions.length && <div className="mt-10">
+            { (sessions && sessions.length) ? <div className="mt-10">
               <h4 className="mb-4">{`${name.split(" ")[0]}'s Proposals`}</h4>
               {sessions.map(session =>
                 <Link to={`/session/${getHref(session)}`} className="unstyled-link">
@@ -86,7 +86,7 @@ export class SpeakerPage extends React.Component {
                 </div>
                 </Link>
               )}
-            </div>}
+            </div> : undefined }
           </Col>
         </Row>
       </Container>
