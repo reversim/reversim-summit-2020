@@ -17,7 +17,7 @@ const CFPIntro = () => (
       <li><a href="https://summit2017.reversim.com">Reversim Summit 2017</a></li>
     </ul>
     <p>We are interested in many topics, everything including: Software development methodologies, Product management for developers, UX, Startups, Mobile, Web, Devops, Data processing, Scaling, Software company culture, Tooling, etc...</p>
-    <p>We want deep, technical sessions, yet ones that can be beneficial to a general audience of  your assigned track. From our experience, talks that tells a story, preferably yours, work best. We want stories which exemplify outstanding and unique work or learning which derive from your personal experience. Any technical improvement you achieved by non trivial means, that might help others improve, is worth sharing.</p>
+    <p>We want deep, technical sessions, yet ones that can be beneficial to a general audience of  your assigned track. From our experience, sessions that tells a story, preferably yours, work best. We want stories which exemplify outstanding and unique work or learning which derive from your personal experience. Any technical improvement you achieved by non trivial means, that might help others improve, is worth sharing.</p>
     <p className="mt-8">There are three possible session types you may submit:</p>
     <h5 className="mt-4">Full Featured sessions (30 minutes)</h5>
     <p>Full feature are frontal presentations of roughly 30 minutes. They will be held either in the large room (500 attendees) or the small room (100-200 attendees) in 3 parallel tracks.</p>
