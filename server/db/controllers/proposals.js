@@ -201,13 +201,18 @@ export function add(req, res) {
               text: speakers[0].email
             },
             {
-              "title": "tags",
-              "color": "#ef6c00",
+              "title": "Categories",
+              "color": "#28a745",
+              "text": proposal.categories ? proposal.categories.join(", ") : ""
+            },
+            {
+              "title": "Tags",
+              "color": "#ffc107",
               "text": proposal.tags ? proposal.tags.join(", ") : ""
             },
             {
               text: proposal.abstract,
-              color: "#0073cf"
+              color: "#6b1ee6"
             }
           ]
         }
