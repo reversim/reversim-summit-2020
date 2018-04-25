@@ -11,7 +11,7 @@ const SpeakerEditPage = ({ speaker, user, updateUserData, ...props }) => (
       <Row>
         <Col sm={{ size: 8, offset: 2 }}>
           <h1 className="my-4">Edit <b>{speaker.name}'s</b> details</h1>
-          <SpeakerForm user={speaker} updateUserData={updateUserData} />
+          <SpeakerForm user={speaker} updateUserData={updateUserData} {...props} />
         </Col>
       </Row>
     </Container>
