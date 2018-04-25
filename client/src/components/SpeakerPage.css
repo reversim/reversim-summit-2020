@@ -16,6 +16,9 @@
 }
 
 .socialLinks a {
-    margin-right: 60px;
     flex: 0 0 auto;
+}
+
+.socialLinks a:not(:last-child) {
+    margin-right: 60px;
 }

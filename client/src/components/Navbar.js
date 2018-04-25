@@ -22,7 +22,7 @@ const navLinkClass = cn("nav-link", s.navLink);
 const NavbarItem = ({ to, text, external }) => {
   let link;
   if (external) {
-    link = <a className={navLinkClass} href={`/${to}`}>{text}</a>
+    link = <a className={navLinkClass} href={to}>{text}</a>
   } else {
     link = <Link className={navLinkClass} to={`/${to}`}>{text}</Link>;
   }
@@ -68,6 +68,7 @@ class Navbar extends Component {
     const { isHome, isSmallScreen, user, onLogout, pathname, history } = this.props;
     const { fixed } = this.state;
     const items = navItems(isHome);
+    const isWhite = !isHome || fixed;
 
     const logo = <img className={s.logo} src={logoImg} onClick={() => history.push("/")} alt={REVERSIM_SUMMIT}/>
 
@@ -76,17 +77,18 @@ class Navbar extends Component {
       <Link className="navbar-brand mr-5" to="/">{logo}</Link>
 
     return (
-      <Navbar2 expand="sm" fixed="top" className={cn(s.navbar, { [s.isNotHome]: !isHome, [s.isWhite]: !isHome || fixed })}>
+      <Navbar2 expand="sm" fixed="top" className={cn(s.navbar, { [s.isNotHome]: !isHome, [s.isWhite]: isWhite })}>
         {navbarBrand}
         <div className="d-flex justify-content-between">
           { cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA /> }
           <NavbarToggler onClick={this.toggle}/>
         </div>
-        <Collapse isOpen={this.state.isOpen} navbar className={cn({"bg-white border-bottom": isSmallScreen})}>
+        <Collapse isOpen={this.state.isOpen} navbar className={cn({"bg-white border-bottom": isSmallScreen && !isWhite})}>
           <Nav navbar>
             { items.map(NavbarItem) }
             { isSmallScreen && user && <div className="border-top">
-              <NavbarItem to={`/profile`} text="My profile" />
+              <NavbarItem to="profile" text="My profile" />
+              <NavItem className={s.navItem} onClick={onLogout}><span className={navLinkClass}>Logout</span></NavItem>
             </div>}
             { isSmallScreen && !user && <div className="border-top">
               <NavbarItem to={getLoginUrl()} text="Login" external={true} />

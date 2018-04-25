@@ -21,7 +21,7 @@ export default () => {
 		].map(item => ({
 			...item,
 			external: true,
-			to: `${item.to}.html`
+			to: `/${item.to}.html`
 		}));
 	} else {
 		items = [

@@ -1,6 +1,6 @@
 .navLink, .navLink:hover {
-    color: white;
     cursor: pointer;
+    color: white;
 }
 
 .navItem {
@@ -13,8 +13,8 @@
 }
 
 .isWhite {
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 0 5px rgba(0, 0, 0, .2), 0 1px 0 rgba(255, 255, 255, .15);
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2), 0 1px 0 rgba(255, 255, 255, .4);
     transition: background 0.3s;
 }
 
@@ -40,13 +40,28 @@
     }
 }
 
-.isNotHome {
-    box-shadow: none;
+@media (min-width: 577px) {
+    .isNotHome {
+        box-shadow: none;
+    }
 }
 
 @media (max-width: 767px) {
     .isHome > .container {
         top: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .navLink, .navLink:hover {
+        color: #262627;
+    }
+
+    .navbar:not(.isWhite) :global .navbar-collapse {
+        margin-left: -20px;
+        padding-left: 20px;
+        margin-right: -20px;
+        padding-right: 20px;
     }
 }
 

@@ -33,14 +33,14 @@ export class SpeakerPage extends React.Component {
     const sessions = proposals.map(proposalId => allProposals[proposalId]);
 
     return <Page title={name} user={user} {...this.props}>
-      <div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>
+      {/*<div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>*/}
       <Container>
         <Row>
           <Col sm={{size: 8, offset: 2}}>
             <SpeakerShort speaker={speaker} editable={isUser} />
-            { isReversimTeamMember && <div className="mb-3"><small className="py-1 px-2 bg-danger text-white">Team member</small></div> }
+            { isReversimTeamMember && <div className="mb-3 text-center text-md-left"><small className="py-1 px-2 bg-danger text-white">Team member</small></div> }
             {isUser && <Button
-              color="primary" className="mb-4 text-center" disabled={isUploadingPhoto}
+              color="primary" className="d-block mb-4 mx-auto mx-md-0" disabled={isUploadingPhoto}
               style={{ width: 150, position: 'relative', overflow: 'hidden' }}
             >
               {isUploadingPhoto ? "Uploading" : "Upload photo"}
@@ -62,7 +62,7 @@ export class SpeakerPage extends React.Component {
               }}
               />
             </Button>}
-            <Row noGutters={true} className="mb-5">
+            <Row noGutters={true} className="mb-5 pt-4 border-top">
               <p>{bio}</p>
             </Row>
             {trackRecord && <div className="mb-3">

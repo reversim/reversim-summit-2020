@@ -5,8 +5,6 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 50%;
-    filter: grayscale(1);
-    transition: all 0.25s;
 }
 
 .teamMember:hover .teamImg {
@@ -15,4 +13,15 @@
 
 .modalHeader {
     border-bottom: none;
+}
+
+@media (min-width: 768px) {
+    .teamImg {
+        filter: grayscale(1);
+        transition: all 0.25s;
+    }
+
+    .teamMember:hover .teamImg {
+        filter: grayscale(0);
+    }
 }

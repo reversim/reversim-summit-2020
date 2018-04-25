@@ -113,7 +113,11 @@ input[type='checkbox'] {
 
 .hero-page-img {
   height: 320px;
+  background-size: cover;
 
+  @media (max-width: 576px) {
+    height: 120px;
+  }
 }
 
 .bg-gray-900 {

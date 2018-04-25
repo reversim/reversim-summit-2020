@@ -12,14 +12,14 @@ const SpeakerShort = ({ speaker, editable, hasLink }) => {
   const nameEl = <h3>{name}{editable && <Button color="primary" size="sm" className="ml-3"><Link to={`/speaker/${speaker._id}/edit`}><i className="fa fa-pencil"/></Link></Button>}</h3>;
 
   return <Row className={cn("align-items-center my-4", s.speakerShort)}>
-    <Col sm="auto">
-      <div className={s.speakerImg} style={{backgroundImage: `url('${picture}')`}}/>
+    <Col md="auto">
+      <div className={cn(s.speakerImg, 'mx-auto mx-lg-0 mb-4 mb-lg-0')} style={{backgroundImage: `url('${picture}')`}}/>
     </Col>
-    <Col>
+    <Col className="text-center text-md-left">
       { hasLink ? <Link to={`/speaker/${getHref(speaker)}`}>{nameEl}</Link> :
         <span>{nameEl}</span> }
       <div className="text-muted mb-2">{oneLiner}</div>
-      <SpeakerSocialLinks {...speaker} className={cn(s.socialLinks, 'ml-0')}/>
+      <SpeakerSocialLinks {...speaker} className={cn(s.socialLinks, 'justify-content-center justify-content-md-start')}/>
     </Col>
   </Row>
 };
