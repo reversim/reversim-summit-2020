@@ -209,8 +209,8 @@ class ProposalForm extends Component {
       <CategoryOther checked={!!this.getOtherCategoryInState(categories)} onChange={() => this.onCategoryChange(this.state.otherCategory)} onChangeInput={this.onCategoryInputChange} disabled={!this.getOtherCategoryInState(categories) && categories.length === MAX_CATEGORIES} />
 
       <FormField id="outline" label="Outline" required={true} multiline={true} value={outline} placeholder="" subtitle={<OutlineFieldCaption />} className={SPACING} />
-      <div className={SPACING}>
-        <input type="checkbox" id="legal" defaultChecked={legal} required/><label htmlFor="legal">I have read and reviewed</label>
+      <div className={cn(SPACING, 'd-flex')}>
+        <input type="checkbox" id="legal" defaultChecked={legal} required className="mr-3 mt-1"/><label htmlFor="legal">I agree that all presented materials will be shared on the web by Reversim team, including the slides, video on youtube and mp3 on the podcast.</label>
       </div>
     </div>
   }
