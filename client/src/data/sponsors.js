@@ -29,10 +29,11 @@ const sponsors = shuffle([
   {
     name: 'Wix',
     logo: wixLogo,
-    url: 'http://wix.com',
-    description: '',
-    featuredJobInfo: '',
-    featuredJobLink: ''
+    url: 'https://www.wix.engineering/',
+    description: <span>Wix.com is a leading cloud-based web development platform with more than 110 million users worldwide. Wix was founded on the belief that the Internet should be accessible to everyone to develop, create, and contribute.<br/>
+      Our Software Engineering culture is based on developers who love their work, are passionate about technology, and believe that nothing is impossible. We deploy hundreds of times a day and design our software for ease of change. We use TDD with Scala and JS to develop our microservices, encourage C/I, and we give back to the community by speaking at developer events and contributing to Open-Source. Wix's headquarters are in Tel Aviv, Israel with offices in Be'er Sheva, San Francisco, New York, Miami, Berlin, Vilnius, Kyiv, and Dnipro - Wix's website.</span>,
+    featuredJobInfo: 'At Wix’s Engineering group, lead developers shape the architecture of our services and product. They set the tone and standard of our developer culture, fusing facets of engineering, product management, DevOps, analytics, and technical management. They are also mentors, helping less-experienced engineers improve and hone their skills so that they are eventually capable of being tech leads themselves. The Wix development culture is transparent, highly technical, and agile. Because we ship often, we’ve happily adopted Continuous Delivery and Test-Driven Development. We code in Scala, Python, Go, Javascript and TypeScript. We develop and maintain highly scalable systems that support Wix’s tens of millions of users—and the people who visit their websites.',
+    featuredJobLink: 'https://www.wix.com/jobs/home'
   },
   {
     name: 'Microsoft',
@@ -88,7 +89,7 @@ const sponsors = shuffle([
     name: 'Outbrain',
     logo: outbrainLogo,
     url: 'http://www.outbrain.com',
-    description: <span>Outbrain is the world’s largest discovery platform, bringing personalized, relevant online, mobile and video content to audiences while helping publishers understand their audiences through data. Our core technology relays on recommendation systems using state of the art machine learning models and deep learning built using big data.Every day, Outbrain engineers overcome technology challenges with the help of experienced mentors and a unique culture encouraging taking risks, ownership, and co-working. Take a look at our technology story in <a href="http://goo.gl/CgLhc8">outbrain tech blog</a> where engineers share their knowledge and experience.</span>,
+    description: <span>Outbrain is the world’s largest discovery platform, bringing personalized, relevant online, mobile and video content to audiences while helping publishers understand their audiences through data. Our core technology relays on recommendation systems using state of the art machine learning models and deep learning built using big data. Every day, Outbrain engineers overcome technology challenges with the help of experienced mentors and a unique culture encouraging taking risks, ownership, and co-working. Take a look at our technology story in <a href="http://goo.gl/CgLhc8">Outbrain's tech blog</a> where engineers share their knowledge and experience.</span>,
     featuredJobInfo: '',
     featuredJobLink: 'https://careers.outbrain.com/index.html'
   },

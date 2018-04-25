@@ -32,18 +32,25 @@ const SponsorMini = ({ name, logo, url }) => (
 
 export const SponsorsSection = () => (
   <Section title="Sponsors">
-    <Row>
+    <Row className="justify-content-center">
       {sponsorsData.map(SponsorMini)}
+      <WantToBe/>
     </Row>
   </Section>
+);
+
+const WantToBe = () => (
+  <div className="my-4 p-3 bg-gray-200 line-height-17 text-center"><h4>Want to be a sponsor?</h4> Contact our amazing Gilli at <a href="mailto:gilli@reversim.com">gilli@reversim.com</a> and let's have fun together!</div>
 );
 
 const Sponsors = (props) => (
   <Page title="Sponsors" {...props}>
     <h1 className="text-center mt-5">Our sponsors</h1>
+    <WantToBe/>
     <Container>
       <p className="text-center mb-5">Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:</p>
       {sponsorsData.map(Sponsor)}
+      <WantToBe/>
     </Container>
   </Page>
 );
