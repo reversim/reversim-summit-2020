@@ -423,8 +423,13 @@ function getProposers(proposals) {
   return User.find({ _id: { $in: userIds }});
 }
 
-function getAllProposals() {
-  return Proposal.find({}, null, { sort: { created_at: -1 } });
+async function getAllProposals(shouldShuffle, seed) {
+  let proposals = await Proposal.find({ status: { $ne: 'archived' }}, null, { sort: { created_at: -1 } });
+  if (shouldShuffle) {
+    const shuffleSeed = seed || String(Date.now());
+    proposals = shuffler.shuffle(proposals, shuffleSeed);
+  }
+  return proposals;
 }
 
 function getAcceptedProposals() {
