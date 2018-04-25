@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import { getHref } from '../utils';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
 import Tag from './Tag';
-import SpeakerShort from './SpeakerShort';
 
 const SpeakerVertical = ({ speaker }) => {
   const { name, picture, oneLiner } = speaker;
