@@ -32,7 +32,7 @@
 }
 
 .navbar:not(.isNotHome) {
-    padding-left: 28%;
+    padding-left: 20%;
 }
 @media (max-width:991px) {
     .navbar:not(.isNotHome) {

@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import cn from 'classnames';
 import s from './Hero.css';
 import Messages from './Messages';
-import {Container} from "reactstrap";
+import { Button, Container } from 'reactstrap';
 import { REVERSIM_SUMMIT } from '../utils';
+import { Link } from 'react-router-dom';
 
 
 class Hero extends Component {
@@ -20,8 +21,11 @@ class Hero extends Component {
           </div>
           <div className="mb-8">
             <div className={cn(s.cta, "p-5 d-inline-block mx-6 font-raleway")}>
-              <h3 className="text-uppercase">We're back!</h3>
-              <h4 className="mb-0 font-weight-normal">CFP opens in a few days, stay tuned!</h4>
+              <h3 className="text-uppercase">We're back,</h3>
+              <h4 className="mb-0 font-weight-normal">CFP is open!</h4>
+              <Link to="/cfp" className="unstyled-link mt-4 d-block">
+                <Button color="primary" size="lg">Submit session</Button>
+              </Link>
             </div>
           </div>
           <div className="text-center">
