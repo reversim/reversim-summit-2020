@@ -54,6 +54,7 @@ class CFPForm extends Component {
     const type = this.state.proposalType;
     const outline = formElements.outline.value;
     const abstract = formElements.abstract.value;
+    const legal = formElements.legal.checked;
     const tags = this.state.tags;
     const categories = this.state.categories;
     const user = this.props.user;
@@ -65,6 +66,7 @@ class CFPForm extends Component {
       outline,
       tags,
       categories,
+      legal,
       speaker_ids: [user._id],
     };
   };

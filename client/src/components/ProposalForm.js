@@ -157,7 +157,7 @@ class ProposalForm extends Component {
   };
 
   render() {
-    const { allTags, categories, proposalType, tags, title, outline, abstract } = this.props;
+    const { allTags, categories, proposalType, tags, title, outline, abstract, legal } = this.props;
     const { abstractLen, abstractErr, newTagPending} = this.state;
     let bestMatch, predefinedTags, tagObjs = tags.map(t => ({ id: t, text: t }));
 
@@ -209,7 +209,9 @@ class ProposalForm extends Component {
       <CategoryOther checked={!!this.getOtherCategoryInState(categories)} onChange={() => this.onCategoryChange(this.state.otherCategory)} onChangeInput={this.onCategoryInputChange} disabled={!this.getOtherCategoryInState(categories) && categories.length === MAX_CATEGORIES} />
 
       <FormField id="outline" label="Outline" required={true} multiline={true} value={outline} placeholder="" subtitle={<OutlineFieldCaption />} className={SPACING} />
-
+      <div className={SPACING}>
+        <input type="checkbox" id="legal" defaultChecked={legal} required/><label htmlFor="legal">I have read and reviewed</label>
+      </div>
     </div>
   }
 }

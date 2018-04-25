@@ -30,6 +30,7 @@ const ProposalSchema = new mongoose.Schema({
   startTime: Date,
   endTime: Date,
   hall: String,
+  legal: Boolean,
   created_at: Date,
   updated_at: Date
 });

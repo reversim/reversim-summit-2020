@@ -12,11 +12,10 @@ import { heroImg, cfpCol } from './CFPPage.css';
 import { getLoginUrl } from './Redirect';
 
 const NonAuthenticated = () => (
-  <div className="text-center">
-    <hr/>
+  <div className="text-center mb-6">
     <h6>Login with Google is required in order to submit a proposal</h6>
     <a href={getLoginUrl()}>
-      <Button outline color="gray-dark">Login</Button>
+      <Button outline color="primary">Login</Button>
     </a>
   </div>
 );

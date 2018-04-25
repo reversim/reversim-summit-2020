@@ -61,7 +61,8 @@ export function transformProposal(proposal, loggedInUser) {
       categories: canViewPrivate ? proposal.categories : undefined,
       outline: canViewPrivate ? proposal.outline : undefined,
       total: (proposal.attendees && canViewPrivate) ? proposal.attendees.length : undefined,
-      attended: proposal.attendees ? (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false) : undefined
+      attended: proposal.attendees ? (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false) : undefined,
+      legal: canViewPrivate && proposal.legal,
     }
   }
 
