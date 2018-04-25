@@ -2,7 +2,6 @@ import React from 'react';
 import Page from "./Page";
 import { Container, Row, Col } from 'reactstrap';
 import {getSessionTypeStr, getHref} from "../utils";
-import heroImg from '../images/speaker.png';
 import {Link} from "react-router-dom";
 import Tag from './Tag';
 import SpeakerShort from "./SpeakerShort";
@@ -33,7 +32,6 @@ export class SpeakerPage extends React.Component {
     const sessions = proposals.map(proposalId => allProposals[proposalId]);
 
     return <Page title={name} user={user} {...this.props}>
-      {/*<div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>*/}
       <Container>
         <Row>
           <Col sm={{size: 8, offset: 2}}>

@@ -9,7 +9,7 @@ import { getHref } from '../utils';
 const SpeakerShort = ({ speaker, editable, hasLink }) => {
   const { name, picture, oneLiner } = speaker;
 
-  const nameEl = <h3>{name}{editable && <Button color="primary" size="sm" className="ml-3"><Link to={`/speaker/${speaker._id}/edit`}><i className="fa fa-pencil"/></Link></Button>}</h3>;
+  const nameEl = <h3>{name}{editable && <Link to={`/speaker/${speaker._id}/edit`}><Button color="primary" size="sm" className="ml-3"><i className="fa fa-pencil"/></Button></Link>}</h3>;
 
   return <Row className={cn("align-items-center my-4", s.speakerShort)}>
     <Col md="auto">

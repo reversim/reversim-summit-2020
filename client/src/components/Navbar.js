@@ -12,9 +12,9 @@ import { getLoginUrl } from './Redirect';
 import { cfp } from '../features';
 
 const CFPCTA = () => (
-  <Button color="primary" className="mr-4">
-    <Link to="/cfp" className="unstyled-link">Submit session</Link>
-  </Button>
+  <Link to="/cfp" className="unstyled-link">
+    <Button color="primary" className="mr-4">Submit session</Button>
+  </Link>
 );
 
 const navLinkClass = cn("nav-link", s.navLink);

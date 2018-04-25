@@ -5,11 +5,11 @@ import {Container} from "reactstrap";
 import Map from "./Map";
 import { REVERSIM_SUMMIT } from '../utils';
 
-const Section = ({ title, children }) => (
-	<p className="font-size-lg">
-		<b className="text-underline">{title}</b><br/>{children}
-	</p>
-);
+// const Section = ({ title, children }) => (
+// 	<p className="font-size-lg">
+// 		<b className="text-underline">{title}</b><br/>{children}
+// 	</p>
+// );
 
 const LocationPage = (props) => (
 	<Page title="Getting there" {...props}>

@@ -32,7 +32,7 @@ class SpeakerForm extends React.Component {
       <Input type="submit" className="d-none"/>
       <div className="d-flex justify-content-center align-items-center">
         <Button color="primary" className="mr-4" style={{ width: 120 }}>Submit</Button>
-        <Link to={`/speaker/${user._id}`}>Cancel</Link>
+        <Link to={`/speaker/${getHref(user)}`}>Cancel</Link>
       </div>
     </form>
   }

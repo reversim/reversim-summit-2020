@@ -2,14 +2,14 @@ import React from 'react';
 import sponsorsData from '../data/sponsors';
 import Section from "./Section";
 import s from './Sponsors.css';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 import Page from "./Page";
 import { REVERSIM_SUMMIT } from '../utils';
 
 const Sponsor = ({ name, logo, url, description, featuredJobInfo, featuredJobLink, excludeWebsite}) => {
   return (
     <div key={name}>
-      <div className="text-center">
+      <div className="text-center mb-4">
         <a href={url} target="_blank"><img src={logo} className={s.sponsorImg} alt={name}/></a>
       </div>
       <Row noGutters={true}>
@@ -41,8 +41,10 @@ export const SponsorsSection = () => (
 const Sponsors = (props) => (
   <Page title="Sponsors" {...props}>
     <h1 className="text-center mt-5">Our sponsors</h1>
-    <p className="text-center mb-5">Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:</p>
-    {sponsorsData.map(Sponsor)}
+    <Container>
+      <p className="text-center mb-5">Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:</p>
+      {sponsorsData.map(Sponsor)}
+    </Container>
   </Page>
 );
 

@@ -15,9 +15,9 @@ const NonAuthenticated = () => (
   <div className="text-center">
     <hr/>
     <h6>Login with Google is required in order to submit a proposal</h6>
-    <Button outline color="gray-dark">
-      <a href={getLoginUrl()}>Login</a>
-    </Button>
+    <a href={getLoginUrl()}>
+      <Button outline color="gray-dark">Login</Button>
+    </a>
   </div>
 );
 
