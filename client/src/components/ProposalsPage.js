@@ -49,24 +49,25 @@ const Proposal = (props) => {
   </Row>;
 };
 
-const ProposalsPage = (props) => (
-  <Page title="Proposals" {...props}>
-    <div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>
+const ProposalsPage = (props) => {
+  const proposals = values(props.proposals);
+  return <Page title="Proposals" {...props}>
+    <div className="hero-page-img" style={{ backgroundImage: `url('${heroImg}')` }} />
     <Container>
       <Row>
         <Col>
-          <h1 className="text-center my-6">Proposals to {REVERSIM_SUMMIT}</h1>
-          {values(props.proposals).map(proposal => (
+          <h1 className="text-center mt-6 mb-12">Proposals to {REVERSIM_SUMMIT}</h1>
+          {proposals.length ? proposals.map(proposal => (
             <Proposal
-              isSmallScreen={props.isSmallScreen}
-              key={proposal._id}
-              proposal={proposal}
-              speakers={proposal.speaker_ids.map(speakerId => props.users[speakerId])} />
-          ))}
+            isSmallScreen={props.isSmallScreen}
+            key={proposal._id}
+            proposal={proposal}
+            speakers={proposal.speaker_ids.map(speakerId => props.users[speakerId])} />
+            )) : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br/> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}
         </Col>
       </Row>
     </Container>
   </Page>
-);
+};
 
 export default ProposalsPage;

@@ -4,7 +4,7 @@ import wixLogo from '../images/sponsors/wix.png';
 // import gigyaLogo from '../images/sponsors/gigya.png';
 import kenshooLogo from '../images/sponsors/kenshoo.png';
 import appsFlyerLogo from '../images/sponsors/apps_flyer.png';
-// import myHeritageLogo from '../images/sponsors/MH_logo.png';
+import myHeritageLogo from '../images/sponsors/MH_logo.png';
 // import klarnaLogo from '../images/sponsors/klarna.png';
 import livepersonLogo from '../images/sponsors/liveperson.png';
 // import tikalLogo from '../images/sponsors/tikal.png';
@@ -88,7 +88,7 @@ const sponsors = shuffle([
     name: 'Outbrain',
     logo: outbrainLogo,
     url: 'http://www.outbrain.com',
-    description: 'Outbrain is the world’s largest discovery platform, bringing personalized, relevant online, mobile and video content to audiences while helping publishers understand their audiences through data. Our core technology relays on recommendation systems using state of the art machine learning models and deep learning built using big data .Every day, Outbrain engineers overcome technology challenges with the help of experianced mentores and a very uniqe culture encurging taking risks, ownerships and co- working.',
+    description: <span>Outbrain is the world’s largest discovery platform, bringing personalized, relevant online, mobile and video content to audiences while helping publishers understand their audiences through data. Our core technology relays on recommendation systems using state of the art machine learning models and deep learning built using big data.Every day, Outbrain engineers overcome technology challenges with the help of experienced mentors and a unique culture encouraging taking risks, ownership, and co-working. Take a look at our technology story in <a href="http://goo.gl/CgLhc8">outbrain tech blog</a> where engineers share their knowledge and experience.</span>,
     featuredJobInfo: '',
     featuredJobLink: 'https://careers.outbrain.com/index.html'
   },
@@ -108,6 +108,15 @@ const sponsors = shuffle([
     description: 'AppsFlyer’s technology is found on 98 percent of the world’s smartphones, making it the global leader in mobile attribution and marketing analytics. Data-driven marketers rely on AppsFlyer for independent measurement solutions and innovative tools to grow their mobile business. AppsFlyer’s platform processes billions of mobile actions every day, empowering mobile marketers and developers to maximize the return on their marketing investments. With AppsFlyer’s NativeTrackTM Attribution, Marketing Analytics Data, OneLink’s Deep linking capabilities and the Active Fraud Suite featuring DeviceRank, AppsFlyer is the go-to resource for the most successful mobile apps in the world. Trusted by Facebook, Google, Twitter, Pinterest, Snap Inc., Tencent, HBO, Playtika, Waze, Alibaba, Kayak and 12,000+ other leading brands and partners, AppsFlyer has 12 global offices to support every app marketer around the world. To learn more, visit http://www.appsflyer.com.',
     featuredJobInfo: '',
     featuredJobLink: ''
+  },
+  {
+    name: 'My Heritage',
+    logo: myHeritageLogo,
+    url: 'https://www.oracle.com',
+    description: <span>As one of Israel's most successful start-ups, with over 420 employees, MyHeritage is utilizing the latest technological advancements, such as DNA testing and advanced matching algorithms developed in-house, to discover, preserve and share the family histories of over 95 million users worldwide.<br/>
+      We invite you to join our <a href="https://www.meetup.com/MyHeritage-Meetup/">MyHeritage Meetup Group</a> to receive updates about upcoming events hosted in our office. Come along to discuss cross-technology challenges with our top-notch R&D team and visit our fascinating <a href="https://medium.com/myheritage-engineering">Engineering blog.</a></span>,
+    featuredJobInfo: 'Join us - Make history.',
+    featuredJobLink: 'https://careers.myheritage.com/'
   },
 
 ]);
