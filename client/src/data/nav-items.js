@@ -6,7 +6,7 @@ const location  = { to: "location", text: "Getting there" };
 const speakers  = { to: "speakers", text: "Speakers" };
 const sponsors  = { to: "sponsors", text: "Sponsors" };
 const schedule  = { to: "schedule", text: "Schedule" };
-// const proposals = { to: "proposals", text: "Proposals" };
+const proposals = { to: "proposals", text: "Proposals" };
 const timeline	= { to: "timeline", text: "Timeline" };
 
 export default () => {
@@ -25,7 +25,7 @@ export default () => {
 		}));
 	} else {
 		items = [
-      // proposals,
+      proposals,
       timeline,
       location,
       team,

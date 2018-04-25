@@ -1,4 +1,4 @@
-const cfp = false;
+const cfp = true;
 
 export {
   cfp
