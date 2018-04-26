@@ -96,7 +96,7 @@ const sponsors = shuffle([
   {
     name: 'Amazon',
     logo: amazonLogo,
-    url: 'https://www.facebook.com/careers/',
+    url: 'https://www.amazon.jobs/location/tel-aviv-israel?offset=0&result_limit=10&sort=relevant&business_category%5b%5d=amazon-web-services&distanceType=Mi&radius=24km&latitude=&longitude=&loc_group_id=&loc_query=&base_query=&city=&country=&region=&county=&query_options=&',
     description: <span>When Amazon.com launched in 1995, it was with the mission “to be Earth’s most customer-centric company, where customers can find and discover anything they might want to buy online, and endeavors to offer its customers the lowest possible prices.”<br/><br/>
       Amazon Web Services (AWS) is a subsidiary of Amazon.com that provides on-demand cloud computing platforms to individuals, companies and governments, on a paid subscription basis.</span>,
     featuredJobInfo: 'Come and join us!',
