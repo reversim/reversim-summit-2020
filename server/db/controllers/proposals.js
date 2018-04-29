@@ -162,6 +162,11 @@ async function get(req, res) {
  * Add a Proposal
  */
 export function add(req, res) {
+  if (!req.user) return res.sendStatus(401);
+  if (req.body.speaker_ids.indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
+    return res.sendStatus(401);
+  }
+
   let proposal = _.clone(req.body);
 
   proposal.created_at = new Date();
@@ -190,44 +195,45 @@ export function add(req, res) {
     Promise.all(proposal.speaker_ids.map(speaker_id => {
       return User.findOne({ _id: speaker_id });
     })).then(speakers => {
-
-      const authorName = speakers.map(speaker => speaker.name).join(" & ");
-      request({
-        url: process.env.SLACK_URL,
-        method: "POST",
-        data: {
-          username: "CFP Alert",
-          text: `${authorName} submitted: ${proposal.title}`,
-          channel: process.env.NODE_ENV === 'production' ? "#cfp" : null,
-          attachments: [
-            {
-              title: proposal.title,
-              author_name: authorName,
-              author_link: `https://summit2018.reversim.com/session/${model._id}`,
-              author_icon: speakers[0].picture,
-              text: speakers[0].email
-            },
-            {
-              "title": "Session type",
-              "color": "#17a2b8",
-              "text": PROPOSAL_TYPES[proposal.type]
-            },
-            {
-              "title": "Categories",
-              "color": "#28a745",
-              "text": proposal.categories ? proposal.categories.join(", ") : ""
-            },
-            {
-              "title": "Tags",
-              "color": "#ffc107",
-              "text": proposal.tags ? proposal.tags.join(", ") : ""
-            },
-            {
-              text: proposal.abstract,
-              color: "#6b1ee6"
-            }
-          ]
-        }
+      Proposal.count({ status: { $ne: 'archived' } }).then(proposalCount => {
+        const authorName = speakers.map(speaker => speaker.name).join(" & ");
+        request({
+          url: process.env.SLACK_URL,
+          method: "POST",
+          data: {
+            username: "CFP Alert",
+            text: `#${proposalCount} ${authorName} submitted: ${proposal.title}`,
+            channel: process.env.NODE_ENV === 'production' ? "#cfp" : null,
+            attachments: [
+              {
+                title: proposal.title,
+                author_name: authorName,
+                author_link: `https://summit2018.reversim.com/session/${model._id}`,
+                author_icon: speakers[0].picture,
+                text: speakers[0].email
+              },
+              {
+                "title": "Session type",
+                "color": "#17a2b8",
+                "text": PROPOSAL_TYPES[proposal.type]
+              },
+              {
+                "title": "Categories",
+                "color": "#28a745",
+                "text": proposal.categories ? proposal.categories.join(", ") : ""
+              },
+              {
+                "title": "Tags",
+                "color": "#ffc107",
+                "text": proposal.tags ? proposal.tags.join(", ") : ""
+              },
+              {
+                text: proposal.abstract,
+                color: "#6b1ee6"
+              }
+            ]
+          }
+        });
       });
     });
   });
