@@ -1,0 +1,10 @@
+{
+  "type": "full",
+  "abstract": "this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract this is a dummy abstract",
+  "categories": ["Backend", "Dummy category"],
+  "tags": ["Frontend", "Dummy tag"],
+  "title": "Dummy proposal",
+  "speaker_ids": ["5adba0363bcbf5d2481ea68e"],
+  "outline": "some outline",
+  "legal": true
+}
