@@ -65,6 +65,8 @@ const SessionPage = (props) => {
   const { user, session, speakers, match: { params: { id } } } = props;
   const {title, abstract, type, tags, outline, categories } = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);
+  const isTeamMember = user.isReversimTeamMember;
+  const canEdit = isAuthor || isTeamMember;
 
   const dayTime = getDateAndTime(id);
 
@@ -74,7 +76,7 @@ const SessionPage = (props) => {
       <Container className="mt-4">
         <Row>
           <Col sm={{size: 8, offset: 2}}>
-            <h2>{title}{isAuthor && <Link className="unstyled-link" to={`/session/${getHref(session)}/edit`}><Button color="primary" size="sm" className="ml-3"><i className="fa fa-pencil"/></Button></Link>}</h2>
+            <h2>{title}{canEdit && <Link className="unstyled-link" to={`/session/${getHref(session)}/edit`}><Button color="primary" size="sm" className="ml-3"><i className="fa fa-pencil"/></Button></Link>}</h2>
             <p>{getSessionTypeStr(type)}</p>
             { tags && tags.length ? <div className="d-flex text-muted mb-2">{tags.map(Tag)}</div> : undefined }
             { dayTime && <Row className="align-items-center my-4">

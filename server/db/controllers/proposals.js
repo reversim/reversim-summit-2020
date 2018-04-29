@@ -8,6 +8,13 @@ import {transformProposal, transformUser} from './helpers';
 import shuffler from 'shuffle-seed';
 import request from 'axios';
 
+// TODO this is duplicate from /client/src/data/proposals.js
+const PROPOSAL_TYPES = {
+  "full": "Full Featured (30 min.)",
+  "lightning": "Lightning Talk (5 min.)",
+  "ossil": "Open Source in Israel (10 min.)"
+};
+
 const errorHandler = (res, err) => {
   console.log(`Error in proposals query: ${err}`);
   return res.status(500).send('Something went wrong getting the data');
@@ -201,6 +208,11 @@ export function add(req, res) {
               text: speakers[0].email
             },
             {
+              "title": "Session type",
+              "color": "#17a2b8",
+              "text": PROPOSAL_TYPES[proposal.type]
+            },
+            {
               "title": "Categories",
               "color": "#28a745",
               "text": proposal.categories ? proposal.categories.join(", ") : ""
@@ -224,35 +236,59 @@ export function add(req, res) {
 /**
  * Update a proposal
  */
-export function update(req, res) {
-  const omitKeys = ['id', '_id', '_v'];
-  req.body.updated_at = new Date();
-  const data = _.omit(req.body, omitKeys);
+async function update(req, res) {
+  if (!req.user) return res.sendStatus(401);
+  const proposal = await Proposal.findOne({ _id: req.params.id });
+  if (!proposal) {
+    console.error('error in proposal update - no proposal found');
+    return res.status(500).send('Something went wrong getting the data');
+  } else if (proposal.speaker_ids.map(String).indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
+    console.error('unauthorized to update proposal');
+    return res.status(401).send('Unauthorized to update proposal');
+  } else {
+    const omitKeys = ['id', '_id', '_v'];
+    req.body.updated_at = new Date();
+    const data = _.omit(req.body, omitKeys);
 
-  Proposal.findOneAndUpdate({ _id: req.params.id }, data, (err, obj) => {
-    if (err) {
-      console.log(`Error in proposals/update query: ${err}`);
-      return res.status(500).send('Something went wrong getting the data');
-    }
+    // TODO just update, don't findOne
+    Proposal.findOneAndUpdate({ _id: req.params.id }, data, (err, obj) => {
+      if (err) {
+        console.log(`Error in proposals/update query: ${err}`);
+        return res.status(500).send('Something went wrong getting the data');
+      }
 
-    return res.status(200).send('Updated successfully');
-  });
+      return res.status(200).send('Updated successfully');
+    });
+  }
 }
 
 /**
  * Remove a proposal
  */
-function remove(req, res) {
-  const query = { id: req.params.id };
-  console.log('removing proposal '+JSON.stringify(query));
-  Proposal.findOneAndRemove(query, (err) => {
-    if (err) {
-      console.log(`Error in proposals/remove query: ${err}`);
-      return res.status(500).send('Something went wrong');
-    }
+async function remove(req, res) {
+  if (!req.user) return res.sendStatus(401);
+  const proposal = await Proposal.findOne({ _id: req.params.id });
+  if (!proposal) {
+    console.error('error in proposal delete - no proposal found');
+    return res.status(500).send('Something went wrong getting the data');
+  } else if (proposal.speaker_ids.map(String).indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
+    console.error('unauthorized to delete proposal');
+    return res.status(401).send('Unauthorized to delete proposal');
+  } else {
+    const query = { _id: req.params.id };
+    const data = { status: 'archived' };
+    console.log('removing proposal ' + JSON.stringify(query));
 
-    return res.status(200).send('Removed Successfully');
-  });
+    // TODO just update, don't findOne
+    Proposal.findOneAndUpdate(query, data, (err) => {
+      if (err) {
+        console.log(`Error in proposals/remove query: ${err}`);
+        return res.status(500).send('Something went wrong');
+      }
+
+      return res.status(200).send('Removed Successfully');
+    });
+  }
 }
 
 /**
