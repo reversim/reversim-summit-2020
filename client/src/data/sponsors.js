@@ -38,7 +38,7 @@ const sponsors = shuffle([
   {
     name: 'Microsoft',
     logo: microsoftLogo,
-    url: 'http://impact.gigya.com',
+    url: 'https://www.microsoft.com/',
     description: 'The Microsoft Israel R&D Center, located in both Herzeliya and Haifa, is one of three strategic global development centers situated around the world. Our mission is to lead strategic products and services that realize Microsoft\'s vision, by tapping into Israel\'s unique technological & entrepreneurial assets. The center is home to some of the company\'s most exciting and innovative technologies driven by a collective of rare and diverse individuals.',
     featuredJobInfo: '',
     featuredJobLink: 'https://careers.microsoft.com/'
@@ -80,7 +80,7 @@ const sponsors = shuffle([
   {
     name: 'Dropbox',
     logo: dropboxLogo,
-    url: 'http://www.klarnaisrael.com/',
+    url: 'https://www.dropbox.com',
     description: 'Dropbox is a leading global collaboration platform that\'s transforming the way people work together, from the smallest business to the largest enterprise. With more than 500 million registered users across more than 180 countries, our mission is to unleash the world’s creative energy by designing a more enlightened way of working.Our mission in Tel Aviv is to reshape the future of work by designing a more enlightened way of working. We aim-higher in everything we do and work hard to gain our users’ love and trust. We have a unique combination of start-up energy and enthusiasm with world class software engineering standards, which attracts the best talent to join us in our quest to conquer the next peak.',
     featuredJobInfo: '',
     featuredJobLink: 'https://www.dropbox.com/jobs/locations/tlv'
@@ -105,7 +105,7 @@ const sponsors = shuffle([
   {
     name: 'AppsFlyer',
     logo: appsFlyerLogo,
-    url: 'https://www.oracle.com',
+    url: 'http://www.appsflyer.com',
     description: 'AppsFlyer’s technology is found on 98 percent of the world’s smartphones, making it the global leader in mobile attribution and marketing analytics. Data-driven marketers rely on AppsFlyer for independent measurement solutions and innovative tools to grow their mobile business. AppsFlyer’s platform processes billions of mobile actions every day, empowering mobile marketers and developers to maximize the return on their marketing investments. With AppsFlyer’s NativeTrackTM Attribution, Marketing Analytics Data, OneLink’s Deep linking capabilities and the Active Fraud Suite featuring DeviceRank, AppsFlyer is the go-to resource for the most successful mobile apps in the world. Trusted by Facebook, Google, Twitter, Pinterest, Snap Inc., Tencent, HBO, Playtika, Waze, Alibaba, Kayak and 12,000+ other leading brands and partners, AppsFlyer has 12 global offices to support every app marketer around the world. To learn more, visit http://www.appsflyer.com.',
     featuredJobInfo: '',
     featuredJobLink: ''
@@ -113,7 +113,7 @@ const sponsors = shuffle([
   {
     name: 'My Heritage',
     logo: myHeritageLogo,
-    url: 'https://www.oracle.com',
+    url: 'https://www.myheritage.com/',
     description: <span>As one of Israel's most successful start-ups, with over 420 employees, MyHeritage is utilizing the latest technological advancements, such as DNA testing and advanced matching algorithms developed in-house, to discover, preserve and share the family histories of over 95 million users worldwide.<br/>
       We invite you to join our <a href="https://www.meetup.com/MyHeritage-Meetup/">MyHeritage Meetup Group</a> to receive updates about upcoming events hosted in our office. Come along to discuss cross-technology challenges with our top-notch R&D team and visit our fascinating <a href="https://medium.com/myheritage-engineering">Engineering blog.</a></span>,
     featuredJobInfo: 'Join us - Make history.',
