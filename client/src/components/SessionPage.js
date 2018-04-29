@@ -65,7 +65,7 @@ const SessionPage = (props) => {
   const { user, session, speakers, match: { params: { id } } } = props;
   const {title, abstract, type, tags, outline, categories } = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);
-  const isTeamMember = user.isReversimTeamMember;
+  const isTeamMember = user && user.isReversimTeamMember;
   const canEdit = isAuthor || isTeamMember;
 
   const dayTime = getDateAndTime(id);
