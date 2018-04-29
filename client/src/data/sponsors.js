@@ -113,7 +113,7 @@ const sponsors = shuffle([
   {
     name: 'My Heritage',
     logo: myHeritageLogo,
-    url: 'https://www.myheritage.com/',
+    url: 'https://careers.myheritage.com/',
     description: <span>As one of Israel's most successful start-ups, with over 420 employees, MyHeritage is utilizing the latest technological advancements, such as DNA testing and advanced matching algorithms developed in-house, to discover, preserve and share the family histories of over 95 million users worldwide.<br/>
       We invite you to join our <a href="https://www.meetup.com/MyHeritage-Meetup/">MyHeritage Meetup Group</a> to receive updates about upcoming events hosted in our office. Come along to discuss cross-technology challenges with our top-notch R&D team and visit our fascinating <a href="https://medium.com/myheritage-engineering">Engineering blog.</a></span>,
     featuredJobInfo: 'Join us - Make history.',
