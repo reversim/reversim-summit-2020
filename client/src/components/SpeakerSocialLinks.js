@@ -8,7 +8,7 @@ const SpeakerSocialLinks = (props) => {
   const links = social
     .filter(type => !!props[type])
     .map(type => (
-      <SpeakerSocialLink type={type} value={props[type]} />
+      <SpeakerSocialLink type={type} value={props[type]} key={props[type]} />
     ));
 
   return <div className={cn(props.className, "d-flex align-items-center")}>

@@ -19,7 +19,7 @@ const SpeakerVertical = ({ speaker }) => {
   const nameEl = <h3>{name}</h3>;
 
   return <Row className={cn("align-items-center", s.speakerShort)}>
-    <Col xs="auto" sm={{size:true}}>
+    <Col xs="auto" sm="12">
       <div className={cn(s.speakerImg, 'mx-auto mb-4')} style={{backgroundImage: `url('${picture}')`, height: 100, width: 100}}/>
     </Col>
     <Col className="text-sm-center">
@@ -37,10 +37,10 @@ const Proposal = (props) => {
   return <Row className={cn({'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
       <Link className="unstyled-link" to={`/session/${getHref(proposal)}`}><h4>{title}</h4></Link>
-      <div className="d-flex mb-3 font-size-sm">
-        <div className="mr-10">{getSessionTypeStr(type)}</div>
-        <div className="text-muted d-flex">{tags.map(Tag)}</div>
-      </div>
+      <Row className="d-flex font-size-sm" noGutters>
+        <Col xs="12" lg="auto" className="mb-1 mr-10">{getSessionTypeStr(type)}</Col>
+        <Col className="text-muted d-flex mb-3">{tags.map(Tag)}</Col>
+      </Row>
       <ReactMarkdown source={abstract} />
     </Col>
     <Col xs="12" sm="3" className="ml-sm-4">
@@ -51,13 +51,14 @@ const Proposal = (props) => {
 
 const ProposalsPage = (props) => {
   const proposals = values(props.proposals);
+  const showProposals = proposals.length || !props.fetchComplete;
   return <Page title="Proposals" {...props}>
     <div className="hero-page-img" style={{ backgroundImage: `url('${heroImg}')` }} />
     <Container>
       <Row>
         <Col>
           <h1 className="text-center mt-6 mb-12">Proposals to {REVERSIM_SUMMIT}</h1>
-          {proposals.length ? proposals.map(proposal => (
+          {showProposals ? proposals.map(proposal => (
             <Proposal
             isSmallScreen={props.isSmallScreen}
             key={proposal._id}
