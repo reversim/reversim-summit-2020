@@ -21,7 +21,7 @@ const CFPIntro = () => (
     <p className="mt-8">There are three possible session types you may submit:</p>
     <h5 className="mt-4">Full Featured sessions (30 minutes)</h5>
     <p>Full feature are frontal presentations of roughly 30 minutes. They will be held either in the large room (500 attendees) or the small room (100-200 attendees) in 3 parallel tracks.</p>
-    <p>Full featured sessions should select one of the following tracks:</p>
+    <p>Full featured sessions can fall under one or more of these categories:</p>
     <Row>
       <Col xs="auto">
         <ul>
@@ -40,6 +40,7 @@ const CFPIntro = () => (
         </ul>
       </Col>
     </Row>
+    <p>Don't worry if you can't fit your talk with any of the above. We accept all things software. You will have the chance to categorize your talk as you see fit.</p>
     <h5 className="mt-4">Lightning Sessions (5 minutes)</h5>
     <p>Lightning are speedy 5 min sessions. They will be presented in a series in which each presenter has exactly 20 slides, 15 sec per slide, slides are auto advanced and in total 5 min. No break b/w the sessions. It's fun, it's speedy, it's concise and it's breathtaking :-)</p>
     <h5 className="mt-4">Open Source in Israel (10 minutes)</h5>
