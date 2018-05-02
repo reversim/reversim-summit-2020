@@ -47,8 +47,8 @@ const sponsors = shuffle([
     name: 'eBay',
     logo: ebayLogo,
     url: 'http://ebay.co.il',
-    description: <span>eBay Israel R&D center offers you a great playground - whether you are a software engineer, analyst or researcher.  With over 1.2 billion items, all ready-to-buy, your day-to-day job will be super dynamic and interesting, and you\'ll be able to use techniques like ML, NLP, Taxonomy management, Computer Vision and more.<br/>
-    You may have a meaningful contribution to eBay\'s platform and thus to the entire shopping experience.  Through our organizational culture, you\'ll impact not only on internal processes, but also the lives of tens of millions of people around the world, by delivering eBay\'s core strategy.<br/>
+    description: <span>eBay Israel R&D center offers you a great playground - whether you are a software engineer, analyst or researcher.  With over 1.2 billion items, all ready-to-buy, your day-to-day job will be super dynamic and interesting, and you'll be able to use techniques like ML, NLP, Taxonomy management, Computer Vision and more.<br/>
+    You may have a meaningful contribution to eBay's platform and thus to the entire shopping experience.  Through our organizational culture, you'll impact not only on internal processes, but also the lives of tens of millions of people around the world, by delivering eBay's core strategy.<br/>
     Join us on Facebook: eBay Israel - R&D Center</span>,
     featuredJobInfo: '',
     featuredJobLink: 'http://ebay.co.il/rnd',

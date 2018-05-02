@@ -18,8 +18,8 @@ const About = () => (
           bring you the content we are interested in, and we hope you will be too.
         </p>
         <p className="mb-4">
-          This is the fifth(!) Reversim Summit. The summits of 2013 and 2014 (TLV Campus), 2015 (Technion) and 2016
-          (Weizmann Institute of Science) also featured community content. Watch previous years' sessions to get the
+          This is the 6th(!) Reversim Summit. The summits of 2013 and 2014 (TLV Campus), 2015 (Technion), 2016
+          (Weizmann Institute of Science) and 2017 (College of Management) also featured community content. Watch previous years' sessions to get the
           general feel of the Revesim Summit spirit.
         </p>
 
