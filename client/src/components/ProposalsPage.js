@@ -49,26 +49,62 @@ const Proposal = (props) => {
   </Row>;
 };
 
-const ProposalsPage = (props) => {
-  const proposals = values(props.proposals);
-  const showProposals = proposals.length || !props.fetchComplete;
-  return <Page title="Proposals" {...props}>
-    <div className="hero-page-img" style={{ backgroundImage: `url('${heroImg}')` }} />
-    <Container>
-      <Row>
-        <Col>
-          <h1 className="text-center mt-6 mb-12">Proposals to {REVERSIM_SUMMIT}</h1>
-          {showProposals ? proposals.map(proposal => (
-            <Proposal
-            isSmallScreen={props.isSmallScreen}
-            key={proposal._id}
-            proposal={proposal}
-            speakers={proposal.speaker_ids.map(speakerId => props.users[speakerId])} />
-            )) : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br/> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}
-        </Col>
-      </Row>
-    </Container>
-  </Page>
-};
+const TagFilter = ({ text, isSelected, onClick }) => (
+  <div onClick={onClick} className={cn("font-size-sm letter-spacing cursor-pointer mr-2 mb-2 px-2 border-radius border", {"border-blue text-blue": !isSelected, "bg-blue text-white border-transparent": isSelected })}>{text}</div>
+)
+
+class ProposalsPage extends React.Component {
+
+  state = {
+    tagFilters: []
+  };
+
+  onTagClick = (tag) => {
+    this.setState(state => {
+      const index = state.tagFilters.indexOf(tag);
+      if (index > -1) {
+        return { tagFilters: state.tagFilters.slice(0,index).concat(state.tagFilters.slice(index+1)) };
+      } else { 
+        return { tagFilters: state.tagFilters.concat(tag) };
+      }
+    });
+  }
+
+  render() {
+    const proposals = values(this.props.proposals);
+    const { allTags, isSmallScreen, fetchComplete, users } = this.props;
+    const { tagFilters } = this.state;
+    const showProposals = proposals.length || !fetchComplete;
+    const tags = allTags.map(tag => ({ text: tag, count: proposals.filter(p => p.tags.includes(tag)).length })).sort((a,b) => (a.count > b.count ? -1 : 1));
+    const tagStrs = tags.map(tag => `${tag.text} (${tag.count})`);
+    const filteredProposals = tagFilters.length ? proposals.filter(proposal => proposal.tags.some(tag => tagFilters.includes(tag))) : proposals;
+    const showCount = filteredProposals.length;
+    return <Page title="Proposals" {...this.props}>
+      <div className="hero-page-img" style={{ backgroundImage: `url('${heroImg}')` }} />
+      <Container>
+        <Row>
+          <Col>
+            <h1 className="text-center mt-6 mb-12">Proposals to {REVERSIM_SUMMIT}</h1>
+            <div className="pt-4 border-top mb-3">Filter by tag:</div>
+            <div className="d-flex flex-wrap pb-2 mb-6 border-bottom">
+              {tagStrs.map((tagStr, i) => <TagFilter text={tagStr} isSelected={tagFilters.includes(tags[i].text)} onClick={() => this.onTagClick(tags[i].text)}/>)}
+            </div>
+            {showProposals ? <div>
+              <div className="mb-6">Showing {showCount} proposals</div>
+              {filteredProposals.map(proposal => (
+                <Proposal
+                  isSmallScreen={isSmallScreen}
+                  key={proposal._id}
+                  proposal={proposal}
+                  speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
+                />
+              ))}
+              </div> : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br/> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}
+          </Col>
+        </Row>
+      </Container>
+    </Page>
+  }
+}
 
 export default ProposalsPage;
