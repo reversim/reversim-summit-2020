@@ -93,7 +93,7 @@ const SessionPage = (props) => {
             </div>}
             {outline && <div>
               <h4>Outline</h4>
-              <ReactMarkdown source={outline}/>
+              <ReactMarkdown source={outline.replace(/\n/g, '<br/>\n')}/>  {/* consolidate line breaks */}
             </div>}
             <div className="border-top">
               {speakers.map(speaker => <SpeakerShort key={speaker._id} speaker={speaker} hasLink={true} />)}

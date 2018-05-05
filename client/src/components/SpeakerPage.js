@@ -7,6 +7,7 @@ import Tag from './Tag';
 import SpeakerShort from "./SpeakerShort";
 import { Button } from 'reactstrap';
 import SpeakerPageRoute from './SpeakerPageRoute';
+import ReactMarkdown from 'react-markdown';
 
 export class SpeakerPage extends React.Component {
 
@@ -65,11 +66,11 @@ export class SpeakerPage extends React.Component {
             </Row>
             {trackRecord && <div className="mb-3">
               <h4>Track record</h4>
-              <div>{trackRecord}</div>
+              <ReactMarkdown source={trackRecord}/>
             </div>}
             {video_url && <div className="mb-3">
               <h4>Video URL</h4>
-              <div>{video_url}</div>
+              <div><a href={video_url} target="_blank">{video_url}</a></div>
             </div>}
             { (sessions && sessions.length) ? <div className="mt-10">
               <h4 className="mb-4">{`${name.split(" ")[0]}'s Proposals`}</h4>
