@@ -2,7 +2,7 @@ import React from 'react';
 import Page from './Page';
 import values from 'lodash/values';
 import heroImg from '../images/session.png';
-import { Col, Container, Row } from 'reactstrap';
+import { Col, Container, Row, Button } from 'reactstrap';
 import ReactMarkdown from 'react-markdown';
 import { getSessionTypeStr, REVERSIM_SUMMIT } from '../utils';
 
@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { getHref } from '../utils';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
 import Tag from './Tag';
+import { voting } from '../features';
 
 const SpeakerVertical = ({ speaker }) => {
   const { name, picture, oneLiner } = speaker;
@@ -32,7 +33,7 @@ const SpeakerVertical = ({ speaker }) => {
 
 
 const Proposal = (props) => {
-  const { proposal, speakers,isSmallScreen } = props;
+  const { proposal, speakers,isSmallScreen, attended, attendProposal } = props;
   const { title, type, tags, abstract } = proposal;
   return <Row className={cn({'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
@@ -42,6 +43,9 @@ const Proposal = (props) => {
         <Col className="text-muted d-flex mb-3">{tags.map(Tag)}</Col>
       </Row>
       <ReactMarkdown source={abstract} />
+      { voting && <div>
+        <Button outline={attended} onClick={() => attendProposal(proposal._id, !attended)}>attend</Button>
+      </div> }
     </Col>
     <Col xs="12" sm="3" className="ml-sm-4">
       {speakers.map(speaker => <SpeakerVertical key={speaker._id} speaker={speaker}/>)}
@@ -72,7 +76,7 @@ class ProposalsPage extends React.Component {
 
   render() {
     const proposals = values(this.props.proposals);
-    const { allTags, isSmallScreen, fetchComplete, users } = this.props;
+    const { allTags, isSmallScreen, fetchComplete, users, attendProposal } = this.props;
     const { tagFilters } = this.state;
     const showProposals = proposals.length || !fetchComplete;
     const tags = allTags.map(tag => ({ text: tag, count: proposals.filter(p => p.tags.includes(tag)).length })).sort((a,b) => (a.count > b.count ? -1 : 1));
@@ -97,6 +101,8 @@ class ProposalsPage extends React.Component {
                   key={proposal._id}
                   proposal={proposal}
                   speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
+                  attended={proposal.attended}
+                  attendProposal={attendProposal}
                 />
               ))}
               </div> : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br/> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}

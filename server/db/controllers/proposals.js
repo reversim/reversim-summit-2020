@@ -301,27 +301,27 @@ async function remove(req, res) {
  * Attend a proposal
  */
 function attend(req, res) {
-  if (req.session.passport && req.session.passport.user) {
-    let query, update;
-    if (req.body.value === true) {
-      query = { id: req.params.id, status: { $ne: 'archived' }, attendees: { $nin: [req.session.passport.user] } };
-      update = { $push: {'attendees': req.session.passport.user } };
-    } else {
-      query = { id: req.params.id, status: { $ne: 'archived' }, attendees: { $in: [req.session.passport.user] } };
-      update = { $pull: {'attendees': req.session.passport.user} };
+  if (!req.user) return res.sendStatus(401);
+
+  let query, update, msg;
+  if (req.body.value === true) {
+    query = { _id: req.params.id, status: { $ne: 'archived' }, attendees: { $nin: [req.session.passport.user] } };
+    update = { $push: {'attendees': req.session.passport.user } };
+    msg = 'Marked as attended';
+  } else {
+    query = { _id: req.params.id, status: { $ne: 'archived' }, attendees: { $in: [req.session.passport.user] } };
+    update = { $pull: {'attendees': req.session.passport.user} };
+    msg = 'Marked as not attended';
+  }
+
+  Proposal.findOneAndUpdate(query, update, (err, obj) => {
+    if (err) {
+      console.log(`Error in proposals/attend query: ${err}`);
+      return res.status(500).send('Something went wrong getting the data');
     }
 
-    Proposal.findOneAndUpdate(query, update, (err, obj) => {
-      if (err) {
-        console.log(`Error in proposals/attend query: ${err}`);
-        return res.status(500).send('Something went wrong getting the data');
-      }
-
-      return res.status(200).send('Marked as attended');
-    });
-  } else {
-    return res.status(403).send('Unauthorized');
-  }
+    return res.status(200).send(msg);
+  });
 }
 
 /**

@@ -11,7 +11,8 @@ import {
   logout,
   registerTeamMember,
   createProposal as doCreateProposal,
-  updateProposal as doUpdateProposal
+  updateProposal as doUpdateProposal,
+  attend,
 } from '../data-service';
 
 if (!isServer && process.env.NODE_ENV !== "development") {
@@ -95,6 +96,16 @@ class App extends Component {
     }))
   };
 
+  attendProposal = async (proposalId, isAttending) => {
+    await attend(proposalId, isAttending);
+    this.setState(state => ({
+      proposals: {
+        ...state.proposals,
+        [proposalId]: {...state.proposals[proposalId], attended: isAttending}
+      }
+    }));
+  }
+
   // This is passed down to route components
   actions = {
     onLogout: this.onLogout,
@@ -102,6 +113,7 @@ class App extends Component {
     updateUserData: this.updateUserData,
     createProposal: this.createProposal,
     updateProposal: this.updateProposal,
+    attendProposal: this.attendProposal
   };
 
   state = store;

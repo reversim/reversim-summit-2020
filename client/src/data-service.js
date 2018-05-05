@@ -60,3 +60,7 @@ export async function registerTeamMember(token) {
   return await put('/api/team', { token });
 }
 
+export async function attend(proposalId, isAttending) {
+  return await post(`/api/proposal/${proposalId}/attend`, { value: !!isAttending });
+}
+
