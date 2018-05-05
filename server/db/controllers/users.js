@@ -134,7 +134,7 @@ export function uploadProfilePicture(req, res) {
 }
 
 const reversimTeam = [
-  'Gili Alperovitch',
+  'Gili Alperovitch Zohar',
   'Amit Zur',
   'Shlomi Noach',
   'Ori Lahav',
