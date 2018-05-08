@@ -7,7 +7,7 @@ const CFPIntro = () => (
     <h2 className="mb-4">Intro</h2>
     <h4>Welcome to Reversim Summit and thank you for submitting your proposal!</h4>
     <p>
-      We encourage all people to submit a proposal to Reversim Summit 2018. If you are _considering_ submitting a proposal, we invite you to do so!
+      We encourage everyone to submit a proposal to Reversim Summit 2018. If you are <i>considering</i> submitting a proposal, we invite you to do so!
     </p>
     <h5>Please read the following guidelines before submitting.</h5>
     <p>We are interested in all things software development, everything including: Software development methodologies, Product management for developers, UX, Startups, Mobile, Web, Devops, Data processing, Scaling, Software company culture, Tooling, etc...</p>
