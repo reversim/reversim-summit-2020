@@ -38,10 +38,19 @@ async function update(req, res) {
     return res.status(500).send('Something went wrong getting the data');
   } else {
     req.body.updated_at = new Date();
+    req.body.logo = await uploadLogo(req.body.logo);
     const data = _.omit(req.body, ['_id']);
     await Sponsor.findOneAndUpdate({ _id: req.params.id }, data);
-    return res.sendStatus(200);
+    return res.status(200).send(data);
   }
+}
+
+function uploadLogo(data) {
+  return new Promise(resolve => {
+    cloudinary.uploader.upload(data, function(result) {
+      resolve(result.secure_url);
+    });
+  });
 }
 
 function remove(req, res) {

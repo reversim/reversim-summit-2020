@@ -73,7 +73,6 @@ function getSponsorData(e) {
   const formElements = e.target.elements;
   return {
     name: formElements.name.value,
-    // logo: formElements.logo.value,
     url: formElements.url.value,
     description: formElements.description.value,
     featuredJobInfo: formElements.featuredJobInfo.value,
@@ -97,18 +96,34 @@ const Sponsors = (props) => (
   </Page>
 );
 
-const SponsorForm = ({ sponsor = {}, onSubmit }) => (
-  <form onSubmit={e => onSubmit(getSponsorData(e))}>
-    <FormField id="name" required placeholder="Name" value={sponsor.name}/>
-    <FormField id="url" required placeholder="Link to website" value={sponsor.url} />
-    <FormField id="description" required multiline placeholder="Description" value={sponsor.description} />
-    <FormField id="featuredJobInfo" required multiline placeholder="Featured job info" value={sponsor.featuredJobInfo} />
-    <FormField id="featuredJobLink" required placeholder="Link to featured job" value={sponsor.featuredJobLink} />
-    <div className="d-flex">
-      <input type="checkbox" id="excludeWebsite" defaultChecked={sponsor.excludeWebsite} />
-    </div>
-    <Button>Submit</Button>
-  </form>
-)
+class SponsorForm extends React.Component {
+  state = {
+    imgData: this.props.sponsor ? this.props.sponsor.logo : null,
+  }
+  render() {
+    const { sponsor = {}, onSubmit } = this.props;
+    return (
+      <form onSubmit={e => onSubmit({ ...getSponsorData(e), logo: this.state.imgData })}>
+          <FormField id="name" required placeholder="Name" value={sponsor.name}/>
+          {this.state.imgData && <img src={this.state.imgData} />}
+          <input type="file" id="logo" onChange={e => {
+            const f = e.target.files[0];
+            if (!f) return;
+            const reader = new FileReader();
+            reader.onload = e2 => { this.setState({ imgData: e2.target.result })};
+            reader.readAsDataURL(f);
+          }} />
+          <FormField id="url" required placeholder="Link to website" value={sponsor.url} />
+          <FormField id="description" required multiline placeholder="Description" value={sponsor.description} />
+          <FormField id="featuredJobInfo" required multiline placeholder="Featured job info" value={sponsor.featuredJobInfo} />
+          <FormField id="featuredJobLink" required placeholder="Link to featured job" value={sponsor.featuredJobLink} />
+          <div className="d-flex">
+            <input type="checkbox" id="excludeWebsite" defaultChecked={sponsor.excludeWebsite} />
+          </div>
+          <Button>Submit</Button>
+        </form>
+    )
+  }
+}
 
 export default Sponsors;
