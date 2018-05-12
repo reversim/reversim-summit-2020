@@ -20,120 +20,6 @@ const errorHandler = (res, err) => {
   return res.status(500).send('Something went wrong getting the data');
 };
 
-
-/**
- * List
- */
-function all(req, res) {
-  const start = Date.now();
-  Proposal.find({ status: { $ne: 'archived' } }, null, { sort: { created_at: -1 } }).populate('speaker_ids').exec((err, proposals) => {
-    if (err) {
-      console.log(`Error in proposals/all query: ${err}`);
-      return res.status(500).send('Something went wrong getting the data');
-    }
-
-    let result = proposals.map((proposal) => transformProposal(proposal, req.user, req.query && req.query.overrideDetails === 'true'));
-
-    if (req.query.group === 'tags') {
-      let groups = {};
-
-      result.forEach(proposal => {
-        if (proposal.tags === undefined || proposal.tags.length === 0) {
-          groups['Untagged'] = groups['Untagged'] || [];
-          groups['Untagged'].push(proposal);
-        } else {
-          proposal.tags.forEach(tag => {
-            groups[tag] = groups[tag] || [];
-            groups[tag].push(proposal);
-          });
-        }
-      });
-
-      result = groups;
-    }
-
-    const userId = req.user && req.user.id;
-    const shuffleSeed = userId || String(Date.now());
-    console.log("seed", shuffleSeed, "userId", userId || '?');
-    console.log(Date.now() - start);
-    return res.json(shuffler.shuffle(result, shuffleSeed));
-  });
-}
-
-/**
- * Recommendations
- */
-const totalRecommendations = 3;
-const randomRecommendations = 2;
-
-function getRecommendations(req, res) {
-  let onlyAcceptedProposals = {};
-
-  if (req.query.onlyAccepted) {
-    onlyAcceptedProposals = { status: 'accepted' }
-  }
-
-  Proposal.findOne({ 'id': req.params.id }).exec()
-    .catch(err => {
-      console.log(`Error in recommendations/first query: ${err}`);
-      return res.status(500).send('Something went wrong getting the data');
-    })
-    .then(proposal => {
-      let totalIntersectedTags = Math.min(totalRecommendations - randomRecommendations, proposal.tags.length);
-      let intersectedTags = _.take(_.shuffle(proposal.tags), totalIntersectedTags);
-
-      let query = {
-        id: { '$ne': proposal.id },
-        status: { $ne: 'archived' },
-        tags: {
-          '$elemMatch': {
-            '$in': intersectedTags
-          }
-        }
-      };
-      if (req.session.passport && req.session.passport.user) {
-        query['speaker_ids'] = {
-          '$elemMatch': {
-            '$ne': req.session.passport.user
-          }
-        }
-      }
-
-      return Proposal.find(Object.assign({}, query, onlyAcceptedProposals)).populate('speaker_ids').limit(totalRecommendations - randomRecommendations).exec();
-    })
-    .catch(err => {
-      console.log(`Error in recommendations/second query: ${err}`);
-      return res.status(500).send('Something went wrong getting the data');
-    })
-    .then(recommendations => {
-      let query = {
-        id: {
-          '$nin': [
-            req.params.id,
-            ...recommendations.map(r => r.id)
-          ]
-        },
-        status: { $ne: 'archived' }
-      };
-      if (req.session.passport && req.session.passport.user) {
-        query['speaker_ids'] = {
-          '$elemMatch': {
-            '$ne': req.session.passport.user
-          }
-        }
-      }
-
-      Proposal.find(Object.assign({}, query, onlyAcceptedProposals)).populate('speaker_ids').exec().then(randomRecommendations => {
-        return _.shuffle([
-          ...recommendations,
-          ..._.take(_.shuffle(randomRecommendations), totalRecommendations - recommendations.length)
-        ]);
-      }).then(recs => {
-        return res.json(recs.map(proposal => transformProposal(proposal, req.user)));
-      });
-    });
-}
-
 /**
  * Tags List
  */
@@ -496,19 +382,17 @@ function getTags(proposals) {
 }
 
 function getProposal(id) {
-  return Proposal.findOne({ id }).populate('speaker_ids');
+  return Proposal.findOne({ _id: id });
 }
 
 
 export default {
-  all,
   get,
   add,
   update,
   remove,
   attend,
   tags,
-  getRecommendations,
   speakers,
   sessions,
   proposers,
