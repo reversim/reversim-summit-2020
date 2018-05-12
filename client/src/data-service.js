@@ -64,3 +64,10 @@ export async function attend(proposalId, isAttending) {
   return await post(`/api/proposal/${proposalId}/attend`, { value: !!isAttending });
 }
 
+export async function addSponsor(data) {
+  return await post('/api/sponsor', data);
+}
+
+export async function updateSponsor(id, data) {
+  return await put(`/api/sponsor/${id}`, data);
+}

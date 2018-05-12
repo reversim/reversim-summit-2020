@@ -13,6 +13,7 @@ const store = {
   features: {
     submission: true
   },
+  sponsors: [],
 
   isSmallScreen: window.innerWidth < 576,
 

@@ -11,6 +11,7 @@ import { transformProposal, transformUser } from '../db/controllers/helpers';
 const usersController = controllers.users;
 const proposalsController = controllers.proposals;
 const messagesController = controllers.messages;
+const sponsorsController = controllers.sponsors;
 
 export default (app) => {
   // user routes
@@ -66,6 +67,7 @@ export default (app) => {
     const user = req.user;
     const team = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
+    const sponsors = await sponsorsController.getAllSponsors(true);
 
     const userId = user && String(user._id);
     if (userId && !users.find(u => String(u._id) === userId)) users.unshift(user);
@@ -80,14 +82,13 @@ export default (app) => {
       allTags,
       team: team.map(user => transformUser(user, req.user)),
       messages,
+      sponsors,
     });
   }
 
   // proposal routes
   app.get('/api/initial', initial);
   app.get('/api/sessions', proposalsController.sessions);
-  app.get('/api/proposal', proposalsController.all);
-  app.get('/api/proposal/:id/recommendations', proposalsController.getRecommendations);
   app.get('/api/proposal/tags', proposalsController.tags);
   app.get('/api/proposal/:id', proposalsController.get);
   app.post('/api/proposal', proposalsController.add);
@@ -101,6 +102,11 @@ export default (app) => {
   app.get('/api/messages', messagesController.getMessages);
   app.post('/api/message', messagesController.addMessage);
   app.delete('/api/message/:id', messagesController.removeMessage);
+
+  app.get('/api/sponsors', sponsorsController.all);
+  app.post('/api/sponsor', sponsorsController.add);
+  app.put('/api/sponsor/:id', sponsorsController.update);
+  app.delete('/api/message/:id', sponsorsController.remove);
 
   app.use("/dashboard", express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
 };

@@ -12,8 +12,11 @@ import {
   registerTeamMember,
   createProposal as doCreateProposal,
   updateProposal as doUpdateProposal,
+  addSponsor,
+  updateSponsor as doUpdateSponsor,
   attend,
 } from '../data-service';
+import findIndex from 'lodash/findIndex';
 
 if (!isServer && process.env.NODE_ENV !== "development") {
   ga.initialize('UA-36904731-4');
@@ -106,6 +109,25 @@ class App extends Component {
     }));
   }
 
+  createSponsor = async (data) => {
+    const sponsor = await addSponsor(data);
+    this.setState(state => ({
+      sponsors: [
+        ...state.sponsors,
+        sponsor,
+      ]
+    }))
+  }
+
+  updateSponsor = async (id, sponsor) => {
+    await doUpdateSponsor(id, sponsor);
+    const index = findIndex(this.state.sponsors, x => x._id === id);
+    this.setState(state => {
+      const sponsors = state.sponsors.slice(0,index).concat(sponsor).concat(state.sponsors.slice(index+1));
+      return {sponsors};
+    });
+  }
+
   // This is passed down to route components
   actions = {
     onLogout: this.onLogout,
@@ -113,7 +135,9 @@ class App extends Component {
     updateUserData: this.updateUserData,
     createProposal: this.createProposal,
     updateProposal: this.updateProposal,
-    attendProposal: this.attendProposal
+    attendProposal: this.attendProposal,
+    createSponsor: this.createSponsor,
+    updateSponsor: this.updateSponsor
   };
 
   state = store;
@@ -127,7 +151,7 @@ class App extends Component {
       <Router location={this.props.location} context={{}}>
         <div>
           { routes.map(route=> (
-            <Route exact component={() => createElement(withRouter(route.comp), routeProps)} path={route.path} key={route.path}/>
+            <Route exact render={(p) => createElement(route.comp, {...routeProps, ...p})} path={route.path} key={route.path}/>
           ))}
         </div>
       </Router>
