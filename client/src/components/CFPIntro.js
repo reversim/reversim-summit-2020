@@ -44,8 +44,10 @@ const CFPIntro = () => (
     <p>Lightning are speedy 5 min sessions. They will be presented in a series in which each presenter has exactly 20 slides, 15 sec per slide, slides are auto advanced and in total 5 min. No break b/w the sessions. It's fun, it's speedy, it's concise and it's breathtaking :-)</p>
     <h5 className="mt-4">Open Source in Israel (10 minutes)</h5>
     <p>We are especially interested in open source projects made in israel or created by Israelis.</p>
-    <h5 className="mt-4">We'd like to hear from you!</h5>
-    <p className="mb-8">Our goal is to streamline the submission and review process, while maintaining superb quality; if you have any feedback or questions, please email us at <a href={`mailto:${REVERSIM_MAIL}`}>{REVERSIM_MAIL}</a>.</p>
+    <div className="mt-8 mb-4 p-3 bg-gray-200 line-height-17">
+      <h5>We'd like to hear from you!</h5>
+      <p>Our goal is to streamline the submission and review process, while maintaining superb quality; if you have any feedback or questions, please email us at <a href={`mailto:${REVERSIM_MAIL}`}>{REVERSIM_MAIL}</a>.</p>
+    </div>
   </div>
 );
 
