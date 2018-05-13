@@ -96,7 +96,7 @@ const sponsors = [
 ];
 
 sponsors.forEach(sponsor => {
-  http.post('http://local.reversim.com:3000/api/sponsor', sponsor, { headers }).then(resp => {
+  http.post(`${process.env.BASE_URL}/api/sponsor`, sponsor, { headers }).then(resp => {
     console.log('insered ', sponsor.name);
   });
 });

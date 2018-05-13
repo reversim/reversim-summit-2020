@@ -9,6 +9,7 @@
     "heroku-postbuild": "cd client && yarn --production=false && yarn build"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "nodemon": "^1.12.5"
   }
 }
