@@ -71,3 +71,7 @@ export async function addSponsor(data) {
 export async function updateSponsor(id, data) {
   return await put(`/api/sponsor/${id}`, data);
 }
+
+export async function deleteSponsor(id) {
+  return await delete2(`/api/sponsor/${id}`);
+}

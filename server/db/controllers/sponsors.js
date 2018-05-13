@@ -47,14 +47,18 @@ async function update(req, res) {
 
 function uploadLogo(data) {
   return new Promise(resolve => {
+    console.log('uploading logo', data.slice(0,150));
     cloudinary.uploader.upload(data, function(result) {
+      console.log('new logo url', result.secure_url);
       resolve(result.secure_url);
     });
   });
 }
 
-function remove(req, res) {
-
+async function remove(req, res) {
+  if (!req.user || !req.user.isReversimTeamMember) return res.sendStatus(401);
+  await Sponsor.remove({ _id: req.params.id });
+  return res.sendStatus(200);
 }
 
 export default {

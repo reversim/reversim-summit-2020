@@ -14,6 +14,7 @@ import {
   updateProposal as doUpdateProposal,
   addSponsor,
   updateSponsor as doUpdateSponsor,
+  deleteSponsor as doDeleteSponsor,
   attend,
 } from '../data-service';
 import findIndex from 'lodash/findIndex';
@@ -128,6 +129,15 @@ class App extends Component {
     });
   }
 
+  deleteSponsor = async (id) => {
+    await doDeleteSponsor(id);
+    const index = findIndex(this.state.sponsors, x => x._id === id);
+    this.setState(state => {
+      const sponsors = state.sponsors.slice(0,index).concat(state.sponsors.slice(index+1));
+      return {sponsors};
+    });
+  }
+
   // This is passed down to route components
   actions = {
     onLogout: this.onLogout,
@@ -137,7 +147,8 @@ class App extends Component {
     updateProposal: this.updateProposal,
     attendProposal: this.attendProposal,
     createSponsor: this.createSponsor,
-    updateSponsor: this.updateSponsor
+    updateSponsor: this.updateSponsor,
+    deleteSponsor: this.deleteSponsor
   };
 
   state = store;

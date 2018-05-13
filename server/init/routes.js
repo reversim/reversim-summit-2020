@@ -106,7 +106,7 @@ export default (app) => {
   app.get('/api/sponsors', sponsorsController.all);
   app.post('/api/sponsor', sponsorsController.add);
   app.put('/api/sponsor/:id', sponsorsController.update);
-  app.delete('/api/message/:id', sponsorsController.remove);
+  app.delete('/api/sponsor/:id', sponsorsController.remove);
 
   app.use("/dashboard", express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
 };
