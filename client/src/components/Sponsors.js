@@ -144,10 +144,10 @@ class SponsorForm extends React.Component {
             left: 0,
             right: 0
           }}/>Choose logo</Button>
-          <Input className="mb-3" size="sm" required placeholder="Link to website" value={this.state.url} onChange={(e) => this.setState({ url: e.target.value })} />
-          <Input className="mb-3" size="sm" required type="textarea" placeholder="Description" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
-          <Input className="mb-3" size="sm" required type="textarea" placeholder="Featured job info" value={this.state.featuredJobInfo} onChange={(e) => this.setState({ featuredJobInfo: e.target.value })} />
-          <Input className="mb-3" size="sm" required placeholder="Link to featured job" value={this.state.featuredJobLink} onChange={(e) => this.setState({ featuredJobLink: e.target.value })} />
+          <Input className="mb-3" size="sm" placeholder="Link to website" value={this.state.url} onChange={(e) => this.setState({ url: e.target.value })} />
+          <Input className="mb-3" size="sm" type="textarea" placeholder="Description" value={this.state.description} onChange={(e) => this.setState({ description: e.target.value })} />
+          <Input className="mb-3" size="sm" type="textarea" placeholder="Featured job info" value={this.state.featuredJobInfo} onChange={(e) => this.setState({ featuredJobInfo: e.target.value })} />
+          <Input className="mb-3" size="sm" placeholder="Link to featured job" value={this.state.featuredJobLink} onChange={(e) => this.setState({ featuredJobLink: e.target.value })} />
           <div className="d-flex align-items-center mb-3">
             <input type="checkbox" id={`excludeWebsite_${_id}`} defaultChecked={this.state.excludeWebsite} onChange={(e) => this.setState({ excludeWebsite: e.target.checked })} />
             <label htmlFor={`excludeWebsite_${_id}`} className="mb-0">Don't automatically add website and job links</label>
