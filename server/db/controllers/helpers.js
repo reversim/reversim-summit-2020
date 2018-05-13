@@ -58,7 +58,7 @@ export function transformProposal(proposal, loggedInUser) {
       endTime: proposal.endTime,
       hall: proposal.hall,
       slides_gdrive_id: proposal.slides_gdrive_id,
-      categories: canViewPrivate ? proposal.categories : undefined,
+      categories: proposal.categories,
       outline: canViewPrivate ? proposal.outline : undefined,
       total: (proposal.attendees && canViewPrivate) ? proposal.attendees.length : undefined,
       attended: proposal.attendees ? (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false) : undefined,
