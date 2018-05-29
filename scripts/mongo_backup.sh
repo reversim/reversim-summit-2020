@@ -1,10 +1,10 @@
-#! /usr/local/bin/bash
+#! /bin/bash
 
 source .private/ENV_VARS
 
 d=`date +%Y-%m-%d-%H-%M-%S`
 
-for c in proposals users
+for c in proposals users sponsors
 do
     file=".private/backup-$d/$c.json"
     echo "Exporting $c"
