@@ -1,5 +1,5 @@
-const cfp = true;
-const voting = false;
+const cfp = false;
+const voting = true;
 
 export {
   cfp,
