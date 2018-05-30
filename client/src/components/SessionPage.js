@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown';
 import { agenda1, agenda2 } from '../data/agenda';
 import { Link } from 'react-router-dom';
 import SessionPageRoute from './SessionPageRoute';
+import {cfp} from '../features';
 
 const agenda = [agenda1, agenda2];
 
@@ -66,7 +67,7 @@ const SessionPage = (props) => {
   const {title, abstract, type, tags, outline, categories } = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);
   const isTeamMember = user && user.isReversimTeamMember;
-  const canEdit = isAuthor || isTeamMember;
+  const canEdit = (isAuthor && cfp) || isTeamMember;
 
   const dayTime = getDateAndTime(id);
 
