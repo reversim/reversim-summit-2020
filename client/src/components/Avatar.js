@@ -7,7 +7,8 @@ const Avatar = ({ id, name, picture, sessions, onLogout }) => (
     <ul className={s.menu}>
       <div className={s.menuInner}>
         {/*{ sessions.length > 0 && <Link className={s.menuItem} to={`/speaker/${id}`}>My Profile</Link> }*/}
-        <div className={s.menuItem}><Link to="/profile">MyProfile</Link></div>
+        <div className={s.menuItem}><Link to="/profile">My Profile</Link></div>
+        <div className={s.menuItem}><Link to="/my-votes">My Votes</Link></div>
         <div className={s.menuItem} onClick={onLogout}>Logout</div>
       </div>
     </ul>

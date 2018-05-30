@@ -174,7 +174,7 @@ class App extends Component {
       <Router location={this.props.location} context={{}}>
         <div>
           { routes.map(route=> (
-            <Route exact render={(p) => createElement(route.comp, {...routeProps, ...p})} path={route.path} key={route.path}/>
+            <Route exact render={(p) => createElement(route.comp, {...routeProps, ...p, ...route.props})} path={route.path} key={route.path} />
           ))}
         </div>
       </Router>

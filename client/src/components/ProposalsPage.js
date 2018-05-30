@@ -89,7 +89,8 @@ class ProposalsPage extends React.Component {
     const showProposals = proposals.length || !fetchComplete;
     const tags = allTags.map(tag => ({ text: tag, count: proposals.filter(p => p.tags.includes(tag)).length })).sort((a,b) => (a.count > b.count ? -1 : 1));
     const tagStrs = tags.map(tag => `${tag.text} (${tag.count})`);
-    const filteredProposals = tagFilters.length ? proposals.filter(proposal => proposal.tags.some(tag => tagFilters.includes(tag))) : proposals;
+    const tagfilteredProposals = tagFilters.length ? proposals.filter(proposal => proposal.tags.some(tag => tagFilters.includes(tag))) : proposals;
+    const filteredProposals = this.props.myVotes ? tagfilteredProposals.filter(proposal=>proposal.attended) : tagfilteredProposals;
     const showCount = filteredProposals.length;
     return <Page title="Proposals" {...this.props}>
       <div className="hero-page-img" style={{ backgroundImage: `url('${heroImg}')` }} />
