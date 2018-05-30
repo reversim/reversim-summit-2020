@@ -99,7 +99,7 @@ class ProposalsPage extends React.Component {
             <h1 className="text-center mt-6 mb-12">Proposals to {REVERSIM_SUMMIT}</h1>
             <div className="pt-4 border-top mb-3">Filter by tag:</div>
             <div className="d-flex flex-wrap pb-2 mb-6 border-bottom">
-              {tagStrs.map((tagStr, i) => <TagFilter text={tagStr} isSelected={tagFilters.includes(tags[i].text)} onClick={() => this.onTagClick(tags[i].text)}/>)}
+              {tagStrs.map((tagStr, i) => <TagFilter key={tagStr} text={tagStr} isSelected={tagFilters.includes(tags[i].text)} onClick={() => this.onTagClick(tags[i].text)}/>)}
             </div>
             {showProposals ? <div>
               <div className="mb-6">Showing {showCount} proposals</div>
