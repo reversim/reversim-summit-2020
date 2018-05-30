@@ -1,6 +1,5 @@
-#! /usr/local/bin/bash
 
-for c in proposals users
+for c in proposals users sponsors
 do
     file="data/$c.json"
     echo "Importing $c from $file"
