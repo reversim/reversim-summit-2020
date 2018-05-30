@@ -44,7 +44,7 @@ const Proposal = (props) => {
       </Row>
       <ReactMarkdown source={abstract} />
       { voting && <div>
-        <Button outline={attended} onClick={() => attendProposal(proposal._id, !attended)}>attend</Button>
+        <AttendButton attended={attended} proposal={proposal} attendProposal={attendProposal}/>
       </div> }
     </Col>
     <Col xs="12" sm="3" className="ml-sm-4">
@@ -56,6 +56,14 @@ const Proposal = (props) => {
 const TagFilter = ({ text, isSelected, onClick }) => (
   <div onClick={onClick} className={cn("font-size-sm letter-spacing cursor-pointer mr-2 mb-2 px-2 border-radius border", {"border-blue text-blue": !isSelected, "bg-blue text-white border-transparent": isSelected })}>{text}</div>
 )
+
+const AttendButton = ({attended, proposal, attendProposal}) => {
+  if (attended) {
+    return <Button className={cn("btn-success", s.changeAnimation)} onClick={() => attendProposal(proposal._id, !attended)}>Interested!</Button>
+  } else {
+    return <Button className={cn("btn-default", s.changeAnimation)} onClick={() => attendProposal(proposal._id, !attended)}>Interested?</Button>
+  }
+}
 
 class ProposalsPage extends React.Component {
 
