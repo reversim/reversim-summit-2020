@@ -46,7 +46,7 @@ const Proposal = (props) => {
       {voting && <div>
         <AttendButton user={user} attended={attended} proposal={proposal} attendProposal={attendProposal} />
       </div>}
-      {user.isReversimTeamMember && <span>Total: {proposal.total}</span>}
+      {user && user.isReversimTeamMember && <span>Total: {proposal.total}</span>}
     </Col>
     <Col xs="12" sm="3" className="ml-sm-4">
       {speakers.map(speaker => <SpeakerVertical key={speaker._id} speaker={speaker} />)}
