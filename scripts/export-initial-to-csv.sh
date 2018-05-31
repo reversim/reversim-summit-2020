@@ -37,13 +37,40 @@ speaker_id_by_proposal() {
 main() {
   proposal_ids | while read pid ; do
     proposal=$(proposal $pid)
-    speaker_id_1st=$(echo $proposal | jq '.speaker_ids[0]' -r)
-    speaker_id_2nd=$(echo $proposal | jq '.speaker_ids[1]' -r)
-    speaker_1st=$(speaker $speaker_id_1st)
-    speaker_2nd=$(speaker $speaker_id_2nd)
-    # [ ! -z "$speaker_2nd" ] && echo "found 2nd speaker"
-    printf "%s\t%s\t%s\t%s\n" $pid "$(echo $speaker_1st | jq .email -r)" "$(echo $proposal | jq .title -r)" "$(echo $speaker_2nd | jq .email -r)"
-    # echo $pid ' \t' $(echo $speaker_1st | jq .email) ' \t' "$(echo $proposal | jq .title)" ' \t' "$(echo $speaker_2nd | jq .email)"
+
+    proposal_title="$(echo $proposal | jq .title)"
+    proposal_url="https://summit2018.reversim.com/session/${pid}"
+    proposal_type=$(echo $proposal | jq '.type' -r)
+    proposal_categories=$(echo $proposal | jq '.categories | join(", ")' -r)
+
+    speaker1_id=$(echo $proposal | jq '.speaker_ids[0]' -r)
+    speaker2_id=$(echo $proposal | jq '.speaker_ids[1]' -r)
+
+    speaker1=$(speaker $speaker1_id)
+    speaker2=$(speaker $speaker2_id)
+
+    speaker1_name="$(echo $speaker1 | jq .name -r)"
+    speaker2_name="$(echo $speaker2 | jq .name -r)"
+
+    speaker1_email="$(echo $speaker1 | jq .email -r)"
+    speaker2_email="$(echo $speaker2 | jq .email -r)"
+
+    speaker1_phone="$(echo $speaker1 | jq .phone -r)"
+    speaker2_phone="$(echo $speaker2 | jq .phone -r)"
+
+    names="$speaker1_name"
+    [ -n "$speaker2_name" ] && names="$names, $speaker2_name"
+    email="$speaker1_email"
+    [ -n "$speaker2_email" ] && email="$email, $speaker2_email"
+    phone="$speaker1_phone"
+    [ -n "$speaker2_phone" ] && phone="$phone, $speaker2_phone"
+
+    speaker_video_url="$(echo $speaker1 | jq .video_url -r)"
+
+    # [ -n "$speaker2" ] && echo "found 2 speaker"
+    # printf "%s\t%s\t%s\t%s\n" $pid "$(echo $speaker1 | jq .email -r)" "$(echo $proposal | jq .title -r)" "$(echo $speaker2 | jq .email -r)"
+    printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" "$pid" "$proposal_url" "$names" "$proposal_title" "$proposal_type" "$proposal_categories" "$speaker_video_url" "$email" "$phone"
+    # echo $pid ' \t' $(echo $speaker1 | jq .email) ' \t' "$(echo $proposal | jq .title)" ' \t' "$(echo $speaker2 | jq .email)"
   done
 }
 
