@@ -79,7 +79,7 @@ main() {
     speaker1_video_url="$(echo $speaker1 | jq .video_url -r)"
 
     # Columns:
-    #pid	proposal_url	num_speakers	speaker_names	proposal_title	proposal_type	proposal_categories proposal_tags	speaker1_video_url	speaker_emails	speaker_phones	speaker_urls
+    #proposal_id	proposal_url	num_speakers	speaker_names	proposal_title	proposal_type	proposal_categories proposal_tags speaker1_video_url	speaker_emails	speaker_phones	speaker_urls
     printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" "$pid" "$proposal_url" "$num_speakers" "$speaker_names" "$proposal_title" "$proposal_type" "$proposal_categories" "$proposal_tags" "$speaker1_video_url" "$speaker_emails" "$speaker_phones" "$speaker_urls"
   done
 }
