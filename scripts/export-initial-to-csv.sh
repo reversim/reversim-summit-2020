@@ -44,6 +44,7 @@ main() {
     proposal_url="https://summit2018.reversim.com/session/${pid}"
     proposal_type=$(echo $proposal | jq '.type' -r)
     proposal_categories=$(echo $proposal | jq '.categories | join(", ")' -r)
+    proposal_categories=$(echo $proposal | jq '.tags | join(", ")' -r)
 
     speaker1_id=$(echo $proposal | jq '.speaker_ids[0]' -r)
     speaker2_id=$(echo $proposal | jq '.speaker_ids[1]' -r)
@@ -77,10 +78,9 @@ main() {
 
     speaker1_video_url="$(echo $speaker1 | jq .video_url -r)"
 
-    # [ -n "$speaker2" ] && echo "found 2 speaker"
-    # printf "%s\t%s\t%s\t%s\n" $pid "$(echo $speaker1 | jq .email -r)" "$(echo $proposal | jq .title -r)" "$(echo $speaker2 | jq .email -r)"
-    printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" "$pid" "$proposal_url" "$num_speakers" "$speaker_names" "$proposal_title" "$proposal_type" "$proposal_categories" "$speaker1_video_url" "$speaker_emails" "$speaker_phones" "$speaker_urls"
-    # echo $pid ' \t' $(echo $speaker1 | jq .email) ' \t' "$(echo $proposal | jq .title)" ' \t' "$(echo $speaker2 | jq .email)"
+    # Columns:
+    #pid	proposal_url	num_speakers	speaker_names	proposal_title	proposal_type	proposal_categories proposal_tags	speaker1_video_url	speaker_emails	speaker_phones	speaker_urls
+    printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" "$pid" "$proposal_url" "$num_speakers" "$speaker_names" "$proposal_title" "$proposal_type" "$proposal_categories" "$proposal_tags" "$speaker1_video_url" "$speaker_emails" "$speaker_phones" "$speaker_urls"
   done
 }
 
