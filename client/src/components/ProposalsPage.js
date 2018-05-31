@@ -72,7 +72,8 @@ const AttendButton = ({ user, attended, proposal, attendProposal }) => {
 class ProposalsPage extends React.Component {
 
   state = {
-    tagFilters: []
+    tagFilters: [],
+    orderByTotal: false,
   };
 
   onTagClick = (tag) => {
@@ -95,7 +96,8 @@ class ProposalsPage extends React.Component {
     const tagStrs = tags.map(tag => `${tag.text} (${tag.count})`);
     const tagfilteredProposals = tagFilters.length ? proposals.filter(proposal => proposal.tags.some(tag => tagFilters.includes(tag))) : proposals;
     const filteredProposals = this.props.myVotes ? tagfilteredProposals.filter(proposal => proposal.attended) : tagfilteredProposals;
-    const showCount = filteredProposals.length;
+    const sortedProposals = this.state.orderByTotal ? filteredProposals.sort((a,b)=> b.total - a.total ) : filteredProposals;
+    const showCount = sortedProposals.length;
     return <Page title="Proposals" {...this.props}>
       <div className="hero-page-img" style={{ backgroundImage: `url('${heroImg}')` }} />
       <Container>
@@ -114,7 +116,12 @@ class ProposalsPage extends React.Component {
             }
             {showProposals ? <div>
               <div className="mb-6">Showing {showCount} proposals</div>
-              {filteredProposals.map(proposal => (
+              {user && user.isReversimTeamMember && 
+              <Fragment>
+                <input type="checkbox" id="order" onChange={()=>this.setState(s=> ({orderByTotal: !s.orderByTotal}))}/>
+                <label htmlFor="order" className="text-info">Order by score (Admin only)</label>
+              </Fragment>}
+              {sortedProposals.map(proposal => (
                 <Proposal
                   isSmallScreen={isSmallScreen}
                   key={proposal._id}
