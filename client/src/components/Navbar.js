@@ -88,6 +88,7 @@ class Navbar extends Component {
             { items.map(NavbarItem) }
             { isSmallScreen && user && <div className="border-top">
               <NavbarItem to="profile" text="My profile" />
+              <NavbarItem to="my-votes" text="My votes" />
               <NavItem className={s.navItem} onClick={onLogout}><span className={navLinkClass}>Logout</span></NavItem>
             </div>}
             { isSmallScreen && !user && <div className="border-top">
