@@ -60,7 +60,7 @@ const CFPPage = (props) => (
       <Container>
         <Row>
           <Col lg={{ size: 10, offset: 1 }} className={cn("bg-white", cfpCol)}>
-            {CFPBody(props)}
+            <CFPBody {...props} />
           </Col>
         </Row>
       </Container>
