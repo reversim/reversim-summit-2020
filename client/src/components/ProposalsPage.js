@@ -33,7 +33,7 @@ const SpeakerVertical = ({ speaker }) => {
 
 
 const Proposal = (props) => {
-  const { proposal, speakers, isSmallScreen, attended, attendProposal, user } = props;
+  const { proposal, speakers, isSmallScreen, attended, attendProposal, user} = props;
   const { title, type, tags, abstract } = proposal;
   return <Row className={cn({ 'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
@@ -46,6 +46,7 @@ const Proposal = (props) => {
       {voting && <div>
         <AttendButton user={user} attended={attended} proposal={proposal} attendProposal={attendProposal} />
       </div>}
+      {user.isReversimTeamMember && <span>Total: {proposal.total}</span>}
     </Col>
     <Col xs="12" sm="3" className="ml-sm-4">
       {speakers.map(speaker => <SpeakerVertical key={speaker._id} speaker={speaker} />)}
@@ -86,7 +87,6 @@ class ProposalsPage extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const proposals = values(this.props.proposals);
     const { allTags, isSmallScreen, fetchComplete, users, attendProposal, user } = this.props;
     const { tagFilters } = this.state;
