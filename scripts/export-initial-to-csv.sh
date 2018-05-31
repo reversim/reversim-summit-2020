@@ -1,10 +1,12 @@
 #!/bin/bash
 
 initial_uri="https://summit2018.reversim.com/api/initial"
-initial_json_file="${HOME}/Downloads/initial-1.json"
+initial_json_file="$1"
 
-if [ ! -s $initial_json_file ] ; then
-  curl $initial_uri > $initial_json_file
+if [ -z "$initial_json_file" ] ; then
+  echo "usage: export-initial-to-csv <initial.json file>"
+  echo "Grab the most up to date initial file from https://summit2018.reversim.com/api/initial while logged in."
+  exit 1
 fi
 
 proposal_ids() {
@@ -45,6 +47,9 @@ main() {
 
     speaker1_id=$(echo $proposal | jq '.speaker_ids[0]' -r)
     speaker2_id=$(echo $proposal | jq '.speaker_ids[1]' -r)
+    [ "$speaker2_id" == "null" ] && speaker2_id=""
+
+    num_speakers=$(echo $proposal | jq '.speaker_ids | length' -r)
 
     speaker1=$(speaker $speaker1_id)
     speaker2=$(speaker $speaker2_id)
@@ -58,18 +63,23 @@ main() {
     speaker1_phone="$(echo $speaker1 | jq .phone -r)"
     speaker2_phone="$(echo $speaker2 | jq .phone -r)"
 
-    names="$speaker1_name"
-    [ -n "$speaker2_name" ] && names="$names, $speaker2_name"
-    email="$speaker1_email"
-    [ -n "$speaker2_email" ] && email="$email, $speaker2_email"
-    phone="$speaker1_phone"
-    [ -n "$speaker2_phone" ] && phone="$phone, $speaker2_phone"
+    speaker1_url="https://summit2018.reversim.com/speaker/${speaker1_id}"
+    speaker2_url="https://summit2018.reversim.com/speaker/${speaker2_id}"
 
-    speaker_video_url="$(echo $speaker1 | jq .video_url -r)"
+    speaker_names="$speaker1_name"
+    [ -n "$speaker2_id" ] && speaker_names="$speaker_names, $speaker2_name"
+    speaker_emails="$speaker1_email"
+    [ -n "$speaker2_id" ] && speaker_emails="$speaker_emails, $speaker2_email"
+    speaker_phones="$speaker1_phone"
+    [ -n "$speaker2_id" ] && speaker_phones="$speaker_phones, $speaker2_phone"
+    speaker_urls="$speaker1_url"
+    [ -n "$speaker2_id" ] && speaker_urls="$speaker_urls, $speaker2_url"
+
+    speaker1_video_url="$(echo $speaker1 | jq .video_url -r)"
 
     # [ -n "$speaker2" ] && echo "found 2 speaker"
     # printf "%s\t%s\t%s\t%s\n" $pid "$(echo $speaker1 | jq .email -r)" "$(echo $proposal | jq .title -r)" "$(echo $speaker2 | jq .email -r)"
-    printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" "$pid" "$proposal_url" "$names" "$proposal_title" "$proposal_type" "$proposal_categories" "$speaker_video_url" "$email" "$phone"
+    printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" "$pid" "$proposal_url" "$num_speakers" "$speaker_names" "$proposal_title" "$proposal_type" "$proposal_categories" "$speaker1_video_url" "$speaker_emails" "$speaker_phones" "$speaker_urls"
     # echo $pid ' \t' $(echo $speaker1 | jq .email) ' \t' "$(echo $proposal | jq .title)" ' \t' "$(echo $speaker2 | jq .email)"
   done
 }
