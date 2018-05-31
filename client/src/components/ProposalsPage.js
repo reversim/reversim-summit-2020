@@ -33,7 +33,7 @@ const SpeakerVertical = ({ speaker }) => {
 
 
 const Proposal = (props) => {
-  const { proposal, speakers, isSmallScreen, attended, attendProposal } = props;
+  const { proposal, speakers, isSmallScreen, attended, attendProposal, user } = props;
   const { title, type, tags, abstract } = proposal;
   return <Row className={cn({ 'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
@@ -44,7 +44,7 @@ const Proposal = (props) => {
       </Row>
       <ReactMarkdown source={abstract} />
       {voting && <div>
-        <AttendButton attended={attended} proposal={proposal} attendProposal={attendProposal} />
+        <AttendButton user={user} attended={attended} proposal={proposal} attendProposal={attendProposal} />
       </div>}
     </Col>
     <Col xs="12" sm="3" className="ml-sm-4">
@@ -57,7 +57,10 @@ const TagFilter = ({ text, isSelected, onClick }) => (
   <div onClick={onClick} className={cn("font-size-sm letter-spacing cursor-pointer mr-2 mb-2 px-2 border-radius border", { "border-blue text-blue": !isSelected, "bg-blue text-white border-transparent": isSelected })}>{text}</div>
 )
 
-const AttendButton = ({ attended, proposal, attendProposal }) => {
+const AttendButton = ({ user, attended, proposal, attendProposal }) => {
+  if (!user) {
+    return <span className="text-danger">Login in order to vote!</span>
+  }
   if (attended) {
     return <Button className={cn("btn-success", s.changeAnimation)} onClick={() => attendProposal(proposal._id, !attended)}>Interested!</Button>
   } else {
@@ -83,8 +86,9 @@ class ProposalsPage extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const proposals = values(this.props.proposals);
-    const { allTags, isSmallScreen, fetchComplete, users, attendProposal } = this.props;
+    const { allTags, isSmallScreen, fetchComplete, users, attendProposal, user } = this.props;
     const { tagFilters } = this.state;
     const showProposals = proposals.length || !fetchComplete;
     const tags = allTags.map(tag => ({ text: tag, count: proposals.filter(p => p.tags.includes(tag)).length })).sort((a, b) => (a.count > b.count ? -1 : 1));
@@ -118,6 +122,7 @@ class ProposalsPage extends React.Component {
                   speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
                   attended={proposal.attended}
                   attendProposal={attendProposal}
+                  user={user}
                 />
               ))}
             </div> : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br /> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}
