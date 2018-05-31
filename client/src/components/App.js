@@ -101,13 +101,25 @@ class App extends Component {
   };
 
   attendProposal = async (proposalId, isAttending) => {
-    await attend(proposalId, isAttending);
+    // We change the state before for better UX otherise the user waits before he sees the vote
     this.setState(state => ({
       proposals: {
         ...state.proposals,
         [proposalId]: {...state.proposals[proposalId], attended: isAttending}
       }
     }));
+    try {
+      ga.event("vote", isAttending ? "attending" : "not-attending", "vote-click", 1);
+      await attend(proposalId, isAttending);
+    } catch(e) {
+      //rollback UI
+      this.setState(state => ({
+        proposals: {
+          ...state.proposals,
+          [proposalId]: {...state.proposals[proposalId], attended: !isAttending}
+        }
+      }));
+    }
   }
 
   createSponsor = async (data) => {
@@ -162,7 +174,7 @@ class App extends Component {
       <Router location={this.props.location} context={{}}>
         <div>
           { routes.map(route=> (
-            <Route exact render={(p) => createElement(route.comp, {...routeProps, ...p})} path={route.path} key={route.path}/>
+            <Route exact render={(p) => createElement(route.comp, {...routeProps, ...p, ...route.props})} path={route.path} key={route.path} />
           ))}
         </div>
       </Router>

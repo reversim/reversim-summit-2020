@@ -75,7 +75,7 @@ export class SpeakerPage extends React.Component {
             { (sessions && sessions.length) ? <div className="mt-10">
               <h4 className="mb-4">{`${name.split(" ")[0]}'s Proposals`}</h4>
               {sessions.map(session =>
-                <Link to={`/session/${getHref(session)}`} className="unstyled-link">
+                <Link key={session._id} to={`/session/${getHref(session)}`} className="unstyled-link">
                   <div className="bg-gray-200 p-3 mb-4" key={session._id}>
                   <h5>{session.title}</h5>
                   <div className="d-flex mb-3 font-size-sm">

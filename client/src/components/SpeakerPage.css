@@ -22,3 +22,7 @@
 .socialLinks a:not(:last-child) {
     margin-right: 60px;
 }
+
+.changeAnimation {
+    transition: background-color 0.2s ease;
+}

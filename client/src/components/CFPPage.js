@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Button, Col, Container, Row } from 'reactstrap';
 import cn from 'classnames';
 import Page from './Page';
@@ -10,7 +10,8 @@ import CFPForm from './CFPForm';
 import smolarzImg from '../images/smolarz_hero.png';
 import { heroImg, cfpCol } from './CFPPage.css';
 import { getLoginUrl } from './Redirect';
-
+import { getRemainingCFPDays, REVERSIM_SUMMIT } from '../utils';
+import { cfp } from '../features';
 const NonAuthenticated = () => (
   <div className="text-center mb-6">
     <h6>Login with Google is required in order to submit a proposal</h6>
@@ -31,20 +32,35 @@ const BottomContent = ({
 }) => {
   if (!submission) return <SubmissionClosed />;
   else if (!user) return <NonAuthenticated />;
-  else return <CFPForm user={user} {...props}/>
+  else return <CFPForm user={user} {...props} />
 };
+
+const CFPBody = (props) => {
+  if (cfp) {
+    return (
+      <Fragment>
+        <CFPTitle />
+        <CFPIntro />
+        <CFPFaq />
+        <BottomContent {...props} />
+      </Fragment>
+    )
+  } else {
+    return (
+      <h1 className="my-5 text-primary">{REVERSIM_SUMMIT} - CFP is closed!</h1>
+    )
+  }
+  
+}
 
 const CFPPage = (props) => (
   <Page title="Call for papers" {...props}>
     <div className="bg-purple">
-      <div className={heroImg} style={{backgroundImage: `url('${smolarzImg}')`}}/>
+      <div className={heroImg} style={{ backgroundImage: `url('${smolarzImg}')` }} />
       <Container>
         <Row>
-          <Col lg={{size: 10, offset: 1}} className={cn("bg-white", cfpCol)}>
-            <CFPTitle />
-            <CFPIntro />
-            <CFPFaq />
-            <BottomContent {...props} />
+          <Col lg={{ size: 10, offset: 1 }} className={cn("bg-white", cfpCol)}>
+            <CFPBody {...props} />
           </Col>
         </Row>
       </Container>

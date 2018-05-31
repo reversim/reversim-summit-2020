@@ -34,5 +34,6 @@ export default [
   // { path: "/women-gathering", comp: WomenGathering },
   { path: "/cfp", comp: CFPPage },
   { path: "/proposals", comp: ProposalsPage },
+  { path: "/my-votes", comp: ProposalsPage, props: {myVotes: true} },
   { path: "/timeline", comp: TimelinePage },
 ]
