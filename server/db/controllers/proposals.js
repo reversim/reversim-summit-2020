@@ -359,8 +359,7 @@ function getProposers(proposals) {
 async function getAllProposals(shouldShuffle, seed) {
   let proposals = await Proposal.find({ status: { $ne: 'archived' }}, null, { sort: { created_at: -1 } });
   if (shouldShuffle) {
-    const shuffleSeed = seed || String(Date.now());
-    proposals = shuffler.shuffle(proposals, shuffleSeed);
+    proposals = shuffler.shuffle(proposals, seed);
   }
   return proposals;
 }
