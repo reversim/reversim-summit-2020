@@ -44,7 +44,7 @@ main() {
     proposal_url="https://summit2018.reversim.com/session/${pid}"
     proposal_type=$(echo $proposal | jq '.type' -r)
     proposal_categories=$(echo $proposal | jq '.categories | join(", ")' -r)
-    proposal_categories=$(echo $proposal | jq '.tags | join(", ")' -r)
+    proposal_tags=$(echo $proposal | jq '.tags | join(", ")' -r)
 
     speaker1_id=$(echo $proposal | jq '.speaker_ids[0]' -r)
     speaker2_id=$(echo $proposal | jq '.speaker_ids[1]' -r)
