@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Page from './Page';
 import values from 'lodash/values';
 import heroImg from '../images/session.png';
@@ -21,21 +21,21 @@ const SpeakerVertical = ({ speaker }) => {
 
   return <Row className={cn("align-items-center", s.speakerShort)}>
     <Col xs="auto" sm="12">
-      <div className={cn(s.speakerImg, 'mx-auto mb-4')} style={{backgroundImage: `url('${picture}')`, height: 100, width: 100}}/>
+      <div className={cn(s.speakerImg, 'mx-auto mb-4')} style={{ backgroundImage: `url('${picture}')`, height: 100, width: 100 }} />
     </Col>
     <Col className="text-sm-center">
       <Link to={`/speaker/${getHref(speaker)}`}>{nameEl}</Link>
       <div className="text-muted mb-2">{oneLiner}</div>
-      <SpeakerSocialLinks {...speaker} className={cn(s.socialLinks, 'justify-content-sm-center')}/>
+      <SpeakerSocialLinks {...speaker} className={cn(s.socialLinks, 'justify-content-sm-center')} />
     </Col>
   </Row>
 };
 
 
 const Proposal = (props) => {
-  const { proposal, speakers,isSmallScreen, attended, attendProposal } = props;
+  const { proposal, speakers, isSmallScreen, attended, attendProposal } = props;
   const { title, type, tags, abstract } = proposal;
-  return <Row className={cn({'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
+  return <Row className={cn({ 'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
       <Link className="unstyled-link" to={`/session/${getHref(proposal)}`}><h4>{title}</h4></Link>
       <Row className="d-flex font-size-sm" noGutters>
@@ -43,21 +43,21 @@ const Proposal = (props) => {
         <Col className="text-muted d-flex mb-3">{tags.map(Tag)}</Col>
       </Row>
       <ReactMarkdown source={abstract} />
-      { voting && <div>
-        <AttendButton attended={attended} proposal={proposal} attendProposal={attendProposal}/>
-      </div> }
+      {voting && <div>
+        <AttendButton attended={attended} proposal={proposal} attendProposal={attendProposal} />
+      </div>}
     </Col>
     <Col xs="12" sm="3" className="ml-sm-4">
-      {speakers.map(speaker => <SpeakerVertical key={speaker._id} speaker={speaker}/>)}
+      {speakers.map(speaker => <SpeakerVertical key={speaker._id} speaker={speaker} />)}
     </Col>
   </Row>;
 };
 
 const TagFilter = ({ text, isSelected, onClick }) => (
-  <div onClick={onClick} className={cn("font-size-sm letter-spacing cursor-pointer mr-2 mb-2 px-2 border-radius border", {"border-blue text-blue": !isSelected, "bg-blue text-white border-transparent": isSelected })}>{text}</div>
+  <div onClick={onClick} className={cn("font-size-sm letter-spacing cursor-pointer mr-2 mb-2 px-2 border-radius border", { "border-blue text-blue": !isSelected, "bg-blue text-white border-transparent": isSelected })}>{text}</div>
 )
 
-const AttendButton = ({attended, proposal, attendProposal}) => {
+const AttendButton = ({ attended, proposal, attendProposal }) => {
   if (attended) {
     return <Button className={cn("btn-success", s.changeAnimation)} onClick={() => attendProposal(proposal._id, !attended)}>Interested!</Button>
   } else {
@@ -75,8 +75,8 @@ class ProposalsPage extends React.Component {
     this.setState(state => {
       const index = state.tagFilters.indexOf(tag);
       if (index > -1) {
-        return { tagFilters: state.tagFilters.slice(0,index).concat(state.tagFilters.slice(index+1)) };
-      } else { 
+        return { tagFilters: state.tagFilters.slice(0, index).concat(state.tagFilters.slice(index + 1)) };
+      } else {
         return { tagFilters: state.tagFilters.concat(tag) };
       }
     });
@@ -87,10 +87,10 @@ class ProposalsPage extends React.Component {
     const { allTags, isSmallScreen, fetchComplete, users, attendProposal } = this.props;
     const { tagFilters } = this.state;
     const showProposals = proposals.length || !fetchComplete;
-    const tags = allTags.map(tag => ({ text: tag, count: proposals.filter(p => p.tags.includes(tag)).length })).sort((a,b) => (a.count > b.count ? -1 : 1));
+    const tags = allTags.map(tag => ({ text: tag, count: proposals.filter(p => p.tags.includes(tag)).length })).sort((a, b) => (a.count > b.count ? -1 : 1));
     const tagStrs = tags.map(tag => `${tag.text} (${tag.count})`);
     const tagfilteredProposals = tagFilters.length ? proposals.filter(proposal => proposal.tags.some(tag => tagFilters.includes(tag))) : proposals;
-    const filteredProposals = this.props.myVotes ? tagfilteredProposals.filter(proposal=>proposal.attended) : tagfilteredProposals;
+    const filteredProposals = this.props.myVotes ? tagfilteredProposals.filter(proposal => proposal.attended) : tagfilteredProposals;
     const showCount = filteredProposals.length;
     return <Page title="Proposals" {...this.props}>
       <div className="hero-page-img" style={{ backgroundImage: `url('${heroImg}')` }} />
@@ -98,10 +98,16 @@ class ProposalsPage extends React.Component {
         <Row>
           <Col>
             <h1 className="text-center mt-6 mb-12">Proposals to {REVERSIM_SUMMIT}</h1>
-            <div className="pt-4 border-top mb-3">Filter by tag:</div>
-            <div className="d-flex flex-wrap pb-2 mb-6 border-bottom">
-              {tagStrs.map((tagStr, i) => <TagFilter key={tagStr} text={tagStr} isSelected={tagFilters.includes(tags[i].text)} onClick={() => this.onTagClick(tags[i].text)}/>)}
-            </div>
+            {!this.props.myVotes && <Fragment>
+
+              <div className="pt-4 border-top mb-3">Filter by tag:</div>
+
+              <div className="d-flex flex-wrap pb-2 mb-6 border-bottom">
+                {tagStrs.map((tagStr, i) => <TagFilter key={tagStr} text={tagStr} isSelected={tagFilters.includes(tags[i].text)} onClick={() => this.onTagClick(tags[i].text)} />)}
+              </div>
+            </Fragment>
+
+            }
             {showProposals ? <div>
               <div className="mb-6">Showing {showCount} proposals</div>
               {filteredProposals.map(proposal => (
@@ -114,7 +120,7 @@ class ProposalsPage extends React.Component {
                   attendProposal={attendProposal}
                 />
               ))}
-              </div> : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br/> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}
+            </div> : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br /> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}
           </Col>
         </Row>
       </Container>
