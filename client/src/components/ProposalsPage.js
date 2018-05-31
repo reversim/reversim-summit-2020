@@ -60,7 +60,7 @@ const TagFilter = ({ text, isSelected, onClick }) => (
 
 const AttendButton = ({ user, attended, proposal, attendProposal }) => {
   if (!user) {
-    return <span className="text-danger">Login in order to vote!</span>
+    return <span className="text-danger">Login to vote!</span>
   }
   if (attended) {
     return <Button className={cn("btn-success", s.changeAnimation)} onClick={() => attendProposal(proposal._id, !attended)}>Interested!</Button>
