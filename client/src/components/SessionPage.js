@@ -58,13 +58,12 @@ const getDateAndTime = id => {
 };
 
 const dates = [
-  "October 8, 2018", // TODO change dates
+  "October 8, 2018", 
   "October 9, 2018"
 ];
 
 
 const SessionPage = (props) => {
-  console.log(props)
   const { user, session, speakers, attendProposal ,match: { params: { id } } } = props;
   const { title, abstract, type, tags, outline, categories, attended } = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);

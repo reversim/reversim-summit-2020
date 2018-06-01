@@ -4,7 +4,6 @@ import cn from 'classnames';
 import s from './SpeakerPage.css';
 
 export default ({ user, attended, proposalId, attendProposal }) => {
-  console.log({ user, attended, proposalId, attendProposal })
   if (!user) {
     return <span className="text-danger">Login to vote!</span>
   }
