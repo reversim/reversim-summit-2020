@@ -21,7 +21,7 @@ const Footer = () => (
       </Row>
       <Row>
         <Col xs="12" sm="auto">
-          <a href="mailto:rs17team@googlegroups.com">Contact</a>
+          <a href="mailto:rs18-team@googlegroups.com">Contact</a>
         </Col>
         <Col xs="12" sm="auto">
           <a href="http://confcodeofconduct.com/">Code of Conduct</a>
