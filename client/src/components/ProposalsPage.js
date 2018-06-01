@@ -13,6 +13,7 @@ import { getHref } from '../utils';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
 import Tag from './Tag';
 import { voting } from '../features';
+import VoteButton from './VoteButton';
 
 const SpeakerVertical = ({ speaker }) => {
   const { name, picture, oneLiner } = speaker;
@@ -34,7 +35,7 @@ const SpeakerVertical = ({ speaker }) => {
 
 const Proposal = (props) => {
   const { proposal, speakers, isSmallScreen, attended, attendProposal, user} = props;
-  const { title, type, tags, abstract } = proposal;
+  const { _id, title, type, tags, abstract } = proposal;
   return <Row className={cn({ 'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
       <Link className="unstyled-link" to={`/session/${getHref(proposal)}`}><h4>{title}</h4></Link>
@@ -44,7 +45,7 @@ const Proposal = (props) => {
       </Row>
       <ReactMarkdown source={abstract} />
       {voting && <div>
-        <AttendButton user={user} attended={attended} proposal={proposal} attendProposal={attendProposal} />
+        <VoteButton user={user} attended={attended} proposalId={_id} attendProposal={attendProposal} />
       </div>}
       {user && user.isReversimTeamMember && <span>Total: {proposal.total}</span>}
     </Col>
@@ -57,17 +58,6 @@ const Proposal = (props) => {
 const TagFilter = ({ text, isSelected, onClick }) => (
   <div onClick={onClick} className={cn("font-size-sm letter-spacing cursor-pointer mr-2 mb-2 px-2 border-radius border", { "border-blue text-blue": !isSelected, "bg-blue text-white border-transparent": isSelected })}>{text}</div>
 )
-
-const AttendButton = ({ user, attended, proposal, attendProposal }) => {
-  if (!user) {
-    return <span className="text-danger">Login to vote!</span>
-  }
-  if (attended) {
-    return <Button className={cn("btn-success", s.changeAnimation)} onClick={() => attendProposal(proposal._id, !attended)}>Interested!</Button>
-  } else {
-    return <Button className={cn("btn-default", s.changeAnimation)} onClick={() => attendProposal(proposal._id, !attended)}>Interested?</Button>
-  }
-}
 
 class ProposalsPage extends React.Component {
 
