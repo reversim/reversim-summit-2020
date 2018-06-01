@@ -36,7 +36,7 @@ const SpeakerVertical = ({ speaker }) => {
 const Proposal = (props) => {
   const { proposal, speakers, isSmallScreen, attended, attendProposal, user} = props;
   const { _id, title, type, tags, abstract } = proposal;
-  return <Row className={cn({ 'mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
+  return <Row className={cn({ 'proposal mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
       <Link className="unstyled-link" to={`/session/${getHref(proposal)}`}><h4>{title}</h4></Link>
       <Row className="d-flex font-size-sm" noGutters>
