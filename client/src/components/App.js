@@ -109,7 +109,13 @@ class App extends Component {
       }
     }));
     try {
-      ga.event("vote", isAttending ? "attending" : "not-attending", "vote-click", 1);
+      ga.event(
+        {
+          category: "vote",
+          action: isAttending ? "attending" : "not-attending",
+          label: "vote-click",
+          value: 1,
+        });
       await attend(proposalId, isAttending);
     } catch(e) {
       //rollback UI
