@@ -10,3 +10,4 @@ env.sh
 webpack-stats.json
 .env
 backup-*
+newrelic_agent.log
