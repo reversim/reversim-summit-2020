@@ -7,7 +7,7 @@ import User from '../models/user';
 import {transformProposal, transformUser} from './helpers';
 import shuffler from 'shuffle-seed';
 import request from 'axios';
-
+import eventConfig from '../../init/eventConfig';
 // TODO this is duplicate from /client/src/data/proposals.js
 const PROPOSAL_TYPES = {
   "full": "Full Featured (30 min.)",
@@ -47,8 +47,8 @@ async function get(req, res) {
 /**
  * Add a Proposal
  */
-export function add(req, res) {
-  if (!req.user) return res.sendStatus(401);
+export function add(req, res) {  
+  if (!req.user || !eventConfig.cfp) return res.sendStatus(401);
   if (req.body.speaker_ids.indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
     return res.sendStatus(401);
   }
@@ -187,7 +187,7 @@ async function remove(req, res) {
  * Attend a proposal
  */
 function attend(req, res) {
-  if (!req.user) return res.sendStatus(401);
+  if (!req.user || !eventConfig.voting) return res.sendStatus(401);
 
   let query, update, msg;
   if (req.body.value === true) {
