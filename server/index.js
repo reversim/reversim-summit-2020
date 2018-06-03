@@ -1,3 +1,4 @@
+require('newrelic');
 require("babel-register");
 const path = require('path');
 const { config } = require("dotenv");
