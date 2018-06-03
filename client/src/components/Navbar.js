@@ -9,7 +9,6 @@ import Avatar from "./Avatar";
 import { isServer } from '../utils';
 import { REVERSIM_SUMMIT } from '../utils';
 import { getLoginUrl } from './Redirect';
-import { cfp } from '../features';
 
 const CFPCTA = () => (
   <Link to="/cfp" className="unstyled-link">
@@ -65,7 +64,8 @@ class Navbar extends Component {
   };
 
   render() {
-    const { isHome, isSmallScreen, user, onLogout, pathname, history } = this.props;
+    const { isHome, isSmallScreen, user, onLogout, pathname, history, eventConfig } = this.props;
+    const { cfp } = eventConfig;
     const { fixed } = this.state;
     const items = navItems(isHome);
     const isWhite = !isHome || fixed;

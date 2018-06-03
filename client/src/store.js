@@ -14,6 +14,7 @@ const store = {
     submission: true
   },
   sponsors: [],
+  eventConfig: {},
 
   isSmallScreen: window.innerWidth < 576,
 

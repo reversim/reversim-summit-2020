@@ -9,7 +9,6 @@ import ReactMarkdown from 'react-markdown';
 import { agenda1, agenda2 } from '../data/agenda';
 import { Link } from 'react-router-dom';
 import SessionPageRoute from './SessionPageRoute';
-import { cfp, voting } from '../features';
 import VoteButton from './VoteButton';
 
 const agenda = [agenda1, agenda2];
@@ -64,7 +63,8 @@ const dates = [
 
 
 const SessionPage = (props) => {
-  const { user, session, speakers, attendProposal ,match: { params: { id } } } = props;
+  const { user, session, speakers, attendProposal, eventConfig ,match: { params: { id } } } = props;
+  const { cfp, voting } = eventConfig;
   const { title, abstract, type, tags, outline, categories, attended } = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);
   const isTeamMember = user && user.isReversimTeamMember;
