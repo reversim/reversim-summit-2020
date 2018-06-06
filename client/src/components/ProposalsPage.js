@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import { getHref } from '../utils';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";
 import Tag from './Tag';
-import { voting } from '../features';
 import VoteButton from './VoteButton';
 
 const SpeakerVertical = ({ speaker }) => {
@@ -34,7 +33,8 @@ const SpeakerVertical = ({ speaker }) => {
 
 
 const Proposal = (props) => {
-  const { proposal, speakers, isSmallScreen, attended, attendProposal, user} = props;
+  const { proposal, speakers, isSmallScreen, attended, attendProposal, user, eventConfig} = props;
+  const { voting } = eventConfig;
   const { _id, title, type, tags, abstract } = proposal;
   return <Row className={cn({ 'proposal mb-8 mx-3 pt-3 bg-gray-200': isSmallScreen })}>
     <Col xs="12" sm={{ size: 7, offset: 1 }} className="mb-6 mb-sm-12">
@@ -66,6 +66,10 @@ class ProposalsPage extends React.Component {
     orderByTotal: false,
   };
 
+  static defaultProps = {
+    eventConfig: {},
+  }
+
   onTagClick = (tag) => {
     this.setState(state => {
       const index = state.tagFilters.indexOf(tag);
@@ -79,7 +83,7 @@ class ProposalsPage extends React.Component {
 
   render() {
     const proposals = values(this.props.proposals);
-    const { allTags, isSmallScreen, fetchComplete, users, attendProposal, user } = this.props;
+    const { allTags, isSmallScreen, fetchComplete, users, attendProposal, user, eventConfig } = this.props;
     const { tagFilters } = this.state;
     const showProposals = proposals.length || !fetchComplete;
     const tags = allTags.map(tag => ({ text: tag, count: proposals.filter(p => p.tags.includes(tag)).length })).sort((a, b) => (a.count > b.count ? -1 : 1));
@@ -120,6 +124,7 @@ class ProposalsPage extends React.Component {
                   attended={proposal.attended}
                   attendProposal={attendProposal}
                   user={user}
+                  eventConfig={eventConfig}
                 />
               ))}
             </div> : <h2 className="text-center mb-6 bg-gray-200 py-3 line-height-17">Nothing yet :-( <br /> Be the first to <Link to="/cfp" className="text-underline"><b>submit!</b></Link></h2>}

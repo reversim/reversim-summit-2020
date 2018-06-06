@@ -11,7 +11,7 @@ import smolarzImg from '../images/smolarz_hero.png';
 import { heroImg, cfpCol } from './CFPPage.css';
 import { getLoginUrl } from './Redirect';
 import { getRemainingCFPDays, REVERSIM_SUMMIT } from '../utils';
-import { cfp } from '../features';
+
 const NonAuthenticated = () => (
   <div className="text-center mb-6">
     <h6>Login with Google is required in order to submit a proposal</h6>
@@ -36,7 +36,8 @@ const BottomContent = ({
 };
 
 const CFPBody = (props) => {
-  if (cfp) {
+  const {eventConfig} = props;
+  if (eventConfig.cfp) {
     return (
       <Fragment>
         <CFPTitle />

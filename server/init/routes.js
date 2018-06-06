@@ -7,6 +7,7 @@ import passport from 'passport';
 import keyBy from 'lodash/keyBy';
 import { controllers } from '../db';
 import { transformProposal, transformUser } from '../db/controllers/helpers';
+import eventConfig from './eventConfig';
 
 const usersController = controllers.users;
 const proposalsController = controllers.proposals;
@@ -83,6 +84,7 @@ export default (app) => {
       team: team.map(user => transformUser(user, req.user)),
       messages,
       sponsors,
+      eventConfig: eventConfig(),
     });
   }
 
