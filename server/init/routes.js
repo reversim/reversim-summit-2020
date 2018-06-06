@@ -84,7 +84,7 @@ export default (app) => {
       team: team.map(user => transformUser(user, req.user)),
       messages,
       sponsors,
-      eventConfig,
+      eventConfig: eventConfig(),
     });
   }
 
