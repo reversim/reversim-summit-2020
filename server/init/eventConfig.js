@@ -10,7 +10,8 @@ const config = {
 export default () => {
   const cfp = moment().tz('Israel').isBetween(config.cfpStartDate, config.cfpEndDate, 'day', "[]");
   const voting = moment().tz('Israel').isBetween(config.votingStartDate, config.votingEndDate, 'day', "[]");
-  
+  const votingEnded = moment().tz('Israel').isAfter(config.votingEndDate, 'day', "[]");
+
   return {
     cfpStartDate: config.cfpStartDate,
     cfpEndDate: config.cfpEndDate,
@@ -18,5 +19,6 @@ export default () => {
     votingEndDate: config.votingEndDate,
     cfp,
     voting,
+    votingEnded,
   }
 }
