@@ -1,4 +1,5 @@
 run:
+	yarn install
 	nodemon dev.js
 
 db-import:
