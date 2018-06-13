@@ -1,6 +1,6 @@
 run:
 	yarn install
-	nodemon dev.js
+	node dev.js
 
 db-import:
 	scripts/mongo_backup.sh --import
