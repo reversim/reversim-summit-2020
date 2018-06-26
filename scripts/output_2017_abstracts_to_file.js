@@ -13,3 +13,4 @@ const users = JSON.parse(usersStr);
 const outputStr = proposals.map((p, i) => `-=-= #${i+1} ${p.title} (${p.speaker_ids.map(({$oid}) => users.find(u => u._id.$oid === $oid).profile.name)}) =-=-\n${p.abstract}`).join('\n\n');
 
 fs.writeFileSync(path.resolve(__dirname, '..', '2017_abstracts.txt'), outputStr);
+fs.writeFileSync(path.resolve(__dirname, '..', '2017_titles.txt'), proposals.map(p => p.title).join('\n'));
