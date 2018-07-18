@@ -64,11 +64,11 @@ const dates = [
 
 const SessionPage = (props) => {
   const { user, session, speakers, attendProposal, eventConfig ,match: { params: { id } } } = props;
-  const { cfp, voting } = eventConfig;
+  const { voting } = eventConfig;
   const { title, abstract, type, tags, outline, categories, attended } = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);
   const isTeamMember = user && user.isReversimTeamMember;
-  const canEdit = (isAuthor && cfp) || isTeamMember;
+  const canEdit = isAuthor || isTeamMember;
 
   const dayTime = getDateAndTime(id);
 

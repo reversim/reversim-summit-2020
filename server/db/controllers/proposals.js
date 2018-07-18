@@ -129,7 +129,7 @@ export function add(req, res) {
  * Update a proposal
  */
 async function update(req, res) {
-  if (!req.user || (!eventConfig().cfp && !req.user.isReversimTeamMember)) return res.sendStatus(401);
+  if (!req.user) return res.sendStatus(401);
   const proposal = await Proposal.findOne({ _id: req.params.id });
   if (!proposal) {
     console.error('error in proposal update - no proposal found');
