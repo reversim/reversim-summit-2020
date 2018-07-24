@@ -78,15 +78,15 @@
 }
 
 .headphones {
-    background: url('../images/headphones-art.png') center -121px;
-    background-size: 816px;
-    width: 558px;
-    height: 603px;
+    background: url('../images/headphones-art.png') center;
+    background-size: 100%;
+    width: 797px;
+    height: 818px;
 }
 
 .left {
     width: 477px;
-    margin-right: -130px;
+    margin-right: -250px;
     z-index: 1;
 }
 

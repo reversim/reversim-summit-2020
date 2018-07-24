@@ -10,7 +10,7 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black:    #000;
 
-$blue:    #29b6f6;
+$blue:    #010035;
 $indigo:  #6b1ee6;
 $purple:  #6f42c1;
 $pink:    #e83e8c;
@@ -39,7 +39,7 @@ $colors: (
   "transparent": transparent
 );
 
-$primary:       $indigo;
+$primary:       $blue;
 $primary-light: lighten($primary, 20%);
 $secondary:     $gray-600;
 $success:       $green;
