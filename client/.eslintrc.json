@@ -1,0 +1,22 @@
+{
+  "extends": "react-app",
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+          "semi": true,
+          "parser": "babylon",
+          "printWidth": 100,
+          "singleQuote": true,
+          "trailingComma": "all",
+          "bracketSpacing": false,
+          "jsxBracketSameLine": true
+      }
+  ],
+    "strict": "off",
+    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
+  }
+}

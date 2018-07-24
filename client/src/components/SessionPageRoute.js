@@ -1,8 +1,8 @@
 import React from 'react';
-import Page from "./Page";
-import { Container, Row, Col } from 'reactstrap';
+import Page from './Page';
+import {Container, Row, Col} from 'reactstrap';
 
-const NoSessionFound = (props) => (
+const NoSessionFound = props => (
   <Page title="Whoops" {...props}>
     <Container>
       <Row>
@@ -14,13 +14,21 @@ const NoSessionFound = (props) => (
   </Page>
 );
 
-export default Component => (props) => {
-  const { match: { params: { id }}, user, users, proposals, fetchComplete } = props;
+export default Component => props => {
+  const {
+    match: {
+      params: {id},
+    },
+    user,
+    users,
+    proposals,
+    fetchComplete,
+  } = props;
   let session = proposals[id];
   if (!fetchComplete) return null;
-  if (!session) return <NoSessionFound user={user} {...props}/>;
+  if (!session) return <NoSessionFound user={user} {...props} />;
 
   const speakers = session.speaker_ids.map(id => users[id]);
 
-  return <Component session={session} speakers={speakers} {...props} />
+  return <Component session={session} speakers={speakers} {...props} />;
 };

@@ -1,8 +1,8 @@
 import React from 'react';
-import Page from "./Page";
-import { Container, Row, Col } from 'reactstrap';
+import Page from './Page';
+import {Container, Row, Col} from 'reactstrap';
 
-const NoUserFound = (props) => (
+const NoUserFound = props => (
   <Page title="Whoops" {...props}>
     <Container>
       <Row>
@@ -14,13 +14,20 @@ const NoUserFound = (props) => (
   </Page>
 );
 
-export default Component => (props) => {
-  const { match: { params: { id }}, user, users, fetchComplete } = props;
+export default Component => props => {
+  const {
+    match: {
+      params: {id},
+    },
+    user,
+    users,
+    fetchComplete,
+  } = props;
   let speaker = users[id];
   if (!fetchComplete) return null;
-  if (!speaker) return <NoUserFound user={user} {...props}/>;
+  if (!speaker) return <NoUserFound user={user} {...props} />;
 
   const isUser = id === (user && user._id);
 
-  return <Component speaker={speaker} isUser={isUser} {...props} />
+  return <Component speaker={speaker} isUser={isUser} {...props} />;
 };

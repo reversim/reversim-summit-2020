@@ -1,7 +1,7 @@
-import { addMessage, removeMessage } from './data-service';
+import {addMessage, removeMessage} from './data-service';
 // import uniq from 'lodash/uniq';
 // import flatMap from 'lodash/flatMap';
-import { isServer } from './utils';
+import {isServer} from './utils';
 
 const store = {
   proposals: {},
@@ -11,22 +11,21 @@ const store = {
   messages: [],
   allTags: [],
   features: {
-    submission: true
+    submission: true,
   },
   sponsors: [],
   eventConfig: {},
 
   isSmallScreen: window.innerWidth < 576,
 
-  onAddMessage: (text) => {
+  onAddMessage: text => {
     addMessage(text).then(msg => store.messages.push(msg));
   },
-  onRemoveMessage: (id) => {
+  onRemoveMessage: id => {
     const index = store.messages.findIndex(x => x._id === id);
     removeMessage(id).then(() => store.messages.splice(index, 1));
   },
 };
-
 
 // TODO put this in initStore and enable when agenda is finalized
 // const filterSessions = sessionIds => sessionIds.map(p => store.sessions.find(session => session._id === p)).filter(x => !!x);
@@ -47,9 +46,8 @@ const store = {
 // 		return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
 // 	});
 
-
 export default store;
 
 if (!isServer) {
-	window.__store = store;
+  window.__store = store;
 }

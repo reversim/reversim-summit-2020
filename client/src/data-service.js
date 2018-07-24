@@ -1,27 +1,27 @@
-import { get, post, put, delete2 } from './api';
+import {get, post, put, delete2} from './api';
 
 export async function getProposals() {
-  return await get("/api/proposal");
+  return await get('/api/proposal');
 }
 
 export async function getSessions() {
-  return await get("/api/sessions");
+  return await get('/api/sessions');
 }
 
 export async function getTeam() {
-  return await get("/api/team");
+  return await get('/api/team');
 }
 
 export async function getMe() {
-  return await get("/api/me");
+  return await get('/api/me');
 }
 
 export async function logout() {
-  return await post("/api/logout");
+  return await post('/api/logout');
 }
 
 export async function createProposal(data) {
-  return await post("/api/proposal", data);
+  return await post('/api/proposal', data);
 }
 
 export async function updateProposal(id, proposal) {
@@ -29,19 +29,19 @@ export async function updateProposal(id, proposal) {
 }
 
 export async function getProposal(id) {
-  return await get("/api/proposal/" + id);
+  return await get('/api/proposal/' + id);
 }
 
 export async function uploadPhoto(id, data) {
-  return await post("/api/profileImage", { id, imageBinary: data });
+  return await post('/api/profileImage', {id, imageBinary: data});
 }
 
 export async function getMessages() {
-  return await get("/api/messages");
+  return await get('/api/messages');
 }
 
 export async function addMessage(text) {
-  return await post("/api/message", { data: text });
+  return await post('/api/message', {data: text});
 }
 
 export async function removeMessage(id) {
@@ -57,11 +57,11 @@ export async function updateUser(user) {
 }
 
 export async function registerTeamMember(token) {
-  return await put('/api/team', { token });
+  return await put('/api/team', {token});
 }
 
 export async function attend(proposalId, isAttending) {
-  return await post(`/api/proposal/${proposalId}/attend`, { value: !!isAttending });
+  return await post(`/api/proposal/${proposalId}/attend`, {value: !!isAttending});
 }
 
 export async function addSponsor(data) {

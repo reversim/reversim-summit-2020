@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
-import { Button, Input } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Input} from 'reactstrap';
 import ga from 'react-ga';
-import UserForm, { getUserData } from './UserForm';
-import { ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR } from '../data/proposals';
+import UserForm, {getUserData} from './UserForm';
+import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../data/proposals';
 import ProposalForm from './ProposalForm';
 
-
 class CFPForm extends Component {
-
   state = {
     proposalType: 'full',
     tags: [],
     categories: [],
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     e.preventDefault();
     const formElements = e.target.elements;
 
-    const { user, updateUserData, createProposal, history } = this.props;
+    const {user, updateUserData, createProposal, history} = this.props;
 
     if (user) {
       const abstract = formElements.abstract.value;
       if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
-        const y = formElements.abstract.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 150;
+        const y =
+          formElements.abstract.getBoundingClientRect().top -
+          document.body.getBoundingClientRect().top -
+          150;
         window.scrollTo(0, y);
         formElements.abstract.focus();
         return;
@@ -31,7 +32,10 @@ class CFPForm extends Component {
 
       const categories = this.state.categories;
       if (!categories.length) {
-        const y = formElements.categories_hidden.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 750;
+        const y =
+          formElements.categories_hidden.getBoundingClientRect().top -
+          document.body.getBoundingClientRect().top -
+          750;
         window.scrollTo(0, y);
         return;
       }
@@ -40,16 +44,16 @@ class CFPForm extends Component {
         await updateUserData(getUserData(formElements));
         const result = await createProposal(this.getProposalData(formElements));
         history.push(`/session/${result._id}`);
-      } catch(ex) {
+      } catch (ex) {
         ga.exception({
           description: `Error on submit: ${ex}`,
-          fatal: true
+          fatal: true,
         });
       }
     }
   };
 
-  getProposalData = (formElements) => {
+  getProposalData = formElements => {
     const title = formElements.title.value;
     const type = this.state.proposalType;
     const outline = formElements.outline.value;
@@ -74,15 +78,17 @@ class CFPForm extends Component {
   updateState = state => this.setState(state);
 
   render() {
-    const { user, allTags } = this.props;
-    const { tags, proposalType, categories } = this.state;
+    const {user, allTags} = this.props;
+    const {tags, proposalType, categories} = this.state;
 
     return (
       <div className="mb-6">
         <h2>Submission</h2>
         <p>You may submit up to 3 proposals.</p>
-        <p>Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.</p>
-        <form onSubmit={this.handleSubmit} >
+        <p>
+          Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.
+        </p>
+        <form onSubmit={this.handleSubmit}>
           <h3 className="mb-0">About you</h3>
           <p className="text-gray-600">Tell us about yourself</p>
           <UserForm user={user} />
@@ -96,12 +102,14 @@ class CFPForm extends Component {
             allTags={allTags}
           />
           <div className="text-center">
-            <Input type="submit" className="d-none"/>
-            <Button color="primary" className="mr-4" style={{ width: 120 }}>Submit</Button>
+            <Input type="submit" className="d-none" />
+            <Button color="primary" className="mr-4" style={{width: 120}}>
+              Submit
+            </Button>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 

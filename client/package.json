@@ -107,16 +107,10 @@
       "node"
     ]
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "devDependencies": {
+    "eslint-plugin-prettier": "^2.6.2",
     "node-sass": "^4.7.2",
+    "prettier": "^1.13.7",
     "sass-loader": "^6.0.6"
   }
 }

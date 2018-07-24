@@ -1,8 +1,8 @@
-import React, { Component, createElement } from 'react';
-import { StaticRouter, BrowserRouter, Route, withRouter } from 'react-router-dom';
+import React, {Component, createElement} from 'react';
+import {StaticRouter, BrowserRouter, Route} from 'react-router-dom';
 import routes from '../data/routeComps';
 import ga from 'react-ga';
-import { isServer } from '../utils';
+import {isServer} from '../utils';
 import store from '../store';
 import {
   getInitialData,
@@ -19,19 +19,18 @@ import {
 } from '../data-service';
 import findIndex from 'lodash/findIndex';
 
-if (!isServer && process.env.NODE_ENV !== "development") {
+if (!isServer && process.env.NODE_ENV !== 'development') {
   ga.initialize('UA-36904731-4');
   ga.pageview(window.location.pathname);
-
 }
 
 const userUpdater = (id, data) => state => {
-  const newUser = { ...state.users[id], ...data };
+  const newUser = {...state.users[id], ...data};
   const newState = {
     users: {
       ...state.users,
-      [id]: newUser
-    }
+      [id]: newUser,
+    },
   };
 
   if (state.user && state.user._id === id) {
@@ -44,17 +43,20 @@ const Router = isServer ? StaticRouter : BrowserRouter;
 const initialDataPromise = getInitialData();
 
 class App extends Component {
-
   componentDidMount() {
     initialDataPromise.then(data => {
       const user = data.user ? data.users[data.user] : data.user;
       this.setState({
         ...data,
         user,
-        fetchComplete: true
+        fetchComplete: true,
       });
 
-      const __team = window.location.search.slice(1).split('&').map(x => x.split('=')).find(x => x[0] === '__team');
+      const __team = window.location.search
+        .slice(1)
+        .split('&')
+        .map(x => x.split('='))
+        .find(x => x[0] === '__team');
       if (__team && user) {
         registerTeamMember(__team[1]);
       }
@@ -66,8 +68,8 @@ class App extends Component {
     window.location.href = '/';
   };
 
-  updateUserData = async (data) => {
-    const { user } = this.state;
+  updateUserData = async data => {
+    const {user} = this.state;
     if (!user) return;
 
     await updateUser(data);
@@ -75,17 +77,17 @@ class App extends Component {
   };
 
   updateUserPhoto = async (id, imgData) => {
-    const { imageUrl } = await uploadPhoto(id, imgData);
-    this.setState(userUpdater(id, { picture: imageUrl }));
+    const {imageUrl} = await uploadPhoto(id, imgData);
+    this.setState(userUpdater(id, {picture: imageUrl}));
   };
 
-  createProposal = async (data) => {
+  createProposal = async data => {
     const proposal = await doCreateProposal(data);
     this.setState(state => ({
       proposals: {
         ...state.proposals,
-        [proposal._id]: proposal
-      }
+        [proposal._id]: proposal,
+      },
     }));
     return proposal;
   };
@@ -95,9 +97,9 @@ class App extends Component {
     this.setState(state => ({
       proposals: {
         ...state.proposals,
-        [id]: {...state.proposals[id], ...data}
-      }
-    }))
+        [id]: {...state.proposals[id], ...data},
+      },
+    }));
   };
 
   attendProposal = async (proposalId, isAttending) => {
@@ -105,56 +107,55 @@ class App extends Component {
     this.setState(state => ({
       proposals: {
         ...state.proposals,
-        [proposalId]: {...state.proposals[proposalId], attended: isAttending}
-      }
+        [proposalId]: {...state.proposals[proposalId], attended: isAttending},
+      },
     }));
     try {
-      ga.event(
-        {
-          category: "vote",
-          action: isAttending ? "attending" : "not-attending",
-          label: "vote-click",
-          value: 1,
-        });
+      ga.event({
+        category: 'vote',
+        action: isAttending ? 'attending' : 'not-attending',
+        label: 'vote-click',
+        value: 1,
+      });
       await attend(proposalId, isAttending);
-    } catch(e) {
+    } catch (e) {
       //rollback UI
       this.setState(state => ({
         proposals: {
           ...state.proposals,
-          [proposalId]: {...state.proposals[proposalId], attended: !isAttending}
-        }
+          [proposalId]: {...state.proposals[proposalId], attended: !isAttending},
+        },
       }));
     }
-  }
+  };
 
-  createSponsor = async (data) => {
+  createSponsor = async data => {
     const sponsor = await addSponsor(data);
     this.setState(state => ({
-      sponsors: [
-        ...state.sponsors,
-        sponsor,
-      ]
-    }))
-  }
+      sponsors: [...state.sponsors, sponsor],
+    }));
+  };
 
   updateSponsor = async (id, sponsor) => {
     await doUpdateSponsor(id, sponsor);
     const index = findIndex(this.state.sponsors, x => x._id === id);
     this.setState(state => {
-      const sponsors = state.sponsors.slice(0,index).concat(sponsor).concat(state.sponsors.slice(index+1));
+      const sponsors = state.sponsors
+        .slice(0, index)
+        .concat(sponsor)
+        .concat(state.sponsors.slice(index + 1));
       return {sponsors};
     });
-  }
+  };
 
-  deleteSponsor = async (id) => {
+  deleteSponsor = async id => {
     await doDeleteSponsor(id);
     const index = findIndex(this.state.sponsors, x => x._id === id);
     this.setState(state => {
-      const sponsors = state.sponsors.slice(0,index).concat(state.sponsors.slice(index+1));
+      const sponsors = state.sponsors.slice(0, index).concat(state.sponsors.slice(index + 1));
       return {sponsors};
     });
-  }
+  };
 
   // This is passed down to route components
   actions = {
@@ -166,7 +167,7 @@ class App extends Component {
     attendProposal: this.attendProposal,
     createSponsor: this.createSponsor,
     updateSponsor: this.updateSponsor,
-    deleteSponsor: this.deleteSponsor
+    deleteSponsor: this.deleteSponsor,
   };
 
   state = store;
@@ -174,13 +175,18 @@ class App extends Component {
   render() {
     const routeProps = {
       ...this.state,
-      ...this.actions
+      ...this.actions,
     };
     return (
       <Router location={this.props.location} context={{}}>
         <div>
-          { routes.map(route=> (
-            <Route exact render={(p) => createElement(route.comp, {...routeProps, ...p, ...route.props})} path={route.path} key={route.path} />
+          {routes.map(route => (
+            <Route
+              exact
+              render={p => createElement(route.comp, {...routeProps, ...p, ...route.props})}
+              path={route.path}
+              key={route.path}
+            />
           ))}
         </div>
       </Router>
