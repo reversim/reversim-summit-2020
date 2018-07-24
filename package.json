@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node server",
     "dev": "node dev.js",
-    "postinstall": "cd server && yarn && cd ../client && yarn",
-    "heroku-postbuild": "cd client && yarn --production=false && yarn build"
+    "postinstall": "cd server && npm install && cd ../client && npm install",
+    "heroku-postbuild": "cd client && npm install --production=false && npm build"
   },
   "dependencies": {
     "axios": "^0.18.0",

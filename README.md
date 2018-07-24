@@ -14,13 +14,13 @@ http://summit2018.reversim.com/
 
 Install:
 ```
-$ yarn
+$ npm install
 ```
 
 Start:
 This will start an API server connecting to local mongo db called `ReversimSummit` and listening on `5001`, and a webpack dev server which serves the frontend at port `3000`. 
 ```
-$ yarn start
+$ npm start
 ```
 
 Import data:
@@ -37,7 +37,7 @@ Type `rs` in the server's terminal to restart.
 Basically, follow this link: https://docs.mongodb.com/manual/installation/  
 The default database name is ReversimSummit, and it's defined in https://github.com/rantav/reversim-summit-2017/blob/master/server/db/constants.js
 
-It's possible to set a custom db connection string by: `MONGODB_URI=<your_db_url> yarn start` 
+It's possible to set a custom db connection string by: `MONGODB_URI=<your_db_url> npm start` 
 
 
 # License

@@ -63,8 +63,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "static:ssr": "NODE_ENV=production webpack -p --config config/webpack.config.ssr.js --progress",
-    "static:watch": "yarn static:ssr --watch",
-    "static:build": "yarn static:ssr && node build/render.js"
+    "static:watch": "npm run static:ssr --watch",
+    "static:build": "npm run static:ssr && node build/render.js"
   },
   "proxy": {
     "/api": {

@@ -1,5 +1,5 @@
 run:
-	yarn install
+	npm install
 	node dev.js
 
 db-import:
