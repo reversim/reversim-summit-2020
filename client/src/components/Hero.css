@@ -1,20 +1,22 @@
 .hero {
-    background: url('../images/hero.jpg') center;
+    background: url('../images/intro-bg.jpg') center;
     background-size: cover;
-    width: 100%;
     min-height: 100vh;
-    color: #fff;
 }
 
 .heroInner {
-    width: 75%;
     position: relative;
-    top: 160px;
-    text-shadow: 0 0 100px rgba(0,0,0,0.5);
+    /* top: 190px; */
 }
 
 .title {
+    letter-spacing: 5.9px;
     font-size: 72px;
+}
+
+.subtitle {
+    letter-spacing: 0.6px;
+    text-shadow: 0 0 49px #030135;
 }
 
 @media (max-width:991px) {
@@ -73,4 +75,21 @@
     .title {
         font-size: 42px;
     }
+}
+
+.headphones {
+    background: url('../images/headphones-art.png') center -121px;
+    background-size: 816px;
+    width: 558px;
+    height: 603px;
+}
+
+.left {
+    width: 477px;
+    margin-right: -130px;
+    z-index: 1;
+}
+
+.separator {
+    width: 151px;
 }

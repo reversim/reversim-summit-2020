@@ -9,13 +9,13 @@ import TimelineSection from '../components/TimelineSection';
 
 const homeSections = [
   {name: 'hero', el: Hero},
-  {name: 'about', el: About},
+  // {name: 'about', el: About},
   // { name: "register", el: Register },
   // { name: "speakers", el: SpeakersSection },
-  {name: 'timeline', el: TimelineSection},
-  {name: 'location', el: Location},
-  {name: 'team', el: Team},
-  {name: 'sponsors', el: SponsorsSection},
+  // {name: 'timeline', el: TimelineSection},
+  // {name: 'location', el: Location},
+  // {name: 'team', el: Team},
+  // {name: 'sponsors', el: SponsorsSection},
 ];
 
 export default homeSections;

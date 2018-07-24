@@ -6,7 +6,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Raleway, sans-serif;
+  font-family: Montserrat, sans-serif;
 }
 
 p {
@@ -19,7 +19,8 @@ b {
 }
 
 h1 {
-  font-family: Amstelvar, serif;
+  font-family: Montserrat, serif;
+  // font-family: Amstelvar, serif;
   font-size: 40px;
 }
 
@@ -99,6 +100,10 @@ input[type='checkbox'] {
   border-bottom: 1px solid #c9c9c9;
 }
 
+.line-height-1 {
+  line-height: 1;
+}
+
 .line-height-12 {
   line-height: 1.2;
 }
@@ -167,4 +172,29 @@ a.unstyled-link:active {
 
 .proposal pre code {
   white-space: pre-wrap;
+}
+
+button.btn {
+  box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.1);
+  background: linear-gradient(to right, rgba(118,12,146,0.2) 0%,rgba(0,92,177,0.2) 100%);
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  outline: none;
+  border: 0;
+  transition: all 200ms;
+  border-radius: 0;
+
+  &:hover {
+    background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);
+    box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.2), 0px 0px 10px 0px rgba(89,0,255,0.8);
+  }
+
+  &:active {
+    background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);
+    box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.2), 0px 0px 20px 0px rgba(89,0,255,1);
+  }
 }
