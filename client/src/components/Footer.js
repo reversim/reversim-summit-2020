@@ -3,51 +3,34 @@ import {Col, Container, Row} from 'reactstrap';
 import footerLogoImg from '../images/reversim_logo_footer.png';
 
 const Footer = () => (
-  <footer className="bg-gray-900 text-white p-5">
+  <footer className="bg-indigo text-white py-9 font-size-md">
     <Container>
-      <Row className="align-items-start mb-5">
-        <Col xs="12" sm="auto">
-          <img src={footerLogoImg} alt="Reversim" />
-        </Col>
-        <Col>
-          <h2 className="mb-5">About Reversim</h2>
-          <p>
-            <a href="http://reversim.com/">Reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by{' '}
-            <a href="https://twitter.com/orilahav">Ori Lahav</a> and{' '}
-            <a href="http://tavory.com/">Ran Tavory</a> which brings together software developers
-            and product, with over 300 recorded episodes and a few thousands listeners.
-          </p>
-          <p>
-            The summit is our intention to create a conference for developers by developers. Like in
-            the podcast, we bring you the content we are interested in, and we hope you will be too.
-          </p>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="12" sm="auto">
-          <a href="mailto:rs18-team@googlegroups.com">Contact</a>
-        </Col>
-        <Col xs="12" sm="auto">
-          <a href="http://confcodeofconduct.com/">Code of Conduct</a>
-        </Col>
-        <Col xs="12" sm="auto" className="ml-sm-auto">
+      <Row className="justify-content-between align-items-center" noGutters>
+        <div className="d-flex">
+          <a className="text-white mr-6" href="mailto:rs18-team@googlegroups.com">
+            Contact
+          </a>
+          <a className="text-white" href="http://confcodeofconduct.com/">
+            Code of Conduct
+          </a>
+        </div>
+        <div className="d-flex align-items-center">
           <a
-            className="mr-4"
+            className="mr-5 text-cyan font-size-lg"
             href="https://twitter.com/reversim"
             target="_blank"
             rel="noopener noreferrer">
             <i className="fa fa-twitter" />
           </a>
           <a
+            className="mr-7 text-cyan font-size-lg"
             href="https://www.facebook.com/groups/806177629478248/"
             target="_blank"
             rel="noopener noreferrer">
             <i className="fa fa-facebook" />
           </a>
-        </Col>
-        <Col xs="12" sm="auto">
-          <small className="text-muted">All Rights Reserved © 2018</small>
-        </Col>
+          <span>All Rights Reserved © 2018</span>
+        </div>
       </Row>
     </Container>
   </footer>
