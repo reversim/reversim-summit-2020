@@ -5,8 +5,7 @@
 }
 
 .heroInner {
-    position: relative;
-    /* top: 190px; */
+    margin-right: -120px;
 }
 
 .title {
@@ -17,64 +16,6 @@
 .subtitle {
     letter-spacing: 0.6px;
     text-shadow: 0 0 49px #030135;
-}
-
-@media (max-width:991px) {
-    .hero {
-        background: url('../images/hero_small.jpg') center;
-        background-size: cover;
-    }
-
-    .heroInner {
-        width: auto;
-        position: static;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .title {
-        font-size: 60px;
-    }
-}
-
-@media (max-width:840px) {
-    .hero {
-        min-height: 65vh;
-    }
-}
-
-
-.cta {
-    border-top: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    letter-spacing: 0.4px;
-}
-
-.autoCenter {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-@media (max-width:576px) {
-    .title {
-        font-size: 60px;
-    }
-}
-
-@media (max-width:460px) {
-    .title {
-        font-size: 48px;
-    }
-}
-
-@media (max-width:380px) {
-    .title {
-        font-size: 42px;
-    }
 }
 
 .headphones {
@@ -92,4 +33,72 @@
 
 .separator {
     width: 151px;
+}
+
+@media (max-width:991px) {
+    .heroInner {
+        margin-right: -80px;
+    }
+
+    .headphones {
+        width: calc(797px*0.7);
+        height: calc(818px*0.7);
+    }
+    
+    .left {
+        width: 320px;
+        margin-right: -80px;
+    }
+
+    .title {
+        font-size: 60px;
+    }
+}
+
+.cta {
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    letter-spacing: 0.4px;
+}
+
+.autoCenter {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (max-width:768px) {
+    .heroInner {
+        flex-direction:column;
+        margin-right: 0;
+        margin-top: 120px;
+    }
+
+    .left  {
+        width: auto;
+        max-width: 390px;
+        margin-right: 0;
+    }
+
+    .headphones {
+        width: 100%;
+        height: auto;
+        padding-top:97.5%;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+}
+
+@media (max-width:460px) {
+    .title {
+        font-size: 48px;
+    }
+}
+
+@media (max-width:380px) {
+    .title {
+        font-size: 42px;
+    }
 }

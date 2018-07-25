@@ -217,6 +217,7 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //$font-size-base:              1rem; // Assumes the browser default, typically `16px`
 $font-size-lg:                24px;
 $font-size-sm:                14px; // for 12px use <small>
+$font-size-md:                18px;
 //
 //$font-weight-light:           300;
 //$font-weight-normal:          400;
@@ -329,7 +330,7 @@ $input-btn-padding-y:         .75rem;
 //// For each of Bootstrap's buttons, define text, background, and border color.
 //
 //$btn-padding-y:               $input-btn-padding-y;
-//$btn-padding-x:               $input-btn-padding-x;
+$btn-padding-x:               $spacer * 4;
 //$btn-line-height:             $input-btn-line-height;
 //
 //$btn-padding-y-sm:            $input-btn-padding-y-sm;
@@ -337,7 +338,7 @@ $input-btn-padding-y:         .75rem;
 //$btn-line-height-sm:          $input-btn-line-height-sm;
 //
 //$btn-padding-y-lg:            $input-btn-padding-y-lg;
-//$btn-padding-x-lg:            $input-btn-padding-x-lg;
+$btn-padding-x-lg:            $spacer * 6;
 //$btn-line-height-lg:          $input-btn-line-height-lg;
 //
 //$btn-border-width:            $input-btn-border-width;
@@ -570,10 +571,10 @@ $input-height-inner-lg:                 48px;
 //
 //// Navbar
 //
-$navbar-padding-y:                  10px;
-$navbar-padding-x:                  20px;
+$navbar-padding-y:                  30px;
+$navbar-padding-x:                  60px;
 //
-//$navbar-nav-link-padding-x:         .5rem;
+$navbar-nav-link-padding-x:         $spacer;
 //
 //$navbar-brand-font-size:            $font-size-lg;
 //// Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link

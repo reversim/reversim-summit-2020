@@ -18,7 +18,7 @@ p {
 }
 
 b {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h1 {
@@ -85,6 +85,20 @@ input[type='checkbox'] {
 
 .font-size-sm {
   font-size: $font-size-sm;
+}
+
+.font-size-md {
+  font-size: $font-size-md;
+}
+
+@media (min-width:991px) {
+  .font-size-lg-md {
+    font-size: $font-size-md !important;
+  }
+}
+
+.font-weight-heavy {
+  font-weight: 500;
 }
 
 .font-pt {
@@ -182,7 +196,7 @@ button.btn {
   background: linear-gradient(to right, rgba(118,12,146,0.2) 0%,rgba(0,92,177,0.2) 100%);
   font-family: Montserrat, sans-serif;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   color: #fff;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -190,6 +204,9 @@ button.btn {
   border: 0;
   transition: all 200ms;
   border-radius: 0;
+  height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
 
   &:hover {
     background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);

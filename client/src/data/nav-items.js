@@ -1,13 +1,14 @@
 import {isServer} from '../utils';
 
-// const register  = { to: "register", text: "Register" };
-const team = {to: 'team', text: 'Team'};
-const location = {to: 'location', text: 'Getting there'};
+const _register = {to: 'register', text: 'Register'};
+const _team = {to: 'team', text: 'Team'};
+const location = {to: 'location', text: 'Venue'};
 const speakers = {to: 'speakers', text: 'Speakers'};
 const sponsors = {to: 'sponsors', text: 'Sponsors'};
-const schedule = {to: 'schedule', text: 'Schedule'};
-const proposals = {to: 'proposals', text: 'Proposals'};
-const timeline = {to: 'timeline', text: 'Timeline'};
+const schedule = {to: 'schedule', text: 'Agenda'};
+const _proposals = {to: 'proposals', text: 'Proposals'};
+const sessions = {to: 'sessions', text: 'Sessions'};
+const _timeline = {to: 'timeline', text: 'Timeline'};
 
 export default () => {
   let items;
@@ -19,7 +20,7 @@ export default () => {
       to: `/${item.to}.html`,
     }));
   } else {
-    items = [proposals, timeline, location, team, sponsors];
+    items = [schedule, location, speakers, sponsors, sessions];
   }
 
   return items;

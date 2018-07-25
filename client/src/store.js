@@ -16,7 +16,7 @@ const store = {
   sponsors: [],
   eventConfig: {},
 
-  isSmallScreen: window.innerWidth < 576,
+  isSmallScreen: window.innerWidth < 991,
 
   onAddMessage: text => {
     addMessage(text).then(msg => store.messages.push(msg));

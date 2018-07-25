@@ -3,8 +3,8 @@ import {Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from '
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
-import s from './Navbar.css';
-import logoImg from '../images/reversim_logo@2x.png';
+import {navbar, logo, navLink, navItem, isWhite, isNotHome} from './Navbar.css';
+import logoImg from '../images/rs18-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
@@ -18,7 +18,7 @@ const CFPCTA = () => (
   </Link>
 );
 
-const navLinkClass = cn('nav-link', s.navLink);
+const navLinkClass = cn('nav-link', navLink);
 
 const NavbarItem = ({to, text, external}) => {
   let link;
@@ -36,7 +36,7 @@ const NavbarItem = ({to, text, external}) => {
     );
   }
   return (
-    <NavItem key={to} className={s.navItem}>
+    <NavItem key={to} className="text-white ml-lg-5 font-weight-heavy font-size-md">
       {link}
     </NavItem>
   );
@@ -78,47 +78,46 @@ class Navbar extends Component {
     const {cfp} = eventConfig;
     const {fixed} = this.state;
     const items = navItems(isHome);
-    const isWhite = !isHome || fixed;
+    const isColored = !isHome || fixed;
 
-    const logo = (
-      <img
-        className={s.logo}
-        src={logoImg}
-        onClick={() => history.push('/')}
-        alt={REVERSIM_SUMMIT}
-      />
+    const logoEl = (
+      <img className={logo} src={logoImg} onClick={() => history.push('/')} alt={REVERSIM_SUMMIT} />
     );
 
     const navbarBrand = isHome ? (
-      <a href="/">{logo}</a>
+      <a href="/">{logoEl}</a>
     ) : (
       <Link className="navbar-brand mr-5" to="/">
-        {logo}
+        {logoEl}
       </Link>
     );
 
     return (
       <Navbar2
-        expand="sm"
+        expand="lg"
         fixed="top"
-        className={cn(s.navbar, {[s.isNotHome]: !isHome, [s.isWhite]: isWhite})}>
-        {navbarBrand}
-        <div className="d-flex justify-content-between">
+        className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}>
+        <div className="d-flex justify-content-between w-100">
+          {navbarBrand}
           {cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
-          <NavbarToggler onClick={this.toggle} />
+          <NavbarToggler onClick={this.toggle} className="ml-auto" />
         </div>
-        <Collapse
-          isOpen={this.state.isOpen}
-          navbar
-          className={cn({'bg-white border-bottom': isSmallScreen && !isWhite})}>
-          <Nav navbar>
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav
+            navbar
+            className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-blue': isSmallScreen})}>
+            <a href="https://news.ycombinator.com" className="d-none d-lg-block">
+              <Button size="lg" className="text-capitalize font-size-lg-md">
+                Get Tickets
+              </Button>
+            </a>
             {items.map(NavbarItem)}
             {isSmallScreen &&
               user && (
                 <div className="border-top">
                   <NavbarItem to="profile" text="My profile" />
                   <NavbarItem to="my-votes" text="My votes" />
-                  <NavItem className={s.navItem} onClick={onLogout}>
+                  <NavItem className={navItem} onClick={onLogout}>
                     <span className={navLinkClass}>Logout</span>
                   </NavItem>
                 </div>
@@ -139,7 +138,7 @@ class Navbar extends Component {
               {user ? (
                 <Avatar {...user} onLogout={onLogout} />
               ) : (
-                <a href={getLoginUrl()}>
+                <a href={getLoginUrl()} className="ml-5">
                   <Button outline color="primary" onClick={this.login}>
                     Login
                   </Button>
