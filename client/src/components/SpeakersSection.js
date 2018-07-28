@@ -11,7 +11,7 @@ const Speaker = ({
 }) => (
   <div className="text-white">
     <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
-    <div className={cn(body, 'ml-4 pt-8 pb-4 px-2')}>
+    <div className={cn(body, 'ml-4 pt-8 pb-4 px-2 bg-emph')}>
       <div className="font-size-md font-weight-bold mb-4">{name}</div>
       <div className="font-size-sm mb-7">{oneLiner}</div>
       <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
@@ -27,7 +27,7 @@ const SpeakersSection = props => {
   const isDown = isDownCalc(perRow);
   console.log(window.innerWidth);
   return (
-    <section>
+    <section className="mb-20">
       <Container>
         <h1 className="mb-14">Speakers</h1>
         <div className="d-flex flex-wrap">

@@ -107,7 +107,7 @@ class SponsorWithEdit extends React.Component {
 }
 
 const SponsorMini = ({name, logo, url}) => (
-  <Col key={name} className="mr-sm-5 mb-5" xs="12" md="auto">
+  <Col key={name} className="mr-sm-5 mb-5" xs="6" md="2">
     <a href={url} target="_blank">
       <img src={logo} className={s.sponsorImg} alt={name} />
     </a>
@@ -115,12 +115,15 @@ const SponsorMini = ({name, logo, url}) => (
 );
 
 export const SponsorsSection = ({sponsors}) => (
-  <Section title="Sponsors">
-    <Row className="justify-content-center">
-      {sponsors.map(SponsorMini)}
-      <WantToBe />
-    </Row>
-  </Section>
+  <section className="mb-20">
+    <Container>
+      <h1 style={{position: 'relative', zIndex: 1}}>Sponsors</h1>
+      <div className="bg-emph px-10 py-16" style={{marginTop: -40}}>
+        <Row>{sponsors.map(SponsorMini)}</Row>
+        {/* <WantToBe /> */}
+      </div>
+    </Container>
+  </section>
 );
 
 const WantToBe = () => (
