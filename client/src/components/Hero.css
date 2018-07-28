@@ -8,11 +8,6 @@
     margin-right: -120px;
 }
 
-.title {
-    letter-spacing: 5.9px;
-    font-size: 72px;
-}
-
 .subtitle {
     letter-spacing: 0.6px;
     text-shadow: 0 0 49px #030135;
@@ -27,7 +22,7 @@
 
 .left {
     width: 477px;
-    margin-right: -250px;
+    margin-right: -230px;
     z-index: 1;
 }
 
@@ -86,12 +81,6 @@
         padding-top:97.5%;
     }
 
-    .title {
-        font-size: 48px;
-    }
-}
-
-@media (max-width:460px) {
     .title {
         font-size: 48px;
     }

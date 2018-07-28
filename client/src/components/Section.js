@@ -6,7 +6,7 @@ import s from './Section.css';
 
 const Section = ({title, isFullWidth, bg, children}) => (
   <section className="mt-5">
-    <Header title={title} />
+    <h1>{title}</h1>
     <Container
       fluid={isFullWidth}
       className={cn({[s.fixedBackground]: bg, 'text-white': bg})}

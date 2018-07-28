@@ -1,24 +1,30 @@
 import React from 'react';
-import Section from './Section';
+import values from 'lodash/values';
 import {Container, Row, Col} from 'reactstrap';
-import Speaker from './Speaker';
-import {colors} from '../utils';
+
+const Speaker = ({speaker: {name, bio, oneLiner, picture}}) => (
+  <div>
+    <img src={picture} alt={name} />
+  </div>
+);
 
 const SpeakerItem = (speaker, i) => {
   return (
     <Col xs="12" sm="6" md="4" lg="3" className="mb-4" key={i}>
-      <Speaker speaker={speaker} color={colors[i % colors.length]} />
+      <Speaker speaker={speaker} />
     </Col>
   );
 };
 
-const SpeakersSection = ({speakers}) => {
+const SpeakersSection = props => {
+  const speakers = values(props.speakers);
   return (
-    <Section title="Speakers">
+    <section>
       <Container>
+        <h1>Speakers</h1>
         <Row>{speakers.map(SpeakerItem)}</Row>
       </Container>
-    </Section>
+    </section>
   );
 };
 
