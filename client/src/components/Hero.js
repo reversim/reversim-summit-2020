@@ -12,8 +12,12 @@ const Hero = () => (
         <div className={cn(separator, 'border border-cyan mb-6 mx-auto mx-md-0')} />
         <div className={cn(subtitle, 'mb-8')}>8 - 9 October | Tel Aviv University</div>
         <div className="d-flex justify-content-center justify-content-md-start">
-          <Button className="mr-4">Get tickets</Button>
-          <Button>View Agenda</Button>
+          <a href="/todo">
+            <Button className="mr-4">Get tickets</Button>
+          </a>
+          <a href="/schedule">
+            <Button>View Schedule</Button>
+          </a>
         </div>
       </div>
       <div className={headphones} />

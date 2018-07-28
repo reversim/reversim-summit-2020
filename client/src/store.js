@@ -4,8 +4,8 @@ import {addMessage, removeMessage} from './data-service';
 import {isServer} from './utils';
 
 const store = {
-  proposals: {},
-  users: {},
+  sessions: {},
+  speakers: {},
   user: null,
   team: [],
   messages: [],

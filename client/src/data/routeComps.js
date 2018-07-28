@@ -1,5 +1,5 @@
 import Home from '../components/Home';
-// import Agenda from '../components/Agenda';
+import Agenda from '../components/Agenda';
 import MyProfile from '../components/MyProfile';
 import SpeakerPage from '../components/SpeakerPage';
 import SpeakerEditPage from '../components/SpeakerEditPage';
@@ -21,7 +21,7 @@ export default [
   {path: '/about', comp: Home},
   {path: '/profile', comp: MyProfile},
   // { path: "/register", comp: RegisterPage },
-  // { path: "/schedule", comp: Agenda },
+  {path: '/schedule', comp: Agenda},
   // { path: "/speakers", comp: SpeakersPage },
   {path: '/location', comp: LocationPage},
   {path: '/sponsors', comp: SponsorsPage},

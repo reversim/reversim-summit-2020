@@ -213,7 +213,7 @@ function attend(req, res) {
 /**
  * Get Speakers
  */
-async function speakers(req, res) {
+async function getSpeakers(req, res) {
   try {
     const p = await getAcceptedProposals();
     const users = await getProposers(p);
@@ -365,7 +365,7 @@ async function getAllProposals(shouldShuffle, seed) {
 }
 
 function getAcceptedProposals() {
-  return Proposal.find({ status: 'accepted' }, null, { sort: { created_at: -1 } }).map()
+  return Proposal.find({ status: 'accepted' }, null, { sort: { created_at: -1 } });
 }
 
 function getTagsFromDb() {
@@ -392,12 +392,13 @@ export default {
   remove,
   attend,
   tags,
-  speakers,
+  getSpeakers,
   sessions,
   proposers,
   getAllAttendees,
 
   getAllProposals,
+  getAcceptedProposals,
   getProposers,
   getTags
 };

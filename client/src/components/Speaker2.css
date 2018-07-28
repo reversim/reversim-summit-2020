@@ -1,0 +1,25 @@
+.img {
+  width: 200px;
+  height:  200px;
+  background-size: cover;
+  z-index:1;
+  position: relative;
+}
+
+.body {
+  width: 252px;
+  background-image: linear-gradient(#04004880, #03004880), linear-gradient(to top, #c000ff80, #00baff80);
+  box-shadow: inset 0 0 49px 0 rgba(0, 240, 255, 0.4);
+  margin-top: -20px;
+}
+
+@media (max-width:767px) {
+  .img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .body {
+    width: 180px;
+  }
+}

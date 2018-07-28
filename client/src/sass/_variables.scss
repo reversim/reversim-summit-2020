@@ -107,6 +107,14 @@ $spacers: (
         10: $spacer * 10,
         11: $spacer * 11,
         12: $spacer * 12,
+        13: $spacer * 13,
+        14: $spacer * 14,
+        15: $spacer * 15,
+        16: $spacer * 16,
+        17: $spacer * 17,
+        18: $spacer * 18,
+        19: $spacer * 19,
+        20: $spacer * 20,
 );
 //
 //// This variable affects the `.h-*` and `.w-*` classes.
@@ -167,7 +175,7 @@ $container-max-widths: (
        sm: 540px,
        md: 720px,
        lg: 960px,
-       xl: 960px
+       xl: 1140px
 );
 //
 //@include _assert-ascending($container-max-widths, "$container-max-widths");
