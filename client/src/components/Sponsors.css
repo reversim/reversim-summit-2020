@@ -1,4 +1,5 @@
 .sponsorImg {
     max-height: 80px;
     max-width: 100%;
+    transition: opacity 150ms;
 }

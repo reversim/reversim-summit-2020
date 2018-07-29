@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const SponsorSchema = new mongoose.Schema({
   name: String,
   logo: String,
+  logoHover: String,
   url: String,
   description: String,
   featuredJobInfo: String,

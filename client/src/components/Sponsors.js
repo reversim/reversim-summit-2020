@@ -1,11 +1,11 @@
 import React from 'react';
 import pick from 'lodash/pick';
-import Section from './Section';
 import s from './Sponsors.css';
 import {Button, Input, Row, Col, Container} from 'reactstrap';
 import Page from './Page';
 import ReactMarkdown from 'react-markdown';
 import {REVERSIM_SUMMIT} from '../utils';
+import cn from 'classnames';
 
 const Sponsor = ({
   sponsor: {
@@ -106,20 +106,40 @@ class SponsorWithEdit extends React.Component {
   }
 }
 
-const SponsorMini = ({name, logo, url}) => (
-  <Col key={name} className="mr-sm-5 mb-5" xs="6" md="2">
-    <a href={url} target="_blank">
-      <img src={logo} className={s.sponsorImg} alt={name} />
-    </a>
-  </Col>
-);
+class SponsorMini extends React.Component {
+  state = {
+    hovered: false,
+  };
+  render() {
+    const {name, logo, url, logoHover} = this.props;
+    return (
+      <Col
+        key={name}
+        className="mr-sm-5 mb-5"
+        xs="6"
+        md="2"
+        onMouseEnter={() => this.setState({hovered: true})}
+        onMouseLeave={() => this.setState({hovered: false})}>
+        <a href={url} target="_blank" className="p-relative d-block">
+          <img src={logo} className={s.sponsorImg} alt={name} />
+          <img
+            src={logoHover}
+            className={cn(s.sponsorImg, 'p-absolute')}
+            alt={name}
+            style={{top: 0, left: 0, opacity: this.state.hovered ? 1 : 0}}
+          />
+        </a>
+      </Col>
+    );
+  }
+}
 
 export const SponsorsSection = ({sponsors}) => (
   <section className="mb-20">
     <Container>
       <h1 style={{position: 'relative', zIndex: 1}}>Sponsors</h1>
       <div className="bg-emph px-10 py-16" style={{marginTop: -40}}>
-        <Row>{sponsors.map(SponsorMini)}</Row>
+        <Row>{sponsors.map(s => <SponsorMini {...s} />)}</Row>
         {/* <WantToBe /> */}
       </div>
     </Container>
