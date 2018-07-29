@@ -1,6 +1,4 @@
 import React from 'react';
-import values from 'lodash/values';
-import sampleSize from 'lodash/sampleSize';
 import {Container, Button} from 'reactstrap';
 import {img, body} from './Speaker2.css';
 import cn from 'classnames';
@@ -22,10 +20,9 @@ const Speaker = ({
 const isDownCalc = perRow => index => !((index + perRow - 1) % perRow);
 
 const SpeakersSection = props => {
-  const speakers = sampleSize(values(props.speakers), 6);
+  const speakers = props.sampleSpeakers.map(s => props.users[s]);
   const perRow = window.innerWidth < 1200 ? 2 : 3;
   const isDown = isDownCalc(perRow);
-  console.log(window.innerWidth);
   return (
     <section className="mb-20">
       <Container>

@@ -4,8 +4,8 @@ import {addMessage, removeMessage} from './data-service';
 import {isServer} from './utils';
 
 const store = {
-  sessions: {},
-  speakers: {},
+  proposals: {},
+  users: {},
   user: null,
   team: [],
   messages: [],
@@ -15,6 +15,7 @@ const store = {
   },
   sponsors: [],
   eventConfig: {},
+  sampleSpeakers: [],
 
   isSmallScreen: window.innerWidth < 991,
 

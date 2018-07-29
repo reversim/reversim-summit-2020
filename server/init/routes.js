@@ -5,6 +5,7 @@ import express from 'express';
 import path from 'path';
 import passport from 'passport';
 import keyBy from 'lodash/keyBy';
+import sampleSize from 'lodash/sampleSize';
 import { controllers } from '../db';
 import { transformProposal, transformUser } from '../db/controllers/helpers';
 import eventConfig from './eventConfig';
@@ -63,33 +64,31 @@ export default (app) => {
 
   async function initial(req, res) {
     // const proposals = await proposalsController.getAllProposals(true, req.user ? req.user.created_at : String(Date.now()));
-    const sessions = await proposalsController.getAcceptedProposals();
-    // const users = await proposalsController.getProposers(proposals);
-    const speakers = await proposalsController.getProposers(sessions);
-    const allTags = proposalsController.getTags(sessions);
+    const proposals = await proposalsController.getAcceptedProposals();
+    const users = await proposalsController.getProposers(proposals);
+    const allTags = proposalsController.getTags(proposals);
     const user = req.user;
     const team = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
     const sponsors = await sponsorsController.getAllSponsors(true);
+    const sampleSpeakers=  sampleSize(users, 6).map(u => u._id);
 
     const userId = user && String(user._id);
     if (userId && !users.find(u => String(u._id) === userId)) users.unshift(user);
-    if (userId && !speakers.find(u => String(u._id) === userId)) speakers.unshift(user);
     
-    // const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user));
-    const mappedSessions = sessions.map(proposal => transformProposal(proposal, req.user));
-    // let mappedUsers = users.map(u => transformUser(u, req.user));
-    let mappedSpeakers = speakers.map(u => transformUser(u, req.user));
+    const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user));
+    let mappedUsers = users.map(u => transformUser(u, req.user));
 
     res.json({
-      sessions: keyBy(mappedSessions, '_id'),
-      speakers: keyBy(mappedSpeakers, '_id'),
+      proposals: keyBy(mappedProposals, '_id'),
+      users: keyBy(mappedUsers, '_id'),
       user: user ? user._id : null,
       allTags,
       team: team.map(user => transformUser(user, req.user)),
       messages,
       sponsors,
       eventConfig: eventConfig(),
+      sampleSpeakers
     });
   }
 
