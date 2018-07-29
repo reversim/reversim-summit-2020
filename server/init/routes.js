@@ -5,7 +5,6 @@ import express from 'express';
 import path from 'path';
 import passport from 'passport';
 import keyBy from 'lodash/keyBy';
-import sampleSize from 'lodash/sampleSize';
 import { controllers } from '../db';
 import { transformProposal, transformUser } from '../db/controllers/helpers';
 import eventConfig from './eventConfig';
@@ -71,7 +70,7 @@ export default (app) => {
     const team = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
     const sponsors = await sponsorsController.getAllSponsors(true);
-    const sampleSpeakers=  sampleSize(users, 6).map(u => u._id);
+    const speakers = users.map(u => u._id);
 
     const userId = user && String(user._id);
     if (userId && !users.find(u => String(u._id) === userId)) users.unshift(user);
@@ -88,7 +87,7 @@ export default (app) => {
       messages,
       sponsors,
       eventConfig: eventConfig(),
-      sampleSpeakers
+      speakers
     });
   }
 

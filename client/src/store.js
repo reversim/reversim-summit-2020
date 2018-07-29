@@ -15,7 +15,7 @@ const store = {
   },
   sponsors: [],
   eventConfig: {},
-  sampleSpeakers: [],
+  speakers: [],
 
   isSmallScreen: window.innerWidth < 991,
 

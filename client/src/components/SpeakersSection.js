@@ -3,6 +3,7 @@ import {Container, Button} from 'reactstrap';
 import {img, body} from './Speaker2.css';
 import cn from 'classnames';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
+import sampleSize from 'lodash/sampleSize';
 
 const Speaker = ({
   speaker: {name, oneLiner, picture, twitter, github, linkedin, stackOverflow},
@@ -20,7 +21,7 @@ const Speaker = ({
 const isDownCalc = perRow => index => !((index + perRow - 1) % perRow);
 
 const SpeakersSection = props => {
-  const speakers = props.sampleSpeakers.map(s => props.users[s]);
+  const speakers = sampleSize(props.speakers, 6).map(s => props.users[s]);
   const perRow = window.innerWidth < 1200 ? 2 : 3;
   const isDown = isDownCalc(perRow);
   return (

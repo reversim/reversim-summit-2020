@@ -5,7 +5,7 @@ import SpeakerPage from '../components/SpeakerPage';
 import SpeakerEditPage from '../components/SpeakerEditPage';
 import SessionPage from '../components/SessionPage';
 import SessionEditPage from '../components/SessionEditPage';
-// import SpeakersPage from "../components/SpeakersPage";
+import SpeakersPage from '../components/SpeakersPage';
 import SponsorsPage from '../components/Sponsors';
 // import RegisterPage from "../components/RegisterPage";
 import LocationPage from '../components/LocationPage';
@@ -22,7 +22,7 @@ export default [
   {path: '/profile', comp: MyProfile},
   // { path: "/register", comp: RegisterPage },
   {path: '/schedule', comp: Agenda},
-  // { path: "/speakers", comp: SpeakersPage },
+  {path: '/speakers', comp: SpeakersPage},
   {path: '/location', comp: LocationPage},
   {path: '/sponsors', comp: SponsorsPage},
   {path: '/team', comp: TeamPage},

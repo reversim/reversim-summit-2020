@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.img:hover div  {
+  display: block !important;
+}
+
 .body {
   width: 252px;
   margin-top: -20px;
