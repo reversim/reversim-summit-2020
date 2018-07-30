@@ -113,14 +113,14 @@ class SponsorMini extends React.Component {
   render() {
     const {name, logo, url, logoHover} = this.props;
     return (
-      <Col
-        key={name}
-        className="mr-sm-5 mb-5"
-        xs="6"
-        md="2"
+      <a
+        href={url}
+        target="_blank"
+        className="d-block text-center"
+        style={{width: '20%'}}
         onMouseEnter={() => this.setState({hovered: true})}
         onMouseLeave={() => this.setState({hovered: false})}>
-        <a href={url} target="_blank" className="p-relative d-block">
+        <div className="p-relative d-inline-block">
           <img src={logo} className={s.sponsorImg} alt={name} />
           <img
             src={logoHover}
@@ -128,8 +128,8 @@ class SponsorMini extends React.Component {
             alt={name}
             style={{top: 0, left: 0, opacity: this.state.hovered ? 1 : 0}}
           />
-        </a>
-      </Col>
+        </div>
+      </a>
     );
   }
 }
@@ -138,8 +138,10 @@ export const SponsorsSection = ({sponsors}) => (
   <section className="mb-20">
     <Container>
       <h1 style={{position: 'relative', zIndex: 1}}>Sponsors</h1>
-      <div className="bg-emph px-10 py-16" style={{marginTop: -40}}>
-        <Row>{sponsors.map(s => <SponsorMini {...s} />)}</Row>
+      <div className="bg-emph px-6 py-9" style={{marginTop: -40}}>
+        <div className="d-flex flex-wrap justify-content-between">
+          {sponsors.map(s => <SponsorMini {...s} />)}
+        </div>
         {/* <WantToBe /> */}
       </div>
     </Container>

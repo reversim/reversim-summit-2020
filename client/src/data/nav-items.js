@@ -20,7 +20,7 @@ export default () => {
       to: `/${item.to}.html`,
     }));
   } else {
-    items = [schedule, location, speakers, sponsors, sessions];
+    items = [schedule, location, speakers, sessions, sponsors];
   }
 
   return items;
