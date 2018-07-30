@@ -10,7 +10,7 @@ import cn from 'classnames';
 const Sponsor = ({
   sponsor: {
     name = '',
-    logo,
+    logoHover,
     url,
     description = '',
     featuredJobInfo,
@@ -32,7 +32,7 @@ const Sponsor = ({
     <div key={name}>
       <div className="text-center mb-4">
         <a href={url} target="_blank">
-          <img src={logo} className={s.sponsorImg} alt={name} />
+          <img src={logoHover} className={s.sponsorImg} alt={name} />
         </a>
       </div>
       <Row noGutters={true}>
@@ -161,7 +161,7 @@ class SponsorsPage extends React.Component {
     return (
       <Page title="Sponsors" {...this.props}>
         <h1 className="text-center mt-5">Our sponsors</h1>
-        <WantToBe />
+        {/* <WantToBe /> */}
         <Container>
           <p className="text-center mb-5">
             Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:
@@ -182,7 +182,7 @@ class SponsorsPage extends React.Component {
               deleteSponsor={deleteSponsor}
             />
           ))}
-          <WantToBe />
+          {/* <WantToBe /> */}
         </Container>
       </Page>
     );

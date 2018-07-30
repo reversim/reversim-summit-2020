@@ -14,6 +14,7 @@ import AdminPage from '../components/AdminPage';
 // import WomenGathering from '../components/WomenGathering';
 import CFPPage from '../components/CFPPage';
 import ProposalsPage from '../components/ProposalsPage';
+import SessionsPage from '../components/SessionsPage';
 import TimelinePage from '../components/TimelinePage';
 
 export default [
@@ -33,6 +34,7 @@ export default [
   {path: '/admin', comp: AdminPage},
   // { path: "/women-gathering", comp: WomenGathering },
   {path: '/cfp', comp: CFPPage},
+  {path: '/sessions', comp: SessionsPage},
   {path: '/proposals', comp: ProposalsPage},
   {path: '/my-votes', comp: ProposalsPage, props: {myVotes: true}},
   {path: '/timeline', comp: TimelinePage},
