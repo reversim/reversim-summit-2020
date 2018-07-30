@@ -10,19 +10,24 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black:    #000;
 
-$blue:    #010035;
-$indigo:  #010029;
-$purple:  #6f42c1;
-$pink:    #e83e8c;
-$red:     #dc3545;
-$orange:  #fd7e14;
-$yellow:  #ffc107;
-$green:   #28a745;
-$teal:    #20c997;
+$darkblue: #010035;
+$darkblue2: #010029;
+$blue:    #0048ff;
+$indigo:  #4d5aff;
+$purple:  #df30ff;
+$pink:    #ff5400;
+$red:     #ff2e5f;
+$orange:  #ffaa30;
+$yellow:  #f6ff00;
+$green:   #30ff96;
+$teal:    #2efffd;
 $cyan:    #1ad6ff;
+$lightgreen: #69ff2e;
 
 $colors: (
   "blue":       $blue,
+  "darkblue":       $darkblue,
+  "darkblue2":       $darkblue2,
   "indigo":     $indigo,
   "indigo-light": lighten($indigo, 20%),
   "purple":     $purple,
@@ -31,6 +36,7 @@ $colors: (
   "orange":     $orange,
   "yellow":     $yellow,
   "green":      $green,
+  "lightgreen": $lightgreen,
   "teal":       $teal,
   "cyan":       $cyan,
   "white":      $white,

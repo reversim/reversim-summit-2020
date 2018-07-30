@@ -4,19 +4,22 @@ import {img, body} from './Speaker2.css';
 import cn from 'classnames';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
 import sampleSize from 'lodash/sampleSize';
+import {Link} from 'react-router-dom';
+import {getHref} from '../utils';
 
-const Speaker = ({
-  speaker: {name, oneLiner, picture, twitter, github, linkedin, stackOverflow},
-}) => (
-  <div className="text-white">
-    <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
-    <div className={cn(body, 'ml-4 pt-8 pb-4 px-2 bg-emph')}>
-      <div className="font-size-md font-weight-bold mb-4">{name}</div>
-      <div className="font-size-sm mb-7">{oneLiner}</div>
-      <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
-    </div>
-  </div>
-);
+const Speaker = ({speaker}) => {
+  const {name, oneLiner, picture, twitter, github, linkedin, stackOverflow} = speaker;
+  return (
+    <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
+      <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
+      <div className={cn(body, 'ml-4 pt-8 pb-4 px-2 bg-emph')}>
+        <div className="font-size-md font-weight-bold mb-4">{name}</div>
+        <div className="font-size-sm mb-7">{oneLiner}</div>
+        <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
+      </div>
+    </Link>
+  );
+};
 
 const isDownCalc = perRow => index => !((index + perRow - 1) % perRow);
 

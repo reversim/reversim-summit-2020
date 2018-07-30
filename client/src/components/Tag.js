@@ -1,8 +1,23 @@
 import React from 'react';
 
+const colors = {
+  craft: 'purple',
+  frontend: 'teal',
+  'ai/ml': 'indigo',
+  product: 'red',
+  culture: 'orange',
+  security: 'yellow',
+  infrastructure: 'green',
+  quality: 'lightgreen',
+  programming: 'blue',
+  oss: 'pink',
+};
+
 const Tag = name => (
-  <div key={name} className="mr-3">
-    #{name}
+  <div
+    key={name}
+    className={`font-weight-heavy font-size-sm mr-3 text-${colors[name.toLowerCase()]}`}>
+    [{name}]
   </div>
 );
 

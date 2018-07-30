@@ -104,7 +104,7 @@ class Navbar extends Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav
             navbar
-            className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-blue': isSmallScreen})}>
+            className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-darkblue': isSmallScreen})}>
             <a href="https://news.ycombinator.com" className="d-none d-lg-block">
               <Button size="lg" className="text-capitalize font-size-lg-md">
                 Get Tickets

@@ -140,7 +140,7 @@ export const SponsorsSection = ({sponsors}) => (
       <h1 style={{position: 'relative', zIndex: 1}}>Sponsors</h1>
       <div className="bg-emph px-6 py-9" style={{marginTop: -40}}>
         <div className="d-flex flex-wrap justify-content-between">
-          {sponsors.map(s => <SponsorMini {...s} />)}
+          {sponsors.map(s => <SponsorMini key={s._id} {...s} />)}
         </div>
         {/* <WantToBe /> */}
       </div>
