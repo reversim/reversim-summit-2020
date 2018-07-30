@@ -8,7 +8,6 @@ import logoImg from '../images/rs18-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
-import {getLoginUrl} from './Redirect';
 
 const CFPCTA = () => (
   <Link to="/cfp" className="unstyled-link">
@@ -122,30 +121,13 @@ class Navbar extends Component {
                   </NavItem>
                 </div>
               )}
-            {isSmallScreen &&
-              !user && (
-                <div className="border-top">
-                  <NavbarItem to={getLoginUrl()} text="Login" external={true} />
-                </div>
-              )}
           </Nav>
         </Collapse>
         {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
 
         {!isServer &&
-          !isSmallScreen && (
-            <div className="ml-auto">
-              {user ? (
-                <Avatar {...user} onLogout={onLogout} />
-              ) : (
-                <a href={getLoginUrl()} className="ml-5">
-                  <Button outline color="primary" onClick={this.login}>
-                    Login
-                  </Button>
-                </a>
-              )}
-            </div>
-          )}
+          !isSmallScreen &&
+          user && <div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div>}
       </Navbar2>
     );
   }

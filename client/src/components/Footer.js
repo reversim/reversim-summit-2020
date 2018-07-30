@@ -1,8 +1,9 @@
 import React from 'react';
-import {Container, Row} from 'reactstrap';
+import {Container, Row, Button} from 'reactstrap';
 import IconLink from './IconLink';
+import {getLoginUrl} from './Redirect';
 
-const Footer = () => (
+const Footer = ({user}) => (
   <footer className="bg-indigo py-9 font-size-md">
     <Container>
       <Row className="justify-content-between align-items-center" noGutters>
@@ -13,6 +14,11 @@ const Footer = () => (
           <a className="text-white" href="http://confcodeofconduct.com/">
             Code of Conduct
           </a>
+          {!user && (
+            <a href={getLoginUrl()} className="text-white ml-6">
+              Login
+            </a>
+          )}
         </div>
         <div className="d-flex align-items-center">
           <IconLink href="https://twitter.com/reversim" icon="twitter" isLarge className="mr-5" />
