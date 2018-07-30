@@ -20,7 +20,6 @@ const Speaker = ({speaker}) => {
           marginTop: -10,
           marginLeft: 10,
         }}
-        alt={name}
         className={cn(img, 'p-relative')}>
         <div className="pt-5 px-3 p-absolute d-none stretch bg-emph font-size-sm">{oneLiner}</div>
       </div>

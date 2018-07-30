@@ -10,7 +10,7 @@ const colors = {
   infrastructure: 'green',
   quality: 'lightgreen',
   programming: 'blue',
-  oss: 'pink',
+  'open source': 'pink',
 };
 
 const Tag = name => (
