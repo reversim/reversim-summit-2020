@@ -43,7 +43,7 @@ const SpeakersPage = ({speakers, users, ...props}) => {
     <Page title="Speakers" {...props}>
       <Container>
         <h1 className="my-10">Meet the speakers</h1>
-        <Row>
+        <Row noGutters>
           {benji && (
             <div className="mb-18 mr-8 mr-md-15">
               <Speaker2 speaker={benji} keynote />
@@ -55,7 +55,7 @@ const SpeakersPage = ({speakers, users, ...props}) => {
             </div>
           )}
         </Row>
-        <Row>
+        <Row noGutters>
           {shuffledSpeakers.map((speaker, i) => (
             <div
               className={cn('mb-18', {'mt-16': isDown(i), 'mr-8 mr-md-15': (i + 1) % 4})}
