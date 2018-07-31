@@ -1,6 +1,11 @@
-.navLink, .navLink:hover {
-    cursor: pointer;
-    color: white;
+.navLink {
+  cursor: pointer;
+  color: white;
+  font-weight: 400;
+}
+
+.navLink:hover {
+  color: #1ad6ff;
 }
 
 .navItem {
