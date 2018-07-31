@@ -6,6 +6,8 @@ import {img} from './Speaker2.css';
 import {Link} from 'react-router-dom';
 import {getHref} from '../utils';
 import shuffle from 'lodash/shuffle';
+import without from 'lodash/without';
+import Speaker2 from './Speaker2';
 
 const Speaker = ({speaker}) => {
   const {name, oneLiner, picture} = speaker;
@@ -29,14 +31,30 @@ const Speaker = ({speaker}) => {
 
 const isDownCalc = perRow => index => !((index + perRow - 1) % perRow);
 
-const SpeakesPage = ({speakers, users, ...props}) => {
+const SpeakersPage = ({speakers, users, ...props}) => {
   const perRow = 2;
   const isDown = isDownCalc(perRow);
-  const shuffledSpeakers = shuffle(speakers);
+  const shuffledSpeakers = shuffle(
+    without(speakers, '5b60af7eb5c7a00014aaff91', '5b45baa6990eba0014f62e39'),
+  );
+  const benji = users['5b60af7eb5c7a00014aaff91'];
+  const holden = users['5b45baa6990eba0014f62e39'];
   return (
     <Page title="Speakers" {...props}>
       <Container>
-        <h1 className="text-center my-5">Meet the speakers</h1>
+        <h1 className="my-10">Meet the speakers</h1>
+        <Row>
+          {benji && (
+            <div className="mb-18 mr-8 mr-md-15">
+              <Speaker2 speaker={benji} keynote />
+            </div>
+          )}
+          {holden && (
+            <div className="mb-18 mr-8 mr-md-15">
+              <Speaker2 speaker={holden} keynote />
+            </div>
+          )}
+        </Row>
         <Row>
           {shuffledSpeakers.map((speaker, i) => (
             <div
@@ -51,4 +69,4 @@ const SpeakesPage = ({speakers, users, ...props}) => {
   );
 };
 
-export default SpeakesPage;
+export default SpeakersPage;

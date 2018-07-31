@@ -8,26 +8,7 @@ import {agenda1, agenda2} from '../data/agenda';
 import {Link} from 'react-router-dom';
 import SessionPageRoute from './SessionPageRoute';
 import VoteButton from './VoteButton';
-
-import cn from 'classnames';
-import SpeakerSocialLinks from './SpeakerSocialLinks';
-import {img, body} from './Speaker2.css';
-
-const Speaker = ({speaker}) => {
-  const {name, oneLiner, picture, twitter, github, linkedin, stackOverflow} = speaker;
-  return (
-    <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
-      <div className="d-flex align-items-start">
-        <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
-        <div className={cn('pt-8 pb-4 pl-8 pr-4 mt-4 bg-emph')} style={{marginLeft: -20}}>
-          <div className="font-size-md font-weight-bold mb-4">{name}</div>
-          <div className="font-size-sm mb-7">{oneLiner}</div>
-          <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
-        </div>
-      </div>
-    </Link>
-  );
-};
+import Speaker from './Speaker2';
 
 const agenda = [agenda1, agenda2];
 
