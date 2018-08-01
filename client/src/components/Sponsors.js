@@ -10,7 +10,7 @@ import cn from 'classnames';
 const Sponsor = ({
   sponsor: {
     name = '',
-    logoHover,
+    logo,
     url,
     description = '',
     featuredJobInfo,
@@ -32,7 +32,7 @@ const Sponsor = ({
     <div key={name}>
       <div className="text-center mb-4">
         <a href={url} target="_blank">
-          <img src={logoHover} className={s.sponsorImg} alt={name} />
+          <img src={logo} className={s.sponsorImg} alt={name} />
         </a>
       </div>
       <Row noGutters={true}>
@@ -148,7 +148,7 @@ export const SponsorsSection = ({sponsors}) => (
   </section>
 );
 
-const WantToBe = () => (
+const _WantToBe = () => (
   <div className="my-4 p-3 bg-gray-200 line-height-17 text-center">
     <h4>Want to be a sponsor?</h4> Contact our amazing Gilli at{' '}
     <a href="mailto:gilli@reversim.com">gilli@reversim.com</a> and let's have fun together!

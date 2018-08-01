@@ -17,6 +17,7 @@
       }
   ],
     "strict": "off",
-    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
+    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+    "jsx-a11y/href-no-hash": "off"
   }
 }

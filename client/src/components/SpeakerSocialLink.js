@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import IconLink from './IconLink';
 
 const icons = {
@@ -16,7 +15,7 @@ const hrefs = {
 };
 
 const SpeakerSocialLink = ({type, value}) => (
-  <IconLink href={hrefs[type](value)} icon={icons[type]} className="mr-4"/>
+  <IconLink href={hrefs[type](value)} icon={icons[type]} className="mr-4" />
 );
 
 export default SpeakerSocialLink;

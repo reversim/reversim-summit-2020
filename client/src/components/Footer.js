@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Button} from 'reactstrap';
+import {Container, Row} from 'reactstrap';
 import IconLink from './IconLink';
 import {getLoginUrl} from './Redirect';
 
