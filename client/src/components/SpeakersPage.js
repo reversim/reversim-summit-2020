@@ -29,11 +29,7 @@ const Speaker = ({speaker}) => {
   );
 };
 
-const isDownCalc = perRow => index => !((index + perRow - 1) % perRow);
-
 const SpeakersPage = ({speakers, users, ...props}) => {
-  const perRow = 2;
-  const isDown = isDownCalc(perRow);
   const shuffledSpeakers = shuffle(
     without(speakers, '5b60af7eb5c7a00014aaff91', '5b45baa6990eba0014f62e39'),
   );
@@ -56,13 +52,13 @@ const SpeakersPage = ({speakers, users, ...props}) => {
           )}
         </Row>
         <Row noGutters>
-          {shuffledSpeakers.map((speaker, i) => (
-            <div
-              className={cn('mb-18', {'mt-16': isDown(i), 'mr-8 mr-md-15': (i + 1) % 4})}
-              key={i}>
-              <Speaker speaker={users[speaker]} />
-            </div>
-          ))}
+          <div className="row no-gutters d-flex justify-content-between">
+            {shuffledSpeakers.map((speaker, i) => (
+              <div className="mb-18 mr-2" key={i}>
+                <Speaker speaker={users[speaker]} />
+              </div>
+            ))}
+          </div>
         </Row>
       </Container>
     </Page>

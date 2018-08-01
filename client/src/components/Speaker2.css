@@ -4,6 +4,7 @@
   background-size: cover;
   z-index:1;
   position: relative;
+  box-shadow: 0 0px 30px #010036;
 }
 
 .img:hover div  {

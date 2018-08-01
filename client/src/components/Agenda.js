@@ -54,7 +54,7 @@ const ShortSessions = ({sessions, users}) => (
           <div className="d-flex">
             <div className="d-flex mr-3">{getSessionImgs(ss, users)}</div>
             <div>
-              <h5 className={cn('mr-4 mb-0', s.igniteName)}>{getSpeakerName(ss, users)}</h5>
+              <h5 className={cn('mr-4 mb-0 font-size-sm', s.igniteName)}>{getSpeakerName(ss, users)}</h5>
               <div>{ss.title}</div>
             </div>
           </div>
@@ -84,7 +84,7 @@ const Session = ({text, session, shortSessions, hall, sep, users}) => {
       <Link to={`/session/${getHref(session)}`}>
         <div className="d-flex align-items-center">
           <div className="flex-1">
-            <div>{getSpeakerName(session, users)}</div>
+            <div className="font-size-sm">{getSpeakerName(session, users)}</div>
             <div className="font-weight-heavy">{session.title}</div>
             <div className="d-flex">{session.tags.map(Tag)}</div>
           </div>
@@ -187,8 +187,8 @@ const agendas = [agenda1, agenda2];
 const DayAgenda = ({index, sessions, isLargeScreen, users}) => {
   return (
     <div className={cn(s.agenda, 'mb-5')}>
-      <h2 className={cn(s.subtitle)}>{dates[index]}</h2>
-      <div className="bg-emph p-3">
+      <h2 className={`${cn(s.subtitle)} day-agenda-title`}>{dates[index]}</h2>
+      <div className="bg-emph pt-4 p-3 day-agenda-content">
         {agendas[index].map(line => (
           <Line {...line} allSessions={sessions} isLargeScreen={isLargeScreen} users={users} />
         ))}
@@ -209,7 +209,7 @@ const Agenda = ({proposals, ...props}) => {
   return (
     <Page title="Schedule" {...props}>
       <Container>
-        <h1 className="font-weight-bold">Schedule</h1>
+        <h1 className="mb-8 font-weight-bold">Schedule</h1>
         {/* <AddToCal /> */}
         <DayAgenda index="0" sessions={proposals} users={props.users} />
         {/*<h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>*/}

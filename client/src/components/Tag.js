@@ -16,7 +16,7 @@ const colors = {
 const Tag = name => (
   <div
     key={name}
-    className={`font-weight-heavy font-size-sm mr-3 text-${colors[name.toLowerCase()]}`}>
+    className={`font-size-sm mr-3 text-${colors[name.toLowerCase()]}`}>
     [{name}]
   </div>
 );

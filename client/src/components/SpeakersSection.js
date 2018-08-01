@@ -13,29 +13,24 @@ const Speaker = ({speaker}) => {
     <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
       <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
       <div className={cn(body, 'ml-4 pt-8 pb-4 px-2 bg-emph')}>
-        <div className="font-size-md font-weight-bold mb-4">{name}</div>
-        <div className="font-size-sm mb-7">{oneLiner}</div>
+        <div className="speaker-name font-weight-md mb-3">{name}</div>
+        <div className="font-size-sm mb-6">{oneLiner}</div>
         <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
       </div>
     </Link>
   );
 };
 
-const isDownCalc = perRow => index => !((index + perRow - 1) % perRow);
-
 const SpeakersSection = props => {
   const speakers = sampleSize(props.speakers, 6).map(s => props.users[s]);
   const perRow = window.innerWidth < 1200 ? 2 : 3;
-  const isDown = isDownCalc(perRow);
   return (
     <section className="mb-20">
       <Container>
         <h1 className="mb-14">Speakers</h1>
         <div className="d-flex flex-wrap">
           {speakers.map((speaker, i) => (
-            <div
-              className={cn('mb-18', {'mt-16': isDown(i), 'mr-8 mr-md-14': (i + 1) % perRow})}
-              key={i}>
+            <div className={cn('mb-18', {'mr-8 mr-md-14': (i + 1) % perRow})} key={i}>
               <Speaker speaker={speaker} />
             </div>
           ))}
