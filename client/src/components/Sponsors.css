@@ -3,3 +3,13 @@
     max-width: 100%;
     transition: opacity 150ms;
 }
+
+@media (min-width:991px) {
+    .sponsor { 
+        width: calc(50% - 20px);
+    }
+
+    .sponsorWrap { 
+        height: 9800px;
+    }
+}

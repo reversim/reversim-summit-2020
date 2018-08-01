@@ -29,32 +29,28 @@ const Sponsor = ({
     ? `${featuredJobInfo} Interested? More info [here](${featuredJobLink}).`
     : featuredJobInfo;
   return (
-    <div key={name}>
+    <div key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)}>
       <div className="text-center mb-4">
         <a href={url} target="_blank">
           <img src={logo} className={s.sponsorImg} alt={name} />
         </a>
       </div>
-      <Row noGutters={true}>
-        <Col sm={{size: 8, offset: 2}} className="separator pb-5 mb-5">
-          <h4>
-            {name}
-            {onEdit && (
-              <span>
-                <Button size="sm" color="primary" className="ml-2" onClick={onEdit}>
-                  <i className="fa fa-pencil" />
-                </Button>
-                <Button size="sm" color="danger" className="ml-2" onClick={onDelete}>
-                  <i className="fa fa-trash" />
-                </Button>
-              </span>
-            )}
-          </h4>
-          <ReactMarkdown source={descriptionWithLink} />
-          {showJob && <h5>Featured job</h5>}
-          {showJob && <ReactMarkdown source={featuredJob} />}
-        </Col>
-      </Row>
+      <h4>
+        {name}
+        {onEdit && (
+          <span>
+            <Button size="sm" color="primary" className="ml-2" onClick={onEdit}>
+              <i className="fa fa-pencil" />
+            </Button>
+            <Button size="sm" color="danger" className="ml-2" onClick={onDelete}>
+              <i className="fa fa-trash" />
+            </Button>
+          </span>
+        )}
+      </h4>
+      <ReactMarkdown source={descriptionWithLink} />
+      {showJob && <h5>Featured job</h5>}
+      {showJob && <ReactMarkdown source={featuredJob} />}
     </div>
   );
 };
@@ -173,15 +169,17 @@ class SponsorsPage extends React.Component {
                 <SponsorForm onSubmit={createSponsor} />
               </div>
             )}
-          {sponsors.map(sponsor => (
-            <SponsorWithEdit
-              key={sponsor._id}
-              sponsor={sponsor}
-              canEdit={user && user.isReversimTeamMember}
-              updateSponsor={updateSponsor}
-              deleteSponsor={deleteSponsor}
-            />
-          ))}
+          <div className={cn('d-lg-flex flex-wrap flex-column', s.sponsorWrap)}>
+            {sponsors.map(sponsor => (
+              <SponsorWithEdit
+                key={sponsor._id}
+                sponsor={sponsor}
+                canEdit={user && user.isReversimTeamMember}
+                updateSponsor={updateSponsor}
+                deleteSponsor={deleteSponsor}
+              />
+            ))}
+          </div>
           {/* <WantToBe /> */}
         </Container>
       </Page>
