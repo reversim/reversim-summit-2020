@@ -16,13 +16,24 @@
   margin-top: -20px;
 }
 
+@media (max-width: 990px) {
+  .homepageImg {
+    width: 250px;
+    height: 250px;
+  }
+
+  .homepageBody {
+    width: 305px;
+  }
+}
+
 @media (max-width:767px) {
-  .img {
+  .img, .homepageImg {
     width: 150px;
     height: 150px;
   }
 
   .body {
-    width: 180px;
+    width: 215px;
   }
 }

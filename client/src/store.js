@@ -16,8 +16,11 @@ const store = {
   sponsors: [],
   eventConfig: {},
   speakers: [],
+  shuffledSpeakers: [],
 
+  isSmallerScreen: window.innerWidth < 768,
   isSmallScreen: window.innerWidth < 991,
+  isXLScreen: window.innerWidth >= 1200,
 
   onAddMessage: text => {
     addMessage(text).then(msg => store.messages.push(msg));

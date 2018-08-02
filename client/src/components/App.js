@@ -18,6 +18,8 @@ import {
   attend,
 } from '../data-service';
 import findIndex from 'lodash/findIndex';
+import shuffle from 'lodash/shuffle';
+import without from 'lodash/without';
 import ScrollToTop from './ScrollToTop';
 
 if (!isServer && process.env.NODE_ENV !== 'development') {
@@ -47,9 +49,15 @@ class App extends Component {
   componentDidMount() {
     initialDataPromise.then(data => {
       const user = data.user ? data.users[data.user] : data.user;
+
+      const shuffledSpeakers = shuffle(
+        without(data.speakers, '5b60af7eb5c7a00014aaff91', '5b45baa6990eba0014f62e39'),
+      );
+
       this.setState({
         ...data,
         user,
+        shuffledSpeakers,
         fetchComplete: true,
       });
 
@@ -62,6 +70,16 @@ class App extends Component {
         registerTeamMember(__team[1]);
       }
     });
+
+    !isServer &&
+      window.addEventListener('resize', () => {
+        const {innerWidth} = window;
+        this.setState({
+          isSmallerScreen: innerWidth < 768,
+          isSmallScreen: innerWidth < 991,
+          isXLScreen: innerWidth >= 1200,
+        });
+      });
   }
 
   onLogout = async () => {
