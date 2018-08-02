@@ -1,0 +1,27 @@
+{
+  "extends": ["plugin:node/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "prettier",
+    "node"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+          "semi": true,
+          "parser": "babylon",
+          "printWidth": 100,
+          "singleQuote": true,
+          "trailingComma": "all",
+          "bracketSpacing": false,
+          "jsxBracketSameLine": true
+      }
+  ],
+    "strict": "off",
+    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
+  }
+}

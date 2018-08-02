@@ -9,7 +9,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: Montserrat, sans-serif;
-  background: $blue;
+  background: $darkblue;
+  color: white;
 }
 
 p {
@@ -22,18 +23,19 @@ b {
 }
 
 h1 {
-  font-family: Montserrat, serif;
-  // font-family: Amstelvar, serif;
-  font-size: 40px;
+  font-weight: 800;
+  font-size: 78px;
+  letter-spacing: 6px;
 }
 
 h2 {
-  font-size: 32px;
+  font-size: 64px;
+  font-weight: 800;
 }
 
 h3 {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 400;
 }
 
 h4 {
@@ -79,6 +81,10 @@ input[type='checkbox'] {
 }
 
 
+.font-size-xl {
+  font-size: $font-size-xl;
+}
+
 .font-size-lg {
   font-size: $font-size-lg;
 }
@@ -101,6 +107,10 @@ input[type='checkbox'] {
   font-weight: 500;
 }
 
+.font-weight-light {
+  font-weight: 300;
+}
+
 .font-pt {
   font-family: 'PT Sans', sans-serif;
 }
@@ -111,6 +121,10 @@ input[type='checkbox'] {
 
 .font-raleway {
   font-family: Raleway, sans-serif;
+}
+
+.font-mono {
+  font-family: 'Roboto Mono', monospace;
 }
 
 .separator {
@@ -186,6 +200,21 @@ a.unstyled-link:active {
   position: relative;
 }
 
+.p-absolute {
+  position: absolute;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+.stretch {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 
 .proposal pre code {
   white-space: pre-wrap;
@@ -217,4 +246,9 @@ button.btn {
     background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);
     box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.2), 0px 0px 20px 0px rgba(89,0,255,1);
   }
+}
+
+.bg-emph {
+  background-image: linear-gradient(#04004880, #03004880), linear-gradient(to top, #c000ff80, #00baff80);
+  box-shadow: inset 0 0 49px 0 rgba(0, 240, 255, 0.4);
 }

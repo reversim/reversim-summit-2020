@@ -1,9 +1,10 @@
 import React from 'react';
-import {Col, Container, Row} from 'reactstrap';
-import footerLogoImg from '../images/reversim_logo_footer.png';
+import {Container, Row} from 'reactstrap';
+import IconLink from './IconLink';
+import {getLoginUrl} from './Redirect';
 
-const Footer = () => (
-  <footer className="bg-indigo text-white py-9 font-size-md">
+const Footer = ({user}) => (
+  <footer className="bg-darkblue2 py-6 font-size-md">
     <Container>
       <Row className="justify-content-between align-items-center" noGutters>
         <div className="d-flex">
@@ -13,22 +14,20 @@ const Footer = () => (
           <a className="text-white" href="http://confcodeofconduct.com/">
             Code of Conduct
           </a>
+          {!user && (
+            <a href={getLoginUrl()} className="text-white ml-6">
+              Login
+            </a>
+          )}
         </div>
         <div className="d-flex align-items-center">
-          <a
-            className="mr-5 text-cyan font-size-lg"
-            href="https://twitter.com/reversim"
-            target="_blank"
-            rel="noopener noreferrer">
-            <i className="fa fa-twitter" />
-          </a>
-          <a
-            className="mr-7 text-cyan font-size-lg"
+          <IconLink href="https://twitter.com/reversim" icon="twitter" isLarge className="mr-5" />
+          <IconLink
             href="https://www.facebook.com/groups/806177629478248/"
-            target="_blank"
-            rel="noopener noreferrer">
-            <i className="fa fa-facebook" />
-          </a>
+            icon="facebook"
+            isLarge
+            className="mr-7"
+          />
           <span>All Rights Reserved © 2018</span>
         </div>
       </Row>

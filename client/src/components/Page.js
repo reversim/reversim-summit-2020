@@ -22,7 +22,7 @@ class Page extends Component {
       eventConfig,
     } = this.props;
     return (
-      <div style={isHome ? {} : {paddingTop: 105}}>
+      <div style={isHome ? {} : {paddingTop: 160}}>
         <Navbar
           isHome={isHome}
           user={user}
@@ -33,7 +33,7 @@ class Page extends Component {
           eventConfig={eventConfig || {}}
         />
         {children}
-        <Footer />
+        <Footer user={user} />
       </div>
     );
   }

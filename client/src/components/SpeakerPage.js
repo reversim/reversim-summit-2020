@@ -1,13 +1,13 @@
 import React from 'react';
 import Page from './Page';
-import {Container, Row, Col} from 'reactstrap';
+import {Container} from 'reactstrap';
 import {getSessionTypeStr, getHref} from '../utils';
 import {Link} from 'react-router-dom';
 import Tag from './Tag';
-import SpeakerShort from './SpeakerShort';
 import {Button} from 'reactstrap';
 import SpeakerPageRoute from './SpeakerPageRoute';
 import ReactMarkdown from 'react-markdown';
+import SpeakerSocialLinks from './SpeakerSocialLinks';
 
 export class SpeakerPage extends React.Component {
   state = {
@@ -28,25 +28,60 @@ export class SpeakerPage extends React.Component {
     const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
     const {isUploadingPhoto} = this.state;
 
-    const sessions = proposals.map(proposalId => allProposals[proposalId]);
+    const sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
 
     return (
       <Page title={name} user={user} {...this.props}>
         <Container>
-          <Row>
-            <Col sm={{size: 8, offset: 2}}>
-              <SpeakerShort speaker={speaker} editable={isUser} />
+          <h2 className="mb-0 p-relative z-1">{speaker.name}</h2>
+          <div className="d-flex align-items-start">
+            <div className="flex-1 bg-emph pl-4 pr-8 pt-8 pb-4" style={{marginTop: -20}}>
               {isReversimTeamMember && (
                 <div className="mb-3 text-center text-md-left">
                   <small className="py-1 px-2 bg-danger text-white">Team member</small>
                 </div>
               )}
+              <div className="font-size-md mb-4">{speaker.oneLiner}</div>
+              <p className="font-size-sm">{bio}</p>
+              {trackRecord && (
+                <div className="mb-3">
+                  <h4>Track record</h4>
+                  <div className="font-size-sm">
+                    <ReactMarkdown source={trackRecord} />
+                  </div>
+                </div>
+              )}
+              {video_url && (
+                <div className="mb-3">
+                  <h4>Video URL</h4>
+                  <div>
+                    <a href={video_url} target="_blank" className="text-white">
+                      {video_url}
+                    </a>
+                  </div>
+                </div>
+              )}
+              <SpeakerSocialLinks {...speaker} />
+            </div>
+            <div
+              style={{
+                flex: '0 0 200px',
+                marginLeft: -20,
+              }}
+              className="mt-5">
+              <div className="p-relative">
+                <img src={speaker.picture} alt={speaker.name} className="w-100" />
+                <div
+                  className="p-absolute stretch"
+                  style={{boxShadow: 'inset 0 0 49px 0 rgba(1, 0, 53, 0.8)'}}
+                />
+              </div>
               {isUser && (
                 <Button
                   color="primary"
-                  className="d-block mb-4 mx-auto mx-md-0"
+                  className="d-block mb-4 mx-auto mx-md-0 mt-3"
                   disabled={isUploadingPhoto}
-                  style={{width: 150, position: 'relative', overflow: 'hidden'}}>
+                  style={{position: 'relative', overflow: 'hidden'}}>
                   {isUploadingPhoto ? 'Uploading' : 'Upload photo'}
                   <input
                     type="file"
@@ -70,48 +105,29 @@ export class SpeakerPage extends React.Component {
                   />
                 </Button>
               )}
-              <Row noGutters={true} className="mb-5 pt-4 border-top">
-                <p>{bio}</p>
-              </Row>
-              {trackRecord && (
-                <div className="mb-3">
-                  <h4>Track record</h4>
-                  <ReactMarkdown source={trackRecord} />
-                </div>
-              )}
-              {video_url && (
-                <div className="mb-3">
-                  <h4>Video URL</h4>
-                  <div>
-                    <a href={video_url} target="_blank">
-                      {video_url}
-                    </a>
+            </div>
+          </div>
+          {sessions && sessions.length ? (
+            <div className="mt-10">
+              <h3 className="mb-4 font-weight-bold">{`${name.split(' ')[0]}'s session`}</h3>
+              {sessions.map(session => (
+                <Link
+                  key={session._id}
+                  to={`/session/${getHref(session)}`}
+                  className="unstyled-link">
+                  <div className="bg-emph p-3 mb-4 d-inline-block" key={session._id}>
+                    <h4 className="font-weight-heavy font-size-md">{session.title}</h4>
+                    <div className="d-flex mb-3 font-size-sm">
+                      <div className="mr-8">{getSessionTypeStr(session.type)}</div>
+                      <div className="d-flex">{session.tags.map(Tag)}</div>
+                    </div>
                   </div>
-                </div>
-              )}
-              {sessions && sessions.length ? (
-                <div className="mt-10">
-                  <h4 className="mb-4">{`${name.split(' ')[0]}'s Proposals`}</h4>
-                  {sessions.map(session => (
-                    <Link
-                      key={session._id}
-                      to={`/session/${getHref(session)}`}
-                      className="unstyled-link">
-                      <div className="bg-gray-200 p-3 mb-4" key={session._id}>
-                        <h5>{session.title}</h5>
-                        <div className="d-flex mb-3 font-size-sm">
-                          <div className="mr-10">{getSessionTypeStr(session.type)}</div>
-                          <div className="text-muted d-flex">{session.tags.map(Tag)}</div>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                undefined
-              )}
-            </Col>
-          </Row>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            undefined
+          )}
         </Container>
       </Page>
     );

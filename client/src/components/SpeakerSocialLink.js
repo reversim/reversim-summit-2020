@@ -1,5 +1,5 @@
 import React from 'react';
-import cn from 'classnames';
+import IconLink from './IconLink';
 
 const icons = {
   twitter: 'twitter',
@@ -15,14 +15,7 @@ const hrefs = {
 };
 
 const SpeakerSocialLink = ({type, value}) => (
-  <a
-    key={type}
-    target="_blank"
-    className="flex-1 text-center"
-    href={hrefs[type](value)}
-    style={{color: 'rgba(0,30,60,0.7)'}}>
-    <i className={cn('fa', `fa-${icons[type]}`)} />
-  </a>
+  <IconLink href={hrefs[type](value)} icon={icons[type]} className="mr-4" />
 );
 
 export default SpeakerSocialLink;

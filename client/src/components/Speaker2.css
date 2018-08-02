@@ -1,0 +1,39 @@
+.img {
+  width: 200px;
+  height:  200px;
+  background-size: cover;
+  z-index:1;
+  position: relative;
+  box-shadow: 0 0px 30px #010036;
+}
+
+.img:hover div  {
+  display: block !important;
+}
+
+.body {
+  width: 252px;
+  margin-top: -20px;
+}
+
+@media (max-width: 990px) {
+  .homepageImg {
+    width: 250px;
+    height: 250px;
+  }
+
+  .homepageBody {
+    width: 305px;
+  }
+}
+
+@media (max-width:767px) {
+  .img, .homepageImg {
+    width: 150px;
+    height: 150px;
+  }
+
+  .body {
+    width: 215px;
+  }
+}

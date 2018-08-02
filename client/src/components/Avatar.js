@@ -13,7 +13,7 @@ const Avatar = ({picture, onLogout}) => (
           <Link to="/my-votes">My Votes</Link>
         </div>
         <div className={s.menuItem} onClick={onLogout}>
-          Logout
+          <a href="#">Logout</a>
         </div>
       </div>
     </ul>

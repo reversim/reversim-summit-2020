@@ -8,7 +8,6 @@ import logoImg from '../images/rs18-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
-import {getLoginUrl} from './Redirect';
 
 const CFPCTA = () => (
   <Link to="/cfp" className="unstyled-link">
@@ -105,8 +104,10 @@ class Navbar extends Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav
             navbar
-            className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-blue': isSmallScreen})}>
-            <a href="https://news.ycombinator.com" className="d-none d-lg-block">
+            className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-darkblue': isSmallScreen})}>
+            <a
+              href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"
+              className="d-none d-lg-block">
               <Button size="lg" className="text-capitalize font-size-lg-md">
                 Get Tickets
               </Button>
@@ -122,30 +123,13 @@ class Navbar extends Component {
                   </NavItem>
                 </div>
               )}
-            {isSmallScreen &&
-              !user && (
-                <div className="border-top">
-                  <NavbarItem to={getLoginUrl()} text="Login" external={true} />
-                </div>
-              )}
           </Nav>
         </Collapse>
         {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
 
         {!isServer &&
-          !isSmallScreen && (
-            <div className="ml-auto">
-              {user ? (
-                <Avatar {...user} onLogout={onLogout} />
-              ) : (
-                <a href={getLoginUrl()} className="ml-5">
-                  <Button outline color="primary" onClick={this.login}>
-                    Login
-                  </Button>
-                </a>
-              )}
-            </div>
-          )}
+          !isSmallScreen &&
+          user && <div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div>}
       </Navbar2>
     );
   }
