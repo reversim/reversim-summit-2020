@@ -67,23 +67,26 @@ export default (app) => {
     const users = await proposalsController.getProposers(proposals);
     const allTags = proposalsController.getTags(proposals);
     const user = req.user;
-    const team = await usersController.getTeam();
+    const teamUsers = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
     const sponsors = await sponsorsController.getAllSponsors(true);
     const speakers = users.map(u => u._id);
+    const team = teamUsers.map(u => u._id);
 
     const userId = user && String(user._id);
     if (userId && !users.find(u => String(u._id) === userId)) users.unshift(user);
+
+    const usersWithTeam = users.concat(teamUsers);
     
     const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user));
-    let mappedUsers = users.map(u => transformUser(u, req.user));
+    let mappedUsers = usersWithTeam.map(u => transformUser(u, req.user));
 
     res.json({
       proposals: keyBy(mappedProposals, '_id'),
       users: keyBy(mappedUsers, '_id'),
       user: user ? user._id : null,
       allTags,
-      team: team.map(user => transformUser(user, req.user)),
+      team,
       messages,
       sponsors,
       eventConfig: eventConfig(),

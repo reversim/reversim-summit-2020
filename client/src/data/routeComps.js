@@ -1,6 +1,7 @@
 import Home from '../components/Home';
 import Agenda from '../components/Agenda';
 import MyProfile from '../components/MyProfile';
+import AboutPage from '../components/AboutPage';
 import SpeakerPage from '../components/SpeakerPage';
 import SpeakerEditPage from '../components/SpeakerEditPage';
 import SessionPage from '../components/SessionPage';
@@ -19,7 +20,7 @@ import TimelinePage from '../components/TimelinePage';
 
 export default [
   {path: '/', comp: Home},
-  {path: '/about', comp: Home},
+  {path: '/about', comp: AboutPage},
   {path: '/profile', comp: MyProfile},
   // { path: "/register", comp: RegisterPage },
   {path: '/schedule', comp: Agenda},
