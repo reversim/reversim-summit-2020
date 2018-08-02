@@ -33,6 +33,8 @@ const sponsors = [
   'wework',
   'wibbitz',
   'wix',
+  'moovit',
+  'monday',
 ];
 
 const sponsorNames = [
@@ -60,6 +62,8 @@ const sponsorNames = [
   'WeWork',
   'WIBBITZ',
   'Wix',
+  'Moovit',
+  'monday.com',
 ];
 
 const urls = JSON.parse(
