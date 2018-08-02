@@ -94,7 +94,7 @@ export const agenda2 = [
   },
   {
     time: '1450-1520',
-    sessions: ['5af87646b5d55a001446ce7c', '5b0bf67e6c37af00145dbe18', '5af06f930c482c0014ab514c'],
+    sessions: ['5af87646b5d55a001446ce7c', '5b0bf67e6c37af00145dbe18', '5b103d6a892ac3001481694e'],
   },
   {
     time: '1540-1610',
