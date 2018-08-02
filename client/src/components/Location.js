@@ -3,7 +3,7 @@ import Map from './Map';
 import {Button, Container} from 'reactstrap';
 
 const Location = () => (
-  <section className="mb-20">
+  <section className="mb-20 location-section">
     <Container>
       <h1 className="mb-0" style={{zIndex: 1, position: 'relative'}}>
         Venue

@@ -7,6 +7,22 @@ import ReactMarkdown from 'react-markdown';
 import {REVERSIM_SUMMIT} from '../utils';
 import cn from 'classnames';
 
+const chunkArray =(myArray, chunk_size) => {
+  let index = 0;
+  let arrayLength = myArray.length;
+  let tempArray = [];
+
+  for (index = 0; index < arrayLength; index += chunk_size) {
+    let myChunk = myArray.slice(index, index + chunk_size);
+    if (myChunk.length < chunk_size) {
+      tempArray[tempArray.length - 1].push(myChunk);
+    } else {
+      tempArray.push(myChunk);
+    }
+  }
+  return tempArray;
+};
+
 const Sponsor = ({
   sponsor: {
     name = '',
@@ -30,7 +46,7 @@ const Sponsor = ({
     : featuredJobInfo;
   return (
     <div key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)}>
-      <div className="text-center mb-4">
+      <div className="mb-4">
         <a href={url} target="_blank">
           <img src={logo} className={s.sponsorImg} alt={name} />
         </a>
@@ -117,7 +133,12 @@ class SponsorMini extends React.Component {
         onMouseEnter={() => this.setState({hovered: true})}
         onMouseLeave={() => this.setState({hovered: false})}>
         <div className="p-relative d-inline-block">
-          <img src={logo} className={s.sponsorImg} alt={name} />
+          <img
+            src={logo}
+            className={s.sponsorImg}
+            alt={name}
+            style={{opacity: this.state.hovered ? 0 : 1}}
+          />
           <img
             src={logoHover}
             className={cn(s.sponsorImg, 'p-absolute')}
@@ -130,19 +151,28 @@ class SponsorMini extends React.Component {
   }
 }
 
-export const SponsorsSection = ({sponsors}) => (
-  <section className="mb-20">
-    <Container>
-      <h1 style={{position: 'relative', zIndex: 1}}>Sponsors</h1>
-      <div className="bg-emph px-6 py-9" style={{marginTop: -40}}>
-        <div className="d-flex flex-wrap justify-content-between">
-          {sponsors.map(s => <SponsorMini key={s._id} {...s} />)}
+export const SponsorsSection = ({sponsors}) => {
+  let dividedSponsors = chunkArray(sponsors, 5);
+  return (
+    <section className="mb-20">
+      <Container>
+        <h1 style={{position: 'relative', zIndex: 1}}>Sponsors</h1>
+        <div className="bg-emph px-6 py-9" style={{marginTop: -40}}>
+          <div>
+            {dividedSponsors.map(sponsorsRow => {
+              return (
+                <div className="d-flex flex-wrap justify-content-between">
+                  {sponsorsRow.map(s => <SponsorMini key={s._id} {...s} />)}
+                </div>
+              );
+            })}
+          </div>
+          {/* <WantToBe /> */}
         </div>
-        {/* <WantToBe /> */}
-      </div>
-    </Container>
-  </section>
-);
+      </Container>
+    </section>
+  );
+};
 
 const _WantToBe = () => (
   <div className="my-4 p-3 bg-gray-200 line-height-17 text-center">
@@ -156,10 +186,10 @@ class SponsorsPage extends React.Component {
     const {createSponsor, updateSponsor, deleteSponsor, user, sponsors} = this.props;
     return (
       <Page title="Sponsors" {...this.props}>
-        <h1 className="text-center mt-5">Our sponsors</h1>
         {/* <WantToBe /> */}
         <Container>
-          <p className="text-center mb-5">
+          <h1 className="mt-5">Our sponsors</h1>
+          <p className="font-size-lg tmb-5">
             Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:
           </p>
           {user &&

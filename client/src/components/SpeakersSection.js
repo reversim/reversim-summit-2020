@@ -10,20 +10,24 @@ import {getHref} from '../utils';
 const Speaker = ({speaker}) => {
   const {name, oneLiner, picture, twitter, github, linkedin, stackOverflow} = speaker;
   return (
-    <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
-      <div
-        style={{backgroundImage: `url('${picture}')`}}
-        alt={name}
-        className={cn(img, homepageImg)}
-      />
+    <span>
+      <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
+        <div
+          style={{backgroundImage: `url('${picture}')`}}
+          alt={name}
+          className={cn(img, homepageImg)}
+        />
+      </Link>
       <div className={cn(body, homepageBody, 'ml-4 pt-8 pb-4 px-2 bg-emph')}>
-        <div className="font-weight-heavy mb-3" style={{letterSpacing: 0.5}}>
-          {name}
-        </div>
-        <div className="font-size-sm mb-6">{oneLiner}</div>
+        <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
+          <div className="font-weight-heavy mb-3" style={{letterSpacing: 0.5}}>
+            {name}
+          </div>
+          <div className="font-size-sm mb-6">{oneLiner}</div>
+        </Link>
         <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
       </div>
-    </Link>
+    </span>
   );
 };
 
@@ -34,7 +38,7 @@ const SpeakersSection = props => {
     <section className="mb-20">
       <Container>
         <h1 className="mb-14">Speakers</h1>
-        <Row>
+        <Row className="justify-content-center">
           {speakers.map((speaker, i) => (
             <div className={cn('mb-18', {'mr-14': (i + 1) % perRow})} key={i}>
               <Speaker speaker={speaker} />

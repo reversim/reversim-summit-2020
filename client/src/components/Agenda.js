@@ -211,7 +211,7 @@ const Agenda = ({proposals, ...props}) => {
   return (
     <Page title="Schedule" {...props}>
       <Container>
-        <h1 className="mb-8 font-weight-bold">Schedule</h1>
+        <h1 className="mb-4 font-weight-bold">Schedule</h1>
         {/* <AddToCal /> */}
         <DayAgenda index="0" sessions={proposals} users={props.users} />
         {/*<h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>*/}

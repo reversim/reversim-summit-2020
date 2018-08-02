@@ -6,10 +6,10 @@ import {img} from './Speaker2.css';
 const TeamMember = ({picture, name, oneLiner, bio}) => (
   <div className="mr-8 mb-8">
     <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
-    <div className="bg-emph ml-4 pt-8 px-4 pb-4" style={{marginTop: -20}}>
+    <div className="bg-emph ml-2 pt-8 px-4 pb-4" style={{marginTop: -20}}>
       <h4>{name}</h4>
       <p>{oneLiner}</p>
-      <p>{bio}</p>
+      <p style={{margin: 0, fontSize: '14px'}}>{bio}</p>
     </div>
   </div>
 );
