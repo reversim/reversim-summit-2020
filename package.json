@@ -6,7 +6,7 @@
     "start": "node server",
     "dev": "node dev.js",
     "postinstall": "cd server && npm install && cd ../client && npm install",
-    "heroku-postbuild": "cd client && npm install --production=false && npm build"
+    "heroku-postbuild": "cd client && npm install --production=false && npm run build"
   },
   "engines": {
     "node": ">=8.11.0"

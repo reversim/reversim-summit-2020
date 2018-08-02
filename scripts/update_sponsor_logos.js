@@ -5,8 +5,9 @@ const fs = require('fs');
 const {resolve} = require('path');
 const {promisify: p} = require('util');
 
-const mongoUrl = 'mongodb://localhost:27017';
-const dbName = 'ReversimSummit18';
+// eslint-disable-next-line
+const mongoUrl = `mongodb://${process.env.MONGODB_ADMIN_USER}:${process.env.MONGODB_ADMIN_PASS}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DB}`;
+const dbName = 'heroku_xqplfw4b';
 const sponsors = [
   'amazon',
   'appliedMaterials',
