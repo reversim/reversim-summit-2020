@@ -68,43 +68,45 @@ export class SpeakerPage extends React.Component {
                 flex: '0 0 200px',
                 marginLeft: -20,
               }}
-              className="mt-5 p-relative">
-              <img src={speaker.picture} alt={speaker.name} className="w-100" />
-              <div
-                className="p-absolute stretch"
-                style={{boxShadow: 'inset 0 0 49px 0 rgba(1, 0, 53, 0.8)'}}
-              />
+              className="mt-5">
+              <div className="p-relative">
+                <img src={speaker.picture} alt={speaker.name} className="w-100" />
+                <div
+                  className="p-absolute stretch"
+                  style={{boxShadow: 'inset 0 0 49px 0 rgba(1, 0, 53, 0.8)'}}
+                />
+              </div>
+              {isUser && (
+                <Button
+                  color="primary"
+                  className="d-block mb-4 mx-auto mx-md-0 mt-3"
+                  disabled={isUploadingPhoto}
+                  style={{position: 'relative', overflow: 'hidden'}}>
+                  {isUploadingPhoto ? 'Uploading' : 'Upload photo'}
+                  <input
+                    type="file"
+                    disabled={isUploadingPhoto}
+                    style={{
+                      opacity: 0,
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                    }}
+                    onChange={e => {
+                      const f = e.target.files[0];
+                      if (!f) return;
+                      const reader = new FileReader();
+                      reader.onload = e2 => this.onPhotoUploaded(e2.target.result);
+                      reader.readAsDataURL(f);
+                      this.onUploadingPhoto();
+                    }}
+                  />
+                </Button>
+              )}
             </div>
           </div>
-          {isUser && (
-            <Button
-              color="primary"
-              className="d-block mb-4 mx-auto mx-md-0"
-              disabled={isUploadingPhoto}
-              style={{width: 150, position: 'relative', overflow: 'hidden'}}>
-              {isUploadingPhoto ? 'Uploading' : 'Upload photo'}
-              <input
-                type="file"
-                disabled={isUploadingPhoto}
-                style={{
-                  opacity: 0,
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                }}
-                onChange={e => {
-                  const f = e.target.files[0];
-                  if (!f) return;
-                  const reader = new FileReader();
-                  reader.onload = e2 => this.onPhotoUploaded(e2.target.result);
-                  reader.readAsDataURL(f);
-                  this.onUploadingPhoto();
-                }}
-              />
-            </Button>
-          )}
           {sessions && sessions.length ? (
             <div className="mt-10">
               <h3 className="mb-4 font-weight-bold">{`${name.split(' ')[0]}'s session`}</h3>
