@@ -13,12 +13,13 @@ const colors = {
   'open source': 'pink',
 };
 
-const Tag = name => (
-  <div
-    key={name}
-    className={`font-size-sm mr-3 text-${colors[name.toLowerCase()]}`}>
-    [{name}]
-  </div>
-);
+const Tag = name =>
+  name.toLowerCase() in colors ? (
+    <div key={name} className={`font-size-sm mr-3 text-${colors[name.toLowerCase()]}`}>
+      [{name}]
+    </div>
+  ) : (
+    undefined
+  );
 
 export default Tag;
