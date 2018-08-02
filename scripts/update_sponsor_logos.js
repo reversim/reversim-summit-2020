@@ -1,6 +1,5 @@
 'use strict';
 require('dotenv').config();
-const cloudinary = require('cloudinary');
 const {MongoClient} = require('mongodb');
 const fs = require('fs');
 const {resolve} = require('path');
@@ -83,32 +82,3 @@ MongoClient.connect(
     client.close();
   },
 );
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-// (async function() {
-//   const urls = {};
-//   for (const sponsor of sponsors) {
-//     console.log(`processing ${sponsor}`);
-//     const filePath = resolve(__dirname, '../client/src/images/sponsors', `${sponsor}.png`);
-//     const url = await upload(filePath);
-//     const urlHover = await upload(filePath.replace('.png', '-hover.png'));
-//     urls[sponsor] = [url, urlHover];
-//   }
-//   console.log(urls);
-//   fs.writeFileSync(resolve(__dirname, '../data/sponsor_logos.json'), JSON.stringify(urls));
-//   console.log('Done');
-// })();
-
-async function upload(data) {
-  return new Promise(resolve => {
-    cloudinary.uploader.upload(data, function(result) {
-      console.log('new logo url', result.secure_url);
-      resolve(result.secure_url);
-    });
-  });
-}
