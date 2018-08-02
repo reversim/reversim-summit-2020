@@ -233,13 +233,14 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //// stylelint-enable value-keyword-case
 //
 //$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-xl:                35px;
 $font-size-lg:                24px;
 $font-size-sm:                14px; // for 12px use <small>
 $font-size-md:                18px;
 //
 //$font-weight-light:           300;
 //$font-weight-normal:          400;
-$font-weight-md:            500;
+//$font-weight-bold:            700;
 //
 //$font-weight-base:            $font-weight-normal;
 //$line-height-base:            1.5;

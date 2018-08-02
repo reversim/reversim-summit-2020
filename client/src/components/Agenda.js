@@ -54,7 +54,9 @@ const ShortSessions = ({sessions, users}) => (
           <div className="d-flex">
             <div className="d-flex mr-3">{getSessionImgs(ss, users)}</div>
             <div>
-              <h5 className={cn('mr-4 mb-0 font-size-sm', s.igniteName)}>{getSpeakerName(ss, users)}</h5>
+              <h5 className={cn('mr-4 mb-0 font-size-sm', s.igniteName)}>
+                {getSpeakerName(ss, users)}
+              </h5>
               <div>{ss.title}</div>
             </div>
           </div>
@@ -187,8 +189,8 @@ const agendas = [agenda1, agenda2];
 const DayAgenda = ({index, sessions, isLargeScreen, users}) => {
   return (
     <div className={cn(s.agenda, 'mb-5')}>
-      <h2 className={`${cn(s.subtitle)} day-agenda-title`}>{dates[index]}</h2>
-      <div className="bg-emph pt-4 p-3 day-agenda-content">
+      <h2 className={cn(s.subtitle, 'font-size-xl font-weight-heavy')}>{dates[index]}</h2>
+      <div className="bg-emph pt-4 p-3" style={{marginTop: -20}}>
         {agendas[index].map(line => (
           <Line {...line} allSessions={sessions} isLargeScreen={isLargeScreen} users={users} />
         ))}

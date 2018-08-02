@@ -13,7 +13,9 @@ const Speaker = ({speaker}) => {
     <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
       <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
       <div className={cn(body, 'ml-4 pt-8 pb-4 px-2 bg-emph')}>
-        <div className="speaker-name font-weight-md mb-3">{name}</div>
+        <div className="font-weight-heavy mb-3" style={{letterSpacing: 0.5}}>
+          {name}
+        </div>
         <div className="font-size-sm mb-6">{oneLiner}</div>
         <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
       </div>
