@@ -34,8 +34,10 @@ export class SpeakerPage extends React.Component {
       <Page title={name} user={user} {...this.props}>
         <Container>
           <h2 className="mb-0 p-relative z-1">{speaker.name}</h2>
-          <div className="d-flex align-items-start">
-            <div className="flex-1 bg-emph pl-4 pr-8 pt-8 pb-4" style={{marginTop: -20}}>
+          <div className="speaker-page__speaker-wrapper">
+            <div
+              className="speaker-page__speaker-content flex-1 bg-emph pl-4 pr-8 pt-8 pb-4"
+              style={{marginTop: -20}}>
               {isReversimTeamMember && (
                 <div className="mb-3 text-center text-md-left">
                   <small className="py-1 px-2 bg-danger text-white">Team member</small>
@@ -63,12 +65,7 @@ export class SpeakerPage extends React.Component {
               )}
               <SpeakerSocialLinks {...speaker} />
             </div>
-            <div
-              style={{
-                flex: '0 0 200px',
-                marginLeft: -20,
-              }}
-              className="mt-5">
+            <div className="speaker-page__speaker-image">
               <div className="p-relative">
                 <img src={speaker.picture} alt={speaker.name} className="w-100" />
                 <div

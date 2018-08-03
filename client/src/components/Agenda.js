@@ -104,9 +104,11 @@ const Session = ({text, session, shortSessions, hall, sep, users}) => {
 
   return (
     <div
-      className={cn('d-flex pt-2', {'pb-2': sep})}
+      className={cn('agenda-session d-flex')}
       style={{borderBottom: sep ? '1px solid rgba(255,255,255,0.2)' : ''}}>
-      <div style={{flex: '0 0 120px'}}>{hall}</div>
+      <div className="agenda-session__hall" style={{display: `${hall ? 'auto' : 'none'}`}}>
+        {hall}
+      </div>
       <div className="flex-1">
         {text && (
           <div style={{fontSize: 24}} className="font-weight-bold">
@@ -175,7 +177,7 @@ const Line = ({time, sessions, text, href, shortSessions, allSessions, users}) =
         <div className="border-top border-white flex-1" />
       </div>
       <div className="d-flex">
-        <div style={{flex: '0 0 140px'}} />
+        <div className="agenda-line-spacer" style={{flex: '0 0 140px'}} />
         <div className="flex-1">{cols}</div>
       </div>
     </div>

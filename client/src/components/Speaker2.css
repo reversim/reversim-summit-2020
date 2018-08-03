@@ -37,3 +37,14 @@
     width: 215px;
   }
 }
+
+@media (max-width:540px) {
+  .img, .homepageImg {
+    width: 150px;
+    height: 150px;
+  }
+
+  .body {
+    width: 400px;
+  }
+}

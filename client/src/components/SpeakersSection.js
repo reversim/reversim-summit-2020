@@ -20,10 +20,10 @@ const Speaker = ({speaker}) => {
       </Link>
       <div className={cn(body, homepageBody, 'ml-4 pt-8 pb-4 px-2 bg-emph')}>
         <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
-          <div className="font-weight-heavy mb-3" style={{letterSpacing: 0.5}}>
+          <div className="speaker-name font-weight-heavy mb-3" style={{letterSpacing: 0.5}}>
             {name}
           </div>
-          <div className="font-size-sm mb-6">{oneLiner}</div>
+          <div className="speaker-oneliner font-size-sm mb-6">{oneLiner}</div>
         </Link>
         <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
       </div>
@@ -33,14 +33,13 @@ const Speaker = ({speaker}) => {
 
 const SpeakersSection = props => {
   const speakers = sampleSize(props.speakers, 6).map(s => props.users[s]);
-  const perRow = props.isSmallScreen ? 2 : 3;
   return (
     <section className="mb-20">
       <Container>
         <h1 className="mb-14">Speakers</h1>
-        <Row className="justify-content-center">
+        <Row className="speakers-section__speakers-wrapper">
           {speakers.map((speaker, i) => (
-            <div className={cn('mb-18', {'mr-14': (i + 1) % perRow})} key={i}>
+            <div className={cn('mb-18')} key={i}>
               <Speaker speaker={speaker} />
             </div>
           ))}

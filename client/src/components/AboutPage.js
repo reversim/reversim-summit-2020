@@ -19,8 +19,8 @@ const AboutPage = props => {
     <Page title="About" {...props}>
       <Container className="mt-4">
         <h1 className="p-relative z-1 text-uppercase mb-0">About</h1>
-        <div className="d-flex align-items-start mb-24" style={{marginTop: -40}}>
-          <div className="bg-emph pt-10 pl-4 pb-4 pr-8 flex-1">
+        <div className="about-content d-flex align-items-start mb-24" style={{marginTop: -40}}>
+          <div className="about-content__p1 bg-emph pt-10 pl-4 pb-4 pr-8 flex-1">
             <h4 className="mb-3">Reversim Summit</h4>
             <div className="bg-cyan mb-3" style={{width: 70, height: 3}} />
             <p className="font-weight-light">
@@ -35,7 +35,7 @@ const AboutPage = props => {
               the Revesim Summit spirit.
             </p>
           </div>
-          <div className="bg-emph py-4 pl-8 pr-4 mt-5 flex-1" style={{marginLeft: -25}}>
+          <div className="about-content__p2 bg-emph py-4 pl-8 pr-4 mt-5 flex-1">
             <h4 className="mb-3">Reversim podcast</h4>
             <div className="bg-cyan mb-3" style={{width: 70, height: 3}} />
             <p className="font-weight-light">

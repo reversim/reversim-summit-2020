@@ -128,7 +128,7 @@ class SponsorMini extends React.Component {
       <a
         href={url}
         target="_blank"
-        className="d-block text-center"
+        className="sponsor-mini d-block text-center"
         style={{width: '20%'}}
         onMouseEnter={() => this.setState({hovered: true})}
         onMouseLeave={() => this.setState({hovered: false})}>
@@ -199,7 +199,7 @@ class SponsorsPage extends React.Component {
                 <SponsorForm onSubmit={createSponsor} />
               </div>
             )}
-          <div className={cn('d-lg-flex flex-wrap flex-column', s.sponsorWrap)}>
+          <div className={cn(s.sponsorWrap)}>
             {sponsors.map(sponsor => (
               <SponsorWithEdit
                 key={sponsor._id}
