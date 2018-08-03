@@ -117,7 +117,7 @@ const SessionPage = props => {
           <div className="font-size-sm">
             <ReactMarkdown source={abstract} />
           </div>
-          {categories && (
+          {/* {categories && (
             <div>
               <h4>Categories</h4>
               <ul>
@@ -128,7 +128,7 @@ const SessionPage = props => {
                 ))}
               </ul>
             </div>
-          )}
+          )} */}
           {outline && (
             <div>
               <h4>Outline</h4>

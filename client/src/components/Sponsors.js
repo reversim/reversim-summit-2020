@@ -26,7 +26,7 @@ const chunkArray =(myArray, chunk_size) => {
 const Sponsor = ({
   sponsor: {
     name = '',
-    logo,
+    logoHover,
     url,
     description = '',
     featuredJobInfo,
@@ -48,7 +48,7 @@ const Sponsor = ({
     <div key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)}>
       <div className="mb-4">
         <a href={url} target="_blank">
-          <img src={logo} className={s.sponsorImg} alt={name} />
+          <img src={logoHover} className={s.sponsorImg} alt={name} />
         </a>
       </div>
       <h4>
