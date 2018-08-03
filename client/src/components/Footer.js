@@ -6,7 +6,7 @@ import {getLoginUrl} from './Redirect';
 const Footer = ({user}) => (
   <footer className="bg-darkblue2 py-6 font-size-md">
     <Container>
-      <Row className="justify-content-between align-items-center" noGutters>
+      <Row className="footer-content align-items-center" noGutters>
         <div className="d-flex">
           <a className="text-white mr-6" href="mailto:rs18-team@googlegroups.com">
             Contact

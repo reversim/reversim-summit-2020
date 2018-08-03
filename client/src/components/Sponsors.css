@@ -5,11 +5,12 @@
 }
 
 @media (min-width:991px) {
-    .sponsor { 
-        width: calc(50% - 20px);
+    .sponsor {
+        width: calc(100% - 20px);
+        display: inline-block;
     }
 
-    .sponsorWrap { 
-        height: 10500px;
+    .sponsorWrap {
+        column-count: 2;
     }
 }

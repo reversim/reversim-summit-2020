@@ -35,7 +35,7 @@ const SpeakersPage = ({shuffledSpeakers, users, ...props}) => {
   return (
     <Page title="Speakers" {...props}>
       <Container>
-        <h1 className="my-10">Meet the speakers</h1>
+        <h1 className="my-10">Speakers</h1>
         <Row noGutters>
           <Col className="mr-8 mr-md-9" style={{marginLeft: props.isSmallerScreen ? 0 : -15}}>
             {benji && (
@@ -52,7 +52,7 @@ const SpeakersPage = ({shuffledSpeakers, users, ...props}) => {
             )}
           </Col>
         </Row>
-        <Row>
+        <Row className="speakers-section__speakers-wrapper">
           {shuffledSpeakers.map((speaker, i) => (
             <div
               className={cn('mb-18', {'mr-16 mr-md-15 mr-lg-13': (i + 1) % perRow})}

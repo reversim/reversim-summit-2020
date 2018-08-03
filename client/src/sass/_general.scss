@@ -13,6 +13,15 @@ body {
   color: white;
 }
 
+a {
+  color: $teal;
+
+  &:hover {
+    color: $cyan;
+    text-decoration: none;
+  }
+}
+
 p {
   line-height: 1.7;
   border-bottom: 20px;
@@ -264,5 +273,130 @@ button.btn {
 
   .h1-up {
     margin-top: -24px;
+  }
+}
+
+
+///////
+.nav-link {
+  &.active {
+    color: #1ad6ff;
+  }
+}
+
+.location-section {
+  background: url('../images/venue-bg.jpg') center;
+}
+
+.sponsor-mini {
+  width: 20%;
+
+  @media (max-width:767px) {
+    width: 50%;
+  }
+}
+
+.speakers-section__speakers-wrapper {
+  justify-content: space-between;
+
+  @media (max-width:767px) {
+    justify-content: space-around;
+  }
+
+  @media (max-width:540px) {
+    justify-content: center;
+
+    .speaker-name {
+      font-size: 20px;
+    }
+
+    .speaker-oneliner {
+      font-size: 18px;
+      font-weight: 300;
+    }
+  }
+}
+
+.speaker-page__speaker-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  .speaker-page__speaker-image {
+    flex: 0 0 200px;
+    margin-left: -20px;
+  }
+
+  @media (max-width:540px) {
+    flex-direction: column;
+    align-items: flex-end;
+
+    .speaker-page__speaker-image {
+      flex: auto;
+      margin-left: 0;
+
+      width: 200px;
+      margin-right: 20px;
+      margin-top: -40px;
+    }
+  }
+}
+
+.footer-content {
+  justify-content: space-between;
+
+  @media (max-width:767px) {
+    justify-content: center;
+  }
+}
+
+.about-content {
+  flex-direction: row;
+
+  .about-content__p2 {
+    margin-left: -25px;
+  }
+
+  @media (max-width:767px) {
+    flex-direction: column;
+
+    .about-content__p2 {
+      margin-left: 0;
+    }
+  }
+}
+
+.agenda-line-spacer {
+  @media (max-width:767px) {
+    display: none;
+  }
+}
+
+.agenda-session {
+  padding: 10px 0;
+
+  @media (max-width:767px) {
+    padding: 30px 0;
+  }
+
+  .agenda-session__hall {
+    flex: 0 0 120px;
+
+    @media (max-width:767px) {
+      flex: 0 0 80px;
+    }
+  }
+}
+
+.social-icon-link {
+  font-size: 16px;
+  margin-right: 20px;
+
+  @media (max-width:767px) {
+    font-size: 20px;
+  }
+
+  @media (max-width:540px) {
+    font-size: 22px;
   }
 }

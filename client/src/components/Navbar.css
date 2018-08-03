@@ -12,6 +12,10 @@
     color: white;
 }
 
+.active {
+  color: #1ad6ff;
+}
+
 .logo {
     cursor: pointer;
     width: 203px;

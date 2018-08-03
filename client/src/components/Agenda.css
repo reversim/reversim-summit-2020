@@ -15,16 +15,6 @@
     font-size: 18px;
 }
 
-@media (max-width:768px) {
-    .tall {
-        font-size: 24px;
-    }
-
-    .small {
-        font-size: 14px;
-    }
-}
-
 .igniteName {
     flex: 0 0 160px;
 }
@@ -41,9 +31,24 @@
 .speakerImg {
     width: 50px;
     height: 50px;
+    margin-left: 10px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 50%;
-    flex: 0 0 50px;
+
+}
+@media (max-width:768px) {
+    .tall {
+        font-size: 24px;
+    }
+
+    .small {
+        font-size: 14px;
+    }
+}
+
+@media (max-width:380px) {
+    .speakerImg {
+      display: none;
+    }
 }

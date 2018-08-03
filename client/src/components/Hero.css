@@ -66,14 +66,13 @@
 
 @media (max-width:768px) {
     .heroInner {
-        flex-direction:column;
+        flex-direction: column-reverse;
         margin-right: 0;
-        margin-top: 120px;
     }
 
     .left  {
         width: auto;
-        max-width: 390px;
+        max-width: 500px;
         margin-right: 0;
     }
 

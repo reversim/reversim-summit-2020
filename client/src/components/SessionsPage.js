@@ -12,10 +12,10 @@ const Session = props => {
   const {_id, title, type, tags, abstract} = proposal;
   return (
     <Link className="bg-emph p-3 d-block unstyled-link mb-6" to={`/session/${getHref(proposal)}`}>
-      <div className="mb-6">{speakers.map(speaker => speaker.name)}</div>
+      <div className="mb-4">{speakers.map(speaker => speaker.name)}</div>
       <h4>{title}</h4>
-      <div className="d-flex mb-6">
-        <div className="mr-8 font-size-sm">{getSessionTypeStr(type)}</div>
+      <div className="d-flex mb-4">
+        <div className="mr-2 font-size-sm">{getSessionTypeStr(type)}</div>
         <div className="d-flex">{tags.map(Tag)}</div>
       </div>
       <div className="text-truncate font-size-sm">{abstract}</div>
@@ -32,7 +32,7 @@ class SessionsPage extends React.Component {
     return (
       <Page title="Sessions" {...this.props}>
         <Container>
-          <h1 className="text-center mt-6 mb-12">Sessions</h1>
+          <h1 className="mt-6 mb-12">Sessions</h1>
           {showProposals ? (
             <div>
               {proposals.map(proposal => (

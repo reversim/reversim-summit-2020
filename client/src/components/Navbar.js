@@ -17,10 +17,9 @@ const CFPCTA = () => (
   </Link>
 );
 
-const navLinkClass = cn('nav-link', navLink);
-
-const NavbarItem = ({to, text, external}) => {
+const NavbarItem = ({to, text, external, pathname}) => {
   let link;
+  let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   if (external) {
     link = (
       <a className={navLinkClass} href={to}>
@@ -75,7 +74,7 @@ class Navbar extends Component {
   render() {
     const {isHome, isSmallScreen, user, onLogout, pathname, history, eventConfig} = this.props;
     const {cfp} = eventConfig;
-    const {fixed} = this.state;
+    const {fixed, currentPage} = this.state;
     const items = navItems(isHome);
     const isColored = !isHome || fixed;
 
@@ -90,6 +89,8 @@ class Navbar extends Component {
         {logoEl}
       </Link>
     );
+
+    const navLinkClass = cn('nav-link', navLink);
 
     return (
       <Navbar2
@@ -107,12 +108,19 @@ class Navbar extends Component {
             className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-darkblue': isSmallScreen})}>
             <a
               href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"
+              target="_blank"
               className="d-none d-lg-block">
               <Button size="lg" className="text-capitalize font-size-lg-md">
                 Get Tickets
               </Button>
             </a>
-            {items.map(NavbarItem)}
+            {items.map(item => (
+              <NavbarItem
+                key={`navbar-i-${item.to}`}
+                pathname={pathname}
+                {...item}
+              />
+            ))}
             {isSmallScreen &&
               user && (
                 <div className="border-top">
