@@ -27,6 +27,7 @@ export class SpeakerPage extends React.Component {
     const {speaker, proposals: allProposals, user, isUser} = this.props;
     const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
     const {isUploadingPhoto} = this.state;
+    const canEdit = (user && user.isReversimTeamMember) || isUser;
 
     const sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
 
@@ -38,6 +39,11 @@ export class SpeakerPage extends React.Component {
             <div
               className="speaker-page__speaker-content flex-1 bg-emph pl-4 pr-8 pt-8 pb-4"
               style={{marginTop: -20}}>
+              {canEdit && (
+                <Link to={`/speaker/${speaker._id}/edit`} className="mb-4 d-block">
+                  <Button>Edit</Button>
+                </Link>
+              )}
               {isReversimTeamMember && (
                 <div className="mb-3 text-center text-md-left">
                   <small className="py-1 px-2 bg-danger text-white">Team member</small>
