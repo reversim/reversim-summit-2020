@@ -4,7 +4,7 @@ export const agenda1 = [
     time: '0900-0940',
     sessions: [null, '5b0e83fe2743a60014eeb3e6', '5b103a00892ac3001481694b'],
   },
-  {time: '1000-1050', text: 'Welcome + Keynote', sessions: '5b60b02dd79cc376756c7bdf'},
+  {time: '1000-1050', text: 'Welcome + Keynote', sessions: '5b62c2b345937029731e441b'},
   {
     time: '1110-1140',
     sessions: ['5b059cc386df020014dfa09b', '5b0e9ac02743a60014eeb3f8', '5b0eef542743a60014eeb419'],
@@ -65,7 +65,7 @@ export const agenda2 = [
     time: '0900-0940',
     sessions: [null, '5b0d4dfc4b330d00147e3374', '5b06fdd06c8bb70014163798'],
   },
-  {time: '1000-1050', text: 'Welcome + Keynote', sessions: '5b60b02dd79cc376756c7bde'},
+  {time: '1000-1050', text: 'Welcome + Keynote', sessions: '5b62c2b345937029731e441a'},
   {
     time: '1110-1140',
     sessions: ['5af48fa3db27ea0014a6f7c6', '5b106377459acd0014b1312c', '5b1003dd892ac30014816927'],
