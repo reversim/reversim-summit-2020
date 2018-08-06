@@ -46,7 +46,7 @@ const Sponsor = ({
     : featuredJobInfo;
   return (
     <div key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)}>
-      <div className="mb-4">
+      <div className="mb-4 text-center">
         <a href={url} target="_blank">
           <img src={logoHover} className={s.sponsorImg} alt={name} />
         </a>
