@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from './Page';
-import {Col, Container, Row} from 'reactstrap';
+import {Container} from 'reactstrap';
 import s from './Agenda.css';
 import cn from 'classnames';
 import {agenda1, agenda2} from '../data/agenda';
@@ -52,8 +52,8 @@ const ShortSessions = ({sessions, users}) => (
         {console.log('ss', ss, users)}
         <Link to={`/session/${getHref(ss)}`}>
           <div className="d-flex">
-            <div className="d-flex mr-3">{getSessionImgs(ss, users)}</div>
-            <div>
+            <div className="d-flex">{getSessionImgs(ss, users)}</div>
+            <div className={s.igniteContent}>
               <h5 className={cn('mr-4 mb-0 font-size-sm', s.igniteName)}>
                 {getSpeakerName(ss, users)}
               </h5>
@@ -176,7 +176,7 @@ const Line = ({time, sessions, text, href, shortSessions, allSessions, users}) =
         </div>
         <div className="border-top border-white flex-1" />
       </div>
-      <div className="d-flex">
+      <div className="d-flex flex-wrap">
         <div className="agenda-line-spacer" style={{flex: '0 0 140px'}} />
         <div className="flex-1">{cols}</div>
       </div>
