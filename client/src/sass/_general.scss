@@ -278,6 +278,14 @@ button.btn {
 
 
 ///////
+
+.page-single-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
 .nav-link {
   &.active {
     color: #1ad6ff;

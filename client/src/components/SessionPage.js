@@ -77,7 +77,7 @@ const SessionPage = props => {
   const dayTime = getDateAndTime(id);
 
   return (
-    <Page title={session.title} {...props}>
+    <Page title={session.title} {...props} isSingleContent={true}>
       <Container className="mt-4">
         <div className="bg-emph p-5 mb-8">
           <h3 className="font-weight-heavy">
