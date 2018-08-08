@@ -9,8 +9,4 @@
         width: calc(100% - 20px);
         display: inline-block;
     }
-
-    .sponsorWrap {
-        column-count: 2;
-    }
 }
