@@ -20,9 +20,13 @@ class Page extends Component {
       location,
       history,
       eventConfig,
+      isSingleContent,
     } = this.props;
+
     return (
-      <div style={isHome ? {} : {paddingTop: 160}}>
+      <div
+        style={isHome ? {} : {paddingTop: 160}}
+        className={isSingleContent ? 'page-single-content' : ''}>
         <Navbar
           isHome={isHome}
           user={user}

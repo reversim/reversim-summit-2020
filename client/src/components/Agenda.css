@@ -37,6 +37,11 @@
     background-position: center;
 
 }
+
+.igniteContent {
+  margin-left: 15px;
+}
+
 @media (max-width:768px) {
     .tall {
         font-size: 24px;
@@ -47,8 +52,12 @@
     }
 }
 
-@media (max-width:380px) {
+@media (max-width:420px) {
     .speakerImg {
       display: none;
+    }
+
+    .igniteContent {
+      margin-left: 0;
     }
 }
