@@ -13,7 +13,7 @@ const sponsors = [
   // 'cyberark',
   // 'dropbox',
   // 'ebay',
-  'fiverr',
+  //'fiverr',
   // 'gett',
   // 'here',
   // 'iguazio',
@@ -30,6 +30,7 @@ const sponsors = [
   // 'wibbitz',
   // 'wix',
   // 'moovit',
+  'forescout'
 ];
 
 cloudinary.config({
