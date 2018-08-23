@@ -121,7 +121,7 @@ const Session = ({text, session, shortSessions, hall, sep, users}) => {
   );
 };
 
-const halls = ['Smolarz', 'Class 2', 'Class 3'];
+const halls = ['Smolarz', 'Gilman 223', 'Gilman 144'];
 
 const Line = ({time, sessions, text, href, shortSessions, allSessions, users}) => {
   let cols;
