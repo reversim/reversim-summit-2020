@@ -54,7 +54,7 @@ export const agenda1 = [
     time: '1620-1650',
     sessions: ['5b0c19ef6c37af00145dbe26', '5b0d46834b330d00147e3371', '5b0e8b102743a60014eeb3ef'],
   },
-  {time: '1650-1710', text: 'Beer Break'},
+  {time: '1650-1710', text: 'Break'},
   {time: '1710-1750', sessions: ['5b0efef02743a60014eeb41d']},
   {time: '1800', text: 'Goodbye'},
 ];
