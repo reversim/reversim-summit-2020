@@ -35,6 +35,7 @@ const sponsors = [
   'wix',
   'moovit',
   'monday',
+  'forescout'
 ];
 
 const sponsorNames = [
@@ -64,6 +65,7 @@ const sponsorNames = [
   'Wix',
   'Moovit',
   'monday.com',
+  'ForeScout'
 ];
 
 const urls = JSON.parse(
