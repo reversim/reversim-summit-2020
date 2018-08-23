@@ -79,7 +79,7 @@ export class SpeakerPage extends React.Component {
                   style={{boxShadow: 'inset 0 0 49px 0 rgba(1, 0, 53, 0.8)'}}
                 />
               </div>
-              {isUser && (
+              {canEdit && (
                 <Button
                   color="primary"
                   className="d-block mb-4 mx-auto mx-md-0 mt-3"
