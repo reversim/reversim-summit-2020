@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import {REVERSIM_SUMMIT} from '../utils';
 import cn from 'classnames';
 
-const chunkArray =(myArray, chunk_size) => {
+const chunkArray = (myArray, chunk_size) => {
   let index = 0;
   let arrayLength = myArray.length;
   let tempArray = [];

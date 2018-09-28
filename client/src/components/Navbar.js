@@ -74,7 +74,7 @@ class Navbar extends Component {
   render() {
     const {isHome, isSmallScreen, user, onLogout, pathname, history, eventConfig} = this.props;
     const {cfp} = eventConfig;
-    const {fixed, currentPage} = this.state;
+    const {fixed, currentPage: _currentPage} = this.state;
     const items = navItems(isHome);
     const isColored = !isHome || fixed;
 
@@ -109,17 +109,14 @@ class Navbar extends Component {
             <a
               href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"
               target="_blank"
+              rel="noreferrer noopener"
               className="d-none d-lg-block">
               <Button size="lg" className="text-capitalize font-size-lg-md">
                 Get Tickets
               </Button>
             </a>
             {items.map(item => (
-              <NavbarItem
-                key={`navbar-i-${item.to}`}
-                pathname={pathname}
-                {...item}
-              />
+              <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
             ))}
             {isSmallScreen &&
               user && (

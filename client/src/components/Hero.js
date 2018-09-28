@@ -14,7 +14,8 @@ const Hero = () => (
         <div className="d-flex justify-content-center justify-content-md-start">
           <a
             href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"
-            target="_blank">
+            target="_blank"
+            rel="noopener noreferrer">
             <Button className="mr-4">Get tickets</Button>
           </a>
           <a href="/schedule">
