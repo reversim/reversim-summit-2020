@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Page from './Page';
 import {Container} from 'reactstrap';
 import s from './Agenda.css';
@@ -7,6 +7,8 @@ import {agenda1, agenda2} from '../data/agenda';
 import {Link} from 'react-router-dom';
 import CalendarLink from './CalendarLink';
 import {isServer, getHref} from '../utils';
+import without from 'lodash/without';
+import uniq from 'lodash/uniq';
 import Tag from './Tag';
 
 const _getSession = (sessions, id) => sessions[id];
@@ -49,7 +51,6 @@ const ShortSessions = ({sessions, users}) => (
   <div className="mt-3">
     {sessions.map((ss, i) => (
       <div className={cn('mb-3 pb-2', {[s.igniteSep]: i < sessions.length - 1})}>
-        {console.log('ss', ss, users)}
         <Link to={`/session/${getHref(ss)}`}>
           <div className="d-flex">
             <div className="d-flex">{getSessionImgs(ss, users)}</div>
@@ -123,26 +124,36 @@ const Session = ({text, session, shortSessions, hall, sep, users}) => {
 
 const halls = ['Smolarz', 'Gilman 223', 'Gilman 144'];
 
-const Line = ({time, sessions, text, href, shortSessions, allSessions, users}) => {
+const Line = ({
+  time,
+  sessions,
+  text,
+  href,
+  shortSessions,
+  allSessions,
+  users,
+  excludedHalls = [],
+}) => {
   let cols;
   if (Array.isArray(sessions)) {
     cols = sessions
       .map((sessionId, i) => ({
         sessionId,
         hall: halls[i],
-        sep: sessionId && i < sessions.length - 1,
+        i,
       }))
-      .filter(({sessionId}) => sessionId)
-      .map(({sessionId, hall, sep}) => (
+      .filter(({sessionId, i}) => sessionId && !excludedHalls.includes(i))
+      .map(({sessionId, hall}, i, filteredSessions) => (
         <Session
           session={sessionId && getSession(allSessions, sessionId)}
           hall={hall}
-          sep={sep}
+          sep={i < filteredSessions.length - 1}
           users={users}
         />
       ));
+    if (!cols.length) cols = null;
   } else if (typeof sessions === 'string') {
-    cols = (
+    cols = !excludedHalls.includes(0) && (
       <Session
         text={text}
         session={getSession(allSessions, sessions)}
@@ -151,7 +162,7 @@ const Line = ({time, sessions, text, href, shortSessions, allSessions, users}) =
       />
     );
   } else if (shortSessions) {
-    cols = (
+    cols = !excludedHalls.includes(0) && (
       <Session
         text={text}
         shortSessions={shortSessions.map(ss => getSession(allSessions, ss))}
@@ -163,24 +174,26 @@ const Line = ({time, sessions, text, href, shortSessions, allSessions, users}) =
     cols = <Session text={text} />;
   }
 
-  if (href) {
+  if (href && cols) {
     if (isServer) href = `${href}.html`;
     cols = <Link to={href}>{cols}</Link>;
   }
 
   return (
-    <div>
-      <div className="d-flex align-items-center">
-        <div className="pr-3">
-          <Time tStr={time} />
+    cols && (
+      <div>
+        <div className="d-flex align-items-center">
+          <div className="pr-3">
+            <Time tStr={time} />
+          </div>
+          <div className="border-top border-white flex-1" />
         </div>
-        <div className="border-top border-white flex-1" />
+        <div className="d-flex flex-wrap">
+          <div className="agenda-line-spacer" style={{flex: '0 0 140px'}} />
+          <div className="flex-1">{cols}</div>
+        </div>
       </div>
-      <div className="d-flex flex-wrap">
-        <div className="agenda-line-spacer" style={{flex: '0 0 140px'}} />
-        <div className="flex-1">{cols}</div>
-      </div>
-    </div>
+    )
   );
 };
 
@@ -188,13 +201,19 @@ const dates = ['Day 1 October 8th', 'Day 2 October 9th'];
 
 const agendas = [agenda1, agenda2];
 
-const DayAgenda = ({index, sessions, isLargeScreen, users}) => {
+const DayAgenda = ({index, sessions, isLargeScreen, users, excludedHalls}) => {
   return (
     <div className={cn(s.agenda, 'mb-5')}>
       <h2 className={cn(s.subtitle, 'font-size-xl font-weight-heavy')}>{dates[index]}</h2>
       <div className="bg-emph pt-4 p-3" style={{marginTop: -20}}>
         {agendas[index].map(line => (
-          <Line {...line} allSessions={sessions} isLargeScreen={isLargeScreen} users={users} />
+          <Line
+            {...line}
+            allSessions={sessions}
+            isLargeScreen={isLargeScreen}
+            users={users}
+            excludedHalls={excludedHalls}
+          />
         ))}
       </div>
     </div>
@@ -207,20 +226,146 @@ const AddToCal = () => (
   </div>
 );
 
-const Agenda = ({proposals, ...props}) => {
-  if (!proposals || !Object.keys(proposals).length) return null;
+const HallFilter = ({index, onChange, excludedHalls}) => (
+  <Fragment>
+    <input
+      type="checkbox"
+      id={`agenda-filter-hall-${index}`}
+      checked={!excludedHalls.includes(index)}
+      onChange={e => onChange(index, e.target.checked)}
+    />
+    <label htmlFor={`agenda-filter-hall-${index}`}>{halls[index]}</label>
+  </Fragment>
+);
 
-  return (
-    <Page title="Schedule" {...props}>
-      <Container>
-        <h1 className="mb-4 font-weight-bold">Schedule</h1>
-        {/* <AddToCal /> */}
-        <DayAgenda index="0" sessions={proposals} users={props.users} />
-        {/*<h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>*/}
-        <DayAgenda index="1" sessions={proposals} users={props.users} />
-      </Container>
-    </Page>
-  );
-};
+const DayFilter = ({index, onChange, excludedDays}) => (
+  <Fragment>
+    <input
+      type="checkbox"
+      id={`agenda-filter-day-${index}`}
+      checked={!excludedDays.includes(index)}
+      onChange={e => onChange(index, e.target.checked)}
+    />
+    <label htmlFor={`agenda-filter-day-${index}`}>Day {index + 1}</label>
+  </Fragment>
+);
+
+class Agenda extends React.Component {
+  state = {
+    excludedHalls: [],
+    excludedDays: [],
+  };
+
+  setExcludedHall = (index, isIncluded) => {
+    this.setState(state => {
+      const excludedHalls = isIncluded
+        ? without(state.excludedHalls, index)
+        : uniq(state.excludedHalls.concat(index));
+
+      localStorage.setItem('agenda-excluded-halls', JSON.stringify(excludedHalls));
+      return {excludedHalls};
+    });
+  };
+
+  setExcludedDay = (index, isIncluded) => {
+    this.setState(state => {
+      const excludedDays = isIncluded
+        ? without(state.excludedDays, index)
+        : uniq(state.excludedDays.concat(index));
+
+      localStorage.setItem('agenda-excluded-days', JSON.stringify(excludedDays));
+      return {excludedDays};
+    });
+  };
+
+  componentDidMount() {
+    let excludedHalls;
+    try {
+      excludedHalls = JSON.parse(localStorage.getItem('agenda-excluded-halls'));
+    } catch (ex) {}
+
+    let excludedDays;
+    try {
+      excludedDays = JSON.parse(localStorage.getItem('agenda-excluded-days'));
+    } catch (ex) {}
+
+    if (excludedHalls || excludedDays) {
+      const newState = {};
+      excludedHalls && (newState.excludedHalls = excludedHalls);
+      excludedDays && (newState.excludedDays = excludedDays);
+      this.setState(newState);
+    }
+  }
+
+  render() {
+    const {proposals, users} = this.props;
+    if (!proposals || !Object.keys(proposals).length) return null;
+
+    return (
+      <Page title="Schedule" {...this.props}>
+        <Container>
+          <h1 className="mb-4 font-weight-bold">Schedule</h1>
+          <div className="d-flex mb-12">
+            <div
+              className="d-flex border-cyan pr-8"
+              style={{borderRightWidth: 2, borderRightStyle: 'solid'}}>
+              <div className="mr-7">
+                <DayFilter
+                  index={0}
+                  onChange={this.setExcludedDay}
+                  excludedDays={this.state.excludedDays}
+                />
+              </div>
+              <DayFilter
+                index={1}
+                onChange={this.setExcludedDay}
+                excludedDays={this.state.excludedDays}
+              />
+            </div>
+            <div className="d-flex pl-8">
+              <div className="mr-7">
+                <HallFilter
+                  index={0}
+                  onChange={this.setExcludedHall}
+                  excludedHalls={this.state.excludedHalls}
+                />
+              </div>
+              <div className="mr-7">
+                <HallFilter
+                  index={1}
+                  onChange={this.setExcludedHall}
+                  excludedHalls={this.state.excludedHalls}
+                />
+              </div>
+              <HallFilter
+                index={2}
+                onChange={this.setExcludedHall}
+                excludedHalls={this.state.excludedHalls}
+              />
+            </div>
+          </div>
+          {/* <AddToCal /> */}
+          {!this.state.excludedDays.includes(0) && (
+            <DayAgenda
+              index="0"
+              sessions={proposals}
+              users={users}
+              excludedHalls={this.state.excludedHalls}
+            />
+          )}
+          {/*<h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>*/}
+          {!this.state.excludedDays.includes(1) && (
+            <DayAgenda
+              index="1"
+              sessions={proposals}
+              users={users}
+              excludedHalls={this.state.excludedHalls}
+            />
+          )}
+        </Container>
+      </Page>
+    );
+  }
+}
 
 export default Agenda;
