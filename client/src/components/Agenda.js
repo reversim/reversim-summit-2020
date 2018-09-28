@@ -10,6 +10,7 @@ import {isServer, getHref} from '../utils';
 import without from 'lodash/without';
 import uniq from 'lodash/uniq';
 import Tag from './Tag';
+import halls from '../data/halls';
 
 const _getSession = (sessions, id) => sessions[id];
 const getSession = (sessions, id) => {
@@ -28,22 +29,18 @@ const getSessionImgs = (session, users) =>
     />
   ));
 
-const _Time = t => (
-  <span>
-    {t.substr(0, 2)}:{t.substr(2)}
-  </span>
-);
+const _Time = t => <span>{t}</span>;
 
 const Time = ({tStr}) => {
   if (tStr.indexOf('-') > -1) {
     const [t1, t2] = tStr.split('-');
     return (
       <div className="font-mono">
-        {_Time(t1)} &mdash; {_Time(t2)}
+        {t1} &mdash; {t2}
       </div>
     );
   } else {
-    return <div className="font-mono">{_Time(tStr)}</div>;
+    return <div className="font-mono">{tStr}</div>;
   }
 };
 
@@ -121,8 +118,6 @@ const Session = ({text, session, shortSessions, hall, sep, users}) => {
     </div>
   );
 };
-
-const halls = ['Smolarz', 'Gilman 223', 'Gilman 144'];
 
 const Line = ({
   time,
@@ -220,7 +215,7 @@ const DayAgenda = ({index, sessions, isLargeScreen, users, excludedHalls}) => {
   );
 };
 
-const AddToCal = () => (
+const _AddToCal = () => (
   <div className="text-center mt-5">
     <CalendarLink />
   </div>

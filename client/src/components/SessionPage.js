@@ -1,61 +1,14 @@
 import React from 'react';
 import Page from './Page';
-import {Container, Row, Col, Button} from 'reactstrap';
+import {Container, Button} from 'reactstrap';
 import {getHref, getSessionTypeStr} from '../utils';
 import Tag from './Tag';
 import ReactMarkdown from 'react-markdown';
-import {agenda1, agenda2} from '../data/agenda';
 import {Link} from 'react-router-dom';
 import SessionPageRoute from './SessionPageRoute';
+import SessionDayTime from './SessionDayTime';
 import VoteButton from './VoteButton';
 import Speaker from './Speaker2';
-
-const agenda = [agenda1, agenda2];
-
-const _getDateAndTime = (index, id) => {
-  let day, time;
-  agenda[index].forEach(slot => {
-    if (time) return;
-
-    if (Array.isArray(slot.sessions)) {
-      slot.sessions.forEach(ss => {
-        if (ss === id) {
-          day = index;
-          time = slot.time;
-        } else if (ss && ss.sessions) {
-          ss.sessions.forEach(sss => {
-            if (sss === id) {
-              day = index;
-              time = slot.time;
-            }
-          });
-        }
-      });
-    } else if (typeof slot.sessions === 'string') {
-      if (slot.sessions === id) {
-        day = index;
-        time = slot.time;
-      }
-    } else if (slot.shortSessions) {
-      slot.shortSessions.forEach(ss => {
-        if (ss === id) {
-          day = index;
-          time = slot.time;
-        }
-      });
-    }
-  });
-
-  if (time) {
-    return {day, time};
-  }
-};
-
-const getDateAndTime = id => {
-  return _getDateAndTime(0, id) || _getDateAndTime(1, id);
-};
-
-const dates = ['October 8, 2018', 'October 9, 2018'];
 
 const SessionPage = props => {
   const {
@@ -69,17 +22,18 @@ const SessionPage = props => {
     },
   } = props;
   const {voting} = eventConfig;
-  const {title, abstract, type, tags, outline, categories, attended} = session;
+  const {title, abstract, type, tags, outline, categories: _categories, attended} = session;
   const isAuthor = user && session.speaker_ids.includes(user._id);
   const isTeamMember = user && user.isReversimTeamMember;
   const canEdit = isAuthor || isTeamMember;
-
-  const dayTime = getDateAndTime(id);
 
   return (
     <Page title={session.title} {...props} isSingleContent={true}>
       <Container className="mt-4">
         <div className="bg-emph p-5 mb-8">
+          <div className="mb-4">
+            <SessionDayTime id={id} />
+          </div>
           <h3 className="font-weight-heavy">
             {title}
             {canEdit && (
@@ -94,16 +48,6 @@ const SessionPage = props => {
             <div className="mr-8">{getSessionTypeStr(type)}</div>
             <div className="d-flex">{tags.map(Tag)}</div>
           </div>
-          {dayTime && (
-            <Row className="align-items-center my-4">
-              <Col>
-                <i className="fa fa-calendar-o mr-3" />
-                <span className="mr-4">{dates[dayTime.day]}</span>
-                <i className="fa fa-clock-o mr-3" />
-                <span>{`${dayTime.time.substr(0, 2)}:${dayTime.time.substr(2)}`}</span>
-              </Col>
-            </Row>
-          )}
           {voting ? (
             <VoteButton
               user={user}
