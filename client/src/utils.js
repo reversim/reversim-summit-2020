@@ -1,8 +1,12 @@
 import createMemoryHistory from 'history/createMemoryHistory';
 import createBrowserHistory from 'history/createBrowserHistory';
-import {CFP_ENDS, PROPOSAL_TYPES} from './data/proposals';
+import {CFP_ENDS, PROPOSAL_TYPES, PROPOSAL_TYPES_SHORT} from './data/proposals';
 
 export const getSessionTypeStr = type => PROPOSAL_TYPES[type];
+export const getSessionTypeShortStr = type => PROPOSAL_TYPES_SHORT[type];
+
+export const getTagStr = tag =>
+  tag.toLowerCase() === 'ai/ml' ? 'AI/ML' : `${tag[0].toUpperCase()}${tag.slice(1).toLowerCase()}`;
 
 export const colors = ['purple', 'gold', 'cyan', 'blue', 'pink', 'yellow', 'green', 'orange'];
 

@@ -14,13 +14,13 @@ const _getDateAndTime = (index, id) => {
         if (ss === id) {
           day = index;
           time = slot.time;
-          hall = halls[i];
+          hall = i;
         } else if (ss && ss.sessions) {
           ss.sessions.forEach(sss => {
             if (sss === id) {
               day = index;
               time = slot.time;
-              hall = halls[i];
+              hall = i;
             }
           });
         }
@@ -29,14 +29,14 @@ const _getDateAndTime = (index, id) => {
       if (slot.sessions === id) {
         day = index;
         time = slot.time;
-        hall = halls[0];
+        hall = 0;
       }
     } else if (slot.shortSessions) {
       slot.shortSessions.forEach(ss => {
         if (ss === id) {
           day = index;
           time = slot.time;
-          hall = halls[0];
+          hall = 0;
         }
       });
     }
@@ -47,7 +47,7 @@ const _getDateAndTime = (index, id) => {
   }
 };
 
-const getDateAndTime = id => {
+export const getDateAndTime = id => {
   return _getDateAndTime(0, id) || _getDateAndTime(1, id);
 };
 
@@ -59,7 +59,7 @@ export default ({id}) => {
       {'\u00A0'}|{'\u00A0'}
       {time}
       {'\u00A0'}|{'\u00A0'}
-      {hall}
+      {halls[hall]}
     </span>
   );
 };

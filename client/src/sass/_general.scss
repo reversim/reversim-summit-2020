@@ -414,6 +414,10 @@ input[type="checkbox"] {
   position: absolute;
   pointer-events: none;
 
+  & + label {
+    margin-bottom: 0;
+  }
+
   & + label:before {
     content: '';
     display: inline-block;

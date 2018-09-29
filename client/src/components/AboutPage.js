@@ -47,7 +47,7 @@ const AboutPage = props => {
         </div>
         <Row noGutters>
           {props.team.map(id => (
-            <Col xs="12" md="6">
+            <Col xs="12" md="6" key={id}>
               {<TeamMember {...props.users[id]} />}
             </Col>
           ))}

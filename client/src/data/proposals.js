@@ -13,6 +13,12 @@ export const PROPOSAL_TYPES = {
   ossil: 'Open Source in Israel (10 min.)',
 };
 
+export const PROPOSAL_TYPES_SHORT = {
+  full: 'Full',
+  lightning: 'Ignite',
+  ossil: 'OSSil',
+};
+
 export const PROPOSAL_TYPES_ARR = Object.keys(PROPOSAL_TYPES).map(type => ({
   value: type,
   text: PROPOSAL_TYPES[type],
@@ -46,3 +52,16 @@ export const CATEGORIES = [
 ];
 
 export const MAX_CATEGORIES = 2;
+
+export const TAG_COLORS = {
+  craft: 'purple',
+  frontend: 'teal',
+  'ai/ml': 'indigo',
+  product: 'red',
+  culture: 'orange',
+  security: 'yellow',
+  infrastructure: 'green',
+  quality: 'lightgreen',
+  programming: 'blue',
+  'open source': 'pink',
+};

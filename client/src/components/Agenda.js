@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Page from './Page';
 import {Container} from 'reactstrap';
 import s from './Agenda.css';
@@ -7,8 +7,7 @@ import {agenda1, agenda2} from '../data/agenda';
 import {Link} from 'react-router-dom';
 import CalendarLink from './CalendarLink';
 import {isServer, getHref} from '../utils';
-import without from 'lodash/without';
-import uniq from 'lodash/uniq';
+import withFilters from './withFilters';
 import Tag from './Tag';
 import halls from '../data/halls';
 
@@ -24,6 +23,7 @@ const getSpeakerPicture = (session, users) => session.speaker_ids.map(ss => user
 const getSessionImgs = (session, users) =>
   getSpeakerPicture(session, users).map((url, i) => (
     <div
+      key={i}
       className={cn('mr-2a', s.speakerImg)}
       style={{backgroundImage: `url('${url}')`, marginLeft: i > 0 ? -10 : 0}}
     />
@@ -47,7 +47,7 @@ const Time = ({tStr}) => {
 const ShortSessions = ({sessions, users}) => (
   <div className="mt-3">
     {sessions.map((ss, i) => (
-      <div className={cn('mb-3 pb-2', {[s.igniteSep]: i < sessions.length - 1})}>
+      <div className={cn('mb-3 pb-2', {[s.igniteSep]: i < sessions.length - 1})} key={i}>
         <Link to={`/session/${getHref(ss)}`}>
           <div className="d-flex">
             <div className="d-flex">{getSessionImgs(ss, users)}</div>
@@ -140,6 +140,7 @@ const Line = ({
       .filter(({sessionId, i}) => sessionId && !excludedHalls.includes(i))
       .map(({sessionId, hall}, i, filteredSessions) => (
         <Session
+          key={i}
           session={sessionId && getSession(allSessions, sessionId)}
           hall={hall}
           sep={i < filteredSessions.length - 1}
@@ -201,8 +202,9 @@ const DayAgenda = ({index, sessions, isLargeScreen, users, excludedHalls}) => {
     <div className={cn(s.agenda, 'mb-5')}>
       <h2 className={cn(s.subtitle, 'font-size-xl font-weight-heavy')}>{dates[index]}</h2>
       <div className="bg-emph pt-4 p-3" style={{marginTop: -20}}>
-        {agendas[index].map(line => (
+        {agendas[index].map((line, i) => (
           <Line
+            key={i}
             {...line}
             allSessions={sessions}
             isLargeScreen={isLargeScreen}
@@ -221,79 +223,16 @@ const _AddToCal = () => (
   </div>
 );
 
-const HallFilter = ({index, onChange, excludedHalls}) => (
-  <Fragment>
-    <input
-      type="checkbox"
-      id={`agenda-filter-hall-${index}`}
-      checked={!excludedHalls.includes(index)}
-      onChange={e => onChange(index, e.target.checked)}
-    />
-    <label htmlFor={`agenda-filter-hall-${index}`}>{halls[index]}</label>
-  </Fragment>
-);
-
-const DayFilter = ({index, onChange, excludedDays}) => (
-  <Fragment>
-    <input
-      type="checkbox"
-      id={`agenda-filter-day-${index}`}
-      checked={!excludedDays.includes(index)}
-      onChange={e => onChange(index, e.target.checked)}
-    />
-    <label htmlFor={`agenda-filter-day-${index}`}>Day {index + 1}</label>
-  </Fragment>
-);
-
 class Agenda extends React.Component {
-  state = {
-    excludedHalls: [],
-    excludedDays: [],
-  };
-
-  setExcludedHall = (index, isIncluded) => {
-    this.setState(state => {
-      const excludedHalls = isIncluded
-        ? without(state.excludedHalls, index)
-        : uniq(state.excludedHalls.concat(index));
-
-      localStorage.setItem('agenda-excluded-halls', JSON.stringify(excludedHalls));
-      return {excludedHalls};
-    });
-  };
-
-  setExcludedDay = (index, isIncluded) => {
-    this.setState(state => {
-      const excludedDays = isIncluded
-        ? without(state.excludedDays, index)
-        : uniq(state.excludedDays.concat(index));
-
-      localStorage.setItem('agenda-excluded-days', JSON.stringify(excludedDays));
-      return {excludedDays};
-    });
-  };
-
-  componentDidMount() {
-    let excludedHalls;
-    try {
-      excludedHalls = JSON.parse(localStorage.getItem('agenda-excluded-halls'));
-    } catch (ex) {}
-
-    let excludedDays;
-    try {
-      excludedDays = JSON.parse(localStorage.getItem('agenda-excluded-days'));
-    } catch (ex) {}
-
-    if (excludedHalls || excludedDays) {
-      const newState = {};
-      excludedHalls && (newState.excludedHalls = excludedHalls);
-      excludedDays && (newState.excludedDays = excludedDays);
-      this.setState(newState);
-    }
-  }
-
   render() {
-    const {proposals, users} = this.props;
+    const {
+      proposals,
+      users,
+      setExcludedDay,
+      setExcludedHall,
+      excludedHalls,
+      excludedDays,
+    } = this.props;
     if (!proposals || !Object.keys(proposals).length) return null;
 
     return (
@@ -305,57 +244,27 @@ class Agenda extends React.Component {
               className="d-flex border-cyan pr-8"
               style={{borderRightWidth: 2, borderRightStyle: 'solid'}}>
               <div className="mr-7">
-                <DayFilter
-                  index={0}
-                  onChange={this.setExcludedDay}
-                  excludedDays={this.state.excludedDays}
-                />
+                <DayFilter index={0} onChange={setExcludedDay} excludedDays={excludedDays} />
               </div>
-              <DayFilter
-                index={1}
-                onChange={this.setExcludedDay}
-                excludedDays={this.state.excludedDays}
-              />
+              <DayFilter index={1} onChange={setExcludedDay} excludedDays={excludedDays} />
             </div>
             <div className="d-flex pl-8">
               <div className="mr-7">
-                <HallFilter
-                  index={0}
-                  onChange={this.setExcludedHall}
-                  excludedHalls={this.state.excludedHalls}
-                />
+                <HallFilter index={0} onChange={setExcludedHall} excludedHalls={excludedHalls} />
               </div>
               <div className="mr-7">
-                <HallFilter
-                  index={1}
-                  onChange={this.setExcludedHall}
-                  excludedHalls={this.state.excludedHalls}
-                />
+                <HallFilter index={1} onChange={setExcludedHall} excludedHalls={excludedHalls} />
               </div>
-              <HallFilter
-                index={2}
-                onChange={this.setExcludedHall}
-                excludedHalls={this.state.excludedHalls}
-              />
+              <HallFilter index={2} onChange={setExcludedHall} excludedHalls={excludedHalls} />
             </div>
           </div>
           {/* <AddToCal /> */}
-          {!this.state.excludedDays.includes(0) && (
-            <DayAgenda
-              index="0"
-              sessions={proposals}
-              users={users}
-              excludedHalls={this.state.excludedHalls}
-            />
+          {!excludedDays.includes(0) && (
+            <DayAgenda index="0" sessions={proposals} users={users} excludedHalls={excludedHalls} />
           )}
           {/*<h4 className={cn("text-center", s.subtitle)} style={{margin:'80px 0'}}>Day 1 is over, check out day 2 bellow</h4>*/}
-          {!this.state.excludedDays.includes(1) && (
-            <DayAgenda
-              index="1"
-              sessions={proposals}
-              users={users}
-              excludedHalls={this.state.excludedHalls}
-            />
+          {!excludedDays.includes(1) && (
+            <DayAgenda index="1" sessions={proposals} users={users} excludedHalls={excludedHalls} />
           )}
         </Container>
       </Page>
@@ -363,4 +272,6 @@ class Agenda extends React.Component {
   }
 }
 
-export default Agenda;
+const {Comp: AgendaWithFilters, HallFilter, DayFilter} = withFilters(Agenda, 'agenda');
+
+export default AgendaWithFilters;
