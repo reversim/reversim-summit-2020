@@ -97,6 +97,7 @@ export default (app) => {
   // proposal routes
   app.get('/api/initial', initial);
   app.get('/api/sessions', proposalsController.sessions);
+  app.get('/api/proposals', proposalsController.getAll);
   app.get('/api/proposal/tags', proposalsController.tags);
   app.get('/api/proposal/:id', proposalsController.get);
   app.post('/api/proposal', proposalsController.add);

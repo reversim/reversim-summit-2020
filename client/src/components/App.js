@@ -16,6 +16,8 @@ import {
   updateSponsor as doUpdateSponsor,
   deleteSponsor as doDeleteSponsor,
   attend,
+  getProposals,
+  getProposers,
 } from '../data-service';
 import findIndex from 'lodash/findIndex';
 import shuffle from 'lodash/shuffle';
@@ -176,6 +178,15 @@ class App extends Component {
     });
   };
 
+  getAllProposals = async () => {
+    const [allProposals, proposers] = await Promise.all([getProposals(), getProposers()]);
+    this.setState(state => ({
+      gotAllProposals: true,
+      proposals: {...state.proposals, ...allProposals},
+      users: {...state.users, ...proposers},
+    }));
+  };
+
   // This is passed down to route components
   actions = {
     onLogout: this.onLogout,
@@ -187,6 +198,7 @@ class App extends Component {
     createSponsor: this.createSponsor,
     updateSponsor: this.updateSponsor,
     deleteSponsor: this.deleteSponsor,
+    getAllProposals: this.getAllProposals,
   };
 
   state = store;

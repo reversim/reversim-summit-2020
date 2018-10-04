@@ -2,6 +2,7 @@
  * Created by oriharel on 31/05/2016.
  */
 import _ from 'lodash';
+import keyBy from 'lodash/keyBy';
 import Proposal from '../models/proposal';
 import User from '../models/user';
 import {transformProposal, transformUser} from './helpers';
@@ -40,6 +41,16 @@ async function get(req, res) {
     const proposal = await getProposal(req.params.id);
     res.json(transformProposal(proposal, req.user))
   } catch(err) {
+    errorHandler(res, err);
+  }
+}
+
+async function getAll(req, res) {
+  try {
+    const seed = req.user ? req.user.created_at : String(Date.now());
+    const proposals = await getAllProposals(true, seed);
+    res.json(keyBy(proposals.map(proposal => transformProposal(proposal, req.user)), '_id'));
+  } catch(ex) {
     errorHandler(res, err);
   }
 }
@@ -223,13 +234,15 @@ async function getSpeakers(req, res) {
   }
 }
 
-function proposers(req, res) {
-  const start = Date.now();
-  getAllProposals()
-    .then(getProposers)
-    .then(users => res.json(users))
-    .then(() => console.log(Date.now() - start))
-    .catch(errorHandler(res));
+async function proposers(req, res) {
+  try {
+    const start = Date.now();
+    const allProposals = await getAllProposals();
+    const proposers = await getProposers(allProposals);
+    res.json(keyBy(proposers.map(u => transformUser(u, req.user)), '_id'));
+  } catch(err) {
+    errorHandler(res)
+  }
 }
 
 function sessions(req, res) {
@@ -387,6 +400,7 @@ function getProposal(id) {
 
 export default {
   get,
+  getAll,
   add,
   update,
   remove,

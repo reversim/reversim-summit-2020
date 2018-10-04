@@ -1,7 +1,11 @@
 import {get, post, put, delete2} from './api';
 
 export async function getProposals() {
-  return await get('/api/proposal');
+  return await get('/api/proposals');
+}
+
+export async function getProposers() {
+  return await get('/api/proposers');
 }
 
 export async function getSessions() {

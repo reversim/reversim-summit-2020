@@ -52,14 +52,17 @@ export const getDateAndTime = id => {
 };
 
 export default ({id}) => {
-  const {day, time, hall} = getDateAndTime(id);
-  return (
-    <span className="font-mono font-weight-heavy">
-      Day {day + 1}
-      {'\u00A0'}|{'\u00A0'}
-      {time}
-      {'\u00A0'}|{'\u00A0'}
-      {halls[hall]}
-    </span>
-  );
+  const dateTime = getDateAndTime(id);
+  if (dateTime) {
+    const {day, time, hall} = dateTime;
+    return (
+      <span className="font-mono font-weight-heavy">
+        Day {day + 1}
+        {'\u00A0'}|{'\u00A0'}
+        {time}
+        {'\u00A0'}|{'\u00A0'}
+        {halls[hall]}
+      </span>
+    );
+  } else return null;
 };
