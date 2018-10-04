@@ -2,7 +2,7 @@ export const agenda1 = [
   {time: '08:00-10:00', text: 'Registration & Coffee'},
   {
     time: '09:00-09:40',
-    sessions: [null, '5b0e83fe2743a60014eeb3e6', '5b103a00892ac3001481694b'],
+    sessions: [null, null, '5b103a00892ac3001481694b'],
   },
   {time: '10:00-10:50', text: 'Welcome + Keynote', sessions: '5b62c2b345937029731e441b'},
   {
