@@ -36,11 +36,7 @@ export const agenda1 = [
     sessions: [
       {
         text: 'OSS in Israel',
-        sessions: [
-          '5afc14f40a0850001443613a',
-          '5b0eaa502743a60014eeb401',
-          '5b0fd64f892ac30014816901',
-        ],
+        sessions: ['5afc14f40a0850001443613a', '5b0fd64f892ac30014816901'],
       },
       '5afd6a116555a80014e7e0ac',
       '5af06f930c482c0014ab514c',
@@ -67,7 +63,7 @@ export const agenda2 = [
   {time: '10:00-10:50', text: 'Welcome + Keynote', sessions: '5b62c2b345937029731e441a'},
   {
     time: '11:10-11:40',
-    sessions: ['5af48fa3db27ea0014a6f7c6', '5b106377459acd0014b1312c', '5aea1eeffad70b0014ee2e7e'],
+    sessions: ['5af48fa3db27ea0014a6f7c6', '5b0eaa502743a60014eeb401', '5aea1eeffad70b0014ee2e7e'],
   },
   {
     time: '11:50-12:20',
