@@ -304,6 +304,13 @@ button.btn {
   }
 }
 
+.row-margin-fix {
+  @media (min-width:768px) {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+}
+
 .speakers-section__speakers-wrapper {
   justify-content: space-between;
 
@@ -393,6 +400,13 @@ button.btn {
     @media (max-width:767px) {
       flex: 0 0 80px;
     }
+
+    @media (max-width:576px) {
+      flex: 0 0 50px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align:right;
+    }
   }
 }
 
@@ -436,5 +450,18 @@ input[type="checkbox"] {
 
   &:checked + label:before {
     content: '✓';
+  }
+}
+
+.agenda-day-filter {
+  @media (min-width:768px) {
+    border-right: 2px solid $cyan;
+    padding-right: 40px !important;
+  }
+}
+
+.agenda-hall-filter {
+  @media (min-width:768px) {
+    padding-left: 40px !important;
   }
 }

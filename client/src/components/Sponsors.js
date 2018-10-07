@@ -153,11 +153,11 @@ export const SponsorsSection = ({sponsors}) => {
     <section className="mb-20">
       <Container>
         <h1 style={{position: 'relative', zIndex: 1}}>Sponsors</h1>
-        <div className="bg-emph px-6 py-9" style={{marginTop: -40}}>
+        <div className="bg-emph px-md-6 px-3 pt-9 pb-5" style={{marginTop: -40}}>
           <div>
-            {dividedSponsors.map(sponsorsRow => {
+            {dividedSponsors.map((sponsorsRow, i) => {
               return (
-                <div className="d-flex flex-wrap justify-content-between">
+                <div key={i} className="d-flex flex-wrap justify-content-between">
                   {sponsorsRow.map(s => <SponsorMini key={s._id} {...s} />)}
                 </div>
               );

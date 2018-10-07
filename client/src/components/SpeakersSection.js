@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Container, Button, Row} from 'reactstrap';
 import {img, body, homepageImg, homepageBody} from './Speaker2.css';
 import cn from 'classnames';
@@ -10,7 +10,7 @@ import {getHref} from '../utils';
 const Speaker = ({speaker}) => {
   const {name, oneLiner, picture, twitter, github, linkedin, stackOverflow} = speaker;
   return (
-    <span>
+    <Fragment>
       <Link to={`/speaker/${getHref(speaker)}`} className="text-white unstyled-link">
         <div
           style={{backgroundImage: `url('${picture}')`}}
@@ -27,23 +27,23 @@ const Speaker = ({speaker}) => {
         </Link>
         <SpeakerSocialLinks {...{twitter, github, linkedin, stackOverflow}} />
       </div>
-    </span>
+    </Fragment>
   );
 };
 
 const SpeakersSection = props => {
   const speakers = sampleSize(props.speakers, 6).map(s => props.users[s]);
   return (
-    <section className="mb-20">
+    <section className="mb-20 mt-12 mt-md-0">
       <Container>
-        <h1 className="mb-14">Speakers</h1>
-        <Row className="speakers-section__speakers-wrapper">
+        <h1 className="mb-14 row-margin-fix">Speakers</h1>
+        <div className="speakers-section__speakers-wrapper d-flex flex-wrap row-margin-fix">
           {speakers.map((speaker, i) => (
             <div className={cn('mb-18')} key={i}>
               <Speaker speaker={speaker} />
             </div>
           ))}
-        </Row>
+        </div>
         <div className="d-flex align-items-center mt-2">
           <div className="border border-cyan mr-4 flex-1" />
           <a href="/speakers">

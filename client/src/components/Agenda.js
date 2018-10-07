@@ -1,6 +1,6 @@
 import React from 'react';
 import Page from './Page';
-import {Container} from 'reactstrap';
+import {Container, Row, Col} from 'reactstrap';
 import s from './Agenda.css';
 import cn from 'classnames';
 import {agenda1, agenda2} from '../data/agenda';
@@ -86,7 +86,7 @@ const Session = ({text, session, shortSessions, hall, sep, users}) => {
           <div className="flex-1">
             <div className="font-size-sm">{getSpeakerName(session, users)}</div>
             <div className="font-weight-heavy">{session.title}</div>
-            <div className="d-flex">{session.tags.map(Tag)}</div>
+            <div className="d-flex flex-wrap">{session.tags.map(Tag)}</div>
           </div>
           <div className="d-flex">{getSessionImgs(session, users)}</div>
         </div>
@@ -239,25 +239,25 @@ class Agenda extends React.Component {
       <Page title="Schedule" {...this.props}>
         <Container>
           <h1 className="mb-4 font-weight-bold">Schedule</h1>
-          <div className="d-flex mb-12">
-            <div
-              className="d-flex border-cyan pr-8"
-              style={{borderRightWidth: 2, borderRightStyle: 'solid'}}>
-              <div className="mr-7">
-                <DayFilter index={0} onChange={setExcludedDay} excludedDays={excludedDays} />
-              </div>
-              <DayFilter index={1} onChange={setExcludedDay} excludedDays={excludedDays} />
-            </div>
-            <div className="d-flex pl-8">
-              <div className="mr-7">
-                <HallFilter index={0} onChange={setExcludedHall} excludedHalls={excludedHalls} />
-              </div>
-              <div className="mr-7">
-                <HallFilter index={1} onChange={setExcludedHall} excludedHalls={excludedHalls} />
-              </div>
-              <HallFilter index={2} onChange={setExcludedHall} excludedHalls={excludedHalls} />
-            </div>
-          </div>
+          <Container style={{padding: 0}}>
+            <Row noGutters>
+              <Col xs="6" md="auto" className="d-md-flex border-cyan mb-6 agenda-day-filter">
+                <div className="mr-md-7 mb-6 mb-md-0">
+                  <DayFilter index={0} onChange={setExcludedDay} excludedDays={excludedDays} />
+                </div>
+                <DayFilter index={1} onChange={setExcludedDay} excludedDays={excludedDays} />
+              </Col>
+              <Col xs="6" md="auto" className="d-md-flex mb-6 agenda-hall-filter">
+                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0">
+                  <HallFilter index={0} onChange={setExcludedHall} excludedHalls={excludedHalls} />
+                </div>
+                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0">
+                  <HallFilter index={1} onChange={setExcludedHall} excludedHalls={excludedHalls} />
+                </div>
+                <HallFilter index={2} onChange={setExcludedHall} excludedHalls={excludedHalls} />
+              </Col>
+            </Row>
+          </Container>
           {/* <AddToCal /> */}
           {!excludedDays.includes(0) && (
             <DayAgenda index="0" sessions={proposals} users={users} excludedHalls={excludedHalls} />
