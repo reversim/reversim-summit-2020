@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Container, Button, Row} from 'reactstrap';
+import {Container, Button} from 'reactstrap';
 import {img, body, homepageImg, homepageBody} from './Speaker2.css';
 import cn from 'classnames';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
