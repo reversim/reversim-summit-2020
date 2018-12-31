@@ -23,7 +23,7 @@ const LocationPage = props => (
           target="_blank"
           rel="noopener noreferrer">
           <b>
-            Tel Aviv University, Smolarz Auditorium{' '}
+            HaCameri theater,<br/> Sderot Sha'ul HaMelech 19
             <i className="ml-3 fa fa-external-link" style={{verticalAlign: 'middle'}} />
           </b>
         </a>

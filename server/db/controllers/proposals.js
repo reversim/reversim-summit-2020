@@ -58,7 +58,7 @@ async function getAll(req, res) {
 /**
  * Add a Proposal
  */
-export function add(req, res) {  
+export function add(req, res) {
   if (!req.user || !eventConfig().cfp) return res.sendStatus(401);
   if (req.body.speaker_ids.indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
     return res.sendStatus(401);
@@ -105,7 +105,7 @@ export function add(req, res) {
               {
                 title: proposal.title,
                 author_name: authorName,
-                author_link: `https://summit2018.reversim.com/session/${model._id}`,
+                author_link: `https://summit2019.reversim.com/session/${model._id}`,
                 author_icon: speakers[0].picture,
                 text: speakers[0].email
               },

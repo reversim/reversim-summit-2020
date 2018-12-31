@@ -19,7 +19,7 @@ import {
 const TitleFieldCaption = () => (
   <span>
     Make it descriptive, concise, and appealing. You are welcome to review{' '}
-    <a href="http://summit2017.reversim.com/schedule" target="_blank" rel="noopener noreferrer">
+    <a href="http://summit2018.reversim.com/schedule" target="_blank" rel="noopener noreferrer">
       last year’s agenda
     </a>, or use the following examples:<br />
     <br />

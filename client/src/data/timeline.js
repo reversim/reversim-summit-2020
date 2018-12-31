@@ -10,5 +10,5 @@ export default [
   {time: 'June 10', text: 'Public voting ends'},
   {time: 'Mid July', text: 'Agenda published'},
   {time: 'Mid September', text: 'Open registration'},
-  {time: 'October 8-9', text: 'Reversim Summit 2018'},
+  {time: 'October 8-9', text: 'Reversim Summit 2019'},
 ];

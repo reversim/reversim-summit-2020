@@ -102,19 +102,20 @@ class Navbar extends Component {
           {cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
           <NavbarToggler onClick={this.toggle} className="ml-auto" />
         </div>
+        {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav
             navbar
             className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-darkblue': isSmallScreen})}>
-            <a
-              href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="d-none d-lg-block">
-              <Button size="lg" className="text-capitalize font-size-lg-md">
-                Get Tickets
-              </Button>
-            </a>
+            {/*<a*/}
+              {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
+              {/*target="_blank"*/}
+              {/*rel="noreferrer noopener"*/}
+              {/*className="d-none d-lg-block">*/}
+              {/*<Button size="lg" className="text-capitalize font-size-lg-md">*/}
+                {/*Get Tickets*/}
+              {/*</Button>*/}
+            {/*</a>*/}
             {items.map(item => (
               <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
             ))}
@@ -130,7 +131,6 @@ class Navbar extends Component {
               )}
           </Nav>
         </Collapse>
-        {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
 
         {!isServer &&
           !isSmallScreen &&

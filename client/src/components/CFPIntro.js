@@ -7,7 +7,7 @@ const CFPIntro = () => (
     <h2 className="mb-4">Intro</h2>
     <h4>Welcome to Reversim Summit and thank you for submitting your proposal!</h4>
     <p>
-      We encourage everyone to submit a proposal to Reversim Summit 2018. If you are{' '}
+      We encourage everyone to submit a proposal to Reversim Summit 2019. If you are{' '}
       <i>considering</i> submitting a proposal, we invite you to do so!
     </p>
     <h5>Please read the following guidelines before submitting.</h5>
@@ -25,6 +25,9 @@ const CFPIntro = () => (
     </p>
     <p>To get a good sense of topics and submissions from previous conferences see:</p>
     <ul>
+      <li>
+        <a href="https://summit2018.reversim.com">Reversim Summit 2018</a>
+      </li>
       <li>
         <a href="https://summit2017.reversim.com">Reversim Summit 2017</a>
       </li>
@@ -77,7 +80,7 @@ const CFPIntro = () => (
     <p>
       We are especially interested in open source projects made in israel or created by Israelis.
     </p>
-    <div className="mt-8 mb-4 p-3 bg-gray-200 line-height-17">
+    <div className="mt-8 mb-4 p-3 line-height-17">
       <h5>We'd like to hear from you!</h5>
       <p>
         Our goal is to streamline the submission and review process, while maintaining superb
