@@ -96,7 +96,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
       onChange={() => onChange(name)}
       disabled={disabled}
     />
-    <div className={cn({'text-primary': checked})}>
+    <div className={cn({'text-primary': checked})} style={{'cursor':'pointer'}}>
       <h5 className="mb-0">{name}</h5>
       <small className={cn({'text-primary': checked, 'text-gray-600': !checked})}>
         {description}
@@ -106,7 +106,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
 );
 
 const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
-  <div className={cn('d-flex align-items-center mb-4', {'opacity-05': disabled})}>
+  <div className={cn('d-flex align-items-center mb-4', {'opacity-05': disabled})} style={{cursor: 'pointer'}}>
     <input
       className="mr-3"
       type="checkbox"
@@ -325,11 +325,6 @@ class ProposalForm extends Component {
             </Button>
           </ModalFooter>
         </Modal>
-
-        <h4 className="mb-0">Private information</h4>
-        <p className="font-size-sm text-gray-600">
-          The following information will be available <b>only to the organizing committee</b>
-        </p>
 
         <label>Categories</label>
         <small className="d-block text-muted mb-2">

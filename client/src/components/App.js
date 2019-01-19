@@ -23,6 +23,7 @@ import findIndex from 'lodash/findIndex';
 import shuffle from 'lodash/shuffle';
 import without from 'lodash/without';
 import ScrollToTop from './ScrollToTop';
+import values from 'lodash/values';
 
 if (!isServer && process.env.NODE_ENV !== 'development') {
   ga.initialize('UA-36904731-4');
@@ -180,9 +181,10 @@ class App extends Component {
 
   getAllProposals = async () => {
     const [allProposals, proposers] = await Promise.all([getProposals(), getProposers()]);
+    const allNotDeletedProposals = values(allProposals).filter(proposal => proposal.status !== 'deleted')
     this.setState(state => ({
       gotAllProposals: true,
-      proposals: {...state.proposals, ...allProposals},
+      proposals: {...state.proposals, ...allNotDeletedProposals},
       users: {...state.users, ...proposers},
     }));
   };

@@ -25,7 +25,7 @@ class Page extends Component {
 
     return (
       <div
-        style={isHome ? {} : {paddingTop: 160, minHeight: "100vh", display: "flex", flexDirection: "column"}}
+        style={isHome ? {} : {paddingTop: 160}}
         className={isSingleContent ? 'page-single-content' : ''}>
         <Navbar
           isHome={isHome}
@@ -36,7 +36,7 @@ class Page extends Component {
           history={history}
           eventConfig={eventConfig || {}}
         />
-        <div style={{flexGrow: 1}}>{children}</div>
+        {children}
         <Footer user={user} />
       </div>
     );

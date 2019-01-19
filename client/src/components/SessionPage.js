@@ -9,6 +9,10 @@ import SessionPageRoute from './SessionPageRoute';
 import SessionDayTime from './SessionDayTime';
 import VoteButton from './VoteButton';
 import Speaker from './Speaker2';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPencilAlt, faTrash} from '@fortawesome/free-solid-svg-icons';
+library.add(faPencilAlt, faTrash);
 
 const SessionPage = props => {
   const {
@@ -27,6 +31,10 @@ const SessionPage = props => {
   const isTeamMember = user && user.isReversimTeamMember;
   const canEdit = isAuthor || isTeamMember;
 
+  this.onDelete = async (proposalId) => {
+    await props.updateProposal(proposalId, {status:'deleted'});
+  };
+
   return (
     <Page title={session.title} {...props} isSingleContent={true}>
       <Container className="mt-4">
@@ -39,9 +47,14 @@ const SessionPage = props => {
             {canEdit && (
               <Link className="unstyled-link" to={`/session/${getHref(session)}/edit`}>
                 <Button color="primary" size="sm" className="ml-3">
-                  <i className="fa fa-pencil" />
+                  <FontAwesomeIcon icon="pencil-alt"/>
                 </Button>
               </Link>
+            )}
+            {canEdit && (
+              <Button color="primary" size="sm" className="ml-3" onClick={this.onDelete.bind(this, getHref(session))}>
+                <FontAwesomeIcon icon="trash"/>
+              </Button>
             )}
           </h3>
           <div className="d-flex mb-2">

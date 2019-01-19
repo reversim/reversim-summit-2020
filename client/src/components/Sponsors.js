@@ -6,6 +6,10 @@ import Page from './Page';
 import ReactMarkdown from 'react-markdown';
 import {REVERSIM_SUMMIT} from '../utils';
 import cn from 'classnames';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
+library.add(faPencilAlt, faTrash);
 
 const chunkArray = (myArray, chunk_size) => {
   let index = 0;
@@ -52,10 +56,10 @@ const Sponsor = ({
         {onEdit && (
           <span>
             <Button size="sm" color="primary" className="ml-2" onClick={onEdit}>
-              <i className="fa fa-pencil" />
+              <FontAwesomeIcon icon="pencil-alt"/>
             </Button>
             <Button size="sm" color="danger" className="ml-2" onClick={onDelete}>
-              <i className="fa fa-trash" />
+              <FontAwesomeIcon icon="trash"/>
             </Button>
           </span>
         )}

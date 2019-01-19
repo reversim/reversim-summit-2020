@@ -21,11 +21,14 @@ const Hero = () => (
             rel="noopener noreferrer">
             <Button className="mr-4">Get tickets</Button>
           </a> */}
-          <Link to="/schedule">
-            <Button>View Schedule</Button>
+          {/*<Link to="/schedule">*/}
+            {/*<Button>View Schedule</Button>*/}
+          {/*</Link>*/}
+          <Link to="/cfp">
+            <Button> Submit session </Button>
           </Link>
         </div>
-        <div className={cn(subtitle, 'mb-8')}>8 - 9 October | Tel Aviv University</div>
+        <div className={cn(subtitle, 'mb-8')}>17 - 18 June | HaCameri Tel Aviv</div>
       </div>
       <div className={headphones} />
     </div>
