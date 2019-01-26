@@ -15,6 +15,7 @@ import {
   CATEGORIES,
   MAX_CATEGORIES,
 } from '../data/proposals';
+import {categories} from './Categories.css';
 
 const TitleFieldCaption = () => (
   <span>
@@ -66,6 +67,12 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
   </span>
 );
 
+const CoSpeakerFieldCaption = () => (
+    <span>
+        make sure your co-speaker is already signed!
+    </span>
+);
+
 const OutlineFieldCaption = () => (
   <span>
     The outline should include the main subjects you intend to cover with a timing estimation and
@@ -96,7 +103,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
       onChange={() => onChange(name)}
       disabled={disabled}
     />
-    <div className={cn({'text-primary': checked})} style={{'cursor':'pointer'}}>
+    <div className={cn({'text-primary': checked}, categories)}>
       <h5 className="mb-0">{name}</h5>
       <small className={cn({'text-primary': checked, 'text-gray-600': !checked})}>
         {description}
@@ -106,16 +113,16 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
 );
 
 const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
-  <div className={cn('d-flex align-items-center mb-4', {'opacity-05': disabled})} style={{cursor: 'pointer'}}>
-    <input
-      className="mr-3"
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-      disabled={disabled}
-    />
-    <label className={cn({'text-primary': checked})}>
-      <h5 className="mb-0">Other</h5>
+  <div className={cn('d-flex align-items-center mb-4', {'opacity-05': disabled})}>
+    {/*<input*/}
+      {/*className="mr-3"*/}
+      {/*type="checkbox"*/}
+      {/*checked={checked}*/}
+      {/*onChange={onChange}*/}
+      {/*disabled={disabled}*/}
+    {/*/>*/}
+    <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
+      <h5 className="mb-0 mr-1">Other</h5>
       <Input
         bsSize="sm"
         disabled={disabled}
@@ -149,6 +156,10 @@ class ProposalForm extends Component {
       abstractLen,
       abstractErr,
     });
+  };
+
+  onChangeCoSpeaker = e => {
+    // const val = e.target.value;
   };
 
   getAbstractErr = val =>
@@ -263,6 +274,15 @@ class ProposalForm extends Component {
           onChange={this.handleProposalTypeChange}
           values={PROPOSAL_TYPES_ARR}
           value={proposalType}
+          className={SPACING}
+        />
+        <FormField
+          id="coSpeaker"
+          label="coSpeaker"
+          required={false}
+          // placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
+          subtitle={<CoSpeakerFieldCaption/>}
+          onChange={this.onChangeCoSpeaker}
           className={SPACING}
         />
         <FormField

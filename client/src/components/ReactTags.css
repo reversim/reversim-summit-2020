@@ -8,13 +8,14 @@
 
 /* Styles for selected tags */
 .selected span.tag {
-  border: 1px solid #ddd;
-  background: #eee;
+  /*border: 1 px solid #000;*/
+  /*background: #eee;*/
   font-size: 12px;
   display: inline-block;
   padding: 5px;
   margin: 0 5px 10px;
   border-radius: 2px;
+  background: linear-gradient(to right,rgba(118,12,146, 0.2) 0%, rgba(0,92,177,0.2) 100%);
 }
 .selected span.tag:first-child {
   margin-left: 0;

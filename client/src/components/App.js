@@ -181,10 +181,9 @@ class App extends Component {
 
   getAllProposals = async () => {
     const [allProposals, proposers] = await Promise.all([getProposals(), getProposers()]);
-    const allNotDeletedProposals = values(allProposals).filter(proposal => proposal.status !== 'deleted')
     this.setState(state => ({
       gotAllProposals: true,
-      proposals: {...state.proposals, ...allNotDeletedProposals},
+      proposals: {...state.proposals, ...allProposals},
       users: {...state.users, ...proposers},
     }));
   };

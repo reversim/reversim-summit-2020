@@ -8,7 +8,7 @@ const Footer = ({user}) => (
     <Container>
       <Row className="footer-content align-items-center" noGutters>
         <div className="d-flex">
-          <a className="text-white mr-6" href="mailto:rs19-team@googlegroups.com">
+          <a className="text-white mr-6" href="mailto:rs19team@googlegroups.com">
             Contact
           </a>
           <a className="text-white" href="http://confcodeofconduct.com/">

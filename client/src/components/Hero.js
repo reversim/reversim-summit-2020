@@ -28,7 +28,7 @@ const Hero = () => (
             <Button> Submit session </Button>
           </Link>
         </div>
-        <div className={cn(subtitle, 'mb-8')}>17 - 18 June | HaCameri Tel Aviv</div>
+        <div className={cn(subtitle, 'mb-8')}>16 - 17 June | Ganei HaTaarucha</div>
       </div>
       <div className={headphones} />
     </div>

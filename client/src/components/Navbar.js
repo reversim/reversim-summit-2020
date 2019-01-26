@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
 import {navbar, logo, navLink, navItem, isWhite, isNotHome} from './Navbar.css';
-import logoImg from '../images/rs18-logo.svg';
+import logoImg from '../images/rs19-logo.png';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';

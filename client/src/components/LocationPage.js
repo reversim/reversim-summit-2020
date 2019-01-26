@@ -19,11 +19,11 @@ const LocationPage = props => (
         The conference will be held at:<br />
         <a
           className="unstyled-link"
-          href="https://www.google.co.il/maps/place/%D7%94%D7%AA%D7%99%D7%90%D7%98%D7%A8%D7%95%D7%9F+%D7%94%D7%A7%D7%90%D7%9E%D7%A8%D7%99%E2%80%AD/@32.0767494,34.7868059,17z/data=!3m1!4b1!4m5!3m4!1s0x151d4b9b4b4fc717:0x61fa90f650d50f64!8m2!3d32.0767494!4d34.7846172?hl=iw"
+          href="https://www.google.com/maps/place/%D7%90%D7%A7%D7%A1%D7%A4%D7%95+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91%E2%80%AD/@32.1055476,34.8112643,17z/data=!3m1!4b1!4m5!3m4!1s0x151d497d21e3f0bd:0x498ace449d9c240f!8m2!3d32.1055476!4d34.8090756?hl=iw"
           target="_blank"
           rel="noopener noreferrer">
           <b>
-            HaCameri theater,<br/> Sderot Sha'ul HaMelech 19
+            Ganei HaTaarucha
             <i className="ml-3 fa fa-external-link" style={{verticalAlign: 'middle'}} />
           </b>
         </a>
