@@ -58,7 +58,7 @@ async function getAll(req, res) {
 /**
  * Add a Proposal
  */
-export function add(req, res) {  
+export function add(req, res) {
   if (!req.user || !eventConfig().cfp) return res.sendStatus(401);
   if (req.body.speaker_ids.indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
     return res.sendStatus(401);
@@ -105,7 +105,7 @@ export function add(req, res) {
               {
                 title: proposal.title,
                 author_name: authorName,
-                author_link: `https://summit2018.reversim.com/session/${model._id}`,
+                author_link: `https://summit2019.reversim.com/session/${model._id}`,
                 author_icon: speakers[0].picture,
                 text: speakers[0].email
               },
@@ -370,7 +370,7 @@ function getProposers(proposals) {
 }
 
 async function getAllProposals(shouldShuffle, seed) {
-  let proposals = await Proposal.find({ status: { $ne: 'archived' }}, null, { sort: { created_at: -1 } });
+  let proposals = await Proposal.find({ status: { $nin: ['archived', 'deleted'] }}, null, { sort: { created_at: -1 } });
   if (shouldShuffle) {
     proposals = shuffler.shuffle(proposals, seed);
   }

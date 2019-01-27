@@ -54,11 +54,11 @@ const CFPBody = props => {
 
 const CFPPage = props => (
   <Page title="Call for papers" {...props}>
-    <div className="bg-purple">
-      <div className={heroImg} style={{backgroundImage: `url('${smolarzImg}')`}} />
+    <div className="container">
+      {/*<div className={heroImg} style={{backgroundImage: `url('${smolarzImg}')`}} />*/}
       <Container>
         <Row>
-          <Col lg={{size: 10, offset: 1}} className={cn('bg-white', cfpCol)}>
+          <Col lg={{size: 10, offset: 1}} className={cn(cfpCol)}>
             <CFPBody {...props} />
           </Col>
         </Row>

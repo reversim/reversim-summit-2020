@@ -4,8 +4,6 @@ import {Button, Col, Container, Row} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {REVERSIM_SUMMIT} from '../utils';
 
-// TODO change dates
-
 const RegisterPage = props => (
   <Page title="Register" {...props}>
     <Container className="line-height-17">

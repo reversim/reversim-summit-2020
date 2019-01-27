@@ -47,6 +47,7 @@ const Tags = ({
       handleAddition={handleAddition}
       autofocus={false}
       classNames={classNames}
+      styles={{background:'linear-gradient(to right,rgba(118,12,146, 0.2) 0%, rgba(0,92,177,0.2) 100%)','border':'none'}}
     />
     {!readOnly && (
       <div className="mt-2">

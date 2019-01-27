@@ -11,7 +11,7 @@ db.proposals.aggregate(
   {$unwind: "$speaker"},
   {$project: {
     _id: 0,
-    link: { $concat: ["https://summit2018.reversim.com/session/", "$id"]},
+    link: { $concat: ["https://summit2019.reversim.com/session/", "$id"]},
     title: 1,
     type: 1,
     tags: {

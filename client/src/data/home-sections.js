@@ -11,7 +11,7 @@ const homeSections = [
   {name: 'hero', el: Hero},
   // {name: 'about', el: About},
   // { name: "register", el: Register },
-  {name: 'speakers', el: SpeakersSection},
+  // {name: 'speakers', el: SpeakersSection},
   // {name: 'timeline', el: TimelineSection},
   {name: 'location', el: Location},
   // {name: 'team', el: Team},

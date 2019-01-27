@@ -23,6 +23,7 @@ import findIndex from 'lodash/findIndex';
 import shuffle from 'lodash/shuffle';
 import without from 'lodash/without';
 import ScrollToTop from './ScrollToTop';
+import values from 'lodash/values';
 
 if (!isServer && process.env.NODE_ENV !== 'development') {
   ga.initialize('UA-36904731-4');
@@ -114,12 +115,15 @@ class App extends Component {
   };
 
   updateProposal = async (id, data) => {
-    await doUpdateProposal(id, data);
     this.setState(state => ({
-      proposals: {
-        ...state.proposals,
-        [id]: {...state.proposals[id], ...data},
-      },
+      gotAllProposals: false
+    }));
+    await doUpdateProposal(id, data);
+    let proposals = await getProposals()
+    this.setState(state => ({
+      gotAllProposals: true,
+      proposals: proposals,
+      proposal: proposals[id]
     }));
   };
 
