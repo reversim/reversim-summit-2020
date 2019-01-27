@@ -1,6 +1,7 @@
 import React from 'react';
 import {REVERSIM_MAIL} from '../utils';
 import {Col, Row} from 'reactstrap';
+import professionDistributionImg from '../images/reversim-2018-profession-distribution-dark.png';
 
 const CFPIntro = () => (
   <div className="pb-6 mb-8 border-bottom">
@@ -10,6 +11,15 @@ const CFPIntro = () => (
       Reversim Summit is a community conference, for developers, of developers, by developers.
       We aim to present excellent, useful & inspiring content to developers and development related roles
       such as product management, development managers.
+    </p>
+    <p>
+      Our 2018 summit audience consisted predominantly of engineers or engineering management people:
+    </p>
+    <p>
+      <img className="d-block ml-auto img-fluid" src={professionDistributionImg} alt="2-18 summit preffesion distribution" />
+    </p>
+    <p>
+      Our speaker lineup was composed of 30% women speakers and 70% men speakers.
     </p>
     <p>
       Our goal is to streamline the submission and review process, while maintaining superb quality;
