@@ -391,7 +391,7 @@ class ProposalForm extends Component {
 
         <FormField
           id="outline"
-          label="Outline & private notes"
+          label="Outline &amp; private notes"
           required={true}
           multiline={true}
           value={outline}
