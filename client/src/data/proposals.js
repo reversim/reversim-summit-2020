@@ -24,9 +24,9 @@ export const PROPOSAL_TYPES_ARR = Object.keys(PROPOSAL_TYPES).map(type => ({
   text: PROPOSAL_TYPES[type],
 }));
 
-export const CFP_ENDS = new Date(2019, 1, 20);
-export const CFP_ENDS_STR = 'February 20st midnight UTC';
-export const CFP_ENDS_STR_SHORT = 'Feb 20';
+export const CFP_ENDS = new Date(2019, 1, 28);
+export const CFP_ENDS_STR = 'February 28st midnight UTC';
+export const CFP_ENDS_STR_SHORT = 'Feb 28';
 export const ABSTRACT_MAX = 700;
 export const ABSTRACT_MIN = 280;
 

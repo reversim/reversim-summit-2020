@@ -10,7 +10,7 @@ const TagFilter = ({text, isSelected, onClick}) => (
     onClick={onClick}
     className={cn(
       'font-size-sm letter-spacing cursor-pointer mr-2 mb-2 px-2 border-radius border',
-      {'border-blue text-blue': !isSelected, 'bg-blue text-white border-transparent': isSelected},
+      {'border-cyan text-cyan': !isSelected, 'bg-blue text-white border-transparent': isSelected},
     )}>
     {text}
   </div>

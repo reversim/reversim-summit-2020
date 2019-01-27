@@ -95,32 +95,33 @@ const OutlineFieldCaption = () => (
 );
 
 const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
-  <label className={cn('d-flex align-items-center mb-4', {'opacity-05': disabled})}>
+  <div onClick={() => onChange(name)} className={cn({'text-primary': checked}, 'd-flex align-items-center mb-4', {'opacity-05': disabled})}>
     <input
       className="mr-3"
       type="checkbox"
       checked={checked}
-      onChange={() => onChange(name)}
       disabled={disabled}
     />
-    <div className={cn({'text-primary': checked}, categories)}>
-      <h5 className="mb-0">{name}</h5>
-      <small className={cn({'text-primary': checked, 'text-gray-600': !checked})}>
-        {description}
-      </small>
-    </div>
-  </label>
+    <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
+      <div className={'d-flex flex-column'}>
+        <h5 className="mb-0">{name}</h5>
+        <small className={cn({'text-primary': checked, 'text-gray-600': !checked})}>
+          {description}
+        </small>
+      </div>
+    </label>
+  </div>
 );
 
 const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
-  <div className={cn('d-flex align-items-center mb-4', {'opacity-05': disabled})}>
-    {/*<input*/}
-      {/*className="mr-3"*/}
-      {/*type="checkbox"*/}
-      {/*checked={checked}*/}
-      {/*onChange={onChange}*/}
-      {/*disabled={disabled}*/}
-    {/*/>*/}
+  <div className={cn({'text-primary': checked}, 'd-flex align-items-center mb-4', {'opacity-05': disabled})}>
+    <input
+      className="mr-3"
+      type="checkbox"
+      checked={checked}
+      onChange={onChange}
+      disabled={disabled}
+    />
     <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
       <h5 className="mb-0 mr-1">Other</h5>
       <Input

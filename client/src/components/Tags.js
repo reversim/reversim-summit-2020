@@ -57,7 +57,7 @@ const Tags = ({
             onClick={() => handleAddition(suggestion)}
             size="sm"
             color="link"
-            className="text-underline"
+            className="text-underline mr-1"
             key={suggestion}>
             {suggestion}
           </Button>

@@ -174,8 +174,8 @@ export const SponsorsSection = ({sponsors}) => {
   );
 };
 
-const _WantToBe = () => (
-  <div className="my-4 p-3 bg-gray-200 line-height-17 text-center">
+const WantToBe = () => (
+  <div className="my-4 p-3 line-height-17 text-center">
     <h4>Want to be a sponsor?</h4> Contact our amazing Gilli at{' '}
     <a href="mailto:gilli@reversim.com">gilli@reversim.com</a> and let's have fun together!
   </div>
@@ -188,29 +188,33 @@ class SponsorsPage extends React.Component {
       <Page title="Sponsors" {...this.props}>
         {/* <WantToBe /> */}
         <Container>
-          <h1 className="mt-5">Our sponsors</h1>
-          <p className="font-size-lg tmb-5">
-            Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:
-          </p>
-          {user &&
-            user.isReversimTeamMember && (
-              <div className="border p-3 mb-8">
-                <h3>Add sponsor</h3>
-                <SponsorForm onSubmit={createSponsor} />
-              </div>
-            )}
-          <div className={cn(s.sponsorWrap)}>
-            {sponsors.map(sponsor => (
-              <SponsorWithEdit
-                key={sponsor._id}
-                sponsor={sponsor}
-                canEdit={user && user.isReversimTeamMember}
-                updateSponsor={updateSponsor}
-                deleteSponsor={deleteSponsor}
-              />
-            ))}
-          </div>
-          {/* <WantToBe /> */}
+          {/*<h1 className="mt-5">Our sponsors</h1>*/}
+          {/*<p className="font-size-lg tmb-5">*/}
+            {/*Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:*/}
+          {/*</p>*/}
+          {/*{user &&*/}
+            {/*user.isReversimTeamMember && (*/}
+              {/*<div className="border p-3 mb-8">*/}
+                {/*<h3>Add sponsor</h3>*/}
+                {/*<SponsorForm onSubmit={createSponsor} />*/}
+              {/*</div>*/}
+            {/*)}*/}
+          {/*<div className={cn(s.sponsorWrap)}>*/}
+            {/*{sponsors.map(sponsor => (*/}
+              {/*<SponsorWithEdit*/}
+                {/*key={sponsor._id}*/}
+                {/*sponsor={sponsor}*/}
+                {/*canEdit={user && user.isReversimTeamMember}*/}
+                {/*updateSponsor={updateSponsor}*/}
+                {/*deleteSponsor={deleteSponsor}*/}
+              {/*/>*/}
+            {/*))}*/}
+          {/*</div>*/}
+          {/*/!* <WantToBe /> *!/*/}
+          <h3 className="text-center">The annual Reversim conference is here</h3>
+          <h3 className="font-weight-bold  text-center">and we can't do it without you!</h3>
+           <WantToBe />
+
         </Container>
       </Page>
     );
