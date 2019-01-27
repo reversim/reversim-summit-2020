@@ -115,12 +115,15 @@ class App extends Component {
   };
 
   updateProposal = async (id, data) => {
-    await doUpdateProposal(id, data);
     this.setState(state => ({
-      proposals: {
-        ...state.proposals,
-        [id]: {...state.proposals[id], ...data},
-      },
+      gotAllProposals: false
+    }));
+    await doUpdateProposal(id, data);
+    let proposals = await getProposals()
+    this.setState(state => ({
+      gotAllProposals: true,
+      proposals: proposals,
+      proposal: proposals[id]
     }));
   };
 

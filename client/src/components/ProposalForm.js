@@ -67,11 +67,11 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
   </span>
 );
 
-const CoSpeakerFieldCaption = () => (
-    <span>
-        make sure your co-speaker is already signed!
-    </span>
-);
+// const CoSpeakerFieldCaption = () => (
+//     <span>
+//         make sure your co-speaker is already signed!
+//     </span>
+// );
 
 const OutlineFieldCaption = () => (
   <span>
@@ -158,9 +158,9 @@ class ProposalForm extends Component {
     });
   };
 
-  onChangeCoSpeaker = e => {
-    // const val = e.target.value;
-  };
+  // onChangeCoSpeaker = e => {
+  //   // const val = e.target.value;
+  // };
 
   getAbstractErr = val =>
     val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
@@ -276,15 +276,15 @@ class ProposalForm extends Component {
           value={proposalType}
           className={SPACING}
         />
-        <FormField
-          id="coSpeaker"
-          label="coSpeaker"
-          required={false}
-          // placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
-          subtitle={<CoSpeakerFieldCaption/>}
-          onChange={this.onChangeCoSpeaker}
-          className={SPACING}
-        />
+        {/*<FormField*/}
+          {/*id="coSpeaker"*/}
+          {/*label="coSpeaker"*/}
+          {/*required={false}*/}
+          {/*// placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}*/}
+          {/*subtitle={<CoSpeakerFieldCaption/>}*/}
+          {/*onChange={this.onChangeCoSpeaker}*/}
+          {/*className={SPACING}*/}
+        {/*/>*/}
         <FormField
           id="abstract"
           label="Abstract"
