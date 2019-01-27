@@ -19,7 +19,7 @@ const LocationPage = props => (
         The conference will be held at:<br />
         <a
           className="unstyled-link"
-          href="https://goo.gl/maps/onwb7pkKZ6Q2"
+          href="https://goo.gl/maps/jCGk8t7fPPE2"
           target="_blank"
           rel="noopener noreferrer">
           <b>

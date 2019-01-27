@@ -1,29 +1,143 @@
 import React from 'react';
 import {REVERSIM_MAIL} from '../utils';
 import {Col, Row} from 'reactstrap';
+import professionDistributionImg from '../images/reversim-2018-profession-distribution-dark.png';
 
 const CFPIntro = () => (
   <div className="pb-6 mb-8 border-bottom">
-    <h2 className="mb-4">Intro</h2>
-    <h4>Welcome to Reversim Summit and thank you for submitting your proposal!</h4>
+
+    <h2 className="mb-4">About</h2>
     <p>
-      We encourage everyone to submit a proposal to Reversim Summit 2019. If you are{' '}
-      <i>considering</i> submitting a proposal, we invite you to do so!
-    </p>
-    <h5>Please read the following guidelines before submitting.</h5>
-    <p>
-      We are interested in all things software development, everything including: Software
-      development methodologies, Product management for developers, UX, Startups, Mobile, Web,
-      Devops, Data processing, Scaling, Software company culture, Tooling, etc...
+      Reversim Summit is a community conference, for developers, of developers, by developers.
+      We aim to present excellent, useful & inspiring content to developers and development related roles
+      such as product management, development managers.
     </p>
     <p>
-      We want deep, technical sessions, yet ones that can be beneficial to a general audience of
-      your assigned track. From our experience, the sessions that work best are ones that tell a
-      story, preferably yours. We want stories which exemplify outstanding and unique work or
-      learning which derive from your personal experience. Any technical improvement you achieved by
-      non trivial means, that might help others improve, is worth sharing.
+      Our 2018 summit audience consisted predominantly of engineers or engineering management people:
     </p>
-    <p>To get a good sense of topics and submissions from previous conferences see:</p>
+    <p>
+      <img className="d-block ml-auto img-fluid" src={professionDistributionImg} alt="2-18 summit preffesion distribution" />
+    </p>
+    <p>
+      Our speaker lineup was composed of 30% women speakers and 70% men speakers.
+    </p>
+    <p>
+      Our goal is to streamline the submission and review process, while maintaining superb quality;
+      if you have any feedback or questions, please email us at <a href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</a>.
+    </p>
+
+    <h2 className="mb-4">Suggested topics</h2>
+    <p>
+      Reversim Summit is looking for submissions on all things software development.
+      We encourage and welcome deep technical submissions, as well as sessions on the
+      surroundings of software development such as product management, culture and business.
+      We prefer sessions that can appeal to our diverse audience.
+      We prefer sessions based on personal experience and learnings.
+      We encourage innovative and unique topics.
+    </p>
+    <p>
+      General HOWTOs and 101s are discouraged. Marketing and sales pitches are unwanted, as are self promotion sessions in disguise.
+    </p>
+    <p>
+      Ideas for topics include, but not limited to:
+    </p>
+    <ul>
+      <li>Front end / securing websites / mobile development</li>
+      <li>Quality / testing / monitoring / alerting / automation</li>
+      <li>Artificial intelligence / machine learning / data science</li>
+      <li>Data / at rest / in transit</li>
+      <li>Infrastructure / operations / deployments / internal tools</li>
+      <li>Cloud / virtualization / containers / serverless</li>
+      <li>Distributed systems / microservices / geo distribution / DR / availability</li>
+      <li>Low level / kernel / drivers / file systems / network</li>
+      <li>Software design / programming languages / API design / software fundamentals</li>
+      <li>Open source projects / technical / maintainership / personal experience / culture</li>
+      <li>Customer facing development / UX / design / product / marketing</li>
+      <li>Culture / scaling organizations / management / motivation and employee engagement</li>
+      <li>Education / teaching / initiatives / government</li>
+    </ul>
+    <p>
+      Can’t find what you were looking for? Please propose a topic which software developers will find to be of interest.
+    </p>
+
+    <h2 className="mb-4">Proposals</h2>
+    <p>
+      We are looking for proposals in these formats:
+    </p>
+    <ul>
+      <li>
+        <strong>Full Featured sessions (30 minutes)</strong>
+        <br/>Full feature are frontal presentations of roughly 30 minutes.
+      </li>
+      <li>
+        <strong>Postmortems (15 minutes)</strong>
+        <br/>Analysis of an incident or an outage at your company.
+        <br/>Consider these questions as you outline your session: What happened? How did it affect your systems? How did you react?
+        How was the problem mitigated? How did you analyze the incident? What were your takeaways? What was the followup process?
+        <br/>Please make sure your company agrees to share the experience and to dive into details.
+        Make this session professional and avoid personal criticism.
+      </li>
+      <li>
+        <strong>Lightning Sessions (5 minutes)</strong>
+        <br/>Lightning sessions are speedy 5 min sessions.
+        They are presented in a series in which each presenter has exactly 20 slides, 15 sec per slide,
+        slides are auto advanced. There are no breaks between lightning sessions.
+        It's fun, it's speedy, it's concise and it's breathtaking :-)
+      </li>
+      <li>
+        <strong>Open Source in Israel (10 minutes)</strong>
+        <br/>We are especially interested in open source projects made in Israel or created by Israelis.
+        We seek first hand developer’s experience.
+      </li>
+    </ul>
+    <h5>First time submitting? No problem.</h5>
+    <p>
+      We encourage anyone and everyone to consider submitting a session. You should be able to speak in
+      front of a large audience and you should have an interesting story to tell, based on your professional experience.
+    </p>
+    <p>
+      The moderators team will be happy to assist new speakers in turning an idea into submission,
+      and to pair, followup and mentor once a proposal is accepted.
+    </p>
+
+    <h2 className="mb-4">Submission guidelines</h2>
+    <ul>
+      <li>
+        Write a clear and concise proposal. The audience should know what to expect when they step into your session.
+      </li>
+      <li>
+        Please consider some past years suggestions on what we consider to be good content/proposals:
+        <ul>
+          <li><a href="https://www.youtube.com/watch?v=Da-JcEYBjuo">https://www.youtube.com/watch?v=Da-JcEYBjuo</a></li>
+          <li><a href="https://www.youtube.com/watch?v=F09My4646hI">https://www.youtube.com/watch?v=F09My4646hI</a></li>
+        </ul>
+      </li>
+      <li>
+        Avoid sales, marketing pitches, or self promotion.
+      </li>
+      <li>
+        The conference is held in Hebrew, and sessions should be delivered in Hebrew. If a speaker does not speak the language, the session will be presented in English.
+      </li>
+      <li>
+        A speaker may submit up to three (3) proposals.
+      </li>
+      <li>
+        A session may be presented by up to two speakers. All speakers must be indicated on submission.
+      </li>
+      <li>
+        Assuming your session is accepted, our moderators will be in continuous contact with you, and follow up on your progress. Your cooperation is expected and may be required.
+        Not being able to cooperate or respond in a timely manner may endanger your participance.
+      </li>
+      <li>
+        You will be requested to participate in at least one dry run session.
+        Your presentation at the conference may depend on that dry run.
+        In our experience, speakers consider the dry run as beneficial to their presentation and personal preparation.
+      </li>
+    </ul>
+
+    <p>
+      To get a sense of successful submissions, please consider our previous conferences content:
+    </p>
     <ul>
       <li>
         <a href="https://summit2018.reversim.com">Reversim Summit 2018</a>
@@ -44,50 +158,33 @@ const CFPIntro = () => (
         <a href="https://summit2013.reversim.com">Reversim Summit 2013</a>
       </li>
     </ul>
-    <p className="mt-8">There are three possible session types you may submit:</p>
-    <h5 className="mt-4">Full Featured sessions (30 minutes)</h5>
+
+    <h2 className="mb-4">Review process</h2>
+    <ul>
+      <li>
+        Once the Call for Papers closes, our moderation team will begin reviewing proposals.
+      </li>
+      <li>
+        Reviewing is not anonymous.
+      </li>
+      <li>
+        We will also hold a public vote to measure demand and interest. Results of this vote will remain confidential.
+      </li>
+      <li>
+        Moderators may contact submitters for questions & clarifications.
+      </li>
+      <li>
+        At the end of the proposal selection process, and before schedule is published, all submitters will be notified on their proposal status.
+      </li>
+      <li>
+        A few speakers may be contacted to agree to have their session waitlisted, so that they can be scheduled in case of another session’s last moment cancellation.
+      </li>
+    </ul>
+
+    <h2 className="mb-4">Code of Conduct</h2>
     <p>
-      Full feature are frontal presentations of roughly 30 minutes. They will be held either in the
-      large room (500 attendees) or the small room (100-200 attendees) in 3 parallel tracks.
+      Proposals, presentations and attendance are subject to the <a href="http://confcodeofconduct.com/">Code of Conduct</a>.
     </p>
-    <p>Full featured sessions can fall under one or more of these categories:</p>
-    <Row>
-      <Col xs="auto">
-        <ul>
-          <li>Backend, infrastructure, operations, cloud, scale</li>
-          <li>Frontend, UI</li>
-          <li>Mobile</li>
-          <li>Quality, testing, monitoring, automation, dev methodologies, performance</li>
-          <li>AI, machine learning, data science</li>
-          <li>Programming, programming languages, API design, paradigms</li>
-          <li>Culture, scaling organizations, management, employee engagement</li>
-          <li>Customer, UX, design, marketing</li>
-          <li>etc.</li>
-        </ul>
-      </Col>
-    </Row>
-    <p>
-      Don't worry if you can't fit your talk with any of the above. We accept all things software.
-      You will have the chance to categorize your talk as you see fit.
-    </p>
-    <h5 className="mt-4">Lightning Sessions (5 minutes)</h5>
-    <p>
-      Lightning are speedy 5 min sessions. They will be presented in a series in which each
-      presenter has exactly 20 slides, 15 sec per slide, slides are auto advanced and in total 5
-      min. No break b/w the sessions. It's fun, it's speedy, it's concise and it's breathtaking :-)
-    </p>
-    <h5 className="mt-4">Open Source in Israel (10 minutes)</h5>
-    <p>
-      We are especially interested in open source projects made in israel or created by Israelis.
-    </p>
-    <div className="mt-8 mb-4 p-3 line-height-17">
-      <h5>We'd like to hear from you!</h5>
-      <p>
-        Our goal is to streamline the submission and review process, while maintaining superb
-        quality; if you have any feedback or questions, please email us at{' '}
-        <a href={`mailto:${REVERSIM_MAIL}`}>{REVERSIM_MAIL}</a>.
-      </p>
-    </div>
   </div>
 );
 

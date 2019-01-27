@@ -12,6 +12,7 @@ import eventConfig from '../../init/eventConfig';
 // TODO this is duplicate from /client/src/data/proposals.js
 const PROPOSAL_TYPES = {
   "full": "Full Featured (30 min.)",
+  "postmortem": "Postmortem (15 min.)",
   "lightning": "Lightning Talk (5 min.)",
   "ossil": "Open Source in Israel (10 min.)"
 };

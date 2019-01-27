@@ -8,6 +8,7 @@ import logoImg from '../images/rs19-logo.png';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
+import { getLoginUrl } from "./Redirect";
 
 const CFPCTA = () => (
   <Link to="/cfp" className="unstyled-link">
@@ -135,6 +136,12 @@ class Navbar extends Component {
         {!isServer &&
           !isSmallScreen &&
           user && <div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div>}
+
+        {!user && (
+          <a href={getLoginUrl()} className="text-white ml-6">
+            Login
+          </a>
+        )}
       </Navbar2>
     );
   }

@@ -446,6 +446,7 @@ input[type="checkbox"] {
     text-align: center;
     font-size: 24px;
     text-indent: 1px;
+    min-width: 25px;
   }
 
   &:checked + label:before {
