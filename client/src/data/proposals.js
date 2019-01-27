@@ -1,15 +1,12 @@
 export const PREDEFINED_TAGS = [
-  'Frontend',
-  'Backend',
-  'Mobile',
-  'Infrastructure',
+  'Engineering',
   'Product',
   'Culture',
 ];
 
 export const PROPOSAL_TYPES = {
   full: 'Full Featured (30 min.)',
-  postmortem: 'Postmortems (15 min.)',
+  postmortem: 'Postmortem (15 min.)',
   lightning: 'Lightning Talk (5 min.)',
   ossil: 'Open Source in Israel (10 min.)',
 };

@@ -60,6 +60,14 @@ const CFPIntro = () => (
         <br/>Full feature are frontal presentations of roughly 30 minutes.
       </li>
       <li>
+        <strong>Postmortems (15 minutes)</strong>
+        <br/>Analysis of an incident or an outage at your company.
+        <br/>Consider these questions as you outline your session: What happened? How did it affect your systems? How did you react?
+        How was the problem mitigated? How did you analyze the incident? What were your takeaways? What was the followup process?
+        <br/>Please make sure your company agrees to share the experience and to dive into details.
+        Make this session professional and avoid personal criticism.
+      </li>
+      <li>
         <strong>Lightning Sessions (5 minutes)</strong>
         <br/>Lightning sessions are speedy 5 min sessions.
         They are presented in a series in which each presenter has exactly 20 slides, 15 sec per slide,
@@ -76,7 +84,8 @@ const CFPIntro = () => (
     <p>
       We encourage anyone and everyone to consider submitting a session. You should be able to speak in
       front of a large audience and you should have an interesting story to tell, based on your professional experience.
-
+    </p>
+    <p>
       The moderators team will be happy to assist new speakers in turning an idea into submission,
       and to pair, followup and mentor once a proposal is accepted.
     </p>
