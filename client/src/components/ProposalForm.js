@@ -60,6 +60,20 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
     on each server, improved server utilization by 73% and brought our CI-CD pipeline back from the
     dead.<br />
     <br />
+    <br />
+    Some helpful guidance questions:
+    <ul>
+      <li>
+        Why this topic is important?
+      </li>
+      <li>
+        What pain points your talk aims to address?
+      </li>
+      <li>
+        What actionable benefits / knowledge will attendees gain by attending your talk?
+      </li>
+    </ul>
+    <br />
     <span className={cn({'text-red': abstractErr}, 'font-weight-bold')}>
       {abstractLen}/{ABSTRACT_MAX}
     </span>{' '}
@@ -91,6 +105,8 @@ const OutlineFieldCaption = () => (
     &bull; 5m: The open source power! How can you use our code to optimize your production system<br />
     &bull; 5m Q&A<br />
     Total time: 37m
+    <br />
+    <br />
   </span>
 );
 
@@ -122,7 +138,7 @@ const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
       {/*disabled={disabled}*/}
     {/*/>*/}
     <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
-      <h5 className="mb-0 mr-1">Other</h5>
+      <h5 className="mb-0 mr-1">Other: </h5>
       <Input
         bsSize="sm"
         disabled={disabled}
@@ -375,7 +391,7 @@ class ProposalForm extends Component {
 
         <FormField
           id="outline"
-          label="Outline"
+          label="Outline &amp; private notes"
           required={true}
           multiline={true}
           value={outline}

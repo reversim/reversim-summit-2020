@@ -43,7 +43,6 @@ const CFPBody = props => {
       <Fragment>
         <CFPTitle />
         <CFPIntro />
-        <CFPFaq />
         <BottomContent {...props} />
       </Fragment>
     );

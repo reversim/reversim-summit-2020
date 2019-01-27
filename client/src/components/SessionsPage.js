@@ -139,6 +139,13 @@ class SessionsPage extends React.Component {
                   </div>
                   <div className="mb-4">
                     <SessionTypeFilter
+                      sessionType="postmortem"
+                      onChange={setExcludedSessionTypes}
+                      excludedSessionTypes={excludedSessionTypes}
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <SessionTypeFilter
                       sessionType="lightning"
                       onChange={setExcludedSessionTypes}
                       excludedSessionTypes={excludedSessionTypes}
