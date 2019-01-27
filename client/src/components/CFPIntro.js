@@ -114,8 +114,6 @@ const CFPIntro = () => (
         Your presentation at the conference may depend on that dry run.
         In our experience, speakers consider the dry run as beneficial to their presentation and personal preparation.
       </li>
-      <li>
-      </li>
     </ul>
 
     <p>
