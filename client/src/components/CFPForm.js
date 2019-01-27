@@ -80,7 +80,6 @@ class CFPForm extends Component {
   render() {
     const {user, allTags} = this.props;
     const {tags, proposalType, categories} = this.state;
-
     return (
       <div className="mb-6">
         <h2>Submission</h2>
@@ -89,8 +88,8 @@ class CFPForm extends Component {
           Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.
         </p>
         <form onSubmit={this.handleSubmit}>
-          {/*hide if user had already submitted personal data*/}
-          <div hidden={!!user.oneLiner}>
+          {/*hide if user had already submitted personal speaker data*/}
+          <div hidden={!!user.video_url}>
             <h3 className="mb-0">About you</h3>
             <p className="text-gray-600">Tell us about yourself</p>
             <UserForm user={user} />
