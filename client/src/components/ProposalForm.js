@@ -15,11 +15,12 @@ import {
   CATEGORIES,
   MAX_CATEGORIES,
 } from '../data/proposals';
+import {categories} from './Categories.css';
 
 const TitleFieldCaption = () => (
   <span>
     Make it descriptive, concise, and appealing. You are welcome to review{' '}
-    <a href="http://summit2017.reversim.com/schedule" target="_blank" rel="noopener noreferrer">
+    <a href="http://summit2018.reversim.com/schedule" target="_blank" rel="noopener noreferrer">
       last year’s agenda
     </a>, or use the following examples:<br />
     <br />
@@ -66,6 +67,12 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
   </span>
 );
 
+// const CoSpeakerFieldCaption = () => (
+//     <span>
+//         make sure your co-speaker is already signed!
+//     </span>
+// );
+
 const OutlineFieldCaption = () => (
   <span>
     The outline should include the main subjects you intend to cover with a timing estimation and
@@ -96,7 +103,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
       onChange={() => onChange(name)}
       disabled={disabled}
     />
-    <div className={cn({'text-primary': checked})}>
+    <div className={cn({'text-primary': checked}, categories)}>
       <h5 className="mb-0">{name}</h5>
       <small className={cn({'text-primary': checked, 'text-gray-600': !checked})}>
         {description}
@@ -107,15 +114,15 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
 
 const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
   <div className={cn('d-flex align-items-center mb-4', {'opacity-05': disabled})}>
-    <input
-      className="mr-3"
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-      disabled={disabled}
-    />
-    <label className={cn({'text-primary': checked})}>
-      <h5 className="mb-0">Other</h5>
+    {/*<input*/}
+      {/*className="mr-3"*/}
+      {/*type="checkbox"*/}
+      {/*checked={checked}*/}
+      {/*onChange={onChange}*/}
+      {/*disabled={disabled}*/}
+    {/*/>*/}
+    <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
+      <h5 className="mb-0 mr-1">Other</h5>
       <Input
         bsSize="sm"
         disabled={disabled}
@@ -150,6 +157,10 @@ class ProposalForm extends Component {
       abstractErr,
     });
   };
+
+  // onChangeCoSpeaker = e => {
+  //   // const val = e.target.value;
+  // };
 
   getAbstractErr = val =>
     val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
@@ -265,6 +276,15 @@ class ProposalForm extends Component {
           value={proposalType}
           className={SPACING}
         />
+        {/*<FormField*/}
+          {/*id="coSpeaker"*/}
+          {/*label="coSpeaker"*/}
+          {/*required={false}*/}
+          {/*// placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}*/}
+          {/*subtitle={<CoSpeakerFieldCaption/>}*/}
+          {/*onChange={this.onChangeCoSpeaker}*/}
+          {/*className={SPACING}*/}
+        {/*/>*/}
         <FormField
           id="abstract"
           label="Abstract"
@@ -325,11 +345,6 @@ class ProposalForm extends Component {
             </Button>
           </ModalFooter>
         </Modal>
-
-        <h4 className="mb-0">Private information</h4>
-        <p className="font-size-sm text-gray-600">
-          The following information will be available <b>only to the organizing committee</b>
-        </p>
 
         <label>Categories</label>
         <small className="d-block text-muted mb-2">

@@ -1,10 +1,10 @@
 import moment from 'moment-timezone';
 
 const config = {
-  cfpStartDate: process.env.CFP_START_DATE ||  "2018-04-25",
-  cfpEndDate: process.env.CFP_END_DATE || "2018-05-31",
-  votingStartDate: process.env.VOTING_START_DATE || "2018-06-01",
-  votingEndDate: process.env.VOTING_END_DATE || "2018-06-10",
+  cfpStartDate: process.env.CFP_START_DATE ||  "2019-01-20",
+  cfpEndDate: process.env.CFP_END_DATE || "2019-02-28",
+  votingStartDate: process.env.VOTING_START_DATE || "2019-04-01",
+  votingEndDate: process.env.VOTING_END_DATE || "2019-05-01",
 }
 
 export default () => {

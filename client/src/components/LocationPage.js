@@ -14,16 +14,16 @@ import {REVERSIM_SUMMIT} from '../utils';
 const LocationPage = props => (
   <Page title="Getting there" {...props}>
     <Container>
-      <h1 className="mb-5 text-center">Getting to {REVERSIM_SUMMIT}</h1>
-      <h2 className="mb-5 line-height-17 text-center bg-faded p-4">
+      <h2 className="mb-4 text-center">Getting to <br/>{REVERSIM_SUMMIT}</h2>
+      <h2 className="mb-5 line-height-17 text-center bg-faded p-4" style={{fontWeight: 600}}>
         The conference will be held at:<br />
         <a
           className="unstyled-link"
-          href="https://www.google.co.il/maps/place/Smolraz,+Tel+Aviv-Yafo/@32.1089199,34.8028505,17.62z/data=!4m5!3m4!1s0x151d4963ee793813:0x894f91e570a3c799!8m2!3d32.108538!4d34.8028162?hl=iw"
+          href="https://goo.gl/maps/onwb7pkKZ6Q2"
           target="_blank"
           rel="noopener noreferrer">
           <b>
-            Tel Aviv University, Smolarz Auditorium{' '}
+            Ganei HaTaarucha
             <i className="ml-3 fa fa-external-link" style={{verticalAlign: 'middle'}} />
           </b>
         </a>
@@ -41,16 +41,16 @@ const LocationPage = props => (
 			<Section title="Bus">
 				TBD
 			</Section>*/}
-      <h4>
-        <a href="http://smolarz.tau.org.il/access.html" target="_blank" rel="noopener noreferrer">
-          More info from Tel Aviv University
-        </a>
-      </h4>
-      <img
-        className="img-fluid"
-        src="http://smolarz.tau.org.il/images/access.gif"
-        alt={`Getting to ${REVERSIM_SUMMIT}`}
-      />
+      {/*<h4>*/}
+        {/*<a href="http://smolarz.tau.org.il/access.html" target="_blank" rel="noopener noreferrer">*/}
+          {/*More info from Tel Aviv University*/}
+        {/*</a>*/}
+      {/*</h4>*/}
+      {/*<img*/}
+        {/*className="img-fluid"*/}
+        {/*src="http://smolarz.tau.org.il/images/access.gif"*/}
+        {/*alt={`Getting to ${REVERSIM_SUMMIT}`}*/}
+      {/*/>*/}
       <div className="my-5">
         <Map />
       </div>

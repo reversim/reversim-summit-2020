@@ -29,10 +29,10 @@ const AboutPage = props => {
               will be too.
             </p>
             <p>
-              This is the 6th(!) Reversim Summit. The summits of 2013 and 2014 (TLV Campus), 2015
-              (Technion), 2016 (Weizmann Institute of Science) and 2017 (College of Management) also
-              featured community content. Watch previous years' sessions to get the general feel of
-              the Revesim Summit spirit.
+              This is the 7th(!) Reversim Summit. The summits of 2013 and 2014 (TLV Campus), 2015
+              (Technion), 2016 (Weizmann Institute of Science), 2017 (College of Management) and 2018 (Tel Aviv University) also
+              featured community content. Watch previous years' sessions to get the general feel of the
+              Revesim Summit spirit.
             </p>
           </div>
           <div className="about-content__p2 bg-emph py-4 pl-8 pr-4 mt-5 flex-1">
