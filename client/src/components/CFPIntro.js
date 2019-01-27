@@ -76,6 +76,9 @@ const CFPIntro = () => (
     <p>
       We encourage anyone and everyone to consider submitting a session. You should be able to speak in
       front of a large audience and you should have an interesting story to tell, based on your professional experience.
+
+      The moderators team will be happy to assist new speakers in turning an idea into submission,
+      and to pair, followup and mentor once a proposal is accepted.
     </p>
 
     <h2 className="mb-4">Submission guidelines</h2>
