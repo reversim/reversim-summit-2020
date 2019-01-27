@@ -4,8 +4,8 @@ import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
 import s from './Map.css';
 
 const position = {
-  lat: 32.076914,
-  lng: 34.784622,
+  lat: 32.1055476,
+  lng: 34.8068869,
 };
 
 const MapWithLoader = withScriptjs(
