@@ -100,7 +100,7 @@ class Navbar extends Component {
         className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}>
         <div className="d-flex justify-content-between w-100">
           {navbarBrand}
-          {cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
+          {/*{cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA />}*/}
           <NavbarToggler onClick={this.toggle} className="ml-auto" />
         </div>
         {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
@@ -117,6 +117,7 @@ class Navbar extends Component {
                 {/*Get Tickets*/}
               {/*</Button>*/}
             {/*</a>*/}
+            {cfp && isSmallScreen && pathname !== '/cfp' && <NavbarItem text="Submit session" to="cfp"/>}
             {items.map(item => (
               <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
             ))}
@@ -124,12 +125,13 @@ class Navbar extends Component {
               user && (
                 <div className="border-top">
                   <NavbarItem to="profile" text="My profile" />
-                  <NavbarItem to="my-votes" text="My votes" />
+                  {/*<NavbarItem to="my-votes" text="My votes" />*/}
                   <NavItem className={navItem} onClick={onLogout}>
                     <span className={navLinkClass}>Logout</span>
                   </NavItem>
                 </div>
               )}
+            {!user && (<NavbarItem to={getLoginUrl()} text="Login" external={true}/>)}
           </Nav>
         </Collapse>
 
@@ -137,11 +139,6 @@ class Navbar extends Component {
           !isSmallScreen &&
           user && <div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div>}
 
-        {!user && (
-          <a href={getLoginUrl()} className="text-white ml-6">
-            Login
-          </a>
-        )}
       </Navbar2>
     );
   }
