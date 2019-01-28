@@ -10,6 +10,7 @@ class CFPForm extends Component {
     proposalType: 'full',
     tags: [],
     categories: [],
+    missingCategories:false
   };
 
   handleSubmit = async e => {
@@ -32,6 +33,7 @@ class CFPForm extends Component {
 
       const categories = this.state.categories;
       if (!categories.length) {
+        this.setState({missingCategories: true})
         const y =
           formElements.categories_hidden.getBoundingClientRect().top -
           document.body.getBoundingClientRect().top -
@@ -101,6 +103,7 @@ class CFPForm extends Component {
             tags={tags}
             proposalType={proposalType}
             categories={categories}
+            missingCategories={this.state.missingCategories}
             allTags={allTags}
           />
           <div className="text-center">

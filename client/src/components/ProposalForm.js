@@ -215,7 +215,7 @@ class ProposalForm extends Component {
         if (state.categories.includes(name)) {
           return {categories: without(state.categories, name)};
         } else {
-          return {categories: uniq(state.categories.concat(name))};
+          return {categories: uniq(state.categories.concat(name)), missingCategories: false};
         }
       } else {
         // it's not predefined
@@ -227,7 +227,7 @@ class ProposalForm extends Component {
             return {categories: without(state.categories, otherCategory)};
           }
         } else {
-          return {categories: uniq(state.categories.concat(name))};
+          return {categories: uniq(state.categories.concat(name)), missingCategories: false};
         }
       }
     });
@@ -368,7 +368,8 @@ class ProposalForm extends Component {
           Choose 1 or 2 categories. This information will help us assign this session to one of the
           conference's tracks.
         </small>
-        <input type="hidden" id="categories_hidden" />
+        <input required={true} type="hidden" id="categories_hidden" />
+        <div hidden={!this.props.missingCategories} className={'text-red mb-2'}>*choose at least one category</div>
         {CATEGORIES.map(category => {
           const checked = categories.includes(category.name);
           return (
