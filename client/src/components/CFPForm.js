@@ -64,6 +64,7 @@ class CFPForm extends Component {
     const tags = this.state.tags;
     const categories = this.state.categories;
     const user = this.props.user;
+    const coSpeaker = formElements.coSpeaker.value;
 
     return {
       title,
@@ -74,7 +75,8 @@ class CFPForm extends Component {
       categories,
       legal,
       speaker_ids: [user._id],
-    };
+      coSpeaker
+    }
   };
 
   updateState = state => this.setState(state);

@@ -60,77 +60,84 @@ async function getAll(req, res) {
  * Add a Proposal
  */
 export function add(req, res) {
-  if (!req.user || !eventConfig().cfp) return res.sendStatus(401);
-  if (req.body.speaker_ids.indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
-    return res.sendStatus(401);
-  }
-
-  let proposal = _.clone(req.body);
-
-  proposal.created_at = new Date();
-  proposal.updated_at = new Date();
-
-  console.log('adding new proposal ' + JSON.stringify(proposal));
-
-  Proposal.create(proposal, (err, model) => {
-    if (err) {
-      console.log(`Error in proposals/add query: ${err}`);
-      return res.status(500).send('Something went wrong');
+  const coSpeaker = req.body.coSpeaker;
+  delete req.body.coSpeaker;
+  User.findOne({ email: coSpeaker }).exec((err, user) => {
+    if (user) {
+      req.body.speaker_ids.push(String(user._id))
+    }
+    if (!req.user || !eventConfig().cfp) return res.sendStatus(401);
+    if (req.body.speaker_ids.indexOf(String(req.user._id)) === -1 && !req.user.isReversimTeamMember) {
+      return res.sendStatus(401);
     }
 
-    // Update speakers proposals
-    Promise.all(proposal.speaker_ids.map(speaker_id => User.findByIdAndUpdate(
-      speaker_id,
-      { $push: {'proposals': model._id} },
-      { safe: true, upsert: true }
-    ))).then(speakers => {
-      res.status(200).send(transformProposal(model, req.user));
-    }).catch(ex => {
-      console.log(`Error in proposals/add/updateUser query: ${ex}`);
-      return res.status(500).send('Something went wrong');
-    });
+    let proposal = _.clone(req.body);
 
-    Promise.all(proposal.speaker_ids.map(speaker_id => {
-      return User.findOne({ _id: speaker_id });
-    })).then(speakers => {
-      Proposal.count({ status: { $ne: 'archived' } }).then(proposalCount => {
-        const authorName = speakers.map(speaker => speaker.name).join(" & ");
-        request({
-          url: process.env.SLACK_URL,
-          method: "POST",
-          data: {
-            username: "CFP Alert",
-            text: `#${proposalCount} ${authorName} submitted: ${proposal.title}`,
-            channel: process.env.NODE_ENV === 'production' ? "#cfp" : null,
-            attachments: [
-              {
-                title: proposal.title,
-                author_name: authorName,
-                author_link: `https://summit2019.reversim.com/session/${model._id}`,
-                author_icon: speakers[0].picture,
-                text: speakers[0].email
-              },
-              {
-                "title": "Session type",
-                "color": "#17a2b8",
-                "text": PROPOSAL_TYPES[proposal.type]
-              },
-              {
-                "title": "Categories",
-                "color": "#28a745",
-                "text": proposal.categories ? proposal.categories.join(", ") : ""
-              },
-              {
-                "title": "Tags",
-                "color": "#ffc107",
-                "text": proposal.tags ? proposal.tags.join(", ") : ""
-              },
-              {
-                text: proposal.abstract,
-                color: "#6b1ee6"
-              }
-            ]
-          }
+    proposal.created_at = new Date();
+    proposal.updated_at = new Date();
+
+    console.log('adding new proposal ' + JSON.stringify(proposal));
+
+    Proposal.create(proposal, (err, model) => {
+      if (err) {
+        console.log(`Error in proposals/add query: ${err}`);
+        return res.status(500).send('Something went wrong');
+      }
+
+      // Update speakers proposals
+      Promise.all(proposal.speaker_ids.map(speaker_id => User.findByIdAndUpdate(
+        speaker_id,
+        { $push: { 'proposals': model._id } },
+        { safe: true, upsert: true }
+      ))).then(speakers => {
+        res.status(200).send(transformProposal(model, req.user));
+      }).catch(ex => {
+        console.log(`Error in proposals/add/updateUser query: ${ex}`);
+        return res.status(500).send('Something went wrong');
+      });
+
+      Promise.all(proposal.speaker_ids.map(speaker_id => {
+        return User.findOne({ _id: speaker_id });
+      })).then(speakers => {
+        Proposal.count({ status: { $ne: 'archived' } }).then(proposalCount => {
+          const authorName = speakers.map(speaker => speaker.name).join(" & ");
+          request({
+            url: process.env.SLACK_URL,
+            method: "POST",
+            data: {
+              username: "CFP Alert",
+              text: `#${proposalCount} ${authorName} submitted: ${proposal.title}`,
+              channel: process.env.NODE_ENV === 'production' ? "#cfp" : null,
+              attachments: [
+                {
+                  title: proposal.title,
+                  author_name: authorName,
+                  author_link: `https://summit2019.reversim.com/session/${model._id}`,
+                  author_icon: speakers[0].picture,
+                  text: speakers[0].email
+                },
+                {
+                  "title": "Session type",
+                  "color": "#17a2b8",
+                  "text": PROPOSAL_TYPES[proposal.type]
+                },
+                {
+                  "title": "Categories",
+                  "color": "#28a745",
+                  "text": proposal.categories ? proposal.categories.join(", ") : ""
+                },
+                {
+                  "title": "Tags",
+                  "color": "#ffc107",
+                  "text": proposal.tags ? proposal.tags.join(", ") : ""
+                },
+                {
+                  text: proposal.abstract,
+                  color: "#6b1ee6"
+                }
+              ]
+            }
+          });
         });
       });
     });
