@@ -3,7 +3,7 @@ import {Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from '
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
-import {navbar, logo, navLink, navItem, isWhite, isNotHome} from './Navbar.css';
+import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn} from './Navbar.css';
 import logoImg from '../images/rs19-logo.png';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
@@ -12,7 +12,7 @@ import { getLoginUrl } from "./Redirect";
 
 const CFPCTA = () => (
   <Link to="/cfp" className="unstyled-link">
-    <Button color="primary" className="mr-4">
+    <Button color="primary" className={cn("mr-4", submitBtn)}>
       Submit session
     </Button>
   </Link>

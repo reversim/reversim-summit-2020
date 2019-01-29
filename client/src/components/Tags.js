@@ -37,7 +37,7 @@ const Tags = ({
 }) => (
   <div className={className}>
     <label>Tags</label>
-    <small className="d-block text-muted mb-2">Maximum {MAX_TAGS} tags. Help us and your audience classifing your session.</small>
+    <small className="d-block mb-2">Maximum {MAX_TAGS} tags. Help us and your audience classifing your session.</small>
     <ReactTags
       tags={tags}
       suggestions={suggestions}

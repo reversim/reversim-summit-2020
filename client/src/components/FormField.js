@@ -61,7 +61,7 @@ export default ({
   return (
     <div className={className}>
       <label htmlFor={id}>{label}</label>
-      {subtitle && <small className="d-block text-muted mb-2">{subtitle}</small>}
+      {subtitle && <small className="d-block mb-2">{subtitle}</small>}
       {valueComp}
     </div>
   );

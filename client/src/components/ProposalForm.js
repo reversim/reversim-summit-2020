@@ -121,7 +121,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
     <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
       <div className={'d-flex flex-column'}>
         <h5 className="mb-0">{name}</h5>
-        <small className={cn({'text-primary': checked, 'text-gray-600': !checked})}>
+        <small className={cn({'text-primary': checked})}>
           {description}
         </small>
       </div>
@@ -364,7 +364,7 @@ class ProposalForm extends Component {
         </Modal>
 
         <label>Categories</label>
-        <small className="d-block text-muted mb-2">
+        <small className="d-block mb-2">
           Choose 1 or 2 categories. This information will help us assign this session to one of the
           conference's tracks.
         </small>

@@ -55,3 +55,15 @@
 :global .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,<svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/></svg>");
 }
+
+.navbar {
+    padding: 20px 30px
+}
+
+/*not so proud about those, need to find a better way to control the button color*/
+.submitBtn {
+    background: linear-gradient(to right,rgba(118,12,146, 0.4) 0%, rgba(0,92,177,0.4) 100%) !important;
+}
+.submitBtn:hover {
+    background: linear-gradient(to right, rgba(118, 12, 146, 0.9) 0%, rgba(0, 92, 177, 1) 100%) !important;
+}
