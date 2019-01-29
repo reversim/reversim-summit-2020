@@ -82,7 +82,10 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
 );
 
 const CoSpeakerFieldCaption = () => (
-    <span className='text-red'>make sure your co-speaker is already signed!</span>
+  <span>
+    <span>If you want to lecture with another speaker, add their email here. both of you will be able to edit the lecture.</span><br/>
+    <span className='text-red'>Make sure your co-speaker is already signed!</span>
+  </span>
  );
 
 const OutlineFieldCaption = () => (
@@ -293,9 +296,9 @@ class ProposalForm extends Component {
         />
         <FormField
           id="coSpeaker"
-          label="co-speaker (optional)"
+          label="Co-Speaker (optional)"
           required={false}
-          // placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
+          placeholder={`co.speaker@email.com`}
           subtitle={<CoSpeakerFieldCaption/>}
           onChange={this.onChangeCoSpeaker}
           className={SPACING}
