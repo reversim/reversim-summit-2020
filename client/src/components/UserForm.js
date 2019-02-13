@@ -120,7 +120,7 @@ const UserForm = ({user}) => (
     />
     <FormField
       id="trackRecord"
-      label="Track record as speaker"
+      label="Track record as speaker, if available"
       value={user.trackRecord}
       placeholder=""
       required={true}
