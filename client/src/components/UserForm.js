@@ -27,11 +27,16 @@ export const getUserData = formElements => {
 
 const VideoUrlFieldCaption = () => (
   <span>
-    <b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.<br />
-    <b>New speakers</b>: A short video introducing you and the planned session outline.<br />
+    <ul>
+      <li>
+        <b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.</li>
+      <li>
+        <b>New speakers</b>: A short video introducing you and the planned session outline.
+        <br/>Please see <a href="https://www.youtube.com/watch?v=F09My4646hI">https://www.youtube.com/watch?v=F09My4646hI</a> for guidance
+      </li>
+    </ul>
     <i>
-      <b>Note</b>: If a video was already pasted in the track record field, it can be reused for
-      this field.
+      <b>Note</b>: You may reuse this video link in the below "Track record" section.
     </i>
   </span>
 );
@@ -119,8 +124,17 @@ const UserForm = ({user}) => (
       className={SPACING}
     />
     <FormField
+      id="video_url"
+      label="Link to video"
+      required={true}
+      value={user.video_url}
+      placeholder="e.g. http://youtu.be/xxxx"
+      subtitle={<VideoUrlFieldCaption />}
+      className={SPACING}
+    />
+    <FormField
       id="trackRecord"
-      label="Track record as speaker"
+      label="Track record as speaker, if available"
       value={user.trackRecord}
       placeholder=""
       required={true}
@@ -128,8 +142,9 @@ const UserForm = ({user}) => (
       className={SPACING}
       subtitle={
         <span>
-          Your speaker track record will vastly improve your chances of getting accepted. The track
-          record should include links to your presentations, most preferable videos of them (plus
+          Reversim Summit is looking for a balance between seasonal speakers and new speakers. <br/><br/>
+
+          Seasonal speakers should include links to presentations, most preferable videos of them (plus
           slides)<br />
           <br />
           <b>Example:</b>
@@ -171,15 +186,6 @@ const UserForm = ({user}) => (
           </ul>
         </span>
       }
-    />
-    <FormField
-      id="video_url"
-      label="Link to video"
-      required={true}
-      value={user.video_url}
-      placeholder="e.g. http://youtu.be/xxxx"
-      subtitle={<VideoUrlFieldCaption />}
-      className={SPACING}
     />
   </div>
 );
