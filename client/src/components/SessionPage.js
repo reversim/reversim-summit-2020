@@ -40,7 +40,7 @@ class SessionPage extends Component {
     const {
       user,
       session,
-      sessionSspeakers,
+      sessionSpeakers,
       attendProposal,
       eventConfig,
       match: {
@@ -113,7 +113,7 @@ class SessionPage extends Component {
           )}
         </div>
         <div className="mb-10">
-          {sessionSspeakers.map(speaker => <Speaker key={speaker._id} speaker={speaker} />)}
+          {sessionSpeakers.map(speaker => <Speaker key={speaker._id} speaker={speaker} />)}
         </div>
       </Container>
       <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>

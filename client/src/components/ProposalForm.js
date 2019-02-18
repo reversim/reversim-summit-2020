@@ -83,7 +83,7 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
 
 const CoSpeakerFieldCaption = () => (
   <span>
-    <span>If you want to lecture with another speaker, add their email here. both of you will be able to edit the lecture.</span><br/>
+    <span>If you want to lecture with another speaker, add their email here. Both of you will be able to edit the lecture.</span><br/>
     <span className='text-red'>Make sure your co-speaker is already signed!</span>
   </span>
  );
@@ -118,6 +118,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
       type="checkbox"
       checked={checked}
       disabled={disabled}
+      readOnly={true}
     />
     <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
       <div className={'d-flex flex-column'}>
@@ -159,6 +160,7 @@ class ProposalForm extends Component {
       abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true,
       newTagPending: null,
       otherCategory: props.categories ? this.getOtherCategoryInState(props.categories) : null,
+      coSpeaker: props.coSpeaker
     };
   }
 
@@ -176,9 +178,13 @@ class ProposalForm extends Component {
     });
   };
 
-  // onChangeCoSpeaker = e => {
-  //   // const val = e.target.value;
-  // };
+  onChangeCoSpeaker = e => {
+    this.props.update({coSpeaker: e.target.value});
+    // this.setState({
+    //   abstractLen,
+    //   abstractErr,
+    // });
+  };
 
   getAbstractErr = val =>
     val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
@@ -257,7 +263,7 @@ class ProposalForm extends Component {
 
   render() {
     const {allTags, categories, proposalType, tags, title, outline, abstract, legal} = this.props;
-    const {abstractLen, abstractErr, newTagPending} = this.state;
+    const {abstractLen, abstractErr, newTagPending, coSpeaker} = this.state;
     let bestMatch,
       predefinedTags,
       tagObjs = tags.map(t => ({id: t, text: t}));
@@ -302,6 +308,7 @@ class ProposalForm extends Component {
           subtitle={<CoSpeakerFieldCaption/>}
           onChange={this.onChangeCoSpeaker}
           className={SPACING}
+          value={coSpeaker}
         />
         <FormField
           id="abstract"

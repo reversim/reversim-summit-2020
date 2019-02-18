@@ -290,6 +290,11 @@ button.btn {
     height: 100vh;
 }
 
+.page {
+  flex-grow: 1;
+  background: $darkblue;
+}
+
 .nav-link {
   &.active {
     color: #1ad6ff;

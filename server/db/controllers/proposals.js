@@ -150,6 +150,9 @@ export function add(req, res) {
 async function update(req, res) {
   if (!req.user) return res.sendStatus(401);
   const proposal = await Proposal.findOne({ _id: req.params.id });
+  const coSpeaker = req.body.coSpeaker;
+  delete req.body.coSpeaker;
+  const coSpeakerUser = await User.findOne({ email: coSpeaker });
   if (!proposal) {
     console.error('error in proposal update - no proposal found');
     return res.status(500).send('Something went wrong getting the data');
@@ -158,6 +161,17 @@ async function update(req, res) {
     return res.status(401).send('Unauthorized to update proposal');
   } else {
     const omitKeys = ['id', '_id', '_v'];
+    if (coSpeakerUser) {
+      const coSpeakerId = String(coSpeakerUser._id);
+      // if the user is not one of the speakers, make it the coSpeaker
+      if(proposal.speaker_ids.indexOf(coSpeakerId) === -1) {
+        proposal.speaker_ids[1] = coSpeakerId;
+      }
+      req.body.speaker_ids = proposal.speaker_ids;
+    } else if(!coSpeaker) {
+      // if coSpeaker is empty, remove the coSpeaker
+      req.body.speaker_ids = [proposal.speaker_ids[0]];
+    }
     req.body.updated_at = new Date();
     const data = _.omit(req.body, omitKeys);
 

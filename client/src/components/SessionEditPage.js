@@ -15,7 +15,11 @@ class SessionEditPage extends React.Component {
       categories: props.session.categories || [],
       tags: props.session.tags,
       proposalType: props.session.type,
+      users: props.users
     };
+    if(props.session.speaker_ids[1]) {
+      this.state.coSpeaker = props.users[props.session.speaker_ids[1]].name;
+    }
   }
 
   handleSubmit = async e => {
@@ -64,6 +68,7 @@ class SessionEditPage extends React.Component {
     const legal = formElements.legal.checked;
     const tags = this.state.tags;
     const categories = this.state.categories;
+    const coSpeaker = this.state.coSpeaker;
 
     return {
       title,
@@ -73,6 +78,7 @@ class SessionEditPage extends React.Component {
       tags,
       categories,
       legal,
+      coSpeaker
     };
   };
 
@@ -82,6 +88,7 @@ class SessionEditPage extends React.Component {
     const {session, allTags} = this.props;
     const {proposalType, categories, tags} = this.state;
     const {title, outline, abstract, legal} = session;
+    const coSpeaker = this.state.coSpeaker
 
     return (
       <Page title={`Edit ${session.title}`} {...this.props}>
@@ -102,6 +109,7 @@ class SessionEditPage extends React.Component {
                   outline={outline}
                   abstract={abstract}
                   legal={legal}
+                  coSpeaker={coSpeaker}
                 />
                 <div className="text-center">
                   <Input type="submit" className="d-none" />

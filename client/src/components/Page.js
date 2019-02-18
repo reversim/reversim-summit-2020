@@ -36,7 +36,7 @@ class Page extends Component {
           history={history}
           eventConfig={eventConfig || {}}
         />
-        <div style={{flexGrow: 1}}>{children}</div>
+        <div className="page">{children}</div>
         <Footer user={user} />
       </div>
     );

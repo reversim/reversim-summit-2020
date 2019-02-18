@@ -30,5 +30,5 @@ export default Component => props => {
 
   const speakers = session.speaker_ids.map(id => users[id]);
 
-  return <Component session={session} sessionSspeakers={speakers} {...props} />;
+  return <Component session={session} sessionSpeakers={speakers} {...props} />;
 };
