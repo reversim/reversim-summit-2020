@@ -41,14 +41,9 @@ const LocationPage = props => (
 			<Section title="Bus">
 				TBD
 			</Section>*/}
-      {/*<h4>*/}
-        {/*<a href="http://smolarz.tau.org.il/access.html" target="_blank" rel="noopener noreferrer">*/}
-          {/*More info from Tel Aviv University*/}
-        {/*</a>*/}
       {/*</h4>*/}
       {/*<img*/}
         {/*className="img-fluid"*/}
-        {/*src="http://smolarz.tau.org.il/images/access.gif"*/}
         {/*alt={`Getting to ${REVERSIM_SUMMIT}`}*/}
       {/*/>*/}
       <div className="my-5">

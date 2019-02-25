@@ -8,6 +8,7 @@ import SessionPage from '../components/SessionPage';
 import SessionEditPage from '../components/SessionEditPage';
 import SpeakersPage from '../components/SpeakersPage';
 import SponsorsPage from '../components/Sponsors';
+import SponsorPage from "../components/SponsorPage";
 // import RegisterPage from "../components/RegisterPage";
 import LocationPage from '../components/LocationPage';
 import TeamPage from '../components/TeamPage';
@@ -27,6 +28,7 @@ export default [
   {path: '/speakers', comp: SpeakersPage},
   {path: '/location', comp: LocationPage},
   {path: '/sponsors', comp: SponsorsPage},
+  {path: '/sponsor/:name', comp: SponsorPage},
   {path: '/team', comp: TeamPage},
   {path: '/speaker/:id', comp: SpeakerPage},
   {path: '/speaker/:id/edit', comp: SpeakerEditPage},

@@ -7,7 +7,6 @@ import CFPTitle from './CFPTitle';
 import CFPIntro from './CFPIntro';
 import CFPFaq from './CFPFaq';
 import CFPForm from './CFPForm';
-import smolarzImg from '../images/smolarz_hero.png';
 import {heroImg, cfpCol} from './CFPPage.css';
 import {getLoginUrl} from './Redirect';
 import {getRemainingCFPDays as _x, REVERSIM_SUMMIT} from '../utils';
@@ -54,7 +53,6 @@ const CFPBody = props => {
 const CFPPage = props => (
   <Page title="Call for papers" {...props}>
     <div className="container">
-      {/*<div className={heroImg} style={{backgroundImage: `url('${smolarzImg}')`}} />*/}
       <Container>
         <Row>
           <Col lg={{size: 10, offset: 1}} className={cn(cfpCol)}>

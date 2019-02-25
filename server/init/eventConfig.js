@@ -1,10 +1,11 @@
 import moment from 'moment-timezone';
 
 const config = {
+  // TODO neta- fix the dates
   cfpStartDate: process.env.CFP_START_DATE ||  "2019-01-20",
-  cfpEndDate: process.env.CFP_END_DATE || "2019-02-28",
-  votingStartDate: process.env.VOTING_START_DATE || "2019-04-01",
-  votingEndDate: process.env.VOTING_END_DATE || "2019-05-01",
+  cfpEndDate: process.env.CFP_END_DATE || "2019-02-20",
+  votingStartDate: process.env.VOTING_START_DATE || "2019-02-01",
+  votingEndDate: process.env.VOTING_END_DATE || "2019-04-01",
 }
 
 export default () => {

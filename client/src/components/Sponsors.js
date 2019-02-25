@@ -9,6 +9,7 @@ import cn from 'classnames';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
+import {Link} from 'react-router-dom';
 library.add(faPencilAlt, faTrash);
 
 const chunkArray = (myArray, chunk_size) => {
@@ -35,6 +36,7 @@ const Sponsor = ({
   },
   onEdit,
   onDelete,
+  history
 }) => {
   const showJob = featuredJobLink || featuredJobInfo;
   const showJobLink = featuredJobLink && !excludeWebsite;
@@ -45,7 +47,7 @@ const Sponsor = ({
     ? `${featuredJobInfo} Interested? More info [here](${featuredJobLink}).`
     : featuredJobInfo;
   return (
-    <div key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)}>
+    <Link key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)} to={`/sponsor/${name}`} >
       <div className="mb-4 text-center">
         <a href={url} target="_blank">
           <img src={logoHover} className={s.sponsorImg} alt={name} />
@@ -67,7 +69,7 @@ const Sponsor = ({
       <ReactMarkdown source={descriptionWithLink} />
       {showJob && <h5>Featured job</h5>}
       {showJob && <ReactMarkdown source={featuredJob} />}
-    </div>
+    </Link>
   );
 };
 
@@ -100,19 +102,21 @@ class SponsorWithEdit extends React.Component {
 
   render() {
     const {isEditing} = this.state;
-    const {sponsor, canEdit} = this.props;
+    const {sponsor, canEdit, history} = this.props;
     return isEditing ? (
       <SponsorForm
         sponsor={sponsor}
         onSubmit={this.onSubmit}
         onCancel={this.onCancel}
         isLoading={this.state.isLoading}
+        history={history}
       />
     ) : (
       <Sponsor
         onEdit={canEdit && this.onEdit}
         onDelete={canEdit && this.onDelete}
         sponsor={sponsor}
+        history={history}
       />
     );
   }
@@ -183,37 +187,38 @@ const WantToBe = () => (
 
 class SponsorsPage extends React.Component {
   render() {
-    const {createSponsor, updateSponsor, deleteSponsor, user, sponsors} = this.props;
+    const {createSponsor, updateSponsor, deleteSponsor, user, sponsors, history} = this.props;
     return (
       <Page title="Sponsors" {...this.props}>
-        {/* <WantToBe /> */}
+         <WantToBe />
         <Container>
-          {/*<h1 className="mt-5">Our sponsors</h1>*/}
-          {/*<p className="font-size-lg tmb-5">*/}
-            {/*Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:*/}
-          {/*</p>*/}
-          {/*{user &&*/}
-            {/*user.isReversimTeamMember && (*/}
-              {/*<div className="border p-3 mb-8">*/}
-                {/*<h3>Add sponsor</h3>*/}
-                {/*<SponsorForm onSubmit={createSponsor} />*/}
-              {/*</div>*/}
-            {/*)}*/}
-          {/*<div className={cn(s.sponsorWrap)}>*/}
-            {/*{sponsors.map(sponsor => (*/}
-              {/*<SponsorWithEdit*/}
-                {/*key={sponsor._id}*/}
-                {/*sponsor={sponsor}*/}
-                {/*canEdit={user && user.isReversimTeamMember}*/}
-                {/*updateSponsor={updateSponsor}*/}
-                {/*deleteSponsor={deleteSponsor}*/}
-              {/*/>*/}
-            {/*))}*/}
-          {/*</div>*/}
-          {/*/!* <WantToBe /> *!/*/}
-          <h3 className="text-center">The annual Reversim conference is here</h3>
-          <h3 className="font-weight-bold  text-center">and we can't do it without you!</h3>
+          <h1 className="mt-5">Our sponsors</h1>
+          <p className="font-size-lg tmb-5">
+            Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:
+          </p>
+          {user &&
+            user.isReversimTeamMember && (
+              <div className="border p-3 mb-8">
+                <h3>Add sponsor</h3>
+                <SponsorForm onSubmit={createSponsor} history={history}/>
+              </div>
+            )}
+          <div className={cn(s.sponsorWrap)}>
+            {sponsors.map(sponsor => (
+              <SponsorWithEdit
+                key={sponsor._id}
+                sponsor={sponsor}
+                canEdit={user && user.isReversimTeamMember}
+                updateSponsor={updateSponsor}
+                deleteSponsor={deleteSponsor}
+                history={history}
+              />
+            ))}
+          </div>
            <WantToBe />
+          {/*<h3 className="text-center">The annual Reversim conference is here</h3>*/}
+          {/*<h3 className="font-weight-bold  text-center">and we can't do it without you!</h3>*/}
+           {/*<WantToBe />*/}
 
         </Container>
       </Page>
@@ -241,7 +246,7 @@ class SponsorForm extends React.Component {
   };
 
   render() {
-    const {onSubmit, onCancel, sponsor, isLoading} = this.props;
+    const {onSubmit, onCancel, sponsor, isLoading, history} = this.props;
     const _id = sponsor ? sponsor._id : '';
     return (
       <Row>
@@ -346,7 +351,7 @@ class SponsorForm extends React.Component {
           </form>
         </Col>
         <Col>
-          <Sponsor sponsor={this.getData()} />
+          <Sponsor sponsor={this.getData()} history={history} />
         </Col>
       </Row>
     );
