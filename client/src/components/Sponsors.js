@@ -24,6 +24,11 @@ const chunkArray = (myArray, chunk_size) => {
   return tempArray;
 };
 
+const PremiumSponsors = ({sponsors}) => {
+  sponsors = []
+
+}
+
 const Sponsor = ({
   sponsor: {
     name = '',
@@ -47,29 +52,31 @@ const Sponsor = ({
     ? `${featuredJobInfo} Interested? More info [here](${featuredJobLink}).`
     : featuredJobInfo;
   return (
-    <Link key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)} to={`/sponsor/${name}`} >
-      <div className="mb-4 text-center">
-        <a href={url} target="_blank">
-          <img src={logoHover} className={s.sponsorImg} alt={name} />
-        </a>
-      </div>
-      <h4>
-        {name}
-        {onEdit && (
-          <span>
-            <Button size="sm" color="primary" className="ml-2" onClick={onEdit}>
-              <FontAwesomeIcon icon="pencil-alt"/>
-            </Button>
-            <Button size="sm" color="danger" className="ml-2" onClick={onDelete}>
-              <FontAwesomeIcon icon="trash"/>
-            </Button>
-          </span>
-        )}
-      </h4>
-      <ReactMarkdown source={descriptionWithLink} />
-      {showJob && <h5>Featured job</h5>}
-      {showJob && <ReactMarkdown source={featuredJob} />}
-    </Link>
+    <div>
+      <Link key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)} to={`/sponsor/${name}`} >
+        <div className="mb-4 text-center">
+          <a href={url} target="_blank">
+            <img src={logoHover} className={s.sponsorImg} alt={name} />
+          </a>
+        </div>
+        <h4>
+          {name}
+          {onEdit && (
+            <span>
+              <Button size="sm" color="primary" className="ml-2" onClick={onEdit}>
+                <FontAwesomeIcon icon="pencil-alt"/>
+              </Button>
+              <Button size="sm" color="danger" className="ml-2" onClick={onDelete}>
+                <FontAwesomeIcon icon="trash"/>
+              </Button>
+            </span>
+          )}
+        </h4>
+        <ReactMarkdown source={descriptionWithLink} />
+        {showJob && <h5>Featured job</h5>}
+        {showJob && <ReactMarkdown source={featuredJob} />}
+      </Link>
+    </div>
   );
 };
 

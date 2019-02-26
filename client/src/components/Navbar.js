@@ -3,12 +3,14 @@ import {Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from '
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
-import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn} from './Navbar.css';
-import logoImg from '../images/rs19-logo.png';
+import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn, newTag, newLink, voteBtn} from './Navbar.css';
+import logoImg from '../images/SVG/nav-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
 import { getLoginUrl } from "./Redirect";
+import newImg from '../images/new-nav-tag.png';
+
 
 const CFPCTA = () => (
   <Link to="/cfp" className="unstyled-link">
@@ -18,18 +20,29 @@ const CFPCTA = () => (
   </Link>
 );
 
+const VotingCTA = () => (
+  <Link to="/my-votes" className="unstyled-link">
+    <Button className={cn("mr-4", voteBtn)}>
+      VOTE FOR SESSION
+    </Button>
+  </Link>
+);
+
 const NavbarItem = ({to, text, external, pathname}) => {
   let link;
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
+  const isNew = to === 'sponsors'
   if (external) {
     link = (
-      <a className={navLinkClass} href={to}>
+      <a className={cn(navLinkClass, isNew? newLink: '')} href={to}>
+        {isNew && <img className={newTag} src={newImg}/>}
         {text}
       </a>
     );
   } else {
     link = (
-      <Link className={navLinkClass} to={`/${to}`}>
+      <Link className={cn(navLinkClass, isNew? newLink: '')} to={`/${to}`}>
+        {isNew && <img className={newTag} src={newImg}/>}
         {text}
       </Link>
     );
@@ -74,7 +87,7 @@ class Navbar extends Component {
 
   render() {
     const {isHome, isSmallScreen, user, onLogout, pathname, history, eventConfig} = this.props;
-    const {cfp} = eventConfig;
+    const {cfp, voting} = eventConfig;
     const {fixed, currentPage: _currentPage} = this.state;
     const items = navItems(isHome);
     const isColored = !isHome || fixed;
@@ -104,6 +117,7 @@ class Navbar extends Component {
           <NavbarToggler onClick={this.toggle} className="ml-auto" />
         </div>
         {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
+        {voting && !isSmallScreen && pathname !== '/my-votes' && <VotingCTA />}
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav
             navbar
@@ -118,6 +132,7 @@ class Navbar extends Component {
               {/*</Button>*/}
             {/*</a>*/}
             {cfp && isSmallScreen && pathname !== '/cfp' && <NavbarItem text="Submit session" to="cfp"/>}
+            {voting && isSmallScreen && pathname !== '/my-votes' && <NavbarItem text="VOTE FOR SESSION" to="my-votes"/>}
             {items.map(item => (
               <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
             ))}
@@ -125,7 +140,7 @@ class Navbar extends Component {
               user && (
                 <div className="border-top">
                   <NavbarItem to="profile" text="My profile" />
-                  {/*<NavbarItem to="my-votes" text="My votes" />*/}
+                  <NavbarItem to="my-votes" text="My votes" />
                   <NavItem className={navItem} onClick={onLogout}>
                     <span className={navLinkClass}>Logout</span>
                   </NavItem>

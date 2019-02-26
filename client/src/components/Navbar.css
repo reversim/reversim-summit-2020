@@ -18,13 +18,33 @@
 
 .logo {
     cursor: pointer;
-    width: 203px;
-    height: 69px;
+    width: 112px;
+    height: 40px;
 }
 
 .isWhite {
     background: #5127ff;
     transition: background 0.3s;
+}
+
+.newLink {
+     display: flex;
+     flex-direction: row-reverse;
+    margin-right: -45px;
+}
+
+.newTag {
+    width: 39px;
+    height: 27px;
+    position: relative;
+    top: -13px;
+    right: 25px;
+}
+
+.voteBtn {
+    border: solid 2px #ffffff !important;
+    background-color: #896cff !important;
+    box-shadow: -2px 2px #5127ff, -4px 4px white !important;
 }
 
 @media (min-width: 577px) {
