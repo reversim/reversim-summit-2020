@@ -8,7 +8,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Montserrat, sans-serif;
+  font-family: SourceCodePro;
   background: $darkblue;
   color: white;
 }
@@ -90,6 +90,10 @@ input[type='checkbox'] {
 }
 
 
+.font-size-xxl {
+  font-size: $font-size-xxl;
+}
+
 .font-size-xl {
   font-size: $font-size-xl;
 }
@@ -118,6 +122,10 @@ input[type='checkbox'] {
 
 .font-weight-light {
   font-weight: 300;
+}
+
+.font-SCP {
+  font-family: SourceCodePro;
 }
 
 .font-pt {
@@ -292,12 +300,17 @@ button.btn {
 
 .page {
   flex-grow: 1;
-  background: $darkblue;
+  background: $white;
+}
+.container {
+  padding: 0;
+  min-width: 100%;
 }
 
 .nav-link {
   &.active {
     color: #1ad6ff;
+    border-bottom: 2px solid #ff6100;
   }
 }
 

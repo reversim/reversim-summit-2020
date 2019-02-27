@@ -15,9 +15,11 @@ $darkblue2: #010029;
 $blue:    #0048ff;
 $indigo:  #4d5aff;
 $purple:  #df30ff;
+$purple2: #5127ff;
 $pink:    #ff5400;
 $red:     #ff2e5f;
 $orange:  #ffaa30;
+$orange2: #ff6100;
 $yellow:  #f6ff00;
 $green:   #30ff96;
 $teal:    #2efffd;
@@ -31,9 +33,11 @@ $colors: (
   "indigo":     $indigo,
   "indigo-light": lighten($indigo, 20%),
   "purple":     $purple,
+  "purple2":     $purple2,
   "pink":       $pink,
   "red":        $red,
   "orange":     $orange,
+  "orange2":   $orange2,
   "yellow":     $yellow,
   "green":      $green,
   "lightgreen": $lightgreen,
@@ -233,6 +237,7 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //// stylelint-enable value-keyword-case
 //
 //$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-xxl:               50px;
 $font-size-xl:                35px;
 $font-size-lg:                24px;
 $font-size-sm:                14px; // for 12px use <small>

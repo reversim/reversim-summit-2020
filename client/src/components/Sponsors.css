@@ -4,6 +4,34 @@
     transition: opacity 150ms;
 }
 
+.premiumCover {
+    background-size: cover;
+    background-color: #5127ff;
+    padding: 20px 200px;
+}
+
+.diamond {
+    width: 85px;
+    height: 85px;
+    margin-right: -50px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    margin-right: -50px;
+    fill: #ff6100;
+}
+.mb10 {
+    margin-bottom: -10px
+}
+
+.hr {
+    flex-grow: 1;
+    height: 2px;
+    align-self: center;
+    margin-left: 10px;
+}
 @media (min-width:991px) {
     .sponsor {
         width: calc(100% - 20px);

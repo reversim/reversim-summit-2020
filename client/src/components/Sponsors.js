@@ -10,6 +10,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom';
+import premiumImage from '../images/sponsors-page-bg.png'
+import diamond from '../images/SVG/diamond.svg'
+import circle from '../images/SVG/circle.svg'
 library.add(faPencilAlt, faTrash);
 
 const chunkArray = (myArray, chunk_size) => {
@@ -24,8 +27,57 @@ const chunkArray = (myArray, chunk_size) => {
   return tempArray;
 };
 
-const PremiumSponsors = ({sponsors}) => {
+const PremiumSponsors = ({sponsors, user, updateSponsor, deleteSponsor}) => {
   sponsors = []
+
+  return (
+      <div className={s.premiumCover} style={{backgroundImage: `url('${premiumImage}')`}}>
+        <div className={'d-flex'}>
+          <img src={diamond} className={s.diamond} alt="diamond"/>
+          <div className={cn('font-size-xxl text-white')}>Meet Our Premium Sponsors</div>
+          <div className={cn(s.hr, 'bg-white')}></div>
+        </div>
+        <div className={cn(s.sponsorWrap)}>
+          {sponsors.map(sponsor => (
+              <SponsorWithEdit
+                  key={sponsor._id}
+                  sponsor={sponsor}
+                  canEdit={user && user.isReversimTeamMember}
+                  updateSponsor={updateSponsor}
+                  deleteSponsor={deleteSponsor}
+              />
+          ))}
+        </div>
+      </div>
+  )
+
+}
+const CommunitySponsors = ({sponsors, user, updateSponsor, deleteSponsor}) => {
+  sponsors = []
+
+  return (
+      <div>
+        <div className={'d-flex align-items-center'}>
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className={s.circle}>
+            <title>circle</title>
+            <path className="cls-1" d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z"/>
+          </svg>
+          <div className={cn('font-size-xxl text-purple2')}>Meet Our Community Sponsors</div>
+          <div className={cn(s.hr, 'bg-purple2', s.mb10)}></div>
+        </div>
+        <div className={cn(s.sponsorWrap)}>
+          {sponsors.map(sponsor => (
+              <SponsorWithEdit
+                  key={sponsor._id}
+                  sponsor={sponsor}
+                  canEdit={user && user.isReversimTeamMember}
+                  updateSponsor={updateSponsor}
+                  deleteSponsor={deleteSponsor}
+              />
+          ))}
+        </div>
+      </div>
+  )
 
 }
 
@@ -40,8 +92,7 @@ const Sponsor = ({
     excludeWebsite,
   },
   onEdit,
-  onDelete,
-  history
+  onDelete
 }) => {
   const showJob = featuredJobLink || featuredJobInfo;
   const showJobLink = featuredJobLink && !excludeWebsite;
@@ -55,9 +106,9 @@ const Sponsor = ({
     <div>
       <Link key={name} className={cn('bg-emph p-3 mb-8 mr-8', s.sponsor)} to={`/sponsor/${name}`} >
         <div className="mb-4 text-center">
-          <a href={url} target="_blank">
+          {/*<a href={url} target="_blank">*/}
             <img src={logoHover} className={s.sponsorImg} alt={name} />
-          </a>
+          {/*</a>*/}
         </div>
         <h4>
           {name}
@@ -109,21 +160,19 @@ class SponsorWithEdit extends React.Component {
 
   render() {
     const {isEditing} = this.state;
-    const {sponsor, canEdit, history} = this.props;
+    const {sponsor, canEdit} = this.props;
     return isEditing ? (
       <SponsorForm
         sponsor={sponsor}
         onSubmit={this.onSubmit}
         onCancel={this.onCancel}
         isLoading={this.state.isLoading}
-        history={history}
       />
     ) : (
       <Sponsor
         onEdit={canEdit && this.onEdit}
         onDelete={canEdit && this.onDelete}
         sponsor={sponsor}
-        history={history}
       />
     );
   }
@@ -194,39 +243,21 @@ const WantToBe = () => (
 
 class SponsorsPage extends React.Component {
   render() {
-    const {createSponsor, updateSponsor, deleteSponsor, user, sponsors, history} = this.props;
+    const {createSponsor, updateSponsor, deleteSponsor, user, sponsors} = this.props;
     return (
       <Page title="Sponsors" {...this.props}>
-         <WantToBe />
         <Container>
-          <h1 className="mt-5">Our sponsors</h1>
-          <p className="font-size-lg tmb-5">
-            Here are the companies who made <b>{REVERSIM_SUMMIT}</b> possible:
-          </p>
           {user &&
             user.isReversimTeamMember && (
               <div className="border p-3 mb-8">
                 <h3>Add sponsor</h3>
-                <SponsorForm onSubmit={createSponsor} history={history}/>
+                <SponsorForm onSubmit={createSponsor}/>
               </div>
             )}
-          <div className={cn(s.sponsorWrap)}>
-            {sponsors.map(sponsor => (
-              <SponsorWithEdit
-                key={sponsor._id}
-                sponsor={sponsor}
-                canEdit={user && user.isReversimTeamMember}
-                updateSponsor={updateSponsor}
-                deleteSponsor={deleteSponsor}
-                history={history}
-              />
-            ))}
-          </div>
-           <WantToBe />
+          <PremiumSponsors sponsors={sponsors} user={user} updateSponsor={updateSponsor} deleteSponsor={deleteSponsor} />
+          <CommunitySponsors sponsors={sponsors} user={user} updateSponsor={updateSponsor} deleteSponsor={deleteSponsor} />
           {/*<h3 className="text-center">The annual Reversim conference is here</h3>*/}
           {/*<h3 className="font-weight-bold  text-center">and we can't do it without you!</h3>*/}
-           {/*<WantToBe />*/}
-
         </Container>
       </Page>
     );
@@ -253,7 +284,7 @@ class SponsorForm extends React.Component {
   };
 
   render() {
-    const {onSubmit, onCancel, sponsor, isLoading, history} = this.props;
+    const {onSubmit, onCancel, sponsor, isLoading} = this.props;
     const _id = sponsor ? sponsor._id : '';
     return (
       <Row>
@@ -358,7 +389,7 @@ class SponsorForm extends React.Component {
           </form>
         </Col>
         <Col>
-          <Sponsor sponsor={this.getData()} history={history} />
+          <Sponsor sponsor={this.getData()}/>
         </Col>
       </Row>
     );
