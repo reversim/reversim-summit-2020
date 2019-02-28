@@ -47,11 +47,11 @@ class SessionPage extends Component {
         params: { id },
       },
     } = this.props;
-    const { voting } = eventConfig;
+    const { voting, cfp } = eventConfig;
     const { title, abstract, type, tags, outline, categories: _categories, attended } = session;
     const isAuthor = user && session.speaker_ids.includes(user._id);
     const isTeamMember = user && user.isReversimTeamMember;
-    const canEdit = isAuthor || isTeamMember;
+    const canEdit = (isAuthor && cfp) || isTeamMember;
 
     return (
     <Page title={session.title} {...this.props} isSingleContent={true}>

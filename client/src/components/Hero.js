@@ -5,13 +5,16 @@ import {Button} from 'reactstrap';
 import {REVERSIM_SUMMIT} from '../utils';
 import {Link} from 'react-router-dom';
 
-const Hero = () => (
+
+const Hero = (props) => (
   <section className={cn(hero, 'd-flex justify-content-center align-items-center')}>
     <div className={cn(heroInner, 'd-flex align-items-center text-center text-md-left')}>
       <div className={cn(left, 'text-white')}>
         <div className="px-2">
           <h1 className={cn('mb-6 text-uppercase line-height-1', title)}>{REVERSIM_SUMMIT}</h1>
-          <h2 className={cn(h2, 'mb-6')}>Welcome and have fun today!</h2>
+          {props.eventConfig.cfp?
+            <h2 className={cn(h2, 'mb-6')}>Welcome and have fun today!</h2>:
+            <h2 className={cn(h2, 'mb-6')}>CFP is closed. Voting will start soon. Stay tuned</h2>}
         </div>
         <div className={cn(separator, 'border border-cyan mb-6 mx-auto mx-md-0')} />
         <div className="d-flex justify-content-center justify-content-md-start mb-6">
@@ -24,9 +27,11 @@ const Hero = () => (
           {/*<Link to="/schedule">*/}
             {/*<Button>View Schedule</Button>*/}
           {/*</Link>*/}
+          {props.eventConfig.cfp &&
           <Link to="/cfp">
             <Button> Submit session </Button>
           </Link>
+          }
         </div>
         <div className={cn(subtitle, 'mb-8')}>16 - 17 June | Ganei HaTaarucha</div>
       </div>
