@@ -28,7 +28,8 @@ const chunkArray = (myArray, chunk_size) => {
 };
 
 const PremiumSponsors = ({sponsors, user, updateSponsor, deleteSponsor}) => {
-  sponsors = []
+  sponsors = sponsors.filter(sponsor => sponsor.isPremium)
+  console.log('sponsors', sponsors)
 
   return (
       <div className={s.premiumCover} style={{backgroundImage: `url('${premiumImage}')`}}>
@@ -244,6 +245,7 @@ const WantToBe = () => (
 class SponsorsPage extends React.Component {
   render() {
     const {createSponsor, updateSponsor, deleteSponsor, user, sponsors} = this.props;
+    console.log('sponsors', sponsors)
     return (
       <Page title="Sponsors" {...this.props}>
         <Container>
