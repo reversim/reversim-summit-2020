@@ -15,7 +15,9 @@ const hrefs = {
 };
 
 const SpeakerSocialLink = ({type, value}) => (
-  <IconLink href={hrefs[type](value)} icon={icons[type]} className="social-icon-link" />
+  <IconLink href={hrefs[type](value)} icon={icons[type]} className="social-icon-link">
+    {type}
+  </IconLink>
 );
 
 export default SpeakerSocialLink;

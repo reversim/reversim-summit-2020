@@ -57,7 +57,9 @@ export class SpeakerPage extends React.Component {
                   </div>
                 )}
               </h3>
-              <p className="mb-0 text-white font-size-lg">{speaker.oneLiner}</p>
+              <p className="mb-0 text-white font-size-lg line-height-1 mt-3 mb-8">
+                {speaker.oneLiner}
+              </p>
               <SpeakerSocialLinks {...speaker} />
             </div>
           </div>
