@@ -1,16 +1,9 @@
 @import 'variables';
 
-@font-face {
-  font-family: Amstelvar;
-  src: url('./Amstelvar-Roman-VF.ttf');
-}
-
 body {
   margin: 0;
   padding: 0;
-  font-family: SourceCodePro;
-  background: $darkblue;
-  color: white;
+  font-family: 'Source Code Pro', monospace;
 }
 
 a {
@@ -301,6 +294,16 @@ button.btn {
 .page {
   flex-grow: 1;
   background: $white;
+  position: relative;
+
+  &:before {
+    content: '';
+    height: 220px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: $purple2;
+  }
 }
 .container {
   padding: 0;

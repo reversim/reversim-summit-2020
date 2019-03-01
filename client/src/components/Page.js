@@ -25,7 +25,7 @@ class Page extends Component {
 
     return (
       <div
-        style={isHome ? {} : {minHeight: "100vh", display: "flex", flexDirection: "column-reverse"}}
+        style={isHome ? {} : {minHeight: '100vh', display: 'flex', flexDirection: 'column'}}
         className={isSingleContent ? 'page-single-content' : ''}>
         <Navbar
           isHome={isHome}

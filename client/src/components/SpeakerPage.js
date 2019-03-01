@@ -32,7 +32,7 @@ export class SpeakerPage extends React.Component {
     const sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
 
     return (
-      <Page title={name} user={user} {...this.props} isSingleContent={true}>
+      <Page title={name} user={user} {...this.props}>
         <Container>
           <h2 className="mb-0 p-relative z-1">{speaker.name}</h2>
           <div className="speaker-page__speaker-wrapper">
