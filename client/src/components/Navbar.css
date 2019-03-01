@@ -20,6 +20,7 @@
     cursor: pointer;
     width: 112px;
     height: 40px;
+    display: block;
 }
 
 .isWhite {
@@ -37,17 +38,6 @@
     position: absolute;
     top: -3px;
     right: -10px;
-}
-
-.voteBtn {
-    border: solid 2px #ffffff !important;
-    box-shadow: -2px 2px #5127ff, -4px 4px white !important;
-    background: right bottom linear-gradient(to right, #ff6100 50%, #896cff 50%) !important;
-    background-size: 200% 100% !important;
-    transition: all .5s ease-out !important;
-}
-.voteBtn:hover {
-    background-position: left bottom !important;
 }
 
 @media (min-width: 577px) {
@@ -80,7 +70,7 @@
 }
 
 .navbar {
-    padding: 20px 30px
+    padding: 25px 30px;
 }
 
 /*not so proud about those, need to find a better way to control the button color*/

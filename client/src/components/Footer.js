@@ -4,7 +4,7 @@ import IconLink from './IconLink';
 import {getLoginUrl} from './Redirect';
 
 const Footer = ({user}) => (
-  <footer className="bg-darkblue2 py-6 font-size-md">
+  <footer className="bg-darkblue2 py-6 font-size-md mt-13">
     <Container>
       <Row className="footer-content align-items-center" noGutters>
         <div className="d-flex">

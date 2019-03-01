@@ -3,7 +3,7 @@ import {Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from '
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
-import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn, newTag, newLink, voteBtn} from './Navbar.css';
+import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn, newTag, newLink} from './Navbar.css';
 import logoImg from '../images/SVG/nav-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
@@ -22,7 +22,7 @@ const CFPCTA = () => (
 
 const VotingCTA = () => (
   <Link to="/my-votes" className="unstyled-link">
-    <Button className={cn("mr-4", voteBtn)}>
+    <Button className="styled-button on-purple">
       VOTE FOR SESSION
     </Button>
   </Link>

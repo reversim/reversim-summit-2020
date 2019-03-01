@@ -1,14 +1,10 @@
-export const PREDEFINED_TAGS = [
-  'Engineering',
-  'Product',
-  'Culture',
-];
+export const PREDEFINED_TAGS = ['Engineering', 'Product', 'Culture'];
 
 export const PROPOSAL_TYPES = {
-  full: 'Full Featured (30 min.)',
-  postmortem: 'Postmortem (15 min.)',
-  lightning: 'Lightning Talk (5 min.)',
-  ossil: 'Open Source in Israel (10 min.)',
+  full: 'Full session (30 minutes)',
+  postmortem: 'Postmortem (15 minuntes)',
+  lightning: 'Lightning talk (5 minuntes)',
+  ossil: 'Open Source in Israel (10 minuntes)',
 };
 
 export const PROPOSAL_TYPES_SHORT = {
@@ -32,13 +28,16 @@ export const ABSTRACT_MIN = 280;
 export const CATEGORIES = [
   {
     name: 'Engineering',
-    description: 'All things development'},
+    description: 'All things development',
+  },
   {
     name: 'Product',
-    description: 'Customer facing development / UX / design / product / marketing'},
+    description: 'Customer facing development / UX / design / product / marketing',
+  },
   {
     name: 'Culture',
-    description: 'Culture / scaling organizations / management / motivation and employee engagement',
+    description:
+      'Culture / scaling organizations / management / motivation and employee engagement',
   },
 ];
 

@@ -110,7 +110,7 @@ input[type='checkbox'] {
 }
 
 .font-weight-heavy {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .font-weight-light {
@@ -118,7 +118,7 @@ input[type='checkbox'] {
 }
 
 .font-SCP {
-  font-family: SourceCodePro;
+  font-family: 'Source Code Pro';
 }
 
 .font-pt {
@@ -230,6 +230,35 @@ a.unstyled-link:active {
   white-space: pre-wrap;
 }
 
+@mixin styled-button($onpurple: false) {
+  $bg-1: $purple2;
+  $bg-2: $white;
+
+  @if $onpurple {
+    $bg-1: $white;
+    $bg-2: $purple2;
+  }
+  
+  border: solid 2px $bg-1 !important;
+  box-shadow: -2px 2px $bg-2, -4px 4px $bg-1 !important;
+
+  background: right bottom linear-gradient(to right, #ff6100 50%, #896cff 50%) !important;
+  background-size: 200% 100% !important;
+  transition: all .5s ease-out !important;
+
+  &:hover {
+    background-position: left bottom !important;
+  }
+}
+
+.styled-button {
+  @include styled-button();
+
+  &.on-purple {
+    @include styled-button(true);
+  }
+}
+
 button.btn {
   box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.1);
   background: linear-gradient(to right, rgba(118,12,146,0.2) 0%,rgba(0,92,177,0.2) 100%);
@@ -295,20 +324,13 @@ button.btn {
   flex-grow: 1;
   background: $white;
   position: relative;
+  padding-top: 100px; // navbar-height
+}
 
-  &:before {
-    content: '';
-    height: 220px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    background: $purple2;
-  }
-}
-.container {
-  padding: 0;
-  min-width: 100%;
-}
+// .container {
+//   padding: 0;
+//   min-width: 100%;
+// }
 
 .nav-link {
   &.active {
@@ -357,29 +379,24 @@ button.btn {
   }
 }
 
+.speaker-page__speaker-hero {
+  position: absolute;
+  top: 100px; // navbar height
+  left: 0;
+  right: 0;
+  height: 220px;
+}
+
+.speaker-page__speaker-picture {
+  width: 230px;
+}
+
 .speaker-page__speaker-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  margin-top: 100px;
+}
 
-  .speaker-page__speaker-image {
-    flex: 0 0 200px;
-    margin-left: -20px;
-  }
-
-  @media (max-width:540px) {
-    flex-direction: column;
-    align-items: flex-end;
-
-    .speaker-page__speaker-image {
-      flex: auto;
-      margin-left: 0;
-
-      width: 200px;
-      margin-right: 20px;
-      margin-top: -40px;
-    }
-  }
+.speaker-page__session {
+  flex-basis: 50%;
 }
 
 .footer-content {
@@ -490,4 +507,12 @@ input[type="checkbox"] {
   @media (min-width:768px) {
     padding-left: 40px !important;
   }
+}
+
+.b-strong {
+  border: 4px solid $purple2;
+}
+
+.b-heavy {
+  border: 2px solid $indigo;
 }
