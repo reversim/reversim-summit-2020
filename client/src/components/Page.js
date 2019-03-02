@@ -37,7 +37,7 @@ class Page extends Component {
           eventConfig={eventConfig || {}}
         />
         <div className="page">{children}</div>
-        <Footer user={user} />
+        <Footer />
       </div>
     );
   }

@@ -396,15 +396,7 @@ button.btn {
 }
 
 .speaker-page__session {
-  flex-basis: 50%;
-}
-
-.footer-content {
-  justify-content: space-between;
-
-  @media (max-width:767px) {
-    justify-content: center;
-  }
+  flex-basis: auto;
 }
 
 .about-content {

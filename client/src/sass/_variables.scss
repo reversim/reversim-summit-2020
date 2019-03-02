@@ -11,11 +11,11 @@ $gray-900: #212529;
 $black:    #000;
 
 $darkblue: #010035;
-$darkblue2: #010029;
 $blue:    #0048ff;
 $indigo:  #896cff;
 $purple:  #df30ff;
 $purple2: #5127ff;
+$purple3: #3312bc;
 $pink:    #ff5400;
 $red:     #ff2e5f;
 $orange:  #ffaa30;
@@ -29,11 +29,11 @@ $lightgreen: #69ff2e;
 $colors: (
   "blue":       $blue,
   "darkblue":       $darkblue,
-  "darkblue2":       $darkblue2,
   "indigo":     $indigo,
   "indigo-light": lighten($indigo, 20%),
   "purple":     $purple,
   "purple2":     $purple2,
+  "purple3":     $purple3,
   "pink":       $pink,
   "red":        $red,
   "orange":     $orange,
