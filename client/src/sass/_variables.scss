@@ -44,6 +44,7 @@ $colors: (
   "teal":       $teal,
   "cyan":       $cyan,
   "white":      $white,
+  "black":      $black,
   "gray":       $gray-600,
   "gray-dark":  $gray-800,
   "transparent": transparent
@@ -209,7 +210,7 @@ $container-max-widths: (
 //$line-height-lg:              1.5;
 //$line-height-sm:              1.5;
 //
-//$border-width:                1px;
+$border-width:                2px;
 //$border-color:                $gray-300;
 //
 //$border-radius:               .25rem;
