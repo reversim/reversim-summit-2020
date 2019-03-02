@@ -1,15 +1,15 @@
 import React from 'react';
 import Page from './Page';
 import {Container} from 'reactstrap';
-import {getSessionTypeStr, getHref} from '../utils';
+import {getHref} from '../utils';
 import {Link} from 'react-router-dom';
-import Tag from './Tag';
+// import Tag from './Tag';
 import {Button} from 'reactstrap';
 import SpeakerPageRoute from './SpeakerPageRoute';
 import ReactMarkdown from 'react-markdown';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
+import SessionInfo from './SessionInfo';
 import plus from '../images/SVG/x.svg';
-import clock from '../images/SVG/hoop.svg';
 
 export class SpeakerPage extends React.Component {
   state = {
@@ -35,7 +35,7 @@ export class SpeakerPage extends React.Component {
 
     return (
       <Page title={name} user={user} {...this.props}>
-        <div className="speaker-page__speaker-hero bg-purple2" />
+        <div className="speaker-page__hero bg-purple2" />
         <Container className="p-relative">
           <div className="d-flex align-items-start speaker-page__speaker-wrapper mb-12">
             <img
@@ -125,11 +125,7 @@ export class SpeakerPage extends React.Component {
                   <div className="b-strong p-4 mr-8 speaker-page__session">
                     <h4 className="font-weight-bold font-size-lg">{session.title}</h4>
                     <div className="mb-9">
-                      <img src={clock} alt="" height="20" className="mr-2" />
-                      <span className="mr-4 font-weight-heavy">
-                        {getSessionTypeStr(session.type)}
-                      </span>
-                      <span className="text-indigo px-2 b-heavy font-weight-bold">Culture</span>
+                      <SessionInfo session={session} />
                     </div>
                     {/* <div className="d-flex">{session.tags.map(Tag)}</div> */}
                     <Link

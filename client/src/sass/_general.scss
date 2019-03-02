@@ -149,6 +149,10 @@ input[type='checkbox'] {
   line-height: 1.2;
 }
 
+.line-height-15 {
+  line-height: 1.5;
+}
+
 .line-height-17 {
   line-height: 1.7;
 }
@@ -379,7 +383,7 @@ button.btn {
   }
 }
 
-.speaker-page__speaker-hero {
+.speaker-page__hero {
   position: absolute;
   top: 100px; // navbar height
   left: 0;
@@ -397,6 +401,17 @@ button.btn {
 
 .speaker-page__session {
   flex-basis: auto;
+}
+
+.session-page__hero {
+  padding-top: 100px;
+}
+
+.session-page__speaker {
+  width: 240px;
+  height: 240px;
+  background-size: cover;
+  border-right: 4px solid $purple2;
 }
 
 .about-content {
