@@ -5,9 +5,8 @@
 }
 
 .premiumCover {
-    background-size: cover;
-    background-color: #5127ff;
-    padding: 20px 200px;
+    background-size: contain;
+    padding: 20px 180px;
 }
 
 .diamond {
@@ -32,9 +31,35 @@
     align-self: center;
     margin-left: 10px;
 }
-@media (min-width:991px) {
-    .sponsor {
-        width: calc(100% - 20px);
-        display: inline-block;
-    }
+
+.sponsor {
+    min-width: 240px;
+    height: 240px;
+    /*display: inline-block;*/
 }
+
+.communitySponsorText {
+    border-width: 4px 4px 4px 0;
+    border-style: solid;
+    width: 0;
+    flex-grow: 1;
+}
+
+.communityText {
+    word-wrap: break-word;
+}
+.premiumSponsor {
+    align-items: baseline;
+    flex-direction: column;
+    margin: 20px;
+}
+.premiumSponsorsWrap {
+    justify-content: space-evenly;
+}
+
+/*@media (min-width:991px) {*/
+    /*.sponsor {*/
+        /*width: calc(100% - 20px);*/
+        /*display: inline-block;*/
+    /*}*/
+/*}*/

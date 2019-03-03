@@ -10,7 +10,7 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black:    #000;
 
-$darkblue: #010035;
+$darkblue:#010035;
 $blue:    #0048ff;
 $indigo:  #896cff;
 $purple:  #df30ff;
@@ -190,7 +190,7 @@ $container-max-widths: (
        sm: 540px,
        md: 720px,
        lg: 960px,
-       // xl: 1140px
+       xl: 1140px
 );
 //
 //@include _assert-ascending($container-max-widths, "$container-max-widths");
