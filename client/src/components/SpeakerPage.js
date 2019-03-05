@@ -36,15 +36,15 @@ export class SpeakerPage extends React.Component {
 
     return (
       <Page title={name} user={user} {...this.props}>
-        <div className="speaker-page__hero bg-purple2">
+        <div className="speaker-page__hero bg-purple2 mb-4">
           <Container>
-            <div className="d-flex align-items-start speaker-page__speaker-wrapper p-relative">
+            <div className="d-flex align-items-end">
               <div
                 style={{backgroundImage: `url(${speaker.picture})`}}
-                className="speaker-page__speaker-picture b-strong mr-5"
+                className="speaker-page__speaker-picture b-strong mr-5 p-relative"
               />
               <div className="flex-grow-1">
-                <h3 className="mb-0 font-size-xxl text-white">
+                <h3 className="mb-3 line-height-1 font-size-xxl text-white">
                   {speaker.name}
                   {canEdit && (
                     <Link to={`/speaker/${speaker._id}/edit`} className="d-block">
@@ -57,13 +57,16 @@ export class SpeakerPage extends React.Component {
                     </div>
                   )}
                 </h3>
-                <p className="text-white font-size-lg mt-3 mb-4">{speaker.oneLiner}</p>
-                <SpeakerSocialLinks {...speaker} />
+                <p className="text-white font-size-lm mb-4 line-height-15">{speaker.oneLiner}</p>
               </div>
             </div>
           </Container>
         </div>
         <Container>
+          <div className="d-flex" style={{marginBottom: 120}}>
+            <div className="speaker-page__placeholder mr-5" />
+            <SpeakerSocialLinks {...speaker} />
+          </div>
           <p className="font-size-md mb-10">{bio}</p>
           {trackRecord && (
             <div className="mb-3">
@@ -121,7 +124,7 @@ export class SpeakerPage extends React.Component {
                 </h3>
                 <div className="bt flex-grow-1 border-bottom border-purple2 border-top" />
               </div>
-              <div className="d-flex flex-wrap">
+              <div className="d-flex flex-wrap align-items-start">
                 {sessions.map((session, i) => (
                   <div
                     className={cn('b-strong p-4 speaker-page__session mb-8', {'mr-8': !(i % 2)})}

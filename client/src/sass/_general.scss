@@ -96,12 +96,16 @@ input[type='checkbox'] {
   font-size: $font-size-lg;
 }
 
-.font-size-sm {
-  font-size: $font-size-sm;
+.font-size-lm {
+  font-size: $font-size-lm;
 }
 
 .font-size-md {
   font-size: $font-size-md;
+}
+
+.font-size-sm {
+  font-size: $font-size-sm;
 }
 
 @media (min-width:991px) {
@@ -397,11 +401,11 @@ button.btn {
   height: 230px;
   flex: 0 0 230px;
   background-size: cover;
+  top: 130px;
 }
 
-.speaker-page__speaker-wrapper {
-  top: 100px;
-  margin-bottom: 170px;
+.speaker-page__placeholder {
+  flex: 0 0 230px;
 }
 
 .speaker-page__session {
@@ -469,8 +473,7 @@ button.btn {
 }
 
 .social-icon-link {
-  font-size: 16px;
-  margin-right: 20px;
+  font-size: 40px;
 
   @media (max-width:767px) {
     font-size: 20px;

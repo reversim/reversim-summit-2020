@@ -9,7 +9,9 @@ export default function SessionInfo({session, size}) {
     <div className={cn({[`font-size-${size}`]: size})}>
       <FontAwesomeIcon icon={faClock} className="mr-2" />
       <span className="mr-4 font-weight-heavy">{getSessionTypeStr(session.type)}</span>
-      <span className="text-indigo px-2 b-heavy font-weight-bold">Culture</span>
+      {session.category && (
+        <span className="text-indigo px-2 b-heavy font-weight-bold">{session.category}</span>
+      )}
     </div>
   );
 }
