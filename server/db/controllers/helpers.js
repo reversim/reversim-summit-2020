@@ -44,6 +44,13 @@ export function transformProposal(proposal, loggedInUser) {
     const isAuthor =  loggedInUser && proposal.speaker_ids && proposal.speaker_ids.some(speakerId => String(speakerId) === String(loggedInUser._id));
     const canViewPrivate = isTeamMember || isAuthor;
 
+    let attended;
+    if (proposal.attendees && loggedInUser) {
+      attended = proposal.attendees.indexOf(loggedInUser._id) > -1 ? true : undefined;
+      if (!attended) {
+        attended = proposal.notAttendees.indexOf(loggedInUser._id) > -1 ? false : undefined;
+      }
+    }
     // console.log("transformProposal, proposal=" + proposal.id, "loggedInUser=", loggedInUser && loggedInUser._id, "isAuthor=", isAuthor, "isTeamMember=", isTeamMember);
 
     return {
@@ -61,7 +68,7 @@ export function transformProposal(proposal, loggedInUser) {
       categories: proposal.categories,
       outline: canViewPrivate ? proposal.outline : undefined,
       total: (proposal.attendees && canViewPrivate) ? proposal.attendees.length : undefined,
-      attended: proposal.attendees ? (loggedInUser ? proposal.attendees.indexOf(loggedInUser._id) > -1 : false) : undefined,
+      attended,
       legal: canViewPrivate && proposal.legal,
     }
   }

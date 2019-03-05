@@ -6,13 +6,16 @@ import {Button} from 'reactstrap';
 // import Tag from './Tag';
 // import SessionDayTime from './SessionDayTime';
 import SessionInfo from './SessionInfo';
+import VoteButton from './VoteButton';
+import {key} from '../utils';
 
-const Session = ({proposal, speakers}) => {
-  const {_id, title, type, tags, abstract} = proposal;
+const Session = ({proposal, speakers, user, attendProposal}) => {
+  const {_id, title, type, tags, abstract, attended} = proposal;
+  // console.log('attended', title, attended);
   return (
     <div className="b-strong d-flex mb-12" style={{minHeight: 440}}>
       {speakers.map(speaker => (
-        <div className="session__speaker mr-1 d-flex flex-column">
+        <div className="session__speaker mr-1 d-flex flex-column" key={key()}>
           <div
             style={{backgroundImage: `url(${speaker.picture})`}}
             className="session__speaker-picture"
@@ -33,8 +36,12 @@ const Session = ({proposal, speakers}) => {
         </div>
         <ReactMarkdown className="mb-4" source={abstract} />
         <div className="flex-grow-1 d-flex justify-content-end align-items-end">
-          <Button className="styled-button mr-10">Not relevant to me</Button>
-          <Button className="styled-button">Interested</Button>
+          <VoteButton
+            user={user}
+            attended={attended}
+            proposalId={_id}
+            attendProposal={attendProposal}
+          />
         </div>
       </div>
     </div>

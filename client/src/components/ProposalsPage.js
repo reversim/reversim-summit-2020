@@ -50,7 +50,7 @@ class ProposalsPage extends React.Component {
 
   render() {
     const proposals = values(this.props.proposals);
-    const {allTags, isSmallScreen, users, gotAllProposals} = this.props;
+    const {allTags, users, gotAllProposals, user, attendProposal} = this.props;
 
     const {tagFilters, showTags} = this.state;
     const showProposals = !!gotAllProposals;
@@ -123,6 +123,8 @@ class ProposalsPage extends React.Component {
                       key={proposal._id}
                       proposal={proposal}
                       speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
+                      user={user}
+                      attendProposal={attendProposal}
                     />
                   ))}
                 </Col>
