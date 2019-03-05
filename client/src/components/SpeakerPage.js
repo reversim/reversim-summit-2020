@@ -1,7 +1,8 @@
 import React from 'react';
+import cn from 'classnames';
 import Page from './Page';
 import {Container} from 'reactstrap';
-import {getHref} from '../utils';
+import {getHref, key} from '../utils';
 import {Link} from 'react-router-dom';
 // import Tag from './Tag';
 import {Button} from 'reactstrap';
@@ -35,34 +36,34 @@ export class SpeakerPage extends React.Component {
 
     return (
       <Page title={name} user={user} {...this.props}>
-        <div className="speaker-page__hero bg-purple2" />
-        <Container className="p-relative">
-          <div className="d-flex align-items-start speaker-page__speaker-wrapper mb-12">
-            <img
-              src={speaker.picture}
-              alt={speaker.name}
-              className="speaker-page__speaker-picture b-strong mr-5"
-            />
-            <div className="flex-grow-1">
-              <h3 className="mb-0 font-size-xxl text-white">
-                {speaker.name}
-                {canEdit && (
-                  <Link to={`/speaker/${speaker._id}/edit`} className="d-block">
-                    <Button>Edit</Button>
-                  </Link>
-                )}
-                {isReversimTeamMember && (
-                  <div className="mb-3 text-center text-md-left">
-                    <small className="py-1 px-2 bg-danger text-white">Team member</small>
-                  </div>
-                )}
-              </h3>
-              <p className="mb-0 text-white font-size-lg line-height-1 mt-3 mb-8">
-                {speaker.oneLiner}
-              </p>
-              <SpeakerSocialLinks {...speaker} />
+        <div className="speaker-page__hero bg-purple2">
+          <Container>
+            <div className="d-flex align-items-start speaker-page__speaker-wrapper p-relative">
+              <div
+                style={{backgroundImage: `url(${speaker.picture})`}}
+                className="speaker-page__speaker-picture b-strong mr-5"
+              />
+              <div className="flex-grow-1">
+                <h3 className="mb-0 font-size-xxl text-white">
+                  {speaker.name}
+                  {canEdit && (
+                    <Link to={`/speaker/${speaker._id}/edit`} className="d-block">
+                      <Button>Edit</Button>
+                    </Link>
+                  )}
+                  {isReversimTeamMember && (
+                    <div className="mb-3 text-center text-md-left">
+                      <small className="py-1 px-2 bg-danger text-white">Team member</small>
+                    </div>
+                  )}
+                </h3>
+                <p className="text-white font-size-lg mt-3 mb-4">{speaker.oneLiner}</p>
+                <SpeakerSocialLinks {...speaker} />
+              </div>
             </div>
-          </div>
+          </Container>
+        </div>
+        <Container>
           <p className="font-size-md mb-10">{bio}</p>
           {trackRecord && (
             <div className="mb-3">
@@ -121,8 +122,10 @@ export class SpeakerPage extends React.Component {
                 <div className="bt flex-grow-1 border-bottom border-purple2 border-top" />
               </div>
               <div className="d-flex flex-wrap">
-                {sessions.map(session => (
-                  <div className="b-strong p-4 mr-8 speaker-page__session">
+                {sessions.map((session, i) => (
+                  <div
+                    className={cn('b-strong p-4 speaker-page__session mb-8', {'mr-8': !(i % 2)})}
+                    key={key()}>
                     <h4 className="font-weight-bold font-size-lg">{session.title}</h4>
                     <div className="mb-9">
                       <SessionInfo session={session} />

@@ -5,8 +5,7 @@ import {getHref} from '../utils';
 import Tag from './Tag';
 import SessionDayTime from './SessionDayTime';
 
-const Session = props => {
-  const {proposal, speakers} = props;
+const Session = ({proposal, speakers}) => {
   const {_id, title, type, tags, abstract} = proposal;
   return (
     <Link className="bg-emph p-3 d-block unstyled-link mb-6" to={`/session/${getHref(proposal)}`}>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Page from './Page';
 import {Container, Button, ModalHeader, ModalBody, ModalFooter, Modal} from 'reactstrap';
-import {getHref} from '../utils';
+import {getHref, key} from '../utils';
 import Tag from './Tag';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router-dom';
@@ -97,7 +97,7 @@ class SessionPage extends Component {
           )}
           <div>
             {sessionSpeakers.map(speaker => (
-              <div className="b-strong d-flex">
+              <div className="b-strong d-flex" key={key()}>
                 <div
                   className="session-page__speaker"
                   style={{backgroundImage: `url('${speaker.picture}')`}}

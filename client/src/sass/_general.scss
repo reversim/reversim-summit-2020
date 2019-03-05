@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Source Code Pro', monospace;
+  font-weight: 300;
 }
 
 a {
@@ -42,17 +43,17 @@ h3 {
 
 h4 {
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 h5 {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 16px;
 }
 
 h6 {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 small {
@@ -110,12 +111,12 @@ input[type='checkbox'] {
 }
 
 .font-weight-heavy {
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.font-weight-light {
-  font-weight: 300;
-}
+// .font-weight-light {
+//   font-weight: 300;
+// }
 
 .font-SCP {
   font-family: 'Source Code Pro';
@@ -383,24 +384,28 @@ button.btn {
   }
 }
 
-.speaker-page__hero {
-  position: absolute;
-  top: 100px; // navbar height
-  left: 0;
-  right: 0;
-  height: 220px;
-}
+// .speaker-page__hero {
+//   position: absolute;
+//   top: 100px; // navbar height
+//   left: 0;
+//   right: 0;
+//   height: 220px;
+// }
 
 .speaker-page__speaker-picture {
   width: 230px;
+  height: 230px;
+  flex: 0 0 230px;
+  background-size: cover;
 }
 
 .speaker-page__speaker-wrapper {
-  margin-top: 100px;
+  top: 100px;
+  margin-bottom: 170px;
 }
 
 .speaker-page__session {
-  flex-basis: auto;
+  flex: 0 0 calc(50% - 20px);
 }
 
 .session-page__hero {

@@ -6,7 +6,6 @@ import Session from './Session';
 import values from 'lodash/values';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFilter, faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import {faChevron} from '@fortawesome/free-regular-svg-icons';
 
 const TagFilter = ({text, isSelected, onClick}) => (
   <div
@@ -103,7 +102,7 @@ class ProposalsPage extends React.Component {
           </div>
 
           {showTags && (
-            <div className="d-flex flex-wrap pb-2 mb-6 border-bottom">
+            <div className="d-flex flex-wrap pb-2 mb-4 border-bottom">
               {tagStrs.map((tagStr, i) => (
                 <TagFilter
                   key={tagStr}
@@ -116,12 +115,11 @@ class ProposalsPage extends React.Component {
           )}
           {showProposals ? (
             <React.Fragment>
-              <div className="mb-4">Showing {showCount} proposals</div>
+              <div className="mb-12 font-weight-heavy">Showing {showCount} proposals</div>
               <Row>
                 <Col>
                   {sortedProposals.map(proposal => (
                     <Session
-                      isSmallScreen={isSmallScreen}
                       key={proposal._id}
                       proposal={proposal}
                       speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}

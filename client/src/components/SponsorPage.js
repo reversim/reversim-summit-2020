@@ -40,7 +40,7 @@ class TitleSection extends React.Component {
     const { sponsor, canEdit } = this.props;
     console.log('sponsor', sponsor)
     return (
-      <div className={cn("bg-purple2 text-white font-weight-light", s.premiumCover)}>
+      <div className={cn("bg-purple2 text-white", s.premiumCover)}>
         <div className={"d-flex"}>
           <div className={"font-size-xxl"}>Big Thanks to our sponsor</div>
           <div className={cn(s.hr, "bg-white")} />
