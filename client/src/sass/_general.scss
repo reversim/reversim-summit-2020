@@ -395,17 +395,17 @@ button.btn {
 //   right: 0;
 //   height: 220px;
 // }
-
+$speaker-picture-size: 230px;
 .speaker-page__speaker-picture {
-  width: 230px;
-  height: 230px;
-  flex: 0 0 230px;
+  width: $speaker-picture-size;
+  height: $speaker-picture-size;
+  flex: 0 0 $speaker-picture-size;
   background-size: cover;
-  top: 130px;
+  top: $speaker-picture-size / 2;
 }
 
 .speaker-page__placeholder {
-  flex: 0 0 230px;
+  flex: 0 0 $speaker-picture-size;
 }
 
 .speaker-page__session {
