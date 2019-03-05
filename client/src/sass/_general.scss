@@ -423,6 +423,17 @@ button.btn {
   border-right: 4px solid $purple2;
 }
 
+.session__speaker {
+  flex: 0 0 240px;
+  border-right: 4px solid $purple2;
+}
+
+.session__speaker-picture {
+  width: 236px;
+  height: 236px;
+  background-size: cover;
+}
+
 .page__hero {
   padding-top: 100px;
 }

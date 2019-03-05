@@ -65,7 +65,6 @@ class SessionsPage extends React.Component {
               {proposals.length ? (
                 proposals.map(proposal => (
                   <Session
-                    isSmallScreen={isSmallScreen}
                     key={proposal._id}
                     proposal={proposal}
                     speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
