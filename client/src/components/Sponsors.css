@@ -57,6 +57,10 @@
     justify-content: space-evenly;
 }
 
+.halfColoredDiv {
+    margin-top: -75px;
+}
+
 /*@media (min-width:991px) {*/
     /*.sponsor {*/
         /*width: calc(100% - 20px);*/

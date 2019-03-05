@@ -7,13 +7,7 @@ const SponsorSchema = new mongoose.Schema({
     link: String,
     shortAddress: String
   },
-  socials: {
-    linkdin: String,
-    github: String,
-    facebook: String,
-    tweeter: String,
-    medium: String,
-  },
+  socials: [{medium: String, link: String}],
   logoHover: String,
   oneLiner: String,
   about: String,

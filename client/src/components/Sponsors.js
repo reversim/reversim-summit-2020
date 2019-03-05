@@ -60,18 +60,8 @@ const CommunitySponsors = ({
   return (
     <div className={cn("bg-white")}>
       <div className={"d-flex align-items-center"}>
-        <svg
-          id="Layer_1"
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 100 100"
-          className={s.circle}
-        >
-          <title>circle</title>
-          <path
-            className="cls-1"
-            d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z"
-          />
+        <svg className={s.circle}>
+          <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
         </svg>
         <div className={cn("font-size-xxl text-purple2")}>
           Meet Our Community Sponsors
@@ -173,7 +163,7 @@ class PremiumSponsor extends React.Component {
           <img src={sponsor.logoHover} alt={sponsor.name} />
         </div>
         <Link to={`/sponsor/${sponsor.name}`} className="unstyled-link">
-          <Button className={"styled-button on-purple btn btn-secondary"}>
+          <Button className={"styled-button on-purple"}>
             EXPLORE OPPORTUNITIES
           </Button>
         </Link>
@@ -312,11 +302,13 @@ class SponsorsPage extends React.Component {
       user,
       sponsors
     } = this.props;
-    console.log("sponsors", sponsors);
+
     return (
       <Page title="Sponsors" {...this.props}>
-        <div className={cn(s.premiumCover, "bg-purple2 page-hero pb-8")}
-             style={{ backgroundImage: `url('${premiumImage}')` }}>
+        <div
+          className={cn(s.premiumCover, "bg-purple2 page-hero pb-8")}
+          style={{ backgroundImage: `url('${premiumImage}')` }}
+        >
           <Container>
             {user &&
               user.isReversimTeamMember && (
@@ -333,17 +325,16 @@ class SponsorsPage extends React.Component {
             />
           </Container>
         </div>
-          <Container  className="mt-4">
-            <CommunitySponsors
-              sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}
-              user={user}
-              updateSponsor={updateSponsor}
-              deleteSponsor={deleteSponsor}
-            />
-            {/*<h3 className="text-center">The annual Reversim conference is here</h3>*/}
-            {/*<h3 className="font-weight-bold  text-center">and we can't do it without you!</h3>*/}
-          </Container>
-
+        <Container className="mt-4">
+          <CommunitySponsors
+            sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}
+            user={user}
+            updateSponsor={updateSponsor}
+            deleteSponsor={deleteSponsor}
+          />
+          {/*<h3 className="text-center">The annual Reversim conference is here</h3>*/}
+          {/*<h3 className="font-weight-bold  text-center">and we can't do it without you!</h3>*/}
+        </Container>
       </Page>
     );
   }

@@ -22,7 +22,7 @@ const CFPCTA = () => (
 
 const VotingCTA = () => (
   <Link to="/my-votes" className="unstyled-link">
-    <Button className="styled-button on-purple">
+    <Button className="styled-button on-purple w-max-content">
       VOTE FOR SESSION
     </Button>
   </Link>
@@ -107,6 +107,7 @@ class Navbar extends Component {
     const navLinkClass = cn('nav-link', navLink);
 
     return (
+
       <Navbar2
         expand="lg"
         fixed="top"

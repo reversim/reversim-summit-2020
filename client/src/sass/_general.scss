@@ -247,7 +247,7 @@ a.unstyled-link:active {
     $bg-1: $white;
     $bg-2: $purple2;
   }
-  
+
   border: solid 2px $bg-1 !important;
   box-shadow: -2px 2px $bg-2, -4px 4px $bg-1 !important;
 
@@ -304,6 +304,15 @@ button.btn {
 .h1-up {
   margin-top: -40px;
 }
+.w-max-content {
+  width: max-content;
+}
+.h-max-content {
+  height: max-content;
+}
+.width-half {
+  width: 50%;
+}
 
 @media (max-width: 576px) {
   h1 {
@@ -336,10 +345,10 @@ button.btn {
   padding-top: 100px; // navbar-height
 }
 
-// .container {
-//   padding: 0;
-//   min-width: 100%;
-// }
+ //.container {
+ //  padding: 0;
+ //  min-width: 100%;
+ //}
 
 .nav-link {
   &.active {
