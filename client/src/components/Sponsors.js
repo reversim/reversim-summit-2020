@@ -43,8 +43,8 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
             key={sponsor._id}
             sponsor={sponsor}
             canEdit={user && user.isReversimTeamMember}
-            // updateSponsor={updateSponsor}
-            // deleteSponsor={deleteSponsor}
+            updateSponsor={updateSponsor}
+            deleteSponsor={deleteSponsor}
           />
         ))}
       </div>
@@ -84,31 +84,15 @@ const CommunitySponsors = ({
 };
 
 const Sponsor = ({
-  sponsor: {
-    name = "",
-    logoHover,
-    url,
-    description = "",
-    featuredJobInfo,
-    featuredJobLink,
-    excludeWebsite
-  },
+  sponsor: { name = "", logo, url, about = "" },
   onEdit,
   onDelete
 }) => {
-  const showJob = featuredJobLink || featuredJobInfo;
-  const showJobLink = featuredJobLink && !excludeWebsite;
-  const descriptionWithLink = excludeWebsite
-    ? description
-    : `${description} [${name}'s website](${url}).`;
-  const featuredJob = showJobLink
-    ? `${featuredJobInfo} Interested? More info [here](${featuredJobLink}).`
-    : featuredJobInfo;
   return (
     <div className={"d-flex m-4"}>
       <div className={cn("text-center b-strong border-purple2", s.sponsor)}>
         {/*<a href={url} target="_blank">*/}
-        <img src={logoHover} className={s.sponsorImg} alt={name} />
+        <img src={logo} className={s.sponsorImg} alt={name} />
         {/*</a>*/}
       </div>
       <div className={cn("border-purple2 p-2", s.communitySponsorText)}>
@@ -135,12 +119,8 @@ const Sponsor = ({
             </span>
           )}
         </h4>
-        <div className={s.communityText}>
-          {descriptionWithLink.replace(/\n\n/g, "\n")}
-        </div>
+        <div className={s.communityText}>{about.replace(/\n\n/g, "\n")}</div>
       </div>
-      {/*{showJob && <h5>Featured job</h5>}*/}
-      {/*{showJob && <ReactMarkdown source={featuredJob} />}*/}
     </div>
   );
 };
@@ -149,24 +129,80 @@ class PremiumSponsor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // isEditing: false,
+      isEditing: false,
       isLoading: false
     };
   }
 
+  onEdit = () => {
+    this.setState({ isEditing: true });
+  };
+
+  onDelete = async () => {
+    await this.props.deleteSponsor(this.props.sponsor._id);
+  };
+
+  onSubmit = async sponsor => {
+    this.setState({ isLoading: true });
+    await this.props.updateSponsor(this.props.sponsor._id, {
+      ...this.props.sponsor,
+      ...sponsor
+    });
+    this.setState({ isEditing: false, isLoading: false });
+  };
+
+  onCancel = () => {
+    this.setState({ isEditing: false });
+  };
+
   render() {
-    // const {isEditingiting} = this.state;
+    const { isEditing } = this.state;
     const { sponsor, canEdit } = this.props;
     return (
       <div className={cn("d-flex align-items-center", s.premiumSponsor)}>
-        <div className={cn(s.sponsor, "bg-white")}>
-          <img src={sponsor.logoHover} alt={sponsor.name} />
+        <div>
+          {isEditing ? (
+            <SponsorForm
+              sponsor={sponsor}
+              onSubmit={this.onSubmit}
+              onCancel={this.onCancel}
+              isLoading={this.state.isLoading}
+            />
+          ) : (
+            <div>
+              {canEdit && (
+                <span>
+                  <Button
+                    size="sm"
+                    color="primary"
+                    className="ml-2"
+                    onClick={this.onEdit}
+                  >
+                    <FontAwesomeIcon icon="pencil-alt" />
+                  </Button>
+                  <Button
+                    size="sm"
+                    color="danger"
+                    className="ml-2"
+                    onClick={this.onDelete}
+                  >
+                    <FontAwesomeIcon icon="trash" />
+                  </Button>
+                </span>
+              )}
+              <div>
+                <div className={cn(s.sponsor, "bg-white")}>
+                  <img src={sponsor.logo} alt={sponsor.name} />
+                </div>
+                <Link to={`/sponsor/${sponsor.name}`} className="unstyled-link">
+                  <Button className={"styled-button on-purple"}>
+                    EXPLORE OPPORTUNITIES
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
-        <Link to={`/sponsor/${sponsor.name}`} className="unstyled-link">
-          <Button className={"styled-button on-purple"}>
-            EXPLORE OPPORTUNITIES
-          </Button>
-        </Link>
       </div>
     );
   }
@@ -227,7 +263,7 @@ class SponsorMini extends React.Component {
     hovered: false
   };
   render() {
-    const { name, logo, url, logoHover } = this.props;
+    const { name, logo, url } = this.props;
     return (
       <a
         href={url}
@@ -243,12 +279,6 @@ class SponsorMini extends React.Component {
             className={s.sponsorImg}
             alt={name}
             style={{ opacity: this.state.hovered ? 0 : 1 }}
-          />
-          <img
-            src={logoHover}
-            className={cn(s.sponsorImg, "p-absolute")}
-            alt={name}
-            style={{ top: 0, left: 0, opacity: this.state.hovered ? 1 : 0 }}
           />
         </div>
       </a>
@@ -273,7 +303,9 @@ export const SponsorsSection = ({ sponsors }) => {
                   key={i}
                   className="d-flex flex-wrap justify-content-between"
                 >
-                  {sponsorsRow.map(s => <SponsorMini key={s._id} {...s} />)}
+                  {sponsorsRow.map(s => (
+                    <SponsorMini key={s._id} {...s} />
+                  ))}
                 </div>
               );
             })}
@@ -310,13 +342,12 @@ class SponsorsPage extends React.Component {
           style={{ backgroundImage: `url('${premiumImage}')` }}
         >
           <Container>
-            {user &&
-              user.isReversimTeamMember && (
-                <div className="border p-3 mb-8">
-                  <h3>Add sponsor</h3>
-                  <SponsorForm onSubmit={createSponsor} />
-                </div>
-              )}
+            {user && user.isReversimTeamMember && (
+              <div className="border p-3 mb-8">
+                <h3>Add sponsor</h3>
+                <SponsorForm onSubmit={createSponsor} />
+              </div>
+            )}
             <PremiumSponsors
               sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
               user={user}
@@ -348,24 +379,46 @@ class SponsorForm extends React.Component {
 
   getData = event => {
     if (event) event.preventDefault();
-    return pick(this.state, [
-      "name",
-      "logo",
-      "url",
-      "description",
-      "featuredJobInfo",
-      "featuredJobLink",
-      "excludeWebsite"
-    ]);
+    if (this.state.isPremium) {
+      return pick(this.state, [
+        "isPremium",
+        "name",
+        "logo",
+        "url",
+        "about",
+        "locationLink",
+        "locationShortAddress",
+        "oneLiner",
+        "linkedIn",
+        "github",
+        "facebook",
+        "twitter",
+        "medium",
+        "techStory",
+        "reversimAndUs",
+        "openPositions"
+      ]);
+    } else {
+      return pick(this.state, ["isPremium", "name", "logo", "url", "about"]);
+    }
   };
 
   render() {
     const { onSubmit, onCancel, sponsor, isLoading } = this.props;
     const _id = sponsor ? sponsor._id : "";
     return (
-      <Row>
-        <Col className="border-right">
           <form onSubmit={e => onSubmit(this.getData(e))}>
+            <div className="d-flex align-items-center mb-3">
+              <input
+                type="checkbox"
+                id={`isPremium_${_id}`}
+                defaultChecked={this.state.isPremium}
+                onChange={e => this.setState({ isPremium: e.target.checked, techStory:(this.state.techStory || {technologies:[], text:''}) })}
+              />
+              <label htmlFor={`isPremium_${_id}`} className="mb-0">
+                Is this a premium sponsor
+              </label>
+            </div>
             <Input
               className="mb-3"
               size="sm"
@@ -394,7 +447,8 @@ class SponsorForm extends React.Component {
                   left: 0,
                   right: 0
                 }}
-              />Choose logo
+              />
+              Choose logo
             </Button>
             <Input
               className="mb-3"
@@ -407,38 +461,184 @@ class SponsorForm extends React.Component {
               className="mb-3"
               size="sm"
               type="textarea"
-              placeholder="Description"
-              value={this.state.description}
-              onChange={e => this.setState({ description: e.target.value })}
+              placeholder="About"
+              value={this.state.about}
+              onChange={e => this.setState({ about: e.target.value })}
             />
-            <Input
-              className="mb-3"
-              size="sm"
-              type="textarea"
-              placeholder="Featured job info"
-              value={this.state.featuredJobInfo}
-              onChange={e => this.setState({ featuredJobInfo: e.target.value })}
-            />
-            <Input
-              className="mb-3"
-              size="sm"
-              placeholder="Link to featured job"
-              value={this.state.featuredJobLink}
-              onChange={e => this.setState({ featuredJobLink: e.target.value })}
-            />
-            <div className="d-flex align-items-center mb-3">
-              <input
-                type="checkbox"
-                id={`excludeWebsite_${_id}`}
-                defaultChecked={this.state.excludeWebsite}
-                onChange={e =>
-                  this.setState({ excludeWebsite: e.target.checked })
-                }
-              />
-              <label htmlFor={`excludeWebsite_${_id}`} className="mb-0">
-                Don't automatically add website and job links
-              </label>
-            </div>
+            {this.state.isPremium && (
+              <div>
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="location link from google maps"
+                  value={this.state.locationLink}
+                  onChange={e =>
+                    this.setState({ locationLink: e.target.value })
+                  }
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="city. like- Herzliya & Haifa, IL"
+                  value={this.state.locationShortAddress}
+                  onChange={e =>
+                    this.setState({ locationShortAddress: e.target.value })
+                  }
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="one line description"
+                  value={this.state.oneLiner}
+                  onChange={e => this.setState({ oneLiner: e.target.value })}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="linkedIn"
+                  value={this.state.linkedIn || (this.state.socials.find(social => social.medium === 'linkedin') || {}).link}
+                  onChange={e => this.setState({ linkedIn: e.target.value })}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="github"
+                  value={this.state.github}
+                  onChange={e => this.setState({ github: e.target.value })}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="facebook"
+                  value={this.state.facebook}
+                  onChange={e => this.setState({ facebook: e.target.value })}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="twitter"
+                  value={this.state.twitter}
+                  onChange={e => this.setState({ twitter: e.target.value })}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="medium"
+                  value={this.state.medium}
+                  onChange={e => this.setState({ medium: e.target.value })}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  type="textarea"
+                  placeholder="technology story"
+                  value={this.state.techStory ? this.state.techStory.text : ''}
+                  onChange={e => {
+                    let techStory = this.state.techStory;
+                    techStory.text = e.target.value;
+                    this.setState({ techStory });
+                  }}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  type="textarea"
+                  placeholder="technologies separated by new line. make sure to remove unnecessary spaces and stuff"
+                  // TODO NETA- clean up my mass
+                  value={(typeof this.state.techStory.technologies) === 'string'? this.state.techStory.technologies: this.state.techStory.technologies.join('\n')}
+                  onChange={e => {
+                    let techStory = this.state.techStory;
+                    techStory.technologies = e.target.value;
+                    this.setState({ techStory });
+                  }}
+                />
+                <Input
+                  className="mb-3"
+                  size="sm"
+                  placeholder="reversim and Us"
+                  type="textarea"
+                  value={this.state.reversimAndUs}
+                  onChange={e =>
+                    this.setState({ reversimAndUs: e.target.value })
+                  }
+                />
+                <Button
+                  onClick={() => {
+                    let openPositions = this.state.openPositions || [];
+                    openPositions.push({
+                      title: "",
+                      city: "",
+                      description: "",
+                      link: ""
+                    });
+                    this.setState({
+                      openPositions: openPositions
+                    });
+                  }}
+                >
+                  add an open Position
+                </Button>
+                {this.state.openPositions &&
+                  this.state.openPositions.map((openPosition, i) => (
+                    <div key={i} className="mb-8">
+                      <Input
+                        className="mb-2"
+                        size="sm"
+                        placeholder="job title"
+                        value={openPosition.title}
+                        onChange={e => {
+                          let openPositions = this.state.openPositions;
+                          openPositions[i].title = e.target.value;
+                          this.setState({ openPositions });
+                        }}
+                      />
+                      <Input
+                        className="mb-2"
+                        size="sm"
+                        placeholder="city"
+                        value={openPosition.city}
+                        onChange={e => {
+                          let openPositions = this.state.openPositions;
+                          openPositions[i].city = e.target.value;
+                          this.setState({ openPositions });
+                        }}
+                      />
+                      <Input
+                        className="mb-2"
+                        size="sm"
+                        type="textarea"
+                        placeholder="description"
+                        value={openPosition.description}
+                        onChange={e => {
+                          let openPositions = this.state.openPositions;
+                          openPositions[i].description = e.target.value;
+                          this.setState({ openPositions });
+                        }}
+                      />
+                      <Input
+                        className="mb-2"
+                        size="sm"
+                        placeholder="link"
+                        value={openPosition.link}
+                        onChange={e => {
+                          let openPositions = this.state.openPositions;
+                          openPositions[i].link = e.target.value;
+                          this.setState({ openPositions });
+                        }}
+                      />
+                      <Button
+                        onClick={() => {
+                          let openPositions = this.state.openPositions;
+                          openPositions.splice(i, 1);
+                          this.setState({ openPositions });
+                        }}
+                      >
+                        cancel
+                      </Button>
+                    </div>
+                  ))}
+              </div>
+            )}
             {!onCancel && (
               <Button
                 className="d-block mx-auto"
@@ -467,11 +667,6 @@ class SponsorForm extends React.Component {
               </div>
             )}
           </form>
-        </Col>
-        <Col>
-          <Sponsor sponsor={this.getData()} />
-        </Col>
-      </Row>
     );
   }
 }

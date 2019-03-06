@@ -25,8 +25,48 @@ async function add(req, res) {
 
   sponsor.created_at = new Date();
   sponsor.updated_at = new Date();
+  const socials = (sponsor) => {
+    let socials = []
+    if(sponsor.linkedIn) socials.push({medium: 'linkedin', link: sponsor.linkedIn});
+    if(sponsor.github) socials.push({medium: 'github', link: sponsor.github});
+    if(sponsor.facebook) socials.push({medium: 'facebook', link: sponsor.facebook});
+    if(sponsor.twitter) socials.push({medium: 'twitter', link: sponsor.twitter});
+    if(sponsor.medium) socials.push({medium: 'medium', link: sponsor.medium});
 
-  const model = await Sponsor.create(sponsor);
+    return socials;
+  }
+  let newSponsor;
+
+  if (sponsor.isPremium) {
+    newSponsor = {
+      name: sponsor.name,
+      logo: sponsor.logo,
+      location: {
+        link: sponsor.locationLink,
+        shortAddress: sponsor.locationShortAddress
+      },
+      socials: socials(sponsor),
+      oneLiner: sponsor.oneLiner,
+      about: sponsor.about,
+      techStory: {
+        text: sponsor.techStory.text,
+        technologies: sponsor.techStory.technologies.split('\n')
+      },
+      openPositions: sponsor.openPositions,
+      url: sponsor.url,
+      images: [],
+      reversimAndUs: sponsor.reversimAndUs,
+      isPremium: sponsor.isPremium,
+
+      created_at: new Date(),
+      updated_at: new Date(),
+    }
+  } else {
+    sponsor.created_at = new Date();
+    sponsor.updated_at = new Date();
+    newSponsor = sponsor
+  }
+  const model = await Sponsor.create(newSponsor);
   return res.status(200).send(model);
 }
 

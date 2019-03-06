@@ -8,6 +8,7 @@ import { animateScroll as scroll, Link as ScrollLink } from "react-scroll";
 import Page from "./Page";
 import { Container, Row, Col, Button } from "reactstrap";
 import s from "./Sponsors.css";
+
 import {
   faMapMarkerAlt,
   faPencilAlt,
@@ -26,8 +27,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faMapMarkerAlt);
 
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
-  console.log("sponsor", sponsor);
-  // const {} = sponsor;
   return (
     <Page title={sponsor.name} {...props}>
       <div className="page__hero bg-purple2">
@@ -54,7 +53,7 @@ class TitleSection extends React.Component {
   }
   mapSocialLink(medium) {
     const mediumMapper = {
-      linkdin: faLinkedin,
+      linkedin: faLinkedin,
       github: faGithub,
       facebook: faFacebook,
       twitter: faTwitter,
@@ -76,7 +75,7 @@ class TitleSection extends React.Component {
           </div>
           <div className="d-flex flex-row mb-4">
             <div className="b-strong border-purple2 bg-white  mr-5">
-              <img src={sponsor.logoHover} alt={sponsor.name} />
+              <img src={sponsor.logo} alt={sponsor.name} />
             </div>
             <div>
               <div>
@@ -93,15 +92,15 @@ class TitleSection extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={"d-flex flex-column mt-4"}>
-                <div>
+              <div className={cn("d-flex flex-column mt-4")}>
+                <div className={s.socialWrapper}>
                   {sponsor.socials.map((social, i) => (
-                    <Link key={i} to={social.link}>
+                    <a key={i} href={social.link}>
                       <FontAwesomeIcon
                         className="mr-3 text-purple2"
                         icon={this.mapSocialLink(social.medium)}
                       />
-                    </Link>
+                    </a>
                   ))}
                 </div>
                 <div className={"text-purple2 cursor-pointer"}>
@@ -245,7 +244,6 @@ class OpenPosition extends React.Component {
   render() {
     // const {isEditingiting} = this.state;
     const { sponsor, canEdit, openPosition } = this.props;
-    console.log("NETA openPosition", openPosition);
     return (
       <div className={cn("mr-5")}>
         <div className={"bg-purple2 p-6"}>

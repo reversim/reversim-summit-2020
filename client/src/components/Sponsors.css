@@ -61,6 +61,9 @@
     margin-top: -75px;
 }
 
+.socialWrapper {
+    min-height: 0.85em;
+}
 /*@media (min-width:991px) {*/
     /*.sponsor {*/
         /*width: calc(100% - 20px);*/

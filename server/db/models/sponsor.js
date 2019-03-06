@@ -1,16 +1,24 @@
 import mongoose from 'mongoose';
 
 const SponsorSchema = new mongoose.Schema({
-  name: String,
-  logo: String,
+  name: {
+    type: String,
+    required: true
+  },
+  logo: {
+    type: String,
+    required: true
+  },
   location: {
     link: String,
     shortAddress: String
   },
   socials: [{medium: String, link: String}],
-  logoHover: String,
   oneLiner: String,
-  about: String,
+  about: {
+    type: String,
+    required: true
+  },
   techStory: {
     text: String,
     technologies: [String]
@@ -21,13 +29,21 @@ const SponsorSchema = new mongoose.Schema({
     description: String,
     link: String
   }],
-  url: String,
+  url: {
+    type: String,
+    required: true
+  },
   images: [String],
   reversimAndUs: String,
-  photos: [String],
   isPremium: Boolean,
-  created_at: Date,
-  updated_at: Date
+  created_at: {
+    type: Date,
+    required: true
+  },
+  updated_at: {
+    type: Date,
+    required: true
+  }
 });
 
 export default mongoose.model('Sponsor', SponsorSchema);
