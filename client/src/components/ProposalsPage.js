@@ -116,19 +116,15 @@ class ProposalsPage extends React.Component {
           {showProposals ? (
             <React.Fragment>
               <div className="mb-12 font-weight-heavy">Showing {showCount} proposals</div>
-              <Row>
-                <Col>
-                  {sortedProposals.map(proposal => (
-                    <Session
-                      key={proposal._id}
-                      proposal={proposal}
-                      speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
-                      user={user}
-                      attendProposal={attendProposal}
-                    />
-                  ))}
-                </Col>
-              </Row>
+              {sortedProposals.map(proposal => (
+                <Session
+                  key={proposal._id}
+                  proposal={proposal}
+                  speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
+                  user={user}
+                  attendProposal={attendProposal}
+                />
+              ))}
             </React.Fragment>
           ) : (
             <span className="font-mono font-size-xl">Nothing to show :-(</span>

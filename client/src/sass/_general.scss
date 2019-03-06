@@ -118,6 +118,10 @@ input[type='checkbox'] {
   font-weight: 500;
 }
 
+.font-weight-regular {
+  font-weight: 400;
+}
+
 // .font-weight-light {
 //   font-weight: 300;
 // }
@@ -554,4 +558,8 @@ input[type="checkbox"] {
 
 .b-heavy {
   border: 2px solid $indigo;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
