@@ -1,34 +1,70 @@
 import React from 'react';
 import Page from './Page';
 import cn from 'classnames';
-import {Col, Container, Row} from 'reactstrap';
+import {Container} from 'reactstrap';
 import Session from './Session';
 import values from 'lodash/values';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faFilter, faChevronDown} from '@fortawesome/free-solid-svg-icons';
+import {faFilter, faTimesCircle, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 const TagFilter = ({text, isSelected, onClick}) => (
   <div
-    onClick={onClick}
-    className={cn('cursor-pointer mr-4 mb-4 px-2 py-1 line-height-1 border font-weight-bold', {
+    className={cn('mr-4 mb-4 px-2 py-1 line-height-1 border font-weight-bold', {
       'border-indigo text-indigo': !isSelected,
       'bg-indigo text-white border-transparent': isSelected,
     })}>
     {text}
+    {'\u00A0'}
+    <FontAwesomeIcon
+      icon={faTimesCircle}
+      className="text-indigo align-top cursor-pointer"
+      onClick={onClick}
+    />
   </div>
 );
 
 class ProposalsPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.input = React.createRef();
+  }
+
   componentDidMount() {
     if (!this.props.gotAllProposals) {
       this.props.getAllProposals();
     }
+    this.addEvents();
   }
+
+  componentWillUnmount() {
+    this.removeEvents();
+  }
+
+  addEvents() {
+    ['click', 'touchstart'].forEach(event =>
+      document.addEventListener(event, this.handleDocumentClick, true),
+    );
+  }
+
+  removeEvents() {
+    ['click', 'touchstart'].forEach(event =>
+      document.removeEventListener(event, this.handleDocumentClick, true),
+    );
+  }
+
+  handleDocumentClick = e => {
+    const input = this.input.current;
+    if (input.contains(e.target) && input !== e.target) {
+      return;
+    }
+
+    this.setState({tagInput: ''});
+  };
 
   state = {
     tagFilters: [],
-    orderByTotal: false,
-    showTags: false,
+    tagInput: '',
+    myVotes: false,
   };
 
   onTagClick = tag => {
@@ -37,82 +73,102 @@ class ProposalsPage extends React.Component {
       if (index > -1) {
         return {
           tagFilters: state.tagFilters.slice(0, index).concat(state.tagFilters.slice(index + 1)),
+          tagInput: '',
         };
       } else {
-        return {tagFilters: state.tagFilters.concat(tag)};
+        return {tagFilters: state.tagFilters.concat(tag), tagInput: ''};
       }
     });
-  };
-
-  toggleTags = () => {
-    this.setState(({showTags}) => ({showTags: !showTags}));
   };
 
   render() {
     const proposals = values(this.props.proposals);
     const {allTags, users, gotAllProposals, user, attendProposal} = this.props;
 
-    const {tagFilters, showTags} = this.state;
+    const {tagFilters, tagInput, myVotes} = this.state;
     const showProposals = !!gotAllProposals;
     const tags = allTags
-      .map(tag => ({text: tag, count: proposals.filter(p => p.tags.includes(tag)).length}))
+      .map(tag => {
+        const count = proposals.filter(p => p.tags.includes(tag)).length;
+        return {text: tag, str: `${tag} (${count})`, count};
+      })
       .sort((a, b) => (a.count > b.count ? -1 : 1));
-    const tagStrs = tags.map(tag => `${tag.text} (${tag.count})`);
     const tagfilteredProposals = tagFilters.length
       ? proposals.filter(proposal => proposal.tags.some(tag => tagFilters.includes(tag)))
       : proposals;
-    const filteredProposals = this.props.myVotes
-      ? tagfilteredProposals.filter(proposal => proposal.attended)
+    const filteredProposals = myVotes
+      ? tagfilteredProposals.filter(proposal => proposal.attended !== undefined)
       : tagfilteredProposals;
-    const sortedProposals = this.state.orderByTotal
-      ? filteredProposals.sort((a, b) => b.total - a.total)
-      : filteredProposals;
-    const showCount = sortedProposals.length;
-
-    let filterByTag = (
-      <span className="text-black font-weight-bold mb-4 line-height-1 py-1 border-transparent border">
-        {'\u00A0'}
-      </span>
+    const sortedProposals = filteredProposals.sort(
+      (a, b) => (b.attended !== undefined ? -1 : a.attended !== undefined ? 1 : 0),
     );
-
-    if (tagFilters.length) {
-      filterByTag = showTags ? (
-        <span className="text-black font-weight-bold mb-4 line-height-1 py-1 border-transparent border">
-          ({tagFilters.length} tag{tagFilters.length > 1 ? 's' : ''} selected)
-        </span>
-      ) : (
-        tagFilters.map(tagStr => <TagFilter key={tagStr} text={tagStr} isSelected={true} />)
-      );
-    }
+    const showCount = sortedProposals.length;
+    const suggestedTags =
+      tagInput &&
+      tags.filter(t => !tagFilters.includes(t.text)).filter(t => t.text.indexOf(tagInput) > -1);
 
     return (
       <Page title="Proposals" {...this.props}>
         <Container>
           <h1 className="mt-6 mb-12">Proposals</h1>
 
-          <div className="border-bottom border-purple2 mb-4 text-orange2">
-            <div className="d-inline-flex flex-wrap align-items-center">
-              <div className="font-size-md cursor-pointer mr-4 mb-4" onClick={this.toggleTags}>
-                <FontAwesomeIcon icon={faFilter} className="mr-2" />
-                <span className="mr-2 font-weight-heavy">Filter by Tags</span>
-                <FontAwesomeIcon icon={faChevronDown} />
+          <div className="border-bottom border-purple2 mb-4">
+            <div className="d-flex justify-content-between align-items-center mb-5">
+              <div className="d-flex align-items-center">
+                <div
+                  className="d-flex b-strong align-items-center p-relative mr-4"
+                  style={{width: 360}}
+                  ref={this.input}>
+                  <input
+                    placeholder="Search for tags..."
+                    className="box-shadow-none border-transparent p-1"
+                    style={{outline: 'none'}}
+                    onChange={e => this.setState({tagInput: e.target.value})}
+                    value={this.state.tagInput}
+                  />
+                  <FontAwesomeIcon icon={faFilter} className="mr-2 text-purple2" />
+                  {suggestedTags && (
+                    <div
+                      className="b-strong p-absolute bg-white"
+                      style={{top: 38, left: -4, right: -4, maxHeight: 360, overflow: 'auto'}}>
+                      {suggestedTags.map(tag => (
+                        <div
+                          key={tag.text}
+                          className="text-black font-weight-heavy p-1 border-bottom border-purple2 cursor-pointer"
+                          onClick={() => this.onTagClick(tag.text)}>
+                          {tag.str}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {tagFilters.length ? (
+                  <div
+                    className="font-weight-heavy border-bottom border-black cursor-pointer"
+                    onClick={() => this.setState({tagFilters: []})}>
+                    Clear all <FontAwesomeIcon icon={faTimes} />
+                  </div>
+                ) : (
+                  undefined
+                )}
               </div>
-              {filterByTag}
+              <div
+                className="cursor-pointer font-weight-heavy d-flex align-items-center"
+                onClick={() => this.setState(({myVotes}) => ({myVotes: !myVotes}))}>
+                <div
+                  className={cn('mr-2 b-strong', {'bg-purple2': this.state.myVotes})}
+                  style={{width: 24, height: 24}}
+                />
+                Show only my votes
+              </div>
+            </div>
+            <div className="d-flex justify-content-start">
+              {tagFilters.map(tagStr => (
+                <TagFilter key={tagStr} text={tagStr} onClick={() => this.onTagClick(tagStr)} />
+              ))}
             </div>
           </div>
 
-          {showTags && (
-            <div className="d-flex flex-wrap pb-2 mb-4 border-bottom">
-              {tagStrs.map((tagStr, i) => (
-                <TagFilter
-                  key={tagStr}
-                  text={tagStr}
-                  isSelected={tagFilters.includes(tags[i].text)}
-                  onClick={() => this.onTagClick(tags[i].text)}
-                />
-              ))}
-            </div>
-          )}
           {showProposals ? (
             <React.Fragment>
               <div className="mb-12 font-weight-heavy">Showing {showCount} proposals</div>
