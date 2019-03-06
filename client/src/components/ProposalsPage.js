@@ -23,16 +23,17 @@ const TagFilter = ({text, isSelected, onClick}) => (
   </div>
 );
 
-class ProposalsPage extends React.Component {
+class TagInput extends React.Component {
   constructor(props) {
     super(props);
     this.input = React.createRef();
   }
 
+  state = {
+    tagInput: '',
+  };
+
   componentDidMount() {
-    if (!this.props.gotAllProposals) {
-      this.props.getAllProposals();
-    }
     this.addEvents();
   }
 
@@ -61,9 +62,71 @@ class ProposalsPage extends React.Component {
     this.setState({tagInput: ''});
   };
 
+  onTagClick = tag => {
+    this.setState({tagInput: ''});
+    this.props.onTagClick(tag);
+  };
+
+  render() {
+    const {tags, tagFilters} = this.props;
+    const {tagInput} = this.state;
+
+    const suggestedTags =
+      tagInput &&
+      tags
+        .filter(t => !tagFilters.includes(t.text))
+        .filter(t => t.text.indexOf(tagInput) > -1)
+        .slice(10);
+    return (
+      <div
+        className="d-flex b-strong align-items-center p-relative mr-4"
+        style={{width: 360}}
+        ref={this.input}>
+        <input
+          placeholder="Search for tags..."
+          className="box-shadow-none border-transparent p-1"
+          style={{outline: 'none'}}
+          onChange={e => this.setState({tagInput: e.target.value})}
+          value={this.state.tagInput}
+        />
+        <FontAwesomeIcon icon={faFilter} className="mr-2 text-purple2" />
+        {suggestedTags && (
+          <div
+            className="b-strong p-absolute bg-white"
+            style={{top: 38, left: -4, right: -4, maxHeight: 360, overflow: 'auto'}}>
+            {suggestedTags.map(tag => (
+              <div
+                key={tag.text}
+                className="text-black font-weight-heavy p-1 border-bottom border-purple2 cursor-pointer"
+                onClick={() => this.onTagClick(tag.text)}>
+                {tag.str}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
+class ProposalsPage extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('ctor');
+  }
+  componentDidMount() {
+    console.log('mount');
+    if (!this.props.gotAllProposals) {
+      this.props.getAllProposals();
+    }
+  }
+
+  componentWillUnmount() {
+    console.log('unmount');
+  }
+
   state = {
     tagFilters: [],
-    tagInput: '',
     myVotes: false,
   };
 
@@ -73,10 +136,9 @@ class ProposalsPage extends React.Component {
       if (index > -1) {
         return {
           tagFilters: state.tagFilters.slice(0, index).concat(state.tagFilters.slice(index + 1)),
-          tagInput: '',
         };
       } else {
-        return {tagFilters: state.tagFilters.concat(tag), tagInput: ''};
+        return {tagFilters: state.tagFilters.concat(tag)};
       }
     });
   };
@@ -85,7 +147,7 @@ class ProposalsPage extends React.Component {
     const proposals = values(this.props.proposals);
     const {allTags, users, gotAllProposals, user, attendProposal} = this.props;
 
-    const {tagFilters, tagInput, myVotes} = this.state;
+    const {tagFilters, myVotes} = this.state;
     const showProposals = !!gotAllProposals;
     const tags = allTags
       .map(tag => {
@@ -103,9 +165,6 @@ class ProposalsPage extends React.Component {
       (a, b) => (b.attended !== undefined ? -1 : a.attended !== undefined ? 1 : 0),
     );
     const showCount = sortedProposals.length;
-    const suggestedTags =
-      tagInput &&
-      tags.filter(t => !tagFilters.includes(t.text)).filter(t => t.text.indexOf(tagInput) > -1);
 
     return (
       <Page title="Proposals" {...this.props}>
@@ -115,33 +174,7 @@ class ProposalsPage extends React.Component {
           <div className="border-bottom border-purple2 mb-4">
             <div className="d-flex justify-content-between align-items-center mb-5">
               <div className="d-flex align-items-center">
-                <div
-                  className="d-flex b-strong align-items-center p-relative mr-4"
-                  style={{width: 360}}
-                  ref={this.input}>
-                  <input
-                    placeholder="Search for tags..."
-                    className="box-shadow-none border-transparent p-1"
-                    style={{outline: 'none'}}
-                    onChange={e => this.setState({tagInput: e.target.value})}
-                    value={this.state.tagInput}
-                  />
-                  <FontAwesomeIcon icon={faFilter} className="mr-2 text-purple2" />
-                  {suggestedTags && (
-                    <div
-                      className="b-strong p-absolute bg-white"
-                      style={{top: 38, left: -4, right: -4, maxHeight: 360, overflow: 'auto'}}>
-                      {suggestedTags.map(tag => (
-                        <div
-                          key={tag.text}
-                          className="text-black font-weight-heavy p-1 border-bottom border-purple2 cursor-pointer"
-                          onClick={() => this.onTagClick(tag.text)}>
-                          {tag.str}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <TagInput tags={tags} tagFilters={tagFilters} onTagClick={this.onTagClick} />
                 {tagFilters.length ? (
                   <div
                     className="font-weight-heavy border-bottom border-black cursor-pointer"

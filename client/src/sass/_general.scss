@@ -252,11 +252,13 @@ a.unstyled-link:active {
     $bg-2: $purple2;
   }
 
+  font-family: 'PT Mono' !important;
+  font-weight: bold !important;
   border: solid 2px $bg-1 !important;
   box-shadow: -2px 2px $bg-2, -4px 4px $bg-1 !important;
 
   background: right bottom linear-gradient(to right, #ff6100 50%, #896cff 50%) !important;
-  background-size: 200% 100% !important;
+  background-size: 205% 100% !important;
   transition: all .5s ease-out !important;
 
   &:hover {
@@ -269,6 +271,42 @@ a.unstyled-link:active {
 
   &.on-purple {
     @include styled-button(true);
+  }
+}
+
+.styled-button-white {
+  font-family: 'PT Mono' !important;
+  font-weight: bold !important;
+  color: black !important;
+  border-left: 2px solid $purple2 !important;
+  border-bottom: 2px solid $purple2 !important;
+  box-shadow: -2px 2px $white, -4px 4px $purple2 !important;
+  background: right bottom linear-gradient(to right, $orange2 50%, white 50%) !important;
+  background-size: 205% 100% !important;
+  transition: all .5s ease-out !important;
+    
+  &:hover {
+    background-position: left bottom !important;
+  }
+
+  &.v2 {
+    background: right bottom linear-gradient(to right, $indigo 50%, white 50%) !important;
+    background-size: 205% 100% !important;
+    
+    &:hover {
+      background-position: left bottom !important;
+    }
+  }
+
+
+  &.orange {
+    background: $orange2 !important;
+    color: white !important;
+  }
+
+  &.purple {
+    color: white !important;
+    background: $indigo !important;
   }
 }
 

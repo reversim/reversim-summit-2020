@@ -11,14 +11,18 @@ export default ({user, attended, proposalId, attendProposal}) => {
   return (
     <React.Fragment>
       <Button
-        className={cn('styled-button mr-4', s.changeAnimation)}
+        className={cn(
+          'styled-button-white v2 mr-10',
+          {purple: attended === false},
+          s.changeAnimation,
+        )}
         onClick={() => attended !== false && attendProposal(proposalId, false)}>
-        Not relevant to me {attended === false && '(v)'}
+        Not relevant to me
       </Button>
       <Button
-        className={cn('styled-button', s.changeAnimation)}
+        className={cn('styled-button-white', {orange: attended}, s.changeAnimation)}
         onClick={() => attended !== true && attendProposal(proposalId, true)}>
-        Interested {attended && '(v)'}
+        Interested
       </Button>
     </React.Fragment>
   );
