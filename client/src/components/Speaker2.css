@@ -30,8 +30,8 @@
 
 @media (max-width:767px) {
   .img, .homepageImg {
-    width: 150px;
-    height: 150px;
+    border-bottom: 0;
+    border-right: 4px solid var(--purple2);
   }
 
   .body {
@@ -41,8 +41,6 @@
 
 @media (max-width:540px) {
   .img, .homepageImg {
-    width: 150px;
-    height: 150px;
   }
 
   .body {

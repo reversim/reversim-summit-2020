@@ -30,7 +30,7 @@ class TeamMember extends React.Component {
         : {height: 240};
 
     return (
-      <div className="mr-8 mb-12 d-flex" style={{height: 248}}>
+      <div className="about__team-member mb-12 d-flex">
         <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
         <div className="flex-grow-1 line-height-12">
           <div
@@ -94,13 +94,11 @@ const AboutPage = props => {
           <h3 className="font-size-xxl mr-4 font-weight-regular">Meet the team</h3>
           <div className="flex-grow-1 border-bottom border-purple2" />
         </div>
-        <Row noGutters>
+        <div className="about__team">
           {props.team.map(id => (
-            <Col xs="12" md="6" key={id}>
               <TeamMember {...props.users[id]} />
-            </Col>
           ))}
-        </Row>
+        </div>
       </Container>
     </Page>
   );
