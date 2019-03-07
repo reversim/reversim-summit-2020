@@ -5,56 +5,43 @@ import {img} from './Speaker2.css';
 import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
 
+const COLLAPSED_BIO_MAX_CHARS = 80;
+
 class TeamMember extends React.Component {
   constructor(props) {
     super(props);
-    this.ref = React.createRef();
-  }
-  state = {isExpanded: false, isTooLong: false};
-  componentDidMount() {
-    if (this.ref.current.offsetHeight > 240) {
-      this.setState({isTooLong: true});
-    }
-  }
-
-  componentDidUpdate() {
-    console.log(this.props.name, this.state.isTooLong);
-    if (!this.state.isTooLong && this.ref.current.offsetHeight > 240) {
-      this.setState({isTooLong: true});
-    }
+    const {bio} = this.props;
+    const isTooLong = bio.length > COLLAPSED_BIO_MAX_CHARS;
+    this.state = {
+      isExpanded: false,
+      isTooLong,
+    };
   }
 
   toggle = () => {
-    this.setState(({isExpanded}) => ({isExpanded: !isExpanded}));
+    this.setState(({isExpanded}) => ({isExpanded: !isExpanded }));
   };
 
   render() {
     const {picture, name, oneLiner, bio} = this.props;
     const {isExpanded, isTooLong} = this.state;
-    const isTruncated = isTooLong && !isExpanded;
+    const textStyle = (isExpanded && isTooLong)
+        ? {zIndex: 1, height: 'auto', minHeight: 240}
+        : {height: 240};
 
     return (
       <div className="mr-8 mb-12 d-flex" style={{height: 248}}>
         <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
         <div className="flex-grow-1 line-height-12">
           <div
-            className="p-4 bg-white b-strong p-relative overflow-hidden"
-            style={isExpanded ? {zIndex: 1, height: 'auto'} : {height: 240}}
-            onMouseEnter={() => isTooLong && this.setState({isExpanded: true})}
-            onMouseLeave={() => isTooLong && this.setState({isExpanded: false})}>
+            className={`p-4 bg-white b-strong p-relative overflow-hidden ${!isExpanded ? "text-fade" : ""}`}
+            onClick={this.toggle}
+            style={textStyle}>
             <div ref={this.ref}>
               <h4 className="line-height-1 mb-1">{name}</h4>
               <p className="font-weight-regular line-height-12 font-size-md">{oneLiner}</p>
               <p className="line-height-15 mb-0">
                 {bio}
-                {/* {'\u00A0'} */}
-                {/* {isTooLong && (
-                  <span
-                    className="text-purple2 font-weight-bold border-bottom border-indigo"
-                    onClick={this.toggle}>
-                    READ {isExpanded ? 'LESS' : 'MORE'}
-                  </span>
-                )} */}
               </p>
             </div>
           </div>
