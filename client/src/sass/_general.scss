@@ -83,6 +83,13 @@ input[type='checkbox'] {
   }
 }
 
+////// Chen's Addition ////////
+
+.navbar-padding {
+  padding-top: 100px;
+}
+
+////// Chen's Addition (END) ////////
 
 .font-size-xxl {
   font-size: $font-size-xxl;
@@ -383,8 +390,7 @@ button.btn {
 .page {
   flex-grow: 1;
   background: $white;
-  position: relative;
-  padding-top: 100px; // navbar-height
+  position: relative; // navbar-height
 }
 
  //.container {
@@ -604,4 +610,10 @@ input[type="checkbox"] {
 
 .box-shadow-none {
   box-shadow: none;
+}
+
+.about__intro-text {
+  @media (max-width:991px) {
+    flex-direction: column;
+  }
 }

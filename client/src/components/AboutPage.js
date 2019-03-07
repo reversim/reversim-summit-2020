@@ -67,16 +67,17 @@ class TeamMember extends React.Component {
 const AboutPage = props => {
   return (
     <Page title="About" {...props}>
-      <div className="bg-purple2 text-white font-size-md">
+      <div  className="navbar-padding pb-15 bg-purple2 text-white font-size-lm x-bg"
+            style={{backgroundImage: `url('${x}')`}}>
         <Container>
           <div className="d-flex align-items-center pt-15 ">
-            <img src={hoop} alt="" height="104" style={{marginRight: -10}} />
+            <img src={hoop} alt="" height="100" style={{marginRight: -16}} />
             <h3 className="font-size-xxl mr-4 font-weight-regular">About</h3>
             <div className="flex-grow-1 border-bottom border-white" />
           </div>
-          <div className="d-flex font-weight-regular">
-            <div className="pt-10 mr-9 flex-1" style={{marginBottom: 100}}>
-              <p className="line-height-15">Reversim Summit</p>
+          <div className="d-flex font-weight-regular about__intro-text">
+            <div className="pt-10 mr-9 flex-1">
+              <p className="line-height-15 font-size-lg">Reversim Summit</p>
               <p className="line-height-15">
                 Reversim summit is our intention to create a conference for developers by
                 developers. Like in the podcast, we bring you the content we are interested in, and
@@ -90,9 +91,8 @@ const AboutPage = props => {
               </p>
             </div>
             <div
-              className="pt-10 mr-12 flex-1"
-              style={{background: `url('${x}') no-repeat`, backgroundSize: 'cover'}}>
-              <p className="mb-3">Reversim podcast</p>
+              className="pt-10 mr-12 flex-1">
+              <p className="mb-3 font-size-lg">Reversim podcast</p>
               <p className="line-height-15">
                 Reversim (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and Ran Tavory which
                 brings together software developers and product, with over 300 recorded episodes and
@@ -120,3 +120,7 @@ const AboutPage = props => {
 };
 
 export default AboutPage;
+
+/**
+ * style={{background: `url('${x}') no-repeat`, backgroundSize: 'cover'}}
+ **/

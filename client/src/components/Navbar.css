@@ -24,7 +24,7 @@
 }
 
 .isWhite {
-    background: #5127ff;
+    background: rgba(81, 39, 255, 0.9);;
     transition: background 0.3s;
 }
 

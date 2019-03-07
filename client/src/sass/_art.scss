@@ -1,0 +1,9 @@
+.x-bg {
+  background-repeat: no-repeat;
+  background-size: 600px;
+  background-position: 70% 133%;
+
+  @media (max-width:991px) {
+    background-position: 50% 120%;
+  }
+}
