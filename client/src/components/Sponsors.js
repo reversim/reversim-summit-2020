@@ -465,7 +465,7 @@ class SponsorForm extends React.Component {
           className="mb-3"
           size="sm"
           placeholder="Link to website"
-          value={this.state.url}
+          value={this.state.url || ''}
           onChange={e => this.setState({ url: e.target.value })}
         />
         <Input
@@ -473,7 +473,7 @@ class SponsorForm extends React.Component {
           size="sm"
           type="textarea"
           placeholder="About"
-          value={this.state.about}
+          value={this.state.about || ''}
           onChange={e => this.setState({ about: e.target.value })}
         />
         {this.state.isPremium && (

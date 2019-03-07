@@ -245,6 +245,10 @@ a.unstyled-link:active {
   left: 0;
 }
 
+.text-align-center {
+  text-align: center !important;
+}
+
 
 .proposal pre code {
   white-space: pre-wrap;
@@ -291,7 +295,7 @@ a.unstyled-link:active {
   background: right bottom linear-gradient(to right, $orange2 50%, white 50%) !important;
   background-size: 205% 100% !important;
   transition: all .5s ease-out !important;
-    
+
   &:hover {
     background-position: left bottom !important;
   }
@@ -299,7 +303,7 @@ a.unstyled-link:active {
   &.v2 {
     background: right bottom linear-gradient(to right, $indigo 50%, white 50%) !important;
     background-size: 205% 100% !important;
-    
+
     &:hover {
       background-position: left bottom !important;
     }

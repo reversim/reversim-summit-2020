@@ -32,6 +32,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faMapMarkerAlt);
 
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
+  console.log('NETA sponsor', sponsor)
   return (
     <Page title={sponsor.name} {...props}>
       <div className="page__hero bg-purple2">
@@ -185,7 +186,7 @@ class SponsorCarousel extends React.Component {
               onExiting={this.onExiting}
               onExited={this.onExited}
               key={i}
-              className='d-flex justify-content-center'
+              className='text-align-center'
           >
             <img src={item}/>
           </CarouselItem>
