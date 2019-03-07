@@ -122,7 +122,7 @@ export class SpeakerPage extends React.Component {
                 <h3 className="text-purple2 font-size-xl mr-4">
                   {speaker.name.split(' ')[0]}'s sessions
                 </h3>
-                <div className="bt flex-grow-1 border-bottom border-purple2 border-top" />
+                <div className="flex-grow-1 border-bottom border-purple2 border-top" />
               </div>
               <div className="d-flex flex-wrap align-items-start">
                 {sessions.map((session, i) => (

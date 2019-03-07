@@ -39,6 +39,5 @@ export default [
   {path: '/cfp', comp: CFPPage},
   {path: '/sessions', comp: SessionsPage},
   {path: '/proposals', comp: ProposalsPage},
-  {path: '/my-votes', comp: ProposalsPage, props: {myVotes: true}},
   {path: '/timeline', comp: TimelinePage},
 ];
