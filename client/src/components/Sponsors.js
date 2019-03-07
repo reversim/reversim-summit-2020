@@ -418,7 +418,7 @@ class SponsorForm extends React.Component {
               this.setState({
                 isPremium: e.target.checked,
                 techStory: this.state.techStory || {
-                  technologies: [],
+                  technologies: '',
                   text: ""
                 },
                 socials: [],

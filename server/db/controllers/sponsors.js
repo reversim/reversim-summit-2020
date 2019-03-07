@@ -42,21 +42,21 @@ async function add(req, res) {
       name: sponsor.name,
       logo: sponsor.logo,
       location: {
-        link: sponsor.locationLink,
-        shortAddress: sponsor.locationShortAddress
+        link: sponsor.locationLink || '',
+        shortAddress: sponsor.locationShortAddress || ''
       },
       socials: socials(sponsor),
-      oneLiner: sponsor.oneLiner,
-      about: sponsor.about,
+      oneLiner: sponsor.oneLiner || '',
+      about: sponsor.about || '',
       techStory: {
-        text: sponsor.techStory.text,
-        technologies: sponsor.techStory.technologies.split('\n')
+        text: sponsor.techStory.text || '',
+        technologies: sponsor.techStory.technologies.split('\n') || []
       },
-      openPositions: sponsor.openPositions,
-      url: sponsor.url,
-      reversimAndUs: sponsor.reversimAndUs,
-      isPremium: sponsor.isPremium,
-      images: sponsor.images,
+      openPositions: sponsor.openPositions || [],
+      url: sponsor.url || '',
+      reversimAndUs: sponsor.reversimAndUs || '',
+      isPremium: sponsor.isPremium || '',
+      images: sponsor.images || '',
 
       created_at: new Date(),
       updated_at: new Date(),
