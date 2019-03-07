@@ -54,9 +54,9 @@ async function add(req, res) {
       },
       openPositions: sponsor.openPositions,
       url: sponsor.url,
-      images: [],
       reversimAndUs: sponsor.reversimAndUs,
       isPremium: sponsor.isPremium,
+      images: sponsor.images,
 
       created_at: new Date(),
       updated_at: new Date(),

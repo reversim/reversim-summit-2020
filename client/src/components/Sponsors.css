@@ -64,6 +64,10 @@
 .socialWrapper {
     min-height: 0.85em;
 }
+
+.carouselControl{
+    opacity: 0.2;
+}
 /*@media (min-width:991px) {*/
     /*.sponsor {*/
         /*width: calc(100% - 20px);*/

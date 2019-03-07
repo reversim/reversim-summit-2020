@@ -8,6 +8,11 @@ import { animateScroll as scroll, Link as ScrollLink } from "react-scroll";
 import Page from "./Page";
 import { Container, Row, Col, Button } from "reactstrap";
 import s from "./Sponsors.css";
+import {Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+  CarouselCaption} from 'reactstrap'
 
 import {
   faMapMarkerAlt,
@@ -131,6 +136,77 @@ class TitleSection extends React.Component {
   }
 }
 
+class SponsorCarousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { activeIndex: 0 };
+    this.next = this.next.bind(this);
+    this.previous = this.previous.bind(this);
+    this.goToIndex = this.goToIndex.bind(this);
+    this.onExiting = this.onExiting.bind(this);
+    this.onExited = this.onExited.bind(this);
+    this.sponsor = this.props.sponsor;
+
+  }
+
+  onExiting() {
+    this.animating = true;
+  }
+
+  onExited() {
+    this.animating = false;
+  }
+
+  next() {
+    if (this.animating) return;
+    const nextIndex = this.state.activeIndex === this.sponsor.images.length - 1 ? 0 : this.state.activeIndex + 1;
+    this.setState({ activeIndex: nextIndex });
+  }
+
+  previous() {
+    if (this.animating) return;
+    const nextIndex = this.state.activeIndex === 0 ? this.sponsor.images.length - 1 : this.state.activeIndex - 1;
+    this.setState({ activeIndex: nextIndex });
+  }
+
+  goToIndex(newIndex) {
+    if (this.animating) return;
+    this.setState({ activeIndex: newIndex });
+  }
+
+  render() {
+    const { activeIndex } = this.state;
+    const { sponsor } = this.props;
+
+
+    const slides = sponsor.images.map((item, i) => {
+      return (
+          <CarouselItem
+              onExiting={this.onExiting}
+              onExited={this.onExited}
+              key={i}
+              className='d-flex justify-content-center'
+          >
+            <img src={item}/>
+          </CarouselItem>
+      );
+    });
+
+    return (
+        <Carousel
+            activeIndex={activeIndex}
+            next={this.next}
+            previous={this.previous}
+            interval={false}
+        >
+          {slides}
+          <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} className={cn(s.carouselControl, 'cursor-pointer bg-purple2')}/>
+          <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} className={cn(s.carouselControl, 'cursor-pointer bg-purple2')} />
+        </Carousel>
+    );
+  }
+}
+
 class DescriptionSection extends React.Component {
   constructor(props) {
     super(props);
@@ -141,24 +217,6 @@ class DescriptionSection extends React.Component {
   }
 
   render() {
-
-    const images = [
-      {
-        original: 'http://lorempixel.com/1000/600/nature/1/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/1/',
-        sizes:'16x16'
-      },
-      {
-        original: 'http://lorempixel.com/100/100/nature/2/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/2/',
-        sizes:'16x16'
-      },
-      {
-        original: 'http://lorempixel.com/100/100/nature/3/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/3/',
-        sizes:'16x16'
-      }
-    ]
     // const {isEditingiting} = this.state;
     const { sponsor, canEdit } = this.props;
     console.log("sponsor", sponsor);
@@ -173,8 +231,8 @@ class DescriptionSection extends React.Component {
               </div>
               <div className="text-black-50">{sponsor.about}</div>
             </div>
-            <div>
-              <div></div>
+            <div className="width-half ml-4">
+              <SponsorCarousel sponsor={sponsor}></SponsorCarousel>
             </div>
           </div>
         </div>
@@ -255,7 +313,7 @@ class OpenPosition extends React.Component {
           </div>
         </div>
         <div className="bg-white b-strong border-purple2 p-6 d-flex flex-column">
-          <div className="pb-3">{sponsor.description}</div>
+          <div className="pb-3">{openPosition.description}</div>
           <a href={openPosition.link} className="align-self-end">
             <Button className="styled-button w-max-content">APPLY</Button>
           </a>
