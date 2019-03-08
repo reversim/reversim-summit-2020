@@ -77,7 +77,7 @@ class TitleSection extends React.Component {
         <div className={cn("bg-purple2 text-white")}>
           <div className={"d-flex"}>
             <div className="font-size-xxl">Big Thanks to our sponsor</div>
-            <div className={cn(s.hr, "bg-white")} />
+            <div className="hl bg-white" />
           </div>
           <div className="d-flex flex-row mb-4">
             <div className="b-strong border-purple2 bg-white  mr-5">
@@ -228,7 +228,7 @@ class DescriptionSection extends React.Component {
             <div className="width-half">
               <div className="d-flex">
                 <div className="font-size-xl text-purple2">Who We Are?</div>
-                <div className={cn(s.hr, "bg-purple2")} />
+                <div className="hl bg-purple2" />
               </div>
               <div className="text-black-50">{sponsor.about}</div>
             </div>
@@ -242,7 +242,7 @@ class DescriptionSection extends React.Component {
             <div className="font-size-xl text-purple2">
               Our Technology Story
             </div>
-            <div className={cn(s.hr, "bg-purple2")} />
+            <div className="hl bg-purple2" />
           </div>
           <div className="d-flex">
             <div className="text-black-50 width-half">
@@ -265,7 +265,7 @@ class DescriptionSection extends React.Component {
             <div className="font-size-xl text-purple2">
               Open Positions - Join Us
             </div>
-            <div className={cn(s.hr, "bg-purple2")} />
+            <div className="hl bg-purple2" />
           </div>
           <div className="text-black-50 d-flex">
             {sponsor.openPositions.map((openPosition, i) => (
@@ -281,7 +281,7 @@ class DescriptionSection extends React.Component {
           <div className="pt-8" name="Reversim & Us">
             <div className="d-flex">
               <div className="font-size-xl text-purple2">Reversim and us</div>
-              <div className={cn(s.hr, "bg-purple2")} />
+              <div className="hl bg-purple2" />
             </div>
             <div className="text-black-50">{sponsor.reversimAndUs}</div>
           </div>

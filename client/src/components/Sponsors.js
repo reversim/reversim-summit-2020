@@ -35,7 +35,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
         <div className={cn("font-size-xxl text-white")}>
           Meet Our Premium Sponsors
         </div>
-        <div className={cn(s.hr, "bg-white")} />
+        <div className="bg-white hl" />
       </div>
       <div className={cn("d-flex flex-wrap", s.premiumSponsorsWrap)}>
         {sponsors.map(sponsor => (
@@ -66,9 +66,9 @@ const CommunitySponsors = ({
         <div className={cn("font-size-xxl text-purple2")}>
           Meet Our Community Sponsors
         </div>
-        <div className={cn(s.hr, "bg-purple2", s.mb10)} />
+        <div className={cn("hl bg-purple2", s.mb10)} />
       </div>
-      <div className={cn(s.sponsorWrap)}>
+      <div>
         {sponsors.map(sponsor => (
           <SponsorWithEdit
             key={sponsor._id}
@@ -92,7 +92,12 @@ const Sponsor = ({
     <div className={"d-flex m-4"}>
       <div className={cn("text-center b-strong border-purple2", s.sponsor)}>
         {/*<a href={url} target="_blank">*/}
-        <img src={logo} className={s.sponsorImg} alt={name} />
+        <img
+          style={{ maxWidth: 240, maxHeight: 240 }}
+          src={logo}
+          className={s.sponsorImg}
+          alt={name}
+        />
         {/*</a>*/}
       </div>
       <div className={cn("border-purple2 p-2", s.communitySponsorText)}>
@@ -192,7 +197,11 @@ class PremiumSponsor extends React.Component {
               )}
               <div>
                 <div className={cn(s.sponsor, "bg-white")}>
-                  <img src={sponsor.logo} alt={sponsor.name} />
+                  <img
+                    style={{ maxWidth: 240, maxHeight: 240 }}
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                  />
                 </div>
                 <Link to={`/sponsor/${sponsor.name}`} className="unstyled-link">
                   <Button className={"styled-button on-purple"}>
@@ -397,7 +406,7 @@ class SponsorForm extends React.Component {
         "techStory",
         "reversimAndUs",
         "openPositions",
-        "images",
+        "images"
       ]);
     } else {
       return pick(this.state, ["isPremium", "name", "logo", "url", "about"]);
@@ -418,7 +427,7 @@ class SponsorForm extends React.Component {
               this.setState({
                 isPremium: e.target.checked,
                 techStory: this.state.techStory || {
-                  technologies: '',
+                  technologies: "",
                   text: ""
                 },
                 socials: [],
@@ -435,7 +444,7 @@ class SponsorForm extends React.Component {
           size="sm"
           required
           placeholder="Name"
-          value={this.state.name || ''}
+          value={this.state.name || ""}
           onChange={e => this.setState({ name: e.target.value })}
         />
         <Button className="p-relative mb-3" size="sm">
@@ -465,7 +474,7 @@ class SponsorForm extends React.Component {
           className="mb-3"
           size="sm"
           placeholder="Link to website"
-          value={this.state.url || ''}
+          value={this.state.url || ""}
           onChange={e => this.setState({ url: e.target.value })}
         />
         <Input
@@ -473,7 +482,7 @@ class SponsorForm extends React.Component {
           size="sm"
           type="textarea"
           placeholder="About"
-          value={this.state.about || ''}
+          value={this.state.about || ""}
           onChange={e => this.setState({ about: e.target.value })}
         />
         {this.state.isPremium && (

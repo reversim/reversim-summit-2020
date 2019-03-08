@@ -194,9 +194,9 @@ input[type='checkbox'] {
   }
 }
 
-.bg-white {
-  background: rgba(255,255,255,0.85); /* TODO only for location */
-}
+//.bg-white {
+//  background: rgba(255,255,255,0.85); /* TODO only for location */
+//}
 
 a.unstyled-link,
 a.unstyled-link:hover,
@@ -397,10 +397,12 @@ button.btn {
   position: relative; // navbar-height
 }
 
- //.container {
- //  padding: 0;
- //  min-width: 100%;
- //}
+.hl {
+  flex-grow: 1;
+  height: 2px;
+  align-self: center;
+  margin-left: 10px;
+}
 
 .nav-link {
   &.active {
