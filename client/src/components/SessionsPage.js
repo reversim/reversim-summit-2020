@@ -71,7 +71,7 @@ class SessionsPage extends React.Component {
                   />
                 ))
               ) : (
-                <span className="font-mono font-size-xl">Nothing to show :-(</span>
+                <span className="font-mono font-size-xl">...</span>
               )}
             </Col>
             <Col lg="3">
