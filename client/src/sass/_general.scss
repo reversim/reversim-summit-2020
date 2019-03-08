@@ -85,8 +85,12 @@ input[type='checkbox'] {
 
 ////// Chen's Addition ////////
 
-.navbar-padding {
+.navbar-margin {
   padding-top: 100px;
+}
+
+.white-bg {
+  background: white;
 }
 
 ////// Chen's Addition (END) ////////
@@ -393,7 +397,7 @@ button.btn {
 
 .page {
   flex-grow: 1;
-  background: $white;
+  background: $purple2;
   position: relative; // navbar-height
 }
 
