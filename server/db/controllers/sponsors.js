@@ -66,6 +66,7 @@ async function add(req, res) {
       name: sponsor.name,
       logo: await uploadLogo(req.body.logo),
       about: sponsor.about || '',
+      url:  sponsor.url || '',
       created_at: new Date(),
       updated_at: new Date(),
     }
