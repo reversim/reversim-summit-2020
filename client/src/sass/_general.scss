@@ -625,6 +625,7 @@ input[type="checkbox"] {
 
 .about__team-member {
   flex: 0 0 calc(50% - 20px);
+  height: 248px;
 
 
   @media (max-width:1200px) {

@@ -5,7 +5,7 @@ import {img} from './Speaker2.css';
 import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
 
-const COLLAPSED_BIO_MAX_CHARS = 80;
+const COLLAPSED_BIO_MAX_CHARS = 110;
 
 class TeamMember extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class TeamMember extends React.Component {
         <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
         <div className="flex-grow-1 line-height-12">
           <div
-            className={`p-4 bg-white b-strong p-relative overflow-hidden ${!isExpanded ? "text-fade" : ""}`}
+            className={`p-4 bg-white b-strong p-relative overflow-hidden ${!isExpanded && isTooLong ? "text-fade" : ""}`}
             onClick={this.toggle}
             style={textStyle}>
             <div ref={this.ref}>

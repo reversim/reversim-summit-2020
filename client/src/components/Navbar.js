@@ -21,7 +21,7 @@ const CFPCTA = () => (
 );
 
 const VotingCTA = () => (
-  <Link to="/my-votes" className="unstyled-link">
+  <Link to="/proposals" className="unstyled-link">
     <Button className="styled-button on-purple w-max-content">
       VOTE FOR SESSION
     </Button>
