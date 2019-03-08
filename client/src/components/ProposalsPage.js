@@ -79,7 +79,7 @@ class TagInput extends React.Component {
         .filter(t => !tagFilters.includes(t.text))
         .filter(t => t.text.toLowerCase().indexOf(tagInput.toLowerCase()) > -1)
         .slice(0, 10);
-    
+
     return (
       <div
         className="d-flex b-strong align-items-center p-relative mr-4"
@@ -93,18 +93,23 @@ class TagInput extends React.Component {
           value={this.state.tagInput}
         />
         <FontAwesomeIcon icon={faFilter} className="mr-2 text-purple2" />
-        {suggestedTags && (
+        {tagInput && (
           <div
             className="b-strong p-absolute bg-white"
-            style={{top: 38, left: -4, right: -4, maxHeight: 360, overflow: 'auto'}}>
-            {suggestedTags.map(tag => (
-              <div
-                key={tag.text}
-                className="text-black font-weight-bold p-1 border-bottom border-purple2 cursor-pointer"
-                onClick={() => this.onTagClick(tag.text)}>
-                {tag.str}
-              </div>
-            ))}
+            style={{top: 38, left: -4, right: -4, maxHeight: 368, overflow: 'auto'}}>
+            {suggestedTags.length > 0
+                ? suggestedTags.map(tag => (
+                      <div
+                        key={tag.text}
+                        className="text-black font-weight-bold p-1 border-bottom border-purple2 cursor-pointer"
+                        onClick={() => this.onTagClick(tag.text)}>
+                        {tag.str}
+                      </div>
+                  ))
+                : <div className="text-black font-weight-bold p-1 cursor-pointer">
+                    No tags were found
+                  </div>
+            }
           </div>
         )}
       </div>
