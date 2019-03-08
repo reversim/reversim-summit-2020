@@ -642,9 +642,10 @@ input[type="checkbox"] {
   }
 }
 
-.Navbar__navLink {
+.nav-link {
   color: white;
   border-bottom: 2px solid transparent;
+  line-height: 15px;
 
   &:hover {
     color: white;
