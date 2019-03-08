@@ -118,7 +118,6 @@ class Navbar extends Component {
           {/*{cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA />}*/}
           <NavbarToggler onClick={this.toggle} className="ml-auto" />
                   </div>
-              {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
           <Collapse isOpen={this.state.isOpen} navbar>
 
           <Nav
