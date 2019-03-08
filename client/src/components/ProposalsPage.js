@@ -173,9 +173,9 @@ class ProposalsPage extends React.Component {
         <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
             style={{backgroundImage: `url('${introBG}')`}}>
             <Container>
-                  <div className="d-flex align-items-center pt-15 ">
-                    <h3 className="font-size-lm mr-4 font-weight-regular">Be The Voice Of The Community</h3>
-                    <h3 className="font-size-xxl mr-4 font-weight-regular">Impact The Content</h3>
+                  <div className="d-flex flex-column pt-15 ">
+                    <h3 className="font-size-xl mr-4 font-weight-regular">Be The Voice Of The Community</h3>
+                    <h3 className="font-size-xxxl mr-4 font-weight-regular">Impact The Content</h3>
                   </div>
             </Container>
         </div>

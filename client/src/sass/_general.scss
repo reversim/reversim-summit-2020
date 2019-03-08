@@ -86,7 +86,7 @@ input[type='checkbox'] {
 ////// Chen's Addition ////////
 
 .navbar-margin {
-  padding-top: 100px;
+  margin-top: 100px;
 }
 
 .white-bg {
@@ -94,6 +94,10 @@ input[type='checkbox'] {
 }
 
 ////// Chen's Addition (END) ////////
+
+.font-size-xxxl {
+  font-size: $font-size-xxxl;
+}
 
 .font-size-xxl {
   font-size: $font-size-xxl;
