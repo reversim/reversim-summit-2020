@@ -12,13 +12,13 @@ import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 
 
-const CFPCTA = () => (
-  <Link to="/cfp" className="unstyled-link">
-    <Button color="primary" className={cn("mr-4", submitBtn)}>
-      Submit session
-    </Button>
-  </Link>
-);
+// const CFPCTA = () => (
+//   <Link to="/cfp" className="unstyled-link">
+//     <Button color="primary" className={cn("mr-4", submitBtn)}>
+//       Submit session
+//     </Button>
+//   </Link>
+// );
 
 const VotingCTA = () => (
   <Link to="/proposals" className="unstyled-link">
@@ -119,12 +119,12 @@ class Navbar extends Component {
           <NavbarToggler onClick={this.toggle} className="ml-auto" />
                   </div>
               {cfp && !isSmallScreen && pathname !== '/cfp' && <CFPCTA />}
-              {voting && !isSmallScreen && pathname !== '/my-votes' && <VotingCTA />}
           <Collapse isOpen={this.state.isOpen} navbar>
 
           <Nav
           navbar
           className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-darkblue': isSmallScreen})}>
+            {voting && !isSmallScreen && pathname !== '/proposals' && <li><VotingCTA /></li>}
           {/*<a*/}
           {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
           {/*target="_blank"*/}
@@ -149,18 +149,21 @@ class Navbar extends Component {
               </NavItem>
               </div>
           )}
-          {!user && (<NavbarItem to={getLoginUrl()} text="Login" external={true}/>)}
+          { !user &&
+                (<NavbarItem to={getLoginUrl()} text="Login" external={true}/>)}
+          { !isServer &&
+            !isSmallScreen &&
+            user &&
+                <div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div>}
           </Nav>
-          </Collapse>
 
-              {!isServer &&
-              !isSmallScreen &&
-              user && <div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div>}
+          </Collapse>
 
           </Container>
       </Navbar2>
     );
   }
 }
+
 
 export default Navbar;
