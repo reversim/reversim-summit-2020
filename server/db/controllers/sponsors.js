@@ -40,7 +40,7 @@ async function add(req, res) {
   if (sponsor.isPremium) {
     newSponsor = {
       name: sponsor.name,
-      logo: sponsor.logo,
+      logo: await uploadLogo(req.body.logo),
       location: {
         link: sponsor.locationLink || '',
         shortAddress: sponsor.locationShortAddress || ''
@@ -56,15 +56,20 @@ async function add(req, res) {
       url: sponsor.url || '',
       reversimAndUs: sponsor.reversimAndUs || '',
       isPremium: sponsor.isPremium || '',
-      images: sponsor.images || '',
+      images: await Promise.all(sponsor.images.map(image => uploadLogo(image))),
 
       created_at: new Date(),
       updated_at: new Date(),
     }
   } else {
-    sponsor.created_at = new Date();
-    sponsor.updated_at = new Date();
-    newSponsor = sponsor
+    newSponsor = {
+      name: sponsor.name,
+      logo: await uploadLogo(req.body.logo),
+      about: sponsor.about || '',
+      url:  sponsor.url || '',
+      created_at: new Date(),
+      updated_at: new Date(),
+    }
   }
   const model = await Sponsor.create(newSponsor);
   return res.status(200).send(model);
@@ -79,6 +84,9 @@ async function update(req, res) {
   } else {
     req.body.updated_at = new Date();
     req.body.logo = await uploadLogo(req.body.logo);
+    req.body.images = await Promise.all(sponsor.images.map(image => uploadLogo(image)));
+
+
     const data = _.omit(req.body, ['_id']);
     await Sponsor.findOneAndUpdate({_id: req.params.id}, data);
     return res.status(200).send(data);

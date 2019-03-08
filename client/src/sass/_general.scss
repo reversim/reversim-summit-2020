@@ -194,9 +194,9 @@ input[type='checkbox'] {
   }
 }
 
-.bg-white {
-  background: rgba(255,255,255,0.85); /* TODO only for location */
-}
+//.bg-white {
+//  background: rgba(255,255,255,0.85); /* TODO only for location */
+//}
 
 a.unstyled-link,
 a.unstyled-link:hover,
@@ -245,6 +245,10 @@ a.unstyled-link:active {
   left: 0;
 }
 
+.text-align-center {
+  text-align: center !important;
+}
+
 
 .proposal pre code {
   white-space: pre-wrap;
@@ -291,7 +295,7 @@ a.unstyled-link:active {
   background: right bottom linear-gradient(to right, $orange2 50%, white 50%) !important;
   background-size: 205% 100% !important;
   transition: all .5s ease-out !important;
-    
+
   &:hover {
     background-position: left bottom !important;
   }
@@ -299,7 +303,7 @@ a.unstyled-link:active {
   &.v2 {
     background: right bottom linear-gradient(to right, $indigo 50%, white 50%) !important;
     background-size: 205% 100% !important;
-    
+
     &:hover {
       background-position: left bottom !important;
     }
@@ -393,10 +397,12 @@ button.btn {
   position: relative; // navbar-height
 }
 
- //.container {
- //  padding: 0;
- //  min-width: 100%;
- //}
+.hl {
+  flex-grow: 1;
+  height: 2px;
+  align-self: center;
+  margin-left: 10px;
+}
 
 .location-section {
   background: url('../images/venue-bg.jpg') center;
