@@ -7,14 +7,14 @@ body {
   font-weight: 300;
 }
 
-a {
-  color: $teal;
-
-  &:hover {
-    color: $cyan;
-    text-decoration: none;
-  }
-}
+//a {
+//  color: $teal;
+//
+//  &:hover {
+//    color: $cyan;
+//    text-decoration: none;
+//  }
+//}
 
 p {
   line-height: 1.7;
@@ -397,13 +397,6 @@ button.btn {
  //  padding: 0;
  //  min-width: 100%;
  //}
-
-.nav-link {
-  &.active {
-    color: #1ad6ff;
-    border-bottom: 2px solid #ff6100;
-  }
-}
 
 .location-section {
   background: url('../images/venue-bg.jpg') center;

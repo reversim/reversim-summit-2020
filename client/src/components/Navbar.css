@@ -2,18 +2,19 @@
     cursor: pointer;
     color: white;
     font-weight: 400;
-}
+    border-bottom: 2px solid var(--purple2);
 
-.navLink:hover {
-  color: #1ad6ff;
+    &:hover {
+         border-bottom: 2px solid #ff6100;
+     }
+
+    &.active {
+         border-bottom: 2px solid #ff6100;
+     }
 }
 
 .navItem {
     color: white;
-}
-
-.active {
-  color: #1ad6ff;
 }
 
 .logo {
