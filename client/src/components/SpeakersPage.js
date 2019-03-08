@@ -11,7 +11,7 @@ const Speaker = ({speaker, imgSize}) => {
   const {name, oneLiner, picture} = speaker;
   return (
     <Link to={`/speaker/${getHref(speaker)}`} className="text-white">
-      <div className="bg-emph d-inline-block py-4 px-3 font-weight-heavy text-nowrap">{name}</div>
+      <div className="bg-emph d-inline-block py-4 px-3 font-weight-bold text-nowrap">{name}</div>
       <div
         style={{
           backgroundImage: `url('${picture}')`,

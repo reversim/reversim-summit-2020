@@ -8,6 +8,15 @@
   }
 }
 
+.proposals-bg {
+  background-repeat: no-repeat;
+  background-position: 70% 15%;
+
+  @media (max-width:991px) {
+    background-position: 75% 100%;
+  }
+}
+
 .text-fade {
   &:after {
     content: '';

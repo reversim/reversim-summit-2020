@@ -77,8 +77,9 @@ class TagInput extends React.Component {
       tagInput &&
       tags
         .filter(t => !tagFilters.includes(t.text))
-        .filter(t => t.text.indexOf(tagInput) > -1)
-        .slice(10);
+        .filter(t => t.text.toLowerCase().indexOf(tagInput.toLowerCase()) > -1)
+        .slice(0, 10);
+    
     return (
       <div
         className="d-flex b-strong align-items-center p-relative mr-4"
@@ -99,7 +100,7 @@ class TagInput extends React.Component {
             {suggestedTags.map(tag => (
               <div
                 key={tag.text}
-                className="text-black font-weight-heavy p-1 border-bottom border-purple2 cursor-pointer"
+                className="text-black font-weight-bold p-1 border-bottom border-purple2 cursor-pointer"
                 onClick={() => this.onTagClick(tag.text)}>
                 {tag.str}
               </div>
@@ -170,7 +171,7 @@ class ProposalsPage extends React.Component {
 
     return (
       <Page title="Proposals" {...this.props}>
-        <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
+        <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm proposals-bg"
             style={{backgroundImage: `url('${introBG}')`}}>
             <Container>
                   <div className="d-flex flex-column pt-15 ">
@@ -187,7 +188,7 @@ class ProposalsPage extends React.Component {
               <TagInput tags={tags} tagFilters={tagFilters} onTagClick={this.onTagClick} />
                   {tagFilters.length ? (
                       <div
-                      className="font-weight-heavy border-bottom border-black cursor-pointer"
+                      className="font-weight-bold border-bottom border-black cursor-pointer"
                       onClick={() => this.setState({tagFilters: []})}>
                       Clear all <FontAwesomeIcon icon={faTimes} />
                   </div>
@@ -196,25 +197,25 @@ class ProposalsPage extends React.Component {
                   )}
               </div>
                   <div
-                  className="cursor-pointer font-weight-heavy d-flex align-items-center"
+                  className="cursor-pointer font-weight-bold d-flex align-items-center"
                   onClick={() => this.setState(({myVotes}) => ({myVotes: !myVotes}))}>
               <div
                   className={cn('mr-2 b-strong', {'bg-purple2': this.state.myVotes})}
                   style={{width: 24, height: 24}}
                   />
                   Show only my votes
-                  </div>
-                  </div>
+              </div>
+              </div>
                   <div className="d-flex justify-content-start">
                       {tagFilters.map(tagStr => (
                           <TagFilter key={tagStr} text={tagStr} onClick={() => this.onTagClick(tagStr)} />
-              ))}
-      </div>
+                        ))}
+              </div>
           </div>
 
           {showProposals ? (
               <React.Fragment>
-              <div className="mb-12 font-weight-heavy">Showing {showCount} proposals</div>
+              <div className="mb-8 mt-8 font-weight-heavy">Showing {showCount} proposals</div>
               {sortedProposals.map(proposal => (
                   <Session
                   key={proposal._id}

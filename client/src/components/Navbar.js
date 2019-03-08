@@ -48,7 +48,7 @@ const NavbarItem = ({to, text, external, pathname}) => {
     );
   }
   return (
-    <NavItem key={to} className="text-white ml-lg-5 font-weight-heavy font-size-md">
+    <NavItem key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
       {link}
     </NavItem>
   );

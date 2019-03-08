@@ -23,7 +23,7 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
           <div className="d-flex flex-column bg-purple2 text-white p-4 flex-grow-1">
             <h5>{speaker.name}</h5>
             <p className="flex-grow-1">{speaker.oneLiner}</p>
-            <Link className="unstyled-link font-weight-heavy" to={`/speaker/${getHref(speaker)}`}>
+            <Link className="unstyled-link font-weight-bold" to={`/speaker/${getHref(speaker)}`}>
               ABOUT THE SPEAKER >>
             </Link>
           </div>
