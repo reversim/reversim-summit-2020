@@ -1,11 +1,14 @@
 import React from 'react';
 import {Button} from 'reactstrap';
 import cn from 'classnames';
+import { getLoginUrl } from "./Redirect";
 import s from './SpeakerPage.css';
 
 export default ({user, attended, proposalId, attendProposal}) => {
   if (!user) {
-    return <span className="text-danger">Login to vote!</span>;
+    return (
+        <a href={getLoginUrl()}>Login to vote!</a>
+    );
   }
 
   return (
