@@ -216,7 +216,7 @@ class ProposalsPage extends React.Component {
               ))}
             </React.Fragment>
           ) : (
-            <span className="font-mono font-size-xl">Nothing to show :-(</span>
+            <span className="font-mono font-size-xl">...</span>
           )}
         </Container>
       </Page>
