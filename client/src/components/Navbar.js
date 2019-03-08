@@ -153,7 +153,7 @@ class Navbar extends Component {
           { !isServer &&
             !isSmallScreen &&
             user &&
-                <div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div>}
+                <li><div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div></li>}
           </Nav>
 
           </Collapse>
