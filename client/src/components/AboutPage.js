@@ -54,7 +54,7 @@ class TeamMember extends React.Component {
 const AboutPage = props => {
   return (
     <Page title="About" {...props}>
-      <div  className="navbar-padding pb-15 bg-purple2 text-white font-size-lm x-bg"
+      <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
             style={{backgroundImage: `url('${x}')`}}>
         <Container>
           <div className="d-flex align-items-center pt-15 ">
@@ -89,17 +89,19 @@ const AboutPage = props => {
           </div>
         </Container>
       </div>
-      <Container style={{marginTop: 80}}>
-        <div className="d-flex align-items-center text-purple2" style={{marginBottom: 80}}>
-          <h3 className="font-size-xxl mr-4 font-weight-regular">Meet the team</h3>
-          <div className="flex-grow-1 border-bottom border-purple2" />
+        <div className="white-bg">
+            <Container>
+                <div className="d-flex align-items-center text-purple2" style={{padding: '80px 0 60px'}}>
+                <h3 className="font-size-xxl mr-4 font-weight-regular">Meet the team</h3>
+                    <div className="flex-grow-1 border-bottom border-purple2" />
+                        </div>
+                        <div className="about__team">
+                        {props.team.map(id => (
+                            <TeamMember {...props.users[id]} />
+                ))}
+                </div>
+            </Container>
         </div>
-        <div className="about__team">
-          {props.team.map(id => (
-              <TeamMember {...props.users[id]} />
-          ))}
-        </div>
-      </Container>
     </Page>
   );
 };

@@ -12,13 +12,13 @@ import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 
 
-// const CFPCTA = () => (
-//   <Link to="/cfp" className="unstyled-link">
-//     <Button color="primary" className={cn("mr-4", submitBtn)}>
-//       Submit session
-//     </Button>
-//   </Link>
-// );
+const CFPCTA = () => (
+  <Link to="/cfp" className="unstyled-link">
+    <Button color="primary" className={cn("mr-4", submitBtn)}>
+      Submit session
+    </Button>
+  </Link>
+);
 
 const VotingCTA = () => (
   <Link to="/proposals" className="unstyled-link">

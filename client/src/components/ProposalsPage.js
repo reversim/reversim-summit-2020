@@ -6,6 +6,8 @@ import Session from './Session';
 import values from 'lodash/values';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFilter, faTimesCircle, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {img} from "./Speaker2.css";
+import introBG from '../images/proposals-page-bg.png';
 
 const TagFilter = ({text, isSelected, onClick}) => (
   <div
@@ -168,57 +170,66 @@ class ProposalsPage extends React.Component {
 
     return (
       <Page title="Proposals" {...this.props}>
-        <Container>
-          <h1 className="mt-6 mb-12">Proposals</h1>
-
-          <div className="border-bottom border-purple2 mb-4">
-            <div className="d-flex justify-content-between align-items-center mb-5">
-              <div className="d-flex align-items-center">
-                <TagInput tags={tags} tagFilters={tagFilters} onTagClick={this.onTagClick} />
-                {tagFilters.length ? (
-                  <div
-                    className="font-weight-heavy border-bottom border-black cursor-pointer"
-                    onClick={() => this.setState({tagFilters: []})}>
-                    Clear all <FontAwesomeIcon icon={faTimes} />
+        <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
+            style={{backgroundImage: `url('${introBG}')`}}>
+            <Container>
+                  <div className="d-flex align-items-center pt-15 ">
+                    <h3 className="font-size-lm mr-4 font-weight-regular">Be The Voice Of The Community</h3>
+                    <h3 className="font-size-xxl mr-4 font-weight-regular">Impact The Content</h3>
                   </div>
-                ) : (
-                  undefined
-                )}
+            </Container>
+        </div>
+        <div className="white-bg" style={{padding: '60px 0'}}>
+          <Container>
+              <div className="border-bottom border-purple2 mb-4">
+              <div className="d-flex justify-content-between align-items-center mb-5">
+              <div className="d-flex align-items-center">
+              <TagInput tags={tags} tagFilters={tagFilters} onTagClick={this.onTagClick} />
+                  {tagFilters.length ? (
+                      <div
+                      className="font-weight-heavy border-bottom border-black cursor-pointer"
+                      onClick={() => this.setState({tagFilters: []})}>
+                      Clear all <FontAwesomeIcon icon={faTimes} />
+                  </div>
+                  ) : (
+                      undefined
+                  )}
               </div>
+                  <div
+                  className="cursor-pointer font-weight-heavy d-flex align-items-center"
+                  onClick={() => this.setState(({myVotes}) => ({myVotes: !myVotes}))}>
               <div
-                className="cursor-pointer font-weight-heavy d-flex align-items-center"
-                onClick={() => this.setState(({myVotes}) => ({myVotes: !myVotes}))}>
-                <div
                   className={cn('mr-2 b-strong', {'bg-purple2': this.state.myVotes})}
                   style={{width: 24, height: 24}}
-                />
-                Show only my votes
-              </div>
-            </div>
-            <div className="d-flex justify-content-start">
-              {tagFilters.map(tagStr => (
-                <TagFilter key={tagStr} text={tagStr} onClick={() => this.onTagClick(tagStr)} />
+                  />
+                  Show only my votes
+                  </div>
+                  </div>
+                  <div className="d-flex justify-content-start">
+                      {tagFilters.map(tagStr => (
+                          <TagFilter key={tagStr} text={tagStr} onClick={() => this.onTagClick(tagStr)} />
               ))}
-            </div>
+      </div>
           </div>
 
           {showProposals ? (
-            <React.Fragment>
+              <React.Fragment>
               <div className="mb-12 font-weight-heavy">Showing {showCount} proposals</div>
               {sortedProposals.map(proposal => (
-                <Session
+                  <Session
                   key={proposal._id}
                   proposal={proposal}
                   speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
                   user={user}
                   attendProposal={attendProposal}
-                />
+                  />
               ))}
-            </React.Fragment>
+          </React.Fragment>
           ) : (
-            <span className="font-mono font-size-xl">Nothing to show :-(</span>
+          <span className="font-mono font-size-xl">Nothing to show :-(</span>
           )}
-        </Container>
+      </Container>
+        </div>
       </Page>
     );
   }
