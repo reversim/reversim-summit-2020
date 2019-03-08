@@ -640,7 +640,7 @@ input[type="checkbox"] {
 
 .Navbar__navLink {
   color: white;
-  border-bottom: 2px solid var(--purple2);
+  border-bottom: 2px solid transparent;
 
   &:hover {
     color: white;
@@ -655,6 +655,6 @@ input[type="checkbox"] {
 
 .navbar-nav > li {
   @media (max-width:991px) {
-    margin-bottom: 15px;
+    margin: 10px 0;
   }
 }
