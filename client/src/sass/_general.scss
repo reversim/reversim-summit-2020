@@ -474,23 +474,24 @@ button.btn {
   }
 }
 
-// .speaker-page__hero {
-//   position: absolute;
-//   top: 100px; // navbar height
-//   left: 0;
-//   right: 0;
-//   height: 220px;
-// }
+ .speaker-page__hero {
+   display: flex;
+   align-items: flex-end;
+   @media (max-width:991px) {
+     align-items: center;
+   }
+ }
 $speaker-picture-size: 230px;
 .speaker-page__speaker-picture {
   width: $speaker-picture-size;
   height: $speaker-picture-size;
   flex: 0 0 $speaker-picture-size;
   background-size: cover;
-  top: $speaker-picture-size / 2;
+  top: 70px;
 
   @media (max-width:991px) {
     top: auto;
+    margin-bottom: 25px;
   }
 }
 
@@ -499,7 +500,7 @@ $speaker-picture-size: 230px;
 }
 
 .speaker-page__social-links {
-  margin-left: $speaker-picture-size + 20px;
+  margin-left: $speaker-picture-size + 25px;
 
   @media (max-width:991px) {
     margin-left: 0;
