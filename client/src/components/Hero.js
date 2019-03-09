@@ -60,9 +60,11 @@ const Hero = ({ eventConfig }) => (
           </div>
         </div>
         <div>
-          <Button className="styled-button on-purple">
-            {"VOTE FOR SESSIONS"}
-          </Button>
+          <Link to="/proposals" className="unstyled-link">
+            <Button className="styled-button on-purple">
+              {"VOTE FOR SESSIONS"}
+            </Button>
+          </Link>
         </div>
       </div>
       <div
