@@ -3,7 +3,13 @@ run:
 	node dev.js
 
 db-import:
-	scripts/mongo_backup.sh --import
+	source .private/ENV_VARS; \
+		scripts/mongo_backup.sh --import
 
 db-backup:
-	scripts/mongo_backup.sh
+	source .private/ENV_VARS; \
+		scripts/mongo_backup.sh
+
+stg-db-import:
+	source .private/ENV_VARS; \
+		scripts/stg_mongo_backup.sh --import
