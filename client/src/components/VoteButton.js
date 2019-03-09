@@ -7,7 +7,7 @@ import s from './SpeakerPage.css';
 export default ({user, attended, proposalId, attendProposal}) => {
   if (!user) {
     return (
-        <a href={getLoginUrl()}>Login to vote!</a>
+      <a href={getLoginUrl()}>Login to vote!</a>
     );
   }
 
@@ -15,10 +15,10 @@ export default ({user, attended, proposalId, attendProposal}) => {
     <React.Fragment>
       <div
         className="not-relevant-cb cursor-pointer font-weight-bold d-flex align-items-center"
-        onClick={() => attended !== false && attendProposal(proposalId, false)}>
+        onClick={() => attendProposal(proposalId, attended === false ? undefined : false)}>
         <div
-            className={cn('mr-2 b-regular', {'selected': attended === false})}
-            style={{width: 24, height: 24}}>
+          className={cn('mr-2 b-regular', {'selected': attended === false})}
+          style={{width: 24, height: 24}}>
           <div/>
         </div>
         <span> Not relevant to me</span>
@@ -26,7 +26,7 @@ export default ({user, attended, proposalId, attendProposal}) => {
 
       <Button
         className={cn('interested-btn', {selected: attended}, s.changeAnimation)}
-        onClick={() => attended !== true && attendProposal(proposalId, true)}>
+        onClick={() => attendProposal(proposalId, attended === true ? undefined : true)}>
         Interested
       </Button>
     </React.Fragment>

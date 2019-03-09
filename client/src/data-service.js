@@ -65,7 +65,7 @@ export async function registerTeamMember(token) {
 }
 
 export async function attend(proposalId, isAttending) {
-  return await post(`/api/proposal/${proposalId}/attend`, {value: !!isAttending});
+  return await post(`/api/proposal/${proposalId}/attend`, {value: isAttending});
 }
 
 export async function addSponsor(data) {
