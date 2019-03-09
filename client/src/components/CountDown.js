@@ -13,6 +13,10 @@ class CountDown extends React.Component {
     this.countDown(props.timeRemainingInSeconds);
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.countDown(nextProps.timeRemainingInSeconds);
+  }
+
   updateRemainMinutesAndSeconds(timeRemainingInSeconds) {
     let remainingDays = Math.floor(timeRemainingInSeconds / (60 * 60 * 24));
     timeRemainingInSeconds -= remainingDays * (60 * 60 * 24);
@@ -29,9 +33,6 @@ class CountDown extends React.Component {
   }
 
   countDown(timeRemainingInSeconds) {
-    this.setState({
-      timeRemainingInSeconds
-    });
     if (timeRemainingInSeconds > 0) {
       this.updateRemainMinutesAndSeconds(timeRemainingInSeconds);
       timeRemainingInSeconds = timeRemainingInSeconds - 1;
