@@ -29,13 +29,15 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
           </div>
         </div>
       ))}
-      <div className="p-4 d-flex flex-column">
-        <h4 className="mb-5">{title}</h4>
-        <div className="mb-5">
+      <div className="p-4 d-flex flex-column justify-content-between">
+        <div className="content ">
+          <h4 className="mb-5">{title}</h4>
+          <div className="mb-5">
           <SessionInfo session={proposal} />
+          </div>
+          <ReactMarkdown className="mb-4" source={abstract} />
         </div>
-        <ReactMarkdown className="mb-4" source={abstract} />
-        <div className="flex-grow-1 d-flex justify-content-end align-items-end">
+        <div className="d-flex justify-content-end align-items-center">
           <VoteButton
             user={user}
             attended={attended}

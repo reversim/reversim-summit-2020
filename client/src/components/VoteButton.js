@@ -13,17 +13,19 @@ export default ({user, attended, proposalId, attendProposal}) => {
 
   return (
     <React.Fragment>
-      <Button
-        className={cn(
-          'styled-button-white v2 mr-10',
-          {purple: attended === false},
-          s.changeAnimation,
-        )}
+      <div
+        className="not-relevant-cb cursor-pointer font-weight-bold d-flex align-items-center"
         onClick={() => attended !== false && attendProposal(proposalId, false)}>
-        Not relevant to me
-      </Button>
+        <div
+            className={cn('mr-2 b-regular', {'selected': attended === false})}
+            style={{width: 24, height: 24}}>
+          <div/>
+        </div>
+        <span> Not relevant to me</span>
+      </div>
+
       <Button
-        className={cn('styled-button-white', {orange: attended}, s.changeAnimation)}
+        className={cn('interested-btn', {selected: attended}, s.changeAnimation)}
         onClick={() => attended !== true && attendProposal(proposalId, true)}>
         Interested
       </Button>

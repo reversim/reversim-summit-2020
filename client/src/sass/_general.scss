@@ -280,7 +280,7 @@ a.unstyled-link:active {
   border: solid 2px $bg-1 !important;
   box-shadow: -2px 2px $bg-2, -4px 4px $bg-1 !important;
 
-  background: right bottom linear-gradient(to right, #ff6100 50%, #896cff 50%) !important;
+  background: right bottom linear-gradient(to right, $orange2 50%, $indigo 50%) !important;
   background-size: 205% 100% !important;
   transition: all .5s ease-out !important;
 
@@ -300,25 +300,18 @@ a.unstyled-link:active {
 .styled-button-white {
   font-family: 'PT Mono' !important;
   font-weight: bold !important;
-  color: black !important;
+  color: $purple2 !important;
+  background: $white !important;
   border-left: 2px solid $purple2 !important;
   border-bottom: 2px solid $purple2 !important;
+  border-right: 2px solid $white !important;
+  border-top: 2px solid $white !important;
   box-shadow: -2px 2px $white, -4px 4px $purple2 !important;
-  background: right bottom linear-gradient(to right, $orange2 50%, white 50%) !important;
-  background-size: 205% 100% !important;
   transition: all .5s ease-out !important;
 
   &:hover {
-    background-position: left bottom !important;
-  }
-
-  &.v2 {
-    background: right bottom linear-gradient(to right, $indigo 50%, white 50%) !important;
-    background-size: 205% 100% !important;
-
-    &:hover {
-      background-position: left bottom !important;
-    }
+    border-top: 2px solid $purple2 !important;
+    border-right: 2px solid $purple2 !important;
   }
 
 
@@ -330,6 +323,27 @@ a.unstyled-link:active {
   &.purple {
     color: white !important;
     background: $indigo !important;
+  }
+}
+
+.interested-btn {
+  @include styled-button(true);
+  border-color: $purple2 !important;
+  box-shadow: -2px 2px $white, -4px 4px $purple2 !important;
+
+  &.selected {
+    background: $orange2 !important;
+  }
+}
+
+.not-relevant-cb {
+  margin-right: 20px;
+  .selected {
+    & > div {
+      background: $purple2;
+      height: 16px;
+      margin: 2px;
+    }
   }
 }
 
@@ -609,6 +623,10 @@ input[type="checkbox"] {
 
 .b-strong {
   border: 4px solid $purple2;
+}
+
+.b-regular {
+  border: 2px solid $purple2;
 }
 
 .b-heavy {

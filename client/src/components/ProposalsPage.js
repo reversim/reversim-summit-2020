@@ -205,7 +205,7 @@ class ProposalsPage extends React.Component {
                   className="cursor-pointer font-weight-bold d-flex align-items-center"
                   onClick={() => this.setState(({myVotes}) => ({myVotes: !myVotes}))}>
               <div
-                  className={cn('mr-2 b-strong', {'bg-purple2': this.state.myVotes})}
+                  className={cn('mr-2 b-regular', {'bg-purple2': this.state.myVotes})}
                   style={{width: 24, height: 24}}
                   />
                   Show only my votes
