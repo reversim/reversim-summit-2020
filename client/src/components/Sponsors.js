@@ -318,14 +318,12 @@ class SponsorMini extends React.Component {
         className="p-relative d-inline-block"
         style={{ width: 200, maxWidth: 200, maxHeight: 100 }}
       >
-        <ScrollLink to={"/sponsor/Wix/about"} offset={-100}>
         <img
           src={logo}
           className={s.sponsorImg}
           alt={name}
           style={{ maxWidth: 200, maxHeight: 100 }}
         />
-        </ScrollLink>
       </div>
     );
   }
