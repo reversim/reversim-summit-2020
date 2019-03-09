@@ -333,7 +333,7 @@ export const SponsorsSection = ({ sponsors }) => {
   return (
     <section className="mb-20">
       <Container>
-        <div className="d-flex">
+        <div className="d-flex mt-16 mb-12">
           <div
             style={{ position: "relative", zIndex: 1 }}
             className="text-purple2 font-size-xxl"
@@ -342,7 +342,7 @@ export const SponsorsSection = ({ sponsors }) => {
           </div>
           <div className="hl bg-purple2" />
         </div>
-        <div className="px-3 pt-9 pb-5">
+        <div className="">
           <div className="d-flex flex-wrap justify-content-between">
             {sponsors
               .filter(sponsor => sponsor.isPremium)
@@ -354,7 +354,7 @@ export const SponsorsSection = ({ sponsors }) => {
                 );
               })}
           </div>
-          <div className="hl bg-purple2" />
+          <div className="hl mt-6 mb-12 bg-purple2" />
           <div className="d-flex flex-wrap justify-content-between mt-6">
             {sponsors
               .filter(sponsor => !sponsor.isPremium)

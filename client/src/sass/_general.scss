@@ -838,3 +838,18 @@ input[type="checkbox"] {
 .countdown-time-txt {
   font-size: 18px;
 }
+
+.map-wrapper {
+  float: right;
+  position: relative;
+
+  @media (max-width:991px) {
+    float: none;
+  }
+}
+
+.venue-img {
+  @media (max-width:991px) {
+    display: none;
+  }
+}
