@@ -751,3 +751,11 @@ input[type="checkbox"] {
     border-top: 4px solid $purple2;
   }
 }
+
+.session-page__speaker-box {
+  flex: 0 0 calc(50% - 20px);
+
+  @media (max-width:1200px) {
+    flex: 0 0 100%;
+  }
+}

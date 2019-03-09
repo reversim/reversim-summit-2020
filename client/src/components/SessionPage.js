@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import cn from 'classnames';
 import Page from './Page';
 import {Container, Button, ModalHeader, ModalBody, ModalFooter, Modal} from 'reactstrap';
 import {getHref, key} from '../utils';
@@ -95,16 +96,14 @@ class SessionPage extends Component {
               {/* consolidate line breaks */}
             </div>
           )}
-          <div>
-            {sessionSpeakers.map(speaker => (
-              <div className="b-strong d-flex" key={key()}>
-                <div
-                  className="session-page__speaker"
+          <div className="d-flex">
+            {sessionSpeakers.map((speaker, i) => (
+              <div className={cn('b-strong session-page__speaker-box mb-8 d-flex', {'mr-8': !(i % 2)})} key={key()}>
+                <div className="session-page__speaker"
                   style={{backgroundImage: `url('${speaker.picture}')`}}
                 />
                 <div className="p-5 d-flex flex-column flex-grow-1">
                   <h4 className="font-weight-bold font-size-lg">{speaker.name}</h4>
-                  <p>{speaker.oneLiner}</p>
                   <div className="flex-grow-1 d-flex justify-content-end align-items-end">
                     <Link
                       key={speaker._id}
