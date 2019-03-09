@@ -29,8 +29,6 @@ class AdminPage extends React.Component {
       ...props
     } = this.props;
     let user = this.state.user
-    console.log("NETA this.props", this.props);
-    console.log("NETA user", user);
 
     if (!this.state.user || !this.state.user.isReversimTeamMember) {
       return (
