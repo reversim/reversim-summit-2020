@@ -22,8 +22,6 @@ import {
 import findIndex from 'lodash/findIndex';
 import shuffle from 'lodash/shuffle';
 import without from 'lodash/without';
-import ScrollToTop from './ScrollToTop';
-import values from 'lodash/values';
 
 if (!isServer && process.env.NODE_ENV !== 'development') {
   ga.initialize('UA-36904731-4');
@@ -222,9 +220,7 @@ class App extends Component {
           {routes.map(route => (
             <Route
               exact
-              render={p =>
-                createElement(ScrollToTop(route.comp), {...routeProps, ...p, ...route.props})
-              }
+              render={p => createElement(route.comp, {...routeProps, ...p, ...route.props})}
               path={route.path}
               key={route.path}
             />

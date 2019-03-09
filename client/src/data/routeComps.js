@@ -19,6 +19,8 @@ import ProposalsPage from '../components/ProposalsPage';
 import SessionsPage from '../components/SessionsPage';
 import TimelinePage from '../components/TimelinePage';
 
+import ScrollToTop from '../components/ScrollToTop';
+
 export default [
   {path: '/', comp: Home},
   {path: '/about', comp: AboutPage},
@@ -40,4 +42,4 @@ export default [
   {path: '/sessions', comp: SessionsPage},
   {path: '/proposals', comp: ProposalsPage},
   {path: '/timeline', comp: TimelinePage},
-];
+].map(({path, comp}) => ({path, comp: ScrollToTop(comp)}));
