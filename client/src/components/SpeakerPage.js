@@ -36,9 +36,9 @@ export class SpeakerPage extends React.Component {
 
     return (
       <Page title={name} user={user} {...this.props}>
-        <div className="navbar-margin speaker-page__hero bg-purple2 mb-4">
+        <div className="navbar-margin bg-purple2 mb-4">
           <Container>
-            <div className="d-flex align-items-end">
+            <div className="speaker-page__hero">
               <div
                 style={{backgroundImage: `url(${speaker.picture})`}}
                 className="speaker-page__speaker-picture b-strong mr-5 p-relative"
@@ -62,10 +62,10 @@ export class SpeakerPage extends React.Component {
             </div>
           </Container>
         </div>
-        <div className="white-bg" style={{padding: '20px 0 0'}}>
+        <div className="white-bg">
         <Container>
             <SpeakerSocialLinks {...speaker} />
-          <p className="font-size-md mb-10 mt-12">{bio}</p>
+          <p className="font-size-md mb-10 mt-16">{bio}</p>
           {trackRecord && (
             <div className="mb-3">
               <h4>Track record</h4>
