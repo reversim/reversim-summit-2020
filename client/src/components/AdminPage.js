@@ -12,7 +12,6 @@ const state = observable({
 class AdminPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log('NETA props', props)
     this.state = {
       user: props.user || {}
     }

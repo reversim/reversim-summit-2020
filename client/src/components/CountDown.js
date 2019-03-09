@@ -42,38 +42,6 @@ class CountDown extends React.Component {
     }
   }
 
-  // compareServerTimeAndComponentTimeAndUpdateServer(
-  //   serverSideTimeRemainingInSeconds
-  // ) {
-  //   let componentTimeRemainingInSeconds = localStorage.getItem(
-  //     "timeRemainingInSeconds"
-  //   );
-  //   if (
-  //     componentTimeRemainingInSeconds &&
-  //     componentTimeRemainingInSeconds < serverSideTimeRemainingInSeconds
-  //   ) {
-  //     let differenceInMinutes = Math.floor(
-  //       (serverSideTimeRemainingInSeconds - componentTimeRemainingInSeconds) /
-  //         60
-  //     );
-  //     if (differenceInMinutes > 0) {
-  //       this.props.onEveryMinute(differenceInMinutes);
-  //     }
-  //     return componentTimeRemainingInSeconds;
-  //   }
-  //   return serverSideTimeRemainingInSeconds;
-  // }
-  //
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('NETA nextProps', nextProps)
-  //   if (this.props.timeRemainingInSeconds !== nextProps.timeRemainingInSeconds) {
-  //     let timeRemainingInSeconds = this.compareServerTimeAndComponentTimeAndUpdateServer(
-  //       nextProps.timeRemainingInSeconds
-  //     );
-  //     this.countDown(timeRemainingInSeconds, true);
-  //   }
-  // }
-
   componentWillUnmount() {
     clearTimeout(this.setTimeoutId);
   }

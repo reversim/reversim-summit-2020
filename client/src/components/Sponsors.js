@@ -10,6 +10,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 import premiumImage from "../images/sponsors-page-bg.png";
 import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
@@ -91,7 +92,10 @@ const Sponsor = ({
   const featuredJob = `Interested? More info [here](${jobUrl}).`;
   return (
     <div className={"d-flex m-4"}>
-      <div className={cn("text-center b-strong border-purple2", s.sponsor)}>
+      <div
+        id={name}
+        className={cn("text-center b-strong border-purple2", s.sponsor)}
+      >
         {/*<a href={url} target="_blank">*/}
         <img
           style={{ maxWidth: 240, maxHeight: 240 }}
@@ -318,12 +322,14 @@ class SponsorMini extends React.Component {
         className="p-relative d-inline-block"
         style={{ width: 200, maxWidth: 200, maxHeight: 100 }}
       >
+        <HashLink smooth to={`/sponsors#${name}`}>
         <img
           src={logo}
           className={s.sponsorImg}
           alt={name}
           style={{ maxWidth: 200, maxHeight: 100 }}
         />
+        </HashLink>
       </div>
     );
   }
@@ -390,8 +396,6 @@ class SponsorsPage extends React.Component {
       user,
       sponsors
     } = this.props;
-    console.log('NETA props', this.props)
-
 
     return (
       <Page title="Sponsors" {...this.props}>
