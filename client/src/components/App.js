@@ -117,17 +117,17 @@ class App extends Component {
   updateProposal = async (id, data) => {
     this.setState(state => ({
       gotAllProposals: false,
-      fetchComplete: false
+      fetchComplete: false,
     }));
     await doUpdateProposal(id, data);
-    let proposals = await getProposals()
-    let users = await getProposers(id)
+    let proposals = await getProposals();
+    let users = await getProposers(id);
     this.setState(state => ({
       gotAllProposals: true,
       fetchComplete: true,
       proposals: proposals,
       proposal: proposals[id],
-      users
+      users,
     }));
   };
 
