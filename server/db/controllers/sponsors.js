@@ -103,10 +103,27 @@ async function update(req, res) {
 }
 
 function uploadLogo(data) {
-  return new Promise(resolve => {
-    console.log("uploading logo", data.slice(0, 150));
-    cloudinary.uploader.upload(data, function(result) {
-      console.log("new logo url", result.secure_url);
+  const cloudinaryCloudName = "dtltonc5g";
+  return new Promise((resolve, reject) => {
+    let prefix = "https://res.cloudinary.com/" + cloudinaryCloudName;
+    if (!data || data.indexOf(prefix) == 0) {
+      // Logo is empty or already in cloudinary, no need to upload
+      resolve(data);
+      return;
+    }
+    console.log("uploading to cloudinary ", data.slice(0, 150));
+    let opts = {};
+    if (data.indexOf("data:video/") == 0) {
+      // This is a video. Requires special options
+      opts.resource_type = "video";
+    }
+    cloudinary.v2.uploader.upload(data, opts, function(error, result) {
+      if (error) {
+        console.error("Error uploading to cloudinary: %s", error)
+        reject(error);
+        return
+      }
+      console.log("New cloudinary resource url", result.secure_url);
       resolve(result.secure_url);
     });
   });
