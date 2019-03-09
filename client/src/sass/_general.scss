@@ -480,6 +480,11 @@ button.btn {
    @media (max-width:991px) {
      align-items: center;
    }
+
+   @media (max-width:768px) {
+     align-items: flex-start;
+     flex-direction: column;
+   }
  }
 $speaker-picture-size: 230px;
 .speaker-page__speaker-picture {
@@ -516,7 +521,7 @@ $speaker-picture-size: 230px;
 }
 
 .session-page__hero {
-  padding-top: 100px;
+  padding-top: 60px;
 }
 
 .session-page__speaker {
@@ -746,6 +751,14 @@ input[type="checkbox"] {
   }
 }
 
+.session-page__speakers {
+  display: flex;
+  flex-direction: row;
+  @media (max-width:1200px) {
+    flex-direction: column;
+  }
+}
+
 .session__speaker-picture {
   @media (max-width:768px) {
     border-top: 4px solid $purple2;
@@ -755,7 +768,28 @@ input[type="checkbox"] {
 .session-page__speaker-box {
   flex: 0 0 calc(50% - 20px);
 
+  &:nth-child(odd) {
+    margin-right: 40px;
+
+    @media (max-width:1200px) {
+      margin-right: 0;
+    }
+  }
+
   @media (max-width:1200px) {
     flex: 0 0 100%;
+  }
+}
+
+.session-page__voting {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.session-page__title {
+  font-size: 48px;
+
+  @media (max-width:768px) {
+    font-size: 35px;
   }
 }

@@ -54,9 +54,9 @@ class SessionPage extends Component {
 
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
-        <div className="session-page__hero bg-purple2 pb-8">
+        <div className="navbar-margin session-page__hero bg-purple2 pb-8">
           <Container>
-            <h3 className="mb-0 line-height-15 font-size-xxl text-white">{title}</h3>
+            <h3 className="session-page__title mb-0 line-height-15 font-size-xxl text-white">{title}</h3>
           </Container>
         </div>
         <Container className="mt-4">
@@ -74,18 +74,6 @@ class SessionPage extends Component {
               </Button>
             </Link>
           )}
-          <div className="mb-5">
-            {voting ? (
-              <VoteButton
-                user={user}
-                attended={attended}
-                proposalId={id}
-                attendProposal={attendProposal}
-              />
-            ) : (
-              undefined
-            )}
-          </div>
           <div className="font-size-md mb-12">
             <ReactMarkdown source={abstract} />
           </div>
@@ -96,9 +84,19 @@ class SessionPage extends Component {
               {/* consolidate line breaks */}
             </div>
           )}
-          <div className="d-flex">
-            {sessionSpeakers.map((speaker, i) => (
-              <div className={cn('b-strong session-page__speaker-box mb-8 d-flex', {'mr-8': !(i % 2)})} key={key()}>
+
+            <div className="session-page__voting mb-10">
+              {voting && (
+                      <VoteButton
+                      user={user}
+                  attended={attended}
+                  proposalId={id}
+                  attendProposal={attendProposal}/>
+              )}
+            </div>
+          <div className="session-page__speakers">
+            {sessionSpeakers.map(speaker => (
+              <div className="b-strong session-page__speaker-box mb-8 d-flex" key={key()}>
                 <div className="session-page__speaker"
                   style={{backgroundImage: `url('${speaker.picture}')`}}
                 />
