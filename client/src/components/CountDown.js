@@ -82,30 +82,30 @@ class CountDown extends React.Component {
     return (
       <div className="timer">
         <div>
-          <div className="lead number-display d-flex font-size-lg">
-            <div className="d-flex flex-column mr-4">
-              <div>{this.state.remainingDays}</div>
-              <div className="font-size-sm">days</div>
+          <div className="lead number-display d-flex justify-content-between font-size-lg">
+            <div className="d-flex flex-column mr-4 align-items-center">
+              <div className="countdown-number">{this.state.remainingDays}</div>
+              <div className="countdown-time-txt">days</div>
             </div>
-            <div className="d-flex flex-column mr-4">
-              <div>{this.state.remainingHours}</div>
-              <div className="font-size-sm">hours</div>
+            <div className="d-flex flex-column mr-4 align-items-center">
+              <div className="countdown-number">{this.state.remainingHours}</div>
+              <div className="countdown-time-txt">hours</div>
             </div>
-            <div className="d-flex flex-column mr-4">
-              <div>
+            <div className="d-flex flex-column mr-4 align-items-center">
+              <div className="countdown-number">
                 {this.state.remainingMinutes > 9
                   ? this.state.remainingMinutes
                   : "0" + this.state.remainingMinutes}
               </div>
-              <div className="font-size-sm">minutes</div>
+              <div className="countdown-time-txt">minutes</div>
             </div>
-            <div className="d-flex flex-column">
-              <div>
+            <div className="d-flex flex-column align-items-center">
+              <div className="countdown-number">
                 {this.state.remainingSeconds > 9
                   ? this.state.remainingSeconds
                   : "0" + this.state.remainingSeconds}
               </div>
-              <div className="font-size-sm">seconds</div>
+              <div className="countdown-time-txt">seconds</div>
             </div>
           </div>
         </div>
