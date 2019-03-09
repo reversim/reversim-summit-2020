@@ -1,18 +1,21 @@
 .hero {
-    background: url('../images/intro-bg.jpg') center;
+    /*background: url('../images/rs19.gif') center;*/
     background-size: cover;
     min-height: 100vh;
+    padding-top: 200px;
 }
 
 .heroInner {
-    margin-right: -120px;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .subtitle {
-    letter-spacing: 0.6px;
-    font-size: 24px;
-    font-weight: 200;
-    text-shadow: 0 0 49px #030135;
+    /*letter-spacing: 0.6px;*/
+    /*font-size: 24px;*/
+    /*font-weight: 200;*/
+    /*text-shadow: 0 0 49px #030135;*/
+    background-color: #451deb;
 }
 
 .headphones {
@@ -30,6 +33,12 @@
 
 .separator {
     width: 151px;
+}
+.heroCounterWrapper {
+    background: url('../images/rs19.gif') center;
+    background-size: cover;
+    width: 40%;
+    align-self: normal;
 }
 
 @media (max-width:991px) {

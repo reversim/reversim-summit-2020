@@ -1,36 +1,70 @@
-import React from 'react';
-import cn from 'classnames';
-import {hero, heroInner, title, subtitle, headphones, left, separator, h2} from './Hero.css';
-import {Button} from 'reactstrap';
-import {REVERSIM_SUMMIT} from '../utils';
-import {Link} from 'react-router-dom';
+import React from "react";
+import cn from "classnames";
+import {
+  hero,
+  heroInner,
+  title,
+  subtitle,
+  headphones,
+  left,
+  separator,
+  h2,
+  heroCounterWrapper
+} from "./Hero.css";
+import { Button } from "reactstrap";
+import { REVERSIM_SUMMIT } from "../utils";
+import { Link } from "react-router-dom";
+import logoImg from "../images/SVG/logo.svg";
+import {
+  faMapMarkerAlt,
+  faCalendarAlt
+} from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+library.add(faMapMarkerAlt, faCalendarAlt);
 
 const Hero = () => (
-  <section className={cn(hero, 'd-flex justify-content-center align-items-center')}>
-    <div className={cn(heroInner, 'd-flex align-items-center text-center text-md-left')}>
-      <div className={cn(left, 'text-white')}>
-        <div className="px-2">
-          <h1 className={cn('mb-6 text-uppercase line-height-1', title)}>{REVERSIM_SUMMIT}</h1>
-          <h2 className={cn(h2, 'mb-6')}>Welcome and have fun today!</h2>
+  <section
+    className={cn(
+      hero,
+      "d-flex justify-content-center align-items-center bg-purple2"
+    )}
+  >
+    <div
+      className={cn(
+        heroInner,
+        "d-flex align-items-center text-center text-md-left text-white"
+      )}
+    >
+      <div className="d-flex flex-column">
+        <div className="d-flex mb-2">
+          <div className="font-size-xxl">Welcome</div>
+          <div className="hl bg-white" />
         </div>
-        <div className={cn(separator, 'border border-cyan mb-6 mx-auto mx-md-0')} />
-        <div className="d-flex justify-content-center justify-content-md-start mb-6">
-          {/* <a
-            href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"
-            target="_blank"
-            rel="noopener noreferrer">
-            <Button className="mr-4">Get tickets</Button>
-          </a> */}
-          {/*<Link to="/schedule">*/}
-            {/*<Button>View Schedule</Button>*/}
-          {/*</Link>*/}
-          <Link to="/cfp">
-            <Button> Submit session </Button>
-          </Link>
+        {/*<div className='d-flex'>*/}
+        <div style={{ width: 400 }}>
+          <img src={logoImg} alt="rs19" />
         </div>
-        <div className={cn(subtitle, 'mb-8')}>16 - 17 June | Ganei HaTaarucha</div>
+
+        {/*<div className={cn(left, 'text-white')}>*/}
+        <div className={cn(subtitle, "p-2 d-flex mt-4 mb-4")}>
+          <div>
+            <FontAwesomeIcon className="mr-2" icon="calendar-alt" />
+            16-17.6.2019
+          </div>
+          <div className="ml-4">
+            <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
+            Ganei HaTaarucha
+          </div>
+        </div>
+        <div>
+          <Button className="styled-button on-purple">
+            {"VOTE FOR SESSIONS"}
+          </Button>
+        </div>
       </div>
-      <div className={headphones} />
+      <div className={cn(heroCounterWrapper)} />
     </div>
   </section>
 );

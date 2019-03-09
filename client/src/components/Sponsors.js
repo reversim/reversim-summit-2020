@@ -267,6 +267,34 @@ class SponsorWithEdit extends React.Component {
   }
 }
 
+class SponsorMiniPremium extends React.Component {
+  state = {
+    hovered: false
+  };
+  render() {
+    const { name, logo, url } = this.props;
+    return (
+      <div className='d-flex flex-column align-items-center mb-6'>
+        <div
+          className="p-relative text-center b-strong mb-2"
+          style={{ width: 350, height: 240, maxWidth: 350 }}
+        >
+          <img
+            src={logo}
+            className={s.sponsorImg}
+            alt={name}
+            style={{ maxWidth: 350, maxHeight: 240 }}
+          />
+        </div>
+        <Link to={`/sponsor/${name}`} className="unstyled-link">
+          <Button className={"styled-button on-white"}>
+            EXPLORE OPPORTUNITIES
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+}
 class SponsorMini extends React.Component {
   state = {
     hovered: false
@@ -274,23 +302,17 @@ class SponsorMini extends React.Component {
   render() {
     const { name, logo, url } = this.props;
     return (
-      <a
-        href={url}
-        target="_blank"
-        className="sponsor-mini d-block text-center"
-        style={{ width: "20%" }}
-        onMouseEnter={() => this.setState({ hovered: true })}
-        onMouseLeave={() => this.setState({ hovered: false })}
+      <div
+        className="p-relative d-inline-block"
+        style={{ width: 200, maxWidth: 200, maxHeight: 100 }}
       >
-        <div className="p-relative d-inline-block">
-          <img
-            src={logo}
-            className={s.sponsorImg}
-            alt={name}
-            style={{ opacity: this.state.hovered ? 0 : 1 }}
-          />
-        </div>
-      </a>
+        <img
+          src={logo}
+          className={s.sponsorImg}
+          alt={name}
+          style={{ maxWidth: 200, maxHeight: 100 }}
+        />
+      </div>
     );
   }
 }
@@ -300,24 +322,38 @@ export const SponsorsSection = ({ sponsors }) => {
   return (
     <section className="mb-20">
       <Container>
-        <h1 style={{ position: "relative", zIndex: 1 }}>Sponsors</h1>
-        <div
-          className="bg-emph px-md-6 px-3 pt-9 pb-5"
-          style={{ marginTop: -40 }}
-        >
-          <div>
-            {dividedSponsors.map((sponsorsRow, i) => {
-              return (
-                <div
-                  key={i}
-                  className="d-flex flex-wrap justify-content-between"
-                >
-                  {sponsorsRow.map(s => (
-                    <SponsorMini key={s._id} {...s} />
-                  ))}
-                </div>
-              );
-            })}
+        <div className="d-flex">
+          <div
+            style={{ position: "relative", zIndex: 1 }}
+            className="text-purple2 font-size-xxl"
+          >
+            Meet Our Sponsors
+          </div>
+          <div className="hl bg-purple2" />
+        </div>
+        <div className="px-3 pt-9 pb-5">
+          <div className="d-flex flex-wrap justify-content-between">
+            {sponsors
+              .filter(sponsor => sponsor.isPremium)
+              .map((sponsor, i) => {
+                return (
+                  <div key={i}>
+                    <SponsorMiniPremium key={sponsor._id} {...sponsor} />
+                  </div>
+                );
+              })}
+          </div>
+          <div className="hl bg-purple2" />
+          <div className="d-flex flex-wrap justify-content-between mt-6">
+            {sponsors
+              .filter(sponsor => !sponsor.isPremium)
+              .map((sponsor, i) => {
+                return (
+                  <div key={i}>
+                    <SponsorMini key={sponsor._id} {...sponsor} />
+                  </div>
+                );
+              })}
           </div>
           {/* <WantToBe /> */}
         </div>

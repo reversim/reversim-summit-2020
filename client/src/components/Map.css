@@ -1,5 +1,6 @@
 .mapContainer {
-    height: 560px;
+    height: 500px;
+    width: 500px;
 }
 
 .mapEl {
