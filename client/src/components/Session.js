@@ -13,9 +13,9 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
   const {_id, title, type, tags, abstract, attended} = proposal;
   // console.log('attended', title, attended);
   return (
-    <div className="b-strong d-flex mb-12" style={{minHeight: 440}}>
+    <div className="session b-strong d-flex mb-12" style={{minHeight: 440}}>
       {speakers.map(speaker => (
-        <div className="session__speaker mr-1 d-flex flex-column" key={key()}>
+        <div className="session__speaker d-flex flex-column" key={key()}>
           <div
             style={{backgroundImage: `url(${speaker.picture})`}}
             className="session__speaker-picture"

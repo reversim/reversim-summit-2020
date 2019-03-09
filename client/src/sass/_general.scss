@@ -689,3 +689,52 @@ input[type="checkbox"] {
     margin: 10px 0;
   }
 }
+
+.proposals-filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width:991px) {
+    flex-direction: column;
+
+    & > div {
+      &:first-child {
+        margin-bottom: 15px;
+      }
+
+      width: 100%;
+    }
+  }
+}
+
+.session {
+  @media (max-width:768px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.session__speaker {
+  &:nth-child(2) {
+    margin-left: 5px;
+    border-left: 4px solid $purple2;
+
+    @media (max-width:768px) {
+      margin-left: 0;
+      border-left: 0;
+      margin-bottom: 5px;
+    }
+  }
+
+  @media (max-width:768px) {
+    flex: 0 0 auto;
+    background: $purple2;
+  }
+}
+
+.session__speaker-picture {
+  @media (max-width:768px) {
+    border-top: 4px solid $purple2;
+  }
+}
