@@ -101,7 +101,7 @@ const Sponsor = ({
         />
         {/*</a>*/}
       </div>
-      <div className={cn("border-purple2 p-2", s.communitySponsorText)}>
+      <div className={cn("border-purple2 p-2 b-strong", s.communitySponsorText)}>
         <h4>
           {name}
           {onEdit && (

@@ -35,12 +35,12 @@
 .sponsor {
     min-width: 240px;
     height: 240px;
+    border-right: 0;
+
     /*display: inline-block;*/
 }
 
 .communitySponsorText {
-    border-width: 4px 4px 4px 0;
-    border-style: solid;
     width: 0;
     flex-grow: 1;
 }
