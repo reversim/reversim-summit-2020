@@ -765,6 +765,10 @@ input[type="checkbox"] {
   }
 }
 
+.session__abstract {
+  word-break: break-word;
+}
+
 .session-page__speaker-box {
   flex: 0 0 calc(50% - 20px);
 
