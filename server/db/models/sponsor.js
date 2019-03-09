@@ -9,6 +9,7 @@ const SponsorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  homeLogo: String,
   location: {
     link: String,
     shortAddress: String
@@ -33,6 +34,7 @@ const SponsorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  jobUrl: String,
   images: [String],
   reversimAndUs: String,
   isPremium: Boolean,

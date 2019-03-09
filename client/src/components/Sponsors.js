@@ -447,7 +447,7 @@ class SponsorForm extends React.Component {
         "images"
       ]);
     } else {
-      return pick(this.state, ["isPremium", "name", "logo", "url", "about"]);
+      return pick(this.state, ["isPremium", "name", "logo", "url", "about", "jobUrl", "homeLogo"]);
     }
   };
 
@@ -508,12 +508,42 @@ class SponsorForm extends React.Component {
           />
           Choose logo
         </Button>
+        <br/>
+        <Button className="p-relative mb-3" size="sm">
+          <input
+            type="file"
+            onChange={e => {
+              const f = e.target.files[0];
+              if (!f) return;
+              const reader = new FileReader();
+              reader.onload = e2 => {
+                this.setState({ homeLogo: e2.target.result, imgDirty: true });
+              };
+              reader.readAsDataURL(f);
+            }}
+            style={{
+              opacity: 0,
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0
+            }}
+          />
+          Choose logo for home page
+        </Button>
         <Input
           className="mb-3"
           size="sm"
           placeholder="Link to website"
           value={this.state.url || ""}
           onChange={e => this.setState({ url: e.target.value })}
+        /><Input
+          className="mb-3"
+          size="sm"
+          placeholder="Link to job page"
+          value={this.state.jobUrl || ""}
+          onChange={e => this.setState({ jobUrl: e.target.value })}
         />
         <Input
           className="mb-3"
