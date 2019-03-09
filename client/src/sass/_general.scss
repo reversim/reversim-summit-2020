@@ -484,14 +484,30 @@ $speaker-picture-size: 230px;
   flex: 0 0 $speaker-picture-size;
   background-size: cover;
   top: $speaker-picture-size / 2;
+
+  @media (max-width:991px) {
+    top: auto;
+  }
 }
 
 .speaker-page__placeholder {
   flex: 0 0 $speaker-picture-size;
 }
 
+.speaker-page__social-links {
+  margin-left: $speaker-picture-size + 20px;
+
+  @media (max-width:991px) {
+    margin-left: 0;
+  }
+}
+
 .speaker-page__session {
   flex: 0 0 calc(50% - 20px);
+
+  @media (max-width:991px) {
+    flex: 0 0 100%;
+  }
 }
 
 .session-page__hero {
@@ -567,14 +583,6 @@ $speaker-picture-size: 230px;
 
 .social-icon-link {
   font-size: 40px;
-
-  @media (max-width:767px) {
-    font-size: 20px;
-  }
-
-  @media (max-width:540px) {
-    font-size: 22px;
-  }
 }
 
 input[type="checkbox"] {

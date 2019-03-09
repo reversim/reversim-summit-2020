@@ -10,7 +10,7 @@ import SpeakerPageRoute from './SpeakerPageRoute';
 import ReactMarkdown from 'react-markdown';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
 import SessionInfo from './SessionInfo';
-import plus from '../images/SVG/x.svg';
+import plus from '../images/SVG/plus.svg';
 
 export class SpeakerPage extends React.Component {
   state = {
@@ -36,7 +36,7 @@ export class SpeakerPage extends React.Component {
 
     return (
       <Page title={name} user={user} {...this.props}>
-        <div className="speaker-page__hero bg-purple2 mb-4">
+        <div className="navbar-margin speaker-page__hero bg-purple2 mb-4">
           <Container>
             <div className="d-flex align-items-end">
               <div
@@ -62,12 +62,10 @@ export class SpeakerPage extends React.Component {
             </div>
           </Container>
         </div>
+        <div className="white-bg" style={{padding: '20px 0 0'}}>
         <Container>
-          <div className="d-flex" style={{marginBottom: 120}}>
-            <div className="speaker-page__placeholder mr-5" />
             <SpeakerSocialLinks {...speaker} />
-          </div>
-          <p className="font-size-md mb-10">{bio}</p>
+          <p className="font-size-md mb-10 mt-12">{bio}</p>
           {trackRecord && (
             <div className="mb-3">
               <h4>Track record</h4>
@@ -122,7 +120,7 @@ export class SpeakerPage extends React.Component {
                 <h3 className="text-purple2 font-size-xl mr-4">
                   {speaker.name.split(' ')[0]}'s sessions
                 </h3>
-                <div className="flex-grow-1 border-bottom border-purple2 border-top" />
+                <div className="flex-grow-1 border-bottom border-purple2" />
               </div>
               <div className="d-flex flex-wrap align-items-start">
                 {sessions.map((session, i) => (
@@ -148,6 +146,7 @@ export class SpeakerPage extends React.Component {
             undefined
           )}
         </Container>
+          </div>
       </Page>
     );
   }
