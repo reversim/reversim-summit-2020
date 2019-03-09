@@ -120,23 +120,16 @@ class TagInput extends React.Component {
 class ProposalsPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log('ctor');
+    this.state = {
+      tagFilters: [],
+      myVotes: false,
+    };
   }
   componentDidMount() {
-    console.log('mount');
     if (!this.props.gotAllProposals) {
       this.props.getAllProposals();
     }
   }
-
-  componentWillUnmount() {
-    console.log('unmount');
-  }
-
-  state = {
-    tagFilters: [],
-    myVotes: false,
-  };
 
   onTagClick = tag => {
     this.setState(state => {

@@ -35,7 +35,7 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
           <div className="mb-5">
           <SessionInfo session={proposal} />
           </div>
-          <ReactMarkdown className="mb-4" source={abstract} />
+          <ReactMarkdown className="mb-4 session__abstract" source={abstract} />
         </div>
         <div className="d-flex justify-content-end align-items-center">
           <VoteButton

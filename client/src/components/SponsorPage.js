@@ -8,11 +8,13 @@ import { animateScroll as scroll, Link as ScrollLink } from "react-scroll";
 import Page from "./Page";
 import { Container, Row, Col, Button } from "reactstrap";
 import s from "./Sponsors.css";
-import {Carousel,
+import {
+  Carousel,
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption} from 'reactstrap'
+  CarouselCaption
+} from "reactstrap";
 
 import {
   faMapMarkerAlt,
@@ -32,7 +34,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faMapMarkerAlt);
 
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
-  console.log('NETA sponsor', sponsor)
   return (
     <Page title={sponsor.name} {...props}>
       <div className="page__hero bg-purple2">
@@ -71,7 +72,6 @@ class TitleSection extends React.Component {
   render() {
     // const {isEditingiting} = this.state;
     const { sponsor, canEdit } = this.props;
-    console.log("sponsor", sponsor);
     return (
       <div>
         <div className={cn("bg-purple2 text-white")}>
@@ -80,8 +80,12 @@ class TitleSection extends React.Component {
             <div className="hl bg-white" />
           </div>
           <div className="d-flex flex-row mb-4">
-            <div className="b-strong border-purple2 bg-white  mr-5">
-              <img src={sponsor.logo} alt={sponsor.name} />
+            <div className="b-strong border-purple2 bg-white mr-5">
+              <img
+                src={sponsor.logo}
+                alt={sponsor.name}
+                style={{ maxWidth: 150, maxHeight: 150 }}
+              />
             </div>
             <div>
               <div>
@@ -90,7 +94,7 @@ class TitleSection extends React.Component {
                     <div className={"font-size-xl mr-5"}>{sponsor.name}</div>
                     <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
                     <span className="font-weight-bold">
-                      {sponsor.location.shortAddress}
+                      {(sponsor.location || {}).shortAddress}
                     </span>
                   </div>
                   <div>
@@ -147,7 +151,6 @@ class SponsorCarousel extends React.Component {
     this.onExiting = this.onExiting.bind(this);
     this.onExited = this.onExited.bind(this);
     this.sponsor = this.props.sponsor;
-
   }
 
   onExiting() {
@@ -160,13 +163,19 @@ class SponsorCarousel extends React.Component {
 
   next() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === this.sponsor.images.length - 1 ? 0 : this.state.activeIndex + 1;
+    const nextIndex =
+      this.state.activeIndex === this.sponsor.images.length - 1
+        ? 0
+        : this.state.activeIndex + 1;
     this.setState({ activeIndex: nextIndex });
   }
 
   previous() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? this.sponsor.images.length - 1 : this.state.activeIndex - 1;
+    const nextIndex =
+      this.state.activeIndex === 0
+        ? this.sponsor.images.length - 1
+        : this.state.activeIndex - 1;
     this.setState({ activeIndex: nextIndex });
   }
 
@@ -179,31 +188,40 @@ class SponsorCarousel extends React.Component {
     const { activeIndex } = this.state;
     const { sponsor } = this.props;
 
-
     const slides = sponsor.images.map((item, i) => {
       return (
-          <CarouselItem
-              onExiting={this.onExiting}
-              onExited={this.onExited}
-              key={i}
-              className='text-align-center'
-          >
-            <img src={item}/>
-          </CarouselItem>
+        <CarouselItem
+          onExiting={this.onExiting}
+          onExited={this.onExited}
+          key={i}
+          className="text-align-center"
+        >
+          <img src={item} />
+        </CarouselItem>
       );
     });
 
     return (
-        <Carousel
-            activeIndex={activeIndex}
-            next={this.next}
-            previous={this.previous}
-            interval={false}
-        >
-          {slides}
-          <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} className={cn(s.carouselControl, 'cursor-pointer bg-purple2')}/>
-          <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} className={cn(s.carouselControl, 'cursor-pointer bg-purple2')} />
-        </Carousel>
+      <Carousel
+        activeIndex={activeIndex}
+        next={this.next}
+        previous={this.previous}
+        interval={false}
+      >
+        {slides}
+        <CarouselControl
+          direction="prev"
+          directionText="Previous"
+          onClickHandler={this.previous}
+          className={cn(s.carouselControl, "cursor-pointer bg-purple2")}
+        />
+        <CarouselControl
+          direction="next"
+          directionText="Next"
+          onClickHandler={this.next}
+          className={cn(s.carouselControl, "cursor-pointer bg-purple2")}
+        />
+      </Carousel>
     );
   }
 }
@@ -233,7 +251,7 @@ class DescriptionSection extends React.Component {
               <div className="text-black-50">{sponsor.about}</div>
             </div>
             <div className="width-half ml-4">
-              <SponsorCarousel sponsor={sponsor}></SponsorCarousel>
+              <SponsorCarousel sponsor={sponsor} />
             </div>
           </div>
         </div>
@@ -313,7 +331,10 @@ class OpenPosition extends React.Component {
             <div>{openPosition.city}</div>
           </div>
         </div>
-        <div className="bg-white b-strong border-purple2 p-6 d-flex flex-column">
+        <div
+          className="bg-white b-strong border-purple2 p-6 d-flex flex-column"
+          style={{ height: "-webkit-fill-available" }}
+        >
           <div className="pb-3">{openPosition.description}</div>
           <a href={openPosition.link} className="align-self-end">
             <Button className="styled-button w-max-content">APPLY</Button>

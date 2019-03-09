@@ -10,6 +10,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
 import premiumImage from "../images/sponsors-page-bg.png";
 import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
@@ -91,7 +92,10 @@ const Sponsor = ({
   const featuredJob = `Interested? More info [here](${jobUrl}).`;
   return (
     <div className={"d-flex m-4"}>
-      <div className={cn("text-center b-strong border-purple2", s.sponsor)}>
+      <div
+        id={name}
+        className={cn("text-center b-strong border-purple2", s.sponsor)}
+      >
         {/*<a href={url} target="_blank">*/}
         <img
           style={{ maxWidth: 240, maxHeight: 240 }}
@@ -101,7 +105,9 @@ const Sponsor = ({
         />
         {/*</a>*/}
       </div>
-      <div className={cn("border-purple2 p-2 b-strong", s.communitySponsorText)}>
+      <div
+        className={cn("border-purple2 p-2 b-strong", s.communitySponsorText)}
+      >
         <h4>
           {name}
           {onEdit && (
@@ -199,7 +205,12 @@ class PremiumSponsor extends React.Component {
                 </span>
               )}
               <div>
-                <div className={cn(s.sponsor, "bg-white")}>
+                <div
+                  className={cn(
+                    s.sponsor,
+                    "bg-white d-flex justify-content-center align-items-center"
+                  )}
+                >
                   <img
                     style={{ maxWidth: 240, maxHeight: 240 }}
                     src={sponsor.logo}
@@ -282,12 +293,14 @@ class SponsorMiniPremium extends React.Component {
           className="p-relative text-center b-strong mb-2"
           style={{ width: 350, height: 240, maxWidth: 350 }}
         >
-          <img
-            src={logo}
-            className={s.sponsorImg}
-            alt={name}
-            style={{ maxWidth: 350, maxHeight: 240 }}
-          />
+          <a href={url}>
+            <img
+              src={logo}
+              className={s.sponsorImg}
+              alt={name}
+              style={{ maxWidth: 350, maxHeight: 240 }}
+            />
+          </a>
         </div>
         <Link to={`/sponsor/${name}`} className="unstyled-link">
           <Button className={"styled-button on-white"}>
@@ -309,12 +322,14 @@ class SponsorMini extends React.Component {
         className="p-relative d-inline-block"
         style={{ width: 200, maxWidth: 200, maxHeight: 100 }}
       >
+        <HashLink smooth to={`/sponsors#${name}`}>
         <img
           src={logo}
           className={s.sponsorImg}
           alt={name}
           style={{ maxWidth: 200, maxHeight: 100 }}
         />
+        </HashLink>
       </div>
     );
   }
@@ -324,7 +339,7 @@ export const SponsorsSection = ({ sponsors }) => {
   return (
     <section className="mb-20">
       <Container>
-        <div className="d-flex">
+        <div className="d-flex mt-16 mb-12">
           <div
             style={{ position: "relative", zIndex: 1 }}
             className="text-purple2 font-size-xxl"
@@ -333,7 +348,7 @@ export const SponsorsSection = ({ sponsors }) => {
           </div>
           <div className="hl bg-purple2" />
         </div>
-        <div className="px-3 pt-9 pb-5">
+        <div className="">
           <div className="d-flex flex-wrap justify-content-between">
             {sponsors
               .filter(sponsor => sponsor.isPremium)
@@ -345,7 +360,7 @@ export const SponsorsSection = ({ sponsors }) => {
                 );
               })}
           </div>
-          <div className="hl bg-purple2" />
+          <div className="hl mt-6 mb-12 bg-purple2" />
           <div className="d-flex flex-wrap justify-content-between mt-6">
             {sponsors
               .filter(sponsor => !sponsor.isPremium)
@@ -385,7 +400,10 @@ class SponsorsPage extends React.Component {
     return (
       <Page title="Sponsors" {...this.props}>
         <div
-          className={cn(s.premiumCover, "bg-purple2 page-hero pb-8")}
+          className={cn(
+            s.premiumCover,
+            "bg-purple2 page-hero pb-8 navbar-margin"
+          )}
           style={{ backgroundImage: `url('${premiumImage}')` }}
         >
           <Container>
@@ -447,7 +465,15 @@ class SponsorForm extends React.Component {
         "images"
       ]);
     } else {
-      return pick(this.state, ["isPremium", "name", "logo", "url", "about", "jobUrl", "homeLogo"]);
+      return pick(this.state, [
+        "isPremium",
+        "name",
+        "logo",
+        "url",
+        "about",
+        "jobUrl",
+        "homeLogo"
+      ]);
     }
   };
 
@@ -508,7 +534,7 @@ class SponsorForm extends React.Component {
           />
           Choose logo
         </Button>
-        <br/>
+        <br />
         <Button className="p-relative mb-3" size="sm">
           <input
             type="file"
@@ -538,7 +564,8 @@ class SponsorForm extends React.Component {
           placeholder="Link to website"
           value={this.state.url || ""}
           onChange={e => this.setState({ url: e.target.value })}
-        /><Input
+        />
+        <Input
           className="mb-3"
           size="sm"
           placeholder="Link to job page"

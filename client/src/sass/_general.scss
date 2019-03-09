@@ -765,6 +765,10 @@ input[type="checkbox"] {
   }
 }
 
+.session__abstract {
+  word-break: break-word;
+}
+
 .session-page__speaker-box {
   flex: 0 0 calc(50% - 20px);
 
@@ -791,5 +795,61 @@ input[type="checkbox"] {
 
   @media (max-width:768px) {
     font-size: 35px;
+  }
+}
+
+.hero__right {
+  background: url('../images/rs19.gif') center;
+  background-size: cover;
+  width: 760px;
+  height: 560px;
+  position: relative;
+
+  @media (max-width:1200px) {
+    background: none;
+    width: auto;
+    height: auto;
+  }
+}
+
+.hero__timer-wrapper {
+  position: absolute;
+  right: 25px;
+  bottom: 15px;
+
+  @media (max-width:1200px) {
+    position: relative;
+    right: auto;
+    bottom: auto;
+  }
+}
+
+.hero__timer-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  letter-spacing: -0.4px;
+}
+
+.countdown-number {
+  font-size: 52px;
+  line-height: 52px;
+}
+
+.countdown-time-txt {
+  font-size: 18px;
+}
+
+.map-wrapper {
+  float: right;
+  position: relative;
+
+  @media (max-width:991px) {
+    float: none;
+  }
+}
+
+.venue-img {
+  @media (max-width:991px) {
+    display: none;
   }
 }

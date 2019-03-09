@@ -1,19 +1,18 @@
 .hero {
     /*background: url('../images/rs19.gif') center;*/
     background-size: cover;
-    padding-bottom: 150px;
-    padding-top: 150px;
+    height: 100vh;
 }
 
 .heroInner {
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .subtitle {
-    /*letter-spacing: 0.6px;*/
-    /*font-size: 24px;*/
-    /*font-weight: 200;*/
+    letter-spacing: 0.6px;
+    font-size: 18px;
+    font-weight: 400;
     /*text-shadow: 0 0 49px #030135;*/
     background-color: #451deb;
 }
@@ -37,8 +36,13 @@
 .heroCounterWrapper {
     background: url('../images/rs19.gif') center;
     background-size: cover;
-    width: 40%;
     align-self: normal;
+}
+
+@media (max-width:1200px) {
+    .heroInner {
+       flex-direction: column;
+    }
 }
 
 @media (max-width:991px) {
@@ -75,7 +79,6 @@
 
 @media (max-width:768px) {
     .heroInner {
-        flex-direction: column-reverse;
         margin-right: 0;
     }
 

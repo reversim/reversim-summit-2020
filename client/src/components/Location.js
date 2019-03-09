@@ -5,7 +5,7 @@ import squares from "../images/SVG/squares.svg";
 import venuePic from "../images/venue-pic.png";
 
 const Location = () => (
-  <section className="mb-20">
+  <section className="mt-16 mb-20">
     <Container>
       <div className="mb-8 d-flex">
         <img src={squares} alt="location" style={{ width: 122, height: 122 }} />
@@ -21,15 +21,15 @@ const Location = () => (
       </div>
 
       <div>
-        <div className="ml-4">
-          <div style={{float:'right', position:'relative'}}>
+        <div>
+          <div className="map-wrapper">
             <Map/>
           </div>
-          <div>
+          <div className="venue-img">
             <img
               src={venuePic}
               alt="venue"
-              style={{ width: 1000, marginTop:-300 }}
+              style={{ width: '100%', marginTop:-300 }}
               className="b-strong border-purple2"
             />
           </div>
