@@ -84,10 +84,11 @@ const CommunitySponsors = ({
 };
 
 const Sponsor = ({
-  sponsor: { name = "", logo, url, about = "" },
+  sponsor: { name = "", logo, url, about = "", jobUrl },
   onEdit,
   onDelete
 }) => {
+  const featuredJob = `Interested? More info [here](${jobUrl}).`;
   return (
     <div className={"d-flex m-4"}>
       <div className={cn("text-center b-strong border-purple2", s.sponsor)}>
@@ -124,7 +125,9 @@ const Sponsor = ({
             </span>
           )}
         </h4>
-        <div className={s.communityText}>{about.replace(/\n\n/g, "\n")}</div>
+        <ReactMarkdown source={about.replace(/\n/g, "<br>")} />
+        {jobUrl && <h5>Featured job</h5>}
+        {jobUrl && <ReactMarkdown source={featuredJob} />}
       </div>
     </div>
   );
@@ -274,7 +277,7 @@ class SponsorMiniPremium extends React.Component {
   render() {
     const { name, logo, url } = this.props;
     return (
-      <div className='d-flex flex-column align-items-center mb-6'>
+      <div className="d-flex flex-column align-items-center mb-6">
         <div
           className="p-relative text-center b-strong mb-2"
           style={{ width: 350, height: 240, maxWidth: 350 }}
@@ -318,7 +321,6 @@ class SponsorMini extends React.Component {
 }
 
 export const SponsorsSection = ({ sponsors }) => {
-  let dividedSponsors = chunkArray(sponsors, 5);
   return (
     <section className="mb-20">
       <Container>

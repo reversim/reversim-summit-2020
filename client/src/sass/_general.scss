@@ -423,6 +423,10 @@ button.btn {
   position: relative; // navbar-height
 }
 
+.justify-content-evenly {
+  justify-content: space-evenly !important;
+}
+
 .hl {
   flex-grow: 1;
   height: 2px;

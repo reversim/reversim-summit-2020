@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-
+import moment2 from 'moment';
 const config = {
   // TODO neta- fix the dates
   cfpStartDate: process.env.CFP_START_DATE ||  "2019-01-20",
@@ -21,5 +21,6 @@ export default () => {
     cfp,
     voting,
     votingEnded,
+    votingCountDown: (moment2(config.votingEndDate).diff(moment()) / 1000)
   }
 }

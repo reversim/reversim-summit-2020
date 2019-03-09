@@ -14,6 +14,7 @@ import {
 import { Button } from "reactstrap";
 import { REVERSIM_SUMMIT } from "../utils";
 import { Link } from "react-router-dom";
+import CountDown from "./CountDown";
 import logoImg from "../images/SVG/logo.svg";
 import {
   faMapMarkerAlt,
@@ -24,7 +25,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(faMapMarkerAlt, faCalendarAlt);
 
-const Hero = () => (
+const Hero = ({ eventConfig }) => (
   <section
     className={cn(
       hero,
@@ -37,7 +38,7 @@ const Hero = () => (
         "d-flex align-items-center text-center text-md-left text-white"
       )}
     >
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column my-8">
         <div className="d-flex mb-2">
           <div className="font-size-xxl">Welcome</div>
           <div className="hl bg-white" />
@@ -64,7 +65,22 @@ const Hero = () => (
           </Button>
         </div>
       </div>
-      <div className={cn(heroCounterWrapper)} />
+      <div
+        className={cn(
+          heroCounterWrapper,
+          "d-flex flex-row-reverse align-items-end justify-content-evenly"
+        )}
+      >
+        <div>
+          <div className="text-white">
+            {"Voting closes at 17:00, March 21st"}
+          </div>
+          <div>
+            <CountDown timeRemainingInSeconds={eventConfig.votingCountDown} />
+          </div>
+        </div>
+        <div />
+      </div>
     </div>
   </section>
 );

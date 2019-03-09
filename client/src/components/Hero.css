@@ -1,8 +1,8 @@
 .hero {
     /*background: url('../images/rs19.gif') center;*/
     background-size: cover;
-    min-height: 100vh;
-    padding-top: 200px;
+    padding-bottom: 150px;
+    padding-top: 150px;
 }
 
 .heroInner {
