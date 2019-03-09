@@ -60,9 +60,11 @@ const Hero = ({ eventConfig }) => (
         </div>
         </div>
         <div className="text-align-left">
-        <Button className="styled-button on-purple">
-            {"VOTE FOR SESSIONS"}
+        <Link to="/proposals" className="unstyled-link">
+            <Button className="styled-button on-purple">
+              {"VOTE FOR SESSIONS"}
             </Button>
+          </Link>
             </div>
             </div>
             <div className="hero__right heroCounterWrapper d-flex flex-row-reverse align-items-end justify-content-evenly">

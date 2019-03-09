@@ -80,8 +80,8 @@ class TitleSection extends React.Component {
             <div className="hl bg-white" />
           </div>
           <div className="d-flex flex-row mb-4">
-            <div className="b-strong border-purple2 bg-white  mr-5">
-              <img src={sponsor.logo} alt={sponsor.name} />
+            <div className="b-strong border-purple2 bg-white mr-5">
+              <img src={sponsor.logo} alt={sponsor.name} style={{maxWidth:150, maxHeight:150}}/>
             </div>
             <div>
               <div>

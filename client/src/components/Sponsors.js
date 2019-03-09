@@ -101,7 +101,9 @@ const Sponsor = ({
         />
         {/*</a>*/}
       </div>
-      <div className={cn("border-purple2 p-2 b-strong", s.communitySponsorText)}>
+      <div
+        className={cn("border-purple2 p-2 b-strong", s.communitySponsorText)}
+      >
         <h4>
           {name}
           {onEdit && (
@@ -199,7 +201,12 @@ class PremiumSponsor extends React.Component {
                 </span>
               )}
               <div>
-                <div className={cn(s.sponsor, "bg-white")}>
+                <div
+                  className={cn(
+                    s.sponsor,
+                    "bg-white d-flex justify-content-center align-items-center"
+                  )}
+                >
                   <img
                     style={{ maxWidth: 240, maxHeight: 240 }}
                     src={sponsor.logo}
@@ -282,12 +289,14 @@ class SponsorMiniPremium extends React.Component {
           className="p-relative text-center b-strong mb-2"
           style={{ width: 350, height: 240, maxWidth: 350 }}
         >
-          <img
-            src={logo}
-            className={s.sponsorImg}
-            alt={name}
-            style={{ maxWidth: 350, maxHeight: 240 }}
-          />
+          <a href={url}>
+            <img
+              src={logo}
+              className={s.sponsorImg}
+              alt={name}
+              style={{ maxWidth: 350, maxHeight: 240 }}
+            />
+          </a>
         </div>
         <Link to={`/sponsor/${name}`} className="unstyled-link">
           <Button className={"styled-button on-white"}>
@@ -309,12 +318,14 @@ class SponsorMini extends React.Component {
         className="p-relative d-inline-block"
         style={{ width: 200, maxWidth: 200, maxHeight: 100 }}
       >
+        <ScrollLink to={"/sponsor/Wix/about"} offset={-100}>
         <img
           src={logo}
           className={s.sponsorImg}
           alt={name}
           style={{ maxWidth: 200, maxHeight: 100 }}
         />
+        </ScrollLink>
       </div>
     );
   }
@@ -381,11 +392,16 @@ class SponsorsPage extends React.Component {
       user,
       sponsors
     } = this.props;
+    console.log('NETA props', this.props)
+
 
     return (
       <Page title="Sponsors" {...this.props}>
         <div
-          className={cn(s.premiumCover, "bg-purple2 page-hero pb-8")}
+          className={cn(
+            s.premiumCover,
+            "bg-purple2 page-hero pb-8 navbar-margin"
+          )}
           style={{ backgroundImage: `url('${premiumImage}')` }}
         >
           <Container>
@@ -447,7 +463,15 @@ class SponsorForm extends React.Component {
         "images"
       ]);
     } else {
-      return pick(this.state, ["isPremium", "name", "logo", "url", "about", "jobUrl", "homeLogo"]);
+      return pick(this.state, [
+        "isPremium",
+        "name",
+        "logo",
+        "url",
+        "about",
+        "jobUrl",
+        "homeLogo"
+      ]);
     }
   };
 
@@ -508,7 +532,7 @@ class SponsorForm extends React.Component {
           />
           Choose logo
         </Button>
-        <br/>
+        <br />
         <Button className="p-relative mb-3" size="sm">
           <input
             type="file"
@@ -538,7 +562,8 @@ class SponsorForm extends React.Component {
           placeholder="Link to website"
           value={this.state.url || ""}
           onChange={e => this.setState({ url: e.target.value })}
-        /><Input
+        />
+        <Input
           className="mb-3"
           size="sm"
           placeholder="Link to job page"
