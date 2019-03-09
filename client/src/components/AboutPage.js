@@ -5,7 +5,7 @@ import {img} from './Speaker2.css';
 import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
 
-const COLLAPSED_BIO_MAX_CHARS = 80;
+const COLLAPSED_BIO_MAX_CHARS = 110;
 
 class TeamMember extends React.Component {
   constructor(props) {
@@ -30,11 +30,11 @@ class TeamMember extends React.Component {
         : {height: 240};
 
     return (
-      <div className="mr-8 mb-12 d-flex" style={{height: 248}}>
+      <div className="about__team-member mb-12 d-flex">
         <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
         <div className="flex-grow-1 line-height-12">
           <div
-            className={`p-4 bg-white b-strong p-relative overflow-hidden ${!isExpanded ? "text-fade" : ""}`}
+            className={`p-4 bg-white b-strong p-relative overflow-hidden ${!isExpanded && isTooLong ? "text-fade" : ""}`}
             onClick={this.toggle}
             style={textStyle}>
             <div ref={this.ref}>
@@ -54,7 +54,7 @@ class TeamMember extends React.Component {
 const AboutPage = props => {
   return (
     <Page title="About" {...props}>
-      <div  className="navbar-padding pb-15 bg-purple2 text-white font-size-lm x-bg"
+      <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
             style={{backgroundImage: `url('${x}')`}}>
         <Container>
           <div className="d-flex align-items-center pt-15 ">
@@ -89,19 +89,19 @@ const AboutPage = props => {
           </div>
         </Container>
       </div>
-      <Container style={{marginTop: 80}}>
-        <div className="d-flex align-items-center text-purple2" style={{marginBottom: 80}}>
-          <h3 className="font-size-xxl mr-4 font-weight-regular">Meet the team</h3>
-          <div className="flex-grow-1 border-bottom border-purple2" />
+        <div className="white-bg">
+            <Container>
+                <div className="d-flex align-items-center text-purple2" style={{padding: '80px 0 60px'}}>
+                <h3 className="font-size-xxl mr-4 font-weight-regular">Meet the team</h3>
+                    <div className="flex-grow-1 border-bottom border-purple2" />
+                        </div>
+                        <div className="about__team">
+                        {props.team.map(id => (
+                            <TeamMember {...props.users[id]} />
+                ))}
+                </div>
+            </Container>
         </div>
-        <Row noGutters>
-          {props.team.map(id => (
-            <Col xs="12" md="6" key={id}>
-              <TeamMember {...props.users[id]} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
     </Page>
   );
 };

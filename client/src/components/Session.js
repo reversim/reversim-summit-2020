@@ -13,9 +13,9 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
   const {_id, title, type, tags, abstract, attended} = proposal;
   // console.log('attended', title, attended);
   return (
-    <div className="b-strong d-flex mb-12" style={{minHeight: 440}}>
+    <div className="session b-strong d-flex mb-12" style={{minHeight: 440}}>
       {speakers.map(speaker => (
-        <div className="session__speaker mr-1 d-flex flex-column" key={key()}>
+        <div className="session__speaker d-flex flex-column" key={key()}>
           <div
             style={{backgroundImage: `url(${speaker.picture})`}}
             className="session__speaker-picture"
@@ -23,19 +23,21 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
           <div className="d-flex flex-column bg-purple2 text-white p-4 flex-grow-1">
             <h5>{speaker.name}</h5>
             <p className="flex-grow-1">{speaker.oneLiner}</p>
-            <Link className="unstyled-link font-weight-heavy" to={`/speaker/${getHref(speaker)}`}>
+            <Link className="unstyled-link font-weight-bold" to={`/speaker/${getHref(speaker)}`}>
               ABOUT THE SPEAKER >>
             </Link>
           </div>
         </div>
       ))}
-      <div className="p-4 d-flex flex-column">
-        <h4 className="mb-5">{title}</h4>
-        <div className="mb-5">
+      <div className="p-4 d-flex flex-column justify-content-between">
+        <div className="content ">
+          <h4 className="mb-5">{title}</h4>
+          <div className="mb-5">
           <SessionInfo session={proposal} />
+          </div>
+          <ReactMarkdown className="mb-4" source={abstract} />
         </div>
-        <ReactMarkdown className="mb-4" source={abstract} />
-        <div className="flex-grow-1 d-flex justify-content-end align-items-end">
+        <div className="d-flex justify-content-end align-items-center">
           <VoteButton
             user={user}
             attended={attended}

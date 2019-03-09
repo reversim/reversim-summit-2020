@@ -4,16 +4,12 @@
     font-weight: 400;
 }
 
-.navLink:hover {
-  color: #1ad6ff;
+.navLink:hover, .navLink:active , .navLink:focus {
+    border-bottom: 2px solid #ff6100;
 }
 
 .navItem {
     color: white;
-}
-
-.active {
-  color: #1ad6ff;
 }
 
 .logo {
@@ -24,7 +20,7 @@
 }
 
 .isWhite {
-    background: rgba(81, 39, 255, 0.9);;
+    background: rgba(81, 39, 255, 0.9);
     transition: background 0.3s;
 }
 

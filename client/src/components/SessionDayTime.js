@@ -56,7 +56,7 @@ export default ({id}) => {
   if (dateTime) {
     const {day, time, hall} = dateTime;
     return (
-      <span className="font-mono font-weight-heavy">
+      <span className="font-mono font-weight-bold">
         Day {day + 1}
         {'\u00A0'}|{'\u00A0'}
         {time}

@@ -8,7 +8,7 @@ export default function SessionInfo({session, size}) {
   return (
     <div className={cn({[`font-size-${size}`]: size})}>
       <FontAwesomeIcon icon={faClock} className="mr-2" />
-      <span className="mr-4 font-weight-heavy">{getSessionTypeStr(session.type)}</span>
+      <span className="mr-4 font-weight-bold">{getSessionTypeStr(session.type)}</span>
       {session.category && (
         <span className="text-indigo px-2 b-heavy font-weight-bold">{session.category}</span>
       )}

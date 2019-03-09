@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
+    border: 1px solid #fff;
     position: relative;
 }
 
@@ -24,7 +25,8 @@
 
 .menuInner {
     padding: 20px;
-    background: var(--darkblue);
+    background: white;
+    border: 2px solid var(--purple2);
 }
 
 .avatarImg:hover .menu {
@@ -33,8 +35,16 @@
     transform: translateY(0);
 }
 
-.menuItem, .menuItem:hover, .menuItem:focus {
-    color: #333;
+.menuItem {
+    color: var(--purple2);
     cursor: pointer;
+    text-decoration: none;
+}
+
+.menuItem a:hover {
+    color: #ff6100;
+}
+
+.menuItem a {
     text-decoration: none;
 }
