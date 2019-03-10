@@ -94,7 +94,7 @@ const Sponsor = ({
     <div className={cn("d-flex m-4", s.communitySponsors)}>
       <div
         id={name}
-        className={cn("text-center b-strong border-purple2", s.sponsor)}
+        className={cn("text-center b-strong border-purple2 d-flex align-items-center", s.sponsor)}
       >
         {/*<a href={url} target="_blank">*/}
         <img

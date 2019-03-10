@@ -1,27 +1,43 @@
-import React from 'react';
-import Page from './Page';
-import cn from 'classnames';
-import {Container} from 'reactstrap';
-import Session from './Session';
-import values from 'lodash/values';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faFilter, faTimesCircle, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {img, title} from "./Speaker2.css";
-import introBG from '../images/proposals-page-bg.png';
+import React from "react";
+import Page from "./Page";
+import cn from "classnames";
+import { Container } from "reactstrap";
+import Session from "./Session";
+import values from "lodash/values";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFilter,
+  faTimesCircle,
+  faTimes,
+  faChevronDown,
+  faChevronUp
+} from "@fortawesome/free-solid-svg-icons";
+import { img, title } from "./Speaker2.css";
+import introBG from "../images/proposals-page-bg.png";
 
-const TagFilter = ({text, isSelected, onClick}) => (
+const TagFilter = ({ text, isSelected, onClick }) => (
   <div
-    className={cn('mr-4 mb-4 px-2 py-1 line-height-1 border font-weight-bold', {
-      'border-indigo text-indigo': !isSelected,
-      'bg-indigo text-white border-transparent': isSelected,
-    })}>
+    className={cn("mr-4 mb-4 px-2 py-1 line-height-1 border font-weight-bold", {
+      "border-indigo text-indigo": !isSelected,
+      "bg-indigo text-white border-transparent": isSelected
+    })}
+  >
     {text}
-    {'\u00A0'}
+    {"\u00A0"}
     <FontAwesomeIcon
       icon={faTimesCircle}
       className="text-indigo align-top cursor-pointer"
       onClick={onClick}
     />
+  </div>
+);
+
+const SelectVotes = ({ text, value, setValue, isBorder }) => (
+  <div className="d-flex flex-column" onClick={() => setValue(value)} style={isBorder ? {borderBottom:'solid 2px #5127ff'} : {}}>
+    <div className="cursor-pointer font-weight-bold d-flex align-items-center px-2 py-1">
+      <div className={cn("mr-2 b-regular")} style={{ width: 24, height: 24 }} />
+      <span>{text}</span>
+    </div>
   </div>
 );
 
@@ -32,7 +48,7 @@ class TagInput extends React.Component {
   }
 
   state = {
-    tagInput: '',
+    tagInput: ""
   };
 
   componentDidMount() {
@@ -44,14 +60,14 @@ class TagInput extends React.Component {
   }
 
   addEvents() {
-    ['click', 'touchstart'].forEach(event =>
-      document.addEventListener(event, this.handleDocumentClick, true),
+    ["click", "touchstart"].forEach(event =>
+      document.addEventListener(event, this.handleDocumentClick, true)
     );
   }
 
   removeEvents() {
-    ['click', 'touchstart'].forEach(event =>
-      document.removeEventListener(event, this.handleDocumentClick, true),
+    ["click", "touchstart"].forEach(event =>
+      document.removeEventListener(event, this.handleDocumentClick, true)
     );
   }
 
@@ -61,17 +77,17 @@ class TagInput extends React.Component {
       return;
     }
 
-    this.setState({tagInput: ''});
+    this.setState({ tagInput: "" });
   };
 
   onTagClick = tag => {
-    this.setState({tagInput: ''});
+    this.setState({ tagInput: "" });
     this.props.onTagClick(tag);
   };
 
   render() {
-    const {tags, tagFilters} = this.props;
-    const {tagInput} = this.state;
+    const { tags, tagFilters } = this.props;
+    const { tagInput } = this.state;
 
     const suggestedTags =
       tagInput &&
@@ -83,33 +99,43 @@ class TagInput extends React.Component {
     return (
       <div
         className="d-flex b-strong align-items-center p-relative mr-4"
-        style={{width: 360}}
-        ref={this.input}>
+        style={{ width: 360 }}
+        ref={this.input}
+      >
         <input
           placeholder="Search for tags..."
           className="box-shadow-none border-transparent p-1"
-          style={{outline: 'none'}}
-          onChange={e => this.setState({tagInput: e.target.value})}
+          style={{ outline: "none" }}
+          onChange={e => this.setState({ tagInput: e.target.value })}
           value={this.state.tagInput}
         />
         <FontAwesomeIcon icon={faFilter} className="mr-2 text-purple2" />
         {tagInput && (
           <div
             className="b-strong p-absolute bg-white"
-            style={{top: 38, left: -4, right: -4, maxHeight: 368, overflow: 'auto'}}>
-            {suggestedTags.length > 0
-                ? suggestedTags.map(tag => (
-                      <div
-                        key={tag.text}
-                        className="text-black font-weight-bold p-1 border-bottom border-purple2 cursor-pointer"
-                        onClick={() => this.onTagClick(tag.text)}>
-                        {tag.str}
-                      </div>
-                  ))
-                : <div className="text-black font-weight-bold p-1 cursor-pointer">
-                    No tags were found
-                  </div>
-            }
+            style={{
+              top: 38,
+              left: -4,
+              right: -4,
+              maxHeight: 368,
+              overflow: "auto"
+            }}
+          >
+            {suggestedTags.length > 0 ? (
+              suggestedTags.map(tag => (
+                <div
+                  key={tag.text}
+                  className="text-black font-weight-bold p-1 border-bottom border-purple2 cursor-pointer"
+                  onClick={() => this.onTagClick(tag.text)}
+                >
+                  {tag.str}
+                </div>
+              ))
+            ) : (
+              <div className="text-black font-weight-bold p-1 cursor-pointer">
+                No tags were found
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -122,7 +148,9 @@ class ProposalsPage extends React.Component {
     super(props);
     this.state = {
       tagFilters: [],
-      myVotes: false,
+      myVotes: undefined,
+      myVotesOpen: false,
+      myVotesClean: true
     };
   }
   componentDidMount() {
@@ -136,97 +164,174 @@ class ProposalsPage extends React.Component {
       const index = state.tagFilters.indexOf(tag);
       if (index > -1) {
         return {
-          tagFilters: state.tagFilters.slice(0, index).concat(state.tagFilters.slice(index + 1)),
+          tagFilters: state.tagFilters
+            .slice(0, index)
+            .concat(state.tagFilters.slice(index + 1))
         };
       } else {
-        return {tagFilters: state.tagFilters.concat(tag)};
+        return { tagFilters: state.tagFilters.concat(tag) };
       }
     });
   };
 
+  toggleMyVotesInput = () => {
+    this.setState({ myVotesOpen: !this.state.myVotesOpen, myVotesClean: false });
+  };
+
   render() {
     const proposals = values(this.props.proposals);
-    const {allTags, users, gotAllProposals, user, attendProposal} = this.props;
+    const {
+      allTags,
+      users,
+      gotAllProposals,
+      user,
+      attendProposal
+    } = this.props;
 
-    const {tagFilters, myVotes} = this.state;
+    const { tagFilters, myVotes } = this.state;
     const showProposals = !!gotAllProposals;
     const tags = allTags
       .map(tag => {
         const count = proposals.filter(p => p.tags.includes(tag)).length;
-        return {text: tag, str: `${tag} (${count})`, count};
+        return { text: tag, str: `${tag} (${count})`, count };
       })
       .sort((a, b) => (a.count > b.count ? -1 : 1));
     const tagfilteredProposals = tagFilters.length
-      ? proposals.filter(proposal => proposal.tags.some(tag => tagFilters.includes(tag)))
+      ? proposals.filter(proposal =>
+          proposal.tags.some(tag => tagFilters.includes(tag))
+        )
       : proposals;
-    const filteredProposals = myVotes
-      ? tagfilteredProposals.filter(proposal => proposal.attended !== undefined)
-      : tagfilteredProposals;
-    const sortedProposals = filteredProposals.sort(
-      (a, b) => (b.attended !== undefined ? -1 : a.attended !== undefined ? 1 : 0),
+    // const filteredProposals = myVotes
+    //   ? tagfilteredProposals.filter(proposal => proposal.attended !== undefined)
+    //   : tagfilteredProposals;
+    let filteredProposals = tagfilteredProposals;
+    if (this.state.myVotes === true)
+      filteredProposals = filteredProposals.filter(
+        proposal => proposal.attended
+      );
+    if (this.state.myVotes === false)
+      filteredProposals = filteredProposals.filter(
+        proposal => proposal.attended === false
+      );
+    const sortedProposals = filteredProposals.sort((a, b) =>
+      b.attended !== undefined ? -1 : a.attended !== undefined ? 1 : 0
     );
     const showCount = sortedProposals.length;
 
     return (
       <Page title="Proposals" {...this.props}>
-        <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm proposals-bg"
-            style={{backgroundImage: `url('${introBG}')`}}>
-            <Container>
-                  <div className={cn("d-flex flex-column pt-15", title)}>
-                    <h3 className="font-size-xl mr-4 font-weight-regular">Be The Voice Of The Community</h3>
-                    <h3 className="font-size-xxxl mr-4 font-weight-regular">Impact The Content</h3>
-                  </div>
-            </Container>
-        </div>
-        <div className="white-bg" style={{padding: '60px 0'}}>
+        <div
+          className="navbar-margin pb-15 bg-purple2 text-white font-size-lm proposals-bg"
+          style={{ backgroundImage: `url('${introBG}')` }}
+        >
           <Container>
-              <div className="border-bottom border-purple2 mb-4">
-                <div className="proposals-filters mb-5">
-                    <div className="d-flex align-items-center">
-                        <TagInput tags={tags} tagFilters={tagFilters} onTagClick={this.onTagClick} />
-                              {tagFilters.length ? (
-                                  <div
-                                  className="font-weight-bold border-bottom border-black cursor-pointer"
-                                  onClick={() => this.setState({tagFilters: []})}>
-                                  Clear all <FontAwesomeIcon icon={faTimes} />
-                              </div>
-                              ) : (
-                                  undefined
-                              )}
-                    </div>
+            <div className={cn("d-flex flex-column pt-15", title)}>
+              <h3 className="font-size-xl mr-4 font-weight-regular">
+                Be The Voice Of The Community
+              </h3>
+              <h3 className="font-size-xxxl mr-4 font-weight-regular">
+                Impact The Content
+              </h3>
+            </div>
+          </Container>
+        </div>
+        <div className="white-bg" style={{ padding: "60px 0" }}>
+          <Container>
+            <div className="border-bottom border-purple2 mb-4">
+              <div className="proposals-filters mb-5">
+                <div className="d-flex align-items-center">
+                  <TagInput
+                    tags={tags}
+                    tagFilters={tagFilters}
+                    onTagClick={this.onTagClick}
+                  />
+                  {tagFilters.length ? (
                     <div
-                      className="cursor-pointer font-weight-bold d-flex align-items-center"
-                      onClick={() => this.setState(({myVotes}) => ({myVotes: !myVotes}))}>
-                          <div
-                              className={cn('mr-2 b-regular', {'bg-purple2': this.state.myVotes})}
-                              style={{width: 24, height: 24}}/>
-                              Show only my votes
-                          </div>
+                      className="font-weight-bold border-bottom border-black cursor-pointer"
+                      onClick={() => this.setState({ tagFilters: [] })}
+                    >
+                      Clear all <FontAwesomeIcon icon={faTimes} />
                     </div>
-                  <div className="d-flex justify-content-start">
-                      {tagFilters.map(tagStr => (
-                          <TagFilter key={tagStr} text={tagStr} onClick={() => this.onTagClick(tagStr)} />
-                        ))}
+                  ) : (
+                    undefined
+                  )}
+                </div>
+                <div className="d-flex flex-column">
+                  <div onClick={this.toggleMyVotesInput}>
+                    <div
+                      className="d-flex b-strong align-items-center p-relative cursor-pointer"
+                      style={{ width: 360 }}
+                      ref={this.input}
+                    >
+                      <input
+                        placeholder="Filter by proposal status..."
+                        className="box-shadow-none border-transparent p-1 cursor-pointer"
+                        style={{ outline: "none" }}
+                        value={this.state.myVotes? 'Interested' : this.state.myVotes === false ? 'Not relevant to me' : this.state.myVotesClean? '' : 'None'}
+                      />
+                      <FontAwesomeIcon
+                        icon={
+                          this.state.myVotesOpen ? faChevronUp : faChevronDown
+                        }
+                        className="text-purple2 mr-2s align-top"
+                      />
+                    </div>
+                    {this.state.myVotesOpen && (
+                      <div className="b-strong position-absolute white-bg" style={{borderTop:'none', width:360}}>
+                        <SelectVotes
+                          text={"Interested"}
+                          value={true}
+                          setValue={myVotes => this.setState({ myVotes })}
+                          isBorder={true}
+                        />
+                        <SelectVotes
+                          text={"Not relevant to me"}
+                          value={false}
+                          setValue={myVotes => this.setState({ myVotes })}
+                          isBorder={true}
+                        />
+                        <SelectVotes
+                          text={"None"}
+                          value={undefined}
+                          setValue={myVotes => this.setState({ myVotes })}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-
-          {showProposals ? (
-              <React.Fragment>
-              <div className="mb-8 mt-8 font-weight-heavy">Showing {showCount} proposals</div>
-              {sortedProposals.map(proposal => (
-                  <Session
-                  key={proposal._id}
-                  proposal={proposal}
-                  speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
-                  user={user}
-                  attendProposal={attendProposal}
+              <div className="d-flex justify-content-start">
+                {tagFilters.map(tagStr => (
+                  <TagFilter
+                    key={tagStr}
+                    text={tagStr}
+                    onClick={() => this.onTagClick(tagStr)}
                   />
-              ))}
-          </React.Fragment>
-          ) : (
-            <span className="font-mono font-size-xl">...</span>
-          )}
-      </Container>
+                ))}
+              </div>
+            </div>
+
+            {showProposals ? (
+              <React.Fragment>
+                <div className="mb-8 mt-8 font-weight-heavy">
+                  Showing {showCount} proposals
+                </div>
+                {sortedProposals.map(proposal => (
+                  <Session
+                    key={proposal._id}
+                    proposal={proposal}
+                    speakers={proposal.speaker_ids.map(
+                      speakerId => users[speakerId]
+                    )}
+                    user={user}
+                    attendProposal={attendProposal}
+                  />
+                ))}
+              </React.Fragment>
+            ) : (
+              <span className="font-mono font-size-xl">...</span>
+            )}
+          </Container>
         </div>
       </Page>
     );

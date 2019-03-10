@@ -142,7 +142,7 @@ class Navbar extends Component {
           user && (
           <div className="border-top">
               <NavbarItem to="profile" text="My profile" />
-              <NavbarItem to="my-votes" text="My votes" />
+              <NavbarItem to="proposals" text="My votes" />
               <NavItem className={navItem} onClick={onLogout}>
               <span className={navLinkClass}>Logout</span>
               </NavItem>

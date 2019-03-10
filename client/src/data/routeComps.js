@@ -38,7 +38,7 @@ export default [
   {path: '/session/:id/edit', comp: SessionEditPage},
   {path: '/admin', comp: AdminPage},
   // { path: "/women-gathering", comp: WomenGathering },
-  {path: '/my-votes', comp: ProposalsPage, props: {myVotes: true}},
+  // {path: '/my-votes', comp: ProposalsPage, props: {myVotes: true}},
   {path: '/cfp', comp: CFPPage},
   {path: '/sessions', comp: SessionsPage},
   {path: '/proposals', comp: ProposalsPage},
