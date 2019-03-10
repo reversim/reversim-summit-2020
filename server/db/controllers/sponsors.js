@@ -93,9 +93,8 @@ async function update(req, res) {
     if(req.body.homeLogo) req.body.homeLogo = await uploadLogo(req.body.homeLogo);
 
     req.body.images = await Promise.all(
-      sponsor.images.map(image => uploadLogo(image))
+      req.body.images.map(image => uploadLogo(image))
     );
-
     const data = _.omit(req.body, ["_id"]);
     await Sponsor.findOneAndUpdate({ _id: req.params.id }, data);
     return res.status(200).send(data);
