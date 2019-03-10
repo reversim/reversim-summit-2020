@@ -196,7 +196,14 @@ class SponsorCarousel extends React.Component {
           key={i}
           className="text-align-center"
         >
-          <img src={item} />
+          {item.endsWith('mp4') ?
+            <video width="320" height="240" controls={true}>
+              <source src={item} type="video/mp4"/>
+              Your browser does not support the video tag.
+            </video>
+            :
+            <img src={item} />
+          }
         </CarouselItem>
       );
     });

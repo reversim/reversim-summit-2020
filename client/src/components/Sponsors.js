@@ -584,7 +584,13 @@ class SponsorForm extends React.Component {
           <div>
             {(this.state.images || []).map((image, i) => (
               <div key={i}>
-                <img src={image} style={{ width: "200px" }} />
+                {image.endsWith('mp4') ?
+                  <video width="200" controls={true}>
+                    <source src={image} type="video/mp4"/>
+                  </video>
+                  :
+                  <img src={image} style={{ width: "200px" }}  />
+                }
                 <FontAwesomeIcon
                   icon="trash"
                   className="cursor-pointer"
