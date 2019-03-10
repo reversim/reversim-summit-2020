@@ -198,7 +198,7 @@ class SponsorCarousel extends React.Component {
           key={i}
           className="text-align-center"
         >
-          {item.endsWith("mp4") ? (
+          {item && item.endsWith("mp4") ? (
             <video
               // width="400"
               // height="400"
