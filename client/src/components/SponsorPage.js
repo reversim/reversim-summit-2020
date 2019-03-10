@@ -121,15 +121,17 @@ class TitleSection extends React.Component {
                   <ScrollLink to={"Tech-Story"} offset={-100}>
                     Tech-Story
                   </ScrollLink>
-                  <span>{" | "}</span>
+                  {!!sponsor.openPositions.length && (<div><span>{" | "}</span>
                   <ScrollLink to={"Open Positions"} offset={-100}>
                     Open Positions
-                  </ScrollLink>
-                  <span>{" | "}</span>
+                  </ScrollLink></div>)}
                   {sponsor.reversimAndUs && (
-                    <ScrollLink to={"Reversim & Us"} offset={-100}>
-                      Reversim & Us
-                    </ScrollLink>
+                    <div>
+                      <span>{" | "}</span>
+                      <ScrollLink to={"Reversim & Us"} offset={-100}>
+                        Reversim & Us
+                      </ScrollLink>
+                    </div>
                   )}
                 </div>
               </div>
@@ -196,14 +198,20 @@ class SponsorCarousel extends React.Component {
           key={i}
           className="text-align-center"
         >
-          {item.endsWith('mp4') ?
-            <video width="320" height="240" controls={true}>
-              <source src={item} type="video/mp4"/>
+          {item.endsWith("mp4") ? (
+            <video
+              // width="400"
+              // height="400"
+              controls={false}
+              autoPlay={true}
+              muted={true}
+            >
+              <source src={item} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            :
+          ) : (
             <img src={item} />
-          }
+          )}
         </CarouselItem>
       );
     });
@@ -249,8 +257,8 @@ class DescriptionSection extends React.Component {
     return (
       <Container>
         <div className="pt-8">
-          <div className="d-flex" name="about">
-            <div className="width-half">
+          <div className={cn("d-flex", s.premiumSection)} name="about">
+            <div className="width-half mr-4">
               <div className="d-flex">
                 <div className="font-size-xl text-purple2">Who We Are?</div>
                 <div className="hl bg-purple2" />
@@ -262,8 +270,8 @@ class DescriptionSection extends React.Component {
             </div>
           </div>
         </div>
-        <div className="pt-8" name="Tech-Story">
-          <div className="d-flex">
+        <div className="pt-8">
+          <div className={cn("d-flex", s.premiumSection)} name="Tech-Story">
             <div className="font-size-xl text-purple2">
               Our Technology Story
             </div>
@@ -274,34 +282,39 @@ class DescriptionSection extends React.Component {
               {sponsor.techStory.text}
             </div>
             <div className="d-flex align-content-start flex-wrap">
-              {sponsor.techStory.technologies.map((technology, i) => (
-                <div
-                  className="bg-purple2 text-white w-max-content h-max-content p-1 m-2"
+              {sponsor.techStory.technologies.map(
+                (technology, i) =>
+                  technology && (
+                    <div
+                      className="bg-purple2 text-white w-max-content h-max-content p-1 m-2"
+                      key={i}
+                    >
+                      {technology}
+                    </div>
+                  )
+              )}
+            </div>
+          </div>
+        </div>
+        {!!sponsor.openPositions.length && (
+          <div className="pt-8" name="Open Positions">
+            <div className={cn("d-flex", s.premiumSection)}>
+              <div className="font-size-xl text-purple2">
+                Open Positions - Join Us
+              </div>
+              <div className="hl bg-purple2" />
+            </div>
+            <div className="text-black-50 d-flex">
+              {sponsor.openPositions.map((openPosition, i) => (
+                <OpenPosition
                   key={i}
-                >
-                  {technology}
-                </div>
+                  openPosition={openPosition}
+                  {...this.props}
+                />
               ))}
             </div>
           </div>
-        </div>
-        <div className="pt-8" name="Open Positions">
-          <div className="d-flex">
-            <div className="font-size-xl text-purple2">
-              Open Positions - Join Us
-            </div>
-            <div className="hl bg-purple2" />
-          </div>
-          <div className="text-black-50 d-flex">
-            {sponsor.openPositions.map((openPosition, i) => (
-              <OpenPosition
-                key={i}
-                openPosition={openPosition}
-                {...this.props}
-              />
-            ))}
-          </div>
-        </div>
+        )}
         {sponsor.reversimAndUs && (
           <div className="pt-8" name="Reversim & Us">
             <div className="d-flex">
@@ -339,8 +352,7 @@ class OpenPosition extends React.Component {
           </div>
         </div>
         <div
-          className="bg-white b-strong border-purple2 p-6 d-flex flex-column"
-          style={{ height: "-webkit-fill-available" }}
+          className={cn("bg-white b-strong border-purple2 p-6 d-flex flex-column", s.openPosition)}
         >
           <div className="pb-3">{openPosition.description}</div>
           <a href={openPosition.link} className="align-self-end">

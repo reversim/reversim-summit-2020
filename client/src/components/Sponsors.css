@@ -65,6 +65,19 @@
     justify-content: space-between;
 }
 
+.premiumSection img {
+    max-height: 400px;
+    max-width: 400px;
+}
+.premiumSection video {
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.openPosition {
+    height: -webkit-fill-available;
+}
+
 @media (max-width:767px) {
     .communitySponsorsHome {
         justify-content: center;
@@ -74,6 +87,22 @@
     }
     .sponsor {
         border-bottom: 0;
+    }
+    .premiumSection {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .premiumSection img {
+        max-width: 300px;
+        max-height: 300px;
+    }
+    .premiumSection video {
+        max-width: 300px;
+        max-height: 300px;
+    }
+    .openPosition {
+        height: inherit;
     }
 }
 @media (min-width:767px) {

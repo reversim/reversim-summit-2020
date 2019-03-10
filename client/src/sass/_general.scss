@@ -391,6 +391,9 @@ button.btn {
 }
 .width-half {
   width: 50%;
+  @media (max-width: 767px) {
+    width: inherit;
+  }
 }
 
 @media (max-width: 576px) {
