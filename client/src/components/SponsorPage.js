@@ -317,7 +317,7 @@ class DescriptionSection extends React.Component {
         )}
         {sponsor.reversimAndUs && (
           <div className="pt-8" name="Reversim & Us">
-            <div className="d-flex">
+            <div className={cn("d-flex", s.premiumSection)}>
               <div className="font-size-xl text-purple2">Reversim and us</div>
               <div className="hl bg-purple2" />
             </div>
