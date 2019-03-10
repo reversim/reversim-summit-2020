@@ -134,7 +134,7 @@ class Navbar extends Component {
           {/*</Button>*/}
           {/*</a>*/}
           {cfp && isSmallScreen && pathname !== '/cfp' && <NavbarItem text="Submit session" to="cfp"/>}
-          {voting && isSmallScreen && pathname !== '/my-votes' && <NavbarItem text="VOTE FOR SESSION" to="my-votes"/>}
+          {voting && isSmallScreen && pathname !== '/my-votes' && <NavbarItem text="VOTE FOR SESSION" to="proposals"/>}
           {items.map(item => (
               <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
           ))}
@@ -142,7 +142,6 @@ class Navbar extends Component {
           user && (
           <div className="border-top">
               <NavbarItem to="profile" text="My profile" />
-              <NavbarItem to="proposals" text="My votes" />
               <NavItem className={navItem} onClick={onLogout}>
               <span className={navLinkClass}>Logout</span>
               </NavItem>
