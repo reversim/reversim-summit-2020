@@ -848,6 +848,7 @@ input[type="checkbox"] {
 
   @media (max-width:991px) {
     float: none;
+    margin-top: 40px;
   }
 }
 
@@ -855,4 +856,17 @@ input[type="checkbox"] {
   @media (max-width:991px) {
     display: none;
   }
+}
+
+.home-sponsors {
+  justify-content: space-between;
+
+  @media (max-width:991px) {
+    justify-content: center;
+  }
+}
+
+.sponsor-community-mini {
+  flex: 0 0 25%;
+  text-align: center;
 }

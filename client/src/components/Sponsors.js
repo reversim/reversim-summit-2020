@@ -291,7 +291,7 @@ class SponsorMiniPremium extends React.Component {
       <div className="d-flex flex-column align-items-center mb-6">
         <div
           className="p-relative text-center b-strong mb-2"
-          style={{ width: 350, height: 240, maxWidth: 350 }}
+          style={{ width: 358, height: 230, maxWidth: 358 }}
         >
           <a href={url}>
             <img
@@ -327,7 +327,7 @@ export const SponsorsSection = ({ sponsors }) => {
           <div className="hl bg-purple2" />
         </div>
         <div className="">
-          <div className="d-flex flex-wrap justify-content-between">
+          <div className="home-sponsors d-flex flex-wrap">
             {sponsors
               .filter(sponsor => sponsor.isPremium)
               .map((sponsor, i) => {
