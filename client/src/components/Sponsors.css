@@ -35,14 +35,6 @@
 .sponsor {
     min-width: 240px;
     height: 240px;
-    border-right: 0;
-
-    /*display: inline-block;*/
-}
-
-.communitySponsorText {
-    width: 0;
-    flex-grow: 1;
 }
 
 .communityText {
@@ -68,9 +60,32 @@
 .carouselControl{
     opacity: 0.2;
 }
-/*@media (min-width:991px) {*/
-    /*.sponsor {*/
-        /*width: calc(100% - 20px);*/
-        /*display: inline-block;*/
-    /*}*/
-/*}*/
+
+.communitySponsorsHome {
+    justify-content: space-between;
+}
+
+@media (max-width:767px) {
+    .communitySponsorsHome {
+        justify-content: center;
+    }
+    .communitySponsors {
+        flex-direction: column;
+    }
+    .sponsor {
+        border-bottom: 0;
+    }
+}
+@media (min-width:767px) {
+    .communitySponsorsTitle {
+        align-items: center;
+    }
+    .communitySponsorText {
+        width: 0;
+        flex-grow: 1;
+    }
+    .sponsor {
+        border-right: 0;
+    }
+
+}

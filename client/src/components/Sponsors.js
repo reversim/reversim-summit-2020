@@ -31,7 +31,7 @@ const chunkArray = (myArray, chunk_size) => {
 const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
   return (
     <div>
-      <div className={"d-flex"}>
+      <div className="d-flex justify-content-center">
         <img src={diamond} className={s.diamond} alt="diamond" />
         <div className={cn("font-size-xxl text-white")}>
           Meet Our Premium Sponsors
@@ -60,7 +60,7 @@ const CommunitySponsors = ({
 }) => {
   return (
     <div className={cn("bg-white")}>
-      <div className={"d-flex align-items-center"}>
+      <div className={cn("d-flex justify-content-center text-align-center", s.communitySponsorsTitle)}>
         <svg className={s.circle}>
           <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
         </svg>
@@ -91,7 +91,7 @@ const Sponsor = ({
 }) => {
   const featuredJob = `Interested? More info [here](${jobUrl}).`;
   return (
-    <div className={"d-flex m-4"}>
+    <div className={cn("d-flex m-4", s.communitySponsors)}>
       <div
         id={name}
         className={cn("text-center b-strong border-purple2", s.sponsor)}
@@ -218,7 +218,7 @@ class PremiumSponsor extends React.Component {
                   />
                 </div>
                 <Link to={`/sponsor/${sponsor.name}`} className="unstyled-link">
-                  <Button className={"styled-button on-purple"}>
+                  <Button className={"styled-button on-purple w-max-content"}>
                     EXPLORE OPPORTUNITIES
                   </Button>
                 </Link>
@@ -342,7 +342,7 @@ export const SponsorsSection = ({ sponsors }) => {
         <div className="d-flex mt-16 mb-12">
           <div
             style={{ position: "relative", zIndex: 1 }}
-            className="text-purple2 font-size-xxl"
+            className="text-purple2 font-size-xxl text-align-center"
           >
             Meet Our Sponsors
           </div>
@@ -361,7 +361,7 @@ export const SponsorsSection = ({ sponsors }) => {
               })}
           </div>
           <div className="hl mt-6 mb-12 bg-purple2" />
-          <div className="d-flex flex-wrap justify-content-between mt-6">
+          <div className={cn("d-flex flex-wrap mt-6", s.communitySponsorsHome)}>
             {sponsors
               .filter(sponsor => !sponsor.isPremium)
               .map((sponsor, i) => {

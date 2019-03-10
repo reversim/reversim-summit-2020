@@ -6,7 +6,7 @@ import Session from './Session';
 import values from 'lodash/values';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFilter, faTimesCircle, faTimes} from '@fortawesome/free-solid-svg-icons';
-import {img} from "./Speaker2.css";
+import {img, title} from "./Speaker2.css";
 import introBG from '../images/proposals-page-bg.png';
 
 const TagFilter = ({text, isSelected, onClick}) => (
@@ -172,7 +172,7 @@ class ProposalsPage extends React.Component {
         <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm proposals-bg"
             style={{backgroundImage: `url('${introBG}')`}}>
             <Container>
-                  <div className="d-flex flex-column pt-15 ">
+                  <div className={cn("d-flex flex-column pt-15", title)}>
                     <h3 className="font-size-xl mr-4 font-weight-regular">Be The Voice Of The Community</h3>
                     <h3 className="font-size-xxxl mr-4 font-weight-regular">Impact The Content</h3>
                   </div>

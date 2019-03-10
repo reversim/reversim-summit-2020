@@ -9,7 +9,8 @@ import {
   left,
   separator,
   h2,
-  heroCounterWrapper
+  heroCounterWrapper,
+  rs19Logo
 } from "./Hero.css";
 import { Container, Button } from "reactstrap";
 import { REVERSIM_SUMMIT } from "../utils";
@@ -29,7 +30,7 @@ const Hero = ({ eventConfig }) => (
     <section
         className={cn(
                 hero,
-            "d-flex justify-content-center align-items-center bg-purple2"
+            "d-flex justify-content-center align-items-center bg-purple2 navbar-margin"
         )}>
         <Container>
         <div
@@ -44,7 +45,7 @@ const Hero = ({ eventConfig }) => (
             <div className="hl bg-white" />
             </div>
         {/*<div className='d-flex'>*/}
-        <div style={{ width: 400 }}>
+        <div className='rs19Logo'>
         <img src={logoImg} alt="rs19" />
             </div>
 

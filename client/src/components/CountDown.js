@@ -49,7 +49,7 @@ class CountDown extends React.Component {
 
   render() {
     return (
-      <div className="timer">
+      <div className="timer mb-4">
         <div>
           <div className="lead number-display d-flex justify-content-between font-size-lg">
             <div className="d-flex flex-column mr-4 align-items-center">

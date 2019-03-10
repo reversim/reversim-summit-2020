@@ -1,7 +1,7 @@
 .hero {
-    /*background: url('../images/rs19.gif') center;*/
     background-size: cover;
     height: 100vh;
+    min-height: 700px;
 }
 
 .heroInner {
@@ -13,8 +13,18 @@
     letter-spacing: 0.6px;
     font-size: 18px;
     font-weight: 400;
-    /*text-shadow: 0 0 49px #030135;*/
     background-color: #451deb;
+}
+.rs19Logo {
+    width: 400px;
+}
+@media (max-width:767px) {
+    .subtitle {
+        flex-direction: column;
+    }
+    .rs19Logo {
+        width: 350px;
+    }
 }
 
 .headphones {

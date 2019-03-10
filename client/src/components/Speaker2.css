@@ -37,6 +37,9 @@
   .body {
     width: 215px;
   }
+  .title {
+    text-align: center;
+  }
 }
 
 @media (max-width:540px) {
