@@ -12,6 +12,7 @@ import joytunes from '../images/community/home-joytunes.png';
 import cloudinary from '../images/community/home-cloudinary.png';
 import oracle from '../images/community/home-oracle.png';
 import chegg from '../images/community/home-chegg.png';
+import cyberark from '../images/community/home-cyberark.png';
 
 const sponsors= [
   {logo:gett, name:'Gett'},
@@ -22,7 +23,8 @@ const sponsors= [
   {logo:cloudinary, name:'Cloudinary'},
   {logo:oracle, name:'Oracle'},
   {logo:chegg, name:'Chegg'},
-]
+  {logo:cyberark, name:'Cyberark'},
+];
 
 
 class SponsorMini extends React.Component {
