@@ -5,12 +5,12 @@ import { Button, Input, Row, Col, Container } from "reactstrap";
 import Page from "./Page";
 import ReactMarkdown from "react-markdown";
 import { REVERSIM_SUMMIT } from "../utils";
+import HomeCommunitySponsors from './HomeCommunitySponsors'
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { HashLink } from 'react-router-hash-link';
 import premiumImage from "../images/sponsors-page-bg.png";
 import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
@@ -311,29 +311,7 @@ class SponsorMiniPremium extends React.Component {
     );
   }
 }
-class SponsorMini extends React.Component {
-  state = {
-    hovered: false
-  };
-  render() {
-    const { name, logo, url } = this.props;
-    return (
-      <div
-        className="p-relative d-inline-block"
-        style={{ width: 200, maxWidth: 200, maxHeight: 100 }}
-      >
-        <HashLink smooth to={`/sponsors#${name}`}>
-        <img
-          src={logo}
-          className={s.sponsorImg}
-          alt={name}
-          style={{ maxWidth: 200, maxHeight: 100 }}
-        />
-        </HashLink>
-      </div>
-    );
-  }
-}
+
 
 export const SponsorsSection = ({ sponsors }) => {
   return (
@@ -362,7 +340,7 @@ export const SponsorsSection = ({ sponsors }) => {
           </div>
           <div className="hl mt-6 mb-12 bg-purple2" />
           <div className={cn("d-flex flex-wrap mt-6", s.communitySponsorsHome)}>
-            {sponsors
+            {/*{sponsors
               .filter(sponsor => !sponsor.isPremium)
               .map((sponsor, i) => {
                 return (
@@ -370,7 +348,8 @@ export const SponsorsSection = ({ sponsors }) => {
                     <SponsorMini key={sponsor._id} {...sponsor} />
                   </div>
                 );
-              })}
+              })}*/}
+            <HomeCommunitySponsors></HomeCommunitySponsors>
           </div>
           {/* <WantToBe /> */}
         </div>
