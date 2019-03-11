@@ -14,7 +14,9 @@ import { Link } from "react-router-dom";
 import premiumImage from "../images/sponsors-page-bg.png";
 import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
+import { img } from "./Speaker2.css";
 library.add(faPencilAlt, faTrash);
+const COLLAPSED_MAX_CHARS = 110;
 
 const chunkArray = (myArray, chunk_size) => {
   let index = 0;
@@ -89,63 +91,91 @@ const CommunitySponsors = ({
   );
 };
 
-const Sponsor = ({
-  sponsor: { name = "", logo, url, about = "", jobUrl },
-  onEdit,
-  onDelete
-}) => {
-  const featuredJob = `Interested? More info [here](${jobUrl}).`;
-  return (
-    <div className={cn("d-flex m-4", s.communitySponsors)}>
-      <div
-        id={name}
-        className={cn(
-          "text-center b-strong border-purple2 d-flex align-items-center",
-          s.sponsor
-        )}
-      >
-        {/*<a href={url} target="_blank">*/}
-        <img
-          style={{ maxWidth: 240, maxHeight: 240 }}
-          src={logo}
-          className={s.sponsorImg}
+class Sponsor extends React.Component {
+  constructor(props) {
+    super(props);
+    let {
+      sponsor: { about }
+    } = this.props;
+    const isTooLong = about.length > COLLAPSED_MAX_CHARS;
+    this.state = {
+      isExpanded: false,
+      isTooLong
+    };
+  }
+
+  toggle = () => {
+    this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }));
+  };
+
+  render() {
+    let {
+      sponsor: { name = "", logo, url, about = "", jobUrl },
+      onEdit,
+      onDelete
+    } = this.props;
+
+    const featuredJob = `Interested? More info [here](${jobUrl}).`;
+    const { isExpanded, isTooLong } = this.state;
+    const textStyle =
+      isExpanded && isTooLong
+        ? { zIndex: 1, height: "auto", minHeight: 240 }
+        : { height: 240 };
+
+    return (
+      <div className="about__team-member mb-12 d-flex">
+        <div
+          style={{ backgroundImage: `url('${logo}')` }}
           alt={name}
+          className={img}
         />
-        {/*</a>*/}
+        <div className="flex-grow-1 line-height-12">
+          <div
+            className={`p-4 bg-white b-strong p-relative overflow-hidden ${
+              !isExpanded && isTooLong ? "text-fade" : ""
+            }`}
+            onClick={this.toggle}
+            style={textStyle}
+          >
+            <div ref={this.ref}>
+              <h4 className="line-height-1 mb-1">
+                {name}
+                {onEdit && (
+                  <span>
+                    <Button
+                      size="sm"
+                      color="primary"
+                      className="ml-2"
+                      onClick={onEdit}
+                    >
+                      <FontAwesomeIcon icon={faPencilAlt} />
+                    </Button>
+                    <Button
+                      size="sm"
+                      color="danger"
+                      className="ml-2"
+                      onClick={onDelete}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </Button>
+                  </span>
+                )}
+              </h4>
+              <p className="line-height-15 mb-0">{about}</p>
+              {jobUrl && (
+                <div>
+                  <br />
+                  <h5>Featured job</h5>
+                  <ReactMarkdown source={featuredJob} />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-      <div
-        className={cn("border-purple2 p-2 b-strong", s.communitySponsorText)}
-      >
-        <h4>
-          {name}
-          {onEdit && (
-            <span>
-              <Button
-                size="sm"
-                color="primary"
-                className="ml-2"
-                onClick={onEdit}
-              >
-                <FontAwesomeIcon icon={faPencilAlt} />
-              </Button>
-              <Button
-                size="sm"
-                color="danger"
-                className="ml-2"
-                onClick={onDelete}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-              </Button>
-            </span>
-          )}
-        </h4>
-        <ReactMarkdown source={about.replace(/\n/g, "<br>")} />
-        {jobUrl && <h5>Featured job</h5>}
-        {jobUrl && <ReactMarkdown source={featuredJob} />}
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 class PremiumSponsor extends React.Component {
   constructor(props) {
