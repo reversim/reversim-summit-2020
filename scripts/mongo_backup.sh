@@ -1,6 +1,5 @@
 #! /bin/bash
 
-source .private/ENV_VARS
 
 d=`date +%Y-%m-%d-%H-%M-%S`
 

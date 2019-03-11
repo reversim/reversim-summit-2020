@@ -22,3 +22,6 @@ export const getRemainingCFPDays = () => {
 };
 
 export const getHref = obj => (isServer ? `${obj._id}.html` : obj._id);
+
+let _key = 1;
+export const key = () => ++_key;

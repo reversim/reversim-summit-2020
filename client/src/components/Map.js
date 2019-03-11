@@ -1,11 +1,12 @@
-import React from 'react';
-import {withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs';
-import s from './Map.css';
+import React from "react";
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import withScriptjs from "react-google-maps/lib/async/withScriptjs";
+import s from "./Map.css";
+import cn from "classnames";
 
 const position = {
   lat: 32.1055476,
-  lng: 34.8068869,
+  lng: 34.8068869
 };
 
 const MapWithLoader = withScriptjs(
@@ -17,7 +18,7 @@ const MapWithLoader = withScriptjs(
         {markerEl}
       </GoogleMap>
     );
-  }),
+  })
 );
 
 const Map = () => (
@@ -26,7 +27,9 @@ const Map = () => (
     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
       process.env.REACT_APP_GOOGLE_MAPS_KEY
     }`}
-    containerElement={<div className={s.mapContainer} />}
+    containerElement={
+      <div className={cn(s.mapContainer, "b-strong border-purple2")} />
+    }
     mapElement={<div className={s.mapEl} />}
   />
 );

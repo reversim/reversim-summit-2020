@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
+import cn from 'classnames';
 import Page from './Page';
-import { Container, Button, ModalHeader, ModalBody, ModalFooter, Modal } from "reactstrap";
-import {getHref, getSessionTypeStr} from '../utils';
+import {Container, Button, ModalHeader, ModalBody, ModalFooter, Modal} from 'reactstrap';
+import {getHref, key} from '../utils';
 import Tag from './Tag';
 import ReactMarkdown from 'react-markdown';
 import {Link} from 'react-router-dom';
 import SessionPageRoute from './SessionPageRoute';
 import SessionDayTime from './SessionDayTime';
 import VoteButton from './VoteButton';
-import Speaker from './Speaker2';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPencilAlt, faTrash} from '@fortawesome/free-solid-svg-icons';
-import { getLoginUrl } from "./Redirect";
+import SessionInfo from './SessionInfo';
 library.add(faPencilAlt, faTrash);
-
 
 class SessionPage extends Component {
   constructor(props) {
@@ -32,9 +31,9 @@ class SessionPage extends Component {
   };
   deleteProposal = async () => {
     this.setState({isDelete: false});
-    await this.props.updateProposal(getHref(this.props.session), {status:'deleted'});
-    this.props.history.goBack(1)
-  }
+    await this.props.updateProposal(getHref(this.props.session), {status: 'deleted'});
+    this.props.history.goBack(1);
+  };
 
   render() {
     const {
@@ -44,11 +43,11 @@ class SessionPage extends Component {
       attendProposal,
       eventConfig,
       match: {
-        params: { id },
+        params: {id},
       },
     } = this.props;
     const { voting, cfp } = eventConfig;
-    const { title, abstract, type, tags, outline, categories: _categories, attende, speaker_ids } = session;
+    const { title, abstract, type, tags, outline, categories: _categories, attende, speaker_ids, attended } = session;
     const trackRecords = sessionSpeakers.map(speaker => ({name: speaker.name, trackRecord: speaker.trackRecord}));
     const video_urls = sessionSpeakers.map(speaker => ({name: speaker.name, video_url: speaker.video_url}));
     const isAuthor = user && session.speaker_ids.includes(user._id);
@@ -56,56 +55,30 @@ class SessionPage extends Component {
     const canEdit = (isAuthor && cfp) || isTeamMember;
 
     return (
-    <Page title={session.title} {...this.props} isSingleContent={true}>
-      <Container className="mt-4">
-        <div className="bg-emph p-5 mb-8">
-          <div className="mb-4">
-            <SessionDayTime id={id} />
+      <Page title={session.title} {...this.props} isSingleContent={true}>
+        <div className="navbar-margin session-page__hero bg-purple2 pb-8">
+          <Container>
+            <h3 className="session-page__title mb-0 line-height-15 font-size-xxl text-white">{title}</h3>
+          </Container>
+        </div>
+        <Container className="mt-4">
+          <div className="mb-5">
+            <SessionInfo session={session} size="md" />
+            {/* <div className="d-flex">{tags.map(Tag)}</div> */}
+            <div>
+              <SessionDayTime id={id} />
+            </div>
           </div>
-          <h3 className="font-weight-heavy">
-            {title}
-            {canEdit && (
-              <Link className="unstyled-link" to={`/session/${getHref(session)}/edit`}>
-                <Button color="primary" size="sm" className="ml-3">
-                  <FontAwesomeIcon icon="pencil-alt"/>
-                </Button>
-              </Link>
-            )}
-            {canEdit && (
-              <Button color="primary" size="sm" className="ml-3" onClick={this.askDelete}>
-                <FontAwesomeIcon icon="trash"/>
+          {canEdit && (
+            <Link className="unstyled-link" to={`/session/${getHref(session)}/edit`}>
+              <Button color="primary" size="sm" className="ml-3">
+                <FontAwesomeIcon icon="pencil-alt" />
               </Button>
-            )}
-          </h3>
-          <div className="d-flex mb-2">
-            <div className="mr-8">{getSessionTypeStr(type)}</div>
-            <div className="d-flex">{tags.map(Tag)}</div>
-          </div>
-          {voting ? (
-            <VoteButton
-              user={user}
-              attended={attended}
-              proposalId={id}
-              attendProposal={attendProposal}
-            />
-          ) : (
-            undefined
+            </Link>
           )}
-          <div className="font-size-sm">
+          <div className="font-size-md mb-12">
             <ReactMarkdown source={abstract} />
           </div>
-          {/* {categories && (
-            <div>
-              <h4>Categories</h4>
-              <ul>
-                {categories.map(cat => (
-                  <li key={cat} className="mr-2">
-                    {cat}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )} */}
           {outline && (
             <div>
               <h4>Outline & private notes</h4>
@@ -134,25 +107,58 @@ class SessionPage extends Component {
                 </div>
               </div>)
           )}
-        </div>
-        <div className="mb-10">
-          {sessionSpeakers.map(speaker => <Speaker key={speaker._id} speaker={speaker} />)}
-        </div>
-      </Container>
-      <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
-        <ModalBody>
-          <p>
-            are you sure you want to delete this proposal?
-          </p>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={this.deleteProposal}>Yes, Delete</Button>{' '}
-          <Button color="secondary" onClick={this.toggleDeleteModal}>Cancel</Button>
-        </ModalFooter>
-      </Modal>
-    </Page>
-  );
+
+            <div className="session-page__voting mb-10">
+              {voting && (
+                      <VoteButton
+                      user={user}
+                  attended={attended}
+                  proposalId={id}
+                  attendProposal={attendProposal}/>
+              )}
+            </div>
+          <div className="session-page__speakers">
+            {sessionSpeakers.map(speaker => (
+              <div className="b-strong session-page__speaker-box mb-8 d-flex" key={key()}>
+                <div className="session-page__speaker"
+                  style={{backgroundImage: `url('${speaker.picture}')`}}
+                />
+                <div className="p-5 d-flex flex-column flex-grow-1">
+                  <h4 className="font-weight-bold font-size-lg">{speaker.name}</h4>
+                  <div className="flex-grow-1 d-flex justify-content-end align-items-end">
+                    <Link
+                      key={speaker._id}
+                      to={`/speaker/${getHref(speaker)}`}
+                      className="unstyled-link">
+                      <Button className="styled-button">Read more</Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {canEdit && (
+            <Button color="primary" size="sm" className="ml-3" onClick={this.askDelete}>
+              <FontAwesomeIcon icon="trash" />
+            </Button>
+          )}
+        </Container>
+        <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
+          <ModalBody>
+            <p>are you sure you want to delete this proposal?</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.deleteProposal}>
+              Yes, Delete
+            </Button>{' '}
+            <Button color="secondary" onClick={this.toggleDeleteModal}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </Page>
+    );
   }
-};
+}
 
 export default SessionPageRoute(SessionPage);

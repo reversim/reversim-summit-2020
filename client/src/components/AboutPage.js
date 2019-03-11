@@ -2,59 +2,112 @@ import React from 'react';
 import Page from './Page';
 import {Container, Row, Col} from 'reactstrap';
 import {img} from './Speaker2.css';
+import hoop from '../images/SVG/hoop.svg';
+import x from '../images/SVG/x.svg';
 
-const TeamMember = ({picture, name, oneLiner, bio}) => (
-  <div className="mr-8 mb-8">
-    <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
-    <div className="bg-emph ml-2 pt-8 px-4 pb-4" style={{marginTop: -20}}>
-      <h4>{name}</h4>
-      <p>{oneLiner}</p>
-      <p style={{margin: 0, fontSize: '14px'}}>{bio}</p>
-    </div>
-  </div>
-);
+const COLLAPSED_BIO_MAX_CHARS = 110;
+
+class TeamMember extends React.Component {
+  constructor(props) {
+    super(props);
+    const {bio} = this.props;
+    const isTooLong = bio.length > COLLAPSED_BIO_MAX_CHARS;
+    this.state = {
+      isExpanded: false,
+      isTooLong,
+    };
+  }
+
+  toggle = () => {
+    this.setState(({isExpanded}) => ({isExpanded: !isExpanded }));
+  };
+
+  render() {
+    const {picture, name, oneLiner, bio} = this.props;
+    const {isExpanded, isTooLong} = this.state;
+    const textStyle = (isExpanded && isTooLong)
+        ? {zIndex: 1, height: 'auto', minHeight: 240}
+        : {height: 240};
+
+    return (
+      <div className="about__team-member mb-12 d-flex">
+        <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
+        <div className="flex-grow-1 line-height-12">
+          <div
+            className={`p-4 bg-white b-strong p-relative overflow-hidden ${!isExpanded && isTooLong ? "text-fade" : ""}`}
+            onClick={this.toggle}
+            style={textStyle}>
+            <div ref={this.ref}>
+              <h4 className="line-height-1 mb-1">{name}</h4>
+              <p className="font-weight-regular line-height-12 font-size-md">{oneLiner}</p>
+              <p className="line-height-15 mb-0">
+                {bio}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
 const AboutPage = props => {
   return (
     <Page title="About" {...props}>
-      <Container className="mt-4">
-        <h1 className="p-relative z-1 text-uppercase mb-0">About</h1>
-        <div className="about-content d-flex align-items-start mb-24" style={{marginTop: -40}}>
-          <div className="about-content__p1 bg-emph pt-10 pl-4 pb-4 pr-8 flex-1">
-            <h4 className="mb-3">Reversim Summit</h4>
-            <div className="bg-cyan mb-3" style={{width: 70, height: 3}} />
-            <p className="font-weight-light">
-              Reversim summit is our intention to create a conference for developers by developers.
-              Like in the podcast, we bring you the content we are interested in, and we hope you
-              will be too.
-            </p>
-            <p>
-              This is the 7th(!) Reversim Summit. The summits of 2013 and 2014 (TLV Campus), 2015
-              (Technion), 2016 (Weizmann Institute of Science), 2017 (College of Management) and 2018 (Tel Aviv University) also
-              featured community content. Watch previous years' sessions to get the general feel of the
-              Revesim Summit spirit.
-            </p>
+      <div  className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
+            style={{backgroundImage: `url('${x}')`}}>
+        <Container>
+          <div className="d-flex align-items-center pt-15 ">
+            <img src={hoop} alt="" height="100" style={{marginRight: -16}} />
+            <h3 className="font-size-xxl mr-4 font-weight-regular">About</h3>
+            <div className="flex-grow-1 border-bottom border-white" />
           </div>
-          <div className="about-content__p2 bg-emph py-4 pl-8 pr-4 mt-5 flex-1">
-            <h4 className="mb-3">Reversim podcast</h4>
-            <div className="bg-cyan mb-3" style={{width: 70, height: 3}} />
-            <p className="font-weight-light">
-              Reversim (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and Ran Tavory which
-              brings together software developers and product, with over 300 recorded episodes and a
-              few thousands listeners.
-            </p>
+          <div className="d-flex font-weight-regular about__intro-text">
+            <div className="pt-10 mr-9 flex-1">
+              <p className="line-height-15 font-size-lg">Reversim Summit</p>
+              <p className="line-height-15">
+                Reversim summit is our intention to create a conference for developers by
+                developers. Like in the podcast, we bring you the content we are interested in, and
+                we hope you will be too.
+              </p>
+              <p className="line-height-15">
+                This is the 7th(!) Reversim Summit. The summits of 2013 and 2014 (TLV Campus), 2015
+                (Technion), 2016 (Weizmann Institute of Science), 2017 (College of Management) and
+                2018 (Tel Aviv University) also featured community content. Watch previous years'
+                sessions to get the general feel of the Revesim Summit spirit.
+              </p>
+            </div>
+            <div
+              className="pt-10 mr-12 flex-1">
+              <p className="mb-3 font-size-lg">Reversim podcast</p>
+              <p className="line-height-15">
+                Reversim (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and Ran Tavory which
+                brings together software developers and product, with over 300 recorded episodes and
+                a few thousands listeners.
+              </p>
+            </div>
           </div>
+        </Container>
+      </div>
+        <div className="white-bg">
+            <Container>
+                <div className="d-flex align-items-center text-purple2" style={{padding: '80px 0 60px'}}>
+                <h3 className="font-size-xxl mr-4 font-weight-regular">Meet the team</h3>
+                    <div className="flex-grow-1 border-bottom border-purple2" />
+                        </div>
+                        <div className="about__team">
+                        {props.team.map(id => (
+                            <TeamMember key={id} {...props.users[id]} />
+                ))}
+                </div>
+            </Container>
         </div>
-        <Row noGutters>
-          {props.team.map(id => (
-            <Col xs="12" md="6" key={id}>
-              {<TeamMember {...props.users[id]} />}
-            </Col>
-          ))}
-        </Row>
-      </Container>
     </Page>
   );
 };
 
 export default AboutPage;
+
+/**
+ * style={{background: `url('${x}') no-repeat`, backgroundSize: 'cover'}}
+ **/

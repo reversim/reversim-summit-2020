@@ -1,18 +1,30 @@
 .hero {
-    background: url('../images/intro-bg.jpg') center;
     background-size: cover;
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 700px;
 }
 
 .heroInner {
-    margin-right: -120px;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .subtitle {
     letter-spacing: 0.6px;
-    font-size: 24px;
-    font-weight: 200;
-    text-shadow: 0 0 49px #030135;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: #451deb;
+}
+.rs19Logo {
+    width: 400px;
+}
+@media (max-width:767px) {
+    .subtitle {
+        flex-direction: column;
+    }
+    .rs19Logo {
+        width: 350px;
+    }
 }
 
 .headphones {
@@ -30,6 +42,17 @@
 
 .separator {
     width: 151px;
+}
+.heroCounterWrapper {
+    background: url('../images/rs19.gif') center;
+    background-size: cover;
+    align-self: normal;
+}
+
+@media (max-width:1200px) {
+    .heroInner {
+       flex-direction: column;
+    }
 }
 
 @media (max-width:991px) {
@@ -66,7 +89,6 @@
 
 @media (max-width:768px) {
     .heroInner {
-        flex-direction: column-reverse;
         margin-right: 0;
     }
 

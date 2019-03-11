@@ -11,7 +11,7 @@ const SpeakerSocialLinks = props => {
       <SpeakerSocialLink type={type} value={props[type]} key={`${type}_${props[type]}`} />
     ));
 
-  return <div className={cn(props.className, 'd-flex align-items-center')}>{links}</div>;
+  return <div className={cn(props.className, 'speaker-page__social-links d-flex align-items-center')}>{links}</div>;
 };
 
 export default SpeakerSocialLinks;

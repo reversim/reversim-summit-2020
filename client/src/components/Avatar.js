@@ -9,9 +9,6 @@ const Avatar = ({picture, onLogout}) => (
         <div className={s.menuItem}>
           <Link to="/profile">My Profile</Link>
         </div>
-        {/*<div className={s.menuItem}>*/}
-          {/*<Link to="/my-votes">My Votes</Link>*/}
-        {/*</div>*/}
         <div className={s.menuItem} onClick={onLogout}>
           <a href="#">Logout</a>
         </div>

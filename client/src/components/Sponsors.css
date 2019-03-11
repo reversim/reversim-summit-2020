@@ -4,9 +4,134 @@
     transition: opacity 150ms;
 }
 
-@media (min-width:991px) {
-    .sponsor {
-        width: calc(100% - 20px);
-        display: inline-block;
+.premiumCover {
+    background-size: contain;
+    padding: 20px 180px;
+}
+
+.diamond {
+    width: 85px;
+    height: 85px;
+    margin-right: -50px;
+}
+
+.triangle {
+    height: 100px;
+    width: 90px;
+    margin-right: -26px;
+    margin-top: -23px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    margin-right: -50px;
+    fill: #ff6100;
+}
+.mb10 {
+    margin-bottom: -10px
+}
+
+.hr {
+    flex-grow: 1;
+    height: 2px;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.sponsor {
+    width: 248px;
+    height: 248px;
+}
+
+.communityText {
+    word-wrap: break-word;
+}
+.premiumSponsor {
+    align-items: baseline;
+    flex-direction: column;
+    margin: 20px;
+}
+.premiumSponsorsWrap {
+    justify-content: space-evenly;
+}
+
+.halfColoredDiv {
+    margin-top: -75px;
+}
+
+.socialWrapper {
+    min-height: 0.85em;
+}
+
+.carouselControl{
+    opacity: 0.2;
+}
+
+.communitySponsorsHome {
+    justify-content: space-between;
+}
+
+.premiumSection img {
+    max-height: 400px;
+    max-width: 400px;
+}
+.premiumSection video {
+    max-height: 400px;
+    max-width: 400px;
+}
+
+.openPosition {
+    height: -webkit-fill-available;
+}
+
+@media (max-width:767px) {
+    .communitySponsorsHome {
+        justify-content: center;
     }
+    .communitySponsors {
+        flex-direction: column;
+    }
+    .sponsor {
+        border-bottom: 0;
+    }
+    .premiumSection {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .premiumSection img {
+        max-width: 300px;
+        max-height: 300px;
+    }
+    .premiumSection video {
+        max-width: 300px;
+        max-height: 300px;
+    }
+    .openPosition {
+        height: inherit;
+    }
+    .premiumTitle {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column !important;
+    }
+    .circle {
+        width: inherit;
+        margin-right: -90px;
+    }
+}
+@media (min-width:767px) {
+    .communitySponsorsTitle {
+        align-items: center;
+    }
+    .communitySponsorText {
+        width: 0;
+        flex-grow: 1;
+    }
+    .sponsor {
+        border-right: 0;
+    }
+
 }

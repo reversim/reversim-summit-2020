@@ -85,7 +85,7 @@ const Session = ({text, session, shortSessions, hall, sep, users}) => {
         <div className="d-flex align-items-center">
           <div className="flex-1">
             <div className="font-size-sm">{getSpeakerName(session, users)}</div>
-            <div className="font-weight-heavy">{session.title}</div>
+            <div className="font-weight-bold">{session.title}</div>
             <div className="d-flex flex-wrap">{session.tags.map(Tag)}</div>
           </div>
           <div className="d-flex">{getSessionImgs(session, users)}</div>
@@ -200,7 +200,7 @@ const agendas = [agenda1, agenda2];
 const DayAgenda = ({index, sessions, isLargeScreen, users, excludedHalls}) => {
   return (
     <div className={cn(s.agenda, 'mb-5')}>
-      <h2 className={cn(s.subtitle, 'font-size-xl font-weight-heavy')}>{dates[index]}</h2>
+      <h2 className={cn(s.subtitle, 'font-size-xl font-weight-bold')}>{dates[index]}</h2>
       <div className="bg-emph pt-4 p-3" style={{marginTop: -20}}>
         {agendas[index].map((line, i) => (
           <Line

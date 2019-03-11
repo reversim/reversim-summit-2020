@@ -17,6 +17,10 @@ const ProposalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
+  notAttendees: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   comments: [String],
   tags: [String],
   categories: [String],

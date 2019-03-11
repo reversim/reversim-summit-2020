@@ -1,21 +1,39 @@
-import React from 'react';
-import Map from './Map';
-import {Button, Container} from 'reactstrap';
+import React from "react";
+import Map from "./Map";
+import { Button, Container } from "reactstrap";
+import squares from "../images/SVG/squares.svg";
+import venuePic from "../images/venue-pic.png";
 
 const Location = () => (
-  <section className="mb-20 location-section">
+  <section className="mt-16 mb-20">
     <Container>
-      <h1 className="mb-0" style={{zIndex: 1, position: 'relative'}}>
-        Venue
-      </h1>
-      <div className="bg-emph py-9 px-4 d-inline-block h1-up">
-        <h3 className="mb-0">Ganei HaTaarucha</h3>
+      <div className="d-flex">
+        <img src={squares} alt="location" style={{ width: 122, height: 122 }} />
+        <div className="flex-grow-1 ml-2">
+          <div className="d-flex">
+            <div className="mb-0 text-purple2 font-size-xxl">Venue</div>
+            <div className="hl bg-purple2" />
+          </div>
+          <div className=" text-black font-size-lg font-weight-bold">
+            {"Ganey HaTaarucha, TLV"}
+          </div>
+        </div>
       </div>
-      <div style={{marginTop: -20}} className="ml-4">
-        <Map />
-      </div>
-      <div className="d-flex align-items-center mt-9">
-        <div className="border border-cyan mr-4 flex-1" />
+
+      <div>
+        <div>
+          <div className="map-wrapper">
+            <Map/>
+          </div>
+          <div className="venue-img">
+            <img
+              src={venuePic}
+              alt="venue"
+              style={{ width: '100%', marginTop:-300 }}
+              className="b-strong border-purple2"
+            />
+          </div>
+        </div>
       </div>
     </Container>
   </section>

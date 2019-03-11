@@ -65,14 +65,13 @@ class SessionsPage extends React.Component {
               {proposals.length ? (
                 proposals.map(proposal => (
                   <Session
-                    isSmallScreen={isSmallScreen}
                     key={proposal._id}
                     proposal={proposal}
                     speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
                   />
                 ))
               ) : (
-                <span className="font-mono font-size-xl">Nothing to show :-(</span>
+                <span className="font-mono font-size-xl">...</span>
               )}
             </Col>
             <Col lg="3">

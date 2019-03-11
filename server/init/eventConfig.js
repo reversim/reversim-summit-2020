@@ -1,9 +1,9 @@
 import moment from 'moment-timezone';
-
+import moment2 from 'moment';
 const config = {
   cfpStartDate: process.env.CFP_START_DATE ||  "2019-01-20",
   cfpEndDate: process.env.CFP_END_DATE || "2019-02-28",
-  votingStartDate: process.env.VOTING_START_DATE || "2019-03-07",
+  votingStartDate: process.env.VOTING_START_DATE || "2019-03-12",
   votingEndDate: process.env.VOTING_END_DATE || "2019-04-01",
 }
 
@@ -20,5 +20,6 @@ export default () => {
     cfp,
     voting,
     votingEnded,
+    votingCountDown: (moment2(config.votingEndDate).diff(moment()) / 1000)
   }
 }

@@ -10,14 +10,16 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black:    #000;
 
-$darkblue: #010035;
-$darkblue2: #010029;
+$darkblue:#010035;
 $blue:    #0048ff;
-$indigo:  #4d5aff;
+$indigo:  #896cff;
 $purple:  #df30ff;
+$purple2: #5127ff;
+$purple3: #3312bc;
 $pink:    #ff5400;
 $red:     #ff2e5f;
 $orange:  #ffaa30;
+$orange2: #ff6100;
 $yellow:  #f6ff00;
 $green:   #30ff96;
 $teal:    #2efffd;
@@ -27,19 +29,22 @@ $lightgreen: #69ff2e;
 $colors: (
   "blue":       $blue,
   "darkblue":       $darkblue,
-  "darkblue2":       $darkblue2,
   "indigo":     $indigo,
   "indigo-light": lighten($indigo, 20%),
   "purple":     $purple,
+  "purple2":     $purple2,
+  "purple3":     $purple3,
   "pink":       $pink,
   "red":        $red,
   "orange":     $orange,
+  "orange2":   $orange2,
   "yellow":     $yellow,
   "green":      $green,
   "lightgreen": $lightgreen,
   "teal":       $teal,
   "cyan":       $cyan,
   "white":      $white,
+  "black":      $black,
   "gray":       $gray-600,
   "gray-dark":  $gray-800,
   "transparent": transparent
@@ -142,7 +147,7 @@ $spacers: (
 //// Settings for the `<body>` element.
 //
 //$body-bg:                   $white;
-//$body-color:                $gray-900;
+$body-color:                $black;
 //
 //// Links
 ////
@@ -185,7 +190,7 @@ $container-max-widths: (
        sm: 540px,
        md: 720px,
        lg: 960px,
-       // xl: 1140px
+       xl: 1280px
 );
 //
 //@include _assert-ascending($container-max-widths, "$container-max-widths");
@@ -205,7 +210,7 @@ $container-max-widths: (
 //$line-height-lg:              1.5;
 //$line-height-sm:              1.5;
 //
-//$border-width:                1px;
+$border-width:                2px;
 //$border-color:                $gray-300;
 //
 //$border-radius:               .25rem;
@@ -233,14 +238,17 @@ $font-family-sans-serif:      Raleway, sans-serif;
 //// stylelint-enable value-keyword-case
 //
 //$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-xxxl:              72px;
+$font-size-xxl:               48px;
 $font-size-xl:                35px;
 $font-size-lg:                24px;
-$font-size-sm:                14px; // for 12px use <small>
 $font-size-md:                18px;
+$font-size-lm:                20px;
+$font-size-sm:                14px; // for 12px use <small>
 //
-//$font-weight-light:           300;
-//$font-weight-normal:          400;
-//$font-weight-bold:            700;
+// $font-weight-light:           300;
+$font-weight-normal:          300;
+$font-weight-bold:            600;
 //
 //$font-weight-base:            $font-weight-normal;
 //$line-height-base:            1.5;
@@ -591,7 +599,7 @@ $input-height-inner-lg:                 48px;
 //// Navbar
 //
 $navbar-padding-y:                  30px;
-$navbar-padding-x:                  30px;
+$navbar-margin-x:                  30px;
 //
 $navbar-nav-link-padding-x:         $spacer;
 //

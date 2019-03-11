@@ -1,10 +1,11 @@
 .img {
-  width: 200px;
-  height:  200px;
+  width: 240px;
+  height:  240px;
+  flex: 0 0 240px;
   background-size: cover;
-  z-index:1;
-  position: relative;
-  box-shadow: 0 0px 30px #010036;
+  border-left: 4px solid var(--purple2);
+  border-top: 4px solid var(--purple2);
+  border-bottom: 4px solid var(--purple2);
 }
 
 .img:hover div  {
@@ -29,19 +30,20 @@
 
 @media (max-width:767px) {
   .img, .homepageImg {
-    width: 150px;
-    height: 150px;
+    border-bottom: 0;
+    border-right: 4px solid var(--purple2);
   }
 
   .body {
     width: 215px;
   }
+  .title {
+    text-align: center;
+  }
 }
 
 @media (max-width:540px) {
   .img, .homepageImg {
-    width: 150px;
-    height: 150px;
   }
 
   .body {
