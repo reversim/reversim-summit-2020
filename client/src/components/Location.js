@@ -7,7 +7,7 @@ import venuePic from "../images/venue-pic.png";
 const Location = () => (
   <section className="mt-16 mb-20">
     <Container>
-      <div className="mb-8 d-flex">
+      <div className="d-flex">
         <img src={squares} alt="location" style={{ width: 122, height: 122 }} />
         <div className="flex-grow-1 ml-2">
           <div className="d-flex">

@@ -12,6 +12,7 @@ import joytunes from '../images/community/home-joytunes.png';
 import cloudinary from '../images/community/home-cloudinary.png';
 import oracle from '../images/community/home-oracle.png';
 import chegg from '../images/community/home-chegg.png';
+import cyberark from '../images/community/home-cyberark.png';
 
 const sponsors= [
   {logo:gett, name:'Gett'},
@@ -22,7 +23,8 @@ const sponsors= [
   {logo:cloudinary, name:'Cloudinary'},
   {logo:oracle, name:'Oracle'},
   {logo:chegg, name:'Chegg'},
-]
+  {logo:cyberark, name:'Cyberark'},
+];
 
 
 class SponsorMini extends React.Component {
@@ -33,8 +35,7 @@ class SponsorMini extends React.Component {
     const { name, logo } = this.props;
     return (
       <div
-        className="p-relative d-inline-block mx-8"
-        style={{ width: 200, maxWidth: 200, maxHeight: 100 }}
+        className="p-relative d-inline-block"
       >
         <HashLink smooth to={`/sponsors#${name}`}>
           <img
@@ -50,11 +51,11 @@ class SponsorMini extends React.Component {
 }
 const HomeCommunitySponsors = () => {
   return (
-    <div className='d-flex flex-wrap justify-content-center'>
+    <div className='home-sponsors d-flex flex-wrap'>
     {sponsors
       .map((sponsor, i) => {
         return (
-          <div key={i}>
+          <div className="sponsor-community-mini" key={i}>
             <SponsorMini key={i} {...sponsor} />
           </div>
         );
