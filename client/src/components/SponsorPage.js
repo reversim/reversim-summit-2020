@@ -7,6 +7,7 @@ import * as Scroll from "react-scroll";
 import { animateScroll as scroll, Link as ScrollLink } from "react-scroll";
 import Page from "./Page";
 import { Container, Row, Col, Button } from "reactstrap";
+import triangle from "../images/SVG/triangle.svg";
 import s from "./Sponsors.css";
 import {
   Carousel,
@@ -75,40 +76,32 @@ class TitleSection extends React.Component {
     return (
       <div>
         <div className={cn("bg-purple2 text-white", s.premiumTitle)}>
-          <div className={"d-flex"}>
-            <div className="font-size-xxl">Big Thanks to our sponsor</div>
-            <div className="hl bg-white" />
-          </div>
-          <div className={cn("d-flex flex-row mb-4", s.premiumTitle)}>
-            <div className="b-strong border-purple2 bg-white mr-5">
-              <img
-                src={sponsor.logo}
-                alt={sponsor.name}
-                style={{ maxWidth: 150, maxHeight: 150 }}
-              />
+            <div className="d-flex justify-content-center mt-15 mb-12">
+                <img src={triangle} className={s.triangle} alt="diamond" />
+                <div className={cn("font-size-xxl text-white")}>
+                    Big Thanks to our sponsor
+                </div>
+                <div className="bg-white hl" />
             </div>
+
+            <div className={cn("d-flex flex-row mb-4", s.premiumTitle)}>
+                <div className="b-strong border-purple2 bg-white mr-5">
+                  <img
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    style={{ maxWidth: 250 }}/>
+                </div>
             <div>
-              <div>
                 <div className={"d-flex flex-column "}>
                   <div className="d-flex flex-inline align-items-baseline">
-                    <div className={"font-size-xl mr-5"}>{sponsor.name}</div>
-                    {(sponsor.location || {}).link && (
-                      <div>
-                        <FontAwesomeIcon
-                          className="mr-2"
-                          icon="map-marker-alt"
-                        />
-                        <span className="font-weight-bold">
-                          {(sponsor.location || {}).shortAddress}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <div>
-                    <span>{sponsor.oneLiner}</span>
+                    <div className={"font-size-xl font-weight-bold  mr-5"}>{sponsor.name}</div>
+                    <div>{sponsor.oneLiner}</div>
                   </div>
                 </div>
-              </div>
+
+
+
+
               <div className={cn("d-flex flex-column mt-4")}>
                 <div className={s.socialWrapper}>
                   {sponsor.socials.map((social, i) => (

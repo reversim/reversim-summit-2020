@@ -8,7 +8,7 @@ import SessionPage from '../components/SessionPage';
 import SessionEditPage from '../components/SessionEditPage';
 import SpeakersPage from '../components/SpeakersPage';
 import SponsorsPage from '../components/Sponsors';
-import SponsorPage from "../components/SponsorPage";
+import SponsorPage from "../components/PremiumSponsorPage";
 // import RegisterPage from "../components/RegisterPage";
 import LocationPage from '../components/LocationPage';
 import TeamPage from '../components/TeamPage';

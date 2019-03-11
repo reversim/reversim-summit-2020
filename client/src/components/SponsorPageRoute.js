@@ -7,7 +7,7 @@ const NoSponsorFound = props => (
     <Container>
       <Row>
         <Col>
-          <h1 className="text-center my-12">Whoops, nothing here :/</h1>
+          <h1 className="text-center my-12">...</h1>
         </Col>
       </Row>
     </Container>

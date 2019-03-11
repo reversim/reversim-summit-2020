@@ -15,6 +15,13 @@
     margin-right: -50px;
 }
 
+.triangle {
+    height: 100px;
+    width: 90px;
+    margin-right: -26px;
+    margin-top: -23px;
+}
+
 .circle {
     width: 100px;
     height: 100px;
