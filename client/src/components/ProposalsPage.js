@@ -40,7 +40,7 @@ const SelectVotes = ({ text, toggleFilter, isBorder, selected }) => (
   >
     <div
       className={cn("mr-2 b-regular", { selected: selected })}
-      style={{ width: 24, height: 24 }}
+      style={{ minWidth: 24, height: 24 }}
     >
       <div />
     </div>

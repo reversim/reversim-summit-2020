@@ -18,7 +18,7 @@ export default ({user, attended, proposalId, attendProposal}) => {
         onClick={() => attendProposal(proposalId, attended === false ? undefined : false)}>
         <div
           className={cn('mr-2 b-regular', {'selected': attended === false})}
-          style={{width: 24, height: 24}}>
+          style={{minWidth: 24, height: 24}}>
           <div/>
         </div>
         <span> Not relevant to me</span>
