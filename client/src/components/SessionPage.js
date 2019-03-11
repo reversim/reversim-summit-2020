@@ -46,11 +46,13 @@ class SessionPage extends Component {
         params: {id},
       },
     } = this.props;
-    const {voting} = eventConfig;
-    const {title, abstract, type, tags, outline, categories: _categories, attended} = session;
+    const { voting, cfp } = eventConfig;
+    const { title, abstract, type, tags, outline, categories: _categories, attende, speaker_ids } = session;
+    const trackRecords = sessionSpeakers.map(speaker => ({name: speaker.name, trackRecord: speaker.trackRecord}));
+    const video_urls = sessionSpeakers.map(speaker => ({name: speaker.name, video_url: speaker.video_url}));
     const isAuthor = user && session.speaker_ids.includes(user._id);
     const isTeamMember = user && user.isReversimTeamMember;
-    const canEdit = isAuthor || isTeamMember;
+    const canEdit = (isAuthor && cfp) || isTeamMember;
 
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
@@ -83,6 +85,27 @@ class SessionPage extends Component {
               <ReactMarkdown source={outline.replace(/\n/g, '<br/>\n')} />{' '}
               {/* consolidate line breaks */}
             </div>
+          )}
+          {isTeamMember &&
+          trackRecords && (
+              trackRecords.map((trackRecord, i) =>
+              <div className="mb-3" key={i}>
+                <h4>Track record- {trackRecord.name}</h4>
+                <div className="font-size-sm">
+                  <ReactMarkdown source={trackRecord.trackRecord} />
+                </div>
+              </div>)
+          )}
+          {isTeamMember &&
+          video_urls && (video_urls.map((video_url, i) =>
+              <div className="mb-3" key={i}>
+                <h4>Video URL- {video_url.name}</h4>
+                <div>
+                  <a href={video_url.video_url} target="_blank" className="text-white">
+                    {video_url.video_url}
+                  </a>
+                </div>
+              </div>)
           )}
 
             <div className="session-page__voting mb-10">

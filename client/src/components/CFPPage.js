@@ -46,7 +46,7 @@ const CFPBody = props => {
       </Fragment>
     );
   } else {
-    return <h1 className="my-5 text-primary">{REVERSIM_SUMMIT} - CFP is closed!</h1>;
+    return <h1 className="my-5 text-primary text-white">{REVERSIM_SUMMIT} - CFP is closed!</h1>;
   }
 };
 

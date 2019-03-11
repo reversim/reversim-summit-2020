@@ -8,6 +8,20 @@ import ProposalForm from "./ProposalForm";
 import { ABSTRACT_MAX, ABSTRACT_MIN } from "../data/proposals";
 import { getHref } from "../utils";
 
+
+const EditNotAllowed = props => (
+    <Page title={`Edit ${props.session.title}`} {...props}>
+      <Container>
+        <Row>
+          <Col>
+            <h2 className="text-center my-12">Editing is over</h2>
+            <h3 className="text-center my-12">If you really have to, contact us at-  <a href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</a></h3>
+          </Col>
+        </Row>
+      </Container>
+    </Page>
+);
+
 class SessionEditPage extends React.Component {
   constructor(props) {
     super(props);
@@ -85,11 +99,16 @@ class SessionEditPage extends React.Component {
   updateState = state => this.setState(state);
 
   render() {
-    const { session, allTags } = this.props;
-    const { proposalType, categories, tags } = this.state;
-    const { title, outline, abstract, legal } = session;
-    const coSpeaker = this.state.coSpeaker;
+    const {session, allTags, eventConfig, user} = this.props;
+    const {proposalType, categories, tags} = this.state;
+    const {title, outline, abstract, legal} = session;
+    const coSpeaker = this.state.coSpeaker
+    const {cfp} = eventConfig;
+    const isAuthor = user && session.speaker_ids.includes(user._id);
+    const isTeamMember = user && user.isReversimTeamMember;
+    const canEdit = (isAuthor && cfp) || isTeamMember;
 
+    if (!canEdit) return <EditNotAllowed {...this.props} />;
     return (
       <Page title={`Edit ${session.title}`} {...this.props}>
         <div className="navbar-margin">
