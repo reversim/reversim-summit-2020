@@ -146,7 +146,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                                     <div className="premium-tech-list">
                                         {
                                             sponsor.techStory.technologies.map(t => (
-                                                <div className="premium-tech-item">{t}</div>
+                                                <div className="premium-tech-item" key={t}>{t}</div>
                                             ))
                                         }
                                     </div>
