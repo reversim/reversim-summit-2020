@@ -11,7 +11,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import premiumImage from "../images/sponsors-page-bg.png";
 import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
 import { img } from "./Speaker2.css";
@@ -42,7 +41,9 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
       </div>
       <div className={cn("d-flex flex-wrap", s.premiumSponsorsWrap)}>
         {sponsors.map(sponsor => (
-          <PremiumSponsor
+          <SponsorMiniPremium
+            key={sponsor._id}
+            {...sponsor}
             key={sponsor._id}
             sponsor={sponsor}
             canEdit={user && user.isReversimTeamMember}
@@ -328,7 +329,7 @@ class SponsorMiniPremium extends React.Component {
     return (
       <div className="d-flex flex-column align-items-center mb-6">
         <div
-          className="p-relative text-center b-strong mb-2"
+          className="p-relative text-center white-bg mb-2"
           style={{ width: 358, height: 230, maxWidth: 358 }}
         >
           <a href={url}>
@@ -341,7 +342,7 @@ class SponsorMiniPremium extends React.Component {
           </a>
         </div>
         <Link to={`/sponsor/${name}`} className="unstyled-link">
-          <Button className={"styled-button on-white"}>
+          <Button className={"styled-button on-purple"}>
             EXPLORE OPPORTUNITIES
           </Button>
         </Link>
@@ -420,7 +421,6 @@ class SponsorsPage extends React.Component {
             s.premiumCover,
             "bg-purple2 page-hero pb-8 navbar-margin"
           )}
-          style={{ backgroundImage: `url('${premiumImage}')` }}
         >
           <Container>
             {user && user.isReversimTeamMember && (

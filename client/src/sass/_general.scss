@@ -346,6 +346,15 @@ a.unstyled-link:active {
     }
   }
 }
+.not-relevant-filter {
+  .selected {
+    & > div {
+      background: $purple2;
+      height: 16px;
+      margin: 2px;
+    }
+  }
+}
 
 button.btn {
   box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.1);

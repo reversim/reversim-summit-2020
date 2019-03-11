@@ -32,13 +32,26 @@ const TagFilter = ({ text, isSelected, onClick }) => (
   </div>
 );
 
-const SelectVotes = ({ text, value, setValue, isBorder }) => (
-  <div className="d-flex flex-column" onClick={() => setValue(value)} style={isBorder ? {borderBottom:'solid 2px #5127ff'} : {}}>
-    <div className="cursor-pointer font-weight-bold d-flex align-items-center px-2 py-1">
-      <div className={cn("mr-2 b-regular")} style={{ width: 24, height: 24 }} />
-      <span>{text}</span>
+const SelectVotes = ({ text, toggleFilter, isBorder, selected }) => (
+  <div
+    className="not-relevant-filter cursor-pointer font-weight-bold d-flex align-items-center px-2 py-1"
+    onClick={toggleFilter}
+    style={isBorder ? { borderBottom: "solid 2px #5127ff" } : {}}
+  >
+    <div
+      className={cn("mr-2 b-regular", { selected: selected })}
+      style={{ width: 24, height: 24 }}
+    >
+      <div />
     </div>
+    <span> {text} </span>
   </div>
+  // {/*<div className="d-flex flex-column" onClick={() => setValue(value)} style={isBorder ? {borderBottom:'solid 2px #5127ff'} : {}}>*/}
+  //   {/*<div className="cursor-pointer font-weight-bold d-flex align-items-center px-2 py-1">*/}
+  //     {/*<div className={cn("mr-2 b-regular")} style={{ width: 24, height: 24 }} />*/}
+  //     {/*<span>{text}</span>*/}
+  // </div>
+  // </div>
 );
 
 class TagInput extends React.Component {
@@ -148,9 +161,13 @@ class ProposalsPage extends React.Component {
     super(props);
     this.state = {
       tagFilters: [],
-      myVotes: undefined,
       myVotesOpen: false,
-      myVotesClean: true
+      myVotesClean: true,
+      votesFilter: {
+        interested: true,
+        notRelevant: true,
+        none: true
+      }
     };
   }
   componentDidMount() {
@@ -175,7 +192,10 @@ class ProposalsPage extends React.Component {
   };
 
   toggleMyVotesInput = () => {
-    this.setState({ myVotesOpen: !this.state.myVotesOpen, myVotesClean: false });
+    this.setState({
+      myVotesOpen: !this.state.myVotesOpen,
+      myVotesClean: false
+    });
   };
 
   render() {
@@ -188,7 +208,7 @@ class ProposalsPage extends React.Component {
       attendProposal
     } = this.props;
 
-    const { tagFilters, myVotes } = this.state;
+    const { tagFilters } = this.state;
     const showProposals = !!gotAllProposals;
     const tags = allTags
       .map(tag => {
@@ -201,18 +221,28 @@ class ProposalsPage extends React.Component {
           proposal.tags.some(tag => tagFilters.includes(tag))
         )
       : proposals;
-    // const filteredProposals = myVotes
-    //   ? tagfilteredProposals.filter(proposal => proposal.attended !== undefined)
-    //   : tagfilteredProposals;
-    let filteredProposals = tagfilteredProposals;
-    if (this.state.myVotes === true)
-      filteredProposals = filteredProposals.filter(
-        proposal => proposal.attended
+
+    let votesFilterText = [];
+    let filteredProposals = [];
+
+    if (this.state.votesFilter.none) {
+      votesFilterText.push('None');
+      filteredProposals.push(
+        ...tagfilteredProposals.filter(proposal => proposal.attended === undefined)
       );
-    if (this.state.myVotes === false)
-      filteredProposals = filteredProposals.filter(
-        proposal => proposal.attended === false
+    }
+    if (this.state.votesFilter.notRelevant) {
+      votesFilterText.push('Not relevant');
+      filteredProposals.push(
+        ...tagfilteredProposals.filter(proposal => proposal.attended === false)
       );
+    }
+    if (this.state.votesFilter.interested) {
+      votesFilterText.push('Interested');
+      filteredProposals.push(
+        ...tagfilteredProposals.filter(proposal => proposal.attended)
+      );
+    }
     const sortedProposals = filteredProposals.sort((a, b) =>
       b.attended !== undefined ? -1 : a.attended !== undefined ? 1 : 0
     );
@@ -257,7 +287,7 @@ class ProposalsPage extends React.Component {
                   )}
                 </div>
                 <div className="d-flex flex-column">
-                  <div onClick={this.toggleMyVotesInput}>
+                  <div>
                     <div
                       className="d-flex b-strong align-items-center p-relative cursor-pointer"
                       style={{ width: 360 }}
@@ -267,7 +297,9 @@ class ProposalsPage extends React.Component {
                         placeholder="Filter by proposal status..."
                         className="box-shadow-none border-transparent p-1 cursor-pointer"
                         style={{ outline: "none" }}
-                        value={this.state.myVotes? 'Interested' : this.state.myVotes === false ? 'Not relevant to me' : this.state.myVotesClean? '' : 'None'}
+                        value={votesFilterText.join(', ')}
+                        onClick={this.toggleMyVotesInput}
+                        onChange={()=>{}}
                       />
                       <FontAwesomeIcon
                         icon={
@@ -277,23 +309,36 @@ class ProposalsPage extends React.Component {
                       />
                     </div>
                     {this.state.myVotesOpen && (
-                      <div className="b-strong position-absolute white-bg" style={{borderTop:'none', width:360}}>
+                      <div
+                        className="b-strong position-absolute white-bg"
+                        style={{ borderTop: "none", width: 360 }}
+                      >
                         <SelectVotes
                           text={"Interested"}
-                          value={true}
-                          setValue={myVotes => this.setState({ myVotes })}
+                          toggleFilter={() => {
+                            let votesFilter = this.state.votesFilter
+                            votesFilter.interested = !votesFilter.interested
+                            this.setState(votesFilter)
+                          }}
                           isBorder={true}
+                          selected={this.state.votesFilter.interested}
                         />
                         <SelectVotes
                           text={"Not relevant to me"}
-                          value={false}
-                          setValue={myVotes => this.setState({ myVotes })}
-                          isBorder={true}
+                          toggleFilter={() => {
+                            let votesFilter = this.state.votesFilter
+                            votesFilter.notRelevant = !votesFilter.notRelevant
+                            this.setState(votesFilter)
+                          }}                          isBorder={true}
+                          selected={this.state.votesFilter.notRelevant}
                         />
                         <SelectVotes
                           text={"None"}
-                          value={undefined}
-                          setValue={myVotes => this.setState({ myVotes })}
+                          toggleFilter={() => {
+                            let votesFilter = this.state.votesFilter
+                            votesFilter.none = !votesFilter.none
+                            this.setState(votesFilter)
+                          }}                          selected={this.state.votesFilter.none}
                         />
                       </div>
                     )}
