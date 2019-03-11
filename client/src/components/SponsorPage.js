@@ -92,10 +92,17 @@ class TitleSection extends React.Component {
                 <div className={"d-flex flex-column "}>
                   <div className="d-flex flex-inline align-items-baseline">
                     <div className={"font-size-xl mr-5"}>{sponsor.name}</div>
-                    <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
-                    <span className="font-weight-bold">
-                      {(sponsor.location || {}).shortAddress}
-                    </span>
+                    {(sponsor.location || {}).link && (
+                      <div>
+                        <FontAwesomeIcon
+                          className="mr-2"
+                          icon="map-marker-alt"
+                        />
+                        <span className="font-weight-bold">
+                          {(sponsor.location || {}).shortAddress}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div>
                     <span>{sponsor.oneLiner}</span>
@@ -121,10 +128,14 @@ class TitleSection extends React.Component {
                   <ScrollLink to={"Tech-Story"} offset={-100}>
                     Tech-Story
                   </ScrollLink>
-                  {!!sponsor.openPositions.length && (<div><span>{" | "}</span>
-                  <ScrollLink to={"Open Positions"} offset={-100}>
-                    Open Positions
-                  </ScrollLink></div>)}
+                  {!!sponsor.openPositions.length && (
+                    <div>
+                      <span>{" | "}</span>
+                      <ScrollLink to={"Open Positions"} offset={-100}>
+                        Open Positions
+                      </ScrollLink>
+                    </div>
+                  )}
                   {sponsor.reversimAndUs && (
                     <div>
                       <span>{" | "}</span>
@@ -352,7 +363,10 @@ class OpenPosition extends React.Component {
           </div>
         </div>
         <div
-          className={cn("bg-white b-strong border-purple2 p-6 d-flex flex-column", s.openPosition)}
+          className={cn(
+            "bg-white b-strong border-purple2 p-6 d-flex flex-column",
+            s.openPosition
+          )}
         >
           <div className="pb-3">{openPosition.description}</div>
           <a href={openPosition.link} className="align-self-end">

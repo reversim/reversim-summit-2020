@@ -9,7 +9,6 @@ const SponsorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  homeLogo: String,
   location: {
     link: String,
     shortAddress: String

@@ -18,6 +18,21 @@ async function getAllSponsors(shouldShuffle) {
 
   return sponsors;
 }
+const socials = sponsor => {
+  let socials = [];
+  if (sponsor.linkedIn)
+    socials.push({ medium: "linkedin", link: sponsor.linkedIn });
+  if (sponsor.github)
+    socials.push({ medium: "github", link: sponsor.github });
+  if (sponsor.facebook)
+    socials.push({ medium: "facebook", link: sponsor.facebook });
+  if (sponsor.twitter)
+    socials.push({ medium: "twitter", link: sponsor.twitter });
+  if (sponsor.medium)
+    socials.push({ medium: "medium", link: sponsor.medium });
+
+  return socials;
+};
 
 async function add(req, res) {
   if (!req.user || !req.user.isReversimTeamMember) return res.sendStatus(401);
@@ -25,21 +40,7 @@ async function add(req, res) {
 
   sponsor.created_at = new Date();
   sponsor.updated_at = new Date();
-  const socials = sponsor => {
-    let socials = [];
-    if (sponsor.linkedIn)
-      socials.push({ medium: "linkedin", link: sponsor.linkedIn });
-    if (sponsor.github)
-      socials.push({ medium: "github", link: sponsor.github });
-    if (sponsor.facebook)
-      socials.push({ medium: "facebook", link: sponsor.facebook });
-    if (sponsor.twitter)
-      socials.push({ medium: "twitter", link: sponsor.twitter });
-    if (sponsor.medium)
-      socials.push({ medium: "medium", link: sponsor.medium });
 
-    return socials;
-  };
   let newSponsor;
 
   if (sponsor.isPremium) {
@@ -72,7 +73,6 @@ async function add(req, res) {
       about: sponsor.about || "",
       url: sponsor.url || "",
       jobUrl: sponsor.jobUrl,
-      homeLogo: await uploadLogo(req.body.homeLogo),
       created_at: new Date(),
       updated_at: new Date()
     };
@@ -88,16 +88,55 @@ async function update(req, res) {
     console.error("error in sponsor update - no sponsor found");
     return res.status(500).send("Something went wrong getting the data");
   } else {
-    req.body.updated_at = new Date();
-    req.body.logo = await uploadLogo(req.body.logo);
-    if(req.body.homeLogo) req.body.homeLogo = await uploadLogo(req.body.homeLogo);
+    let newSponsor;
 
-    req.body.images = await Promise.all(
-      req.body.images.map(image => uploadLogo(image))
-    );
-    const data = _.omit(req.body, ["_id"]);
-    await Sponsor.findOneAndUpdate({ _id: req.params.id }, data);
-    return res.status(200).send(data);
+    if (sponsor.isPremium) {
+      newSponsor = {
+        name: req.body.name,
+        logo: await uploadLogo(req.body.logo),
+        location: {
+          link: req.body.locationLink || "",
+          shortAddress: req.body.locationShortAddress || ""
+        },
+        socials: socials(req.body),
+        oneLiner: req.body.oneLiner || "",
+        about: req.body.about || "",
+        techStory: {
+          text: req.body.techStory.text || "",
+          technologies: (req.body.techStory.technologies || '').split("\n") || []
+        },
+        openPositions: req.body.openPositions || [],
+        url: req.body.url || "",
+        reversimAndUs: req.body.reversimAndUs || "",
+        isPremium: req.body.isPremium || "",
+        images: await Promise.all(req.body.images.map(image => uploadLogo(image))),
+        updated_at: new Date()
+      };
+    } else {
+      newSponsor = {
+        name: req.body.name,
+        logo: await uploadLogo(req.body.logo),
+        about: req.body.about || "",
+        url: req.body.url || "",
+        jobUrl: req.body.jobUrl,
+        updated_at: new Date()
+      };
+    }
+
+
+
+
+    // req.body.updated_at = new Date();
+    // req.body.logo = await uploadLogo(req.body.logo);
+    //
+    // req.body.images = await Promise.all(
+    //   req.body.images.map(image => uploadLogo(image))
+    // );
+    // if(req.body.socials) req.body.socials= socials(req.body.socials);
+    // if(req.body.technologies)
+    // const data = _.omit(req.body, ["_id"]);
+    await Sponsor.findOneAndUpdate({ _id: req.params.id }, newSponsor);
+    return res.status(200).send(newSponsor);
   }
 }
 

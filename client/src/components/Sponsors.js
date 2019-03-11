@@ -5,7 +5,7 @@ import { Button, Input, Row, Col, Container } from "reactstrap";
 import Page from "./Page";
 import ReactMarkdown from "react-markdown";
 import { REVERSIM_SUMMIT } from "../utils";
-import HomeCommunitySponsors from './HomeCommunitySponsors'
+import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -60,7 +60,12 @@ const CommunitySponsors = ({
 }) => {
   return (
     <div className={cn("bg-white")}>
-      <div className={cn("d-flex justify-content-center text-align-center", s.communitySponsorsTitle)}>
+      <div
+        className={cn(
+          "d-flex justify-content-center text-align-center",
+          s.communitySponsorsTitle
+        )}
+      >
         <svg className={s.circle}>
           <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
         </svg>
@@ -94,7 +99,10 @@ const Sponsor = ({
     <div className={cn("d-flex m-4", s.communitySponsors)}>
       <div
         id={name}
-        className={cn("text-center b-strong border-purple2 d-flex align-items-center", s.sponsor)}
+        className={cn(
+          "text-center b-strong border-purple2 d-flex align-items-center",
+          s.sponsor
+        )}
       >
         {/*<a href={url} target="_blank">*/}
         <img
@@ -118,7 +126,7 @@ const Sponsor = ({
                 className="ml-2"
                 onClick={onEdit}
               >
-                <FontAwesomeIcon icon="pencil-alt" />
+                <FontAwesomeIcon icon={faPencilAlt} />
               </Button>
               <Button
                 size="sm"
@@ -126,7 +134,7 @@ const Sponsor = ({
                 className="ml-2"
                 onClick={onDelete}
               >
-                <FontAwesomeIcon icon="trash" />
+                <FontAwesomeIcon icon={faTrash} />
               </Button>
             </span>
           )}
@@ -192,7 +200,7 @@ class PremiumSponsor extends React.Component {
                     className="ml-2"
                     onClick={this.onEdit}
                   >
-                    <FontAwesomeIcon icon="pencil-alt" />
+                    <FontAwesomeIcon icon={faPencilAlt} />
                   </Button>
                   <Button
                     size="sm"
@@ -200,7 +208,7 @@ class PremiumSponsor extends React.Component {
                     className="ml-2"
                     onClick={this.onDelete}
                   >
-                    <FontAwesomeIcon icon="trash" />
+                    <FontAwesomeIcon icon={faTrash} />
                   </Button>
                 </span>
               )}
@@ -312,7 +320,6 @@ class SponsorMiniPremium extends React.Component {
   }
 }
 
-
 export const SponsorsSection = ({ sponsors }) => {
   return (
     <section className="mb-20">
@@ -349,7 +356,7 @@ export const SponsorsSection = ({ sponsors }) => {
                   </div>
                 );
               })}*/}
-            <HomeCommunitySponsors></HomeCommunitySponsors>
+            <HomeCommunitySponsors />
           </div>
           {/* <WantToBe /> */}
         </div>
@@ -419,6 +426,13 @@ class SponsorForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.props.sponsor ? { ...this.props.sponsor } : {};
+    this.state.techStory = this.state.techStory || {
+      technologies: "",
+      text: ""
+    };
+    this.state.techStory.technologies = (
+      this.state.techStory.technologies || []
+    ).join("\n");
   }
 
   getData = event => {
@@ -450,8 +464,7 @@ class SponsorForm extends React.Component {
         "logo",
         "url",
         "about",
-        "jobUrl",
-        "homeLogo"
+        "jobUrl"
       ]);
     }
   };
@@ -469,10 +482,6 @@ class SponsorForm extends React.Component {
             onChange={e =>
               this.setState({
                 isPremium: e.target.checked,
-                techStory: this.state.techStory || {
-                  technologies: "",
-                  text: ""
-                },
                 socials: [],
                 images: []
               })
@@ -513,30 +522,6 @@ class SponsorForm extends React.Component {
           />
           Choose logo
         </Button>
-        <br />
-        <Button className="p-relative mb-3" size="sm">
-          <input
-            type="file"
-            onChange={e => {
-              const f = e.target.files[0];
-              if (!f) return;
-              const reader = new FileReader();
-              reader.onload = e2 => {
-                this.setState({ homeLogo: e2.target.result, imgDirty: true });
-              };
-              reader.readAsDataURL(f);
-            }}
-            style={{
-              opacity: 0,
-              position: "absolute",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0
-            }}
-          />
-          Choose logo for home page
-        </Button>
         <Input
           className="mb-3"
           size="sm"
@@ -563,13 +548,13 @@ class SponsorForm extends React.Component {
           <div>
             {(this.state.images || []).map((image, i) => (
               <div key={i}>
-                {image.endsWith('mp4') ?
+                {image.endsWith("mp4") ? (
                   <video width="200" controls={true}>
-                    <source src={image} type="video/mp4"/>
+                    <source src={image} type="video/mp4" />
                   </video>
-                  :
-                  <img src={image} style={{ width: "200px" }}  />
-                }
+                ) : (
+                  <img src={image} style={{ width: "200px" }} />
+                )}
                 <FontAwesomeIcon
                   icon="trash"
                   className="cursor-pointer"
@@ -689,11 +674,7 @@ class SponsorForm extends React.Component {
               type="textarea"
               placeholder="technologies separated by new line. make sure to remove unnecessary spaces and stuff"
               // TODO NETA- clean up my mass
-              value={
-                typeof this.state.techStory.technologies === "string"
-                  ? this.state.techStory.technologies
-                  : this.state.techStory.technologies.join("\n")
-              }
+              value={this.state.techStory.technologies}
               onChange={e => {
                 let techStory = this.state.techStory;
                 techStory.technologies = e.target.value;
