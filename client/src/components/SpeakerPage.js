@@ -86,8 +86,7 @@ export class SpeakerPage extends React.Component {
           )}
           {canEdit && (
             <Button
-              color="primary"
-              className="d-block mb-4 mx-auto mx-md-0 mt-3"
+              className="d-block mb-4 mx-auto mx-md-0 mt-3 styled-button btn btn-secondary"
               disabled={isUploadingPhoto}
               style={{position: 'relative', overflow: 'hidden'}}>
               {isUploadingPhoto ? 'Uploading' : 'Upload photo'}

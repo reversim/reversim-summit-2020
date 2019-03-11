@@ -7,6 +7,7 @@ import Redirect from './Redirect';
 
 const SpeakerEditPage = ({speaker, user, updateUserData, ...props}) => (
   <Page title={`Edit ${speaker.name}`} user={user} {...props}>
+    <div className='navbar-margin'>
     <Container className="my-8">
       <Row>
         <Col sm={{size: 8, offset: 2}}>
@@ -17,6 +18,7 @@ const SpeakerEditPage = ({speaker, user, updateUserData, ...props}) => (
         </Col>
       </Row>
     </Container>
+    </div>
   </Page>
 );
 

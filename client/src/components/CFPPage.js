@@ -52,7 +52,7 @@ const CFPBody = props => {
 
 const CFPPage = props => (
   <Page title="Call for papers" {...props}>
-    <div className="container">
+    <div className="container navbar-margin">
       <Container>
         <Row>
           <Col lg={{size: 10, offset: 1}} className={cn(cfpCol)}>
