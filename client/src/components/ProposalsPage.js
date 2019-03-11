@@ -103,7 +103,6 @@ class TagInput extends React.Component {
     const { tagInput } = this.state;
     const width = this.props.isSmallerScreen ? 300 : 360;
 
-
     const suggestedTags =
       tagInput &&
       tags
@@ -300,7 +299,7 @@ class ProposalsPage extends React.Component {
                       ref={this.input}
                     >
                       <input
-                        placeholder="Filter by proposal status..."
+                        placeholder="Filter by voting status..."
                         className="box-shadow-none border-transparent p-1 cursor-pointer"
                         style={{ outline: "none" }}
                         value={votesFilterText.join(", ")}
