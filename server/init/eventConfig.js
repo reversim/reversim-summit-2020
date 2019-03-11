@@ -5,7 +5,7 @@ const config = {
   cfpStartDate: process.env.CFP_START_DATE ||  "2019-01-20",
   cfpEndDate: process.env.CFP_END_DATE || "2019-02-20",
   votingStartDate: process.env.VOTING_START_DATE || "2019-02-01",
-  votingEndDate: process.env.VOTING_END_DATE || "2019-03-22",
+  votingEndDate: process.env.VOTING_END_DATE || "2019-03-24",
 }
 
 export default () => {
