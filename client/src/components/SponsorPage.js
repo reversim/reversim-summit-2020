@@ -313,8 +313,7 @@ class DescriptionSection extends React.Component {
                 <OpenPosition
                   key={i}
                   openPosition={openPosition}
-                  {...this.props}
-                />
+                  {...this.props}/>
               ))}
             </div>
           </div>

@@ -8,6 +8,7 @@ import { animateScroll as scroll, Link as ScrollLink } from "react-scroll";
 import Page from "./Page";
 import { Container, Row, Col, Button } from "reactstrap";
 import triangle from "../images/SVG/triangle.svg";
+import zigzag from '../images/SVG/zigzag.svg';
 import s from "./Sponsors.css";
 import {
     Carousel,
@@ -117,7 +118,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                 <div className="premium-pr premium-mr">
                     <section className="premium-who">
                         <div className="d-flex">
-                            <div className="font-size-xl text-purple2">Who We Are?</div>
+                            <h3 className="font-size-xl text-purple2">Who We Are?</h3>
                             <div className="hl bg-purple2" />
                         </div>
                         <p className="premium-text">{sponsor.about}</p>
@@ -132,24 +133,66 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                 </div>
                 <div className="premium-mr premium-tech">
                     <div className={cn("d-flex", s.premiumSection)} name="Tech-Story">
-                        <div className="font-size-xl text-purple2">
+                        <h3 className="font-size-xl text-purple2">
                             Our Technology Story
-                        </div>
+                        </h3>
                         <div className="hl bg-purple2" />
                     </div>
                     <div className="premium-tech-story">
                         <p className="premium-text">{sponsor.techStory.text}</p>
-                        <div className="premium-tech-list">
+
                             {
                                 (sponsor.techStory.technologies && sponsor.techStory.technologies.length > 0) && (
-                                    sponsor.techStory.technologies.map(t => (
-                                        <div className="premium-tech-item">{t}</div>
-                                    ))
+                                    <div className="premium-tech-list">
+                                        {
+                                            sponsor.techStory.technologies.map(t => (
+                                                <div className="premium-tech-item">{t}</div>
+                                            ))
+                                        }
+                                    </div>
                                 )
                             }
-                        </div>
                     </div>
                 </div>
+                {
+                    (sponsor.openPositions && sponsor.openPositions.length > 0) && (
+                        <div className="premium-mr">
+                            <section>
+                                <div className="d-flex align-items-center mb-8 mt-12">
+                                    <img src={zigzag} alt="" height="80" style={{marginRight: -11}}/>
+                                    <h3 className="text-purple2 font-size-xl mr-4">
+                                        Open Positions
+                                    </h3>
+                                    <div className="flex-grow-1 border-bottom border-purple2"/>
+                                </div>
+                                <div className="premium-positions">
+                                    {sponsor.openPositions.map((openPosition, i) => (
+                                        <OpenPosition
+                                            key={i}
+                                            openPosition={openPosition}
+                                            {...this.props}/>
+                                    ))}
+                                </div>
+                            </section>
+                        </div>
+                    )
+
+                }
+                {
+                    sponsor.reversimAndUs && (
+                        <div className="premium-mr">
+                            <section>
+                                <div className="d-flex align-items-center mb-4 mt-12">
+                                    <h3 className="text-purple2 font-size-xl mr-4">
+                                        Reversim and us
+                                    </h3>
+                                    <div className="flex-grow-1 border-bottom border-purple2"/>
+                                </div>
+                                <p className="premium-text">{sponsor.reversimAndUs}</p>
+                            </section>
+                        </div>
+                    )
+                }
             </Container>
         </Page>
     );
@@ -364,12 +407,8 @@ class OpenPosition extends React.Component {
         </div>
         </div>
         <div
-        className={cn(
-            "bg-white b-strong border-purple2 p-6 d-flex flex-column",
-            s.openPosition
-    )}
-    >
-    <div className="pb-3">{openPosition.description}</div>
+        className="bg-white b-strong border-purple2 p-6 d-flex flex-column">
+    <div className="pb-3 premium-position">{openPosition.description}</div>
         <a href={openPosition.link} className="align-self-end">
             <Button className="styled-button w-max-content">APPLY</Button>
             </a>

@@ -971,6 +971,33 @@ input[type="checkbox"] {
   font-weight: 400;
 }
 
+.premium-tech-story {
+  display: flex;
+}
+
+.premium-tech-list {
+  flex: 0 0 50%;
+  margin-left: 40px;
+}
+
+.premium-tech-item {
+  display: inline-block;
+  margin-right: 20px;
+  background: $purple2;
+  padding: 5px 10px;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.premium-positions {
+  display: flex;
+}
+
+.premium-position {
+  font-weight: 400;
+}
+
 
 
 
