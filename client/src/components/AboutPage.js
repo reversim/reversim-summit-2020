@@ -97,7 +97,7 @@ const AboutPage = props => {
                         </div>
                         <div className="about__team">
                         {props.team.map(id => (
-                            <TeamMember {...props.users[id]} />
+                            <TeamMember key={id} {...props.users[id]} />
                 ))}
                 </div>
             </Container>

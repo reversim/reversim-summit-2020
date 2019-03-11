@@ -342,6 +342,16 @@ a.unstyled-link:active {
     & > div {
       background: $purple2;
       height: 16px;
+      width: 16px;
+      margin: 2px;
+    }
+  }
+}
+.not-relevant-filter {
+  .selected {
+    & > div {
+      background: $purple2;
+      height: 16px;
       margin: 2px;
     }
   }
