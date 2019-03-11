@@ -47,7 +47,7 @@ class SessionPage extends Component {
       },
     } = this.props;
     const { voting, cfp } = eventConfig;
-    const { title, abstract, type, tags, outline, categories: _categories, attende, speaker_ids } = session;
+    const { title, abstract, type, tags, outline, categories: _categories, attende, speaker_ids, attended } = session;
     const trackRecords = sessionSpeakers.map(speaker => ({name: speaker.name, trackRecord: speaker.trackRecord}));
     const video_urls = sessionSpeakers.map(speaker => ({name: speaker.name, video_url: speaker.video_url}));
     const isAuthor = user && session.speaker_ids.includes(user._id);

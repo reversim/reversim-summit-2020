@@ -11,6 +11,7 @@ import { getHref } from "../utils";
 
 const EditNotAllowed = props => (
     <Page title={`Edit ${props.session.title}`} {...props}>
+      <div className='navbar-margin'>
       <Container>
         <Row>
           <Col>
@@ -19,6 +20,7 @@ const EditNotAllowed = props => (
           </Col>
         </Row>
       </Container>
+    </div>
     </Page>
 );
 
