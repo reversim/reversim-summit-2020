@@ -32,7 +32,7 @@ const chunkArray = (myArray, chunk_size) => {
 const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
   return (
     <div>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mb-6">
         <img src={diamond} className={s.diamond} alt="diamond" />
         <div className={cn("font-size-xxl text-white")}>
           Meet Our Premium Sponsors
@@ -65,7 +65,7 @@ const CommunitySponsors = ({
     <div className={cn("bg-white")}>
       <div
         className={cn(
-          "d-flex justify-content-center text-align-center",
+          "d-flex justify-content-center text-align-center mb-6",
           s.communitySponsorsTitle
         )}
       >

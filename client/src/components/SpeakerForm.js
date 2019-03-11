@@ -31,7 +31,7 @@ class SpeakerForm extends React.Component {
         <UserForm user={user} />
         <Input type="submit" className="d-none" />
         <div className="d-flex justify-content-center align-items-center">
-          <Button color="primary" className="mr-4" style={{width: 120}}>
+          <Button color="primary" className="styled-button on-purple w-max-content btn btn-secondary mr-4">
             Submit
           </Button>
           <Link to={`/speaker/${getHref(user)}`}>Cancel</Link>

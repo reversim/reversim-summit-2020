@@ -1,12 +1,12 @@
-import React from 'react';
-import Page from './Page';
-import ga from 'react-ga';
-import {Container, Row, Col, Input, Button} from 'reactstrap';
-import SessionPageRoute from './SessionPageRoute';
-import Redirect from './Redirect';
-import ProposalForm from './ProposalForm';
-import {ABSTRACT_MAX, ABSTRACT_MIN} from '../data/proposals';
-import {getHref} from '../utils';
+import React from "react";
+import Page from "./Page";
+import ga from "react-ga";
+import { Container, Row, Col, Input, Button } from "reactstrap";
+import SessionPageRoute from "./SessionPageRoute";
+import Redirect from "./Redirect";
+import ProposalForm from "./ProposalForm";
+import { ABSTRACT_MAX, ABSTRACT_MIN } from "../data/proposals";
+import { getHref } from "../utils";
 
 class SessionEditPage extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class SessionEditPage extends React.Component {
       proposalType: props.session.type,
       users: props.users
     };
-    if(props.session.speaker_ids[1]) {
+    if (props.session.speaker_ids[1]) {
       this.state.coSpeaker = props.users[props.session.speaker_ids[1]].name;
     }
   }
@@ -26,7 +26,7 @@ class SessionEditPage extends React.Component {
     e.preventDefault();
     const formElements = e.target.elements;
 
-    const {updateProposal, session} = this.props;
+    const { updateProposal, session } = this.props;
 
     const abstract = formElements.abstract.value;
     if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
@@ -55,7 +55,7 @@ class SessionEditPage extends React.Component {
     } catch (ex) {
       ga.exception({
         description: `Error on submit: ${ex}`,
-        fatal: true,
+        fatal: true
       });
     }
   };
@@ -85,42 +85,48 @@ class SessionEditPage extends React.Component {
   updateState = state => this.setState(state);
 
   render() {
-    const {session, allTags} = this.props;
-    const {proposalType, categories, tags} = this.state;
-    const {title, outline, abstract, legal} = session;
-    const coSpeaker = this.state.coSpeaker
+    const { session, allTags } = this.props;
+    const { proposalType, categories, tags } = this.state;
+    const { title, outline, abstract, legal } = session;
+    const coSpeaker = this.state.coSpeaker;
 
     return (
       <Page title={`Edit ${session.title}`} {...this.props}>
-        <Container className="my-8">
-          <Row>
-            <Col sm={{size: 8, offset: 2}}>
-              <h1 className="my-4">
-                Edit <b>{session.title}</b>
-              </h1>
-              <form onSubmit={this.handleSubmit}>
-                <ProposalForm
-                  update={this.updateState}
-                  tags={tags}
-                  proposalType={proposalType}
-                  categories={categories}
-                  allTags={allTags}
-                  title={title}
-                  outline={outline}
-                  abstract={abstract}
-                  legal={legal}
-                  coSpeaker={coSpeaker}
-                />
-                <div className="text-center">
-                  <Input type="submit" className="d-none" />
-                  <Button color="primary" className="mr-4" style={{width: 120}}>
-                    Submit
-                  </Button>
-                </div>
-              </form>
-            </Col>
-          </Row>
-        </Container>
+        <div className="navbar-margin">
+          <Container className="my-8">
+            <Row>
+              <Col sm={{ size: 8, offset: 2 }}>
+                <h1 className="my-4">
+                  Edit <b>{session.title}</b>
+                </h1>
+                <form onSubmit={this.handleSubmit}>
+                  <ProposalForm
+                    update={this.updateState}
+                    tags={tags}
+                    proposalType={proposalType}
+                    categories={categories}
+                    allTags={allTags}
+                    title={title}
+                    outline={outline}
+                    abstract={abstract}
+                    legal={legal}
+                    coSpeaker={coSpeaker}
+                  />
+                  <div className="text-center">
+                    <Input type="submit" className="d-none" />
+                    <Button
+                      color="primary"
+                      className="mr-4"
+                      style={{ width: 120 }}
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                </form>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </Page>
     );
   }
