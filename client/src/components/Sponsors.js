@@ -329,7 +329,7 @@ class SponsorMiniPremium extends React.Component {
     return (
       <div className="d-flex flex-column align-items-center mb-6">
         <div
-          className="p-relative text-center white-bg mb-2"
+          className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center"
           style={{ width: 358, height: 230, maxWidth: 358 }}
         >
           <a href={url}>
@@ -419,7 +419,7 @@ class SponsorsPage extends React.Component {
         <div
           className={cn(
             s.premiumCover,
-            "bg-purple2 page-hero pb-8 navbar-margin"
+            "bg-purple2 page-hero pb-8 navbar-margin d-flex justify-content-center align-items-center"
           )}
         >
           <Container>
