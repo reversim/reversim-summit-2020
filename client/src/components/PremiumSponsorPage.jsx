@@ -87,30 +87,68 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                     </div>
                     <ul className="premium-internal-links">
                         <li>
-                            <ScrollLink to={"about"} offset={-100}>
+                            <ScrollLink href="#" to={"about"} offset={-100}>
                                 about
                             </ScrollLink>
                         </li>
                         <li>
-                            <ScrollLink to={"Tech-Story"} offset={-100}>
+                            <ScrollLink href="#" to={"Tech-Story"} offset={-100}>
                                 Tech-Story
                             </ScrollLink>
                         </li>
                         {!!sponsor.openPositions.length && (
                             <li>
-                                <ScrollLink to={"Open Positions"} offset={-100}>
+                                <ScrollLink href="#" to={"Open Positions"} offset={-100}>
                                     Open Positions
                                 </ScrollLink>
                             </li>
                         )}
                         {sponsor.reversimAndUs && (
                             <li>
-                                <ScrollLink to={"Reversim & Us"} offset={-100}>
+                                <ScrollLink href="#" to={"Reversim & Us"} offset={-100}>
                                     Reversim & Us
                                 </ScrollLink>
                             </li>
                         )}
                     </ul>
+                </div>
+            </Container>
+            <Container>
+                <div className="premium-pr premium-mr">
+                    <section className="premium-who">
+                        <div className="d-flex">
+                            <div className="font-size-xl text-purple2">Who We Are?</div>
+                            <div className="hl bg-purple2" />
+                        </div>
+                        <p className="premium-text">{sponsor.about}</p>
+                    </section>
+                    {
+                        (sponsor.images && sponsor.images.length > 0) && (
+                            <section className="premium-gallery">
+                                <SponsorCarousel sponsor={sponsor} />
+                            </section>
+                        )
+                    }
+                </div>
+                <div className="premium-mr premium-tech">
+                    <div className={cn("d-flex", s.premiumSection)} name="Tech-Story">
+                        <div className="font-size-xl text-purple2">
+                            Our Technology Story
+                        </div>
+                        <div className="hl bg-purple2" />
+                    </div>
+                    <div className="premium-tech-story">
+                        <p className="premium-text">{sponsor.techStory.text}</p>
+                        <div className="premium-tech-list">
+                            {
+                                (sponsor.techStory.technologies && sponsor.techStory.technologies.length > 0) && (
+                                    sponsor.techStory.technologies.map(t => (
+                                        <div className="premium-tech-item">{t}</div>
+                                    ))
+                                )
+                            }
+                        </div>
+                    </div>
                 </div>
             </Container>
         </Page>

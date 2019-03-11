@@ -897,7 +897,7 @@ input[type="checkbox"] {
 }
 
 .premium-intro-content{
-  margin-left: 370px;
+  margin-left: 380px;
   padding-bottom: 10px;
 }
 
@@ -913,7 +913,7 @@ input[type="checkbox"] {
 }
 
 .premium-details {
-  margin-left: 370px;
+  margin-left: 380px;
   padding-top: 20px;
 }
 
@@ -938,6 +938,38 @@ input[type="checkbox"] {
       text-decoration: underline;
     }
   }
+}
+
+.premium-mr {
+  margin-top: 60px;
+}
+
+.premium-pr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.premium-gallery {
+  width: 57%;
+  margin-left: 40px;
+
+  .carousel-item {
+    min-width: 720px;
+
+    img {
+      height: 410px;
+    }
+
+    video {
+      height: 410px;
+    }
+  }
+}
+
+.premium-text {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 
