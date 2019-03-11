@@ -250,11 +250,16 @@ class PremiumSponsor extends React.Component {
                     "bg-white d-flex justify-content-center align-items-center"
                   )}
                 >
-                  <img
-                    style={{ maxWidth: 240, maxHeight: 240 }}
-                    src={sponsor.logo}
-                    alt={sponsor.name}
-                  />
+                  <Link
+                    to={`/sponsor/${sponsor.name}`}
+                    className="unstyled-link"
+                  >
+                    <img
+                      style={{ maxWidth: 240, maxHeight: 240 }}
+                      src={sponsor.logo}
+                      alt={sponsor.name}
+                    />
+                  </Link>
                 </div>
                 <Link to={`/sponsor/${sponsor.name}`} className="unstyled-link">
                   <Button className={"styled-button on-purple w-max-content"}>
@@ -332,14 +337,14 @@ class SponsorMiniPremium extends React.Component {
           className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center b-strong"
           style={{ width: 358, height: 230, maxWidth: 358 }}
         >
-          <a href={url}>
+          <Link to={`/sponsor/${name}`} className="unstyled-link">
             <img
               src={logo}
               className={s.sponsorImg}
               alt={name}
               style={{ maxWidth: 350, maxHeight: 240 }}
             />
-          </a>
+          </Link>
         </div>
         <Link to={`/sponsor/${name}`} className="unstyled-link">
           <Button className={"styled-button on-purple"}>
