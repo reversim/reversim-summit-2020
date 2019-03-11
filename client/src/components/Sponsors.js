@@ -329,7 +329,7 @@ class SponsorMiniPremium extends React.Component {
     return (
       <div className="d-flex flex-column align-items-center mb-6">
         <div
-          className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center"
+          className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center b-strong"
           style={{ width: 358, height: 230, maxWidth: 358 }}
         >
           <a href={url}>

@@ -296,12 +296,13 @@ class ProposalsPage extends React.Component {
                   <div>
                     <div
                       className="d-flex b-strong align-items-center p-relative cursor-pointer"
+                      style={{ outline: "none", width }}
                       ref={this.input}
                     >
                       <input
                         placeholder="Filter by proposal status..."
                         className="box-shadow-none border-transparent p-1 cursor-pointer"
-                        style={{ outline: "none", width }}
+                        style={{ outline: "none" }}
                         value={votesFilterText.join(", ")}
                         onClick={this.toggleMyVotesInput}
                         onChange={() => {}}
