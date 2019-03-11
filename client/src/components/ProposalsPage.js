@@ -101,6 +101,8 @@ class TagInput extends React.Component {
   render() {
     const { tags, tagFilters } = this.props;
     const { tagInput } = this.state;
+    const width = this.props.isSmallerScreen ? 300 : 360;
+
 
     const suggestedTags =
       tagInput &&
@@ -112,7 +114,7 @@ class TagInput extends React.Component {
     return (
       <div
         className="d-flex b-strong align-items-center p-relative mr-4"
-        style={{ width: 360 }}
+        style={{ width }}
         ref={this.input}
       >
         <input
@@ -208,6 +210,8 @@ class ProposalsPage extends React.Component {
       attendProposal
     } = this.props;
 
+    const width = this.props.isSmallerScreen ? 300 : 360;
+
     const { tagFilters } = this.state;
     const showProposals = !!gotAllProposals;
     const tags = allTags
@@ -226,19 +230,21 @@ class ProposalsPage extends React.Component {
     let filteredProposals = [];
 
     if (this.state.votesFilter.none) {
-      votesFilterText.push('None');
+      votesFilterText.push("None");
       filteredProposals.push(
-        ...tagfilteredProposals.filter(proposal => proposal.attended === undefined)
+        ...tagfilteredProposals.filter(
+          proposal => proposal.attended === undefined
+        )
       );
     }
     if (this.state.votesFilter.notRelevant) {
-      votesFilterText.push('Not relevant');
+      votesFilterText.push("Not relevant");
       filteredProposals.push(
         ...tagfilteredProposals.filter(proposal => proposal.attended === false)
       );
     }
     if (this.state.votesFilter.interested) {
-      votesFilterText.push('Interested');
+      votesFilterText.push("Interested");
       filteredProposals.push(
         ...tagfilteredProposals.filter(proposal => proposal.attended)
       );
@@ -251,7 +257,7 @@ class ProposalsPage extends React.Component {
     return (
       <Page title="Proposals" {...this.props}>
         <div
-          className="navbar-margin pb-15 bg-purple2 text-white font-size-lm proposals-bg"
+          className="navbar-margin pb-15 bg-purple2 text-white font-size-lm proposals-bg d-flex justify-content-center"
           style={{ backgroundImage: `url('${introBG}')` }}
         >
           <Container>
@@ -290,16 +296,15 @@ class ProposalsPage extends React.Component {
                   <div>
                     <div
                       className="d-flex b-strong align-items-center p-relative cursor-pointer"
-                      style={{ width: 360 }}
                       ref={this.input}
                     >
                       <input
                         placeholder="Filter by proposal status..."
                         className="box-shadow-none border-transparent p-1 cursor-pointer"
-                        style={{ outline: "none" }}
-                        value={votesFilterText.join(', ')}
+                        style={{ outline: "none", width }}
+                        value={votesFilterText.join(", ")}
                         onClick={this.toggleMyVotesInput}
-                        onChange={()=>{}}
+                        onChange={() => {}}
                       />
                       <FontAwesomeIcon
                         icon={
@@ -311,14 +316,14 @@ class ProposalsPage extends React.Component {
                     {this.state.myVotesOpen && (
                       <div
                         className="b-strong position-absolute white-bg"
-                        style={{ borderTop: "none", width: 360 }}
+                        style={{ borderTop: "none", width }}
                       >
                         <SelectVotes
                           text={"Interested"}
                           toggleFilter={() => {
-                            let votesFilter = this.state.votesFilter
-                            votesFilter.interested = !votesFilter.interested
-                            this.setState(votesFilter)
+                            let votesFilter = this.state.votesFilter;
+                            votesFilter.interested = !votesFilter.interested;
+                            this.setState(votesFilter);
                           }}
                           isBorder={true}
                           selected={this.state.votesFilter.interested}
@@ -326,19 +331,21 @@ class ProposalsPage extends React.Component {
                         <SelectVotes
                           text={"Not relevant to me"}
                           toggleFilter={() => {
-                            let votesFilter = this.state.votesFilter
-                            votesFilter.notRelevant = !votesFilter.notRelevant
-                            this.setState(votesFilter)
-                          }}                          isBorder={true}
+                            let votesFilter = this.state.votesFilter;
+                            votesFilter.notRelevant = !votesFilter.notRelevant;
+                            this.setState(votesFilter);
+                          }}
+                          isBorder={true}
                           selected={this.state.votesFilter.notRelevant}
                         />
                         <SelectVotes
                           text={"None"}
                           toggleFilter={() => {
-                            let votesFilter = this.state.votesFilter
-                            votesFilter.none = !votesFilter.none
-                            this.setState(votesFilter)
-                          }}                          selected={this.state.votesFilter.none}
+                            let votesFilter = this.state.votesFilter;
+                            votesFilter.none = !votesFilter.none;
+                            this.setState(votesFilter);
+                          }}
+                          selected={this.state.votesFilter.none}
                         />
                       </div>
                     )}
