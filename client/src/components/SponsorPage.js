@@ -74,12 +74,12 @@ class TitleSection extends React.Component {
     const { sponsor, canEdit } = this.props;
     return (
       <div>
-        <div className={cn("bg-purple2 text-white")}>
+        <div className={cn("bg-purple2 text-white", s.premiumTitle)}>
           <div className={"d-flex"}>
             <div className="font-size-xxl">Big Thanks to our sponsor</div>
             <div className="hl bg-white" />
           </div>
-          <div className="d-flex flex-row mb-4">
+          <div className={cn("d-flex flex-row mb-4", s.premiumTitle)}>
             <div className="b-strong border-purple2 bg-white mr-5">
               <img
                 src={sponsor.logo}

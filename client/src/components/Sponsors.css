@@ -104,6 +104,12 @@
     .openPosition {
         height: inherit;
     }
+    .premiumTitle {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column !important;
+    }
 }
 @media (min-width:767px) {
     .communitySponsorsTitle {
