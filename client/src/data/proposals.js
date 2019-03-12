@@ -2,9 +2,9 @@ export const PREDEFINED_TAGS = ['Engineering', 'Product', 'Culture'];
 
 export const PROPOSAL_TYPES = {
   full: 'Full session (30 minutes)',
-  postmortem: 'Postmortem (15 minuntes)',
-  lightning: 'Lightning talk (5 minuntes)',
-  ossil: 'Open Source in Israel (10 minuntes)',
+  postmortem: 'Postmortem (15 minutes)',
+  lightning: 'Lightning talk (5 minutes)',
+  ossil: 'Open Source in Israel (10 minutes)',
 };
 
 export const PROPOSAL_TYPES_SHORT = {
