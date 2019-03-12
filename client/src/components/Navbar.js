@@ -122,7 +122,7 @@ class Navbar extends Component {
 
           <Nav
           navbar
-          className={cn('ml-auto align-items-end p-3 p-lg-0', {'bg-darkblue': isSmallScreen})}>
+          className={cn('ml-auto align-items-end p-3 p-lg-0')}>
             {voting && !isSmallScreen && pathname !== '/proposals' && <li><VotingCTA /></li>}
           {/*<a*/}
           {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
