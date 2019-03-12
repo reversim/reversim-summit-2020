@@ -30,8 +30,8 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
         </div>
       ))}
       <div className="p-4 d-flex flex-column justify-content-between">
-        <div className="content ">
-          <h4 className="mb-5">{title}</h4>
+        <div className="content">
+          <h4 className="mb-5"><a class="unstyled-link" href={`/session/${_id}`}>{title}</a></h4>
           <div className="mb-5">
           <SessionInfo session={proposal} />
           </div>
