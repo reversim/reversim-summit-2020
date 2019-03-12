@@ -70,7 +70,7 @@ const Hero = ({ eventConfig }) => (
             </div>
             <div className="hero__right heroCounterWrapper d-flex flex-row-reverse align-items-end justify-content-evenly">
                 <div className="hero__timer-wrapper">
-                    <div className="hero__timer-title text-white">{"Voting closes at 17:00, March 21st"}</div>
+                    <div className="hero__timer-title text-white">{"Voting closes at 17:00, March 24"}</div>
                     <div><CountDown timeRemainingInSeconds={eventConfig.votingCountDown} /></div>
                 </div>
             <div/>
