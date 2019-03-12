@@ -132,7 +132,8 @@ class TagInput extends React.Component {
               left: -4,
               right: -4,
               maxHeight: 368,
-              overflow: "auto"
+              overflow: "auto",
+              zIndex: 1
             }}
           >
             {suggestedTags.length > 0 ? (
@@ -209,8 +210,6 @@ class ProposalsPage extends React.Component {
       attendProposal
     } = this.props;
 
-    const width = this.props.isSmallerScreen ? 300 : 360;
-
     const { tagFilters } = this.state;
     const showProposals = !!gotAllProposals;
     const tags = allTags
@@ -273,7 +272,7 @@ class ProposalsPage extends React.Component {
         <div className="white-bg" style={{ padding: "60px 0" }}>
           <Container>
             <div className="border-bottom border-purple2 mb-4">
-              <div className="proposals-filters mb-5">
+              <div className="proposals-filters mb-5 align-items-start">
                 <div className="d-flex align-items-center">
                   <TagInput
                     tags={tags}
@@ -292,10 +291,9 @@ class ProposalsPage extends React.Component {
                   )}
                 </div>
                 <div className="d-flex flex-column">
-                  <div>
                     <div
-                      className="d-flex b-strong align-items-center p-relative cursor-pointer"
-                      style={{ outline: "none", width }}
+                      className="d-flex b-strong align-items-center p-relative cursor-pointer mr-4"
+                      style={{ outline: "none" }}
                       ref={this.input}
                     >
                       <input
@@ -310,13 +308,13 @@ class ProposalsPage extends React.Component {
                         icon={
                           this.state.myVotesOpen ? faChevronUp : faChevronDown
                         }
-                        className="text-purple2 mr-2s align-top"
+                        className="text-purple2 mr-2 align-top"
                       />
                     </div>
                     {this.state.myVotesOpen && (
                       <div
-                        className="b-strong position-absolute white-bg"
-                        style={{ borderTop: "none", width }}
+                        className="b-strong white-bg mr-4"
+                        style={{ borderTop: "none" }}
                       >
                         <SelectVotes
                           text={"Interested"}
@@ -349,7 +347,6 @@ class ProposalsPage extends React.Component {
                         />
                       </div>
                     )}
-                  </div>
                 </div>
               </div>
               <div className="d-flex justify-content-start">
