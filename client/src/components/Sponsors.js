@@ -41,10 +41,9 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
       </div>
       <div className={cn("d-flex flex-wrap", s.premiumSponsorsWrap)}>
         {sponsors.map(sponsor => (
-          <SponsorMiniPremium
+          <SponsorMiniPremiumWithEdit
             key={sponsor._id}
             {...sponsor}
-            key={sponsor._id}
             sponsor={sponsor}
             canEdit={user && user.isReversimTeamMember}
             updateSponsor={updateSponsor}
@@ -324,33 +323,100 @@ class SponsorWithEdit extends React.Component {
     );
   }
 }
+class SponsorMiniPremiumWithEdit extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isEditing: false,
+      isLoading: false
+    };
+  }
+
+  onEdit = () => {
+    this.setState({ isEditing: true });
+  };
+
+  onDelete = async () => {
+    await this.props.deleteSponsor(this.props.sponsor._id);
+  };
+
+  onSubmit = async sponsor => {
+    this.setState({ isLoading: true });
+    await this.props.updateSponsor(this.props.sponsor._id, {
+      ...this.props.sponsor,
+      ...sponsor
+    });
+    this.setState({ isEditing: false, isLoading: false });
+  };
+
+  onCancel = () => {
+    this.setState({ isEditing: false });
+  };
+
+  render() {
+    const { isEditing } = this.state;
+    const { sponsor, canEdit } = this.props;
+    return isEditing ? (
+      <SponsorForm
+        sponsor={sponsor}
+        onSubmit={this.onSubmit}
+        onCancel={this.onCancel}
+        isLoading={this.state.isLoading}
+      />
+    ) : (
+      <SponsorMiniPremium
+        onEdit={canEdit && this.onEdit}
+        onDelete={canEdit && this.onDelete}
+        sponsor={sponsor}
+        {...sponsor}
+      />
+    );
+  }
+}
 
 class SponsorMiniPremium extends React.Component {
   state = {
     hovered: false
   };
   render() {
-    const { name, logo, url } = this.props;
+    const { name, logo, url, onEdit, onDelete } = this.props;
     return (
-      <div className="d-flex flex-column align-items-center mb-6">
-        <div
-          className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center b-strong"
-          style={{ width: 358, height: 230, maxWidth: 358 }}
-        >
+      <div>
+        {onEdit && (
+          <span>
+            <Button size="sm" color="primary" className="ml-2" onClick={onEdit}>
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </Button>
+            <Button
+              size="sm"
+              color="danger"
+              className="ml-2"
+              onClick={onDelete}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+          </span>
+        )}
+        <div className="d-flex flex-column align-items-center mb-6">
+          <div
+            className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center b-strong"
+            style={{ width: 358, height: 230, maxWidth: 358 }}
+          >
+            <Link to={`/sponsor/${name}`} className="unstyled-link">
+              <img
+                src={logo}
+                className={s.sponsorImg}
+                alt={name}
+                style={{ maxWidth: 350, maxHeight: 240 }}
+              />
+            </Link>
+          </div>
           <Link to={`/sponsor/${name}`} className="unstyled-link">
-            <img
-              src={logo}
-              className={s.sponsorImg}
-              alt={name}
-              style={{ maxWidth: 350, maxHeight: 240 }}
-            />
+            <Button className={"styled-button on-purple"}>
+              EXPLORE OPPORTUNITIES
+            </Button>
           </Link>
         </div>
-        <Link to={`/sponsor/${name}`} className="unstyled-link">
-          <Button className={"styled-button on-purple"}>
-            EXPLORE OPPORTUNITIES
-          </Button>
-        </Link>
       </div>
     );
   }
