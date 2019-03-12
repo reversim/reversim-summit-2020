@@ -32,6 +32,9 @@ const chunkArray = (myArray, chunk_size) => {
 const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
   return (
     <div>
+      <div>
+        <WantToBe></WantToBe>
+      </div>
       <div className="d-flex justify-content-center mb-6">
         <img src={diamond} className={s.diamond} alt="diamond" />
         <div className={cn("font-size-xxl text-white")}>
@@ -468,9 +471,9 @@ export const SponsorsSection = ({ sponsors }) => {
 };
 
 const WantToBe = () => (
-  <div className="my-4 p-3 line-height-17 text-center">
-    <h4>Want to be a sponsor?</h4> Contact our amazing Gilli at{" "}
-    <a href="mailto:gilli@reversim.com">gilli@reversim.com</a> and let's have
+  <div className="my-4 p-3 line-height-17 text-center text-white font-size-lg">
+    <div className="font-size-xl">Want to be a sponsor?</div> Contact our amazing Gilli at{" "}
+    <a className="text-white" href="mailto:gilli@reversim.com">gilli@reversim.com</a> and let's have
     fun together!
   </div>
 );
