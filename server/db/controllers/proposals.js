@@ -425,7 +425,8 @@ function getTagsFromDb() {
 }
 
 function getTags(proposals) {
-  return _.uniq(_.flatMap(proposals, p => p.tags)).sort();
+  return _.uniq(_.flatMap(proposals, p => p.tags).map(t=>t.toLowerCase())).sort();
+  // return _.uniq(_.flatMap(proposals, p => p.tags)).sort();
 }
 
 function getProposal(id) {

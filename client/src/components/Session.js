@@ -9,7 +9,7 @@ import SessionInfo from './SessionInfo';
 import VoteButton from './VoteButton';
 import {key} from '../utils';
 
-const Session = ({proposal, speakers, user, attendProposal}) => {
+const Session = ({proposal, speakers, user, attendProposal, onTagClick}) => {
   const {_id, title, type, tags, abstract, attended} = proposal;
   // console.log('attended', title, attended);
   return (
@@ -30,10 +30,10 @@ const Session = ({proposal, speakers, user, attendProposal}) => {
         </div>
       ))}
       <div className="p-4 d-flex flex-column justify-content-between">
-        <div className="content ">
+        <div className="content">
           <h4 className="mb-5">{title}</h4>
           <div className="mb-5">
-          <SessionInfo session={proposal} />
+          <SessionInfo session={proposal} onTagClick={onTagClick}/>
           </div>
           <ReactMarkdown className="mb-4 session__abstract" source={abstract} />
         </div>

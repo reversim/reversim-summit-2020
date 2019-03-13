@@ -1,16 +1,37 @@
-import React from 'react';
-import cn from 'classnames';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faClock} from '@fortawesome/free-regular-svg-icons';
-import {getSessionTypeStr} from '../utils';
+import React from "react";
+import cn from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { getSessionTypeStr } from "../utils";
 
-export default function SessionInfo({session, size}) {
+export default function SessionInfo({ session, size, onTagClick }) {
   return (
-    <div className={cn({[`font-size-${size}`]: size})}>
-      <FontAwesomeIcon icon={faClock} className="mr-2" />
-      <span className="mr-4 font-weight-bold">{getSessionTypeStr(session.type)}</span>
+    <div className={cn({ [`font-size-${size}`]: size })}>
+      <div className="d-flex align-items-center">
+        <FontAwesomeIcon icon={faClock} className="mr-2" />
+        <span className="mr-4 font-weight-bold w-max-content">
+          {getSessionTypeStr(session.type)}
+        </span>
+        <div className="mr-4 text-purple2 font-weight-bold d-flex">
+          {session.tags.map(tag =>
+            onTagClick ? (
+              <div
+                key={tag}
+                className="b-regular px-1 w-max-content mr-4 cursor-pointer"
+                onClick={()=>onTagClick(tag)}
+              >
+                {tag}
+              </div>
+            ) : (
+              <div key={tag} className="b-regular px-1 w-max-content mr-4">{tag}</div>
+            )
+          )}
+        </div>
+      </div>
       {session.category && (
-        <span className="text-indigo px-2 b-heavy font-weight-bold">{session.category}</span>
+        <span className="text-indigo px-2 b-heavy font-weight-bold">
+          {session.category}
+        </span>
       )}
     </div>
   );

@@ -214,13 +214,13 @@ class ProposalsPage extends React.Component {
     const showProposals = !!gotAllProposals;
     const tags = allTags
       .map(tag => {
-        const count = proposals.filter(p => p.tags.includes(tag)).length;
+        const count = proposals.filter(p => p.tags.map(t=>t.toLowerCase()).includes(tag.toLowerCase())).length;
         return { text: tag, str: `${tag} (${count})`, count };
       })
       .sort((a, b) => (a.count > b.count ? -1 : 1));
     const tagfilteredProposals = tagFilters.length
       ? proposals.filter(proposal =>
-          proposal.tags.some(tag => tagFilters.includes(tag))
+          proposal.tags.some(tag => tagFilters.map(t=>t.toLowerCase()).includes(tag.toLowerCase()))
         )
       : proposals;
 
@@ -374,6 +374,7 @@ class ProposalsPage extends React.Component {
                     )}
                     user={user}
                     attendProposal={attendProposal}
+                    onTagClick={this.onTagClick}
                   />
                 ))}
               </React.Fragment>

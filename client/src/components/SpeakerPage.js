@@ -78,7 +78,7 @@ export class SpeakerPage extends React.Component {
             <div className="mb-3">
               <h4>Video URL</h4>
               <div>
-                <a href={video_url} target="_blank" className="text-white">
+                <a href={video_url} target="_blank">
                   {video_url}
                 </a>
               </div>
