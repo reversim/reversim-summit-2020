@@ -179,6 +179,7 @@ class ProposalsPage extends React.Component {
   }
 
   onTagClick = tag => {
+    tag = tag.toLowerCase()
     this.setState(state => {
       const index = state.tagFilters.indexOf(tag);
       if (index > -1) {
@@ -192,6 +193,19 @@ class ProposalsPage extends React.Component {
       }
     });
   };
+
+  addTag = tag => {
+    tag = tag.toLowerCase()
+    this.setState(state => {
+      const index = state.tagFilters.indexOf(tag);
+      if (index > -1) {
+        return {tagFilters: state.tagFilters}
+      } else {
+        return { tagFilters: state.tagFilters.concat(tag) };
+      }
+    });
+  }
+
 
   toggleMyVotesInput = () => {
     this.setState({
@@ -374,7 +388,7 @@ class ProposalsPage extends React.Component {
                     )}
                     user={user}
                     attendProposal={attendProposal}
-                    onTagClick={this.onTagClick}
+                    onTagClick={this.addTag}
                   />
                 ))}
               </React.Fragment>
