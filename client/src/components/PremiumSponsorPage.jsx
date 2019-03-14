@@ -266,7 +266,7 @@ class SponsorCarousel extends React.Component {
                 Your browser does not support the video tag.
             </video>
         ) : (
-            <img src={item} />
+            <img src={image(item, 596, 410)} />
         )}
         </CarouselItem>
         );

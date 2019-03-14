@@ -9,6 +9,7 @@ import Page from "./Page";
 import { Container, Row, Col, Button } from "reactstrap";
 import triangle from "../images/SVG/triangle.svg";
 import s from "./Sponsors.css";
+import {image} from '../images';
 import {
   Carousel,
   CarouselItem,
@@ -214,7 +215,7 @@ class SponsorCarousel extends React.Component {
               Your browser does not support the video tag.
             </video>
           ) : (
-            <img src={item} />
+            <img src={image(item, 596, 410)} />
           )}
         </CarouselItem>
       );
