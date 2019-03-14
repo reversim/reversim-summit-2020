@@ -3,7 +3,7 @@ import {Container, Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, But
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
-import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn, newTag, newLink} from './Navbar.css';
+import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn, newTag, newLink, navbarOpen} from './Navbar.css';
 import logoImg from '../images/SVG/nav-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
@@ -122,7 +122,7 @@ class Navbar extends Component {
 
           <Nav
           navbar
-          className={cn('ml-auto align-items-end p-3 p-lg-0')}>
+          className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}>
             {voting && !isSmallScreen && pathname !== '/proposals' && <li><VotingCTA /></li>}
           {/*<a*/}
           {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
@@ -140,12 +140,13 @@ class Navbar extends Component {
           ))}
           {isSmallScreen &&
           user && (
-          <div className="border-top">
+          /*<div className="border-top">
               <NavbarItem to="profile" text="My profile" />
               <NavItem className={navItem} onClick={onLogout}>
               <span className={navLinkClass}>Logout</span>
               </NavItem>
-              </div>
+              </div>*/
+            <Avatar {...user} onLogout={onLogout} />
           )}
           { !user &&
                 (<NavbarItem to={getLoginUrl()} text="Login" external={true}/>)}
