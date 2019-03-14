@@ -109,7 +109,9 @@ async function update(req, res) {
         url: req.body.url || "",
         reversimAndUs: req.body.reversimAndUs || "",
         isPremium: req.body.isPremium || "",
-        images: await Promise.all(req.body.images.map(image => uploadLogo(image))),
+        images: await Promise.all(req.body.images.map(
+          image => uploadLogo(image)
+        )),
         updated_at: new Date()
       };
     } else {
@@ -157,8 +159,9 @@ function uploadLogo(data) {
     }
     cloudinary.v2.uploader.upload(data, opts, function(error, result) {
       if (error) {
-        console.error("Error uploading to cloudinary: %s", error)
-        reject(error);
+        console.error("Error uploading to cloudinary: %s", error);
+        // Do not reject so that the caller can continue normally. Not the ideal solution, I know... 
+        resolve("");
         return
       }
       console.log("New cloudinary resource url", result.secure_url);
