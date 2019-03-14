@@ -118,8 +118,11 @@
         flex-direction: column !important;
     }
     .circle {
-        width: inherit;
-        margin-right: -90px;
+        display: none;
+    }
+
+    .premiumCover {
+        flex-direction: column;
     }
 }
 @media (min-width:767px) {

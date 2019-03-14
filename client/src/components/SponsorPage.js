@@ -94,7 +94,7 @@ class TitleSection extends React.Component {
             <div>
                 <div className={"d-flex flex-column "}>
                   <div className="d-flex flex-inline align-items-baseline">
-                    <div className={"font-size-xl font-weight-bold  mr-5"}>{sponsor.name}</div>
+                    <div className={"font-size-xl font-weight-bold mr-5"}>{sponsor.name}</div>
                     <div>{sponsor.oneLiner}</div>
                   </div>
                 </div>

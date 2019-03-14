@@ -20,8 +20,8 @@ async function getAllSponsors(shouldShuffle) {
 }
 const socials = sponsor => {
   let socials = [];
-  if (sponsor.linkedIn)
-    socials.push({ medium: "linkedin", link: sponsor.linkedIn });
+  if (sponsor.linkedin)
+    socials.push({ medium: "linkedin", link: sponsor.linkedin });
   if (sponsor.github)
     socials.push({ medium: "github", link: sponsor.github });
   if (sponsor.facebook)

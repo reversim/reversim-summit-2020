@@ -69,7 +69,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                         </div>
                         <article className="premium-intro-content">
                             <div className="premium-name">{sponsor.name}</div>
-                            <p className="premium-oneliner">{sponsor.oneLiner}></p>
+                            <p className="premium-oneliner">{sponsor.oneLiner}</p>
                         </article>
                     </div>
                 </Container>

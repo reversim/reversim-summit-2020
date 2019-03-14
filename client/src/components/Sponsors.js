@@ -32,9 +32,6 @@ const chunkArray = (myArray, chunk_size) => {
 const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
   return (
     <div>
-      <div>
-        <WantToBe></WantToBe>
-      </div>
       <div className="d-flex justify-content-center mb-6">
         <img src={diamond} className={s.diamond} alt="diamond" />
         <div className={cn("font-size-xxl text-white")}>
@@ -471,10 +468,15 @@ export const SponsorsSection = ({ sponsors }) => {
 };
 
 const WantToBe = () => (
-  <div className="my-4 p-3 line-height-17 text-center text-white font-size-lg">
-    <div className="font-size-xl">Want to be a sponsor?</div> Contact our amazing Gilli at{" "}
-    <a className="text-white" href="mailto:gilli@reversim.com">gilli@reversim.com</a> and let's have
-    fun together!
+  <div className="my-4 p-3 line-height-17 text-center text-white font-size-lg d-flex justify-content-center">
+    <div>
+      <div className="font-size-xl">Want to be a sponsor?</div> Contact our
+      amazing Gilli at{" "}
+      <a className="text-white" href="mailto:gilli@reversim.com">
+        gilli@reversim.com
+      </a>
+      and let's have fun together!
+    </div>
   </div>
 );
 
@@ -503,6 +505,7 @@ class SponsorsPage extends React.Component {
                 <SponsorForm onSubmit={createSponsor} />
               </div>
             )}
+            <WantToBe />
             <PremiumSponsors
               sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
               user={user}
@@ -534,9 +537,27 @@ class SponsorForm extends React.Component {
       technologies: "",
       text: ""
     };
-    this.state.techStory.technologies = (
-      this.state.techStory.technologies || []
-    ).join("\n");
+
+    if (this.props.sponsor && this.props.sponsor.isPremium) {
+      let linkedin = this.props.sponsor.socials.find(social => social.medium === "linkedin");
+      this.state.linkedin = linkedin ? linkedin.link : "";
+
+      let github = this.props.sponsor.socials.find(social => social.medium === "github");
+      this.state.github = github ? github.link : "";
+
+      let facebook = this.props.sponsor.socials.find(social => social.medium === "facebook");
+      this.state.facebook = facebook ? facebook.link : "";
+
+      let twitter = this.props.sponsor.socials.find(social => social.medium === "twitter");
+      this.state.twitter = twitter ? twitter.link : "";
+
+      let medium = this.props.sponsor.socials.find(social => social.medium === "medium");
+      this.state.medium = medium ? medium.link : "";
+
+      this.state.techStory.technologies = (
+        this.state.techStory.technologies || []
+      ).join("\n");
+    }
   }
 
   getData = event => {
@@ -551,7 +572,7 @@ class SponsorForm extends React.Component {
         "locationLink",
         "locationShortAddress",
         "oneLiner",
-        "linkedIn",
+        "linkedin",
         "github",
         "facebook",
         "twitter",
@@ -722,15 +743,8 @@ class SponsorForm extends React.Component {
               className="mb-3"
               size="sm"
               placeholder="linkedIn"
-              value={
-                this.state.linkedIn ||
-                (
-                  this.state.socials.find(
-                    social => social.medium === "linkedin"
-                  ) || {}
-                ).link
-              }
-              onChange={e => this.setState({ linkedIn: e.target.value })}
+              value={this.state.linkedin}
+              onChange={e => this.setState({ linkedin: e.target.value })}
             />
             <Input
               className="mb-3"
