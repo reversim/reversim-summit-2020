@@ -10,6 +10,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import triangle from "../images/SVG/triangle.svg";
 import zigzag from '../images/SVG/zigzag.svg';
 import s from "./Sponsors.css";
+import {image} from '../images';
 import {
     Carousel,
     CarouselItem,
@@ -63,7 +64,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                     <div className="premium-intro">
                         <div className="premium-logo">
                             <img
-                                src={sponsor.logo}
+                                src={image(sponsor.logo, 350, 221)}
                                 alt={sponsor.name}
                                 style={{ maxWidth: 350 }}/>
                         </div>

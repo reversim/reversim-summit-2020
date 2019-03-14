@@ -24,7 +24,7 @@ export function transformUser(user, loggedInUser) {
       isReversimTeamMember: user.isReversimTeamMember,
       bio: user.bio,
       gender: user.gender,
-      picture: user.picture && user.picture.replace("/dtltonc5g/image/upload/", "/dtltonc5g/image/upload/w_300/"),
+      picture: user.picture,
       linkedin: user.linkedin,
       twitter: user.twitter,
       stackOverflow: user.stackOverflow,

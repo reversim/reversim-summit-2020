@@ -4,6 +4,7 @@ import {Container, Row, Col} from 'reactstrap';
 import {img} from './Speaker2.css';
 import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
+import {image} from '../images';
 
 const COLLAPSED_BIO_MAX_CHARS = 110;
 
@@ -31,7 +32,7 @@ class TeamMember extends React.Component {
 
     return (
       <div className="about__team-member mb-12 d-flex">
-        <div style={{backgroundImage: `url('${picture}')`}} alt={name} className={img} />
+        <div style={{backgroundImage: `url('${image(picture, 240, 240)}')`}} alt={name} className={img} />
         <div className="flex-grow-1 line-height-12">
           <div
             className={`p-4 bg-white b-strong p-relative overflow-hidden ${!isExpanded && isTooLong ? "text-fade" : ""}`}

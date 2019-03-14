@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
 import { img } from "./Speaker2.css";
+import {image} from '../images';
+
 library.add(faPencilAlt, faTrash);
 const COLLAPSED_MAX_CHARS = 110;
 
@@ -125,7 +127,7 @@ class Sponsor extends React.Component {
     return (
       <div className="about__team-member mb-12 d-flex">
         <div
-          style={{ backgroundImage: `url('${logo}')` }}
+          style={{ backgroundImage: `url('${image(logo, 240, 240)}')` }}
           alt={name}
           className={img}
         />
@@ -404,7 +406,7 @@ class SponsorMiniPremium extends React.Component {
           >
             <Link to={`/sponsor/${name}`} className="unstyled-link">
               <img
-                src={logo}
+                src={image(logo, 350, 240)}
                 className={s.sponsorImg}
                 alt={name}
                 style={{ maxWidth: 350, maxHeight: 240 }}

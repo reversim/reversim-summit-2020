@@ -11,6 +11,7 @@ import ReactMarkdown from 'react-markdown';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
 import SessionInfo from './SessionInfo';
 import plus from '../images/SVG/plus.svg';
+import {image} from '../images';
 
 export class SpeakerPage extends React.Component {
   state = {
@@ -40,7 +41,7 @@ export class SpeakerPage extends React.Component {
           <Container>
             <div className="speaker-page__hero">
               <div
-                style={{backgroundImage: `url(${speaker.picture})`}}
+                style={{backgroundImage: `url(${image(speaker.picture, 230, 230)})`}}
                 className="speaker-page__speaker-picture b-strong mr-5 p-relative"
               />
               <div className="flex-grow-1">
