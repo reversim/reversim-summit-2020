@@ -470,12 +470,11 @@ export const SponsorsSection = ({ sponsors }) => {
 const WantToBe = () => (
   <div className="my-4 line-height-17 text-center text-white font-size-lg d-flex justify-content-center">
     <div>
-      <div className="font-size-xl">Want to be a sponsor?</div> Contact our
-      amazing Gilli at{" "}
+      <div className="font-size-xl">Want to be a sponsor?</div> {"Contact our amazing Gilli at "}
       <a className="text-white" href="mailto:gilli@reversim.com">
         gilli@reversim.com
       </a>
-      and let's have fun together!
+      {" and let's have fun together!"}
     </div>
   </div>
 );
