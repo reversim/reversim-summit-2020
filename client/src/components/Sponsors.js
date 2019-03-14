@@ -468,7 +468,7 @@ export const SponsorsSection = ({ sponsors }) => {
 };
 
 const WantToBe = () => (
-  <div className="my-4 p-3 line-height-17 text-center text-white font-size-lg d-flex justify-content-center">
+  <div className="my-4 line-height-17 text-center text-white font-size-lg d-flex justify-content-center">
     <div>
       <div className="font-size-xl">Want to be a sponsor?</div> Contact our
       amazing Gilli at{" "}

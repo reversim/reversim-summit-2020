@@ -123,6 +123,7 @@
 
     .premiumCover {
         flex-direction: column;
+        padding: 0 auto;
     }
 }
 @media (min-width:767px) {
