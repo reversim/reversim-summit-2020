@@ -406,7 +406,7 @@ class SponsorMiniPremium extends React.Component {
           >
             <Link to={`/sponsor/${name}`} className="unstyled-link">
               <img
-                src={image(logo, 350, 240)}
+                src={image(logo, 358, 230)}
                 className={s.sponsorImg}
                 alt={name}
                 style={{ maxWidth: 350, maxHeight: 240 }}
