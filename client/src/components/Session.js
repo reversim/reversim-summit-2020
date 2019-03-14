@@ -8,16 +8,16 @@ import {Button} from 'reactstrap';
 import SessionInfo from './SessionInfo';
 import VoteButton from './VoteButton';
 import {key} from '../utils';
+import {image} from '../images';
 
 const Session = ({proposal, speakers, user, attendProposal, onTagClick}) => {
   const {_id, title, type, tags, abstract, attended} = proposal;
-  // console.log('attended', title, attended);
   return (
     <div className="session b-strong d-flex mb-12" style={{minHeight: 440}}>
       {speakers.map(speaker => (
         <div className="session__speaker d-flex flex-column" key={key()}>
           <div
-            style={{backgroundImage: `url(${speaker.picture})`}}
+            style={{backgroundImage: `url(${image(speaker.picture, 236, 236)})`}}
             className="session__speaker-picture"
           />
           <div className="d-flex flex-column bg-purple2 text-white p-4 flex-grow-1">
