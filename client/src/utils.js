@@ -25,3 +25,13 @@ export const getHref = obj => (isServer ? `${obj._id}.html` : obj._id);
 
 let _key = 1;
 export const key = () => ++_key;
+export const hyperlink = url => {
+  if (!url) {
+    // empty or null
+    return null;
+  }
+  if (url.startsWith("http")) {
+    return url;
+  }
+  return `http://${url}`;
+};

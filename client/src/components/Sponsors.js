@@ -4,7 +4,7 @@ import s from "./Sponsors.css";
 import { Button, Input, Row, Col, Container } from "reactstrap";
 import Page from "./Page";
 import ReactMarkdown from "react-markdown";
-import { REVERSIM_SUMMIT } from "../utils";
+import { REVERSIM_SUMMIT, hyperlink } from "../utils";
 import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -126,11 +126,13 @@ class Sponsor extends React.Component {
 
     return (
       <div className="about__team-member mb-12 d-flex">
-        <div
-          style={{ backgroundImage: `url('${image(logo, 240, 240)}')` }}
-          alt={name}
-          className={img}
-        />
+        <a href={hyperlink(url)} target="_blank">
+          <div
+            style={{ backgroundImage: `url('${image(logo, 240, 240)}')` }}
+            alt={name}
+            className={img}
+          />
+        </a>
         <div className="flex-grow-1 line-height-12">
           <div
             className={`p-4 bg-white b-strong p-relative overflow-hidden ${
