@@ -90,7 +90,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                     <ul className="premium-internal-links">
                         <li>
                             <ScrollLink href="#" to={"about"} offset={-100}>
-                                about
+                                About
                             </ScrollLink>
                         </li>
                         <li>

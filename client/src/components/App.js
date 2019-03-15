@@ -164,7 +164,11 @@ class App extends Component {
   };
 
   updateSponsor = async (id, sponsor) => {
-    await doUpdateSponsor(id, sponsor);
+    // reread the sponsor from the backend result to make up for discrepencies in data modeling (such as the case with social linkgs)
+    sponsor = await doUpdateSponsor(id, sponsor);
+    // The ID is not returned so populate it
+    sponsor._id = id;
+    // And finally update the local state
     const index = findIndex(this.state.sponsors, x => x._id === id);
     this.setState(state => {
       const sponsors = state.sponsors
