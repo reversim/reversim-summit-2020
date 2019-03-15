@@ -581,7 +581,8 @@ class SponsorForm extends React.Component {
         "techStory",
         "reversimAndUs",
         "openPositions",
-        "images"
+        "images",
+        "socials"
       ]);
     } else {
       return pick(this.state, [
