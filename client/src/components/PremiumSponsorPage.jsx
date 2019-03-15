@@ -79,7 +79,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                 <div className="premium-details">
                     <div className="premium-social">
                         {sponsor.socials.map((social, i) => (
-                            <a key={i} href={social.link}>
+                            <a key={i} href={social.link} target="_blank">
                                 <FontAwesomeIcon
                                     className="premium-social-icon mr-5 text-purple2"
                                     icon={mapSocialLink(social.medium)}
