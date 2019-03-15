@@ -116,7 +116,7 @@ class TitleSection extends React.Component {
                 </div>
                 <div className={"text-purple2 cursor-pointer"}>
                   <ScrollLink to={"about"} offset={-100}>
-                    about
+                    About
                   </ScrollLink>
                   <span>{"  | "}</span>
                   <ScrollLink to={"Tech-Story"} offset={-100}>
