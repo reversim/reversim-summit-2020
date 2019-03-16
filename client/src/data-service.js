@@ -79,3 +79,7 @@ export async function updateSponsor(id, data) {
 export async function deleteSponsor(id) {
   return await delete2(`/api/sponsor/${id}`);
 }
+
+export async function getVotes() {
+  return await get('/api/proposals/attendees');
+}

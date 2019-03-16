@@ -106,7 +106,7 @@ export default (app) => {
   app.post('/api/proposal/:id/attend', proposalsController.attend);
   app.get('/api/speakers', proposalsController.getSpeakers);
   app.get('/api/proposers', proposalsController.proposers);
-  app.get('/api/proposal/attendees', proposalsController.getAllAttendees);
+  app.get('/api/proposals/attendees', proposalsController.getAllAttendees);
 
   app.get('/api/messages', messagesController.getMessages);
   app.post('/api/message', messagesController.addMessage);

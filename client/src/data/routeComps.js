@@ -13,6 +13,7 @@ import SponsorPage from "../components/PremiumSponsorPage";
 import LocationPage from '../components/LocationPage';
 import TeamPage from '../components/TeamPage';
 import AdminPage from '../components/AdminPage';
+import AdminVotesDashboard from '../components/AdminVotesDashboard';
 // import WomenGathering from '../components/WomenGathering';
 import CFPPage from '../components/CFPPage';
 import ProposalsPage from '../components/ProposalsPage';
@@ -37,6 +38,7 @@ export default [
   {path: '/session/:id', comp: SessionPage},
   {path: '/session/:id/edit', comp: SessionEditPage},
   {path: '/admin', comp: AdminPage},
+  {path: '/admin/votes', comp: AdminVotesDashboard},
   // { path: "/women-gathering", comp: WomenGathering },
   // {path: '/my-votes', comp: ProposalsPage, props: {myVotes: true}},
   {path: '/cfp', comp: CFPPage},

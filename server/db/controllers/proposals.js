@@ -226,8 +226,8 @@ function attend(req, res) {
   if (req.body.value === true) {
     query = { _id: req.params.id, status: { $ne: 'archived' }, attendees: { $nin: [req.session.passport.user] } };
     update = {
-      $push: {'attendees': req.session.passport.user },
-      $pull: {'notAttendees': req.session.passport.user}
+      $push: { 'attendees': req.session.passport.user },
+      $pull: { 'notAttendees': req.session.passport.user }
     };
     msg = 'Marked as attended';
   } else if (req.body.value === false) {
@@ -293,67 +293,6 @@ function sessions(req, res) {
   // return res.json(proposals.map(p => transformProposal(p, req.user)));
 }
 
-const baseQuery = [
-  {$unwind: "$speaker_ids"},
-  {$lookup: {
-    localField: "speaker_ids",
-    from: "users",
-    foreignField: "_id",
-    as: "speaker"
-  }},
-  {$unwind: "$speaker"},
-  {$unwind: "$attendees"},
-  {$lookup: {
-    localField: "attendees",
-    from: "users",
-    foreignField: "_id",
-    as: "attendee"
-  }},
-  {$unwind: "$attendee"},
-  {$group: {
-    _id: "$id",
-    link: {
-      $first: {
-        $concat: ["https://summit2017.reversim.com/session/", "$id"]
-      }
-    },
-    title: { $first: "$title" },
-    speaker: { $first: "$speaker.name" },
-    attendees: {
-      $push: { $concat: ["$attendee.name", " <", "$attendee.email", ">"] }
-    },
-    attendeeCount: { $sum: 1 }
-  }}
-];
-
-const projectAttendeesRaw = { $project: {
-  attendeeCount: 1,
-  link: 1,
-  title: 1,
-  speaker: 1,
-  attendees: 1
-}};
-const projectAttendees = { $project: {
-  attendeeCount: 1,
-  link: 1,
-  title: 1,
-  speaker: 1
-}};
-const sortAttendees = { $sort: { attendeeCount: -1 }};
-
-const aggregateQuery = (isDataAdmin) => {
-  if (isDataAdmin) {
-    return baseQuery.concat([
-      projectAttendeesRaw, sortAttendees
-    ]);
-  } else {
-    return baseQuery.concat([
-      projectAttendees,
-      sortAttendees
-    ]);
-  }
-};
-
 const attendDataQuery = [
   { $unwind: "$attendees" },
   { $group: {
@@ -376,23 +315,41 @@ const attendDataQuery = [
   }}
 ];
 
+const votesQuery = [
+  {
+    $match: {
+      status: { 
+        $nin: ['archived', 'deleted'] 
+      }
+    }
+  },
+  {
+    $project: {
+      _id: "$_id",
+      title: "$title",
+      speakers: "$speakers",
+      votes: {$size: "$attendees"}
+    }
+  },
+  { 
+    $sort: { 
+      votes: -1 
+    }
+  }
+];
+
 function getAllAttendees(req, res) {
   if (!req.user || !req.user.isReversimTeamMember) {
     return res.send(401);
   }
 
-  let query;
-  if (req.user.isDataAdmin) {
-    query = aggregateQuery(true);
-  } else if (req.user.isReversimTeamMember) {
-    query = aggregateQuery(false);
-  }
+  let query = votesQuery;
 
   Promise.all([
     Proposal.aggregate(query).exec(),
     Proposal.aggregate(attendDataQuery).exec()
-  ]).then(([proposals, data]) => {
-    return res.json({ proposals, data: data[0] });
+  ]).then(([proposals, aggs]) => {
+    return res.json({ proposals, aggs: aggs[0] });
   }).catch(err => {
     console.log(`Error in proposal/attendees query: ${err}`);
     return res.status(500).send('Something went wrong getting the data');
