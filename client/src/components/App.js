@@ -18,6 +18,7 @@ import {
   attend,
   getProposals,
   getProposers,
+  getVotes,
 } from '../data-service';
 import findIndex from 'lodash/findIndex';
 import shuffle from 'lodash/shuffle';
@@ -197,6 +198,13 @@ class App extends Component {
     }));
   };
 
+  loadVotes = async () => {
+    const [votes] = await Promise.all([getVotes()]);
+    this.setState(state => ({
+      votes,
+    }));
+  };
+
   // This is passed down to route components
   actions = {
     onLogout: this.onLogout,
@@ -209,6 +217,7 @@ class App extends Component {
     updateSponsor: this.updateSponsor,
     deleteSponsor: this.deleteSponsor,
     getAllProposals: this.getAllProposals,
+    loadVotes: this.loadVotes,
   };
 
   state = store;
