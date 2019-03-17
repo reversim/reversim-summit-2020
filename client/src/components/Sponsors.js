@@ -4,7 +4,7 @@ import s from "./Sponsors.css";
 import { Button, Input, Row, Col, Container } from "reactstrap";
 import Page from "./Page";
 import ReactMarkdown from "react-markdown";
-import { REVERSIM_SUMMIT, hyperlink } from "../utils";
+import { REVERSIM_SUMMIT, hyperlink, loadScript } from "../utils";
 import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -597,9 +597,33 @@ class SponsorForm extends React.Component {
       ]);
     }
   };
+  
 
+  openCloudinaryUploader() {
+    let uploader = cloudinary.createUploadWidget({
+      cloudName: 'dtltonc5g', 
+      uploadPreset: 'ss7dt1yg'}, (error, result) => { 
+        this.cloudinaryCallback(error, result);
+      });
+    uploader.open();
+  }
+
+  cloudinaryCallback(error, result) {
+    if (error) {
+      console.log(error);
+      return;
+    }
+    if (result && result.event === "success") {
+      let url = result.info.secure_url;
+      console.log("New image upload: " + url);
+      let images = this.state.images.concat(url);
+      this.setState({images});
+    }
+  }
   render() {
     const { onSubmit, onCancel, sponsor, isLoading } = this.props;
+    loadScript("https://widget.cloudinary.com/v2.0/global/all.js")
+
     const _id = sponsor ? sponsor._id : "";
     return (
       <form onSubmit={e => onSubmit(this.getData(e))}>
@@ -695,29 +719,7 @@ class SponsorForm extends React.Component {
                 />
               </div>
             ))}
-            <Button className="p-relative mb-3" size="sm">
-              <input
-                type="file"
-                onChange={e => {
-                  const f = e.target.files[0];
-                  if (!f) return;
-                  const reader = new FileReader();
-                  reader.onload = e2 => {
-                    let images = this.state.images;
-                    images.push(e2.target.result);
-                    this.setState({ images });
-                  };
-                  reader.readAsDataURL(f);
-                }}
-                style={{
-                  opacity: 0,
-                  position: "absolute",
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  right: 0
-                }}
-              />
+            <Button className="p-relative mb-3" size="sm" onClick={() => this.openCloudinaryUploader()}>
               Add photos
             </Button>
             <Input
