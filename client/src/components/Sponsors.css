@@ -64,8 +64,10 @@
     min-height: 0.85em;
 }
 
-.carouselControl{
+.carouselControl {
     opacity: 0.2;
+    height: 410px;
+    width: 10%;
 }
 
 .communitySponsorsHome {

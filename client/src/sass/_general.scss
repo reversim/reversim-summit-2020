@@ -976,21 +976,22 @@ input[type="checkbox"] {
   width: 57%;
   margin-left: 40px;
 
-  @media (max-width:991px) {
-    display: none;
+  @media (max-width: 991px) {
+    //display: none;
+    width: 100%;
+    margin-left: 0;
   }
+}
+.carousel-item-next, .carousel-item-prev {
+  position: absolute;
+}
 
-  .carousel-item {
-    min-width: 720px;
-
-    img {
-      height: 410px;
-    }
-
-    video {
-      height: 410px;
-    }
-  }
+.carousel-item {
+  min-width: 720px;
+  height: 410px;
+}
+.carousel-item img, .carousel-item video {
+  width: inherit;
 }
 
 .premium-text {
