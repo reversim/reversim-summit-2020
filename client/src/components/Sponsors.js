@@ -1,3 +1,5 @@
+/*global cloudinary */
+
 import React from "react";
 import pick from "lodash/pick";
 import s from "./Sponsors.css";
