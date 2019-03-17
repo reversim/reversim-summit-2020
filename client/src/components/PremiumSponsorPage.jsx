@@ -244,7 +244,10 @@ class SponsorCarousel extends React.Component {
     const { activeIndex } = this.state;
     const { sponsor } = this.props;
 
-    const slides = sponsor.images.map((item, i) => {
+    const images = sponsor.images.sort((img1, img2) => 
+      img1.endsWith("mp4") ? -1 : (img2.endsWith("mp4") ? 1 : 0)
+    );
+    const slides = images.map((item, i) => {
       return (
         <CarouselItem
           onExiting={this.onExiting}
@@ -264,7 +267,7 @@ class SponsorCarousel extends React.Component {
               Your browser does not support the video tag.
             </video>
           ) : (
-            <img src={image(item, 596, 410)} />
+            <img src={image(item, 720, 495)} />
           )}
         </CarouselItem>
       );
