@@ -28,6 +28,15 @@ const VotingCTA = () => (
   </Link>
 );
 
+const ExploreOpportunitiesCTA = () => (
+  <Link to="/sponsors" className="unstyled-link">
+    <Button className="styled-button on-purple w-max-content">
+      EXPLORE OPPORTUNITIES
+    </Button>
+  </Link>
+);
+
+
 const NavbarItem = ({to, text, external, pathname}) => {
   let link;
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
@@ -123,7 +132,7 @@ class Navbar extends Component {
           <Nav
           navbar
           className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}>
-            {voting && !isSmallScreen && pathname !== '/proposals' && <li><VotingCTA /></li>}
+            {!isSmallScreen && <li><ExploreOpportunitiesCTA /></li>}
           {/*<a*/}
           {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
           {/*target="_blank"*/}
