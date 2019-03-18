@@ -231,17 +231,16 @@ function attend(req, res) {
     };
     msg = 'Marked as attended';
   } else if (req.body.value === false) {
-    query = { _id: req.params.id, status: { $ne: 'archived' }, attendees: { $in: [req.session.passport.user] } };
+    query = { _id: req.params.id, status: { $ne: 'archived' }, notAttendees: { $nin: [req.session.passport.user] } };
     update = {
       $pull: {'attendees': req.session.passport.user},
       $push: {'notAttendees': req.session.passport.user }
     };
     msg = 'Marked as not attended';
   } else {
-    query = { _id: req.params.id, status: { $ne: 'archived' }, attendees: { $nin: [req.session.passport.user] } };
+    query = { _id: req.params.id, status: { $ne: 'archived' } };
     update = {
-      $pull: {'attendees': req.session.passport.user },
-      $pull: {'notAttendees': req.session.passport.user}
+      $pull: {'attendees': req.session.passport.user, 'notAttendees': req.session.passport.user }
     };
     msg = 'Marked as not voted';
   }
@@ -318,8 +317,8 @@ const attendDataQuery = [
 const votesQuery = [
   {
     $match: {
-      status: { 
-        $nin: ['archived', 'deleted'] 
+      status: {
+        $nin: ['archived', 'deleted']
       }
     }
   },
@@ -331,9 +330,9 @@ const votesQuery = [
       votes: {$size: "$attendees"}
     }
   },
-  { 
-    $sort: { 
-      votes: -1 
+  {
+    $sort: {
+      votes: -1
     }
   }
 ];
