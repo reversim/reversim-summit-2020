@@ -34,6 +34,7 @@ import {
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactMarkdown from "react-markdown";
 library.add(faMapMarkerAlt);
 
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
@@ -122,7 +123,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <h3 className="font-size-xl text-purple2">Who We Are?</h3>
               <div className="hl bg-purple2" />
             </div>
-            <p className="premium-text">{sponsor.about}</p>
+            <ReactMarkdown className="premium-text" source={sponsor.about}></ReactMarkdown>
           </section>
           {sponsor.images &&
             sponsor.images.length > 0 && (
@@ -244,7 +245,7 @@ class SponsorCarousel extends React.Component {
     const { activeIndex } = this.state;
     const { sponsor } = this.props;
 
-    const images = sponsor.images.sort((img1, img2) => 
+    const images = sponsor.images.sort((img1, img2) =>
       img1.endsWith("mp4") ? -1 : (img2.endsWith("mp4") ? 1 : 0)
     );
     const slides = images.map((item, i) => {
