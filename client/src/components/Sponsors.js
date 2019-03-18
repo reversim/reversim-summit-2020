@@ -39,7 +39,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
       <div className="d-flex justify-content-center mb-6">
         <img src={diamond} className={s.diamond} alt="diamond" />
         <div className={cn("font-size-xxl text-white")}>
-          Meet Our Premium Sponsors
+          Premium Sponsors
         </div>
         <div className="bg-white hl" />
       </div>
@@ -76,7 +76,7 @@ const CommunitySponsors = ({
           <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
         </svg>
         <div className={cn("font-size-xxl text-purple2")}>
-          Meet Our Community Sponsors
+          Community Sponsors
         </div>
         <div className={cn("hl bg-purple2", s.mb10)} />
       </div>
@@ -102,15 +102,7 @@ class Sponsor extends React.Component {
       sponsor: { about }
     } = this.props;
     const isTooLong = about.length > COLLAPSED_MAX_CHARS;
-    this.state = {
-      isExpanded: false,
-      isTooLong
-    };
   }
-
-  toggle = () => {
-    this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }));
-  };
 
   render() {
     let {
@@ -120,14 +112,9 @@ class Sponsor extends React.Component {
     } = this.props;
 
     const featuredJob = `Interested? More info [here](${jobUrl}).`;
-    const { isExpanded, isTooLong } = this.state;
-    const textStyle =
-      isExpanded && isTooLong
-        ? { zIndex: 1, height: "auto", minHeight: 240 }
-        : { height: 240 };
 
     return (
-      <div className="about__team-member mb-12 d-flex">
+      <div className="about__team-member mb-12 d-flex" style={{height: "auto"}}>
         <a href={hyperlink(url)} target="_blank">
           <div
             style={{ backgroundImage: `url('${image(logo, 240, 240)}')` }}
@@ -136,13 +123,7 @@ class Sponsor extends React.Component {
           />
         </a>
         <div className="flex-grow-1 line-height-12">
-          <div
-            className={`p-4 bg-white b-strong p-relative overflow-hidden ${
-              !isExpanded && isTooLong ? "text-fade" : ""
-            }`}
-            onClick={this.toggle}
-            style={textStyle}
-          >
+          <div className="p-4 bg-white b-strong p-relative overflow-hidden">
             <div ref={this.ref}>
               <h4 className="line-height-1 mb-1">
                 {name}
