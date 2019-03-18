@@ -43,7 +43,9 @@ class CFPForm extends Component {
       }
 
       try {
-        await updateUserData(getUserData(formElements));
+        let newUser = getUserData(e.target.elements);
+        newUser._id = user._id;
+        await updateUserData(newUser);
         const result = await createProposal(this.getProposalData(formElements));
         history.push(`/session/${result._id}`);
       } catch (ex) {

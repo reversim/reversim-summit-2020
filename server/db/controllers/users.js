@@ -100,7 +100,7 @@ export function update(req, res) {
 
   console.log('update body is: '+JSON.stringify(data));
 
-  User.findOneAndUpdate({ '_id': req.session.passport.user }, data, (err, user) => {
+  User.findOneAndUpdate({ '_id': req.body._id }, data, (err, user) => {
     if (err) {
       console.log(`Error in users/update query: ${err}`);
       console.error('stack: '+err.stack);

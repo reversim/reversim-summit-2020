@@ -13,7 +13,9 @@ class SpeakerForm extends React.Component {
 
     if (user) {
       try {
-        await updateUserData(getUserData(e.target.elements));
+        let newUser = getUserData(e.target.elements);
+        newUser._id = user._id;
+        await updateUserData(newUser);
         history.push(`/speaker/${user._id}`);
       } catch (ex) {
         ga.exception({
@@ -31,7 +33,7 @@ class SpeakerForm extends React.Component {
         <UserForm user={user} />
         <Input type="submit" className="d-none" />
         <div className="d-flex justify-content-center align-items-center">
-          <Button color="primary" className="styled-button on-purple w-max-content btn btn-secondary mr-4">
+          <Button color="primary" className="styled-button w-max-content btn btn-secondary mr-4">
             Submit
           </Button>
           <Link to={`/speaker/${getHref(user)}`}>Cancel</Link>

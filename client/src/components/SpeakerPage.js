@@ -49,7 +49,7 @@ export class SpeakerPage extends React.Component {
                   {speaker.name}
                   {canEdit && (
                     <Link to={`/speaker/${speaker._id}/edit`} className="d-block">
-                      <Button>Edit</Button>
+                      <Button className="styled-button on-purple btn btn-secondary">Edit</Button>
                     </Link>
                   )}
                   {isReversimTeamMember && (
