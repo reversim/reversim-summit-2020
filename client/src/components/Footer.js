@@ -17,13 +17,28 @@ const Footer = () => (
       >
         <div className="d-flex">
           <div className="mr-10 text-white d-flex">
-            <div className="mr-2">Contact Us:</div>
+            <div className="mr-2">Contact us:</div>
             <a href="mailto:rs19team@googlegroups.com">
-              <FontAwesomeIcon className="mr-2" color={"white"} icon={faEnvelope} />
-            </a><a href="https://www.facebook.com/groups/reversim/">
-              <FontAwesomeIcon className="mr-2" color={"white"} icon={faFacebook} />
-            </a><a href="https://twitter.com/reversim/">
-              <FontAwesomeIcon className="mr-2" color={"white"} icon={faTwitter} />
+              <FontAwesomeIcon
+                className="mr-2"
+                color={"white"}
+                icon={faEnvelope}
+              />
+            </a>
+            <div className="mr-2 ml-5">Stay in touch:</div>
+            <a href="https://www.facebook.com/groups/reversim/">
+              <FontAwesomeIcon
+                className="mr-2"
+                color={"white"}
+                icon={faFacebook}
+              />
+            </a>
+            <a href="https://twitter.com/reversim/">
+              <FontAwesomeIcon
+                className="mr-2"
+                color={"white"}
+                icon={faTwitter}
+              />
             </a>
           </div>
           <a className="text-white" href="http://confcodeofconduct.com/">
