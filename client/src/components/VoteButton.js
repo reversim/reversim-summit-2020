@@ -15,7 +15,7 @@ export default ({user, attended, proposalId, attendProposal}) => {
     <React.Fragment>
       <div
         className="not-relevant-cb cursor-pointer font-weight-bold d-flex align-items-center"
-        onClick={() => attendProposal(proposalId, attended === false ? undefined : false)}>
+        onClick={() => attendProposal(proposalId, false)}>
         <div
           className={cn('mr-2 b-regular', {'selected': attended === false})}
           style={{minWidth: 24, height: 24}}>
@@ -26,7 +26,7 @@ export default ({user, attended, proposalId, attendProposal}) => {
 
       <Button
         className={cn('interested-btn', {selected: attended}, s.changeAnimation)}
-        onClick={() => attendProposal(proposalId, attended? undefined: true)}>
+        onClick={() => attendProposal(proposalId, true)}>
         Interested
       </Button>
     </React.Fragment>
