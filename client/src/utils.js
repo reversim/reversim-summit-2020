@@ -1,5 +1,4 @@
-import createMemoryHistory from 'history/createMemoryHistory';
-import createBrowserHistory from 'history/createBrowserHistory';
+import {createMemoryHistory, createBrowserHistory} from 'history';
 import {CFP_ENDS, PROPOSAL_TYPES, PROPOSAL_TYPES_SHORT} from './data/proposals';
 
 export const getSessionTypeStr = type => PROPOSAL_TYPES[type];

@@ -1,6 +1,6 @@
 import React from "react";
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import withScriptjs from "react-google-maps/lib/async/withScriptjs";
+import { withGoogleMap, GoogleMap, Marker, withScriptjs } from "react-google-maps";
+// import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 import s from "./Map.css";
 import cn from "classnames";
 
@@ -26,7 +26,7 @@ const Map = () => (
     loadingElement={<div />}
     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
       process.env.REACT_APP_GOOGLE_MAPS_KEY
-    }`}
+      }`}
     containerElement={
       <div className={cn(s.mapContainer, "b-strong border-purple2")} />
     }
