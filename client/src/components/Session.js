@@ -10,7 +10,7 @@ import VoteButton from './VoteButton';
 import {key} from '../utils';
 import {image} from '../images';
 
-const Session = ({proposal, speakers, user, attendProposal, onTagClick}) => {
+const Session = ({proposal, speakers, user, attendProposal, onTagClick, eventConfig}) => {
   const {_id, title, type, tags, abstract, attended} = proposal;
   return (
     <div className="session b-strong d-flex mb-12" style={{minHeight: 440}}>
@@ -43,6 +43,7 @@ const Session = ({proposal, speakers, user, attendProposal, onTagClick}) => {
             attended={attended}
             proposalId={_id}
             attendProposal={attendProposal}
+            eventConfig={eventConfig}
           />
         </div>
       </div>

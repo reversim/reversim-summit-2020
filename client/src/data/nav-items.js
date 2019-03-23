@@ -15,13 +15,13 @@ export default () => {
   let items;
 
   if (isServer) {
-    items = [about, sponsors, _proposals].map(item => ({
+    items = [about, sponsors].map(item => ({
       ...item,
       external: true,
       to: `/${item.to}.html`,
     }));
   } else {
-    items = [about, sponsors, _proposals];
+    items = [about, sponsors];
   }
 
   return items;

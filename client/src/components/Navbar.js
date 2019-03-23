@@ -147,6 +147,8 @@ class Navbar extends Component {
           {items.map(item => (
               <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
           ))}
+            { voting && <NavbarItem key={`navbar-i-proposals`} pathname={pathname} {...{to: 'proposals', text: 'Proposals'}} />
+            }
           {isSmallScreen &&
           user && (
           /*<div className="border-top">

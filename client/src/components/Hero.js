@@ -27,60 +27,75 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faMapMarkerAlt, faCalendarAlt);
 
 const Hero = ({ eventConfig }) => (
-    <section
+  <section
+    className={cn(
+      hero,
+      "d-flex justify-content-center align-items-center bg-purple2 navbar-margin"
+    )}
+  >
+    <Container>
+      <div
         className={cn(
-                hero,
-            "d-flex justify-content-center align-items-center bg-purple2 navbar-margin"
-        )}>
-        <Container>
-        <div
-        className={cn(
-                heroInner,
-            "d-flex align-items-center text-center text-md-left text-white"
+          heroInner,
+          "d-flex align-items-center text-center text-md-left text-white"
         )}
-        >
+      >
         <div className="d-flex flex-column my-8">
-            <div className="d-flex mb-6">
+          <div className="d-flex mb-6">
             <div className="font-size-xxl">Welcome</div>
             <div className="hl bg-white" />
-            </div>
-        {/*<div className='d-flex'>*/}
-        <div className='rs19Logo'>
-        <img src={logoImg} alt="rs19" />
-            </div>
+          </div>
+          {/*<div className='d-flex'>*/}
+          <div className="rs19Logo">
+            <img src={logoImg} alt="rs19" />
+          </div>
 
-        {/*<div className={cn(left, 'text-white')}>*/}
-        <div className={cn(subtitle, "p-2 d-flex mt-4 mb-8")}>
-        <div>
-        <FontAwesomeIcon className="mr-2" icon="calendar-alt" />
-            16-17.6.2019
-        </div>
-        <div className="ml-4">
-            <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
-            TLV Convention center
-        </div>
-        </div>
-        <div className="text-align-left">
-        <Link to="/proposals" className="unstyled-link">
-            <Button className="styled-button on-purple">
-              {"VOTE FOR SESSIONS"}
-            </Button>
-          </Link>
+          {/*<div className={cn(left, 'text-white')}>*/}
+          <div className={cn(subtitle, "p-2 d-flex mt-4 mb-8")}>
+            <div>
+              <FontAwesomeIcon className="mr-2" icon="calendar-alt" />
+              16-17.6.2019
             </div>
+            <div className="ml-4">
+              <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
+              TLV Convention center
             </div>
-            <div className="hero__right heroCounterWrapper d-flex flex-row-reverse align-items-end justify-content-evenly">
-                <div className="hero__timer-wrapper">
-                    <div className="hero__timer-title text-white">{"Voting closes at 17:00, March 24"}</div>
-                    <div><CountDown timeRemainingInSeconds={eventConfig.votingCountDown} /></div>
-                </div>
-            <div/>
+          </div>
+          <div className="text-align-left">
+            {eventConfig.voting && (
+              <Link to="/proposals" className="unstyled-link">
+                <Button className="styled-button on-purple">
+                  {"VOTE FOR SESSIONS"}
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
+        <div className="hero__right heroCounterWrapper d-flex flex-row-reverse align-items-end justify-content-evenly">
+          <div className="hero__timer-wrapper">
+            <div className="hero__timer-title text-white">
+              {eventConfig.voting
+                ? "Voting closes at 17:00, March 24"
+                : "Reversim Summit will start in"}
+            </div>
+            <div>
+              <CountDown
+                timeRemainingInSeconds={
+                  eventConfig.voting
+                    ? eventConfig.votingCountDown
+                    : eventConfig.summitStartCountDown
+                }
+              />
+            </div>
+          </div>
+          <div />
         </div>
+      </div>
     </Container>
     <div>
-        <i className="fas fa-angle-down"/>
+      <i className="fas fa-angle-down" />
     </div>
-    </section>
+  </section>
 );
 
 export default Hero;

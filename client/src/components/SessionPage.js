@@ -149,6 +149,7 @@ class SessionPage extends Component {
                 attended={attended}
                 proposalId={id}
                 attendProposal={attendProposal}
+                eventConfig={eventConfig}
               />
             )}
           </div>

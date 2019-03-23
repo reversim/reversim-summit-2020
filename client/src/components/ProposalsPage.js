@@ -221,7 +221,8 @@ class ProposalsPage extends React.Component {
       users,
       gotAllProposals,
       user,
-      attendProposal
+      attendProposal,
+      eventConfig
     } = this.props;
 
     const { tagFilters } = this.state;
@@ -389,6 +390,7 @@ class ProposalsPage extends React.Component {
                     user={user}
                     attendProposal={attendProposal}
                     onTagClick={this.addTag}
+                    eventConfig={eventConfig}
                   />
                 ))}
               </React.Fragment>
