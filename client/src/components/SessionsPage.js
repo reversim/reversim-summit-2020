@@ -38,6 +38,7 @@ class SessionsPage extends React.Component {
       excludedSessionTypes,
       setExcludedTags,
       excludedTags,
+      eventConfig
     } = this.props;
 
     const proposals = values(this.props.proposals).filter(proposal => {
@@ -68,6 +69,7 @@ class SessionsPage extends React.Component {
                     key={proposal._id}
                     proposal={proposal}
                     speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
+                    eventConfig={eventConfig}
                   />
                 ))
               ) : (
