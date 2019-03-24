@@ -273,7 +273,7 @@ class ProposalsPage extends React.Component {
           className="navbar-margin pb-15 bg-purple2 text-white font-size-lm proposals-bg d-flex justify-content-center"
           style={{ backgroundImage: `url('${introBG}')` }}
         >
-          <Container>
+          {eventConfig.voting && <Container>
             <div className={cn("d-flex flex-column pt-15", title)}>
               <h3 className="font-size-xl mr-4 font-weight-regular">
                 Be The Voice Of The Community
@@ -282,7 +282,7 @@ class ProposalsPage extends React.Component {
                 Impact The Content
               </h3>
             </div>
-          </Container>
+          </Container>}
         </div>
         <div className="white-bg" style={{ padding: "60px 0" }}>
           <Container>

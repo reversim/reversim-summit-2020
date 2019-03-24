@@ -11,9 +11,9 @@ export default ({
   attendProposal,
   eventConfig
 }) => {
-  if (!user) {
+  if (!user && eventConfig.voting) {
     return <a href={getLoginUrl()}>Login to vote!</a>;
-  }
+  } else return null
 
   return (
     <React.Fragment>
