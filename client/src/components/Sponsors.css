@@ -83,10 +83,6 @@
     max-width: 400px;
 }
 
-.openPosition {
-    height: -webkit-fill-available;
-}
-
 @media (max-width:767px) {
     .communitySponsorsHome {
         justify-content: center;
@@ -109,9 +105,6 @@
     .premiumSection video {
         max-width: 300px;
         max-height: 300px;
-    }
-    .openPosition {
-        height: inherit;
     }
     .premiumTitle {
         display: flex;

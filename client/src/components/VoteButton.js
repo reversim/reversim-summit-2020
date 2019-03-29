@@ -19,7 +19,6 @@ export default ({
 
   return (
     <React.Fragment>
-      {eventConfig.voting && (
         <div
           className="not-relevant-cb cursor-pointer font-weight-bold d-flex align-items-center"
           onClick={() => attendProposal(proposalId, false)}
@@ -32,9 +31,8 @@ export default ({
           </div>
           <span> Not relevant to me</span>
         </div>
-      )}
+      )
 
-      {eventConfig.voting && (
         <Button
           className={cn(
             "interested-btn",
@@ -45,7 +43,7 @@ export default ({
         >
           Interested
         </Button>
-      )}
+      )
     </React.Fragment>
   );
 };

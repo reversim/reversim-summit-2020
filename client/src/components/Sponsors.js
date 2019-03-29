@@ -17,7 +17,7 @@ import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
 import { img } from "./Speaker2.css";
 import {image} from '../images';
-
+import CommunitySponsors from './CommunitySponsors'
 library.add(faPencilAlt, faTrash);
 const COLLAPSED_MAX_CHARS = 110;
 
@@ -58,42 +58,42 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     </div>
   );
 };
-const CommunitySponsors = ({
-  sponsors,
-  user,
-  updateSponsor,
-  deleteSponsor
-}) => {
-  return (
-    <div className={cn("bg-white")}>
-      <div
-        className={cn(
-          "d-flex justify-content-center text-align-center mb-6",
-          s.communitySponsorsTitle
-        )}
-      >
-        <svg className={s.circle}>
-          <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
-        </svg>
-        <div className={cn("font-size-xxl text-purple2")}>
-          Community Sponsors
-        </div>
-        <div className={cn("hl bg-purple2", s.mb10)} />
-      </div>
-      <div>
-        {sponsors.map(sponsor => (
-          <SponsorWithEdit
-            key={sponsor._id}
-            sponsor={sponsor}
-            canEdit={user && user.isReversimTeamMember}
-            updateSponsor={updateSponsor}
-            deleteSponsor={deleteSponsor}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+// const CommunitySponsors = ({
+//   sponsors,
+//   user,
+//   updateSponsor,
+//   deleteSponsor
+// }) => {
+//   return (
+//     <div className={cn("bg-white")}>
+//       <div
+//         className={cn(
+//           "d-flex justify-content-center text-align-center mb-6",
+//           s.communitySponsorsTitle
+//         )}
+//       >
+//         <svg className={s.circle}>
+//           <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
+//         </svg>
+//         <div className={cn("font-size-xxl text-purple2")}>
+//           Community Sponsors
+//         </div>
+//         <div className={cn("hl bg-purple2", s.mb10)} />
+//       </div>
+//       <div>
+//         {sponsors.map(sponsor => (
+//           <SponsorWithEdit
+//             key={sponsor._id}
+//             sponsor={sponsor}
+//             canEdit={user && user.isReversimTeamMember}
+//             updateSponsor={updateSponsor}
+//             deleteSponsor={deleteSponsor}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 class Sponsor extends React.Component {
   constructor(props) {
@@ -580,12 +580,12 @@ class SponsorForm extends React.Component {
       ]);
     }
   };
-  
+
 
   openCloudinaryUploader() {
     let uploader = cloudinary.createUploadWidget({
-      cloudName: 'dtltonc5g', 
-      uploadPreset: 'ss7dt1yg'}, (error, result) => { 
+      cloudName: 'dtltonc5g',
+      uploadPreset: 'ss7dt1yg'}, (error, result) => {
         this.cloudinaryCallback(error, result);
       });
     uploader.open();
