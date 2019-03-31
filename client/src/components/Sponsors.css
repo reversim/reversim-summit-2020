@@ -90,6 +90,9 @@
     .communitySponsors {
         flex-direction: column;
     }
+    .communitySponsorsImageSection {
+        align-items: center;
+    }
     .sponsor {
         border-bottom: 0;
     }

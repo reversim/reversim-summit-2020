@@ -101,7 +101,7 @@ class SessionPage extends Component {
               className="unstyled-link"
               to={`/session/${getHref(session)}/edit`}
             >
-              <Button color="primary" size="sm" className="ml-3">
+              <Button size="sm" className="ml-3 styled-button btn btn-secondary">
                 <FontAwesomeIcon icon="pencil-alt" />
               </Button>
             </Link>
@@ -180,16 +180,16 @@ class SessionPage extends Component {
               </div>
             ))}
           </div>
-          {canEdit && (
-            <Button
-              color="primary"
-              size="sm"
-              className="ml-3"
-              onClick={this.askDelete}
-            >
-              <FontAwesomeIcon icon="trash" />
-            </Button>
-          )}
+          {/*{canEdit && (*/}
+          {/*  <Button*/}
+          {/*    color="primary"*/}
+          {/*    size="sm"*/}
+          {/*    className="ml-3"*/}
+          {/*    onClick={this.askDelete}*/}
+          {/*  >*/}
+          {/*    <FontAwesomeIcon icon="trash" />*/}
+          {/*  </Button>*/}
+          {/*)}*/}
         </Container>
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
           <ModalBody>

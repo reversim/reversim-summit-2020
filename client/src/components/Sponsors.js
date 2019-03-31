@@ -17,7 +17,7 @@ import diamond from "../images/SVG/diamond.svg";
 import circle from "../images/SVG/circle.svg";
 import { img } from "./Speaker2.css";
 import {image} from '../images';
-import CommunitySponsors from './CommunitySponsors'
+import CommunitySponsor from './CommunitySponsor'
 library.add(faPencilAlt, faTrash);
 const COLLAPSED_MAX_CHARS = 110;
 
@@ -58,42 +58,42 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     </div>
   );
 };
-// const CommunitySponsors = ({
-//   sponsors,
-//   user,
-//   updateSponsor,
-//   deleteSponsor
-// }) => {
-//   return (
-//     <div className={cn("bg-white")}>
-//       <div
-//         className={cn(
-//           "d-flex justify-content-center text-align-center mb-6",
-//           s.communitySponsorsTitle
-//         )}
-//       >
-//         <svg className={s.circle}>
-//           <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
-//         </svg>
-//         <div className={cn("font-size-xxl text-purple2")}>
-//           Community Sponsors
-//         </div>
-//         <div className={cn("hl bg-purple2", s.mb10)} />
-//       </div>
-//       <div>
-//         {sponsors.map(sponsor => (
-//           <SponsorWithEdit
-//             key={sponsor._id}
-//             sponsor={sponsor}
-//             canEdit={user && user.isReversimTeamMember}
-//             updateSponsor={updateSponsor}
-//             deleteSponsor={deleteSponsor}
-//           />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
+const CommunitySponsors = ({
+  sponsors,
+  user,
+  updateSponsor,
+  deleteSponsor
+}) => {
+  return (
+    <div className={cn("bg-white")}>
+      <div
+        className={cn(
+          "d-flex justify-content-center text-align-center mb-6",
+          s.communitySponsorsTitle
+        )}
+      >
+        <svg className={s.circle}>
+          <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
+        </svg>
+        <div className={cn("font-size-xxl text-purple2")}>
+          Community Sponsors
+        </div>
+        <div className={cn("hl bg-purple2", s.mb10)} />
+      </div>
+      <div>
+        {sponsors.map(sponsor => (
+          <SponsorWithEdit
+            key={sponsor._id}
+            sponsor={sponsor}
+            canEdit={user && user.isReversimTeamMember}
+            updateSponsor={updateSponsor}
+            deleteSponsor={deleteSponsor}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 class Sponsor extends React.Component {
   constructor(props) {
@@ -164,103 +164,6 @@ class Sponsor extends React.Component {
   }
 }
 
-class PremiumSponsor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isEditing: false,
-      isLoading: false
-    };
-  }
-
-  onEdit = () => {
-    this.setState({ isEditing: true });
-  };
-
-  onDelete = async () => {
-    await this.props.deleteSponsor(this.props.sponsor._id);
-  };
-
-  onSubmit = async sponsor => {
-    this.setState({ isLoading: true });
-    await this.props.updateSponsor(this.props.sponsor._id, {
-      ...this.props.sponsor,
-      ...sponsor
-    });
-    this.setState({ isEditing: false, isLoading: false });
-  };
-
-  onCancel = () => {
-    this.setState({ isEditing: false });
-  };
-
-  render() {
-    const { isEditing } = this.state;
-    const { sponsor, canEdit } = this.props;
-    return (
-      <div className={cn("d-flex align-items-center", s.premiumSponsor)}>
-        <div>
-          {isEditing ? (
-            <SponsorForm
-              sponsor={sponsor}
-              onSubmit={this.onSubmit}
-              onCancel={this.onCancel}
-              isLoading={this.state.isLoading}
-            />
-          ) : (
-            <div>
-              {canEdit && (
-                <span>
-                  <Button
-                    size="sm"
-                    color="primary"
-                    className="ml-2"
-                    onClick={this.onEdit}
-                  >
-                    <FontAwesomeIcon icon={faPencilAlt} />
-                  </Button>
-                  <Button
-                    size="sm"
-                    color="danger"
-                    className="ml-2"
-                    onClick={this.onDelete}
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                  </Button>
-                </span>
-              )}
-              <div>
-                <div
-                  className={cn(
-                    s.sponsor,
-                    "bg-white d-flex justify-content-center align-items-center"
-                  )}
-                >
-                  <Link
-                    to={`/sponsor/${sponsor.name}`}
-                    className="unstyled-link"
-                  >
-                    <img
-                      style={{ maxWidth: 240, maxHeight: 240 }}
-                      src={sponsor.logo}
-                      alt={sponsor.name}
-                    />
-                  </Link>
-                </div>
-                <Link to={`/sponsor/${sponsor.name}`} className="unstyled-link">
-                  <Button className={"styled-button on-purple w-max-content"}>
-                    EXPLORE OPPORTUNITIES
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-}
-
 class SponsorWithEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -302,7 +205,8 @@ class SponsorWithEdit extends React.Component {
         isLoading={this.state.isLoading}
       />
     ) : (
-      <Sponsor
+      <CommunitySponsor
+        canEdit={this.props.canEdit}
         onEdit={canEdit && this.onEdit}
         onDelete={canEdit && this.onDelete}
         sponsor={sponsor}
