@@ -46,7 +46,7 @@ const Tags = ({
       handleDelete={handleDelete}
       handleAddition={handleAddition}
       autofocus={false}
-      classNames={classNames}
+      classNames={cn(classNames, "styled-button btn btn-secondary")}
       styles={{background:'linear-gradient(to right,rgba(118,12,146, 0.2) 0%, rgba(0,92,177,0.2) 100%)','border':'none'}}
     />
     {!readOnly && (
@@ -57,7 +57,8 @@ const Tags = ({
             onClick={() => handleAddition(suggestion)}
             size="sm"
             color="link"
-            className="text-underline mr-1"
+            className="btn btn-secondary mr-3 styled-button mb-2"
+            style={{fontSize: 12, height: 30}}
             key={suggestion}>
             {suggestion}
           </Button>

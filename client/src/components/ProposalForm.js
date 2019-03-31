@@ -112,7 +112,7 @@ const OutlineFieldCaption = () => (
 );
 
 const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
-  <div onClick={() => onChange(name)} className={cn({'text-primary': checked}, 'd-flex align-items-center mb-4', {'opacity-05': disabled})}>
+  <div onClick={() => onChange(name)} className={cn({'text-primary': checked}, 'd-flex align-items-center mb-4', {'opacity-05': !disabled})}>
     <input
       className="mr-3"
       type="checkbox"

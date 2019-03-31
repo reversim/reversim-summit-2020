@@ -136,9 +136,8 @@ class SessionEditPage extends React.Component {
                   <div className="text-center">
                     <Input type="submit" className="d-none" />
                     <Button
-                      color="primary"
-                      className="mr-4"
-                      style={{ width: 120 }}
+                      className="mr-4 styled-button btn btn-secondary"
+                      // style={{ width: 120 }}
                     >
                       Submit
                     </Button>
