@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
 import { getLoginUrl } from "./Redirect";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faEnvelopeSquare } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -28,7 +28,7 @@ const Footer = ({ isSmallScreen }) => (
                 <FontAwesomeIcon
                   className="ml-2"
                   color={"white"}
-                  icon={faEnvelope}
+                  icon={faEnvelopeSquare}
                 />
               </a>
             </div>
@@ -46,6 +46,13 @@ const Footer = ({ isSmallScreen }) => (
                   className="ml-2"
                   color={"white"}
                   icon={faTwitter}
+                />
+              </a>
+              <a href="https://groups.google.com/forum/#!forum/reversim-summit">
+                <FontAwesomeIcon
+                  className="ml-2"
+                  color={"white"}
+                  icon={faEnvelope}
                 />
               </a>
             </div>
