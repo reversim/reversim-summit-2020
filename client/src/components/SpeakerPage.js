@@ -28,10 +28,12 @@ export class SpeakerPage extends React.Component {
   };
 
   render() {
-    const {speaker, proposals: allProposals, user, isUser} = this.props;
+    const {speaker, proposals: allProposals, user, isUser, eventConfig} = this.props;
     const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
+    const { moderationCompleted } = eventConfig;
     const {isUploadingPhoto} = this.state;
     const canEdit = (user && user.isReversimTeamMember) || isUser;
+    const canSeeStatus = (isUser && moderationCompleted) || (user && user.isReversimTeamMember);
 
     const sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
 
@@ -132,12 +134,15 @@ export class SpeakerPage extends React.Component {
                       <SessionInfo session={session} />
                     </div>
                     {/* <div className="d-flex">{session.tags.map(Tag)}</div> */}
-                    <Link
-                      key={session._id}
-                      to={`/session/${getHref(session)}`}
-                      className="unstyled-link float-right">
-                      <Button className="styled-button">Read more</Button>
-                    </Link>
+                    <div className='d-flex justify-content-between mobile-flex-column'>
+                      {canSeeStatus && <div className='text-purple2 font-weight-bold font-size-lm'>Status: {session.status === 'accepted' ? 'Accepted' : 'Not accepted'}</div>}
+                      <Link
+                        key={session._id}
+                        to={`/session/${getHref(session)}`}
+                        className="unstyled-link float-right">
+                        <Button className="styled-button">Read more</Button>
+                      </Link>
+                    </div>
                   </div>
                 ))}
               </div>

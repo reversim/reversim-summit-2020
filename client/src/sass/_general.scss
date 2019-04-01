@@ -486,6 +486,12 @@ button.btn {
   }
 }
 
+.mobile-flex-column {
+  @media (max-width:768px) {
+    flex-direction: column;
+  }
+}
+
  .speaker-page__hero {
    display: flex;
    align-items: flex-end;
@@ -669,6 +675,15 @@ input[type="checkbox"] {
 
 .box-shadow-none {
   box-shadow: none;
+}
+
+.height-auto {
+  height: auto !important;
+}
+.mobile-height-auto {
+  @media (max-width:768px) {
+    height: auto !important;
+  }
 }
 
 .about__intro-text {

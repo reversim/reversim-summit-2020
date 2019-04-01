@@ -14,6 +14,7 @@ export default () => {
   const votingEnded = moment().tz('Israel').subtract(15, 'hours').isAfter(config.votingEndDate, 'day', "[]");
   const votingCountDown = (moment2(config.votingEndDate).tz('Israel').add(15, 'hours').diff(moment()) / 1000);
   const summitStartCountDown = (moment2(config.summitStartDate).tz('Israel').add(9, 'hours').diff(moment()) / 1000);
+  const moderationCompleted = (process.env.MODERATION_COMPLETED === 'true');
 
   return {
     cfpStartDate: config.cfpStartDate,
@@ -24,6 +25,7 @@ export default () => {
     voting,
     votingEnded,
     votingCountDown,
-    summitStartCountDown
+    summitStartCountDown,
+    moderationCompleted
   }
 }
