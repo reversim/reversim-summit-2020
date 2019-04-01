@@ -55,7 +55,7 @@ class SessionPage extends Component {
         params: { id }
       }
     } = this.props;
-    const { voting, cfp } = eventConfig;
+    const { voting, cfp, moderationCompleted } = eventConfig;
     const {
       title,
       abstract,
@@ -78,6 +78,7 @@ class SessionPage extends Component {
     const isAuthor = user && session.speaker_ids.includes(user._id);
     const isTeamMember = user && user.isReversimTeamMember;
     const canEdit = (isAuthor && cfp) || isTeamMember;
+    const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
 
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
@@ -96,16 +97,29 @@ class SessionPage extends Component {
               <SessionDayTime id={id} />
             </div>
           </div>
-          {canEdit && (
-            <Link
-              className="unstyled-link"
-              to={`/session/${getHref(session)}/edit`}
-            >
-              <Button size="sm" className="ml-3 styled-button btn btn-secondary">
-                <FontAwesomeIcon icon="pencil-alt" />
-              </Button>
-            </Link>
-          )}
+
+          <div className="mb-2 d-flex align-items-center">
+            {canSeeStatus && (
+              <div className="text-purple2 font-weight-bold font-size-lm">
+                Status:{" "}
+                {session.status === "accepted" ? "Accepted" : "Not accepted"}
+              </div>
+            )}
+            {canEdit && (
+              <Link
+                className="unstyled-link"
+                to={`/session/${getHref(session)}/edit`}
+              >
+                <Button
+                  size="sm"
+                  className="ml-3 styled-button btn btn-secondary"
+                >
+                  <FontAwesomeIcon icon="pencil-alt" />
+                </Button>
+              </Link>
+            )}
+          </div>
+
           <div className="font-size-md mb-12">
             <ReactMarkdown source={abstract} />
           </div>
@@ -132,10 +146,7 @@ class SessionPage extends Component {
               <div className="mb-3" key={i}>
                 <h4>Video URL- {video_url.name}</h4>
                 <div>
-                  <a
-                    href={video_url.video_url}
-                    target="_blank"
-                  >
+                  <a href={video_url.video_url} target="_blank">
                     {video_url.video_url}
                   </a>
                 </div>
@@ -173,7 +184,7 @@ class SessionPage extends Component {
                       to={`/speaker/${getHref(speaker)}`}
                       className="unstyled-link"
                     >
-                      <Button className="styled-button">Read more</Button>
+                      <Button className="styled-button mobile-height-auto">Read more</Button>
                     </Link>
                   </div>
                 </div>
