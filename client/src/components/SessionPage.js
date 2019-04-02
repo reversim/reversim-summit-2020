@@ -101,8 +101,8 @@ class SessionPage extends Component {
           <div className="mb-2 d-flex align-items-center">
             {canSeeStatus && (
               <div className="text-purple2 font-weight-bold font-size-lm">
-                Status:{" "}
-                {session.status === "accepted" ? "Accepted" : "Not accepted"}
+                Status:
+                {session.status === "accepted" ? " Accepted" : " Sadly not this time"}
               </div>
             )}
             {canEdit && (
@@ -124,7 +124,7 @@ class SessionPage extends Component {
             <ReactMarkdown source={abstract} />
           </div>
           {outline && (
-            <div>
+            <div className='text-break'>
               <h4>Outline & private notes</h4>
               <ReactMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
               {/* consolidate line breaks */}

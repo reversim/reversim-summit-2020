@@ -70,7 +70,7 @@ export class SpeakerPage extends React.Component {
             <SpeakerSocialLinks {...speaker} />
           <p className="font-size-md mb-10 mt-16">{bio}</p>
           {trackRecord && (
-            <div className="mb-3">
+            <div className="mb-3 text-break">
               <h4>Track record</h4>
               <div className="font-size-sm">
                 <ReactMarkdown source={trackRecord} />
@@ -78,7 +78,7 @@ export class SpeakerPage extends React.Component {
             </div>
           )}
           {video_url && (
-            <div className="mb-3">
+            <div className="mb-3 text-break">
               <h4>Video URL</h4>
               <div>
                 <a href={video_url} target="_blank">
@@ -135,7 +135,7 @@ export class SpeakerPage extends React.Component {
                     </div>
                     {/* <div className="d-flex">{session.tags.map(Tag)}</div> */}
                     <div className='d-flex justify-content-between mobile-flex-column'>
-                      {canSeeStatus && <div className='text-purple2 font-weight-bold font-size-lm'>Status: {session.status === 'accepted' ? 'Accepted' : 'Not accepted'}</div>}
+                      {canSeeStatus && <div className='text-purple2 font-weight-bold font-size-lm'>Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}</div>}
                       <Link
                         key={session._id}
                         to={`/session/${getHref(session)}`}
