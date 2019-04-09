@@ -1,6 +1,7 @@
 import React from 'react';
 import IconLink from './IconLink';
 import {faLinkedin, faTwitterSquare, faGithubSquare, faStackOverflow} from '@fortawesome/free-brands-svg-icons';
+import cn from "classnames";
 
 const icons = {
   twitter: faTwitterSquare,
@@ -12,11 +13,11 @@ const hrefs = {
   twitter: x => `https://twitter.com/${x}`,
   linkedin: x => x,
   github: x => `https://github.com/${x}`,
-  stackOverflow: x => x,
+  // stackOverflow: x => x,
 };
 
-const SpeakerSocialLink = ({type, value}) => (
-  <IconLink href={hrefs[type](value)} icon={icons[type]} className="social-icon-link mr-7 d-flex" />
+const SpeakerSocialLink = ({type, value, iconClassName}) => (
+  <IconLink href={hrefs[type](value)} icon={icons[type]} className={cn("social-icon-link mr-7 d-flex", iconClassName)} />
 );
 
 export default SpeakerSocialLink;

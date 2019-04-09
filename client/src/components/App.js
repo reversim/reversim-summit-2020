@@ -55,11 +55,15 @@ class App extends Component {
       const shuffledSpeakers = shuffle(
         without(data.speakers, '5b60af7eb5c7a00014aaff91', '5b45baa6990eba0014f62e39'),
       );
+      const shuffledAcceptedSpeakers = shuffle(
+        data.acceptedSpeakers
+      );
 
       this.setState({
         ...data,
         user,
         shuffledSpeakers,
+        shuffledAcceptedSpeakers,
         fetchComplete: true,
       });
 

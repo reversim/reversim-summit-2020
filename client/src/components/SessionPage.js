@@ -77,7 +77,8 @@ class SessionPage extends Component {
     }));
     const isAuthor = user && session.speaker_ids.includes(user._id);
     const isTeamMember = user && user.isReversimTeamMember;
-    const canEdit = (isAuthor && cfp) || isTeamMember;
+    const editPeriod = cfp || moderationCompleted;
+    const canEdit = (isAuthor && editPeriod) || isTeamMember;
     const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
 
     return (

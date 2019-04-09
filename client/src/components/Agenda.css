@@ -62,3 +62,9 @@
       margin-left: 0;
     }
 }
+
+.diamond {
+    width: 85px;
+    height: 85px;
+    margin-right: -40px;
+}

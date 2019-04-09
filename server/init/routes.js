@@ -63,8 +63,9 @@ export default (app) => {
 
   async function initial(req, res) {
     const proposals = await proposalsController.getAllProposals(true, req.user ? req.user.created_at : String(Date.now()));
-    // const proposals = await proposalsController.getAcceptedProposals();
+    const acceptedProposals = await proposalsController.getAcceptedProposals();
     const users = await proposalsController.getProposers(proposals);
+    const acceptedSpeakers = (await proposalsController.getProposers(acceptedProposals)).map(u => u._id);
     const allTags = proposalsController.getTags(proposals);
     const user = req.user;
     const teamUsers = await usersController.getTeam();
@@ -77,7 +78,7 @@ export default (app) => {
     if (userId && !users.find(u => String(u._id) === userId)) users.unshift(user);
 
     const usersWithTeam = users.concat(teamUsers);
-    
+
     const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user));
     let mappedUsers = usersWithTeam.map(u => transformUser(u, req.user));
 
@@ -90,7 +91,9 @@ export default (app) => {
       messages,
       sponsors,
       eventConfig: eventConfig(),
-      speakers
+      speakers,
+      acceptedProposals,
+      acceptedSpeakers
     });
   }
 

@@ -1,8 +1,9 @@
-import React, {Fragment} from 'react';
-import without from 'lodash/without';
-import uniq from 'lodash/uniq';
-import halls from '../data/halls';
-import {getSessionTypeShortStr, getTagStr} from '../utils';
+import React, { Fragment } from "react";
+import without from "lodash/without";
+import uniq from "lodash/uniq";
+import halls from "../data/halls";
+import { getSessionTypeShortStr, getTagStr } from "../utils";
+import cn from "classnames";
 
 function withFilters(WrappedComp, type) {
   const hallsKey = `excluded-halls-${type}`;
@@ -10,19 +11,35 @@ function withFilters(WrappedComp, type) {
   const sessionTypesKey = `excluded-sessiontypes-${type}`;
   const tagsKey = `excluded-tags-${type}`;
 
-  const Filter = ({val, list, onChange, getText, filterType}) => (
+  const Filter = ({ val, list, onChange, getText, filterType }) => (
     <Fragment>
-      <input
-        type="checkbox"
-        id={`filter-${filterType}-${type}-${val}`}
-        checked={!list.includes(val)}
-        onChange={e => onChange(val, e.target.checked)}
-      />
-      <label htmlFor={`filter-${filterType}-${type}-${val}`}>{getText(val)}</label>
+      {/*<input*/}
+      {/*  type="checkbox"*/}
+      {/*  id={`filter-${filterType}-${type}-${val}`}*/}
+      {/*  checked={!list.includes(val)}*/}
+      {/*  onChange={e => onChange(val, e.target.checked)}*/}
+      {/*/>*/}
+      <div
+        className="text-white d-flex"
+        onClick={e => onChange(val, list.includes(val))}
+      >
+        <div className="cursor-pointer font-weight-bold d-flex align-items-center filter-cb">
+          <div
+            className={cn("mr-2 b-regular-white", { selected: !list.includes(val) })}
+            id={`filter-${filterType}-${type}-${val}`}
+            style={{ minWidth: 24, height: 24 }}
+          >
+            <div />
+          </div>
+        </div>
+        <label htmlFor={`filter-${filterType}-${type}-${val}`}>
+          {getText(val)}
+        </label>
+      </div>
     </Fragment>
   );
 
-  const HallFilter = ({index, onChange, excludedHalls}) => (
+  const HallFilter = ({ index, onChange, excludedHalls }) => (
     <Filter
       val={index}
       onChange={onChange}
@@ -32,7 +49,7 @@ function withFilters(WrappedComp, type) {
     />
   );
 
-  const DayFilter = ({index, onChange, excludedDays}) => (
+  const DayFilter = ({ index, onChange, excludedDays }) => (
     <Filter
       val={index}
       onChange={onChange}
@@ -42,7 +59,11 @@ function withFilters(WrappedComp, type) {
     />
   );
 
-  const SessionTypeFilter = ({sessionType, onChange, excludedSessionTypes}) => (
+  const SessionTypeFilter = ({
+    sessionType,
+    onChange,
+    excludedSessionTypes
+  }) => (
     <Filter
       val={sessionType}
       onChange={onChange}
@@ -52,7 +73,7 @@ function withFilters(WrappedComp, type) {
     />
   );
 
-  const TagFilter = ({tag, onChange, excludedTags}) => (
+  const TagFilter = ({ tag, onChange, excludedTags }) => (
     <Filter
       val={tag}
       onChange={onChange}
@@ -67,34 +88,46 @@ function withFilters(WrappedComp, type) {
       excludedHalls: [],
       excludedDays: [],
       excludedSessionTypes: [],
-      excludedTags: [],
+      excludedTags: []
     };
 
     setExcludedHall = (index, isIncluded) => {
-      this.setExcluded('excludedHalls', hallsKey, index, isIncluded);
+      this.setExcluded("excludedHalls", hallsKey, index, isIncluded);
     };
 
     setExcludedDay = (index, isIncluded) => {
-      this.setExcluded('excludedDays', daysKey, index, isIncluded);
+      this.setExcluded("excludedDays", daysKey, index, isIncluded);
     };
 
     setExcludedSessionTypes = (sessionType, isIncluded) => {
-      this.setExcluded('excludedSessionTypes', sessionTypesKey, sessionType, isIncluded);
-      if (sessionType === 'full') {
-        this.setExcluded('excludedSessionTypes', sessionTypesKey, 'keynote', isIncluded);
+      this.setExcluded(
+        "excludedSessionTypes",
+        sessionTypesKey,
+        sessionType,
+        isIncluded
+      );
+      if (sessionType === "full") {
+        this.setExcluded(
+          "excludedSessionTypes",
+          sessionTypesKey,
+          "keynote",
+          isIncluded
+        );
       }
     };
 
     setExcludedTags = (tag, isIncluded) => {
-      this.setExcluded('excludedTags', tagsKey, tag, isIncluded);
+      this.setExcluded("excludedTags", tagsKey, tag, isIncluded);
     };
 
     setExcluded = (prop, localStorageKey, val, isIncluded) => {
       this.setState(state => {
-        const newVal = isIncluded ? without(state[prop], val) : uniq(state[prop].concat(val));
+        const newVal = isIncluded
+          ? without(state[prop], val)
+          : uniq(state[prop].concat(val));
 
         localStorage.setItem(localStorageKey, JSON.stringify(newVal));
-        return {[prop]: newVal};
+        return { [prop]: newVal };
       });
     };
 
@@ -128,7 +161,8 @@ function withFilters(WrappedComp, type) {
           setExcludedDay={this.setExcludedDay}
           setExcludedHall={this.setExcludedHall}
           setExcludedSessionTypes={this.setExcludedSessionTypes}
-          setExcludedTags={this.setExcludedTags}>
+          setExcludedTags={this.setExcludedTags}
+        >
           {this.props.children}
         </WrappedComp>
       );
@@ -140,7 +174,7 @@ function withFilters(WrappedComp, type) {
     DayFilter,
     HallFilter,
     SessionTypeFilter,
-    TagFilter,
+    TagFilter
   };
 }
 

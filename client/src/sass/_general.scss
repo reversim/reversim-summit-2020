@@ -356,6 +356,18 @@ a.unstyled-link:active {
   }
 }
 
+
+.filter-cb {
+  margin-right: 5px;
+  .selected {
+    & > div {
+      background: $white;
+      height: 16px;
+      margin: 2px;
+    }
+  }
+}
+
 button.btn {
   box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.1);
   background: linear-gradient(to right, rgba(118,12,146,0.2) 0%,rgba(0,92,177,0.2) 100%);
@@ -491,6 +503,11 @@ button.btn {
     flex-direction: column;
   }
 }
+.mobile-flex-row {
+  @media (max-width:768px) {
+    flex-direction: row;
+  }
+}
 
  .speaker-page__hero {
    display: flex;
@@ -558,6 +575,18 @@ $speaker-picture-size: 230px;
   width: 236px;
   height: 236px;
   background-size: cover;
+  @media (max-width:768px) {
+    border-top: 4px solid $purple2;
+  }
+}
+.speakers__speaker-picture {
+  width: 240px;
+  height: 240px;
+  background-size: cover;
+  border-right: 0 !important;
+  @media (max-width:768px) {
+    border-right: 4px solid $purple2 !important;
+  }
 }
 
 .page__hero {
@@ -669,6 +698,9 @@ input[type="checkbox"] {
   border: 2px solid $indigo;
 }
 
+.b-regular-white {
+  border: 2px solid $white;
+}
 .overflow-hidden {
   overflow: hidden;
 }
@@ -700,7 +732,7 @@ input[type="checkbox"] {
 
 .about__team-member {
   flex: 0 0 calc(50% - 20px);
-  height: 248px;
+  //height: 248px;
 
 
   @media (max-width:1200px) {
@@ -783,12 +815,6 @@ input[type="checkbox"] {
   flex-direction: row;
   @media (max-width:1200px) {
     flex-direction: column;
-  }
-}
-
-.session__speaker-picture {
-  @media (max-width:768px) {
-    border-top: 4px solid $purple2;
   }
 }
 

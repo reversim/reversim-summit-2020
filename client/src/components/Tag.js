@@ -1,10 +1,10 @@
-import React from 'react';
-import {TAG_COLORS} from '../data/proposals';
+import React from "react";
+import { TAG_COLORS } from "../data/proposals";
 
 const Tag = name =>
   name.toLowerCase() in TAG_COLORS ? (
-    <div key={name} className={`font-size-sm mr-3 text-${TAG_COLORS[name.toLowerCase()]}`}>
-      [{name}]
+    <div key={name} className="b-regular px-1 w-max-content mr-4 my-1 cursor-pointer text-purple2 font-weight-bold">
+      {name}
     </div>
   ) : (
     undefined

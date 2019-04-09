@@ -17,6 +17,9 @@ const store = {
   eventConfig: {},
   speakers: [],
   shuffledSpeakers: [],
+  acceptedProposals:[],
+  acceptedSpeakers: [],
+  shuffledAcceptedSpeakers: [],
 
   isSmallerScreen: window.innerWidth < 768,
   isSmallScreen: window.innerWidth < 991,
