@@ -77,7 +77,9 @@ class SessionPage extends Component {
     }));
     const isAuthor = user && session.speaker_ids.includes(user._id);
     const isTeamMember = user && user.isReversimTeamMember;
-    const editPeriod = cfp || moderationCompleted;
+    // const editPeriod = cfp || moderationCompleted;
+    // TODO: NETA- remove the always true
+    const editPeriod = true;
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
     const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
 
