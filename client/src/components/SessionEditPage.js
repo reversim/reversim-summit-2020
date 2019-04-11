@@ -108,7 +108,8 @@ class SessionEditPage extends React.Component {
     const {cfp} = eventConfig;
     const isAuthor = user && session.speaker_ids.includes(user._id);
     const isTeamMember = user && user.isReversimTeamMember;
-    const canEdit = (isAuthor && cfp) || isTeamMember;
+    // TODO neta: fix the editing period
+    const canEdit = isAuthor || isTeamMember;
 
     if (!canEdit) return <EditNotAllowed {...this.props} />;
     return (
