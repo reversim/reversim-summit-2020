@@ -55,6 +55,7 @@ class SessionsPage extends React.Component {
 
     return (
       <Page title="Sessions" {...this.props}>
+        <div className='navbar-margin'>
         <Container>
           <h1 className="mt-6 mb-12">Sessions</h1>
 
@@ -62,7 +63,7 @@ class SessionsPage extends React.Component {
             {proposals.length ? `Showing ${proposals.length} sessions` : '\u00A0'}
           </div>
 
-          <Row>
+          <div className='row d-flex mobile-flex-column-reverse'>
             <Col lg="9">
               {proposals.length ? (
                 proposals.map(proposal => (
@@ -200,8 +201,9 @@ class SessionsPage extends React.Component {
                 </Fragment>
               }
             </Col>
-          </Row>
+          </div>
         </Container>
+        </div>
       </Page>
     );
   }

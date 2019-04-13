@@ -366,13 +366,13 @@ a.unstyled-link:active {
       margin: 2px;
     }
   }
-  //.selected {
-  //  & > div.color-purple2 {
-  //    background: $purple2;
-  //    height: 16px;
-  //    margin: 2px;
-  //  }
-  //}
+  .selected {
+    & > div.color-purple2 {
+      background: $purple2;
+      height: 16px;
+      margin: 2px;
+    }
+  }
 }
 
 button.btn {
@@ -508,6 +508,11 @@ button.btn {
 .mobile-flex-column {
   @media (max-width:768px) {
     flex-direction: column;
+  }
+}
+.mobile-flex-column-reverse {
+  @media (max-width:768px) {
+    flex-direction: column-reverse;
   }
 }
 .mobile-flex-row {
