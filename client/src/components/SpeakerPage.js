@@ -28,16 +28,19 @@ export class SpeakerPage extends React.Component {
   };
 
   render() {
-    const {speaker, proposals: allProposals, user, isUser, eventConfig} = this.props;
+    const {speaker, proposals: allProposals, user, isUser, eventConfig, acceptedProposals} = this.props;
     const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
     const { moderationCompleted } = eventConfig;
     const {isUploadingPhoto} = this.state;
     const canEdit = (user && user.isReversimTeamMember) || isUser;
     const canSeeStatus = canEdit && moderationCompleted;
 
-    const sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
+    let sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
+    if(!canSeeStatus){
+      sessions = proposals.map(proposalId => acceptedProposals[proposalId]).filter(x => x);
+    }
 
-    return (
+      return (
       <Page title={name} user={user} {...this.props}>
         <div className="navbar-margin bg-purple2 mb-4">
           <Container>

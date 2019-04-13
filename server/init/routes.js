@@ -63,7 +63,7 @@ export default (app) => {
 
   async function initial(req, res) {
     const proposals = await proposalsController.getAllProposals(true, req.user ? req.user.created_at : String(Date.now()));
-    const acceptedProposals = await proposalsController.getAcceptedProposals();
+    const acceptedProposals = await proposalsController.getAcceptedProposals(true, req.user ? req.user.created_at : String(Date.now()));
     const users = await proposalsController.getProposers(proposals);
     const acceptedSpeakers = (await proposalsController.getProposers(acceptedProposals)).map(u => u._id);
     const allTags = proposalsController.getTags(proposals);
@@ -80,6 +80,7 @@ export default (app) => {
     const usersWithTeam = users.concat(teamUsers);
 
     const mappedProposals = proposals.map(proposal => transformProposal(proposal, req.user));
+    const mappedAcceptedProposals = acceptedProposals.map(proposal => transformProposal(proposal, req.user));
     let mappedUsers = usersWithTeam.map(u => transformUser(u, req.user));
 
     res.json({
@@ -92,7 +93,7 @@ export default (app) => {
       sponsors,
       eventConfig: eventConfig(),
       speakers,
-      acceptedProposals,
+      acceptedProposals:keyBy(mappedAcceptedProposals, '_id'),
       acceptedSpeakers
     });
   }

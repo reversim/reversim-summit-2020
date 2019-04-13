@@ -368,8 +368,12 @@ async function getAllProposals(shouldShuffle, seed) {
   return proposals;
 }
 
-function getAcceptedProposals() {
-  return Proposal.find({ status: 'accepted' }, null, { sort: { created_at: -1 } });
+async function getAcceptedProposals(shouldShuffle, seed) {
+  let proposals = await Proposal.find({ status: 'accepted' }, null, { sort: { created_at: -1 } });
+  if (shouldShuffle) {
+    proposals = shuffler.shuffle(proposals, seed);
+  }
+  return proposals;
 }
 
 function getTagsFromDb() {

@@ -7,10 +7,11 @@ import {getDateAndTime} from './SessionDayTime';
 import withFilters from './withFilters';
 import intersection from 'lodash/intersection';
 import Session from './Session';
+import cn from "classnames";
 
 const FilterHeader = ({text, isCollapsed, onClick}) => (
   <div
-    className="border-cyan font-size-md pb-2 mb-4 d-flex justify-content-between cursor-pointer"
+    className="border-purple2 font-size-md pb-2 mb-4 d-flex justify-content-between cursor-pointer"
     style={{borderBottomWidth: 2, borderBottomStyle: 'solid'}}
     onClick={onClick}>
     {text}
@@ -41,7 +42,7 @@ class SessionsPage extends React.Component {
       eventConfig
     } = this.props;
 
-    const proposals = values(this.props.proposals).filter(proposal => {
+    const proposals = values(this.props.acceptedProposals).filter(proposal => {
       const {day, hall} = getDateAndTime(proposal._id);
 
       return (
@@ -82,23 +83,26 @@ class SessionsPage extends React.Component {
                 isCollapsed={this.state.dayCollapsed}
                 onClick={() => this.setState(state => ({dayCollapsed: !state.dayCollapsed}))}
               />
-              {!this.state.dayCollapsed && (
+              {
                 <Fragment>
+                  <div style={{transition: 'max-height 0.3s ease-in-out', maxHeight:(this.state.dayCollapsed ? 0: 1000), overflow:'auto'}} >
                   <div className="mb-4">
                     <DayFilter index={0} onChange={setExcludedDay} excludedDays={excludedDays} />
                   </div>
                   <div className="mb-8">
                     <DayFilter index={1} onChange={setExcludedDay} excludedDays={excludedDays} />
                   </div>
+                  </div>
                 </Fragment>
-              )}
+              }
               <FilterHeader
                 text="Class"
                 isCollapsed={this.state.hallCollapsed}
                 onClick={() => this.setState(state => ({hallCollapsed: !state.hallCollapsed}))}
               />
-              {!this.state.hallCollapsed && (
+              {
                 <Fragment>
+                  <div style={{transition: 'max-height 0.3s ease-in-out', maxHeight:(this.state.hallCollapsed ? 0: 1000), overflow:'auto'}} >
                   <div className="mb-4">
                     <HallFilter
                       index={0}
@@ -113,15 +117,23 @@ class SessionsPage extends React.Component {
                       excludedHalls={excludedHalls}
                     />
                   </div>
-                  <div className="mb-8">
+                  <div className="mb-4">
                     <HallFilter
                       index={2}
                       onChange={setExcludedHall}
                       excludedHalls={excludedHalls}
                     />
                   </div>
+                  <div className="mb-8">
+                    <HallFilter
+                      index={3}
+                      onChange={setExcludedHall}
+                      excludedHalls={excludedHalls}
+                    />
+                  </div>
+                  </div>
                 </Fragment>
-              )}
+              }
               <FilterHeader
                 text="Session type"
                 isCollapsed={this.state.sessionTypeCollapsed}
@@ -129,8 +141,10 @@ class SessionsPage extends React.Component {
                   this.setState(state => ({sessionTypeCollapsed: !state.sessionTypeCollapsed}))
                 }
               />
-              {!this.state.sessionTypeCollapsed && (
+              {
                 <Fragment>
+                  <div style={{transition: 'max-height 0.3s ease-in-out', maxHeight:(this.state.sessionTypeCollapsed ? 0: 1000), overflow:'auto'}} >
+
                   <div className="mb-4">
                     <SessionTypeFilter
                       sessionType="full"
@@ -152,29 +166,39 @@ class SessionsPage extends React.Component {
                       excludedSessionTypes={excludedSessionTypes}
                     />
                   </div>
-                  <div className="mb-8">
+                  <div className="mb-4">
                     <SessionTypeFilter
                       sessionType="ossil"
                       onChange={setExcludedSessionTypes}
                       excludedSessionTypes={excludedSessionTypes}
                     />
                   </div>
+                  <div className="mb-8">
+                    <SessionTypeFilter
+                      sessionType="keynote"
+                      onChange={setExcludedSessionTypes}
+                      excludedSessionTypes={excludedSessionTypes}
+                    />
+                  </div>
+                  </div>
                 </Fragment>
-              )}
+              }
               <FilterHeader
                 text="Tags"
                 isCollapsed={this.state.tagCollapsed}
                 onClick={() => this.setState(state => ({tagCollapsed: !state.tagCollapsed}))}
               />
-              {!this.state.tagCollapsed && (
+              {
                 <Fragment>
+                  <div style={{transition: 'max-height 0.3s ease-in-out', maxHeight:(this.state.tagCollapsed ? 0: 1000), overflow:'auto'}} >
                   {Object.keys(TAG_COLORS).map(tag => (
                     <div className="mb-4" key={tag}>
                       <TagFilter tag={tag} onChange={setExcludedTags} excludedTags={excludedTags} />
                     </div>
                   ))}
+                  </div>
                 </Fragment>
-              )}
+              }
             </Col>
           </Row>
         </Container>

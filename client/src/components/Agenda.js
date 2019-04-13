@@ -284,12 +284,14 @@ class Agenda extends React.Component {
                     index={0}
                     onChange={setExcludedDay}
                     excludedDays={excludedDays}
+                    bgColor='purple2'
                   />
                 </div>
                 <DayFilter
                   index={1}
                   onChange={setExcludedDay}
                   excludedDays={excludedDays}
+                  bgColor='purple2'
                 />
               </div>
               <div
@@ -300,6 +302,7 @@ class Agenda extends React.Component {
                     index={0}
                     onChange={setExcludedHall}
                     excludedHalls={excludedHalls}
+                    bgColor='purple2'
                   />
                 </div>
                 <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
@@ -307,6 +310,7 @@ class Agenda extends React.Component {
                     index={1}
                     onChange={setExcludedHall}
                     excludedHalls={excludedHalls}
+                    bgColor='purple2'
                   />
                 </div>
                 <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3 mr-3">
@@ -314,12 +318,14 @@ class Agenda extends React.Component {
                     index={2}
                     onChange={setExcludedHall}
                     excludedHalls={excludedHalls}
+                    bgColor='purple2'
                   />
                 </div>
                 <HallFilter
                   index={3}
                   onChange={setExcludedHall}
                   excludedHalls={excludedHalls}
+                  bgColor='purple2'
                 />
               </div>
             </div>

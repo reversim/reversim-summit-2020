@@ -5,6 +5,7 @@ export const PROPOSAL_TYPES = {
   postmortem: 'Postmortem (15 minutes)',
   lightning: 'Lightning talk (5 minutes)',
   ossil: 'Open Source in Israel (10 minutes)',
+  keynote: 'keynote',
 };
 
 export const PROPOSAL_TYPES_SHORT = {
@@ -12,6 +13,7 @@ export const PROPOSAL_TYPES_SHORT = {
   postmortem: 'Postmortems',
   lightning: 'Ignite',
   ossil: 'OSSil',
+  keynote: 'Keynote',
 };
 
 export const PROPOSAL_TYPES_ARR = Object.keys(PROPOSAL_TYPES).map(type => ({

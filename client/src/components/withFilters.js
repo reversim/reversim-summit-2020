@@ -11,7 +11,7 @@ function withFilters(WrappedComp, type) {
   const sessionTypesKey = `excluded-sessiontypes-${type}`;
   const tagsKey = `excluded-tags-${type}`;
 
-  const Filter = ({ val, list, onChange, getText, filterType }) => (
+  const Filter = ({ val, list, onChange, getText, filterType, bgColor }) => (
     <Fragment>
       {/*<input*/}
       {/*  type="checkbox"*/}
@@ -20,16 +20,16 @@ function withFilters(WrappedComp, type) {
       {/*  onChange={e => onChange(val, e.target.checked)}*/}
       {/*/>*/}
       <div
-        className="text-white d-flex"
+        className="d-flex"
         onClick={e => onChange(val, list.includes(val))}
       >
-        <div className="cursor-pointer font-weight-bold d-flex align-items-center filter-cb">
+        <div className={cn("cursor-pointer font-weight-bold d-flex align-items-center filter-cb", (bgColor === 'purple2'? 'text-white' : ''))}>
           <div
-            className={cn("mr-2 b-regular-white", { selected: !list.includes(val) })}
+            className={cn("mr-2", (bgColor === 'purple2'? 'b-regular-white' : 'b-regular'), { selected: !list.includes(val) })}
             id={`filter-${filterType}-${type}-${val}`}
             style={{ minWidth: 24, height: 24 }}
           >
-            <div />
+            <div className={bgColor === 'purple2'? '' : 'color-purple2'} />
           </div>
         </div>
         <label htmlFor={`filter-${filterType}-${type}-${val}`}>
@@ -39,22 +39,24 @@ function withFilters(WrappedComp, type) {
     </Fragment>
   );
 
-  const HallFilter = ({ index, onChange, excludedHalls }) => (
+  const HallFilter = ({ index, onChange, excludedHalls, bgColor }) => (
     <Filter
       val={index}
       onChange={onChange}
       list={excludedHalls}
       filterType="hall"
+      bgColor={bgColor}
       getText={index => halls[index]}
     />
   );
 
-  const DayFilter = ({ index, onChange, excludedDays }) => (
+  const DayFilter = ({ index, onChange, excludedDays, bgColor }) => (
     <Filter
       val={index}
       onChange={onChange}
       list={excludedDays}
       filterType="day"
+      bgColor={bgColor}
       getText={index => `Day ${index + 1}`}
     />
   );
@@ -62,23 +64,26 @@ function withFilters(WrappedComp, type) {
   const SessionTypeFilter = ({
     sessionType,
     onChange,
-    excludedSessionTypes
+    excludedSessionTypes,
+    bgColor
   }) => (
     <Filter
       val={sessionType}
       onChange={onChange}
       list={excludedSessionTypes}
       filterType="sessiontype"
+      bgColor={bgColor}
       getText={getSessionTypeShortStr}
     />
   );
 
-  const TagFilter = ({ tag, onChange, excludedTags }) => (
+  const TagFilter = ({ tag, onChange, excludedTags, bgColor }) => (
     <Filter
       val={tag}
       onChange={onChange}
       list={excludedTags}
       filterType="tag"
+      bgColor={bgColor}
       getText={getTagStr}
     />
   );

@@ -7,7 +7,7 @@ export const agenda1 = [
   {time: '10:00-10:50', text: 'Welcome + Keynote', sessions: '5b62c2b345937029731e441b'},
   {
     time: '11:10-11:40',
-    sessions: ['5b059cc386df020014dfa09b', '5b0e9ac02743a60014eeb3f8', '5b0eef542743a60014eeb419'],
+    sessions: ['5b059cc386df020014dfa09b', '5b0e9ac02743a60014eeb3f8', '5b0eef542743a60014eeb419',"5b106377459acd0014b1312c"],
   },
   {
     time: '11:50-12:20',
