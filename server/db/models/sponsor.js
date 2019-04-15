@@ -16,8 +16,7 @@ const SponsorSchema = new mongoose.Schema({
   socials: [{medium: String, link: String}],
   oneLiner: String,
   about: {
-    type: String,
-    required: true
+    type: String
   },
   techStory: {
     text: String,
@@ -30,8 +29,7 @@ const SponsorSchema = new mongoose.Schema({
     link: String
   }],
   url: {
-    type: String,
-    required: true
+    type: String
   },
   jobUrl: String,
   images: [String],
