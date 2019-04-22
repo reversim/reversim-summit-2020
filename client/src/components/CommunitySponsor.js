@@ -16,7 +16,7 @@ const CommunitySponsor = ({ canEdit, onEdit, onDelete, sponsor }) => {
   return (
     <div className={cn("d-flex mb-12 b-strong", s.communitySponsors)}>
       <div className={cn("session__speaker d-flex flex-column", s.communitySponsorsImageSection)}>
-        <div
+        <a href={hyperlink(sponsor.url)} target="_blank"
           style={{
             backgroundColor: 'white',
             backgroundImage: `url(${image(sponsor.logo, 236, 236)})`
