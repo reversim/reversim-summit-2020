@@ -931,6 +931,9 @@ input[type="checkbox"] {
   flex: 0 0 20%;
   text-align: center;
   align-self: center;
+  @media (max-width:991px) {
+    flex: 0;
+  }
 }
 
 

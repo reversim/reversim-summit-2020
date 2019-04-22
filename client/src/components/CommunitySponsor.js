@@ -18,6 +18,7 @@ const CommunitySponsor = ({ canEdit, onEdit, onDelete, sponsor }) => {
       <div className={cn("session__speaker d-flex flex-column", s.communitySponsorsImageSection)}>
         <div
           style={{
+            backgroundColor: 'white',
             backgroundImage: `url(${image(sponsor.logo, 236, 236)})`
           }}
           className="session__speaker-picture"

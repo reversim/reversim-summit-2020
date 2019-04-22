@@ -288,22 +288,22 @@ class SponsorMiniPremium extends React.Component {
             </Button>
           </span>
         )}
-        <div className="d-flex flex-column align-items-center mb-6">
+        <div className="d-flex flex-column align-items-center mb-10">
           <div
-            className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center b-strong"
-            style={{ width: 358, height: 230, maxWidth: 358 }}
+            className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center b-strong cursor-pointer"
+            style={{ width: 248, height: 230, maxWidth: 248 }}
           >
             <Link to={`/sponsor/${name}`} className="unstyled-link">
               <img
-                src={image(logo, 358, 230)}
+                src={image(logo, 350, 150)}
                 className={s.sponsorImg}
                 alt={name}
-                style={{ maxWidth: 350, maxHeight: 240 }}
+                style={{ maxWidth: 240, maxHeight: 240 }}
               />
             </Link>
           </div>
           <Link to={`/sponsor/${name}`} className="unstyled-link">
-            <Button className={"styled-button on-purple"}>
+            <Button className='styled-button on-purple w-max-content'>
               EXPLORE OPPORTUNITIES
             </Button>
           </Link>
@@ -349,7 +349,7 @@ export const SponsorsSection = ({ sponsors }) => {
                   </div>
                 );
               })}*/}
-            <HomeCommunitySponsors />
+            <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
           </div>
           {/* <WantToBe /> */}
         </div>

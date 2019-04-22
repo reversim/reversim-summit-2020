@@ -42,7 +42,7 @@ const Hero = ({ eventConfig }) => (
       >
         <div className="d-flex flex-column my-8">
           <div className="d-flex mb-6">
-            <div className="font-size-xxl">Welcome</div>
+            <div className="font-size-xxl">RSVP coming soon</div>
             <div className="hl bg-white" />
           </div>
           {/*<div className='d-flex'>*/}
