@@ -81,7 +81,7 @@ const AboutPage = props => {
             <div className="pt-10 mr-9 flex-1">
               <p className="line-height-15 font-size-lg">Reversim Summit</p>
               <p className="line-height-15">
-                Reversim summit is our intention to create a conference for
+                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה)  summit is our intention to create a conference for
                 developers by developers. Like in the podcast, we bring you the
                 content we are interested in, and we hope you will be too.
               </p>
@@ -97,7 +97,7 @@ const AboutPage = props => {
             <div className="pt-10 mr-12 flex-1">
               <p className="mb-3 font-size-lg">Reversim podcast</p>
               <p className="line-height-15">
-                Reversim (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and
+                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and
                 Ran Tavory which brings together software developers and
                 product, with over 300 recorded episodes and a few thousands
                 listeners.
