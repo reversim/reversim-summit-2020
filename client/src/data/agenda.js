@@ -1,105 +1,144 @@
 export const agenda1 = [
-  {time: '08:00-10:00', text: 'Registration & Coffee'},
+  {time: '08:00-09:00', text: 'Registration & Coffee'},
   {
     time: '09:00-09:40',
-    sessions: [null, null, '5b103a00892ac3001481694b'],
+    sessions: [null, '5c51f4e27314030017e1c2ce', '5c765e02e037850017ca38f6', '5c753a43d0e22f001706cbd1'],
   },
-  {time: '10:00-10:50', text: 'Welcome + Keynote', sessions: '5b62c2b345937029731e441b'},
+  {time: '10:00-10:50', text: 'Welcome + Keynote', sessions: '5cae52ece7179a36ac342cf9'},
+  {
+    time: '10:50-11:10',
+    text: 'Break :)'
+  },
   {
     time: '11:10-11:40',
-    sessions: ['5b059cc386df020014dfa09b', '5b0e9ac02743a60014eeb3f8', '5b0eef542743a60014eeb419',"5b106377459acd0014b1312c"],
+    sessions: ['5c77fd129cec66001786e678', '5c72fecbe931df0017cad291', '5c74d43efb50dd0017b460e2','5c7817eb9cec66001786e69c'],
+  },
+  {
+    time: '11:40-11:50',
+    text: 'Short break :)'
   },
   {
     time: '11:50-12:20',
-    sessions: ['5b0f9a25892ac300148168d9', '5b0aa71392ac8b00147796e9', '5b1041fd892ac30014816955'],
+    sessions: ['5c6beb0ad7ca690017a9d038', {text: 'Postmortem', sessions:['5c648683ceec950017a7a20d', '5c6c2441d7ca690017a9d043']}, '5c741556fb50dd0017b460d2', '5c77ae2c9cec66001786e61e'],
   },
   {time: '12:20-13:20', text: 'Lunch'},
   {
-    time: '13:20-14:00',
+    time: '13:20-13:50',
+    sessions: ['5c57eb47499ec8001717bb1b', {text: 'OSSIL', sessions:['5c768578b347af001757ff25', '5c4f84abae9a470017867fae']}, '5c77de369cec66001786e64b', '5c50c2ddae9a470017867fc9'],
+  },
+  {
+    time: '13:50-14:00',
+    text: 'Short break :)'
+  },
+  {
+    time: '14:00-14:30',
+    sessions: ['5c7859231503d900172c583e', '5c685885f477e10017131ac1', '5c77f95a9cec66001786e671', '5c781b369cec66001786e6a1'],
+  },
+  {
+    time: '14:30-14:40',
+    text: 'Short break :)'
+  },
+  {
+    time: '14:40-15:10',
     text: 'Ignites',
     shortSessions: [
-      '5af73571cb1fea0014992e91',
-      '5b1056bf892ac30014816966',
-      '5b105f9d459acd0014b13124',
-      '5ae85c31f397710014af8dfa',
-      '5b0f6e77892ac300148168cb',
-      '5ae6c8aafdb0380014322f52',
-      '5b0ec3922743a60014eeb40f',
-    ],
-  },
-  {
-    time: '14:10-14:40',
-    sessions: ['5b067a966c8bb7001416378a', '5b0e60492743a60014eeb3dc', '5b103113892ac30014816946'],
-  },
-  {
-    time: '14:50-15:20',
-    sessions: [
-      {
-        text: 'OSS in Israel',
-        sessions: ['5afc14f40a0850001443613a', '5b0fd64f892ac30014816901'],
-      },
-      '5afd6a116555a80014e7e0ac',
-      '5af06f930c482c0014ab514c',
+      '5c7795039cec66001786e60f',
+      '5c77c6089cec66001786e62e',
+      '5c741121fb50dd0017b460d1',
+      '5c77ff989cec66001786e67b',
+      '5c7811269cec66001786e697',
+      '5c783ea0d1b4260017fe23f1',
+      '5c7847ea1503d900172c581f',
     ],
   },
   {
     time: '15:40-16:10',
-    sessions: ['5b0e917f2743a60014eeb3f5', '5b0d0b7e4b330d00147e3366', '5b0feb16892ac30014816911'],
+    sessions: ['5c771e7d9cec66001786e604','5c7801589cec66001786e680', '5c66b0052be200001726d346', '5c5145067314030017e1c2b5'],
+  },
+  {
+    time: '14:30-14:40',
+    text: 'Short break :)'
   },
   {
     time: '16:20-16:50',
-    sessions: ['5b0c19ef6c37af00145dbe26', '5b0d46834b330d00147e3371', '5b0e8b102743a60014eeb3ef'],
+    sessions: ['5c507db4ae9a470017867fc1', '5c6a4a13d330b60017b4f82c', '5c7557e2d0e22f001706cbe0', '5c518d9f7314030017e1c2c7'],
   },
-  {time: '17:10-17:50', sessions: ['5b0efef02743a60014eeb41d']},
+  {
+    time: '16:50-17:10',
+    text: 'Beer break 🍻'
+  },
+  {time: '17:10-17:50', sessions: ['5cb1de4136df6a422308f415']},
   {time: '18:00', text: 'Goodbye'},
 ];
 
 export const agenda2 = [
-  {time: '08:00-10:00', text: 'Registration & Coffee'},
+  {time: '08:00-09:00', text: 'Registration & Coffee'},
   {
     time: '09:00-09:40',
-    sessions: [null, '5b0d4dfc4b330d00147e3374', '5b06fdd06c8bb70014163798'],
+    sessions: [null, '5c778acb9cec66001786e608', '5c76650be037850017ca38f8', '5c73f0a0fb50dd0017b460cb'],
   },
-  {time: '10:00-10:50', text: 'Welcome + Keynote', sessions: '5b62c2b345937029731e441a'},
+  {time: '10:00-10:50', text: 'Welcome + Keynote', sessions: '5cb2106436df6a42230a9640'},
+  {
+    time: '10:50-11:10',
+    text: 'Break :)'
+  },
   {
     time: '11:10-11:40',
-    sessions: ['5af48fa3db27ea0014a6f7c6', '5b0eaa502743a60014eeb401', '5aea1eeffad70b0014ee2e7e'],
+    sessions: ['5c7859c31503d900172c5840', '5c751107d0e22f001706cbc5', '5c6407d2e2ba3d00178ee60c','5c517d367314030017e1c2c4'],
+  },
+  {
+    time: '11:40-11:50',
+    text: 'Short break :)'
   },
   {
     time: '11:50-12:20',
-    sessions: ['5b0a4a2536e9e10014ced480', '5b01bf2dea92090014a196d2', '5b0ce9e36c37af00145dbe3e'],
+    sessions: ['5c6a6e55d330b60017b4f82f', '5c768d4eb347af001757ff29', {text: 'OSSIL', sessions:['5c765936e037850017ca38f3', '5c7693c3051b240017a208f2', '5c784cce1503d900172c582a']}, '5c645d5ae2ba3d00178ee616'],
   },
   {time: '12:20-13:20', text: 'Lunch'},
   {
-    time: '13:20-14:00',
+    time: '13:20-13:50',
+    sessions: ['5c5eae53ced7850017d57f40', '5c76534de037850017ca38f0', {text: 'Postmortem', sessions:['5c6c657d8e68c600174f5109', '5c77b5af9cec66001786e626']}, '5c6f045cf9d89b0017a7d80b'],
+  },
+  {
+    time: '13:50-14:00',
+    text: 'Short break :)'
+  },
+  {
+    time: '14:00-14:30',
+    sessions: ['5c52f3c55a09c900174932e3', '5c77c9ab9cec66001786e633', '5c650165ceec950017a7a213', '5c768ead2443a10017bb2bd1'],
+  },
+  {
+    time: '14:30-14:40',
+    text: 'Short break :)'
+  },
+  {
+    time: '14:40-15:10',
     text: 'Ignites',
     shortSessions: [
-      '5b0d5e994b330d00147e3377',
-      '5afc0c660a08500014436138',
-      '5b0eb4212743a60014eeb409',
-      '5afb39c41fb20d0014d19f50',
-      '5b0e573e2743a60014eeb3d8',
-      '5b104fdb892ac3001481695f',
-      '5b0bb60d6c37af00145dbe04',
+      '5c69428f3cdbee0017312edb',
+      '5c6e9189f9d89b0017a7d7fc',
+      '5c77ee889cec66001786e666',
+      '5c744342fb50dd0017b460d6',
+      '5c767e73b347af001757ff22',
+      '5c5eafa3ced7850017d57f41',
     ],
   },
   {
-    time: '14:10-14:40',
-    sessions: ['5b0c51856c37af00145dbe2f', '5ae68b17fdb0380014322f50', '5b0b0ba592ac8b00147796f5'],
-  },
-  {
-    time: '14:50-15:20',
-    sessions: ['5af87646b5d55a001446ce7c', '5b0bf67e6c37af00145dbe18', '5b103d6a892ac3001481694e'],
-  },
-  {
     time: '15:40-16:10',
-    sessions: ['5b0c05976c37af00145dbe1e', '5b0d13ac4b330d00147e3369', '5ae17cddb2b0d70014f5ca2d'],
+    sessions: ['5c4ec71ae6319f00172a968e','5c6da466a0b22e0017b88ac5', '5c754052d0e22f001706cbd8', '5c6c23fcd7ca690017a9d042'],
+  },
+  {
+    time: '14:30-14:40',
+    text: 'Short break :)'
   },
   {
     time: '16:20-16:50',
-    sessions: ['5b0f0c45892ac300148168bf', '5b10f106459acd0014b13136', '5b0e88622743a60014eeb3eb'],
+    sessions: ['5c75adf7e037850017ca38cd', '5c5fe555e6ceb50017772487', '5c77f6d79cec66001786e670', '5c7854181503d900172c5833'],
   },
-  {time: '16:50-17:10', text: 'Beer Break'},
-  {time: '17:10-17:50', text: 'Hall of shame'},
+  {
+    time: '16:50-17:10',
+    text: 'Beer break 🍻'
+  },
+  {time: '17:10-17:50', sessions: ['5cb20ef536df6a42230a8bcf']},
   {time: '18:00', text: 'Goodbye'},
 ];

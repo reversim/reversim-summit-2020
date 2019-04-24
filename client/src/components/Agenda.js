@@ -112,6 +112,12 @@ const Session = ({ text, session, shortSessions, hall, sep, users }) => {
         <ShortSessions sessions={shortSessions} users={users} />
       </div>
     );
+  } else {
+    content = (
+      <div style={{ fontSize: 24 }} className="font-weight-bold">
+        {text}
+      </div>
+    );
   }
 
   return (
@@ -275,7 +281,7 @@ class Agenda extends React.Component {
               <div className="mb-4 text-white font-size-xxl">Agenda</div>
             </div>
             {/*<Container style={{padding: 0}}>*/}
-            <div className="noGutters d-flex mt-3 flex-wrap align-items-baseline">
+            <div className="noGutters d-flex mt-3 flex-wrap align-items-baseline text-white">
               <div
                 className="d-flex mb-6 agenda-day-filter align-items-baseline"
               >

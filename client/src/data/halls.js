@@ -1,1 +1,1 @@
-export default ['A3', 'A4', 'A5', 'A10'];
+export default ['Main', 'Class 2', 'Class 3', 'Class 4'];
