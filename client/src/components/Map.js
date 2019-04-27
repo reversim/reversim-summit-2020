@@ -5,8 +5,8 @@ import s from "./Map.css";
 import cn from "classnames";
 
 const position = {
-  lat: 32.1055476,
-  lng: 34.8068869
+  lat: 32.104836,
+  lng: 34.807388
 };
 
 const MapWithLoader = withScriptjs(

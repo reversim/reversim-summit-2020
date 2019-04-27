@@ -2,7 +2,7 @@ import React from "react";
 import Map from "./Map";
 import { Button, Container } from "reactstrap";
 import squares from "../images/SVG/squares.svg";
-import venuePic from "../images/venue-pic.png";
+import venuePic from "../images/bitan10.jpeg";
 
 const Location = () => (
   <section className="mt-16 mb-20">
