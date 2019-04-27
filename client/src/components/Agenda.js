@@ -301,7 +301,7 @@ class Agenda extends React.Component {
                 />
               </div>
               <div
-                className="d-flex mb-6 agenda-hall-filter align-items-baseline"
+                className="d-flex mb-6 agenda-hall-filter align-items-baseline flex-wrap"
               >
                 <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
                   <HallFilter
