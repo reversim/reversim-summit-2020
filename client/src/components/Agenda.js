@@ -48,8 +48,10 @@ const Time = ({ tStr }) => {
   }
 };
 
-const ShortSessions = ({ sessions, users }) => (
-  <div className="mt-3">
+const ShortSessions = ({ sessions, users, text }) => (
+  <div>
+    {text && <div className={s.tall}>{text}</div>}
+    <div className="mt-3">
     {sessions.map((ss, i) => (
       <div
         className={cn("mb-3 pb-2", { [s.igniteSep]: i < sessions.length - 1 })}
@@ -68,6 +70,7 @@ const ShortSessions = ({ sessions, users }) => (
         </Link>
       </div>
     ))}
+    </div>
   </div>
 );
 
@@ -83,7 +86,7 @@ const Session = ({ text, session, shortSessions, hall, sep, users }) => {
             {hall}
           </div>
         )}
-        <ShortSessions sessions={session.sessions} users={users} />
+        <ShortSessions sessions={session.sessions} users={users} text={text}/>
       </div>
     );
   } else if (session) {
@@ -100,7 +103,7 @@ const Session = ({ text, session, shortSessions, hall, sep, users }) => {
               </div>
             )}
             <div className="font-weight-bold">{session.title}</div>
-            <div className="d-flex flex-wrap">{session.tags.map(Tag)}</div>
+            {/*<div className="d-flex flex-wrap">{session.tags.map(Tag)}</div>*/}
           </div>
           <div className="d-flex">{getSessionImgs(session, users)}</div>
         </div>
@@ -109,7 +112,7 @@ const Session = ({ text, session, shortSessions, hall, sep, users }) => {
   } else if (shortSessions) {
     content = (
       <div>
-        <ShortSessions sessions={shortSessions} users={users} />
+        <ShortSessions sessions={shortSessions} users={users} text={text} />
       </div>
     );
   } else {
@@ -226,11 +229,11 @@ const DayAgenda = ({
 }) => {
   return (
     <div className={cn(s.agenda, "mb-5")}>
-      <div className="d-flex font-size-xl">
+      <div className="d-flex font-size-xl mb-2">
         <div className="font-weight-bold mr-3">{dates[index].day}</div>
         <div> {dates[index].date} </div>
       </div>
-      <div className="pt-4 p-3" style={{ marginTop: -20 }}>
+      <div className="pt-4 pr-3 pb-3" style={{ marginTop: -20 }}>
         {agendas[index].map((line, i) => (
           <Line
             key={i}
