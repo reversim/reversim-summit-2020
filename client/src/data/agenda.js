@@ -39,7 +39,7 @@ export const agenda1 = [
     text: 'Short break :)'
   },
   {
-    time: '14:40-15:10',
+    time: '14:40-15:20',
     text: 'Ignites',
     shortSessions: [
       '5c7795039cec66001786e60f',
@@ -56,7 +56,7 @@ export const agenda1 = [
     sessions: ['5c771e7d9cec66001786e604','5c7801589cec66001786e680', '5c66b0052be200001726d346', '5c5145067314030017e1c2b5'],
   },
   {
-    time: '14:30-14:40',
+    time: '16:10-16:20',
     text: 'Short break :)'
   },
   {
@@ -112,7 +112,7 @@ export const agenda2 = [
     text: 'Short break :)'
   },
   {
-    time: '14:40-15:10',
+    time: '14:40-15:20',
     text: 'Ignites',
     shortSessions: [
       '5c69428f3cdbee0017312edb',
@@ -128,7 +128,7 @@ export const agenda2 = [
     sessions: ['5c4ec71ae6319f00172a968e','5c6da466a0b22e0017b88ac5', '5c754052d0e22f001706cbd8', '5c6c23fcd7ca690017a9d042'],
   },
   {
-    time: '14:30-14:40',
+    time: '16:10-16:20',
     text: 'Short break :)'
   },
   {
