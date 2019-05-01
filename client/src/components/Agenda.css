@@ -20,7 +20,7 @@
 }
 
 .igniteSep {
-    border-bottom: 1px dotted #333;
+    border-bottom: 2px solid rgba(81, 39, 255, 0.2);
 }
 
 .agenda a {

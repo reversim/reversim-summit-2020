@@ -28,7 +28,7 @@ const getSessionImgs = (session, users) =>
   getSpeakerPicture(session, users).map((url, i) => (
     <div
       key={i}
-      className={cn("mr-2a", s.speakerImg)}
+      className={cn("mr-2a b-regular", s.speakerImg)}
       style={{ backgroundImage: `url('${url}')`, marginLeft: i > 0 ? -10 : 0 }}
     />
   ));
@@ -58,14 +58,14 @@ const ShortSessions = ({ sessions, users, text }) => (
         key={i}
       >
         <Link to={`/session/${getHref(ss)}`}>
-          <div className="d-flex">
-            <div className="d-flex">{getSessionImgs(ss, users)}</div>
+          <div className="d-flex justify-content-between">
             <div className={s.igniteContent}>
               <h5 className={cn("mr-4 mb-0 font-size-sm", s.igniteName)}>
                 {getSpeakerName(ss, users)}
               </h5>
               <div>{ss.title}</div>
             </div>
+            <div className="d-flex">{getSessionImgs(ss, users)}</div>
           </div>
         </Link>
       </div>
@@ -126,7 +126,7 @@ const Session = ({ text, session, shortSessions, hall, sep, users }) => {
   return (
     <div
       className="agenda-session d-flex align-items-center"
-      style={{ borderBottom: sep ? "1px solid rgba(255,255,255,0.2)" : "" }}
+      style={{ borderBottom: sep ? "2px solid rgba(81, 39, 255, 0.2)" : "" }}
     >
       <div
         className="agenda-session__hall text-orange2 font-weight-bold font-size-lg"
@@ -229,7 +229,7 @@ const DayAgenda = ({
 }) => {
   return (
     <div className={cn(s.agenda, "mb-5")}>
-      <div className="d-flex font-size-xl mb-2">
+      <div className="d-flex font-size-xl mb-6">
         <div className="font-weight-bold mr-3">{dates[index].day}</div>
         <div> {dates[index].date} </div>
       </div>
@@ -270,12 +270,12 @@ class Agenda extends React.Component {
     return (
       <Page title="Schedule" {...this.props}>
         <div
-          className="navbar-margin bg-purple2"
+          className="navbar-margin bg-purple2 pb-4"
           style={{
             backgroundImage: `url('${agendaBg}')`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center"
+            backgroundPosition: "80% 30px"
           }}
         >
           <Container>
@@ -286,7 +286,7 @@ class Agenda extends React.Component {
             {/*<Container style={{padding: 0}}>*/}
             <div className="noGutters d-flex mt-3 flex-wrap align-items-baseline text-white">
               <div
-                className="d-flex mb-6 agenda-day-filter align-items-baseline"
+                className="d-flex mb-6 agend-flex font-size-xl mb-2 da-day-filter align-items-baseline"
               >
                 <div className="mr-md-7 mb-6 mb-md-0 ml-3 mr-3">
                   <DayFilter
