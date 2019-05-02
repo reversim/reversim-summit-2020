@@ -287,10 +287,10 @@ class Agenda extends React.Component {
               <div className="mb-4 text-white font-size-xxl">Agenda</div>
             </div>
             {/*<Container style={{padding: 0}}>*/}
-            <div className="noGutters d-flex mt-3 flex-wrap align-items-baseline text-white">
-              <div className="d-flex pr-4">
-                {!isSmallScreen && <div className="py-1">{"Summit Days:"}</div>}
-                <div className="d-flex mb-6 agend-flex mb-2 da-day-filter align-items-baseline">
+            <div className="noGutters d-flex mt-3 flex-wrap align-items-baseline text-white mb-6">
+              <div className="d-flex pr-4 mobile-flex-column">
+                <div className="py-1">{"Summit Days:"}</div>
+                <div className="d-flex agend-flex da-day-filter align-items-baseline">
                   <div className="mr-md-7 mb-6 mb-md-0 ml-3 mr-3">
                     <DayFilter
                       index={0}
@@ -307,43 +307,43 @@ class Agenda extends React.Component {
                   />
                 </div>
               </div>
-              <div className="d-flex mb-6 agenda-hall-filter align-items-baseline flex-wrap">
-                <div className="d-flex">
-                  {!isSmallScreen && <div className="py-1">{"Classes:"}</div>}
-                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
-                  <HallFilter
-                    index={0}
-                    onChange={setExcludedHall}
-                    excludedHalls={excludedHalls}
-                    bgColor="purple2"
-                  />
-                </div>
-                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
-                  <HallFilter
-                    index={1}
-                    onChange={setExcludedHall}
-                    excludedHalls={excludedHalls}
-                    bgColor="purple2"
-                  />
-                </div>
-                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
-                  <HallFilter
-                    index={2}
-                    onChange={setExcludedHall}
-                    excludedHalls={excludedHalls}
-                    bgColor="purple2"
-                  />
-                </div>
-                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
-                  <HallFilter
-                  index={3}
-                  onChange={setExcludedHall}
-                  excludedHalls={excludedHalls}
-                  bgColor="purple2"
-                />
+              <div className="d-flex mobile-flex-column agenda-hall-filter">
+                <div className="py-1">{"Classes:"}</div>
+                <div className="d-flex align-items-baseline flex-wrap">
+                  <div className="mr-md-4 mr-md-7 mb-md-0 ml-3">
+                    <HallFilter
+                      index={0}
+                      onChange={setExcludedHall}
+                      excludedHalls={excludedHalls}
+                      bgColor="purple2"
+                    />
+                  </div>
+                  <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
+                    <HallFilter
+                      index={1}
+                      onChange={setExcludedHall}
+                      excludedHalls={excludedHalls}
+                      bgColor="purple2"
+                    />
+                  </div>
+                  <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
+                    <HallFilter
+                      index={2}
+                      onChange={setExcludedHall}
+                      excludedHalls={excludedHalls}
+                      bgColor="purple2"
+                    />
+                  </div>
+                  <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
+                    <HallFilter
+                      index={3}
+                      onChange={setExcludedHall}
+                      excludedHalls={excludedHalls}
+                      bgColor="purple2"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
           </Container>
         </div>
