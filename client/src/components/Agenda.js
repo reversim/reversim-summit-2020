@@ -52,24 +52,26 @@ const ShortSessions = ({ sessions, users, text }) => (
   <div>
     {text && <div className={s.tall}>{text}</div>}
     <div className="mt-3">
-    {sessions.map((ss, i) => (
-      <div
-        className={cn("mb-3 pb-2", { [s.igniteSep]: i < sessions.length - 1 })}
-        key={i}
-      >
-        <Link to={`/session/${getHref(ss)}`}>
-          <div className="d-flex justify-content-between">
-            <div className={s.igniteContent}>
-              <h5 className={cn("mr-4 mb-0 font-size-sm", s.igniteName)}>
-                {getSpeakerName(ss, users)}
-              </h5>
-              <div>{ss.title}</div>
+      {sessions.map((ss, i) => (
+        <div
+          className={cn("mb-3 pb-2", {
+            [s.igniteSep]: i < sessions.length - 1
+          })}
+          key={i}
+        >
+          <Link to={`/session/${getHref(ss)}`}>
+            <div className="d-flex justify-content-between">
+              <div className={s.igniteContent}>
+                <h5 className={cn("mr-4 mb-0 font-size-sm", s.igniteName)}>
+                  {getSpeakerName(ss, users)}
+                </h5>
+                <div>{ss.title}</div>
+              </div>
+              <div className="d-flex">{getSessionImgs(ss, users)}</div>
             </div>
-            <div className="d-flex">{getSessionImgs(ss, users)}</div>
-          </div>
-        </Link>
-      </div>
-    ))}
+          </Link>
+        </div>
+      ))}
     </div>
   </div>
 );
@@ -80,13 +82,13 @@ const Session = ({ text, session, shortSessions, hall, sep, users }) => {
     content = (
       <div>
         {session.text && <div className={s.tall}>{session.text}</div>}
-        {hall && (
-          <div className="d-lg-none text-muted">
-            <i className="fa fa-map-marker mr-2" />
-            {hall}
-          </div>
-        )}
-        <ShortSessions sessions={session.sessions} users={users} text={text}/>
+        {/*{hall && (*/}
+        {/*  <div className="d-lg-none text-muted">*/}
+        {/*    <i className="fa fa-map-marker mr-2" />*/}
+        {/*    {hall}*/}
+        {/*  </div>*/}
+        {/*)}*/}
+        <ShortSessions sessions={session.sessions} users={users} text={text} />
       </div>
     );
   } else if (session) {
@@ -263,14 +265,15 @@ class Agenda extends React.Component {
       setExcludedDay,
       setExcludedHall,
       excludedHalls,
-      excludedDays
+      excludedDays,
+      isSmallScreen
     } = this.props;
     if (!proposals || !Object.keys(proposals).length) return null;
 
     return (
       <Page title="Schedule" {...this.props}>
         <div
-          className="navbar-margin bg-purple2 pb-4"
+          className="navbar-margin bg-purple2 pb-4 pt-20"
           style={{
             backgroundImage: `url('${agendaBg}')`,
             backgroundSize: "contain",
@@ -279,39 +282,40 @@ class Agenda extends React.Component {
           }}
         >
           <Container>
-            <div className='d-flex'>
+            <div className="d-flex">
               <img src={diamond} alt="diamond" className={s.diamond} />
               <div className="mb-4 text-white font-size-xxl">Agenda</div>
             </div>
             {/*<Container style={{padding: 0}}>*/}
             <div className="noGutters d-flex mt-3 flex-wrap align-items-baseline text-white">
-              <div
-                className="d-flex mb-6 agend-flex font-size-xl mb-2 da-day-filter align-items-baseline"
-              >
-                <div className="mr-md-7 mb-6 mb-md-0 ml-3 mr-3">
+              <div className="d-flex pr-4">
+                {!isSmallScreen && <div className="py-1">{"Summit Days:"}</div>}
+                <div className="d-flex mb-6 agend-flex mb-2 da-day-filter align-items-baseline">
+                  <div className="mr-md-7 mb-6 mb-md-0 ml-3 mr-3">
+                    <DayFilter
+                      index={0}
+                      onChange={setExcludedDay}
+                      excludedDays={excludedDays}
+                      bgColor="purple2"
+                    />
+                  </div>
                   <DayFilter
-                    index={0}
+                    index={1}
                     onChange={setExcludedDay}
                     excludedDays={excludedDays}
-                    bgColor='purple2'
+                    bgColor="purple2"
                   />
                 </div>
-                <DayFilter
-                  index={1}
-                  onChange={setExcludedDay}
-                  excludedDays={excludedDays}
-                  bgColor='purple2'
-                />
               </div>
-              <div
-                className="d-flex mb-6 agenda-hall-filter align-items-baseline flex-wrap"
-              >
+              <div className="d-flex mb-6 agenda-hall-filter align-items-baseline flex-wrap">
+                <div className="d-flex">
+                  {!isSmallScreen && <div className="py-1">{"Classes:"}</div>}
                 <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
                   <HallFilter
                     index={0}
                     onChange={setExcludedHall}
                     excludedHalls={excludedHalls}
-                    bgColor='purple2'
+                    bgColor="purple2"
                   />
                 </div>
                 <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
@@ -319,24 +323,27 @@ class Agenda extends React.Component {
                     index={1}
                     onChange={setExcludedHall}
                     excludedHalls={excludedHalls}
-                    bgColor='purple2'
+                    bgColor="purple2"
                   />
                 </div>
-                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3 mr-3">
+                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
                   <HallFilter
                     index={2}
                     onChange={setExcludedHall}
                     excludedHalls={excludedHalls}
-                    bgColor='purple2'
+                    bgColor="purple2"
                   />
                 </div>
-                <HallFilter
+                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0 ml-3">
+                  <HallFilter
                   index={3}
                   onChange={setExcludedHall}
                   excludedHalls={excludedHalls}
-                  bgColor='purple2'
+                  bgColor="purple2"
                 />
+                </div>
               </div>
+            </div>
             </div>
           </Container>
         </div>

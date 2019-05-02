@@ -32,7 +32,7 @@ function withFilters(WrappedComp, type) {
             <div className={bgColor === 'purple2'? '' : 'color-purple2'} />
           </div>
         </div>
-        <label htmlFor={`filter-${filterType}-${type}-${val}`}>
+        <label className="mt-1" htmlFor={`filter-${filterType}-${type}-${val}`}>
           {getText(val)}
         </label>
       </div>
