@@ -27,7 +27,7 @@ export default [
   {path: '/about', comp: AboutPage},
   {path: '/profile', comp: MyProfile},
   // { path: "/register", comp: RegisterPage },
-  {path: '/schedule', comp: Agenda},
+  {path: '/agenda', comp: Agenda},
   {path: '/speakers', comp: SpeakersPage},
   {path: '/location', comp: LocationPage},
   {path: '/sponsors', comp: SponsorsPage},

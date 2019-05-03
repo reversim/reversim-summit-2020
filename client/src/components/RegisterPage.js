@@ -12,7 +12,7 @@ const RegisterPage = props => (
           <h1 className="text-center my-5">Register to {REVERSIM_SUMMIT}</h1>
           <h4 className="line-height-17 mb-5">
             Registration is for each day separately. Please check the{' '}
-            <Link to="/schedule.html">schedule</Link> before you register. You are encouraged to
+            <Link to="/agenda.html">agenda</Link> before you register. You are encouraged to
             register to both days.
           </h4>
           <h4 className="line-height-17 mb-5">

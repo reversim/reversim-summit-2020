@@ -271,7 +271,7 @@ class Agenda extends React.Component {
     if (!proposals || !Object.keys(proposals).length) return null;
 
     return (
-      <Page title="Schedule" {...this.props}>
+      <Page title="Agenda" {...this.props}>
         <div
           className="navbar-margin bg-purple2 pb-4 pt-20"
           style={{
