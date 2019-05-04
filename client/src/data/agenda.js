@@ -115,7 +115,7 @@ export const agenda2 = [
     time: '14:40-15:20',
     text: 'Ignites',
     shortSessions: [
-      '5c69428f3cdbee0017312edb',
+      '5c501187ae9a470017867fb4',
       '5c6e9189f9d89b0017a7d7fc',
       '5c77ee889cec66001786e666',
       '5c744342fb50dd0017b460d6',
