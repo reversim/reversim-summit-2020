@@ -39,7 +39,7 @@ class SponsorMini extends React.Component {
             src={image(logo, 350, 230)}
             className={s.sponsorImg}
             alt={name}
-            style={{maxHeight: 150 }}
+            style={{maxHeight: 100 }}
           />
         {/*</HashLink>*/}
         </a>

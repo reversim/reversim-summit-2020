@@ -15,7 +15,7 @@ const Location = () => (
             <div className="hl bg-purple2" />
           </div>
           <div className=" text-black font-size-lg font-weight-bold">
-            {"Ganey HaTaarucha, TLV"}
+            {"TLV Convention center"}
           </div>
         </div>
       </div>

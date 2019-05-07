@@ -303,7 +303,7 @@ class SponsorMiniPremium extends React.Component {
             </Link>
           </div>
           <Link to={`/sponsor/${name}`} className="unstyled-link">
-            <Button className='styled-button on-purple w-max-content'>
+            <Button className='styled-button w-max-content'>
               EXPLORE OPPORTUNITIES
             </Button>
           </Link>

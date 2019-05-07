@@ -10,7 +10,7 @@ import VoteButton from './VoteButton';
 import {key} from '../utils';
 import {image} from '../images';
 
-const Session = ({proposal, speakers, user, attendProposal, onTagClick, eventConfig}) => {
+const Session = ({proposal, speakers, user, attendProposal, onTagClick, eventConfig, location}) => {
   const {_id, title, type, tags, abstract, attended} = proposal;
   return (
     <div className="session b-strong d-flex mb-12" style={{minHeight: 440}}>
@@ -33,7 +33,7 @@ const Session = ({proposal, speakers, user, attendProposal, onTagClick, eventCon
         <div className="content">
           <h4 className="mb-5"><a className="unstyled-link" href={`/session/${_id}`}>{title}</a></h4>
           <div className="mb-5">
-          <SessionInfo session={proposal} onTagClick={onTagClick}/>
+          <SessionInfo session={proposal} onTagClick={onTagClick} location={location}/>
           </div>
           <ReactMarkdown className="mb-4 session__abstract" source={abstract} />
         </div>

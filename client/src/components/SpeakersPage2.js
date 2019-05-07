@@ -30,8 +30,8 @@ class Speaker extends React.Component {
       ? { zIndex: 1, height: "auto", minHeight: 240 }
       : { height: 240 };
     let textContainerStyle = isExpanded
-      ? { minHeight: 320 }
-      : { height: 320 };
+      ? { minHeight: 280 }
+      : { height: 280 };
 
     // textStyle = { zIndex: 10, height: "auto", minHeight: 240 }
 
@@ -48,7 +48,7 @@ class Speaker extends React.Component {
               style={{ backgroundImage: `url(${image(picture, 240, 240)})`}}
             />
           </Link>
-          <div className="d-flex flex-column bg-purple2 text-white p-4" style={{width:240}}>
+          <div className="d-flex flex-column bg-purple2 text-white p-2" style={{width:240, minHeight:40}}>
             <SpeakerSocialLinks {...speaker} className="ml-0" iconClassName="text-white"/>
           </div>
         </div>
@@ -71,7 +71,7 @@ class Speaker extends React.Component {
               </p>
               <div className="line-height-15 mb-0">
                 <ReadMore
-                  lines={8 - Math.ceil(oneLiner.length / 29)}
+                  lines={7 - Math.ceil(oneLiner.length / 29)}
                   truncateText="…"
                   more="Read more"
                   less="Show less"
