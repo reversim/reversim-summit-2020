@@ -21,7 +21,7 @@ export default () => {
       to: `/${item.to}.html`,
     }));
   } else {
-    items = [about, sponsors, agenda];
+    items = [about, agenda, sponsors, speakers, sessions];
   }
 
   return items;

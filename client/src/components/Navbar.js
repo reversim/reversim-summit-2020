@@ -36,6 +36,14 @@ const ExploreOpportunitiesCTA = () => (
   </Link>
 );
 
+const GetTicketsCTA = () => (
+  <Link to="/" className="unstyled-link">
+    <Button className="styled-button on-purple w-max-content">
+      Get Tickets
+    </Button>
+  </Link>
+);
+
 
 const NavbarItem = ({to, text, external, pathname}) => {
   let link;
@@ -132,7 +140,7 @@ class Navbar extends Component {
           <Nav
           navbar
           className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}>
-            {!isSmallScreen && <li><ExploreOpportunitiesCTA /></li>}
+            {!isSmallScreen && <li><GetTicketsCTA /></li>}
           {/*<a*/}
           {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
           {/*target="_blank"*/}
