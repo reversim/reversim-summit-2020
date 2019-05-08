@@ -68,13 +68,13 @@ const Hero = ({ eventConfig }) => (
               </Link>
             )}
           </div>
-          <div className="d-flex justify-content-around">
-            <Link to="/" className="unstyled-link">
+          <div className="d-flex justify-content-around mobile-flex-column">
+            <Link to="/" className="unstyled-link mb-4">
               <Button className="styled-button on-purple">
                 {"Get Tickets"}
               </Button>
             </Link>
-            <Link to="/agenda" className="unstyled-link">
+            <Link to="/agenda" className="unstyled-link mb-4">
               <Button className="styled-button on-purple">
                 {"View Agenda"}
               </Button>
