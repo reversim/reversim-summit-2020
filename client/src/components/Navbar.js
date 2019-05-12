@@ -37,7 +37,7 @@ const ExploreOpportunitiesCTA = () => (
 );
 
 const GetTicketsCTA = () => (
-  <a href="http://tickets.reversim.com/" className="unstyled-link">
+  <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
     <Button className="styled-button on-purple w-max-content">
       Get Tickets
     </Button>

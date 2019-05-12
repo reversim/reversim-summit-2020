@@ -68,8 +68,8 @@ const Hero = ({ eventConfig }) => (
               </Link>
             )}
           </div>
-          <div className="d-flex justify-content-around mobile-flex-column">
-            <a href="http://tickets.reversim.com" className="unstyled-link mb-4">
+          <div className="d-flex justify-content-between mobile-flex-column mx-2">
+            <a href="https://ti.to/reversim-summit/2019" className="unstyled-link mb-4">
               <Button className="styled-button on-purple">
                 {"Get Tickets"}
               </Button>
