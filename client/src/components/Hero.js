@@ -3,6 +3,7 @@ import cn from "classnames";
 import {
   hero,
   heroInner,
+  heroContent,
   title,
   subtitle,
   headphones,
@@ -17,6 +18,7 @@ import { REVERSIM_SUMMIT } from "../utils";
 import { Link } from "react-router-dom";
 import CountDown from "./CountDown";
 import logoImg from "../images/SVG/logo.svg";
+import homeBG from "../images/home-reg-bg.png";
 import {
   faMapMarkerAlt,
   faCalendarAlt
@@ -40,11 +42,7 @@ const Hero = ({ eventConfig }) => (
           "d-flex align-items-center text-center text-md-left text-white"
         )}
       >
-        <div className="d-flex flex-column my-8">
-          <div className="d-flex mb-6">
-            <div className="font-size-xxl">RSVP coming soon</div>
-            <div className="hl bg-white" />
-          </div>
+        <div className={cn("d-flex flex-column my-8 bg-purple2", heroContent)}>
           {/*<div className='d-flex'>*/}
           <div className="rs19Logo">
             <img src={logoImg} alt="rs19" />
@@ -70,25 +68,18 @@ const Hero = ({ eventConfig }) => (
               </Link>
             )}
           </div>
-        </div>
-        <div className="hero__right heroCounterWrapper d-flex flex-row-reverse align-items-end justify-content-evenly">
-          <div className="hero__timer-wrapper">
-            <div className="hero__timer-title text-white">
-              {eventConfig.voting
-                ? "Voting closes at 17:00, March 24"
-                : "Reversim Summit will start in"}
-            </div>
-            <div>
-              <CountDown
-                timeRemainingInSeconds={
-                  eventConfig.voting
-                    ? eventConfig.votingCountDown
-                    : eventConfig.summitStartCountDown
-                }
-              />
-            </div>
+          <div className="d-flex justify-content-between mobile-flex-column mx-2">
+            <a href="https://ti.to/reversim-summit/2019" className="unstyled-link mb-4">
+              <Button className="styled-button on-purple">
+                {"Get Tickets"}
+              </Button>
+            </a>
+            <Link to="/agenda" className="unstyled-link mb-4">
+              <Button className="styled-button on-purple">
+                {"View Agenda"}
+              </Button>
+            </Link>
           </div>
-          <div />
         </div>
       </div>
     </Container>

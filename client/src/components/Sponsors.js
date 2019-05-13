@@ -18,6 +18,7 @@ import circle from "../images/SVG/circle.svg";
 import { img } from "./Speaker2.css";
 import {image} from '../images';
 import CommunitySponsor from './CommunitySponsor'
+import { isWhite } from "./Navbar.css";
 library.add(faPencilAlt, faTrash);
 const COLLAPSED_MAX_CHARS = 110;
 
@@ -260,6 +261,7 @@ class SponsorMiniPremiumWithEdit extends React.Component {
         onDelete={canEdit && this.onDelete}
         sponsor={sponsor}
         {...sponsor}
+        isOnWhite={false}
       />
     );
   }
@@ -270,7 +272,7 @@ class SponsorMiniPremium extends React.Component {
     hovered: false
   };
   render() {
-    const { name, logo, url, onEdit, onDelete } = this.props;
+    const { name, logo, url, onEdit, onDelete, isOnWhite } = this.props;
     return (
       <div>
         {onEdit && (
@@ -303,8 +305,8 @@ class SponsorMiniPremium extends React.Component {
             </Link>
           </div>
           <Link to={`/sponsor/${name}`} className="unstyled-link">
-            <Button className='styled-button w-max-content'>
-              EXPLORE OPPORTUNITIES
+            <Button className={cn('styled-button w-max-content', !isOnWhite && 'on-purple')}>
+              Explore Opportunities
             </Button>
           </Link>
         </div>
@@ -333,7 +335,7 @@ export const SponsorsSection = ({ sponsors }) => {
               .map((sponsor, i) => {
                 return (
                   <div key={i}>
-                    <SponsorMiniPremium key={sponsor._id} {...sponsor} />
+                    <SponsorMiniPremium key={sponsor._id} isOnWhite={true} {...sponsor} />
                   </div>
                 );
               })}
