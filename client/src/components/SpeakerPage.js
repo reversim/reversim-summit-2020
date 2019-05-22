@@ -46,7 +46,7 @@ export class SpeakerPage extends React.Component {
           <Container>
             <div className="speaker-page__hero">
               <div
-                style={{backgroundImage: `url(${image(speaker.picture, 230, 230)})`}}
+                style={{backgroundImage: `url(${image(speaker.picture, 222, 222)})`}}
                 className="speaker-page__speaker-picture b-strong mr-5 p-relative"
               />
               <div className="flex-grow-1">

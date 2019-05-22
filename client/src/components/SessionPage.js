@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import SessionPageRoute from "./SessionPageRoute";
 import SessionDayTime from "./SessionDayTime";
 import VoteButton from "./VoteButton";
+import {image} from '../images';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -175,7 +176,7 @@ class SessionPage extends Component {
               >
                 <div
                   className="session-page__speaker"
-                  style={{ backgroundImage: `url('${speaker.picture}')` }}
+                  style={{ backgroundImage: `url('${image(speaker.picture, 236, 240)}')` }}
                 />
                 <div className="p-5 d-flex flex-column flex-grow-1">
                   <h4 className="font-weight-bold font-size-lg">
