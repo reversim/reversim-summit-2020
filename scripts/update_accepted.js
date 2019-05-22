@@ -1,5 +1,17 @@
 db.proposals.update({
   _id: { $in: [
+    ObjectId("5c78704d1503d900172c584b")
+    ]
+  }
+}, {
+  $set: { status: 'withdrawn' }
+}, {
+  multi: true
+});
+
+
+db.proposals.update({
+  _id: { $in: [
     ObjectId("5c76d67f051b240017a20910"),
     ObjectId("5c50c2ddae9a470017867fc9"),
     ObjectId("5c6c23fcd7ca690017a9d042"),
@@ -19,7 +31,7 @@ db.proposals.update({
     ObjectId("5c77fd129cec66001786e678"),
     ObjectId("5c781b369cec66001786e6a1"),
     ObjectId("5c7859c31503d900172c5840"),
-    ObjectId("5c78704d1503d900172c584b"),
+    ObjectId("5c5145067314030017e1c2b5"),
     ObjectId("5c52f3c55a09c900174932e3"),
     ObjectId("5c57eb47499ec8001717bb1b"),
     ObjectId("5c5eae53ced7850017d57f40"),
