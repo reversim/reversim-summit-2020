@@ -10,6 +10,7 @@ import { isServer, getHref } from "../utils";
 import withFilters from "./withFilters";
 import Tag from "./Tag";
 import halls from "../data/halls";
+import {image} from '../images';
 import agendaBg from "../images/agenda-page-bg.png";
 import diamond from "../images/SVG/diamond.svg";
 
@@ -29,7 +30,7 @@ const getSessionImgs = (session, users) =>
     <div
       key={i}
       className={cn("mr-2a b-regular", s.speakerImg)}
-      style={{ backgroundImage: `url('${url}')`, marginLeft: i > 0 ? -10 : 0 }}
+      style={{ backgroundImage: `url('${image(url, 50, 50)}')`, marginLeft: i > 0 ? -10 : 0 }}
     />
   ));
 
