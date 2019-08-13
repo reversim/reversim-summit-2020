@@ -15,6 +15,14 @@ https://summit2020.reversim.com/
 
 ### Setup
 
+#### NodeJS
+
+Install NodeJS version `v8.11.1` or similar (various versions work)
+
+Test installation by running:
+
+    node -v
+
 #### MongoDB
 
 Basically, follow this link: https://docs.mongodb.com/manual/installation/
@@ -31,14 +39,9 @@ Intial data import:
 
     make initial-data-import
 
-#### NodeJS
-
-Install NodeJS version `v8.11.1` or similar (various versions work)
-
 ### Running
 
     make run
-
 
 ## Working locally
 
