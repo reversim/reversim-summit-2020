@@ -1,44 +1,49 @@
-# Website for Reversim Summit 2019
-http://summit2019.reversim.com/
+# Website for Reversim Summit 2020
+https://summit2020.reversim.com/
 
 #### Authors:
 
 * [Lidan Hifi](https://www.linkedin.com/in/lidan)
 * [Amit Zur](https://github.com/amitzur)
+* [Neta Kedem](https://github.com/neta-kedem)
 
 #### Contributors:
 
 * [Ori Harel](https://github.com/oriharel)
 
-#### Getting started
+## Getting started
 
-Install:
-```
-$ npm install
-```
+### Setup
 
-Start:
-This will start an API server connecting to local mongo db called `ReversimSummit` and listening on `5001`, and a webpack dev server which serves the frontend at port `3000`. 
-```
-$ npm start
-```
+#### MongoDB
 
-Import data:
+Basically, follow this link: https://docs.mongodb.com/manual/installation/
 
-You may import data for development. There's a shell script to do that, which takes `/data/*.json` files into your local mongo setup at the `ReversimSummit` db.
-```
-$ ./scripts/import_dev_db.sh
-```
+Then run `mongod` in a separate tab, e.g. open a new tab and type
+
+    mongod
+
+The default database name is `ReversimSummit20`, and it's defined in /server/db/constants.js
+
+It's possible to set a custom db connection string by: `MONGODB_URI=<your_db_url> npm start`
+
+Intial data import:
+
+    make initial-data-import
+
+#### NodeJS
+
+Install NodeJS version `v8.11.1` or similar (various versions work)
+
+### Running
+
+    make run
+
+
 ## Working locally
+
 #### Restarting the server
 Type `rs` in the server's terminal to restart.
-
-#### Installing mongo
-Basically, follow this link: https://docs.mongodb.com/manual/installation/  
-The default database name is ReversimSummit, and it's defined in https://github.com/rantav/reversim-summit-2017/blob/master/server/db/constants.js
-
-It's possible to set a custom db connection string by: `MONGODB_URI=<your_db_url> npm start` 
-
 
 # License
 MIT

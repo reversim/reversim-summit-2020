@@ -11,6 +11,6 @@ do
 
     if [ "$1" = "--import" ]; then
         echo "Importing $c"
-        mongoimport -d ReversimSummit19 -c $c --mode upsert --file $file
+        mongoimport -d ReversimSummit20 -c $c --mode upsert --file $file
     fi
 done
