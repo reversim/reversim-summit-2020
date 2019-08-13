@@ -15,6 +15,15 @@ https://summit2020.reversim.com/
 
 ### Setup
 
+#### Add to /etc/hosts
+
+Add the following line to the file `/etc/hosts` (use sudo)
+`127.0.0.1 local.reversim.com`
+
+E.g.
+
+    echo "127.0.0.1 local.reversim.com" | sudo tee -a /etc/hosts
+
 #### NodeJS
 
 Install NodeJS version `v8.11.1` or similar (various versions work)

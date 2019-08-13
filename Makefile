@@ -1,4 +1,6 @@
 run:
+	cd client && npm install
+	cd server && npm install
 	npm install
 	node dev.js
 
