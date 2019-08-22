@@ -4,6 +4,8 @@ import routes from '../data/routeComps';
 import ga from 'react-ga';
 import {isServer} from '../utils';
 import store from '../store';
+import {ThemeProvider} from 'styled-components';
+import theme from '../styles/Theme';
 import {
   getInitialData,
   uploadPhoto,
@@ -232,18 +234,20 @@ class App extends Component {
       ...this.actions,
     };
     return (
-      <Router location={this.props.location} context={{}}>
-        <div>
-          {routes.map(route => (
-            <Route
-              exact
-              render={p => createElement(route.comp, {...routeProps, ...p, ...route.props})}
-              path={route.path}
-              key={route.path}
-            />
-          ))}
-        </div>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router location={this.props.location} context={{}}>
+          <div>
+            {routes.map(route => (
+              <Route
+                exact
+                render={p => createElement(route.comp, {...routeProps, ...p, ...route.props})}
+                path={route.path}
+                key={route.path}
+              />
+            ))}
+          </div>
+        </Router>
+      </ThemeProvider>
     );
   }
 }
