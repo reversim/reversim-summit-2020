@@ -84,84 +84,103 @@ class Navbar extends Component {
     window.removeEventListener('scroll', this.onScroll);
   }
 
-  onScroll = _e => {
+  onScroll = () => {
     const fixed = window.scrollY > 60;
     this.setState({fixed});
   };
 
   render() {
-    const {isHome, isSmallScreen, user, onLogout, pathname, history, eventConfig} = this.props;
-    const {cfp, voting} = eventConfig;
+    const {
+      isHome,
+      isSmallScreen,
+      user,
+      onLogout,
+      pathname,
+      history,
+      eventConfig: {
+        cfp,
+        voting,
+      },
+    } = this.props;
     const {fixed, currentPage: _currentPage} = this.state;
     const items = navItems(isHome);
     const isColored = !isHome || fixed;
 
-    const logoEl = (
-      <img className={logo} src={logoImg} onClick={() => history.push('/')} alt={REVERSIM_SUMMIT} />
-    );
-
-    const navbarBrand = isHome ? (
-      <a href="/">{logoEl}</a>
-    ) : (
-      <Link className="navbar-brand mr-5" to="/">
-        {logoEl}
-      </Link>
-    );
-
-    const navLinkClass = cn('nav-link', navLink);
-
     return (
-
       <Navbar2
         expand="lg"
         fixed="top"
         className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}>
         <Container>
           <div className="d-flex justify-content-between w-100">
-              {navbarBrand}
-          {/*{cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA />}*/}
-          <NavbarToggler onClick={this.toggle} className="ml-auto" />
-                  </div>
+            <Link className="navbar-brand mr-5" to="/">
+              <img
+                className={logo}
+                src={logoImg}
+                onClick={() => history.push('/')}
+                alt={REVERSIM_SUMMIT}
+              />
+            </Link>
+            <NavbarToggler onClick={this.toggle} className="ml-auto" />
+          </div>
+
           <Collapse isOpen={this.state.isOpen} navbar>
 
-          <Nav
-          navbar
-          className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}>
-            {!isSmallScreen && <li><GetTicketsCTA /></li>}
-          {/*<a*/}
-          {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
-          {/*target="_blank"*/}
-          {/*rel="noreferrer noopener"*/}
-          {/*className="d-none d-lg-block">*/}
-          {/*<Button size="lg" className="text-capitalize font-size-lg-md">*/}
-          {/*Get Tickets*/}
-          {/*</Button>*/}
-          {/*</a>*/}
-          {cfp && isSmallScreen && pathname !== '/cfp' && <NavbarItem text="Submit session" to="cfp"/>}
-          {voting && isSmallScreen && pathname !== '/my-votes' && <NavbarItem text="VOTE FOR SESSION" to="proposals"/>}
-          {items.map(item => (
-              <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
-          ))}
-            { voting && <NavbarItem key={`navbar-i-proposals`} pathname={pathname} {...{to: 'proposals', text: 'Proposals'}} />
-            }
-          {isSmallScreen &&
-          user && (
-          /*<div className="border-top">
-              <NavbarItem to="profile" text="My profile" />
-              <NavItem className={navItem} onClick={onLogout}>
-              <span className={navLinkClass}>Logout</span>
-              </NavItem>
-              </div>*/
-            <Avatar {...user} onLogout={onLogout} />
-          )}
-          { !user &&
-                (<NavbarItem to={getLoginUrl()} text="Login" external={true}/>)}
-          { !isServer &&
-            !isSmallScreen &&
-            user &&
-                <li><div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div></li>}
-          </Nav>
+            <Nav
+              navbar
+              className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}>
+              {
+                !isSmallScreen && <li><GetTicketsCTA /></li>
+              }
 
+              {
+                cfp && isSmallScreen && pathname !== '/cfp' && (
+                  <NavbarItem text="Submit session" to="cfp"/>
+                )
+              }
+
+              {
+                voting && isSmallScreen && pathname !== '/my-votes' && (
+                  <NavbarItem text="VOTE FOR SESSION" to="proposals"/>
+                )
+              }
+
+              {
+                items.map(item => (
+                  <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
+                ))
+              }
+
+              { 
+                voting && (
+                  <NavbarItem
+                    key={`navbar-i-proposals`}
+                    pathname={pathname} {...{to: 'proposals', text: 'Proposals'}} />
+                )
+              }
+
+              {
+                isSmallScreen && user && (
+                  <Avatar {...user} onLogout={onLogout} />
+                )
+              }
+
+              { 
+                !user && (
+                <NavbarItem to={getLoginUrl()} text="Login" external={true}/>
+                )
+              }
+
+              { 
+                !isServer && !isSmallScreen && user && (
+                  <li>
+                    <div className="ml-5">
+                      <Avatar {...user} onLogout={onLogout} />
+                    </div>
+                  </li>
+                )
+              }
+            </Nav>
           </Collapse>
 
           </Container>
