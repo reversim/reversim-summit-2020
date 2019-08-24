@@ -10,6 +10,7 @@ import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
 import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
+import LinkDuo from './LinkDuo'
 
 
 const CFPCTA = () => (
@@ -44,29 +45,15 @@ const GetTicketsCTA = () => (
   </a>
 );
 
-
 const NavbarItem = ({to, text, external, pathname}) => {
-  let link;
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   const isNew = to === 'sponsors'
-  if (external) {
-    link = (
-      <a className={cn(navLinkClass, isNew? newLink: '')} href={to}>
-        {isNew && <img className={newTag} src={newImg}/>}
-        {text}
-      </a>
-    );
-  } else {
-    link = (
-      <Link className={cn(navLinkClass, isNew? newLink: '')} to={`/${to}`}>
-        {isNew && <img className={newTag} src={newImg}/>}
-        {text}
-      </Link>
-    );
-  }
   return (
     <NavItem key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
-      {link}
+      <LinkDuo className={cn(navLinkClass, isNew? newLink: '')} to={to} external={!!external}>
+        {isNew && <img className={newTag} src={newImg}/>}
+        {text}
+      </LinkDuo>
     </NavItem>
   );
 };
