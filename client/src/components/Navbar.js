@@ -1,41 +1,36 @@
+/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import {Container, Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from 'reactstrap';
+import {
+  Container,
+  Navbar as Navbar2,
+  Collapse,
+  NavbarToggler,
+  Nav,
+  NavItem,
+  Button
+} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
-import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn, newTag, newLink, navbarOpen} from './Navbar.css';
+import {
+  navbar,
+  logo,
+  navLink,
+  isWhite,
+  isNotHome,
+  newTag,
+  newLink,
+  navbarOpen
+} from './Navbar.css';
 import logoImg from '../images/SVG/nav-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
 import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
-import LinkDuo from './LinkDuo'
+import LinkDuo from './LinkDuo';
 
-
-const CFPCTA = () => (
-  <Link to="/cfp" className="unstyled-link">
-    <Button color="primary" className={cn("mr-4", submitBtn)}>
-      Submit session
-    </Button>
-  </Link>
-);
-
-const VotingCTA = () => (
-  <Link to="/proposals" className="unstyled-link">
-    <Button className="styled-button on-purple w-max-content">
-      VOTE FOR SESSIONS
-    </Button>
-  </Link>
-);
-
-const ExploreOpportunitiesCTA = () => (
-  <Link to="/sponsors" className="unstyled-link">
-    <Button className="styled-button on-purple w-max-content">
-      EXPLORE OPPORTUNITIES
-    </Button>
-  </Link>
-);
+// import {Container} from './GlobalStyledComponents/Container';
 
 const GetTicketsCTA = () => (
   <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
@@ -108,63 +103,58 @@ class Navbar extends Component {
       </Link>
     );
 
-    const navLinkClass = cn('nav-link', navLink);
-
     return (
-
       <Navbar2
         expand="lg"
         fixed="top"
         className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}>
         <Container>
           <div className="d-flex justify-content-between w-100">
-              {navbarBrand}
-          {/*{cfp && isSmallScreen && pathname !== '/cfp' && <CFPCTA />}*/}
-          <NavbarToggler onClick={this.toggle} className="ml-auto" />
-                  </div>
+            {navbarBrand}
+            <NavbarToggler onClick={this.toggle} className="ml-auto" />
+          </div>
           <Collapse isOpen={this.state.isOpen} navbar>
-
-          <Nav
-          navbar
-          className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}>
-            {!isSmallScreen && <li><GetTicketsCTA /></li>}
-          {/*<a*/}
-          {/*href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"*/}
-          {/*target="_blank"*/}
-          {/*rel="noreferrer noopener"*/}
-          {/*className="d-none d-lg-block">*/}
-          {/*<Button size="lg" className="text-capitalize font-size-lg-md">*/}
-          {/*Get Tickets*/}
-          {/*</Button>*/}
-          {/*</a>*/}
-          {cfp && isSmallScreen && pathname !== '/cfp' && <NavbarItem text="Submit session" to="cfp"/>}
-          {voting && isSmallScreen && pathname !== '/my-votes' && <NavbarItem text="VOTE FOR SESSION" to="proposals"/>}
-          {items.map(item => (
-              <NavbarItem key={`navbar-i-${item.to}`} pathname={pathname} {...item} />
-          ))}
-            { voting && <NavbarItem key={`navbar-i-proposals`} pathname={pathname} {...{to: 'proposals', text: 'Proposals'}} />
-            }
-          {isSmallScreen &&
-          user && (
-          /*<div className="border-top">
-              <NavbarItem to="profile" text="My profile" />
-              <NavItem className={navItem} onClick={onLogout}>
-              <span className={navLinkClass}>Logout</span>
-              </NavItem>
-              </div>*/
-            <Avatar {...user} onLogout={onLogout} />
-          )}
-          { !user &&
-                (<NavbarItem to={getLoginUrl()} text="Login" external={true}/>)}
-          { !isServer &&
-            !isSmallScreen &&
-            user &&
-                <li><div className="ml-5">{<Avatar {...user} onLogout={onLogout} />}</div></li>}
-          </Nav>
-
+            <Nav
+            navbar
+            className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}
+            >
+              {!isSmallScreen && <li> <GetTicketsCTA /> </li>}
+              {cfp && isSmallScreen && pathname !== '/cfp' && (
+                <NavbarItem text="Submit session" to="cfp"/>
+              )}
+              {voting && isSmallScreen && pathname !== '/my-votes' && <NavbarItem text="VOTE FOR SESSION" to="proposals"/>}
+              {items.map(item => (
+                <NavbarItem 
+                  key={`navbar-i-${item.to}`}
+                  pathname={pathname}
+                  {...item} 
+                />
+              ))}
+              { voting && (
+                <NavbarItem
+                  key={`navbar-i-proposals`}
+                  pathname={pathname}
+                  {...{to: 'proposals', text: 'Proposals'}}
+                />
+              )}
+              {isSmallScreen && user}
+              {!user && (
+                <NavbarItem
+                  to={getLoginUrl()}
+                  text="Login"
+                  external={true}
+                />
+              )}
+              {!isServer && isSmallScreen && user && (
+                <li>
+                  <div className="ml-5">
+                    {<Avatar {...user} onLogout={onLogout} />}
+                  </div>
+                </li>
+              )}
+            </Nav>
           </Collapse>
-
-          </Container>
+        </Container>
       </Navbar2>
     );
   }
