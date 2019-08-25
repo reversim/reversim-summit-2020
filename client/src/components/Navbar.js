@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Container, Navbar as Navbar2, Collapse, NavbarToggler, Nav, NavItem, Button} from 'reactstrap';
+import {Container, Navbar as Navbar2, Collapse, NavbarToggler, Nav, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
-import {navbar, logo, navLink, navItem, isWhite, isNotHome, submitBtn, newTag, newLink, navbarOpen} from './Navbar.css';
+import {navbar, logo, navLink, isWhite, isNotHome, submitBtn, newTag, newLink, navbarOpen} from './Navbar.css';
 import logoImg from '../images/SVG/nav-logo.svg';
 import Avatar from './Avatar';
 import {isServer} from '../utils';
@@ -37,24 +37,16 @@ const ExploreOpportunitiesCTA = () => (
   </Link>
 );
 
-const GetTicketsCTA = () => (
-  <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
-    <Button className="styled-button on-purple w-max-content">
-      Get Tickets
-    </Button>
-  </a>
-);
-
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   const isNew = to === 'sponsors'
   return (
-    <NavItem key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
+    <li key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
       <LinkDuo className={cn(navLinkClass, isNew? newLink: '')} to={to} external={!!external}>
         {isNew && <img className={newTag} src={newImg}/>}
         {text}
       </LinkDuo>
-    </NavItem>
+    </li>
   );
 };
 
@@ -130,7 +122,15 @@ class Navbar extends Component {
               navbar
               className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}>
               {
-                !isSmallScreen && <li><GetTicketsCTA /></li>
+                !isSmallScreen && (
+                  <li>
+                    <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
+                      <Button className="styled-button on-purple w-max-content">
+                        Get Tickets
+                      </Button>
+                    </a>
+                  </li>
+                )
               }
 
               {
