@@ -1,19 +1,15 @@
 import React from 'react';
 import styled, {createGlobalStyle} from 'styled-components';
-import reset from 'styled-reset';
+
 import {faEnvelope, faEnvelopeSquare} from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {Container} from 'reactstrap';
+import {Container} from 'reactstrap'; //was imported to check its behavior
 
 library.add(faFacebook, faTwitter, faEnvelope);
 
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-  /* other styles */
-`;
 
 const Footer = styled.footer`
   padding: 50px;
@@ -55,57 +51,56 @@ const Link = styled.a`
 
 const FooterContainer = () => (
 <Footer>
-    <GlobalStyle />
-    <Container>
-        <List>
-          <ListItem>
-            <h6>Contact us:</h6>
-            <a href="mailto:rs19team@googlegroups.com">
-              <FontAwesomeIcon
-                className="ml-2"
-                color="white"
-                icon={faEnvelopeSquare}
-              />
-            </a>
-          </ListItem>
+  <Container>
+      <List>
+        <ListItem>
+          <h6>Contact us:</h6>
+          <a href="mailto:rs19team@googlegroups.com">
+            <FontAwesomeIcon
+              className="ml-2"
+              color="white"
+              icon={faEnvelopeSquare}
+            />
+          </a>
+        </ListItem>
 
-          <ListItem>
-            <h6>Stay in touch:</h6>
-            <a href="https://www.facebook.com/groups/reversim/">
-              <FontAwesomeIcon
-                className="ml-2"
-                color="white"
-                icon={faFacebook}
-              />
-            </a>
-            <a href="https://twitter.com/reversim/">
-              <FontAwesomeIcon
-                className="ml-2"
-                color="white"
-                icon={faTwitter}
-              />
-            </a>
-            <a href="https://groups.google.com/forum/#!forum/reversim-summit">
-              <FontAwesomeIcon
-                className="ml-2"
-                color="white"
-                icon={faEnvelope}
-              />
-            </a>
-          </ListItem>
+        <ListItem>
+          <h6>Stay in touch:</h6>
+          <a href="https://www.facebook.com/groups/reversim/">
+            <FontAwesomeIcon
+              className="ml-2"
+              color="white"
+              icon={faFacebook}
+            />
+          </a>
+          <a href="https://twitter.com/reversim/">
+            <FontAwesomeIcon
+              className="ml-2"
+              color="white"
+              icon={faTwitter}
+            />
+          </a>
+          <a href="https://groups.google.com/forum/#!forum/reversim-summit">
+            <FontAwesomeIcon
+              className="ml-2"
+              color="white"
+              icon={faEnvelope}
+            />
+          </a>
+        </ListItem>
 
-          <ListItem>
-            <Link href="http://confcodeofconduct.com/">
-            Code of Conduct
-            </Link>
-          </ListItem>
+        <ListItem>
+          <Link href="http://confcodeofconduct.com/">
+          Code of Conduct
+          </Link>
+        </ListItem>
 
-          <ListItem>
-            <h6>All Rights Reserved © 2019</h6>
-          </ListItem>
-        </List>
-    </Container>
-  </Footer>
+        <ListItem>
+          <h6>All Rights Reserved © 2019</h6>
+        </ListItem>
+      </List>
+  </Container>
+</Footer>
 );
 
 export default FooterContainer;

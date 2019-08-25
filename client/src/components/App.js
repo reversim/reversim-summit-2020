@@ -4,8 +4,11 @@ import routes from '../data/routeComps';
 import ga from 'react-ga';
 import {isServer} from '../utils';
 import store from '../store';
+import {createGlobalStyle} from 'styled-components';
+import reset from 'styled-reset';
 import {ThemeProvider} from 'styled-components';
 import theme from '../styles/Theme';
+
 import {
   getInitialData,
   uploadPhoto,
@@ -25,6 +28,11 @@ import {
 import findIndex from 'lodash/findIndex';
 import shuffle from 'lodash/shuffle';
 import without from 'lodash/without';
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  /* other styles */
+`;
 
 if (!isServer && process.env.NODE_ENV !== 'development') {
   ga.initialize('UA-36904731-4');
@@ -234,6 +242,8 @@ class App extends Component {
       ...this.actions,
     };
     return (
+      <div>
+      <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Router location={this.props.location} context={{}}>
           <div>
@@ -248,6 +258,7 @@ class App extends Component {
           </div>
         </Router>
       </ThemeProvider>
+      </div>
     );
   }
 }
