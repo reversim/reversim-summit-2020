@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Container} from './GlobalStyledComponents/Container';
 import {faEnvelope, faEnvelopeSquare} from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {Container} from './GlobalStyledComponents/Container';
-// import {Container} from 'reactstrap'; //was imported to check its behavior
-
 library.add(faFacebook, faTwitter, faEnvelope);
-
 
 const Footer = styled.footer`
   padding: 50px;
@@ -24,26 +21,29 @@ const List = styled.ul`
 
   @media (max-width: 900px) {
     flex-direction: column;
-  }
+  };
 `;
 
 const ListItem = styled.li`
   display: flex;
   felx-direction: row;
   color: ${props => props.theme.textColor1};
+  
+  @media (min-width: 768px) {
+    margin: 0 1rem;
+  };
+  @media (min-width: 360px){
+    margin: 0.3rem 0;
+  };
 `;
 
 const Link = styled.a`
   color: ${props => props.theme.textColor1};
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
   &:hover {
     text-decoration: none;
     color: ${props => props.theme.textColor1};
-  }
-
-  @media (max-width: 1200px) {
-    font-size: 14px;
   }
 `;
 
