@@ -6,6 +6,8 @@ import {faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
+import {Container} from 'reactstrap';
+
 library.add(faFacebook, faTwitter, faEnvelope);
 
 const GlobalStyle = createGlobalStyle`
@@ -54,53 +56,55 @@ const Link = styled.a`
 const FooterContainer = () => (
 <Footer>
     <GlobalStyle />
-    <List>
-      <ListItem>
-        <h6>Contact us:</h6>
-        <a href="mailto:rs19team@googlegroups.com">
-          <FontAwesomeIcon
-            className="ml-2"
-            color="white"
-            icon={faEnvelopeSquare}
-          />
-        </a>
-      </ListItem>
+    <Container>
+        <List>
+          <ListItem>
+            <h6>Contact us:</h6>
+            <a href="mailto:rs19team@googlegroups.com">
+              <FontAwesomeIcon
+                className="ml-2"
+                color="white"
+                icon={faEnvelopeSquare}
+              />
+            </a>
+          </ListItem>
 
-      <ListItem>
-        <h6>Stay in touch:</h6>
-        <a href="https://www.facebook.com/groups/reversim/">
-          <FontAwesomeIcon
-            className="ml-2"
-            color="white"
-            icon={faFacebook}
-          />
-        </a>
-        <a href="https://twitter.com/reversim/">
-          <FontAwesomeIcon
-            className="ml-2"
-            color="white"
-            icon={faTwitter}
-          />
-        </a>
-        <a href="https://groups.google.com/forum/#!forum/reversim-summit">
-          <FontAwesomeIcon
-            className="ml-2"
-            color="white"
-            icon={faEnvelope}
-          />
-        </a>
-      </ListItem>
+          <ListItem>
+            <h6>Stay in touch:</h6>
+            <a href="https://www.facebook.com/groups/reversim/">
+              <FontAwesomeIcon
+                className="ml-2"
+                color="white"
+                icon={faFacebook}
+              />
+            </a>
+            <a href="https://twitter.com/reversim/">
+              <FontAwesomeIcon
+                className="ml-2"
+                color="white"
+                icon={faTwitter}
+              />
+            </a>
+            <a href="https://groups.google.com/forum/#!forum/reversim-summit">
+              <FontAwesomeIcon
+                className="ml-2"
+                color="white"
+                icon={faEnvelope}
+              />
+            </a>
+          </ListItem>
 
-      <ListItem>
-        <Link href="http://confcodeofconduct.com/">
-        Code of Conduct
-        </Link>
-      </ListItem>
+          <ListItem>
+            <Link href="http://confcodeofconduct.com/">
+            Code of Conduct
+            </Link>
+          </ListItem>
 
-      <ListItem>
-        <h6>All Rights Reserved © 2019</h6>
-      </ListItem>
-    </List>
+          <ListItem>
+            <h6>All Rights Reserved © 2019</h6>
+          </ListItem>
+        </List>
+    </Container>
   </Footer>
 );
 
