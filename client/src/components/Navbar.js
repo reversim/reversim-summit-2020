@@ -32,24 +32,16 @@ import LinkDuo from './LinkDuo';
 
 // import {Container} from './GlobalStyledComponents/Container';
 
-const GetTicketsCTA = () => (
-  <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
-    <Button className="styled-button on-purple w-max-content">
-      Get Tickets
-    </Button>
-  </a>
-);
-
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   const isNew = to === 'sponsors'
   return (
-    <NavItem key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
+    <li key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
       <LinkDuo className={cn(navLinkClass, isNew? newLink: '')} to={to} external={!!external}>
         {isNew && <img className={newTag} src={newImg}/>}
         {text}
       </LinkDuo>
-    </NavItem>
+    </li>
   );
 };
 
@@ -79,14 +71,24 @@ class Navbar extends Component {
     window.removeEventListener('scroll', this.onScroll);
   }
 
-  onScroll = _e => {
+  onScroll = () => {
     const fixed = window.scrollY > 60;
     this.setState({fixed});
   };
 
   render() {
-    const {isHome, isSmallScreen, user, onLogout, pathname, history, eventConfig} = this.props;
-    const {cfp, voting} = eventConfig;
+    const {
+      isHome,
+      isSmallScreen,
+      user,
+      onLogout,
+      pathname,
+      history,
+      eventConfig: {
+        cfp,
+        voting,
+      },
+    } = this.props;
     const {fixed, currentPage: _currentPage} = this.state;
     const items = navItems(isHome);
     const isColored = !isHome || fixed;
