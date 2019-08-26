@@ -32,6 +32,14 @@ import LinkDuo from './LinkDuo';
 
 // import {Container} from './GlobalStyledComponents/Container';
 
+const GetTicketsCTA = () => (
+  <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
+    <Button className="styled-button on-purple w-max-content">
+      Get Tickets
+    </Button>
+  </a>
+);
+
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   const isNew = to === 'sponsors'
