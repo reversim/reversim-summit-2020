@@ -15,26 +15,40 @@ const Footer = styled.footer`
 `;
 
 const List = styled.ul`
+  width: 100%;
   display: flex;
-  felx-direction: row;
+  flex-direction: row;
   justify-content: space-between;
 
   @media (max-width: 900px) {
     flex-direction: column;
+    justify-content: space-evenly; /* I tried to use this to create some space when
+    screen size is small but it didn't work..*/
   };
 `;
 
 const ListItem = styled.li`
+  width: 20%;
   display: flex;
-  felx-direction: row;
+  flex-direction: row;
+  justify-content: space-around;
   color: ${props => props.theme.textColor1};
-  
-  @media (min-width: 768px) {
+  @media only screen and (max-width: 995px) {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 0 1rem;
   };
-  @media (min-width: 360px){
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    justify-content: flex-start;
     margin: 0.3rem 0;
   };
+`;
+
+const FontAwsomeContainer = styled.div`
+  /* This styled-component was made to help control the three Font-Awsome icons at
+  the "stay in touch" section. Insert your style here if necessary */
 `;
 
 const Link = styled.a`
@@ -47,8 +61,6 @@ const Link = styled.a`
   }
 `;
 
-
-
 const FooterContainer = () => (
 <Footer>
   <Container>
@@ -57,7 +69,6 @@ const FooterContainer = () => (
           <h6>Contact us:</h6>
           <a href="mailto:rs19team@googlegroups.com">
             <FontAwesomeIcon
-              className="ml-2"
               color="white"
               icon={faEnvelopeSquare}
             />
@@ -66,27 +77,26 @@ const FooterContainer = () => (
 
         <ListItem>
           <h6>Stay in touch:</h6>
-          <a href="https://www.facebook.com/groups/reversim/">
-            <FontAwesomeIcon
-              className="ml-2"
-              color="white"
-              icon={faFacebook}
-            />
-          </a>
-          <a href="https://twitter.com/reversim/">
-            <FontAwesomeIcon
-              className="ml-2"
-              color="white"
-              icon={faTwitter}
-            />
-          </a>
-          <a href="https://groups.google.com/forum/#!forum/reversim-summit">
-            <FontAwesomeIcon
-              className="ml-2"
-              color="white"
-              icon={faEnvelope}
-            />
-          </a>
+          <FontAwsomeContainer>
+            <a href="https://www.facebook.com/groups/reversim/">
+              <FontAwesomeIcon
+                color="white"
+                icon={faFacebook}
+              />
+            </a>
+            <a href="https://twitter.com/reversim/">
+              <FontAwesomeIcon
+                color="white"
+                icon={faTwitter}
+              />
+            </a>
+            <a href="https://groups.google.com/forum/#!forum/reversim-summit">
+              <FontAwesomeIcon
+                color="white"
+                icon={faEnvelope}
+              />
+            </a>
+          </FontAwsomeContainer>
         </ListItem>
 
         <ListItem>
