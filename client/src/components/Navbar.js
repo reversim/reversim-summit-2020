@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import styled from 'styled-components'
 import {
   Container,
-  // Navbar as Navbar2,
+  Navbar as Navbar2,
   Collapse,
   NavbarToggler,
   Nav,
@@ -29,27 +28,6 @@ import {REVERSIM_SUMMIT} from '../utils';
 import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 import LinkDuo from './LinkDuo';
-
-// import {Container} from './GlobalStyledComponents/Container';
-
-const Navbar2 = styled.div`
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-
-    display: flex;
-    align-items: center;
-
-    padding: 25px 30px;
-
-
-@media (min-width: 992px){
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-}
-`;
 
 const GetTicketsCTA = () => (
   <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
@@ -140,7 +118,8 @@ class Navbar extends Component {
       <Navbar2
         expand="lg"
         fixed="top"
-        className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}>
+        className="navbar"
+        >
         <Container>
           <div className="d-flex justify-content-between w-100">
             {navbarBrand}
