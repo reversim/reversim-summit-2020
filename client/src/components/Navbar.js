@@ -29,7 +29,6 @@ import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 import LinkDuo from './LinkDuo';
 
-<<<<<<< HEAD
 const GetTicketsCTA = () => (
   <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
     <Button className="styled-button on-purple w-max-content">
@@ -37,9 +36,6 @@ const GetTicketsCTA = () => (
     </Button>
   </a>
 );
-=======
-// import {Container} from './GlobalStyledComponents/Container';
->>>>>>> parent of bc7de90... getting inline with gitHub
 
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
