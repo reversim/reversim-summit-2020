@@ -106,7 +106,7 @@ const FooterContainer = () => (
         </ListItem>
 
         <ListItem>
-          <h6>All Rights Reserved © 2019</h6>
+          <h6>All Rights Reserved © 2020</h6>
         </ListItem>
       </List>
   </Container>
