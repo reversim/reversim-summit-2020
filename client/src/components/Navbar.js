@@ -6,6 +6,7 @@ import {
   Collapse,
   NavbarToggler,
   Nav,
+  NavItem,
   Button
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
@@ -28,6 +29,8 @@ import {REVERSIM_SUMMIT} from '../utils';
 import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 import LinkDuo from './LinkDuo';
+
+// import {Container} from './GlobalStyledComponents/Container';
 
 const GetTicketsCTA = () => (
   <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
@@ -64,9 +67,7 @@ class Navbar extends Component {
 
   componentWillMount() {
     if (window.scrollY > 60) {
-      this.setState({
-        fixed: true
-      });
+      this.setState({fixed: true});
     }
   }
 
@@ -80,9 +81,7 @@ class Navbar extends Component {
 
   onScroll = () => {
     const fixed = window.scrollY > 60;
-    this.setState({
-      fixed
-    });
+    this.setState({fixed});
   };
 
   render() {
@@ -118,8 +117,7 @@ class Navbar extends Component {
       <Navbar2
         expand="lg"
         fixed="top"
-        className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}
-        >
+        className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}>
         <Container>
           <div className="d-flex justify-content-between w-100">
             {navbarBrand}
