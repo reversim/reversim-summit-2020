@@ -10,7 +10,7 @@ library.add(faFacebook, faTwitter, faEnvelope);
 
 const Footer = styled.footer`
   padding: 50px;
-  background-color: ${props => props.theme.bgColor3};
+  background-color: ${props => props.theme.color.background_3};
   font-family: Source Code Pro, monospace;
 `;
 
@@ -20,7 +20,7 @@ const List = styled.ul`
   flex-direction: row;
   justify-content: space-between;
 
-  @media (max-width: 900px) {
+  @media only screen and ${props => props.theme.mq.tablet_landscape} {
     flex-direction: column;
     justify-content: space-evenly; /* I tried to use this to create some space when
     screen size is small but it didn't work..*/
@@ -32,14 +32,14 @@ const ListItem = styled.li`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  color: ${props => props.theme.textColor1};
-  @media only screen and (max-width: 995px) {
+  color: ${props => props.theme.color.text_1};
+  @media only screen and ${props => props.theme.mq.tablet_landscape} {
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
     margin: 0 1rem;
   };
-  @media only screen and (max-width: 768px) {
+  @media only screen and ${props => props.theme.mq.tablet} {
     width: 100%;
     justify-content: flex-start;
     margin: 0.3rem 0;
@@ -52,7 +52,7 @@ const FontAwsomeContainer = styled.div`
 `;
 
 const Link = styled.a`
-  color: ${props => props.theme.textColor1};
+  color: ${props => props.theme.color.text_1};
   font-size: 1rem;
   cursor: pointer;
   &:hover {
