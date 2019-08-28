@@ -21,9 +21,9 @@ const List = styled.ul`
   justify-content: space-between;
 
   @media only screen and ${props => props.theme.mq.tablet_landscape} {
+    min-height: 300px;
     flex-direction: column;
-    justify-content: space-evenly; /* I tried to use this to create some space when
-    screen size is small but it didn't work..*/
+    justify-content: space-evenly;
   };
 `;
 
@@ -34,21 +34,27 @@ const ListItem = styled.li`
   justify-content: space-around;
   color: ${props => props.theme.color.text_1};
   @media only screen and ${props => props.theme.mq.tablet_landscape} {
+    display: flex;
     width: 100%;
+    min-height: ${props => props.theme.space.xxl};
     flex-direction: column;
     justify-content: space-between;
     margin: 0 ${props => props.theme.space.l};
   };
   @media only screen and ${props => props.theme.mq.tablet} {
     width: 100%;
-    justify-content: flex-start;
-    margin: ${props => props.theme.space.s} 0;
+    justify-content: space-between;
+    margin: ${props => props.theme.space.xl} 0;
   };
 `;
 
 const FontAwsomeContainer = styled.div`
-  /* This styled-component was made to help control the three Font-Awsome icons at
-  the "stay in touch" section. Insert your style here if necessary */
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  @media only screen and ${props => props.theme.mq.tablet_landscape} {
+    width: 30%;
+  }
 `;
 
 const Link = styled.a`
