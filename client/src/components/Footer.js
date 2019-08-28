@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 library.add(faFacebook, faTwitter, faEnvelope);
 
 const Footer = styled.footer`
-  padding: 50px;
+  padding: ${props => props.theme.space.xxl};
   background-color: ${props => props.theme.color.background_3};
   font-family: Source Code Pro, monospace;
 `;
@@ -37,12 +37,12 @@ const ListItem = styled.li`
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0 1rem;
+    margin: 0 ${props => props.theme.space.l};
   };
   @media only screen and ${props => props.theme.mq.tablet} {
     width: 100%;
     justify-content: flex-start;
-    margin: 0.3rem 0;
+    margin: ${props => props.theme.space.s} 0;
   };
 `;
 

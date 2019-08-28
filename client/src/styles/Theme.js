@@ -4,6 +4,14 @@ const theme = {
     background_3: '#3312bc',
     text_1: 'white',
   },
+  // spaces used for padding and margins
+  space: {
+    s: '5px',
+    m: '10px',
+    l: '15px',
+    xl: '20px',
+    xxl: '50px',
+  },
   // media queries parameters
   mq: {
     mobile: '(max-width: 480px)',
