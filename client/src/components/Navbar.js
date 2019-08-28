@@ -118,7 +118,7 @@ class Navbar extends Component {
       <Navbar2
         expand="lg"
         fixed="top"
-        className="navbar"
+        className={cn(navbar, {[isNotHome]: !isHome, [isWhite]: isColored})}
         >
         <Container>
           <div className="d-flex justify-content-between w-100">
