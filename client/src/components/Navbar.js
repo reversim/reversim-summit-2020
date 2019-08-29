@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
-  Container,
+  // Container,
   Navbar as BootstrapNavbar,
   Collapse,
   NavbarToggler,
@@ -30,8 +30,7 @@ import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 import LinkDuo from './LinkDuo';
 import styled from 'styled-components';
-
-// import {Container} from './GlobalStyledComponents/Container';
+import theme from '../styles/Theme';
 
 // styled-components section
 const NavbarContainer = styled.div`
@@ -47,6 +46,15 @@ const NavbarContainer = styled.div`
     };
   };
 `;
+    // Navbar Inner Container
+const Container = styled.div`
+    
+    /* .container */
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;`
 
 // React.js componenets section
 
@@ -147,7 +155,9 @@ class Navbar extends Component {
               navbar
               className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}
               >
-                {!isSmallScreen && <li> <GetTicketsCTA /> </li>}
+                {!isSmallScreen && (
+                  <li> <GetTicketsCTA /> </li>
+                )}
                 {cfp && isSmallScreen && pathname !== '/cfp' && (
                   <NavbarItem 
                     text="Submit session" 
