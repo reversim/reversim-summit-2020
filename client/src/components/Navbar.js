@@ -33,6 +33,23 @@ import styled from 'styled-components';
 
 // import {Container} from './GlobalStyledComponents/Container';
 
+// styled-components section
+const NavbarContainer = styled.div`
+  nav  {
+    padding: 25px 30px;
+    ${props => {
+      if(props.isColored){
+        return (
+          'background: rgba(81, 39, 255, 0.9); \n transition: background 0.3s;'
+          )
+        };
+      }
+    };
+  };
+`;
+
+// React.js componenets section
+
 const GetTicketsCTA = () => (
   <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
     <Button className="styled-button on-purple w-max-content">
@@ -53,20 +70,6 @@ const NavbarItem = ({to, text, external, pathname}) => {
     </li>
   );
 };
-
-const NavbarContainer = styled.div`
-  nav  {
-    padding: 25px 30px;
-    ${props => {
-      if(props.isColored){
-        return (
-          'background: rgba(81, 39, 255, 0.9); \n transition: background 0.3s;'
-          )
-        };
-      }
-    };
-  };
-`;
 
 class Navbar extends Component {
   state = {
@@ -146,9 +149,17 @@ class Navbar extends Component {
               >
                 {!isSmallScreen && <li> <GetTicketsCTA /> </li>}
                 {cfp && isSmallScreen && pathname !== '/cfp' && (
-                  <NavbarItem text="Submit session" to="cfp"/>
+                  <NavbarItem 
+                    text="Submit session" 
+                    to="cfp"
+                  />
                 )}
-                {voting && isSmallScreen && pathname !== '/my-votes' && <NavbarItem text="VOTE FOR SESSION" to="proposals"/>}
+                {voting && isSmallScreen && pathname !== '/my-votes' && (
+                  <NavbarItem 
+                    text="VOTE FOR SESSION" 
+                    to="proposals"
+                  />
+                )}
                 {items.map(item => (
                   <NavbarItem 
                     key={`navbar-i-${item.to}`}
