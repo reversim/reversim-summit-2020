@@ -14,10 +14,10 @@ const theme = {
   },
   // media queries parameters
   mq: {
-    mobile: '(max-width: 480px)',
-    tablet: '(max-width: 768px)',
-    tablet_landscape: '(max-width: 1200px)', //though classic tablet landscape is 1024px, 1200 worked better for Footer.js
-    laptop: '(max-width: 1600px)',
+    mobile: '480px',
+    tablet: '768px',
+    tablet_landscape: '1200px', //though classic tablet landscape is 1024px, 1200 worked better for Footer.js
+    laptop: '1600px',
   },
 };
 

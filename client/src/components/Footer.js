@@ -20,7 +20,7 @@ const List = styled.ul`
   flex-direction: row;
   justify-content: space-between;
 
-  @media only screen and ${props => props.theme.mq.tablet_landscape} {
+  @media (max-width: ${props => props.theme.mq.tablet_landscape}) {
     min-height: 300px;
     flex-direction: column;
     justify-content: space-evenly;
@@ -33,7 +33,7 @@ const ListItem = styled.li`
   flex-direction: row;
   justify-content: space-around;
   color: ${props => props.theme.color.text_1};
-  @media only screen and ${props => props.theme.mq.tablet_landscape} {
+  @media (max-width: ${props => props.theme.mq.tablet_landscape}) {
     display: flex;
     width: 100%;
     min-height: ${props => props.theme.space.xxl};
@@ -41,7 +41,7 @@ const ListItem = styled.li`
     justify-content: space-between;
     margin: 0 ${props => props.theme.space.l};
   };
-  @media only screen and ${props => props.theme.mq.tablet} {
+  @media (max-width: ${props => props.theme.mq.tablet}) {
     width: 100%;
     justify-content: space-between;
     margin: ${props => props.theme.space.xl} 0;
@@ -52,7 +52,7 @@ const FontAwsomeContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 30%;
-  @media only screen and ${props => props.theme.mq.tablet_landscape} {
+  @media (max-width: ${props => props.theme.mq.tablet_landscape}) {
     width: 30%;
   }
 `;
