@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
-  Container,
+  // Container,
   Navbar as BootstrapNavbar,
   Collapse,
   NavbarToggler,
@@ -47,18 +47,16 @@ const NavbarContainer = styled.div`
   };
 `;
     // Navbar Inner Container
-const aContainer = styled.div`
+const Container = styled.div`
     
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 0 15px;
     margin-right: auto;
     margin-left: auto;
-    
     `
 
 // React.js componenets section
