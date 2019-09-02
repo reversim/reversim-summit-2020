@@ -1,7 +1,8 @@
 const theme = {
   // the website's color scheme
   color: {
-    background_3: '#3312bc',
+    background_1: 'rgba(81, 39, 255, 0.9)',
+    background_3: 'rgb(51, 18, 188)',
     text_1: 'white',
   },
   // spaces used for padding and margins

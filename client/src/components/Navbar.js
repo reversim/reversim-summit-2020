@@ -30,7 +30,6 @@ import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 import LinkDuo from './LinkDuo';
 import styled from 'styled-components';
-import theme from '../styles/Theme';
 
 // styled-components section
 const NavbarContainer = styled.div`
@@ -39,7 +38,8 @@ const NavbarContainer = styled.div`
     ${props => {
       if(props.isColored){
         return (
-          'background: rgba(81, 39, 255, 0.9); \n transition: background 0.3s;'
+          `background: ${props.theme.color.background_1};
+           transition: background 0.3s;`
           )
         };
       }
@@ -47,14 +47,14 @@ const NavbarContainer = styled.div`
   };
 `;
     // Navbar Inner Container
-const Container = styled.div`
+const NavInnerContainer = styled.div`
     
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
+    padding: 0 ${props => props.theme.space.l};
     margin-right: auto;
     margin-left: auto;
     `
@@ -148,7 +148,7 @@ class Navbar extends Component {
           expand="lg"
           fixed="top"
         >
-          <Container>
+          <NavInnerContainer>
             <div className="d-flex justify-content-between w-100">
               {navbarBrand}
               <NavbarToggler onClick={this.toggle} className="ml-auto" />
@@ -204,7 +204,7 @@ class Navbar extends Component {
                 )}
               </Nav>
             </Collapse>
-          </Container>
+          </NavInnerContainer>
         </BootstrapNavbar>
       </NavbarContainer>
       
