@@ -47,6 +47,7 @@ const NavbarContainer = styled.div`
   };
 `;
     // Navbar Inner Container
+    // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
 const NavInnerContainer = styled.div`
     
     width: 100%;
