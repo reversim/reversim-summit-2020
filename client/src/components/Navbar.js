@@ -49,6 +49,22 @@ const MainAligner = styled.div`
  justify-content: space-between;
 `;
 
+const NavItemAligner = styled.div`
+ display: flex;
+ flex-direction: column;
+ align-items: flex-end !important;
+ padding: ${props => props.theme.space.l} !important;
+ padding-left: 0;
+ margin-left: auto !important;
+ margin-bottom: 0;
+ list-style: none;
+ @media (min-width: 992px){
+  flex-direction: row;
+  padding: 0 !important;
+ };
+`;
+
+
     // Navbar Inner Container
     // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
 // const NavInnerContainer = styled.div`
@@ -158,55 +174,58 @@ class Navbar extends Component {
               <NavbarToggler onClick={this.toggle} className="ml-auto" />
             </MainAligner>
             <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav
-              navbar
-              className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}
-              >
-                {!isSmallScreen && (
-                  <li> <GetTicketsCTA /> </li>
-                )}
-                {cfp && isSmallScreen && pathname !== '/cfp' && (
-                  <NavbarItem 
-                    text="Submit session" 
-                    to="cfp"
-                  />
-                )}
-                {voting && isSmallScreen && pathname !== '/my-votes' && (
-                  <NavbarItem 
-                    text="VOTE FOR SESSION" 
-                    to="proposals"
-                  />
-                )}
-                {items.map(item => (
-                  <NavbarItem 
-                    key={`navbar-i-${item.to}`}
-                    pathname={pathname}
-                    {...item} 
-                  />
-                ))}
-                { voting && (
-                  <NavbarItem
-                    key={`navbar-i-proposals`}
-                    pathname={pathname}
-                    {...{to: 'proposals', text: 'Proposals'}}
-                  />
-                )}
-                {isSmallScreen && user}
-                {!user && (
-                  <NavbarItem
-                    to={getLoginUrl()}
-                    text="Login"
-                    external={true}
-                  />
-                )}
-                {!isServer && isSmallScreen && user && (
-                  <li>
-                    <div className="ml-5">
-                      {<Avatar {...user} onLogout={onLogout} />}
-                    </div>
-                  </li>
-                )}
-              </Nav>
+              <NavItemAligner>
+                <Nav
+                  navbar
+                  className={navbarOpen ? 'navbarOpen': ''}
+                  >
+                  {!isSmallScreen && (
+                    <li> <GetTicketsCTA /> </li>
+                  )}
+                  {cfp && isSmallScreen && pathname !== '/cfp' && (
+                    <NavbarItem 
+                      text="Submit session" 
+                      to="cfp"
+                    />
+                  )}
+                  {voting && isSmallScreen && pathname !== '/my-votes' && (
+                    <NavbarItem 
+                      text="VOTE FOR SESSION" 
+                      to="proposals"
+                    />
+                  )}
+                  {items.map(item => (
+                    <NavbarItem 
+                      key={`navbar-i-${item.to}`}
+                      pathname={pathname}
+                      {...item} 
+                    />
+                  ))}
+                  { voting && (
+                    <NavbarItem
+                      key={`navbar-i-proposals`}
+                      pathname={pathname}
+                      {...{to: 'proposals', text: 'Proposals'}}
+                    />
+                  )}
+                  {isSmallScreen && user}
+                  {!user && (
+                    <NavbarItem
+                      to={getLoginUrl()}
+                      text="Login"
+                      external={true}
+                    />
+                  )}
+                  {!isServer && isSmallScreen && user && (
+                    <li>
+                      <div className="ml-5">
+                        {<Avatar {...user} onLogout={onLogout} />}
+                      </div>
+                    </li>
+                  )}
+                </Nav>
+              </NavItemAligner>
+
             </Collapse>
           </ReactstrapContainer>
         </ReactstrapNavbar>
