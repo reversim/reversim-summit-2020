@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
-  ReactstrapContainer as ReactstrapContainer,
+  Container as ReactstrapContainer,
   Navbar as ReactstrapNavbar,
   Collapse,
   NavbarToggler,
@@ -42,8 +42,8 @@ const NavbarContainer = styled.div`
     };
   };
 `;
-    // Navbar Inner ReactstrapContainer
-    // Reactstrap's Reactstrapcontainer had also a behavioral aspect which led to a better UI.. We need to decied on that.
+    // Navbar Inner Container
+    // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
 // const NavInnerContainer = styled.div`
     
 //     width: 100%;
