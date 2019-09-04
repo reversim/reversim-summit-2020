@@ -42,6 +42,13 @@ const NavbarContainer = styled.div`
     };
   };
 `;
+
+const MainAligner = styled.div`
+ width: 100%;
+ display: flex;
+ justify-content: space-between;
+`;
+
     // Navbar Inner Container
     // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
 // const NavInnerContainer = styled.div`
@@ -146,10 +153,10 @@ class Navbar extends Component {
           fixed="top"
         >
           <ReactstrapContainer>
-            <div className="d-flex justify-content-between w-100">
+            <MainAligner>
               {navbarBrand}
               <NavbarToggler onClick={this.toggle} className="ml-auto" />
-            </div>
+            </MainAligner>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav
               navbar
