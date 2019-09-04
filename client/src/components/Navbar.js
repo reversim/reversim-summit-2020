@@ -1,23 +1,19 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
-  // Container,
+  Container,
   Navbar as BootstrapNavbar,
   Collapse,
   NavbarToggler,
   Nav,
-  NavItem,
   Button
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
 import {
-  navbar,
   logo,
   navLink,
-  isWhite,
-  isNotHome,
   newTag,
   newLink,
   navbarOpen
@@ -48,17 +44,17 @@ const NavbarContainer = styled.div`
 `;
     // Navbar Inner Container
     // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
-const NavInnerContainer = styled.div`
+// const NavInnerContainer = styled.div`
     
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 ${props => props.theme.space.l};
-    margin-right: auto;
-    margin-left: auto;
-    `
+//     width: 100%;
+//     display: flex;
+//     flex-wrap: nowrap;
+//     align-items: center;
+//     justify-content: space-between;
+//     padding: 0 ${props => props.theme.space.l};
+//     margin-right: auto;
+//     margin-left: auto;
+//     `
 
 // React.js componenets section
 
@@ -149,7 +145,7 @@ class Navbar extends Component {
           expand="lg"
           fixed="top"
         >
-          <NavInnerContainer>
+          <Container>
             <div className="d-flex justify-content-between w-100">
               {navbarBrand}
               <NavbarToggler onClick={this.toggle} className="ml-auto" />
@@ -205,7 +201,7 @@ class Navbar extends Component {
                 )}
               </Nav>
             </Collapse>
-          </NavInnerContainer>
+          </Container>
         </BootstrapNavbar>
       </NavbarContainer>
       
