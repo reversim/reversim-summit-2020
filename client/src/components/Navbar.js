@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
-  Container,
-  Navbar as BootstrapNavbar,
+  ReactstrapContainer as ReactstrapContainer,
+  Navbar as ReactstrapNavbar,
   Collapse,
   NavbarToggler,
   Nav,
@@ -42,8 +42,8 @@ const NavbarContainer = styled.div`
     };
   };
 `;
-    // Navbar Inner Container
-    // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
+    // Navbar Inner ReactstrapContainer
+    // Reactstrap's Reactstrapcontainer had also a behavioral aspect which led to a better UI.. We need to decied on that.
 // const NavInnerContainer = styled.div`
     
 //     width: 100%;
@@ -141,11 +141,11 @@ class Navbar extends Component {
 
     return (
       <NavbarContainer isColored={isColored}>
-        <BootstrapNavbar
+        <ReactstrapNavbar
           expand="lg"
           fixed="top"
         >
-          <Container>
+          <ReactstrapContainer>
             <div className="d-flex justify-content-between w-100">
               {navbarBrand}
               <NavbarToggler onClick={this.toggle} className="ml-auto" />
@@ -201,8 +201,8 @@ class Navbar extends Component {
                 )}
               </Nav>
             </Collapse>
-          </Container>
-        </BootstrapNavbar>
+          </ReactstrapContainer>
+        </ReactstrapNavbar>
       </NavbarContainer>
       
     );
