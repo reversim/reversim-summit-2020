@@ -58,7 +58,7 @@ const NavItemAligner = styled.div`
  margin-left: auto !important;
  margin-bottom: 0;
  list-style: none;
- @media (min-width: 992px){
+ @media (min-width: ${props => props.theme.mq.l}){
   flex-direction: row;
   padding: 0 !important;
  };
