@@ -5,6 +5,10 @@ const theme = {
     background_3: 'rgb(51, 18, 188)',
     text_1: 'white',
   },
+  font: {
+    main: 'Source Code Pro,monospace',
+    button: 'PT Mono',
+  },
   // spaces used for padding and margins
   space: {
     s: '5px',
