@@ -64,7 +64,6 @@ const NavItemAligner = styled.div`
  };
 `;
 
-
     // Navbar Inner Container
     // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
 // const NavInnerContainer = styled.div`
@@ -82,11 +81,12 @@ const NavItemAligner = styled.div`
 // React.js componenets section
 
 const GetTicketsCTA = () => (
-  <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
-    <Button className="styled-button on-purple w-max-content">
+    <Button 
+    className="styled-button on-purple w-max-content" 
+    onclick="window.location.href='https://ti.to/reversim-summit/2019'">
       Get Tickets
     </Button>
-  </a>
+  
 );
 
 const NavbarItem = ({to, text, external, pathname}) => {
