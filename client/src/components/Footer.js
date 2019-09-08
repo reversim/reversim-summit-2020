@@ -63,7 +63,7 @@ const Link = styled.a`
   cursor: pointer;
   &:hover {
     text-decoration: none;
-    color: ${props => props.theme.textColor1};
+    color: ${props => props.theme.color.text_1};
   }
 `;
 

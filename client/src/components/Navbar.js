@@ -64,15 +64,37 @@ const NavItemAligner = styled.div`
  };
 `;
 
-const NavbarButton = styled.button`
-  /* .styled-button.on-purple  */
-    font-family: 'PT Mono' !important;
-    font-weight: bold !important;
-    border: solid 2px #fff !important;
-    box-shadow: -2px 2px #5127ff, -4px 4px #fff !important;
-    background: right bottom linear-gradient(to right, #ff6100 50%, #896cff 50%) !important;
-    background-size: 205% 100% !important;
-    transition: all .5s ease-out !important;
+const NavbarButton = styled.a`
+  width: max-content;
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none; /*consider deleting*/
+  padding: 0 20px 0.75rem 20px;
+  line-height: 2.25;
+  letter-spacing: 1px;
+  
+  color: #fff;
+  border: solid 2px #fff !important;
+  box-shadow: -2px 2px #5127ff, -4px 4px #fff !important;
+  background-color: #896cff;
+  /* background-size: 205% 100% !important; */
+  
+  outline: none;
+  border-radius: 0;
+
+  font-family: 'PT Mono' !important;
+  font-weight: bold !important;
+
+  &:hover{ 
+    background: linear-gradient(to right, #ff6100 50%, #896cff 50%);
+    background-size: 200% 100%;
+    transition: all .5s ease-out;
+    text-decoration: none;
+    color: #fff;
+    /* could not figure out how to add th transition effect */
+  };
 `;
 
     // Navbar Inner Container
@@ -92,11 +114,10 @@ const NavbarButton = styled.button`
 // React.js componenets section
 
 const GetTicketsCTA = () => (
-    <Button 
-    className="styled-button on-purple w-max-content" 
-    onclick="window.location.href='https://ti.to/reversim-summit/2019'">
+    <NavbarButton 
+    href="https://ti.to/reversim-summit/2019">
       Get Tickets
-    </Button>
+    </NavbarButton>
   
 );
 
