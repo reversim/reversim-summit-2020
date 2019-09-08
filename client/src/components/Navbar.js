@@ -64,6 +64,17 @@ const NavItemAligner = styled.div`
  };
 `;
 
+const NavbarButton = styled.button`
+  /* .styled-button.on-purple  */
+    font-family: 'PT Mono' !important;
+    font-weight: bold !important;
+    border: solid 2px #fff !important;
+    box-shadow: -2px 2px #5127ff, -4px 4px #fff !important;
+    background: right bottom linear-gradient(to right, #ff6100 50%, #896cff 50%) !important;
+    background-size: 205% 100% !important;
+    transition: all .5s ease-out !important;
+`;
+
     // Navbar Inner Container
     // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
 // const NavInnerContainer = styled.div`

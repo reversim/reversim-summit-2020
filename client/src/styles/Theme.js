@@ -4,7 +4,10 @@ const theme = {
     background_1: 'rgba(81, 39, 255, 0.9)',
     background_3: 'rgb(51, 18, 188)',
     text_1: 'white',
+    button_or_box_shadow_1: '#5127ff',
+    button_or_box_shadow_2: '#fff',
   },
+  // the website's fonts
   font: {
     main: 'Source Code Pro,monospace',
     button: 'PT Mono',
@@ -16,6 +19,10 @@ const theme = {
     l: '15px',
     xl: '20px',
     xxl: '50px',
+  },
+  // borders used on the website, no colors only line styles and width
+  border: {
+    button_border: 'solid 2px',
   },
   // media queries parameters
   mq: {
