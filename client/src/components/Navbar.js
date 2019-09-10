@@ -49,18 +49,23 @@ const MainAligner = styled.div`
 `;
 
 const NavItemAligner = styled.div`
- display: flex;
- flex-direction: column;
- align-items: flex-end !important;
- padding: ${props => props.theme.space.l} !important;
- padding-left: 0;
- margin-left: auto !important;
- margin-bottom: 0;
- list-style: none;
- @media (min-width: ${props => props.theme.mq.l}){
-  flex-direction: row;
-  padding: 0 !important;
- };
+ ${props => {
+   return (`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end !important;
+    padding: ${props.theme.space.l} !important;
+    padding-left: 0;
+    margin-left: auto !important;
+    margin-bottom: 0;
+    list-style: none;
+    @media (min-width: ${props.theme.mq.l}){
+      flex-direction: row;
+      padding: 0 !important;
+    };
+   `);
+ }};
+
 `;
 
 const NavbarButton = styled.a`
