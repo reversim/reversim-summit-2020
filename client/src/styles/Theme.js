@@ -13,7 +13,7 @@ const theme = {
   },
   // the website's fonts
   font: {
-    main: 'Source Code Pro,monospace',
+    main: 'Source Code Pro, monospace',
     button: 'PT Mono',
   },
   // spaces used for padding and margins
@@ -33,7 +33,7 @@ const theme = {
     xs: '480px',
     m: '768px',
     l: '992px',
-    xl: '1200px', //though classic tablet landscape is 1024px, 1200 worked better for Footer.js
+    xl: '1200px',
     xxl: '1600px',
   },
 };
