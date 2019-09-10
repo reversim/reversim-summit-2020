@@ -9,9 +9,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 library.add(faFacebook, faTwitter, faEnvelope);
 
 const Footer = styled.footer`
-  padding: ${props => props.theme.space.xxl};
-  background-color: ${props => props.theme.color.background_3};
-  font-family: Source Code Pro, monospace;
+  ${props => {
+    return (`
+      padding: ${props.theme.space.xxl};
+      background-color: ${props.theme.color.background_3};
+      font-family: Source Code Pro, monospace;
+    `)
+  }};
 `;
 
 const List = styled.ul`
@@ -28,24 +32,28 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  width: 20%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  color: ${props => props.theme.color.text_1};
-  @media (max-width: ${props => props.theme.mq.xl}) {
+  ${props => {
+    return (`
+    width: 20%;
     display: flex;
-    width: 100%;
-    min-height: ${props => props.theme.space.xxl};
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 0 ${props => props.theme.space.l};
-  };
-  @media (max-width: ${props => props.theme.mq.m}) {
-    width: 100%;
-    justify-content: space-between;
-    margin: ${props => props.theme.space.xl} 0;
-  };
+    flex-direction: row;
+    justify-content: space-around;
+    color: ${props.theme.color.text_1};
+    @media (max-width: ${props.theme.mq.xl}) {
+      display: flex;
+      width: 100%;
+      min-height: ${props.theme.space.xxl};
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 0 ${props.theme.space.l};
+    };
+    @media (max-width: ${props.theme.mq.m}) {
+      width: 100%;
+      justify-content: space-between;
+      margin: ${props.theme.space.xl} 0;
+    };
+    `);
+  }}
 `;
 
 const FontAwsomeContainer = styled.div`
@@ -58,13 +66,17 @@ const FontAwsomeContainer = styled.div`
 `;
 
 const Link = styled.a`
-  color: ${props => props.theme.color.text_1};
-  font-size: 1rem;
-  cursor: pointer;
-  &:hover {
-    text-decoration: none;
-    color: ${props => props.theme.color.text_1};
-  }
+  ${props => {
+    return (`
+    color: ${props.theme.color.text_1};
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+      color: ${props.theme.color.text_1};
+    };
+    `);
+  }}
 `;
 
 const FooterContainer = () => (
