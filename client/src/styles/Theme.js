@@ -3,9 +3,13 @@ const theme = {
   color: {
     background_1: 'rgba(81, 39, 255, 0.9)',
     background_3: 'rgb(51, 18, 188)',
-    text_1: 'white',
-    button_or_box_shadow_1: '#5127ff',
-    button_or_box_shadow_2: '#fff',
+    text_1: 'rgb(255, 255, 255)',
+
+    button_bkgr_1: 'rgb(137, 108, 255)',
+    button_bkgr_2: 'rgb(255, 97, 0)',
+    
+    box_shadow_1: 'rgb(81, 39, 255)',
+    box_shadow_2: 'rgb(255, 255, 255)',
   },
   // the website's fonts
   font: {

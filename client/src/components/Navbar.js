@@ -5,8 +5,7 @@ import {
   Navbar as ReactstrapNavbar,
   Collapse,
   NavbarToggler,
-  Nav,
-  Button
+  Nav
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
@@ -65,36 +64,42 @@ const NavItemAligner = styled.div`
 `;
 
 const NavbarButton = styled.a`
-  width: max-content;
-  height: 40px;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  user-select: none; /*consider deleting*/
-  padding: 0 20px 0.75rem 20px;
-  line-height: 2.25;
-  letter-spacing: 1px;
-  
-  color: #fff;
-  border: solid 2px #fff !important;
-  box-shadow: -2px 2px #5127ff, -4px 4px #fff !important;
-  background-color: #896cff;
-  /* background-size: 205% 100% !important; */
-  
-  outline: none;
-  border-radius: 0;
+  ${props => {
+    return (`
+    width: max-content;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none; /*CONSIDER DELETING*/
+    padding: 0 20px 0.75rem 20px;
+    line-height: 2.25;
+    letter-spacing: 1px;
+    
+    color: ${props.theme.color.text_1};
+    border: solid 2px ${props.theme.color.text_1} !important;
+    box-shadow: -2px 2px ${props.theme.color.box_shadow_1}, -4px 4px ${props.theme.color.box_shadow_2} !important;
+    background-color: ${props.theme.color.button_bkgr_1};
+    /* background-size: 205% 100% !important; IT DOES NOT SEEM TO AFFECT MUCH*/
+    
+    outline: none;
+    border-radius: 0;
 
-  font-family: 'PT Mono' !important;
-  font-weight: bold !important;
+    font-family: 'PT Mono' !important;
+    font-weight: bold !important;
 
-  &:hover{ 
-    background: linear-gradient(to right, #ff6100 50%, #896cff 50%);
-    background-size: 200% 100%;
-    transition: all .5s ease-out;
-    text-decoration: none;
-    color: #fff;
-    /* could not figure out how to add th transition effect */
-  };
+    &:hover{ 
+      text-decoration: none;
+      color: ${props.theme.color.text_1};
+
+      background: right bottom linear-gradient(to right, ${props.theme.color.button_bkgr_2} 50%, ${props.theme.color.button_bkgr_1} 50%);
+      background-size: 205% 100%;
+      transition: all .5s ease-out;
+      /* NOTE: could not figure out how to add the transition effect properly */
+    };
+    `);
+  }}
+
 `;
 
     // Navbar Inner Container
