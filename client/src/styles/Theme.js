@@ -15,13 +15,15 @@ const theme = {
   font: {
     main: 'Source Code Pro, monospace',
     button: 'PT Mono',
+    weight_bold: '600',
+    size_md: '18px',
   },
   // spaces used for padding and margins
   space: {
     s: '5px',
     m: '10px',
     l: '15px',
-    xl: '20px',
+    xl: '25px',
     xxl: '50px',
   },
   // borders used on the website, no colors only line styles and width

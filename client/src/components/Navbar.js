@@ -48,6 +48,19 @@ const MainAligner = styled.div`
  justify-content: space-between;
 `;
 
+const NavLI = styled.li`
+  ${props => {
+    return (`
+      font-size: ${props.theme.font.size_md};
+      color: ${props.theme.color.text_1} !important;
+      font-weight: ${props.theme.font.weight_bold} !important;
+        @media (min-width: ${props.theme.mq.l}){
+          margin-left: ${props.theme.space.xl} !important;
+        }
+    `)
+  }}  
+`;
+
 const NavItemAligner = styled.div`
  ${props => {
    return (`
@@ -68,7 +81,7 @@ const NavItemAligner = styled.div`
 
 `;
 
-const NavbarButton = styled.a`
+const TicketCTAButton = styled.a`
   ${props => {
     return (`
     width: max-content;
@@ -124,10 +137,10 @@ const NavbarButton = styled.a`
 // React.js componenets section
 
 const GetTicketsCTA = () => (
-    <NavbarButton 
+    <TicketCTAButton
     href="https://ti.to/reversim-summit/2019">
       Get Tickets
-    </NavbarButton>
+    </TicketCTAButton>
   
 );
 
@@ -135,12 +148,12 @@ const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   const isNew = to === 'sponsors'
   return (
-    <li key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
+    <NavLI key={to}>
       <LinkDuo className={cn(navLinkClass, isNew? newLink: '')} to={to} external={!!external}>
         {isNew && <img className={newTag} src={newImg}/>}
         {text}
       </LinkDuo>
-    </li>
+    </NavLI>
   );
 };
 
