@@ -23,7 +23,6 @@ const List = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   @media (max-width: ${props => props.theme.mq.xl}) {
     min-height: 300px;
     flex-direction: column;
