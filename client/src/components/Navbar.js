@@ -81,7 +81,7 @@ const NavItemAligner = styled.div`
 
 `;
 
-const TicketCTAButton = styled.a`
+const TicketCTAButton = styled.button`
   ${props => {
     return (`
     width: max-content;
@@ -105,14 +105,16 @@ const TicketCTAButton = styled.a`
 
     font-family: 'PT Mono' !important;
     font-weight: bold !important;
+    font-size: 16px;
+    outline: none;
 
     &:hover{ 
       text-decoration: none;
       color: ${props.theme.color.text_1};
 
-      background: right bottom linear-gradient(to right, ${props.theme.color.button_bkgr_2} 50%, ${props.theme.color.button_bkgr_1} 50%);
-      background-size: 205% 100%;
-      transition: all .5s ease-out;
+      background: right bottom linear-gradient(to right, ${props.theme.color.button_bkgr_2} 50%, ${props.theme.color.button_bkgr_1} 50%) !important; /*!important IS IT?*/
+      background-size: 205% 100% !important;
+      transition: all .5s ease-out !important;
       /* NOTE: could not figure out how to add the transition effect properly */
     };
     `);
