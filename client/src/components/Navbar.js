@@ -81,7 +81,7 @@ const NavItemAligner = styled.div`
 
 `;
 
-const TicketCTAButton = styled.button`
+const TicketCTAButton = styled.a`
   ${props => {
     return (`
     width: max-content;
@@ -119,7 +119,6 @@ const TicketCTAButton = styled.button`
     };
     `);
   }}
-
 `;
 
     // Navbar Inner Container
