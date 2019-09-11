@@ -4,21 +4,11 @@ import {
   hero,
   heroInner,
   heroContent,
-  title,
   subtitle,
-  headphones,
-  left,
-  separator,
-  h2,
-  heroCounterWrapper,
-  rs19Logo
 } from "./Hero.css";
 import { Container, Button } from "reactstrap";
-import { REVERSIM_SUMMIT } from "../utils";
 import { Link } from "react-router-dom";
-import CountDown from "./CountDown";
 import logoImg from "../images/SVG/logo.svg";
-import homeBG from "../images/home-reg-bg.png";
 import {
   faMapMarkerAlt,
   faCalendarAlt
