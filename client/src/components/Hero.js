@@ -15,16 +15,27 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
 
 library.add(faMapMarkerAlt, faCalendarAlt);
 
+const StyledSection = styled.section`
+  ${props => {
+    return(`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('../images/home-reg-bg.png') center white; /*NOTE: something wierd here*/
+      background-size: cover;
+      height: 100vh;
+      background-color: ${props.theme.color.background_2}; /* change to theme */
+      border-top: ${2 * props.theme.spaces} solid ${props.theme.color.background_2}; /* change to theme */ 
+    `)
+  }}
+`;
+
 const Hero = ({ eventConfig }) => (
-  <section
-    className={cn(
-      hero,
-      "d-flex justify-content-center align-items-center bg-purple2 navbar-margin"
-    )}
-  >
+  <StyledSection>
     <Container>
       <div
         className={cn(
@@ -76,7 +87,7 @@ const Hero = ({ eventConfig }) => (
     <div>
       <i className="fas fa-angle-down" />
     </div>
-  </section>
+  </StyledSection>
 );
 
 export default Hero;

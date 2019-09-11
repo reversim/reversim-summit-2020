@@ -2,6 +2,7 @@ const theme = {
   // the website's color scheme
   color: {
     background_1: 'rgba(81, 39, 255, 0.9)',
+    background_2: 'rgb(81, 39, 255)',
     background_3: 'rgb(51, 18, 188)',
     text_1: 'rgb(255, 255, 255)',
 
