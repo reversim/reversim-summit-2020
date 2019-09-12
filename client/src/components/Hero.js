@@ -46,6 +46,18 @@ const HeroInner = styled.div`
       @media (min-width: ${props.theme.mq.m}){
         text-align: left !important;
       };
+      
+      @media (max-width:${props.theme.mq.m}) {
+        margin-right: 0;
+      };
+
+      @media (max-width:${props.theme.mq.l}) {
+        margin-right: -80px;
+      };
+
+      @media (max-width:${props.theme.mq.xl}) {
+       flex-direction: column;
+      };
       `)
   }}
 `;
