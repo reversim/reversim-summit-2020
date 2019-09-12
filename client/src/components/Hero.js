@@ -25,11 +25,11 @@ const StyledSection = styled.section`
       display: flex;
       justify-content: center;
       align-items: center;
-      background: url('../images/home-reg-bg.png') center white; /*NOTE: something wierd here*/
+      background: url("../images/home-reg-bg.png") center white; /*NOTE: something wierd here doesn't seem to load image from url*/
       background-size: cover;
       height: 100vh;
-      background-color: ${props.theme.color.background_2}; /* change to theme */
-      border-top: ${2 * props.theme.spaces} solid ${props.theme.color.background_2}; /* change to theme */ 
+      background-color: ${props.theme.color.background_2};
+      border-top: 100px solid ${props.theme.color.background_2};
     `)
   }}
 `;
