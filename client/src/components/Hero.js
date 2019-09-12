@@ -1,9 +1,4 @@
 import React from "react";
-import cn from "classnames";
-import {
-  heroContent,
-  subtitle,
-} from "./Hero.css";
 import { Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import logoImg from "../images/SVG/logo.svg";
@@ -20,6 +15,8 @@ library.add(faMapMarkerAlt, faCalendarAlt);
 
 const StyledSection = styled.section`
   ${props => {
+    const {background_2} = props.theme.color;
+
     return(`
       display: flex;
       justify-content: center;
@@ -27,35 +24,44 @@ const StyledSection = styled.section`
       background: url(${backgroundImg}) center white;
       background-size: cover;
       height: 100vh;
-      background-color: ${props.theme.color.background_2};
-      border-top: 100px solid ${props.theme.color.background_2};
+      background-color: ${background_2};
+      border-top: 100px solid ${background_2};
     `)
   }}
 `;
 
 const HeroInner = styled.div`
   ${props => {
+    const {
+      color,
+      mq: {
+        m,
+        l,
+        xl,
+      }
+    } = props.theme;
+
       return(`
       width: 100%;
       display: flex !important;
       justify-content: center;
       align-items: center !important;
       text-align: center !important;
-      color: ${props.theme.color.text_1} !important;
+      color: ${color.text_1} !important;
 
-      @media (min-width: ${props.theme.mq.m}){
+      @media (min-width: ${m}){
         text-align: left !important;
       };
       
-      @media (max-width:${props.theme.mq.m}) {
+      @media (max-width:${m}) {
         margin-right: 0;
       };
 
-      @media (max-width:${props.theme.mq.l}) {
+      @media (max-width:${l}) {
         margin-right: -80px;
       };
 
-      @media (max-width:${props.theme.mq.xl}) {
+      @media (max-width:${xl}) {
        flex-direction: column;
       };
       `)
@@ -64,25 +70,35 @@ const HeroInner = styled.div`
 
 const HeroContent = styled.div`
   ${props => {
+    const {
+      space,
+      color,
+    } = props.theme;
+
     return (`
       display: flex !important;
       flex-direction: column;
-      margin-bottom: ${props.theme.space.xxl} !important; /* check it */
-      background-color: ${props.theme.color.background_2} !important;
-      box-shadow: 0 0 30px 15px ${props.theme.color.box_shadow_1};
+      margin-bottom: ${space.xxl} !important;
+      background-color: ${color.background_2} !important;
+      box-shadow: 0 0 30px 15px ${color.box_shadow_1};
     `)
   }}
 `;
 
 const RSLogoImg = styled.img`
   ${props => {
+      const {
+        m,
+        xxs,
+      } = props.theme.mq;
+
       return (`
       width: 400px;
-      @media (max-width:${props.theme.mq.m}) {
+      @media (max-width:${m}) {
             width: 350px;
       };
 
-      @media (max-width:${props.theme.mq.xxs}) {
+      @media (max-width:${xxs}) {
             width: 250px;
       };
       `)
