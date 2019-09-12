@@ -7,6 +7,7 @@ import {
 import { Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import logoImg from "../images/SVG/logo.svg";
+import backgroundImg from "../images/home-reg-bg.png"
 import {
   faMapMarkerAlt,
   faCalendarAlt
@@ -23,7 +24,7 @@ const StyledSection = styled.section`
       display: flex;
       justify-content: center;
       align-items: center;
-      background: url("../images/home-reg-bg.png") center white; /*NOTE: something wierd here doesn't seem to load image from url*/
+      background: url(${backgroundImg}) center white;
       background-size: cover;
       height: 100vh;
       background-color: ${props.theme.color.background_2};
