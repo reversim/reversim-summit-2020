@@ -7,7 +7,7 @@ const theme = {
     
     text_1: 'rgb(255, 255, 255)',
 
-    button_bkgr_1: 'rgb(137, 108, 255)',
+    button_bkgr_1: 'rgb(137, 108, 255)', 
     button_bkgr_2: 'rgb(255, 97, 0)',
     
     box_shadow_1: 'rgb(81, 39, 255)',
@@ -18,6 +18,7 @@ const theme = {
     main: 'Source Code Pro, monospace',
     button: 'PT Mono',
     weight_bold: '600',
+    size_reg: '16px',
     size_md: '18px',
   },
   // spaces used for padding and margins

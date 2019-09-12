@@ -10,6 +10,7 @@ import {
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 
 library.add(faMapMarkerAlt, faCalendarAlt);
 
@@ -152,9 +153,8 @@ const ButtonContainer = styled.div`
   
     return (`
     display: flex !important;
-    justify-content: space-between !important;
+    justify-content: space-around !important;
     margin-right: ${space.m} !important;
-    
     
     @media (max-width: ${mq.m}){
       flex-direction: column;
@@ -180,26 +180,22 @@ const Hero = ({ eventConfig }) => (
               TLV Convention center
             </FAIconAligner>
           </Subtitle>
-          <div className="text-align-left">
-            {eventConfig.voting && (
-              <Link to="/proposals" className="unstyled-link">
-                <Button className="styled-button on-purple">
-                  {"VOTE FOR SESSIONS"}
-                </Button>
-              </Link>
-            )}
-          </div>
+
+          {eventConfig.voting && (
+            <ButtonContainer>
+              <ButtonStyledLink href="/proposals">
+                {"VOTE FOR SESSIONS"}
+              </ButtonStyledLink>
+          </ButtonContainer>
+          )}
+
           <ButtonContainer>
-            <a href="https://ti.to/reversim-summit/2019" className="unstyled-link mb-4">
-              <Button className="styled-button on-purple">
+              <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
                 {"Get Tickets"}
-              </Button>
-            </a>
-            <Link to="/agenda" className="unstyled-link mb-4">
-              <Button className="styled-button on-purple">
+              </ButtonStyledLink>
+              <ButtonStyledLink href="/agenda" >
                 {"View Agenda"}
-              </Button>
-            </Link>
+              </ButtonStyledLink>
           </ButtonContainer>
         </HeroContent>
       </HeroInner>
