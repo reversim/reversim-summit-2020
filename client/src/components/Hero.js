@@ -121,6 +121,7 @@ const Subtitle = styled.div`
 
     padding: ${space.m} !important;
     display: flex !important;
+    justify-content: space-between;
     margin-top: ${space.l} !important;
     margin-bottom: ${space.xxl} !important;
 
@@ -131,6 +132,37 @@ const Subtitle = styled.div`
   }}
 `;
 
+const FAIconAligner = styled.div`
+  ${props => {
+    return (`
+    width: max-content;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 ${props.theme.space.m} !important;
+    `)
+  }}
+`;
+
+const ButtonContainer = styled.div`
+  ${props => {
+    const {
+      space,
+      mq,
+    } = props.theme
+  
+    return (`
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-right: ${space.m} !important;
+    
+    
+    @media (max-width: ${mq.m}){
+      flex-direction: column;
+      }
+    `)
+  }};
+`;
+
 const Hero = ({ eventConfig }) => (
   <StyledSection>
     <Container>
@@ -139,14 +171,14 @@ const Hero = ({ eventConfig }) => (
             <RSLogoImg src={logoImg} alt="rs19" />
 
           <Subtitle>
-            <div>
-              <FontAwesomeIcon className="mr-2" icon="calendar-alt" />
+            <FAIconAligner>
+              <FontAwesomeIcon icon="calendar-alt" className="mr-2"/> {/* could not get rid of className and keep style */}
               16-17.6.2019
-            </div>
-            <div className="ml-4">
-              <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
+            </FAIconAligner>
+            <FAIconAligner>
+              <FontAwesomeIcon icon="map-marker-alt" className="mr-2"/> {/* could not get rid of className and keep style */}
               TLV Convention center
-            </div>
+            </FAIconAligner>
           </Subtitle>
           <div className="text-align-left">
             {eventConfig.voting && (
@@ -157,7 +189,7 @@ const Hero = ({ eventConfig }) => (
               </Link>
             )}
           </div>
-          <div className="d-flex justify-content-between mobile-flex-column mx-2">
+          <ButtonContainer>
             <a href="https://ti.to/reversim-summit/2019" className="unstyled-link mb-4">
               <Button className="styled-button on-purple">
                 {"Get Tickets"}
@@ -168,7 +200,7 @@ const Hero = ({ eventConfig }) => (
                 {"View Agenda"}
               </Button>
             </Link>
-          </div>
+          </ButtonContainer>
         </HeroContent>
       </HeroInner>
     </Container>
