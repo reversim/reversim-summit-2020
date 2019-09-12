@@ -167,15 +167,15 @@ const Hero = ({ eventConfig }) => (
     <Container>
       <HeroInner>
         <HeroContent>
-            <RSLogoImg src={logoImg} alt="rs19" />
+          <RSLogoImg src={logoImg} alt="rs19" />
 
           <Subtitle>
             <FAIconAligner>
-              <FontAwesomeIcon icon="calendar-alt" className="mr-2"/> {/* could not get rid of className and keep style */}
+              <FontAwesomeIcon icon="calendar-alt" className="mr-2" /> {/* could not get rid of className and keep style */}
               16-17.6.2019
             </FAIconAligner>
             <FAIconAligner>
-              <FontAwesomeIcon icon="map-marker-alt" className="mr-2"/> {/* could not get rid of className and keep style */}
+              <FontAwesomeIcon icon="map-marker-alt" className="mr-2" /> {/* could not get rid of className and keep style */}
               TLV Convention center
             </FAIconAligner>
           </Subtitle>
@@ -185,16 +185,16 @@ const Hero = ({ eventConfig }) => (
               <ButtonStyledLink href="/proposals">
                 {"VOTE FOR SESSIONS"}
               </ButtonStyledLink>
-          </ButtonContainer>
+            </ButtonContainer>
           )}
 
           <ButtonContainer>
-              <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
-                {"Get Tickets"}
-              </ButtonStyledLink>
-              <ButtonStyledLink href="/agenda" >
-                {"View Agenda"}
-              </ButtonStyledLink>
+            <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
+              {"Get Tickets"}
+            </ButtonStyledLink>
+            <ButtonStyledLink href="/agenda">
+              {"View Agenda"}
+            </ButtonStyledLink>
           </ButtonContainer>
         </HeroContent>
       </HeroInner>
