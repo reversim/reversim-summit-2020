@@ -37,8 +37,8 @@ const HeroInner = styled.div`
   ${props => {
       return(`
       width: 100%;
-      justify-content: center;
       display: flex !important;
+      justify-content: center;
       align-items: center !important;
       text-align: center !important;
       color: ${props.theme.color.text_1} !important;
@@ -50,11 +50,23 @@ const HeroInner = styled.div`
   }}
 `;
 
+const HeroContent = styled.div`
+  ${props => {
+    return (`
+      display: flex !important;
+      flex-direction: column;
+      margin-bottom: ${props.theme.space.xxl} !important; /* check it */
+      background-color: ${props.theme.color.background_2} !important;
+      box-shadow: 0 0 30px 15px ${props.theme.color.box_shadow_1};
+    `)
+  }}
+`;
+
 const Hero = ({ eventConfig }) => (
   <StyledSection>
     <Container>
       <HeroInner>
-        <div className={cn("d-flex flex-column my-8 bg-purple2", heroContent)}>
+        <HeroContent>
           {/*<div className='d-flex'>*/}
           <div className="rs19Logo">
             <img src={logoImg} alt="rs19" />
@@ -92,7 +104,7 @@ const Hero = ({ eventConfig }) => (
               </Button>
             </Link>
           </div>
-        </div>
+        </HeroContent>
       </HeroInner>
     </Container>
     <div>
