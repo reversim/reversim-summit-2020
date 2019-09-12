@@ -34,15 +34,23 @@ const StyledSection = styled.section`
   }}
 `;
 
+const HeroInner = styled.div`
+  width: 100%;
+  justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  text-align: center !important;
+  color: white !important; /*change to theme */
+
+  @media (min-width: 768px){
+    text-align: left !important;
+  } /*change to theme */
+`;
+
 const Hero = ({ eventConfig }) => (
   <StyledSection>
     <Container>
-      <div
-        className={cn(
-          heroInner,
-          "d-flex align-items-center text-center text-md-left text-white"
-        )}
-      >
+      <HeroInner>
         <div className={cn("d-flex flex-column my-8 bg-purple2", heroContent)}>
           {/*<div className='d-flex'>*/}
           <div className="rs19Logo">
@@ -82,7 +90,7 @@ const Hero = ({ eventConfig }) => (
             </Link>
           </div>
         </div>
-      </div>
+      </HeroInner>
     </Container>
     <div>
       <i className="fas fa-angle-down" />
