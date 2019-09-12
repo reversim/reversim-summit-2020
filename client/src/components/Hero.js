@@ -1,8 +1,6 @@
 import React from "react";
 import cn from "classnames";
 import {
-  hero,
-  heroInner,
   heroContent,
   subtitle,
 } from "./Hero.css";
@@ -35,16 +33,20 @@ const StyledSection = styled.section`
 `;
 
 const HeroInner = styled.div`
-  width: 100%;
-  justify-content: center;
-  display: flex !important;
-  align-items: center !important;
-  text-align: center !important;
-  color: white !important; /*change to theme */
+  ${props => {
+      return(`
+      width: 100%;
+      justify-content: center;
+      display: flex !important;
+      align-items: center !important;
+      text-align: center !important;
+      color: ${props.theme.color.text_1} !important;
 
-  @media (min-width: 768px){
-    text-align: left !important;
-  } /*change to theme */
+      @media (min-width: ${props.theme.mq.m}){
+        text-align: left !important;
+      };
+      `)
+  }}
 `;
 
 const Hero = ({ eventConfig }) => (
