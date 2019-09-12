@@ -200,9 +200,6 @@ const Hero = ({ eventConfig }) => (
         </HeroContent>
       </HeroInner>
     </Container>
-    <div>
-      <i className="fas fa-angle-down" />
-    </div>
   </StyledSection>
 );
 
