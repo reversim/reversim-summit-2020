@@ -1,6 +1,5 @@
 import React from "react";
-import { Container, Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Container } from "reactstrap";
 import logoImg from "../images/SVG/logo.svg";
 import backgroundImg from "../images/home-reg-bg.png"
 import {
