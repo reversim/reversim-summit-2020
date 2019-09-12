@@ -89,6 +89,31 @@ const RSLogoImg = styled.img`
   }}
 `;
 
+const Subtitle = styled.div`
+  ${props => {
+    const {
+      font,
+      space,
+      mq,
+    } = props.theme;
+
+    return (`
+    letter-spacing: 0.6px;
+    font-size: ${font.size_md};
+    font-weight: 400;
+    background-color: #451deb;
+
+    padding: ${space.m} !important;
+    display: flex !important;
+    margin-top: ${space.l} !important;
+    margin-bottom: ${space.xxl} !important;
+
+    @media (max-width:${mq.m}) {
+      flex-direction: column;
+    }
+    `);
+  }}
+`;
 
 const Hero = ({ eventConfig }) => (
   <StyledSection>
@@ -97,7 +122,7 @@ const Hero = ({ eventConfig }) => (
         <HeroContent>
             <RSLogoImg src={logoImg} alt="rs19" />
 
-          <div className={cn(subtitle, "p-2 d-flex mt-4 mb-8")}>
+          <Subtitle>
             <div>
               <FontAwesomeIcon className="mr-2" icon="calendar-alt" />
               16-17.6.2019
@@ -106,7 +131,7 @@ const Hero = ({ eventConfig }) => (
               <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
               TLV Convention center
             </div>
-          </div>
+          </Subtitle>
           <div className="text-align-left">
             {eventConfig.voting && (
               <Link to="/proposals" className="unstyled-link">
