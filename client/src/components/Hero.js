@@ -67,12 +67,10 @@ const Hero = ({ eventConfig }) => (
     <Container>
       <HeroInner>
         <HeroContent>
-          {/*<div className='d-flex'>*/}
           <div className="rs19Logo">
             <img src={logoImg} alt="rs19" />
           </div>
 
-          {/*<div className={cn(left, 'text-white')}>*/}
           <div className={cn(subtitle, "p-2 d-flex mt-4 mb-8")}>
             <div>
               <FontAwesomeIcon className="mr-2" icon="calendar-alt" />
