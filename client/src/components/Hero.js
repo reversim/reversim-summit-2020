@@ -74,14 +74,28 @@ const HeroContent = styled.div`
   }}
 `;
 
+const RSLogoImg = styled.img`
+  ${props => {
+      return (`
+      width: 400px;
+      @media (max-width:${props.theme.mq.m}) {
+            width: 350px;
+      };
+
+      @media (max-width:${props.theme.mq.xxs}) {
+            width: 250px;
+      };
+      `)
+  }}
+`;
+
+
 const Hero = ({ eventConfig }) => (
   <StyledSection>
     <Container>
       <HeroInner>
         <HeroContent>
-          <div className="rs19Logo">
-            <img src={logoImg} alt="rs19" />
-          </div>
+            <RSLogoImg src={logoImg} alt="rs19" />
 
           <div className={cn(subtitle, "p-2 d-flex mt-4 mb-8")}>
             <div>

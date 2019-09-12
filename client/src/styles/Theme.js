@@ -34,6 +34,7 @@ const theme = {
   },
   // media queries parameters
   mq: {
+    xxs: '360px',
     xs: '480px',
     m: '768px',
     l: '992px',
