@@ -13,12 +13,13 @@ const Footer = styled.footer`
     const {
       space,
       color,
+      font,
     } = props.theme;
 
     return (`
       padding: ${space.xxl};
       background-color: ${color.background_3};
-      font-family: Source Code Pro, monospace;
+      font-family: ${font.main};
     `)
   }};
 `;
