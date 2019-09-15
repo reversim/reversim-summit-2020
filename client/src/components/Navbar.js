@@ -30,7 +30,7 @@ import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 // styled-components section
 const NavbarContainer = styled.div`
   nav  {
-    padding: 25px 30px;
+  padding: ${props => props.theme.space. xl};
     ${props => {
       if(props.isColored){
         return (
