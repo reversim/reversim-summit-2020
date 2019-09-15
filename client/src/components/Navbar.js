@@ -96,60 +96,6 @@ const NavItemAligner = styled.div`
 
 `;
 
-// const TicketCTAButton = styled.a`
-//   ${props => {
-//     return (`
-//     width: max-content;
-//     height: 40px;
-//     display: inline-block;
-//     text-align: center;
-//     vertical-align: middle;
-//     user-select: none; /*CONSIDER DELETING*/
-//     padding: 0 20px 0.75rem 20px;
-//     line-height: 2.25;
-//     letter-spacing: 1px;
-    
-//     color: ${props.theme.color.text_1};
-//     border: solid 2px ${props.theme.color.text_1} !important;
-//     box-shadow: -2px 2px ${props.theme.color.box_shadow_1}, -4px 4px ${props.theme.color.box_shadow_2} !important;
-//     background-color: ${props.theme.color.button_bkgr_1};
-//     /* background-size: 205% 100% !important; IT DOES NOT SEEM TO AFFECT MUCH*/
-    
-//     outline: none;
-//     border-radius: 0;
-
-//     font-family: 'PT Mono' !important;
-//     font-weight: bold !important;
-//     font-size: 16px;
-//     outline: none;
-
-//     &:hover{ 
-//       text-decoration: none;
-//       color: ${props.theme.color.text_1};
-
-//       background: right bottom linear-gradient(to right, ${props.theme.color.button_bkgr_2} 50%, ${props.theme.color.button_bkgr_1} 50%) !important; /*!important IS IT?*/
-//       background-size: 205% 100% !important;
-//       transition: all .5s ease-out !important;
-//       /* NOTE: could not figure out how to add the transition effect properly */
-//     };
-//     `);
-//   }}
-// `;
-
-    // Navbar Inner Container
-    // Reactstrap's container had also a behavioral aspect which led to a better UI.. We need to decied on that.
-// const NavInnerContainer = styled.div`
-    
-//     width: 100%;
-//     display: flex;
-//     flex-wrap: nowrap;
-//     align-items: center;
-//     justify-content: space-between;
-//     padding: 0 ${props => props.theme.space.l};
-//     margin-right: auto;
-//     margin-left: auto;
-//     `
-
 // React.js componenets section
 
 const GetTicketsCTA = () => (
