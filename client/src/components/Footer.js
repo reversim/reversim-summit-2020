@@ -10,70 +10,96 @@ library.add(faFacebook, faTwitter, faEnvelope);
 
 const Footer = styled.footer`
   ${props => {
+    const {
+      space,
+      color,
+    } = props.theme;
+
     return (`
-      padding: ${props.theme.space.xxl};
-      background-color: ${props.theme.color.background_3};
+      padding: ${space.xxl};
+      background-color: ${color.background_3};
       font-family: Source Code Pro, monospace;
     `)
   }};
 `;
 
 const List = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  ${props => {
+    return(`
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
 
-  @media (max-width: ${props => props.theme.mq.xl}) {
-    min-height: 300px;
-    flex-direction: column;
-    justify-content: space-evenly;
-  };
+      @media (max-width: ${props.theme.mq.xl}) {
+        min-height: 300px;
+        flex-direction: column;
+        justify-content: space-evenly;
+      };    
+    `)
+  }}
+  
 `;
 
 const ListItem = styled.li`
   ${props => {
+    const {
+      color,
+      mq,
+      space,
+    } = props.theme;
+
     return (`
     width: 20%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    color: ${props.theme.color.text_1};
-    @media (max-width: ${props.theme.mq.xl}) {
+    color: ${color.text_1};
+    @media (max-width: ${mq.xl}) {
       display: flex;
       width: 100%;
-      min-height: ${props.theme.space.xxl};
+      min-height: ${space.xxl};
       flex-direction: column;
       justify-content: space-between;
-      margin: 0 ${props.theme.space.l};
+      margin: 0 ${space.l};
     };
-    @media (max-width: ${props.theme.mq.m}) {
+    @media (max-width: ${mq.m}) {
       width: 100%;
       justify-content: space-between;
-      margin: ${props.theme.space.xl} 0;
+      margin: ${space.xl} 0;
     };
     `);
   }}
 `;
 
 const FontAwsomeContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 30%;
-  @media (max-width: ${props => props.theme.mq.xl}) {
-    width: 30%;
-  }
+  ${props => {
+    return (`
+      display: flex;
+      justify-content: space-between;
+      width: 30%;
+      @media (max-width: ${props.theme.mq.xl}) {
+        width: 30%;
+      }
+    `)
+  }}
 `;
 
 const Link = styled.a`
   ${props => {
+    const {
+      color: {
+        text_1,
+      },
+    } = props.theme;
+
     return (`
-    color: ${props.theme.color.text_1};
+    color: ${text_1};
     font-size: 1rem;
     cursor: pointer;
     &:hover {
       text-decoration: none;
-      color: ${props.theme.color.text_1};
+      color: ${text_1};
     };
     `);
   }}
