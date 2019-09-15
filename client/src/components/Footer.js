@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Container} from './GlobalStyledComponents/Container';
+import {Container} from './GlobalStyledComponents/ReversimStyledComps';
 import {faEnvelope, faEnvelopeSquare} from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core';
