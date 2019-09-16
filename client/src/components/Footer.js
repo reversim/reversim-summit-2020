@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Container} from './GlobalStyledComponents/Container';
+import {Container} from './GlobalStyledComponents/ReversimStyledComps';
 import {faEnvelope, faEnvelopeSquare} from '@fortawesome/free-solid-svg-icons';
 import {faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core';
@@ -9,67 +9,106 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 library.add(faFacebook, faTwitter, faEnvelope);
 
 const Footer = styled.footer`
-  padding: ${props => props.theme.space.xxl};
-  background-color: ${props => props.theme.color.background_3};
-  font-family: Source Code Pro, monospace;
+  ${props => {
+    const {
+      space,
+      color,
+      font,
+    } = props.theme;
+
+    return (`
+      padding: ${space.xxl};
+      background-color: ${color.background_3};
+      font-family: ${font.main};
+    `)
+  }};
 `;
 
 const List = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  ${props => {
+    return(`
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
 
-  @media (max-width: ${props => props.theme.mq.tablet_landscape}) {
-    min-height: 300px;
-    flex-direction: column;
-    justify-content: space-evenly;
-  };
+      @media (max-width: ${props.theme.mq.xl}) {
+        min-height: 300px;
+        flex-direction: column;
+        justify-content: space-evenly;
+      };    
+    `)
+  }}
+  
 `;
 
 const ListItem = styled.li`
-  width: 20%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  color: ${props => props.theme.color.text_1};
-  @media (max-width: ${props => props.theme.mq.tablet_landscape}) {
+  ${props => {
+    const {
+      color,
+      mq,
+      space,
+    } = props.theme;
+
+    return (`
+    width: 20%;
     display: flex;
-    width: 100%;
-    min-height: ${props => props.theme.space.xxl};
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 0 ${props => props.theme.space.l};
-  };
-  @media (max-width: ${props => props.theme.mq.tablet}) {
-    width: 100%;
-    justify-content: space-between;
-    margin: ${props => props.theme.space.xl} 0;
-  };
+    flex-direction: row;
+    justify-content: space-around;
+    color: ${color.text_1};
+    @media (max-width: ${mq.xl}) {
+      display: flex;
+      width: 100%;
+      min-height: ${space.xxl};
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 0 ${space.l};
+    };
+    @media (max-width: ${mq.m}) {
+      width: 100%;
+      justify-content: space-between;
+      margin: ${space.xl} 0;
+    };
+    `);
+  }}
 `;
 
 const FontAwsomeContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 30%;
-  @media (max-width: ${props => props.theme.mq.tablet_landscape}) {
-    width: 30%;
-  }
+  ${props => {
+    return (`
+      display: flex;
+      justify-content: space-between;
+      width: 30%;
+      @media (max-width: ${props.theme.mq.xl}) {
+        width: 30%;
+      }
+    `)
+  }}
 `;
 
 const Link = styled.a`
-  color: ${props => props.theme.color.text_1};
-  font-size: 1rem;
-  cursor: pointer;
-  &:hover {
-    text-decoration: none;
-    color: ${props => props.theme.textColor1};
-  }
+  ${props => {
+    const {
+      color: {
+        text_1,
+      },
+    } = props.theme;
+
+    return (`
+    color: ${text_1};
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+      color: ${text_1};
+    };
+    `);
+  }}
 `;
 
 const FooterContainer = () => (
-<Footer>
-  <Container>
+  <Footer>
+    <Container>
       <List>
         <ListItem>
           <h6>Contact us:</h6>
@@ -115,8 +154,8 @@ const FooterContainer = () => (
           <h6>All Rights Reserved © 2020</h6>
         </ListItem>
       </List>
-  </Container>
-</Footer>
+    </Container>
+  </Footer>
 );
 
 export default FooterContainer;

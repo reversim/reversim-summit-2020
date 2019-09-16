@@ -1,23 +1,18 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
-  // Container,
-  Navbar as BootstrapNavbar,
+  Container as ReactstrapContainer,
+  Navbar as ReactstrapNavbar,
   Collapse,
   NavbarToggler,
-  Nav,
-  NavItem,
-  Button
+  Nav
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
 import cn from 'classnames';
 import {
-  navbar,
   logo,
   navLink,
-  isWhite,
-  isNotHome,
   newTag,
   newLink,
   navbarOpen
@@ -30,52 +25,97 @@ import { getLoginUrl } from "./Redirect";
 import newImg from '../images/new-nav-tag.png';
 import LinkDuo from './LinkDuo';
 import styled from 'styled-components';
-import theme from '../styles/Theme';
+import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components section
 const NavbarContainer = styled.div`
   nav  {
-    padding: 25px 30px;
+  padding: ${props => props.theme.space. xl};
     ${props => {
       if(props.isColored){
         return (
-          'background: rgba(81, 39, 255, 0.9); \n transition: background 0.3s;'
+          `background: ${props.theme.color.background_1};
+           transition: background 0.3s;`
           )
         };
       }
     };
   };
 `;
-    // Navbar Inner Container
-const Container = styled.div`
-    
-    /* .container */
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;`
+
+const MainAligner = styled.div`
+ width: 100%;
+ display: flex;
+ justify-content: space-between;
+`;
+
+const NavItemAligner = styled.div`
+ ${props => {
+  const {
+    space,
+    mq,
+  } = props.theme;
+
+   return (`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: ${space.l};
+    padding-left: 0;
+    margin-left: auto;
+    margin-bottom: 0;
+    list-style: none;
+    @media (min-width: ${mq.l}){
+      flex-direction: row;
+      padding: 0;
+    };
+   `);
+ }};
+
+`;
+
+const NavLI = styled.li`
+  ${props => {
+    const {
+      font,
+      color,
+      mq,
+      space,
+    } = props.theme;
+
+    return (`
+      width: max-content;
+      font-family: ${font.main};
+      font-size: ${font.size_md};
+      color: ${color.text_1};
+      font-weight: ${font.weight_bold};
+        @media (min-width: ${mq.l}){
+          margin-left: ${space.xl};
+        }
+    `)
+  }}  
+`;
 
 // React.js componenets section
 
 const GetTicketsCTA = () => (
-  <a href="https://ti.to/reversim-summit/2019" className="unstyled-link">
-    <Button className="styled-button on-purple w-max-content">
+    <ButtonStyledLink
+    href="https://ti.to/reversim-summit/2019">
       Get Tickets
-    </Button>
-  </a>
+    </ButtonStyledLink>
+  
 );
 
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   const isNew = to === 'sponsors'
   return (
-    <li key={to} className="text-white ml-lg-5 font-weight-bold font-size-md">
+    <NavLI key={to}>
       <LinkDuo className={cn(navLinkClass, isNew? newLink: '')} to={to} external={!!external}>
         {isNew && <img className={newTag} src={newImg}/>}
         {text}
       </LinkDuo>
-    </li>
+    </NavLI>
   );
 };
 
@@ -141,68 +181,71 @@ class Navbar extends Component {
 
     return (
       <NavbarContainer isColored={isColored}>
-        <BootstrapNavbar
+        <ReactstrapNavbar
           expand="lg"
           fixed="top"
         >
-          <Container>
-            <div className="d-flex justify-content-between w-100">
+          <ReactstrapContainer>
+            <MainAligner>
               {navbarBrand}
               <NavbarToggler onClick={this.toggle} className="ml-auto" />
-            </div>
+            </MainAligner>
             <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav
-              navbar
-              className={cn('ml-auto align-items-end p-3 p-lg-0', navbarOpen)}
-              >
-                {!isSmallScreen && (
-                  <li> <GetTicketsCTA /> </li>
-                )}
-                {cfp && isSmallScreen && pathname !== '/cfp' && (
-                  <NavbarItem 
-                    text="Submit session" 
-                    to="cfp"
-                  />
-                )}
-                {voting && isSmallScreen && pathname !== '/my-votes' && (
-                  <NavbarItem 
-                    text="VOTE FOR SESSION" 
-                    to="proposals"
-                  />
-                )}
-                {items.map(item => (
-                  <NavbarItem 
-                    key={`navbar-i-${item.to}`}
-                    pathname={pathname}
-                    {...item} 
-                  />
-                ))}
-                { voting && (
-                  <NavbarItem
-                    key={`navbar-i-proposals`}
-                    pathname={pathname}
-                    {...{to: 'proposals', text: 'Proposals'}}
-                  />
-                )}
-                {isSmallScreen && user}
-                {!user && (
-                  <NavbarItem
-                    to={getLoginUrl()}
-                    text="Login"
-                    external={true}
-                  />
-                )}
-                {!isServer && isSmallScreen && user && (
-                  <li>
-                    <div className="ml-5">
-                      {<Avatar {...user} onLogout={onLogout} />}
-                    </div>
-                  </li>
-                )}
-              </Nav>
+              <NavItemAligner>
+                <Nav
+                  navbar
+                  className={navbarOpen ? 'navbarOpen': ''}
+                  >
+                  {!isSmallScreen && (
+                    <NavLI> <GetTicketsCTA /> </NavLI>
+                  )}
+                  {cfp && isSmallScreen && pathname !== '/cfp' && (
+                    <NavbarItem 
+                      text="Submit session" 
+                      to="cfp"
+                    />
+                  )}
+                  {voting && isSmallScreen && pathname !== '/my-votes' && (
+                    <NavbarItem 
+                      text="VOTE FOR SESSION" 
+                      to="proposals"
+                    />
+                  )}
+                  {items.map(item => (
+                    <NavbarItem 
+                      key={`navbar-i-${item.to}`}
+                      pathname={pathname}
+                      {...item} 
+                    />
+                  ))}
+                  { voting && (
+                    <NavbarItem
+                      key={`navbar-i-proposals`}
+                      pathname={pathname}
+                      {...{to: 'proposals', text: 'Proposals'}}
+                    />
+                  )}
+                  {isSmallScreen && user}
+                  {!user && (
+                    <NavbarItem
+                      to={getLoginUrl()}
+                      text="Login"
+                      external={true}
+                    />
+                  )}
+                  {!isServer && isSmallScreen && user && (
+                    <li>
+                      <div className="ml-5">
+                        {<Avatar {...user} onLogout={onLogout} />}
+                      </div>
+                    </li>
+                  )}
+                </Nav>
+              </NavItemAligner>
+
             </Collapse>
-          </Container>
-        </BootstrapNavbar>
+          </ReactstrapContainer>
+        </ReactstrapNavbar>
       </NavbarContainer>
       
     );
