@@ -3,10 +3,10 @@
 import React from "react";
 import pick from "lodash/pick";
 import s from "./Sponsors.css";
-import { Button, Input, Row, Col, Container } from "reactstrap";
+import { Button, Input, Container } from "reactstrap";
 import Page from "./Page";
 import ReactMarkdown from "react-markdown";
-import { REVERSIM_SUMMIT, hyperlink, loadScript } from "../utils";
+import { REVERSIM_SUMMIT, hyperlink, loadScript } from "../utils";  //check if REVERSIM_SUMMIT can be deleted
 import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -14,11 +14,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import diamond from "../images/SVG/diamond.svg";
-import circle from "../images/SVG/circle.svg";
+import circle from "../images/SVG/circle.svg"; //check if REVERSIM_SUMMIT can be deleted
 import { img } from "./Speaker2.css";
 import {image} from '../images';
 import CommunitySponsor from './CommunitySponsor'
-import { isWhite } from "./Navbar.css";
+import { isWhite } from "./Navbar.css"; //check if REVERSIM_SUMMIT can be deleted
 library.add(faPencilAlt, faTrash);
 const COLLAPSED_MAX_CHARS = 110;
 
@@ -341,19 +341,19 @@ export const SponsorsSection = ({ sponsors }) => {
               })}
           </div>
           <div className="hl mt-6 mb-12 bg-purple2" />
-          <div className={cn("d-flex flex-wrap mt-6", s.communitySponsorsHome)}>
-            {/*{sponsors
+          <div className={cn("d-flex flex-wrap mt-6", s.communitySponsorsHome)}> {/* NOTE: This is not shown when screen width is under 992px */}
+            {/* {sponsors
               .filter(sponsor => !sponsor.isPremium)
               .map((sponsor, i) => {
                 return (
                   <div key={i}>
-                    <SponsorMini key={sponsor._id} {...sponsor} />
+                    <SponsorMini key={sponsor._id} {...sponsor} /> /* NOTE: SponsorMini is not defined. check if It could and should be imported from anywhere.
                   </div>
                 );
-              })}*/}
+              })} */}
             <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
           </div>
-          {/* <WantToBe /> */}
+          {/* <WantToBe /> */} {/* NOTE: DO NOT DELETE but consider changing color since it's white on white */}
         </div>
       </Container>
     </section>
