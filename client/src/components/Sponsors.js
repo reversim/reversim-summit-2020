@@ -6,7 +6,7 @@ import s from "./Sponsors.css";
 import { Button, Input, Container } from "reactstrap";
 import Page from "./Page";
 import ReactMarkdown from "react-markdown";
-import { REVERSIM_SUMMIT, hyperlink, loadScript } from "../utils";  //check if REVERSIM_SUMMIT can be deleted
+import { hyperlink, loadScript } from "../utils";
 import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -14,11 +14,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import diamond from "../images/SVG/diamond.svg";
-import circle from "../images/SVG/circle.svg"; //check if REVERSIM_SUMMIT can be deleted
 import { img } from "./Speaker2.css";
 import {image} from '../images';
-import CommunitySponsor from './CommunitySponsor'
-import { isWhite } from "./Navbar.css"; //check if REVERSIM_SUMMIT can be deleted
+import CommunitySponsor from './CommunitySponsor';
 library.add(faPencilAlt, faTrash);
 const COLLAPSED_MAX_CHARS = 110;
 
