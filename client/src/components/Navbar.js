@@ -62,10 +62,10 @@ const NavLI = styled.li`
       width: max-content;
       font-family: ${font.main};
       font-size: ${font.size_md};
-      color: ${color.text_1} !important;
-      font-weight: ${font.weight_bold} !important;
+      color: ${color.text_1};
+      font-weight: ${font.weight_bold};
         @media (min-width: ${mq.l}){
-          margin-left: ${space.xl} !important;
+          margin-left: ${space.xl};
         }
     `)
   }}  
@@ -81,15 +81,15 @@ const NavItemAligner = styled.div`
    return (`
     display: flex;
     flex-direction: column;
-    align-items: flex-end !important;
-    padding: ${space.l} !important;
+    align-items: flex-end;
+    padding: ${space.l};
     padding-left: 0;
-    margin-left: auto !important;
+    margin-left: auto;
     margin-bottom: 0;
     list-style: none;
     @media (min-width: ${mq.l}){
       flex-direction: row;
-      padding: 0 !important;
+      padding: 0;
     };
    `);
  }};
