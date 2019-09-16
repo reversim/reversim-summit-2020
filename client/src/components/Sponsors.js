@@ -48,6 +48,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     </div>
   );
 };
+
 const CommunitySponsors = ({
   sponsors,
   user,
