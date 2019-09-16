@@ -49,28 +49,6 @@ const MainAligner = styled.div`
  justify-content: space-between;
 `;
 
-const NavLI = styled.li`
-  ${props => {
-    const {
-      font,
-      color,
-      mq,
-      space,
-    } = props.theme;
-
-    return (`
-      width: max-content;
-      font-family: ${font.main};
-      font-size: ${font.size_md};
-      color: ${color.text_1};
-      font-weight: ${font.weight_bold};
-        @media (min-width: ${mq.l}){
-          margin-left: ${space.xl};
-        }
-    `)
-  }}  
-`;
-
 const NavItemAligner = styled.div`
  ${props => {
   const {
@@ -94,6 +72,28 @@ const NavItemAligner = styled.div`
    `);
  }};
 
+`;
+
+const NavLI = styled.li`
+  ${props => {
+    const {
+      font,
+      color,
+      mq,
+      space,
+    } = props.theme;
+
+    return (`
+      width: max-content;
+      font-family: ${font.main};
+      font-size: ${font.size_md};
+      color: ${color.text_1};
+      font-weight: ${font.weight_bold};
+        @media (min-width: ${mq.l}){
+          margin-left: ${space.xl};
+        }
+    `)
+  }}  
 `;
 
 // React.js componenets section
