@@ -61,40 +61,42 @@ const BreakLine = styled.hr`
 `;
 
 const SponsorsSection = ({ sponsors }) => {
-return (
-        <SponserSectionContainter>
-            <HeadingAlinger>
-              <Heading>Meet Our Sponsors</Heading>
-              <BreakLine />
-            </HeadingAlinger>
-          <div className="">
-            <div className="home-sponsors d-flex flex-wrap">
-              {sponsors
-                .filter(sponsor => sponsor.isPremium)
-                .map((sponsor, i) => {
-                  return (
-                    <div key={i}>
-                        <SponsorMiniPremium key={sponsor._id} isOnWhite={true} {...sponsor} />
-                    </div>
-                  );
-                })}
+  return (
+    <SponserSectionContainter>
+      <HeadingAlinger>
+        <Heading>Meet Our Sponsors</Heading>
+          <BreakLine />
+      </HeadingAlinger>
+      <div className="">  {/*this contains both Homes Sponsers and Community Sponsers */}
+        <div className="home-sponsors d-flex flex-wrap"> {/*Homes Sponsers */}
+          {sponsors
+          .filter(sponsor => sponsor.isPremium)
+          .map((sponsor, i) => {
+          return (
+            <div key={i}>
+              <SponsorMiniPremium key={sponsor._id} isOnWhite={true} {...sponsor} />
             </div>
-            <div className="hl mt-6 mb-12 bg-purple2" />
-              <div className={cn("d-flex flex-wrap mt-6", s.communitySponsorsHome)}> {/* NOTE: This is not shown when screen width is under 992px */}
-                {/* {sponsors
+            );
+          })}
+        </div>
+        <div className="hl mt-6 mb-12 bg-purple2" />
+        
+        <div className={cn("d-flex flex-wrap mt-6", s.communitySponsorsHome)}> {/* NOTE: This is not shown when screen width is under 992px 
+        It has a class="home-sponsors d-flex flex-wrap mobile-flex-column" and the mobile-flex-colum is set for max-width: 768px */}
+          {/* {sponsors
                 .filter(sponsor => !sponsor.isPremium)
                 .map((sponsor, i) => {
-                    return (
-                    <div key={i}>
-                        <SponsorMini key={sponsor._id} {...sponsor} /> /* NOTE: SponsorMini is not defined. check if It could and should be imported from anywhere.
-                    </div>
-                    );
-                })} */}
-                <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
-              </div>
-              {/* <WantToBe /> */} {/* NOTE: DO NOT DELETE but consider changing color since it's white on white */}
-            </div>
-        </SponserSectionContainter>
+                  return (
+                  <div key={i}>
+                      <SponsorMini key={sponsor._id} {...sponsor} /> /* NOTE: SponsorMini is not defined. check if It could and should be imported from anywhere.
+                  </div>
+                 );
+          })} */}
+          <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
+        </div>
+            {/* <WantToBe /> */} {/* NOTE: DO NOT DELETE but consider changing color since it's white on white */}
+      </div>
+    </SponserSectionContainter>
 );
 };
 
