@@ -83,18 +83,8 @@ const SponsorsSection = ({ sponsors }) => {
         
         <div className={cn("d-flex flex-wrap mt-6", s.communitySponsorsHome)}> {/* NOTE: This is not shown when screen width is under 992px 
         It has a class="home-sponsors d-flex flex-wrap mobile-flex-column" and the mobile-flex-colum is set for max-width: 768px */}
-          {/* {sponsors
-                .filter(sponsor => !sponsor.isPremium)
-                .map((sponsor, i) => {
-                  return (
-                  <div key={i}>
-                      <SponsorMini key={sponsor._id} {...sponsor} /> /* NOTE: SponsorMini is not defined. check if It could and should be imported from anywhere.
-                  </div>
-                 );
-          })} */}
           <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
         </div>
-            {/* <WantToBe /> */} {/* NOTE: DO NOT DELETE but consider changing color since it's white on white */}
       </div>
     </SponserSectionContainter>
 );
