@@ -83,7 +83,7 @@ export const BreakLine = styled.hr`
         flex-grow: 1;
         align-self: center;
         margin-left: ${space.m};
-        border-top: 1px solid ${color.background_2};
+        border-top: 1.5px solid ${color.background_2};
         
       `)
   }}

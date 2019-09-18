@@ -11,7 +11,6 @@ import {
 const SponserSectionContainter = styled(Container)`
   margin-top: 80px;
   margin-bottom: 100px; 
-  /* Consider theming somehow */
 `;
 
 const HeadingAlinger = styled.div`
@@ -69,8 +68,8 @@ const CommunitySponsorsHome = styled.div`
           display: flex;
           justify-content: space-between;
           flex-wrap: wrap;
-          margin-top: ${space.xl} !important;
-          @media (max-width: ${mq.m}) {
+          margin-top: ${space.xl};
+          @media (max-width: ${mq.l}) {
             justify-content: space-around;
           }
         `)
@@ -84,23 +83,23 @@ const SponsorsSection = ({ sponsors }) => {
         <Heading>Meet Our Sponsors</Heading>
           <BreakLine />
       </HeadingAlinger>
-      <div className="">
+      
         <HomeSponsors>
           {sponsors
-          .filter(sponsor => sponsor.isPremium)
-          .map((sponsor, i) => {
-          return (
-            <div key={i}>
-              <SponsorMiniPremium key={sponsor._id} isOnWhite={true} {...sponsor} />
-            </div>
-            );
+            .filter(sponsor => sponsor.isPremium)
+            .map((sponsor, i) => {
+              return (
+                <div key={i}>
+                  <SponsorMiniPremium key={sponsor._id} isOnWhite={true} {...sponsor} />
+                </div>
+                );
           })}
         </HomeSponsors>
         <BreakLine /> 
-        <CommunitySponsorsHome> {/* NOTE: This is not shown when screen width is under 992px */}
+        <CommunitySponsorsHome> {/* NOTE: This is not shown when screen width is under 992px couldn't figure out why */}
           <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
         </CommunitySponsorsHome>
-      </div>
+      
     </SponserSectionContainter>
 );
 };
