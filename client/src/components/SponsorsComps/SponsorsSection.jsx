@@ -1,13 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-import s from "../Sponsors.css";
-// import { Container } from "reactstrap";
 import HomeCommunitySponsors from "../HomeCommunitySponsors";
-import cn from "classnames";
 import { SponsorMiniPremium } from '../Sponsors';
 import styled from 'styled-components';
-import { Container } from '../GlobalStyledComponents/ReversimStyledComps'
-import { cpus } from "os";
+import {
+  Container,
+  BreakLine,
+} from '../GlobalStyledComponents/ReversimStyledComps'
 
 const SponserSectionContainter = styled(Container)`
   margin-top: 80px;
@@ -41,23 +40,6 @@ const Heading = styled.h2`
         font-family: ${font.main};
         font-size: ${font.size_h2};
         color: ${color.heading_2};
-      `)
-  }}
-`;
-
-const BreakLine = styled.hr`
-  ${props => {
-      const {
-      color,
-      space,
-      } = props.theme;
-      
-      return(`
-        flex-grow: 1;
-        align-self: center;
-        margin-left: ${space.m};
-        border-top: 1px solid ${color.background_2};
-        
       `)
   }}
 `;

@@ -71,3 +71,20 @@ export const ButtonStyledLink = styled.a`
   }};
 
 `;
+
+export const BreakLine = styled.hr`
+  ${props => {
+      const {
+      color,
+      space,
+      } = props.theme;
+      
+      return(`
+        flex-grow: 1;
+        align-self: center;
+        margin-left: ${space.m};
+        border-top: 1px solid ${color.background_2};
+        
+      `)
+  }}
+`;
