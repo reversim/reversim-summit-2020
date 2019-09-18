@@ -6,6 +6,7 @@ const theme = {
     background_3: 'rgb(51, 18, 188)',
     
     text_1: 'rgb(255, 255, 255)',
+    heading_2: 'rgb(81, 39, 255)',
 
     button_bkgr_1: 'rgb(137, 108, 255)', 
     button_bkgr_2: 'rgb(255, 97, 0)',
@@ -20,6 +21,7 @@ const theme = {
     weight_bold: '600',
     size_reg: '16px',
     size_md: '18px',
+    size_h2: `48px`,
   },
   // spaces used for padding and margins
   space: {

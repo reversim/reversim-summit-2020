@@ -1,24 +1,72 @@
 import React from "react";
 import s from "../Sponsors.css";
-import { Container } from "reactstrap";
+// import { Container } from "reactstrap";
 import HomeCommunitySponsors from "../HomeCommunitySponsors";
 import cn from "classnames";
 import { SponsorMiniPremium } from '../Sponsors';
+import styled from 'styled-components';
+import { Container } from '../GlobalStyledComponents/ReversimStyledComps'
 
+const SponserSectionContainter = styled(Container)`
+  margin-top: 80px;
+  margin-bottom: 100px; 
+  /* Consider theming somehow */
+`;
+
+const HeadingAlinger = styled.div`
+  ${props => {
+      return(`
+        width: 100%;
+        display: flex;
+        align-items: baseline;
+        margin-bottom: ${props.theme.space.xxl};
+      `)
+    }}
+  `;
+
+const Heading = styled.h2`
+  ${props => {
+      const {
+        color,
+        font,
+      } = props.theme;
+      
+      return(`
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        font-family: ${font.main};
+        font-size: ${font.size_h2};
+        color: ${color.heading_2};
+      `)
+  }}
+`;
+
+const BreakLine = styled.hr`
+  ${props => {
+      const {
+      color,
+      space,
+      } = props.theme;
+      
+      return(`
+        flex-grow: 1;
+        height: 2px;
+        align-self: center;
+        margin-left: ${space.m};
+        background-color: ${color.background_2};
+      `)
+  }}
+
+`;
 
 const SponsorsSection = ({ sponsors }) => {
 return (
-    <section className="mb-20">
-        <Container>
-          <div className="d-flex mt-16 mb-12">
-            <div
-              style={{ position: "relative", zIndex: 1 }}
-              className="text-purple2 font-size-xxl text-align-center"
-            >
-                Meet Our Sponsors
-            </div>
-            <div className="hl bg-purple2" />
-          </div>
+        <SponserSectionContainter>
+            <HeadingAlinger>
+              <Heading>Meet Our Sponsors</Heading>
+              <BreakLine />
+            </HeadingAlinger>
           <div className="">
             <div className="home-sponsors d-flex flex-wrap">
               {sponsors
@@ -46,8 +94,7 @@ return (
               </div>
               {/* <WantToBe /> */} {/* NOTE: DO NOT DELETE but consider changing color since it's white on white */}
             </div>
-        </Container>
-    </section>
+        </SponserSectionContainter>
 );
 };
 
