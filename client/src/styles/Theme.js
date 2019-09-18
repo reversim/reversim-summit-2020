@@ -18,6 +18,7 @@ const theme = {
   font: {
     main: 'Source Code Pro, monospace',
     button: 'PT Mono',
+    weight_normal: '300',
     weight_bold: '600',
     size_reg: '16px',
     size_md: '18px',
