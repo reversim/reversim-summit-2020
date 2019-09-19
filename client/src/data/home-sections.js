@@ -4,7 +4,7 @@ import Hero from '../components/Hero';
 // import Register from '../components/Register';
 import SpeakersSection from '../components/SpeakersSection';
 import Location from '../components/Location';
-import SponsorsSection from '../components/SponsorsComps/SponsorsSection';
+import SponsorsSection from '../components/SponsorsComps/HomePageSponsorsSection';
 // import TimelineSection from '../components/TimelineSection';
 
 const homeSections = [
