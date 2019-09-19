@@ -4,7 +4,7 @@ import HomeCommunitySponsors from "../HomeCommunitySponsors";
 
 import s from "../Sponsors.css";
 import { Link } from "react-router-dom";
-import { Button, Container } from "reactstrap";
+import { Button } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
