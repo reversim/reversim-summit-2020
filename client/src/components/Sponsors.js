@@ -7,7 +7,6 @@ import { Button, Input, Container } from "reactstrap";
 import Page from "./Page";
 import ReactMarkdown from "react-markdown";
 import { hyperlink, loadScript } from "../utils";
-import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
