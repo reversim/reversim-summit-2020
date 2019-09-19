@@ -15,7 +15,7 @@ import diamond from "../images/SVG/diamond.svg";
 import { img } from "./Speaker2.css";
 import {image} from '../images';
 import CommunitySponsor from './CommunitySponsor';
-import { SponsorMiniPremium } from './SponsorsComps/HomePageSponsorsSection';
+import { SponsorMiniPremium } from './SponsorsComps/SponserGeneralComps';
 
 library.add(faPencilAlt, faTrash);
 
