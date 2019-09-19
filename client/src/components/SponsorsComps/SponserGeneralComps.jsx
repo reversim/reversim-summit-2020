@@ -13,11 +13,52 @@ import styled from 'styled-components';
 import {
   Container,
   BreakLine,
+  ButtonStyledLink,
 } from '../GlobalStyledComponents/ReversimStyledComps'
 import {image} from '../../images';
 
 library.add(faPencilAlt, faTrash);
 
+const SponsorItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: ${props => props.theme.space.xxl};
+`;
+
+const ImageContainer= styled.a`
+  ${props => {
+    const{
+      color,
+      space,
+    } = props.theme;
+
+    return(`
+      width: 248px;
+      height: 230px;
+      max-width: 248px;
+
+      position: relative;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      margin-bottom: ${space.m};
+
+      color: inherit;      
+      border: 4px solid ${color.box_shadow_1};
+      background: ${color.image_link_bkgr};
+      text-decoration: none;
+      cursor: pointer;
+    `)
+  }}
+`;
+
+const SMPLinkingButton = styled(ButtonStyledLink)`
+  &:hover{
+    color: ${props => props.theme.color.text_1};
+  }
+`;
 
 export class SponsorMiniPremium extends React.Component {
   state = {
@@ -49,26 +90,22 @@ export class SponsorMiniPremium extends React.Component {
             </Button>
           </span>
         )}
-        <div className="d-flex flex-column align-items-center mb-10">
-          <div
-            className="p-relative text-center white-bg mb-2 d-flex justify-content-center align-items-center b-strong cursor-pointer"
-            style={{ width: 248, height: 230, maxWidth: 248 }}
-          >
-            <Link to={`/sponsor/${name}`} className="unstyled-link">
+        {/* Will need to create a Styled-Buttom for the above section */}
+
+        <SponsorItem>
+            <ImageContainer href={`/sponsor/${name}`}>
               <img
                 src={image(logo, 350, 150)}
                 className={s.sponsorImg}
                 alt={name}
                 style={{ maxWidth: 240, maxHeight: 240 }}
               />
-            </Link>
-          </div>
-          <Link to={`/sponsor/${name}`} className="unstyled-link">
-            <Button className={cn('styled-button w-max-content', !isOnWhite && 'on-purple')}>
+            </ImageContainer>
+            <SMPLinkingButton href={`/sponsor/${name}`}>
               Explore Opportunities
-            </Button>
-          </Link>
-        </div>
+            </SMPLinkingButton>
+
+        </SponsorItem>
       </div>
     );
   }

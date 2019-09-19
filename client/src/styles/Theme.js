@@ -10,6 +10,7 @@ const theme = {
 
     button_bkgr_1: 'rgb(137, 108, 255)', 
     button_bkgr_2: 'rgb(255, 97, 0)',
+    image_link_bkgr: 'rgb(255, 255, 255)',
     
     box_shadow_1: 'rgb(81, 39, 255)',
     box_shadow_2: 'rgb(255, 255, 255)',
