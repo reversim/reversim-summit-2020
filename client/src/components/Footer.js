@@ -10,10 +10,16 @@ library.add(faFacebook, faTwitter, faEnvelope);
 
 const Footer = styled.footer`
   ${props => {
+     const {
+      space,
+      color,
+      font
+    } = props.theme;
+
     return (`
-      padding: ${props.theme.space.xxl};
-      background-color: ${props.theme.color.background_3};
-      font-family: Source Code Pro, monospace;
+      padding: ${space.xxl};
+      background-color: ${color.background_3};
+      font-family: ${font.main};
     `)
   }};
 `;
@@ -38,7 +44,9 @@ const ListItem = styled.li`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    
     color: ${props.theme.color.text_1};
+
     @media (max-width: ${props.theme.mq.xl}) {
       display: flex;
       width: 100%;
@@ -47,6 +55,7 @@ const ListItem = styled.li`
       justify-content: space-between;
       margin: 0 ${props.theme.space.l};
     };
+
     @media (max-width: ${props.theme.mq.m}) {
       width: 100%;
       justify-content: space-between;
