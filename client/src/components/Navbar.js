@@ -49,6 +49,20 @@ const MainAligner = styled.div`
  justify-content: space-between;
 `;
 
+
+const NavLI = styled.li`
+  ${props => {
+    return (`
+      font-size: ${props.theme.font.size_md};
+      color: ${props.theme.color.text_1};
+      font-weight: ${props.theme.font.weight_bold};
+      @media (min-width: ${props.theme.mq.l}){
+        margin-left: ${props.theme.space.xl};
+      }
+    `)
+  }}  
+`;
+
 const NavItemAligner = styled.div`
  ${props => {
   const {
@@ -89,9 +103,9 @@ const NavLI = styled.li`
       font-size: ${font.size_md};
       color: ${color.text_1};
       font-weight: ${font.weight_bold};
-        @media (min-width: ${mq.l}){
-          margin-left: ${space.xl};
-        }
+      @media (min-width: ${mq.l}){
+        margin-left: ${space.xl};
+      }
     `)
   }}  
 `;

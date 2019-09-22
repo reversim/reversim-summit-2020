@@ -55,7 +55,9 @@ const ListItem = styled.li`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+
     color: ${color.text_1};
+    
     @media (max-width: ${mq.xl}) {
       display: flex;
       width: 100%;
@@ -64,6 +66,7 @@ const ListItem = styled.li`
       justify-content: space-between;
       margin: 0 ${space.l};
     };
+
     @media (max-width: ${mq.m}) {
       width: 100%;
       justify-content: space-between;

@@ -1,92 +1,209 @@
 import React from "react";
-import cn from "classnames";
-import {
-  hero,
-  heroInner,
-  heroContent,
-  title,
-  subtitle,
-  headphones,
-  left,
-  separator,
-  h2,
-  heroCounterWrapper,
-  rs19Logo
-} from "./Hero.css";
-import { Container, Button } from "reactstrap";
-import { REVERSIM_SUMMIT } from "../utils";
-import { Link } from "react-router-dom";
-import CountDown from "./CountDown";
+import { Container } from "reactstrap";
 import logoImg from "../images/SVG/logo.svg";
-import homeBG from "../images/home-reg-bg.png";
+import backgroundImg from "../images/home-reg-bg.png"
 import {
   faMapMarkerAlt,
   faCalendarAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
+import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 
 library.add(faMapMarkerAlt, faCalendarAlt);
 
-const Hero = ({ eventConfig }) => (
-  <section
-    className={cn(
-      hero,
-      "d-flex justify-content-center align-items-center bg-purple2 navbar-margin"
-    )}
-  >
-    <Container>
-      <div
-        className={cn(
-          heroInner,
-          "d-flex align-items-center text-center text-md-left text-white"
-        )}
-      >
-        <div className={cn("d-flex flex-column my-8 bg-purple2", heroContent)}>
-          {/*<div className='d-flex'>*/}
-          <div className="rs19Logo">
-            <img src={logoImg} alt="rs19" />
-          </div>
+const StyledSection = styled.section`
+  ${props => {
+    const {background_2} = props.theme.color;
 
-          {/*<div className={cn(left, 'text-white')}>*/}
-          <div className={cn(subtitle, "p-2 d-flex mt-4 mb-8")}>
-            <div>
-              <FontAwesomeIcon className="mr-2" icon="calendar-alt" />
+    return(`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url(${backgroundImg}) center white;
+      background-size: cover;
+      height: 100vh;
+      background-color: ${background_2};
+      border-top: 100px solid ${background_2};
+    `)
+  }}
+`;
+
+const HeroInner = styled.div`
+  ${props => {
+    const {
+      color,
+      mq: {
+        m,
+        l,
+        xl,
+      }
+    } = props.theme;
+
+      return(`
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: ${color.text_1};
+
+      @media (min-width: ${m}){
+        text-align: left;
+      };
+      
+      @media (max-width:${m}) {
+        margin-right: 0;
+      };
+
+      @media (max-width:${l}) {
+        margin-right: -80px;
+      };
+
+      @media (max-width:${xl}) {
+       flex-direction: column;
+      };
+      `)
+  }}
+`;
+
+const HeroContent = styled.div`
+  ${props => {
+    const {
+      space,
+      color,
+    } = props.theme;
+
+    return (`
+      display: flex !important;
+      flex-direction: column;
+      margin-bottom: ${space.xxl} !important;
+      background-color: ${color.background_2} !important;
+      box-shadow: 0 0 30px 15px ${color.box_shadow_1};
+    `)
+  }}
+`;
+
+const LogoImg = styled.img`
+  ${props => {
+      const {
+        m,
+        xxs,
+      } = props.theme.mq;
+
+      return (`
+      width: 400px;
+      @media (max-width:${m}) {
+            width: 350px;
+      };
+
+      @media (max-width:${xxs}) {
+            width: 250px;
+      };
+      `)
+  }}
+`;
+
+const Subtitle = styled.div`
+  ${props => {
+    const {
+      font,
+      space,
+      mq,
+    } = props.theme;
+
+    return (`
+    letter-spacing: 0.6px;
+    font-size: ${font.size_md};
+    font-weight: 400;
+    background-color: #451deb;
+
+    padding: ${space.m} !important;
+    display: flex !important;
+    justify-content: space-between;
+    margin-top: ${space.l} !important;
+    margin-bottom: ${space.xxl} !important;
+
+    @media (max-width:${mq.m}) {
+      flex-direction: column;
+    }
+    `);
+  }}
+`;
+
+const IconAligner = styled.div`
+  ${props => {
+    return (`
+    width: max-content;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 ${props.theme.space.m} !important;
+
+    svg {
+    margin-right: 10px
+    }
+    `)
+  }}
+`;
+
+const ButtonContainer = styled.div`
+  ${props => {
+    const {
+      space,
+      mq,
+    } = props.theme
+  
+    return (`
+    display: flex !important;
+    justify-content: space-around !important;
+    margin-right: ${space.m} !important;
+    
+    @media (max-width: ${mq.m}){
+      flex-direction: column;
+      }
+    `)
+  }};
+`;
+
+const Hero = ({ eventConfig }) => (
+  <StyledSection>
+    <Container>
+      <HeroInner>
+        <HeroContent>
+          <LogoImg src={logoImg} alt="rs19" />
+
+          <Subtitle>
+            <IconAligner>
+              <FontAwesomeIcon icon="calendar-alt" />
               16-17.6.2019
-            </div>
-            <div className="ml-4">
-              <FontAwesomeIcon className="mr-2" icon="map-marker-alt" />
+            </IconAligner>
+            <IconAligner>
+              <FontAwesomeIcon icon="map-marker-alt" />
               TLV Convention center
-            </div>
-          </div>
-          <div className="text-align-left">
-            {eventConfig.voting && (
-              <Link to="/proposals" className="unstyled-link">
-                <Button className="styled-button on-purple">
-                  {"VOTE FOR SESSIONS"}
-                </Button>
-              </Link>
-            )}
-          </div>
-          <div className="d-flex justify-content-between mobile-flex-column mx-2">
-            <a href="https://ti.to/reversim-summit/2019" className="unstyled-link mb-4">
-              <Button className="styled-button on-purple">
-                {"Get Tickets"}
-              </Button>
-            </a>
-            <Link to="/agenda" className="unstyled-link mb-4">
-              <Button className="styled-button on-purple">
-                {"View Agenda"}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </div>
+            </IconAligner>
+          </Subtitle>
+
+          {eventConfig.voting && (
+            <ButtonContainer>
+              <ButtonStyledLink href="/proposals">
+                {"VOTE FOR SESSIONS"}
+              </ButtonStyledLink>
+            </ButtonContainer>
+          )}
+
+          <ButtonContainer>
+            <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
+              {"Get Tickets"}
+            </ButtonStyledLink>
+            <ButtonStyledLink href="/agenda">
+              {"View Agenda"}
+            </ButtonStyledLink>
+          </ButtonContainer>
+        </HeroContent>
+      </HeroInner>
     </Container>
-    <div>
-      <i className="fas fa-angle-down" />
-    </div>
-  </section>
+  </StyledSection>
 );
 
 export default Hero;
