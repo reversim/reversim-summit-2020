@@ -52,11 +52,11 @@ const NavLI = styled.li`
   ${props => {
     return (`
       font-size: ${props.theme.font.size_md};
-      color: ${props.theme.color.text_1} !important;
-      font-weight: ${props.theme.font.weight_bold} !important;
-        @media (min-width: ${props.theme.mq.l}){
-          margin-left: ${props.theme.space.xl} !important;
-        }
+      color: ${props.theme.color.text_1};
+      font-weight: ${props.theme.font.weight_bold};
+      @media (min-width: ${props.theme.mq.l}){
+        margin-left: ${props.theme.space.xl};
+      }
     `)
   }}  
 `;
@@ -66,15 +66,14 @@ const NavItemAligner = styled.div`
    return (`
     display: flex;
     flex-direction: column;
-    align-items: flex-end !important;
-    padding: ${props.theme.space.l} !important;
-    padding-left: 0;
-    margin-left: auto !important;
+    align-items: flex-end;
+    padding: ${props.theme.space.l};
+    margin-left: auto;
     margin-bottom: 0;
     list-style: none;
     @media (min-width: ${props.theme.mq.l}){
       flex-direction: row;
-      padding: 0 !important;
+      padding: 0;
     };
    `);
  }};
@@ -89,7 +88,7 @@ const TicketCTAButton = styled.a`
     display: inline-block;
     text-align: center;
     vertical-align: middle;
-    user-select: none; /*CONSIDER DELETING*/
+    user-select: none;
     padding: 0 20px 0.75rem 20px;
     line-height: 2.25;
     letter-spacing: 1px;
