@@ -35,8 +35,8 @@ const theme = {
   },
   // media queries parameters
   mq: {
-    xxs: '360px',
-    xs: '480px',
+    xs: '360px',
+    s: '480px',
     m: '768px',
     l: '992px',
     xl: '1200px',

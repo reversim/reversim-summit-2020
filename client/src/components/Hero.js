@@ -43,14 +43,14 @@ const HeroInner = styled.div`
 
       return(`
       width: 100%;
-      display: flex !important;
+      display: flex;
       justify-content: center;
-      align-items: center !important;
-      text-align: center !important;
-      color: ${color.text_1} !important;
+      align-items: center;
+      text-align: center;
+      color: ${color.text_1};
 
       @media (min-width: ${m}){
-        text-align: left !important;
+        text-align: left;
       };
       
       @media (max-width:${m}) {
@@ -85,7 +85,7 @@ const HeroContent = styled.div`
   }}
 `;
 
-const RSLogoImg = styled.img`
+const LogoImg = styled.img`
   ${props => {
       const {
         m,
@@ -132,13 +132,17 @@ const Subtitle = styled.div`
   }}
 `;
 
-const FAIconAligner = styled.div`
+const IconAligner = styled.div`
   ${props => {
     return (`
     width: max-content;
     display: flex;
     justify-content: space-between;
     margin: 0 ${props.theme.space.m} !important;
+
+    svg {
+    margin-right: 10px
+    }
     `)
   }}
 `;
@@ -167,17 +171,17 @@ const Hero = ({ eventConfig }) => (
     <Container>
       <HeroInner>
         <HeroContent>
-          <RSLogoImg src={logoImg} alt="rs19" />
+          <LogoImg src={logoImg} alt="rs19" />
 
           <Subtitle>
-            <FAIconAligner>
-              <FontAwesomeIcon icon="calendar-alt" className="mr-2" /> {/* could not get rid of className and keep style */}
+            <IconAligner>
+              <FontAwesomeIcon icon="calendar-alt" />
               16-17.6.2019
-            </FAIconAligner>
-            <FAIconAligner>
-              <FontAwesomeIcon icon="map-marker-alt" className="mr-2" /> {/* could not get rid of className and keep style */}
+            </IconAligner>
+            <IconAligner>
+              <FontAwesomeIcon icon="map-marker-alt" />
               TLV Convention center
-            </FAIconAligner>
+            </IconAligner>
           </Subtitle>
 
           {eventConfig.voting && (
