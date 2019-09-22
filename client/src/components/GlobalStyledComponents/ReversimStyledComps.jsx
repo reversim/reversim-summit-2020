@@ -40,6 +40,7 @@ export const Container = styled.div`
 export const ButtonStyledLink = styled.a`
   ${props => {
     const {
+
       color,
       font,
       space,
@@ -52,6 +53,7 @@ export const ButtonStyledLink = styled.a`
       background-size: 205% 100%;
       border: solid 2px ${color.box_shadow_2};
       box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
+
       transition: all .5s ease-out;
       margin-bottom: ${space.xl};
       padding: ${space.m};
