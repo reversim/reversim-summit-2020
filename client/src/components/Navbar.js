@@ -33,10 +33,10 @@ const NavbarContainer = styled.div`
   padding: ${props => props.theme.space. xl};
     ${props => {
       if(props.isColored){
-        return (
-          `background: ${props.theme.color.background_1};
-           transition: background 0.3s;`
-          )
+        return (`
+          background: ${props.theme.color.background_1};
+          transition: background 0.3s;
+          `)
         };
       }
     };
@@ -49,28 +49,8 @@ const MainAligner = styled.div`
  justify-content: space-between;
 `;
 
-
-const NavLI = styled.li`
-  ${props => {
-    return (`
-      font-size: ${props.theme.font.size_md};
-      color: ${props.theme.color.text_1};
-      font-weight: ${props.theme.font.weight_bold};
-      @media (min-width: ${props.theme.mq.l}){
-        margin-left: ${props.theme.space.xl};
-      }
-    `)
-  }}  
-`;
-
 const NavItemAligner = styled.div`
- ${props => {
-  const {
-    space,
-    mq,
-  } = props.theme;
-
-   return (`
+ ${({theme: { space, mq, } }) =>` 
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -79,35 +59,27 @@ const NavItemAligner = styled.div`
     margin-left: auto;
     margin-bottom: 0;
     list-style: none;
+
     @media (min-width: ${mq.l}){
       flex-direction: row;
       padding: 0;
     };
-   `);
- }};
-
+   `};
 `;
 
 const NavLI = styled.li`
-  ${props => {
-    const {
-      font,
-      color,
-      mq,
-      space,
-    } = props.theme;
-
-    return (`
+  ${ ({ theme: {font, color, mq, space,} }) => `
       width: max-content;
       font-family: ${font.main};
       font-size: ${font.size_md};
       color: ${color.text_1};
       font-weight: ${font.weight_bold};
+      
       @media (min-width: ${mq.l}){
         margin-left: ${space.xl};
       }
-    `)
-  }}  
+    `
+  } 
 `;
 
 // React.js componenets section
