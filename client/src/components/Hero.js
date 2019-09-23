@@ -14,34 +14,20 @@ import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 library.add(faMapMarkerAlt, faCalendarAlt);
 
 const StyledSection = styled.section`
-  ${props => {
-    const {background_2} = props.theme.color;
-
-    return(`
+  ${ ({ theme: { color } }) =>`
       display: flex;
       justify-content: center;
       align-items: center;
       background: url(${backgroundImg}) center white;
       background-size: cover;
       height: 100vh;
-      background-color: ${background_2};
-      border-top: 100px solid ${background_2};
-    `)
-  }}
+      background-color: ${color.background_2};
+      border-top: 100px solid ${color.background_2};
+    `}
 `;
 
 const HeroInner = styled.div`
-  ${props => {
-    const {
-      color,
-      mq: {
-        m,
-        l,
-        xl,
-      }
-    } = props.theme;
-
-      return(`
+  ${ ({ theme: { color, mq, }}) =>`
       width: 100%;
       display: flex;
       justify-content: center;
@@ -49,71 +35,49 @@ const HeroInner = styled.div`
       text-align: center;
       color: ${color.text_1};
 
-      @media (min-width: ${m}){
+      @media (min-width: ${mq.m}){
         text-align: left;
       };
       
-      @media (max-width:${m}) {
+      @media (max-width:${mq.m}) {
         margin-right: 0;
       };
 
-      @media (max-width:${l}) {
+      @media (max-width:${mq.l}) {
         margin-right: -80px;
       };
 
-      @media (max-width:${xl}) {
+      @media (max-width:${mq.xl}) {
        flex-direction: column;
       };
-      `)
-  }}
+      `}
 `;
 
 const HeroContent = styled.div`
-  ${props => {
-    const {
-      space,
-      color,
-    } = props.theme;
-
-    return (`
+  ${ ({ theme: { space, color, } }) =>`
       display: flex !important;
       flex-direction: column;
       margin-bottom: ${space.xxl} !important;
       background-color: ${color.background_2} !important;
       box-shadow: 0 0 30px 15px ${color.box_shadow_1};
-    `)
-  }}
+    `}
 `;
 
 const LogoImg = styled.img`
-  ${props => {
-      const {
-        m,
-        xxs,
-      } = props.theme.mq;
-
-      return (`
+  ${ ({ theme: { mq } }) =>`
       width: 400px;
-      @media (max-width:${m}) {
+      @media (max-width:${mq.m}) {
             width: 350px;
       };
 
-      @media (max-width:${xxs}) {
+      @media (max-width:${mq.xxs}) {
             width: 250px;
       };
-      `)
-  }}
+      `}
 `;
 
 const Subtitle = styled.div`
-  ${props => {
-    const {
-      font,
-      space,
-      mq,
-    } = props.theme;
-
-    return (`
+  ${ ({ theme: { font, space, mq } }) =>`
     letter-spacing: 0.6px;
     font-size: ${font.size_md};
     font-weight: 400;
@@ -128,33 +92,24 @@ const Subtitle = styled.div`
     @media (max-width:${mq.m}) {
       flex-direction: column;
     }
-    `);
-  }}
+    `};
 `;
 
 const IconAligner = styled.div`
-  ${props => {
-    return (`
+  ${ ({ theme: { space } }) =>`
     width: max-content;
     display: flex;
     justify-content: space-between;
-    margin: 0 ${props.theme.space.m} !important;
+    margin: 0 ${space.m} !important;
 
     svg {
     margin-right: 10px
     }
-    `)
-  }}
+    `};
 `;
 
 const ButtonContainer = styled.div`
-  ${props => {
-    const {
-      space,
-      mq,
-    } = props.theme
-  
-    return (`
+  ${ ({ theme: { space, mq, } }) => `
     display: flex !important;
     justify-content: space-around !important;
     margin-right: ${space.m} !important;
@@ -162,8 +117,7 @@ const ButtonContainer = styled.div`
     @media (max-width: ${mq.m}){
       flex-direction: column;
       }
-    `)
-  }};
+    `};
 `;
 
 const Hero = ({ eventConfig }) => (
