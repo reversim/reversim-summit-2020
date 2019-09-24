@@ -8,6 +8,7 @@ import {
 } from '../GlobalStyledComponents/ReversimStyledComps'
 import { SponsorMiniPremium } from './SponserGeneralComps';
 
+// Styled-components section
 
 const SponserSectionContainter = styled(Container)`
   margin-top: 80px;
@@ -15,24 +16,16 @@ const SponserSectionContainter = styled(Container)`
 `;
 
 const HeadingAlinger = styled.div`
-  ${props => {
-      return(`
-        width: 100%;
-        display: flex;
-        align-items: baseline;
-        margin-bottom: ${props.theme.space.xxl};
-      `)
-    }}
-  `;
+  ${ ( { theme: { space } } ) => `
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: ${space.xxl};
+  `}
+`;
 
 const Heading = styled.h2`
-  ${props => {
-      const {
-        color,
-        font,
-      } = props.theme;
-      
-      return(`
+  ${ ( { theme: { color, font } } ) => `
         position: relative;
         z-index: 1;
         text-align: center;
@@ -40,42 +33,34 @@ const Heading = styled.h2`
         font-family: ${font.main};
         font-size: ${font.size_h2};
         color: ${color.heading_2};
-      `)
-  }}
+      `}
 `;
 
 const HomeSponsors = styled.div`
-  ${props => {
-        return(`
-          display: flex;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          
-          @media (max-width: ${props.theme.mq.l}) {
-            justify-content: space-around;
-          }
-        `)
-    }}
+  ${ ( { theme: { mq } } ) => `
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      
+      @media (max-width: ${mq.l}) {
+        justify-content: space-around;
+      }
+    `}
 `;
 
 const CommunitySponsorsHome = styled.div`
-  ${props => {
-        const {
-          space,
-          mq,
-        } = props.theme;
-        
-        return(`
-          display: flex;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          margin-top: ${space.xl};
-          @media (max-width: ${mq.l}) {
-            justify-content: space-around;
-          }
-        `)
-    }}
+${ ( { theme: { space, mq } } ) =>`
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: ${space.xl};
+      @media (max-width: ${mq.l}) {
+        justify-content: space-around;
+      }
+    `}
 `;
+
+// React components section
 
 const SponsorsSection = ({ sponsors }) => {
   return (
