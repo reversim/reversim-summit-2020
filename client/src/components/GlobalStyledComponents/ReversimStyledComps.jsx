@@ -60,6 +60,5 @@ export const BreakLine = styled.hr`
       align-self: center;
       margin-left: ${space.m};
       border-top: 1.5px solid ${color.background_2};
-      
     `}
 `;
