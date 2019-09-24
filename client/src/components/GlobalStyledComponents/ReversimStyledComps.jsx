@@ -1,13 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  ${props => {
-    const {
-      mq,
-      space,
-    } = props.theme;
-
-    return (`
+  ${ ({ theme: { mq, space } }) =>`
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -32,21 +26,11 @@ export const Container = styled.div`
       @media (min-width: ${mq.xl}) {
         max-width: 1280px;
       };    
-    `)
-  }}
-
+    `}
 `
 
 export const ButtonStyledLink = styled.a`
-  ${props => {
-    const {
-
-      color,
-      font,
-      space,
-    } = props.theme;
-
-    return (`
+  ${ ({ theme: { color, font, space } }) =>`
       color: ${color.text_1};
       height: 40px;
       background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
@@ -67,24 +51,15 @@ export const ButtonStyledLink = styled.a`
         text-decoration: none;
         color: inherit;
       }
-    `)
-  }};
-
+    `};
 `;
 
 export const BreakLine = styled.hr`
-  ${props => {
-      const {
-      color,
-      space,
-      } = props.theme;
+  ${ ({ theme: { color, space } }) =>`
+      flex-grow: 1;
+      align-self: center;
+      margin-left: ${space.m};
+      border-top: 1.5px solid ${color.background_2};
       
-      return(`
-        flex-grow: 1;
-        align-self: center;
-        margin-left: ${space.m};
-        border-top: 1.5px solid ${color.background_2};
-        
-      `)
-  }}
+    `}
 `;
