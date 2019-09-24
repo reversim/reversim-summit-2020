@@ -19,6 +19,9 @@ import {image} from '../../images';
 
 library.add(faPencilAlt, faTrash);
 
+
+//styled-components section
+
 const SponsorItem = styled.div`
 ${( { theme: { space } } ) =>`
   display: flex;
@@ -96,6 +99,8 @@ border-color: #003acc;
     text-decoration: none;
   }
 `;
+
+//React components section
 
 export class SponsorMiniPremium extends React.Component {
   state = {
