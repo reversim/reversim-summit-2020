@@ -20,20 +20,16 @@ import {image} from '../../images';
 library.add(faPencilAlt, faTrash);
 
 const SponsorItem = styled.div`
+${( { theme: { space } } ) =>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: ${props => props.theme.space.xxl};
+  margin-bottom: ${space.xxl};
+`}
 `;
 
 const ImageContainer= styled.a`
-  ${props => {
-    const{
-      color,
-      space,
-    } = props.theme;
-
-    return(`
+  ${( { theme: { color, space } } ) => `
       width: 248px;
       height: 230px;
       max-width: 248px;
@@ -50,8 +46,7 @@ const ImageContainer= styled.a`
       background: ${color.image_link_bkgr};
       text-decoration: none;
       cursor: pointer;
-    `)
-  }}
+    `}
 `;
 
 const SMPLinkingButton = styled(ButtonStyledLink)`
