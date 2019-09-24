@@ -49,6 +49,19 @@ const ImageContainer= styled.a`
       background: ${color.image_link_bkgr};
       text-decoration: none;
       cursor: pointer;
+      transition: opacity 300ms linear;
+      
+      &:hover{
+        opacity: 0.5;
+      }
+    `}
+`;
+
+const SponsorImg = styled.img`
+    ${ ({ theme: { space } }) => `
+      max-height: 240px;
+      max-width: 240px;
+      padding: ${space.s};
     `}
 `;
 
@@ -58,46 +71,36 @@ const SMPLinkingButton = styled(ButtonStyledLink)`
   }
 `;
 
-const PencilButton = styled.button`
--webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+const FAButtonContainer = styled.div`
+  display: flex;
+`
 
-box-sizing: border-box;
-margin: 0;
-overflow: visible;
-text-transform: none;
--webkit-appearance: button;
-display: inline-block;
-  /* text-align: center; */
-  /* vertical-align: middle; */
-  user-select: none;
-  padding: 0.25rem 0.5rem;
-  /* line-height: 1.5; */
-  margin-left: 10px;
-  cursor: pointer;
-  /* font-family: Montserrat, sans-serif; */
-  font-size: 16px;
-  /* font-weight: 500; */
-  /* letter-spacing: 1px; */
-  outline: none;
-  border: 0;
-  transition: all 200ms;
-  border-radius: 0;
+const FAButton = styled.button`
+${ ({ theme: { color } }) => `
+  width: 50%;
   height: 40px;
-  /* padding-top: 0;
-  padding-bottom: 0; If both are deleted result is the same */
-text-decoration: none;
-  color: #fff;
-border-color: #003acc;
-  background: linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.2) 100%);
-  /* box-shadow: inset 0px 0px 10px 2px rgba(0, 238, 255, 0.2), 0px 0px 10px 0px rgba(89, 0, 255, 0.8); */
+  
+  display: flex;
+  justify-content: center;
+  
+  user-select: none;
+  cursor: pointer;
+  
+  color: ${color.text_1};
+  text-decoration: none;
+  background: linear-gradient(to right, ${color.font_awsome_background_1} 0%, ${color.font_awsome_background_2} 100%);
+  border: 0;
+  border-radius: 0;
+  border-color: ${color.font_awsome_border};
+  transition: all 200ms;
+  
   &:hover{
-    background: linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%);
-    box-shadow: inset 0px 0px 10px 2px rgba(0, 238, 255, 0.2), 0px 0px 10px 0px rgba(89, 0, 255, 0.8);
-    color: #fff;
-    background-color: #003dd9;
-    /* border-color: #003acc; */
+    color: ${color.text_1};
     text-decoration: none;
+    background: linear-gradient(to right, ${color.font_awsome_background_1} 0%, ${color.font_awsome_background_2} 100%);
+    box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_1}, 0px 0px 10px 0px ${color.font_awsome_box_shadow_2};
   }
+`}
 `;
 
 //React components section
@@ -117,33 +120,26 @@ export class SponsorMiniPremium extends React.Component {
 
     return (
       <div>
-        <span>
-            <PencilButton 
+        {onEdit && (
+          <FAButtonContainer>
+            <FAButton 
               onClick={onEdit}
             >
               <FontAwesomeIcon icon={faPencilAlt} />
-            </PencilButton>
-            <Button
-              size="sm"
-              color="danger"
-              className="ml-2"
+            </FAButton>
+            <FAButton
               onClick={onDelete}
             >
               <FontAwesomeIcon icon={faTrash} />
-            </Button>
-          </span>
-        {/* {onEdit && (
-          
-        )} */}
-        {/* Will need to create a Styled-Buttom for the above section */}
+            </FAButton>
+          </FAButtonContainer>
+        )}
 
         <SponsorItem>
             <ImageContainer href={`/sponsor/${name}`}>
-              <img
+              <SponsorImg
                 src={image(logo, 350, 150)}
-                className={s.sponsorImg}
                 alt={name}
-                style={{ maxWidth: 240, maxHeight: 240 }}
               />
             </ImageContainer>
             <SMPLinkingButton href={`/sponsor/${name}`}>

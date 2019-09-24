@@ -4,16 +4,22 @@ const theme = {
     background_1: 'rgba(81, 39, 255, 0.9)',
     background_2: 'rgb(81, 39, 255)',
     background_3: 'rgb(51, 18, 188)',
-    
+    font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
+    font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,
+
     text_1: 'rgb(255, 255, 255)',
     heading_2: 'rgb(81, 39, 255)',
 
-    button_bkgr_1: 'rgb(137, 108, 255)', 
+    button_bkgr_1: 'rgb(137, 108, 255)',
     button_bkgr_2: 'rgb(255, 97, 0)',
     image_link_bkgr: 'rgb(255, 255, 255)',
     
+    font_awsome_border: `rgb(0, 58, 204)`,
+
     box_shadow_1: 'rgb(81, 39, 255)',
     box_shadow_2: 'rgb(255, 255, 255)',
+    font_awsome_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
+    font_awsome_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
   },
   // the website's fonts
   font: {
