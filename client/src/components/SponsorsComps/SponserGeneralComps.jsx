@@ -1,24 +1,13 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-
-import s from "../Sponsors.css";
-import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
-import cn from "classnames";
-
 import styled from 'styled-components';
-import {
-  Container,
-  BreakLine,
-  ButtonStyledLink,
-} from '../GlobalStyledComponents/ReversimStyledComps'
+import { ButtonStyledLink } from '../GlobalStyledComponents/ReversimStyledComps'
 import {image} from '../../images';
 
 library.add(faPencilAlt, faTrash);
-
 
 //styled-components section
 
