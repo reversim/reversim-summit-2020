@@ -56,6 +56,7 @@ export const ButtonStyledLink = styled.a`
 
 export const BreakLine = styled.hr`
   ${ ({ theme: { color, space } }) =>`
+      width: 100%;
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};

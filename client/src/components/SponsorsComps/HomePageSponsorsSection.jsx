@@ -12,7 +12,9 @@ import { SponsorMiniPremium } from './SponserGeneralComps';
 
 const SponserSectionContainter = styled(Container)`
   margin-top: 80px;
-  margin-bottom: 100px; 
+  margin-bottom: 100px;
+  flex-direction: column;
+  flex-wrap: nowrap;
 `;
 
 const HeadingAlinger = styled.div`
@@ -26,6 +28,7 @@ const HeadingAlinger = styled.div`
 
 const Heading = styled.h2`
   ${ ( { theme: { color, font } } ) => `
+        width: inherit;
         position: relative;
         z-index: 1;
         text-align: center;
@@ -38,8 +41,10 @@ const Heading = styled.h2`
 
 const HomeSponsors = styled.div`
   ${ ( { theme: { mq } } ) => `
+      max-width: 1200px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
       
       @media (max-width: ${mq.l}) {

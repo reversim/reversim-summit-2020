@@ -27,7 +27,7 @@ ${( { theme: { space } } ) =>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: ${space.xxl};
+  margin: ${space.xl} ${space.s};
 `}
 `;
 
