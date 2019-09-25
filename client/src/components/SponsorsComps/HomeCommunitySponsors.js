@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const SponsorMiniContainer = styled.a`
   min-width: 150px;
-  min-height: 150px;
+  min-height: 110px;
 
   position: relative;
   display: inline-block;
@@ -26,7 +26,6 @@ const SponsorMiniImg = styled.img`
   padding: ${props => props.theme.space.s};
   max-height: 100px;
 `;
-
 
 // React components section
 
@@ -51,7 +50,11 @@ class SponsorMini extends React.Component {
     hovered: false
   };
   render() {
-    const { name, logo, url } = this.props;
+    const { 
+      name,
+      logo,
+      url
+    } = this.props;
     return (
       <SponsorMiniContainer href={hyperlink(url)} target="_blank">
         {/*<HashLink smooth to={`/sponsors#${name}`}>*/}
