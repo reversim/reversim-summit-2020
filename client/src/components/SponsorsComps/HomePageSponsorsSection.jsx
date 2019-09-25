@@ -53,7 +53,7 @@ const HomeSponsors = styled.div`
     `}
 `;
 
-const CommunitySponsorsHome = styled.div`
+const CommunitySponsorsSection = styled.div`
 ${ ( { theme: { space, mq } } ) =>`
       display: flex;
       justify-content: space-between;
@@ -87,9 +87,9 @@ const SponsorsSection = ({ sponsors }) => {
           })}
         </HomeSponsors>
         <BreakLine /> 
-        <CommunitySponsorsHome> {/* NOTE: This is not shown when screen width is under 992px couldn't figure out why */}
+        <CommunitySponsorsSection> {/* NOTE: This is not shown when screen width is under 992px couldn't figure out why */}
           <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
-        </CommunitySponsorsHome>
+        </CommunitySponsorsSection>
       
     </SponserSectionContainter>
 );
