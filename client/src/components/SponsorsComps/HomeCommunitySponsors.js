@@ -1,12 +1,35 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import { HashLink } from "react-router-hash-link";
 import { hyperlink } from "../../utils";
 import { image } from "../../images";
 import styled from "styled-components";
 
 // Styled-component Section
 
-const SponsorMiniContainer = styled.a`
+const HomeCommunityContainer = styled.div`
+${ ({ theme: { mq } }) => `
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+  @media (max-width: ${mq.s}) {
+    justify-content: center;
+  }  
+`}
+
+`;
+
+const SponsorMiniContainer = styled.div`
+  ${ ({ theme: { space } }) => `
+    flex: 0 0 20%;
+    text-align: center;
+    align-self: center;
+
+    margin: 0 ${space.l};
+  `}
+`;
+
+const SponsorMiniLink = styled.a`
   min-width: 150px;
   min-height: 110px;
 
@@ -56,29 +79,27 @@ class SponsorMini extends React.Component {
       url
     } = this.props;
     return (
-      <SponsorMiniContainer href={hyperlink(url)} target="_blank">
-        {/*<HashLink smooth to={`/sponsors#${name}`}>*/}
+      <SponsorMiniLink href={hyperlink(url)} target="_blank">
           <SponsorMiniImg
             src={image(logo, 350, 230)}
             alt={name}
           />
-        {/*</HashLink>*/}
-      </SponsorMiniContainer>
+      </SponsorMiniLink>
     );
   }
 }
 const HomeCommunitySponsors = ({sponsors}) => {
   return (
-    <div className='home-sponsors d-flex flex-wrap'>
+    <HomeCommunityContainer>
     {orderSponsors(sponsors)
       .map((sponsor, i) => {
         return (
-          <div className="sponsor-community-mini mx-4" key={i}>
+          <SponsorMiniContainer key={i}>
             <SponsorMini key={i} {...sponsor} />
-          </div>
+          </SponsorMiniContainer>
         );
       })}
-    </div>
+    </HomeCommunityContainer>
   );
 };
 
