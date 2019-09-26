@@ -7,7 +7,7 @@ import SpeakerEditPage from '../components/SpeakerEditPage';
 import SessionPage from '../components/SessionPage';
 import SessionEditPage from '../components/SessionEditPage';
 import SpeakersPage from '../components/SpeakersPage2';
-import SponsorsPage from '../components/Sponsors';
+import SponsorsPage from '../components/SponsorPage/SponsorsPage.jsx';
 import SponsorPage from "../components/PremiumSponsorPage";
 // import RegisterPage from "../components/RegisterPage";
 import LocationPage from '../components/LocationPage';
