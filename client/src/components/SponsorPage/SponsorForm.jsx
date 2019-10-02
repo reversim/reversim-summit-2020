@@ -4,11 +4,24 @@
 
 import React from "react";
 import pick from "lodash/pick";
-import { Button, Input} from "reactstrap";
+import { Button as StrapButton, Input as StrapInput} from "reactstrap";
 import { loadScript } from "../../utils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from 'styled-components';
+import { Input } from '../GlobalStyledComponents/ReversimStyledComps';
 
+// styled-components section
+
+const CheckboxContainer = styled.div`
+  ${ ({ theme: { space } }) => `
+    display: flex;
+    align-items: center;
+    margin-bottom: ${space.l};
+  `}
+`;
+
+// React components section
 
 class SponsorForm extends React.Component {
     constructor(props) {
@@ -105,7 +118,7 @@ class SponsorForm extends React.Component {
       const _id = sponsor ? sponsor._id : "";
       return (
         <form onSubmit={e => onSubmit(this.getData(e))}>
-          <div className="d-flex align-items-center mb-3">
+          <CheckboxContainer>
             <input
               type="checkbox"
               id={`isPremium_${_id}`}
@@ -121,16 +134,15 @@ class SponsorForm extends React.Component {
             <label htmlFor={`isPremium_${_id}`} className="mb-0">
               Is this a premium sponsor
             </label>
-          </div>
+          </CheckboxContainer>
           <Input
-            className="mb-3"
-            size="sm"
+           
             required
             placeholder="Name"
             value={this.state.name || ""}
             onChange={e => this.setState({ name: e.target.value })}
           />
-          <Button className="p-relative mb-3" size="sm">
+          <StrapButton className="p-relative mb-3" size="sm">
             <input
               type="file"
               onChange={e => {
@@ -152,22 +164,22 @@ class SponsorForm extends React.Component {
               }}
             />
             Choose logo
-          </Button>
-          <Input
+          </StrapButton>
+          <StrapInput
             className="mb-3"
             size="sm"
             placeholder="Link to website"
             value={this.state.url || ""}
             onChange={e => this.setState({ url: e.target.value })}
           />
-          <Input
+          <StrapInput
             className="mb-3"
             size="sm"
             placeholder="Link to job page"
             value={this.state.jobUrl || ""}
             onChange={e => this.setState({ jobUrl: e.target.value })}
           />
-          <Input
+          <StrapInput
             className="mb-3"
             size="sm"
             type="textarea"
@@ -197,17 +209,17 @@ class SponsorForm extends React.Component {
                   />
                 </div>
               ))}
-              <Button className="p-relative mb-3" size="sm" onClick={() => this.openCloudinaryUploader()}>
+              <StrapButton className="p-relative mb-3" size="sm" onClick={() => this.openCloudinaryUploader()}>
                 Add photos
-              </Button>
-              <Input
+              </StrapButton>
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="location link from google maps"
                 value={this.state.locationLink}
                 onChange={e => this.setState({ locationLink: e.target.value })}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="city. like- Herzliya & Haifa, IL"
@@ -216,49 +228,49 @@ class SponsorForm extends React.Component {
                   this.setState({ locationShortAddress: e.target.value })
                 }
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="one line description"
                 value={this.state.oneLiner}
                 onChange={e => this.setState({ oneLiner: e.target.value })}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="linkedIn"
                 value={this.state.linkedin}
                 onChange={e => this.setState({ linkedin: e.target.value })}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="github"
                 value={this.state.github}
                 onChange={e => this.setState({ github: e.target.value })}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="facebook"
                 value={this.state.facebook}
                 onChange={e => this.setState({ facebook: e.target.value })}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="twitter"
                 value={this.state.twitter}
                 onChange={e => this.setState({ twitter: e.target.value })}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="medium"
                 value={this.state.medium}
                 onChange={e => this.setState({ medium: e.target.value })}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 type="textarea"
@@ -270,7 +282,7 @@ class SponsorForm extends React.Component {
                   this.setState({ techStory });
                 }}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 type="textarea"
@@ -283,7 +295,7 @@ class SponsorForm extends React.Component {
                   this.setState({ techStory });
                 }}
               />
-              <Input
+              <StrapInput
                 className="mb-3"
                 size="sm"
                 placeholder="reversim and Us"
@@ -291,7 +303,7 @@ class SponsorForm extends React.Component {
                 value={this.state.reversimAndUs}
                 onChange={e => this.setState({ reversimAndUs: e.target.value })}
               />
-              <Button
+              <StrapButton
                 onClick={() => {
                   let openPositions = this.state.openPositions || [];
                   openPositions.push({
@@ -306,11 +318,11 @@ class SponsorForm extends React.Component {
                 }}
               >
                 add an open Position
-              </Button>
+              </StrapButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
                   <div key={i} className="mb-8">
-                    <Input
+                    <StrapInput
                       className="mb-2"
                       size="sm"
                       placeholder="job title"
@@ -321,7 +333,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <Input
+                    <StrapInput
                       className="mb-2"
                       size="sm"
                       placeholder="city"
@@ -332,7 +344,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <Input
+                    <StrapInput
                       className="mb-2"
                       size="sm"
                       type="textarea"
@@ -344,7 +356,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <Input
+                    <StrapInput
                       className="mb-2"
                       size="sm"
                       placeholder="link"
@@ -355,7 +367,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <Button
+                    <StrapButton
                       onClick={() => {
                         let openPositions = this.state.openPositions;
                         openPositions.splice(i, 1);
@@ -363,24 +375,24 @@ class SponsorForm extends React.Component {
                       }}
                     >
                       cancel
-                    </Button>
+                    </StrapButton>
                   </div>
                 ))}
             </div>
           )}
           {!onCancel && (
-            <Button
+            <StrapButton
               className="d-block mx-auto"
               color="primary"
               style={{ width: 150 }}
               disabled={isLoading}
             >
               Submit
-            </Button>
+            </StrapButton>
           )}
           {onCancel && (
             <div className="d-flex justify-content-around">
-              <Button
+              <StrapButton
                 outline
                 color="primary"
                 onClick={e => {
@@ -389,10 +401,10 @@ class SponsorForm extends React.Component {
                 }}
               >
                 Cancel
-              </Button>
-              <Button color="primary" disabled={isLoading}>
+              </StrapButton>
+              <StrapButton color="primary" disabled={isLoading}>
                 Submit
-              </Button>
+              </StrapButton>
             </div>
           )}
         </form>

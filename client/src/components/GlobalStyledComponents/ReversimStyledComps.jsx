@@ -95,3 +95,33 @@ export const ButtonStyledLink = styled.a`
       }
     `};
 `;
+
+export const Input = styled.input`
+  ${ ({theme: { space, font }}) =>`
+// mb-3
+    margin-buttom: ${space.l};
+
+// form-control-sm
+    // height: calc(1.5em + 0.5rem + 4px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+
+// from-control
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 1.5rem + 4px);
+    padding: 0.75rem 0.75rem;
+    font-size: ${font.size_reg};
+    font-weight: 300;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  `}
+`;
