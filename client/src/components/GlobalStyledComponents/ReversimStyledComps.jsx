@@ -39,9 +39,9 @@ export const BreakLine = styled.hr`
     `}
 `;
 
-export const Heading2 = styled.h3`
+export const Heading2 = styled.h2`
   ${ ({ theme: { color, font } }) =>`
-    color: ${color.text_1};
+    color: ${color.heading_2};
     font-size: ${font.size_h2};
     `}
 `;

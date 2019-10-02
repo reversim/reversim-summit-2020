@@ -1,22 +1,21 @@
 /*global cloudinary */
 
 import React from "react";
-import s from "../Sponsors.css";
-import { Container } from "reactstrap";
+import { Container as RS_Cont } from "reactstrap";
 import Page from "../Page";
-import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import SponsorForm from './SponsorForm';
 import PremiumSponsors from './PremiumSponsors';
 import CommunitySponsors from './CommunitySponsors';
 import styled from 'styled-components';
-import { Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
+import { Container, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
 
 library.add(faPencilAlt, faTrash);
 
-// const COLLAPSED_MAX_CHARS = 110;
+// Styled-components Section
 
+  //WantToBe components
 const WantToBeContainer = styled.div`
   ${ ({ theme: { color, space } }) =>`
     display: flex;
@@ -41,6 +40,65 @@ const WantToBelink = styled(SimpleLink)`
     font-size: ${font.size_bg};
   `}
 `;
+
+  //SponsorsPage Components
+
+const FirstSectionContainer = styled.section`
+  ${ ({ theme: { color, space, mq } }) => `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-size: contain;
+    background-color: ${color.background_2};
+    padding: ${space.xl} 180px ${space.xxl} 180px;
+
+    border-top: 100px solid ${color.box_shadow_1};
+    
+    @media (max-width: ${mq.m}) {
+      flex-direction: column;
+    }
+  `}
+`;
+
+const AddSoponsorContainer = styled.div`
+  ${ ({ theme: { space, color} }) =>`
+    padding: ${space.l};
+    margin-bottom: ${space.xxl};
+    border: 2px solid ${color.box_shadow_3};
+    color: ${color.text_1};
+  `}
+`;
+
+const CommunityContainer = styled(Container)`
+ ${ ({ theme: { space } }) => `
+  margin-top: ${space.xl};
+ `}
+`;
+
+const InviterContainer = styled.div`
+  ${ ({ theme: { space, color } }) => `
+    box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
+    background: ${color.background_linear_gradient_1};
+    padding: ${space.xl};
+    margin-bottom: ${space.xl};  
+  `}
+`;
+
+const InviterHeading = styled(Heading3)`
+  ${ ({ theme: { color } }) => `
+    color: ${color.heading_2};
+    text-align: center;
+  `}
+`;
+
+const InviterHeadingBold = styled(InviterHeading)`
+  ${ ({ theme: { font }}) => `
+    font-weight: ${font.weight_bold};
+  ` }
+`;
+
+// React components section
 
 const WantToBe = () => (
   <WantToBeContainer>
@@ -67,18 +125,13 @@ class SponsorsPage extends React.Component {
 
     return (
       <Page title="Sponsors" {...this.props}>
-        <div
-          className={cn(
-            s.premiumCover,
-            "bg-purple2 page-hero pb-8 navbar-margin d-flex justify-content-center align-items-center"
-          )}
-        >
+        <FirstSectionContainer>
           <Container>
-            {user && user.isReversimTeamMember && (
-              <div className="border p-3 mb-8">
-                <h3>Add sponsor</h3>
-                <SponsorForm onSubmit={createSponsor} />
-              </div>
+          {user && user.isReversimTeamMember && (
+            <AddSoponsorContainer>
+              <Heading3>Add sponsor</Heading3>
+              <SponsorForm onSubmit={createSponsor} />
+            </AddSoponsorContainer>              
             )}
             <WantToBe />
             <PremiumSponsors
@@ -88,24 +141,25 @@ class SponsorsPage extends React.Component {
               deleteSponsor={deleteSponsor}
             />
           </Container>
-        </div>
-        <Container className="mt-4">
+        </FirstSectionContainer>
+        <CommunityContainer>
           <CommunitySponsors
             sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}
             user={user}
             updateSponsor={updateSponsor}
             deleteSponsor={deleteSponsor}
           />
-          {/*<h3 className="text-center">The annual Reversim conference is here</h3>*/}
-          {/*<h3 className="font-weight-bold  text-center">and we can't do it without you!</h3>*/}
-        </Container>
+          {/* <InviterContainer>
+            <InviterHeading>The annual Reversim conference is here</InviterHeading>
+            <InviterHeadingBold>and we can't do it without you!</InviterHeadingBold>
+          </InviterContainer> */}
+        </CommunityContainer>
       </Page>
     );
   }
 }
 
 export default SponsorsPage;
-
 
 // class Sponsor extends React.Component {
 //   constructor(props) {
