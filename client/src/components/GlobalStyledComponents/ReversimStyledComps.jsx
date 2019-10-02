@@ -98,24 +98,21 @@ export const ButtonStyledLink = styled.a`
 
 export const Input = styled.input`
   ${ ({theme: { space, font }}) =>`
-// mb-3
+    display: block;
+  
+    height: calc(1.5em + 0.5rem + 4px);
+    width: 100%;
+    
+    padding: 0.25rem 0.5rem;
     margin-buttom: ${space.l};
 
-// form-control-sm
-    // height: calc(1.5em + 0.5rem + 4px);
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
-
-// from-control
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 1.5rem + 4px);
-    padding: 0.75rem 0.75rem;
-    font-size: ${font.size_reg};
+    font-size: calc(0.875 * ${font.size_reg});
     font-weight: 300;
+
     line-height: 1.5;
+    
+    border-radius: 0.2rem;
+    
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
