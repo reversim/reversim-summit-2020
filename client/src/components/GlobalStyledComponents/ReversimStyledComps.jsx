@@ -29,6 +29,48 @@ export const Container = styled.div`
     `}
 `
 
+export const BreakLine = styled.hr`
+  ${ ({ theme: { color, space } }) =>`
+      width: 100%;
+      flex-grow: 1;
+      align-self: center;
+      margin-left: ${space.m};
+      border-top: 1.5px solid ${color.background_2};
+    `}
+`;
+
+export const Heading2 = styled.h3`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_1};
+    font-size: ${font.size_h2};
+    `}
+`;
+
+export const Heading3 = styled.h3`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_1};
+    font-size: ${font.size_h3};
+    `}
+`;
+
+export const Paragraph = styled.p`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_1};
+    font-size: ${font.size_reg};
+    `}
+`;
+
+export const SimpleLink = styled.a`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_1};
+    font-size: ${font.size_reg};
+
+    &:hover{
+      color: ${color.text_1};
+    }
+    `}
+`;
+
 export const ButtonStyledLink = styled.a`
   ${ ({ theme: { color, font, space } }) =>`
       color: ${color.text_1};
@@ -52,14 +94,4 @@ export const ButtonStyledLink = styled.a`
         color: inherit;
       }
     `};
-`;
-
-export const BreakLine = styled.hr`
-  ${ ({ theme: { color, space } }) =>`
-      width: 100%;
-      flex-grow: 1;
-      align-self: center;
-      margin-left: ${space.m};
-      border-top: 1.5px solid ${color.background_2};
-    `}
 `;

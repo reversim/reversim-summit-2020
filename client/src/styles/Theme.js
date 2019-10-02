@@ -29,7 +29,10 @@ const theme = {
     weight_bold: '600',
     size_reg: '16px',
     size_md: '18px',
-    size_h2: `48px`,
+    size_bg: '24px',
+    
+    size_h2: '48px',
+    size_h3: '35px',
   },
   // spaces used for padding and margins
   space: {

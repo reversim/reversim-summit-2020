@@ -7,25 +7,52 @@ import Page from "../Page";
 import cn from "classnames";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
-
 import SponsorForm from './SponsorForm';
 import PremiumSponsors from './PremiumSponsors';
 import CommunitySponsors from './CommunitySponsors';
+import styled from 'styled-components';
+import { Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
 
 library.add(faPencilAlt, faTrash);
 
 // const COLLAPSED_MAX_CHARS = 110;
 
+const WantToBeContainer = styled.div`
+  ${ ({ theme: { color, space } }) =>`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin: ${space.xl} 0px;
+    line-height: 1.7;
+
+    color: ${color.text_1};
+  `}
+`;
+
+const WantToBePara = styled(Paragraph)`
+  ${ ({ theme: { font } }) => `
+    font-size: ${font.size_bg};
+  `}
+`;
+
+const WantToBelink = styled(SimpleLink)`
+  ${ ({ theme: { font } }) => `
+    font-size: ${font.size_bg};
+  `}
+`;
+
 const WantToBe = () => (
-  <div className="my-4 line-height-17 text-center text-white font-size-lg d-flex justify-content-center">
-    <div>
-      <div className="font-size-xl">Want to be a sponsor?</div> {"Contact our amazing Gilli at "}
-      <a className="text-white" href="mailto:gilli@reversim.com">
+  <WantToBeContainer>
+    <Heading3>Want to be a sponsor?</Heading3> 
+    <WantToBePara>
+      {"Contact our amazing Gilli at "}
+      <WantToBelink href="mailto:gilli@reversim.com">
         gilli@reversim.com
-      </a>
+      </WantToBelink>
       {" and let's have fun together!"}
-    </div>
-  </div>
+    </WantToBePara>
+  </WantToBeContainer>
 );
 
 class SponsorsPage extends React.Component {
