@@ -101,7 +101,6 @@ export const Input = styled.input`
     display: block;
   
     width: 100%;
-    // height: calc(1.5em + 0.5rem + 4px);
     
     padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
     margin-bottom: ${space.l};
@@ -127,4 +126,37 @@ export const Input = styled.input`
       box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 0.2rem ${color.input_box_shadow_2};
     }
   `}
+`;
+
+export const TextArea = styled.textarea`
+${ ({theme: { space, font, color }}) =>`
+  display: block;
+
+  width: 100%;
+  // height: calc(1.5em + 0.5rem + 4px);
+  
+  padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
+  margin-bottom: ${space.l};
+
+  font-size: calc(0.875 * ${font.size_reg});
+  font-weight: 300;
+
+  line-height: 1.5;
+  
+  color: ${color.input_1};
+  background-color: ${color.input_bkgr_1};
+  background-clip: padding-box;
+  border: 2px solid ${color.input_border_1};
+  border-radius: 0.25rem;
+  box-shadow: inset 0 1px 1px ${color.input_box_shadow_1};
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:focus {
+    color: ${color.input_1};
+    background-color: ${color.input_bkgr_1};
+    border-color: ${color.input_border_2};
+    outline: 0;
+    box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 0.2rem ${color.input_box_shadow_2};
+  }
+`}
 `;

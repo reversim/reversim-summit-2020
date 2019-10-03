@@ -4,12 +4,12 @@
 
 import React from "react";
 import pick from "lodash/pick";
-import { Button as StrapButton, Input as StrapInput} from "reactstrap";
+import { Button as StrapButton } from "reactstrap";
 import { loadScript } from "../../utils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from 'styled-components';
-import { Input } from '../GlobalStyledComponents/ReversimStyledComps';
+import { Input, TextArea } from '../GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components section
 
@@ -136,7 +136,6 @@ class SponsorForm extends React.Component {
             </label>
           </CheckboxContainer>
           <Input
-           
             required
             placeholder="Name"
             value={this.state.name || ""}
@@ -165,23 +164,17 @@ class SponsorForm extends React.Component {
             />
             Choose logo
           </StrapButton>
-          <StrapInput
-            className="mb-3"
-            size="sm"
+          <Input
             placeholder="Link to website"
             value={this.state.url || ""}
             onChange={e => this.setState({ url: e.target.value })}
           />
-          <StrapInput
-            className="mb-3"
-            size="sm"
+          <Input
             placeholder="Link to job page"
             value={this.state.jobUrl || ""}
             onChange={e => this.setState({ jobUrl: e.target.value })}
           />
-          <StrapInput
-            className="mb-3"
-            size="sm"
+          <TextArea
             type="textarea"
             placeholder="About"
             value={this.state.about || ""}
@@ -212,67 +205,49 @@ class SponsorForm extends React.Component {
               <StrapButton className="p-relative mb-3" size="sm" onClick={() => this.openCloudinaryUploader()}>
                 Add photos
               </StrapButton>
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="location link from google maps"
                 value={this.state.locationLink}
                 onChange={e => this.setState({ locationLink: e.target.value })}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="city. like- Herzliya & Haifa, IL"
                 value={this.state.locationShortAddress}
                 onChange={e =>
                   this.setState({ locationShortAddress: e.target.value })
                 }
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="one line description"
                 value={this.state.oneLiner}
                 onChange={e => this.setState({ oneLiner: e.target.value })}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="linkedIn"
                 value={this.state.linkedin}
                 onChange={e => this.setState({ linkedin: e.target.value })}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="github"
                 value={this.state.github}
                 onChange={e => this.setState({ github: e.target.value })}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="facebook"
                 value={this.state.facebook}
                 onChange={e => this.setState({ facebook: e.target.value })}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="twitter"
                 value={this.state.twitter}
                 onChange={e => this.setState({ twitter: e.target.value })}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <Input
                 placeholder="medium"
                 value={this.state.medium}
                 onChange={e => this.setState({ medium: e.target.value })}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <TextArea
                 type="textarea"
                 placeholder="technology story"
                 value={this.state.techStory ? this.state.techStory.text : ""}
@@ -282,9 +257,7 @@ class SponsorForm extends React.Component {
                   this.setState({ techStory });
                 }}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <TextArea
                 type="textarea"
                 placeholder="technologies separated by new line. make sure to remove unnecessary spaces and stuff"
                 // TODO NETA- clean up my mass
@@ -295,9 +268,7 @@ class SponsorForm extends React.Component {
                   this.setState({ techStory });
                 }}
               />
-              <StrapInput
-                className="mb-3"
-                size="sm"
+              <TextArea
                 placeholder="reversim and Us"
                 type="textarea"
                 value={this.state.reversimAndUs}
@@ -322,9 +293,7 @@ class SponsorForm extends React.Component {
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
                   <div key={i} className="mb-8">
-                    <StrapInput
-                      className="mb-2"
-                      size="sm"
+                    <Input
                       placeholder="job title"
                       value={openPosition.title}
                       onChange={e => {
@@ -333,9 +302,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <StrapInput
-                      className="mb-2"
-                      size="sm"
+                    <Input
                       placeholder="city"
                       value={openPosition.city}
                       onChange={e => {
@@ -344,9 +311,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <StrapInput
-                      className="mb-2"
-                      size="sm"
+                    <TextArea
                       type="textarea"
                       placeholder="description"
                       value={openPosition.description}
@@ -356,9 +321,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <StrapInput
-                      className="mb-2"
-                      size="sm"
+                    <Input
                       placeholder="link"
                       value={openPosition.link}
                       onChange={e => {
