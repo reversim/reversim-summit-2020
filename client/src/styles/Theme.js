@@ -11,6 +11,7 @@ const theme = {
     background_2: 'rgb(81, 39, 255)',
     background_3: 'rgb(51, 18, 188)',
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.2) 0%, rgba(0, 92, 177, 0.2) 100%)',
+    background_linear_gradient_2: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)', //used in FormButton :hover
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,
     button_bkgr_1: 'rgb(137, 108, 255)',
@@ -30,12 +31,18 @@ const theme = {
     input_border_2: 'rgb(128, 164, 255)',
     input_box_shadow_1: 'rgba(0, 0, 0, 0.075)',
     input_box_shadow_2: 'rgba(0, 72, 255, 0.25)',
+    form_button_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
+    form_button_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
+    form_button_border_hover: 'rgb(84, 91, 98)',
   },
+
   // the website's fonts
   font: {
     main: 'Source Code Pro, monospace',
+    form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
     weight_normal: '300',
+    weight_med: '500',
     weight_bold: '600',
     size_reg: '16px',
     size_md: '18px',
@@ -44,6 +51,7 @@ const theme = {
     size_h2: '48px',
     size_h3: '35px',
   },
+
   // spaces used for padding and margins
   space: {
     s: '5px',

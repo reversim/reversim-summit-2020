@@ -9,7 +9,7 @@ import { loadScript } from "../../utils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from 'styled-components';
-import { Input, TextArea } from '../GlobalStyledComponents/ReversimStyledComps';
+import { Input, TextArea, FormButton } from '../GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components section
 
@@ -111,6 +111,7 @@ class SponsorForm extends React.Component {
         this.setState({images});
       }
     }
+    
     render() {
       const { onSubmit, onCancel, sponsor, isLoading } = this.props;
       loadScript("https://widget.cloudinary.com/v2.0/global/all.js")
@@ -141,7 +142,7 @@ class SponsorForm extends React.Component {
             value={this.state.name || ""}
             onChange={e => this.setState({ name: e.target.value })}
           />
-          <StrapButton className="p-relative mb-3" size="sm">
+          <FormButton>
             <input
               type="file"
               onChange={e => {
@@ -163,7 +164,7 @@ class SponsorForm extends React.Component {
               }}
             />
             Choose logo
-          </StrapButton>
+          </FormButton>
           <Input
             placeholder="Link to website"
             value={this.state.url || ""}
@@ -202,9 +203,11 @@ class SponsorForm extends React.Component {
                   />
                 </div>
               ))}
-              <StrapButton className="p-relative mb-3" size="sm" onClick={() => this.openCloudinaryUploader()}>
+              <FormButton
+              onClick={() => this.openCloudinaryUploader()}
+              >
                 Add photos
-              </StrapButton>
+              </FormButton>
               <Input
                 placeholder="location link from google maps"
                 value={this.state.locationLink}
@@ -274,7 +277,7 @@ class SponsorForm extends React.Component {
                 value={this.state.reversimAndUs}
                 onChange={e => this.setState({ reversimAndUs: e.target.value })}
               />
-              <StrapButton
+              <FormButton
                 onClick={() => {
                   let openPositions = this.state.openPositions || [];
                   openPositions.push({
@@ -289,7 +292,7 @@ class SponsorForm extends React.Component {
                 }}
               >
                 add an open Position
-              </StrapButton>
+              </FormButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
                   <div key={i} className="mb-8">
@@ -330,7 +333,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <StrapButton
+                    <FormButton
                       onClick={() => {
                         let openPositions = this.state.openPositions;
                         openPositions.splice(i, 1);
@@ -338,36 +341,33 @@ class SponsorForm extends React.Component {
                       }}
                     >
                       cancel
-                    </StrapButton>
+                    </FormButton>
                   </div>
                 ))}
             </div>
           )}
           {!onCancel && (
-            <StrapButton
-              className="d-block mx-auto"
-              color="primary"
+            <FormButton
               style={{ width: 150 }}
               disabled={isLoading}
             >
               Submit
-            </StrapButton>
+            </FormButton>
           )}
           {onCancel && (
             <div className="d-flex justify-content-around">
-              <StrapButton
+              <FormButton
                 outline
-                color="primary"
                 onClick={e => {
                   e.preventDefault();
                   onCancel();
                 }}
               >
                 Cancel
-              </StrapButton>
-              <StrapButton color="primary" disabled={isLoading}>
+              </FormButton>
+              <FormButton disabled={isLoading}>
                 Submit
-              </StrapButton>
+              </FormButton>
             </div>
           )}
         </form>

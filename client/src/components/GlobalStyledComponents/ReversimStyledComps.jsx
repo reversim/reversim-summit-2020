@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+//general elements
+
 export const Container = styled.div`
   ${ ({ theme: { mq, space } }) =>`
       display: flex;
@@ -39,6 +41,8 @@ export const BreakLine = styled.hr`
     `}
 `;
 
+//<h2, 3, ...> and <p>
+
 export const Heading2 = styled.h2`
   ${ ({ theme: { color, font } }) =>`
     color: ${color.heading_2};
@@ -47,9 +51,10 @@ export const Heading2 = styled.h2`
 `;
 
 export const Heading3 = styled.h3`
-  ${ ({ theme: { color, font } }) =>`
+  ${ ({ theme: { color, space, font } }) =>`
     color: ${color.text_1};
     font-size: ${font.size_h3};
+    margin-bottom: ${space.l};
     `}
 `;
 
@@ -60,6 +65,7 @@ export const Paragraph = styled.p`
     `}
 `;
 
+// <a>s and <button>s
 export const SimpleLink = styled.a`
   ${ ({ theme: { color, font } }) =>`
     color: ${color.text_1};
@@ -96,6 +102,50 @@ export const ButtonStyledLink = styled.a`
     `};
 `;
 
+export const FormButton = styled.button`
+  ${ ({theme: {color, font, space,}}) => `
+    box-shadow: inset 0px 0px 10px 2px rgba(0, 238, 255, 0.1);
+    background: ${color.background_linear_gradient_1};
+    font-family: ${font.form_button};
+    font-size: ${font.size_reg};
+    font-weight: ${font.weight_med};
+    color: ${color.text_1};
+    letter-spacing: 1px;
+    outline: none;
+    border: 0;
+    transition: all 200ms;
+    border-radius: 0;
+    height: 40px;
+
+    position: relative;
+
+    margin: ${space.l} 0;
+    padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
+    line-height: 1.5;
+
+    display: inline-block;
+    text-transform: none;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    overflow: visible;
+
+    &:hover{
+      background: ${color.background_linear_gradient_2};
+      box-shadow: inset 0px 0px 10px 2px ${color.form_button_box_shadow_1}, 0px 0px 10px 0px ${color.form_button_box_shadow_2};
+      color: ${color.text_1};
+      border-color: ${color.form_button_border_hover};
+      text-decoration: none;
+    }
+
+    &:active{
+      background: ${color.background_linear_gradient_2};
+    }
+  `}
+`;
+
+// <input>s and <textarea>
+
 export const Input = styled.input`
   ${ ({theme: { space, font, color }}) =>`
     display: block;
@@ -103,7 +153,7 @@ export const Input = styled.input`
     width: 100%;
     
     padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
-    margin-bottom: ${space.l};
+    margin: ${space.l} 0;
 
     font-size: calc(0.875 * ${font.size_reg});
     font-weight: 300;
@@ -114,7 +164,7 @@ export const Input = styled.input`
     background-color: ${color.input_bkgr_1};
     background-clip: padding-box;
     border: 2px solid ${color.input_border_1};
-    border-radius: 0.25rem;
+    border-radius: calc(0.25 * ${font.size_reg});
     box-shadow: inset 0 1px 1px ${color.input_box_shadow_1};
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
@@ -123,7 +173,7 @@ export const Input = styled.input`
       background-color: ${color.input_bkgr_1};
       border-color: ${color.input_border_2};
       outline: 0;
-      box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 0.2rem ${color.input_box_shadow_2};
+      box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 calc(0.2 * ${font.size_reg}) ${color.input_box_shadow_2};
     }
   `}
 `;
@@ -133,11 +183,10 @@ ${ ({theme: { space, font, color }}) =>`
   display: block;
 
   width: 100%;
-  // height: calc(1.5em + 0.5rem + 4px);
   
   padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
-  margin-bottom: ${space.l};
-
+  margin: ${space.l} 0;
+  
   font-size: calc(0.875 * ${font.size_reg});
   font-weight: 300;
 
@@ -147,7 +196,7 @@ ${ ({theme: { space, font, color }}) =>`
   background-color: ${color.input_bkgr_1};
   background-clip: padding-box;
   border: 2px solid ${color.input_border_1};
-  border-radius: 0.25rem;
+  border-radius: calc(0.25 * ${font.size_reg});
   box-shadow: inset 0 1px 1px ${color.input_box_shadow_1};
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
@@ -156,7 +205,7 @@ ${ ({theme: { space, font, color }}) =>`
     background-color: ${color.input_bkgr_1};
     border-color: ${color.input_border_2};
     outline: 0;
-    box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 0.2rem ${color.input_box_shadow_2};
+    box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 calc(0.2 * ${font.size_reg}) ${color.input_box_shadow_2};
   }
 `}
 `;
