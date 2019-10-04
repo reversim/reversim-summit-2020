@@ -25,8 +25,25 @@ const TrashIcon =styled(FontAwesomeIcon)`
     cursor: pointer;
     margin: 0 ${space.m};
   `}
-  
 `
+const OpenPositionContainer = styled.div`
+  ${ ({ theme: { space } }) => `
+    margin-buttom: ${space.xxl};
+  `}
+`;
+
+const SubmitOrCancelContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const UploadImg = styled.img`
+  width: 200px;
+`;
+
+const SubmitButton = styled(FormButton)`
+  width: 150px;
+`;
 
 // React components section
 
@@ -189,7 +206,7 @@ class SponsorForm extends React.Component {
                       <source src={image} type="video/mp4" />
                     </video>
                   ) : (
-                    <img src={image} style={{ width: "200px" }} />
+                    <UploadImg src={image} />
                   )}
                   <TrashIcon
                     icon="trash"
@@ -293,7 +310,7 @@ class SponsorForm extends React.Component {
               </FormButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
-                  <div key={i} className="HOLA mb-8">
+                  <OpenPositionContainer key={i}>
                     <Input
                       placeholder="job title"
                       value={openPosition.title}
@@ -340,20 +357,19 @@ class SponsorForm extends React.Component {
                     >
                       cancel
                     </FormButton>
-                  </div>
+                  </OpenPositionContainer>
                 ))}
             </div>
           )}
           {!onCancel && (
-            <FormButton
-              style={{ width: 150 }}
+            <SubmitButton
               disabled={isLoading}
             >
               Submit
-            </FormButton>
+            </SubmitButton>
           )}
           {onCancel && (
-            <div className="d-flex justify-content-around">
+            <SubmitOrCancelContainer>
               <FormButton
                 outline
                 onClick={e => {
@@ -363,10 +379,10 @@ class SponsorForm extends React.Component {
               >
                 Cancel
               </FormButton>
-              <FormButton disabled={isLoading}>
+              <SubmitButton disabled={isLoading}>
                 Submit
-              </FormButton>
-            </div>
+              </SubmitButton>
+            </SubmitOrCancelContainer>
           )}
         </form>
       );
