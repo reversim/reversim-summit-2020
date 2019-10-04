@@ -4,12 +4,11 @@
 
 import React from "react";
 import pick from "lodash/pick";
-import { Button as StrapButton } from "reactstrap";
 import { loadScript } from "../../utils";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import styled from 'styled-components';
-import { Input, TextArea, FormButton } from '../GlobalStyledComponents/ReversimStyledComps';
+import { Input, TextArea, FormButton, FileInput } from '../GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components section
 
@@ -20,6 +19,14 @@ const CheckboxContainer = styled.div`
     margin-bottom: ${space.l};
   `}
 `;
+
+const TrashIcon =styled(FontAwesomeIcon)`
+  ${ ({ theme: { space } }) => `
+    cursor: pointer;
+    margin: 0 ${space.m};
+  `}
+  
+`
 
 // React components section
 
@@ -132,7 +139,7 @@ class SponsorForm extends React.Component {
                 })
               }
             />
-            <label htmlFor={`isPremium_${_id}`} className="mb-0">
+            <label htmlFor={`isPremium_${_id}`}>
               Is this a premium sponsor
             </label>
           </CheckboxContainer>
@@ -143,7 +150,7 @@ class SponsorForm extends React.Component {
             onChange={e => this.setState({ name: e.target.value })}
           />
           <FormButton>
-            <input
+            <FileInput
               type="file"
               onChange={e => {
                 const f = e.target.files[0];
@@ -153,14 +160,6 @@ class SponsorForm extends React.Component {
                   this.setState({ logo: e2.target.result, imgDirty: true });
                 };
                 reader.readAsDataURL(f);
-              }}
-              style={{
-                opacity: 0,
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0
               }}
             />
             Choose logo
@@ -192,9 +191,8 @@ class SponsorForm extends React.Component {
                   ) : (
                     <img src={image} style={{ width: "200px" }} />
                   )}
-                  <FontAwesomeIcon
+                  <TrashIcon
                     icon="trash"
-                    className="cursor-pointer"
                     onClick={() => {
                       let images = this.state.images;
                       images.splice(i, 1);
@@ -295,7 +293,7 @@ class SponsorForm extends React.Component {
               </FormButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
-                  <div key={i} className="mb-8">
+                  <div key={i} className="HOLA mb-8">
                     <Input
                       placeholder="job title"
                       value={openPosition.title}

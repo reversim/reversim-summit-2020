@@ -209,3 +209,12 @@ ${ ({theme: { space, font, color }}) =>`
   }
 `}
 `;
+
+export const FileInput = styled.input`
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
