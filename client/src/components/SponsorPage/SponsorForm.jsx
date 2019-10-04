@@ -143,7 +143,7 @@ class SponsorForm extends React.Component {
         sponsor,
         isLoading,
       } = this.props;
-      
+
       loadScript("https://widget.cloudinary.com/v2.0/global/all.js")
   
       const _id = sponsor ? sponsor._id : "";
@@ -285,7 +285,6 @@ class SponsorForm extends React.Component {
               <TextArea
                 type="textarea"
                 placeholder="technologies separated by new line. make sure to remove unnecessary spaces and stuff"
-                // TODO NETA- clean up my mass
                 value={this.state.techStory.technologies}
                 onChange={e => {
                   let techStory = this.state.techStory;

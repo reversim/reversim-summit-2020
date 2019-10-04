@@ -135,7 +135,7 @@ class SponsorsPage extends React.Component {
             <AddSoponsorContainer>
               <Heading3>Add sponsor</Heading3>
               <SponsorForm onSubmit={createSponsor} />
-            </AddSoponsorContainer> 
+            </AddSoponsorContainer>
             <WantToBe />
             <PremiumSponsors
               sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
