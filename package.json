@@ -20,6 +20,7 @@
     "react-text-truncate": "^0.14.0"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
     "dotenv": "^6.0.0",
     "eslint-plugin-node": "^7.0.1"
   }
