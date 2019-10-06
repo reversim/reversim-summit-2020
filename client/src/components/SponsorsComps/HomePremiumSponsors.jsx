@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { SponsorMiniPremium } from './SponserGeneralComps';
 
-const PremiunSponsorsSection = styled.section`
+const Contianer = styled.div`
   ${ ( { theme: { mq } } ) => `
       display: flex;
       justify-content: space-between;
@@ -18,7 +18,7 @@ const PremiunSponsorsSection = styled.section`
 
 const HomePremiumSponsors = ({ sponsors }) =>{
   return (
-    <PremiunSponsorsSection>
+    <Contianer>
       {sponsors
       .filter(sponsor => sponsor.isPremium)
       .map((sponsor, i) => {
@@ -28,7 +28,7 @@ const HomePremiumSponsors = ({ sponsors }) =>{
           </div>
         );
       })}
-    </PremiunSponsorsSection>
+    </Contianer>
   );
 };
 

@@ -8,7 +8,7 @@ import { image } from "../../images";
 
 // Styled-component Section
 
-const ComSponsSection = styled.section`
+const Container = styled.div`
 ${ ( { theme: { space, mq } } ) =>`
       display: flex;
       justify-content: space-between;
@@ -104,7 +104,7 @@ class SponsorMini extends React.Component {
 }
 const CommunitySponsorsSection = ({sponsors}) => {
   return (
-    <ComSponsSection>
+    <Container>
       <HomeCommunityContainer>
       {orderSponsors(sponsors)
         .map((sponsor, i) => {
@@ -115,7 +115,7 @@ const CommunitySponsorsSection = ({sponsors}) => {
           );
         })}
       </HomeCommunityContainer>
-    </ComSponsSection>
+    </Container>
   );
 };
 
