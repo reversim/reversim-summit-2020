@@ -3,11 +3,22 @@ import React from 'react';
 import styled from "styled-components";
 
 import { hyperlink } from "../../utils";
-
 import { image } from "../../images";
 
 
 // Styled-component Section
+
+const ComSponsSection = styled.section`
+${ ( { theme: { space, mq } } ) =>`
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: ${space.xl};
+      @media (max-width: ${mq.l}) {
+        justify-content: space-around;
+      }
+    `}
+`;
 
 const HomeCommunityContainer = styled.div`
 ${ ({ theme: { mq } }) => `
@@ -91,19 +102,21 @@ class SponsorMini extends React.Component {
     );
   }
 }
-const HomeCommunitySponsors = ({sponsors}) => {
+const CommunitySponsorsSection = ({sponsors}) => {
   return (
-    <HomeCommunityContainer>
-    {orderSponsors(sponsors)
-      .map((sponsor, i) => {
-        return (
-          <SponsorMiniContainer key={i}>
-            <SponsorMini key={i} {...sponsor} />
-          </SponsorMiniContainer>
-        );
-      })}
-    </HomeCommunityContainer>
+    <ComSponsSection>
+      <HomeCommunityContainer>
+      {orderSponsors(sponsors)
+        .map((sponsor, i) => {
+          return (
+            <SponsorMiniContainer key={i}>
+              <SponsorMini key={i} {...sponsor} />
+            </SponsorMiniContainer>
+          );
+        })}
+      </HomeCommunityContainer>
+    </ComSponsSection>
   );
 };
 
-export default HomeCommunitySponsors;
+export default CommunitySponsorsSection;

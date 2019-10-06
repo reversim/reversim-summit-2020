@@ -2,7 +2,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-import HomeCommunitySponsors from "./HomeCommunitySponsors";
+import CommunitySponsorsSection from "./CommunitySponsorsSection";
 import {
   Container,
   BreakLine,
@@ -30,8 +30,6 @@ const HeadingAlinger = styled.div`
 const Heading = styled.h2`
   ${ ( { theme: { color, font } } ) => `
         width: inherit;
-        position: relative;
-        z-index: 1;
         text-align: center;
         font-weight: ${font.weight_normal};
         font-family: ${font.main};
@@ -40,30 +38,6 @@ const Heading = styled.h2`
       `}
 `;
 
-const PremiunSponsorsSection = styled.section`
-  ${ ( { theme: { mq } } ) => `
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      
-      @media (max-width: ${mq.l}) {
-        justify-content: space-around;
-      }
-    `}
-`;
-
-const CommunitySponsorsSection = styled.section`
-${ ( { theme: { space, mq } } ) =>`
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-top: ${space.xl};
-      @media (max-width: ${mq.l}) {
-        justify-content: space-around;
-      }
-    `}
-`;
 
 // React components section
 
@@ -73,19 +47,14 @@ const HomePageSponsorsSection = ({ sponsors }) => {
       <HeadingAlinger>
         <Heading>Meet Our Sponsors</Heading>
         <BreakLine />
-
       </HeadingAlinger>
-        <PremiunSponsorsSection>
-          <HomePremiumSponsors sponsors={sponsors} />
-        </PremiunSponsorsSection>
-        <BreakLine /> 
 
-        <CommunitySponsorsSection> {/* NOTE: This is not shown when screen width is under 992px couldn't figure out why */}
-          <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
-        </CommunitySponsorsSection>
-      
+      <HomePremiumSponsors sponsors={sponsors} />
+      <BreakLine /> 
+
+      <CommunitySponsorsSection sponsors={sponsors.filter(sponsor => !sponsor.isPremium)} />
     </SponserSectionContainter>
-);
+  );
 };
 
 export default HomePageSponsorsSection;
