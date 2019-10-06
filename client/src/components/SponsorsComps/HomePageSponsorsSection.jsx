@@ -40,7 +40,7 @@ const Heading = styled.h2`
       `}
 `;
 
-const HomeSponsors = styled.div`
+const PremiunSponsorsSection = styled.div`
   ${ ( { theme: { mq } } ) => `
       max-width: 1200px;
       display: flex;
@@ -73,10 +73,10 @@ const SponsorsSection = ({ sponsors }) => {
     <SponserSectionContainter>
       <HeadingAlinger>
         <Heading>Meet Our Sponsors</Heading>
-          <BreakLine />
+        <BreakLine />
       </HeadingAlinger>
       
-        <HomeSponsors>
+        <PremiunSponsorsSection>
           {sponsors
             .filter(sponsor => sponsor.isPremium)
             .map((sponsor, i) => {
@@ -86,7 +86,7 @@ const SponsorsSection = ({ sponsors }) => {
                 </div>
                 );
           })}
-        </HomeSponsors>
+        </PremiunSponsorsSection>
         <BreakLine /> 
         <CommunitySponsorsSection> {/* NOTE: This is not shown when screen width is under 992px couldn't figure out why */}
           <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
