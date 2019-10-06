@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-import s from "../Sponsors.css";
 import cn from "classnames";
-import diamond from "../../images/SVG/diamond.svg";
+
+import s from "../Sponsors.css";
+import SponsorForm from './SponsorForm';
 import { SponsorMiniPremium } from '../SponsorsComps/SponserGeneralComps';
 
-import SponsorForm from './SponsorForm';
+import diamond from "../../images/SVG/diamond.svg";
 
 class SponsorMiniPremiumWithEdit extends React.Component {
     constructor(props) {

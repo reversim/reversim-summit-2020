@@ -1,8 +1,11 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { hyperlink } from "../../utils";
-import { image } from "../../images";
 import styled from "styled-components";
+
+import { hyperlink } from "../../utils";
+
+import { image } from "../../images";
+
 
 // Styled-component Section
 

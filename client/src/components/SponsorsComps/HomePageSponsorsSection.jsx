@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React from "react";
-import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import styled from 'styled-components';
+
+import HomeCommunitySponsors from "./HomeCommunitySponsors";
 import {
   Container,
   BreakLine,

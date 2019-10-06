@@ -1,15 +1,19 @@
 import React from "react";
-import { Container } from "reactstrap";
-import logoImg from "../images/SVG/logo.svg";
-import backgroundImg from "../images/home-reg-bg.png"
+import styled from "styled-components";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
   faCalendarAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
+
+import { Container } from "reactstrap";
+import { ButtonStyledLink } from './GlobalStyledComponents/ReversimStyledComps';
+
+import logoImg from "../images/SVG/logo.svg";
+import backgroundImg from "../images/home-reg-bg.png";
+
 
 library.add(faMapMarkerAlt, faCalendarAlt);
 

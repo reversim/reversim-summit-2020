@@ -1,15 +1,17 @@
 /*global cloudinary */
-
 import React from "react";
-import { Container as RS_Cont } from "reactstrap";
-import Page from "../Page";
+import styled from 'styled-components';
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import Page from "../Page";
 import SponsorForm from './SponsorForm';
 import PremiumSponsors from './PremiumSponsors';
 import CommunitySponsors from './CommunitySponsors';
-import styled from 'styled-components';
+
 import { Container, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
+
 
 library.add(faPencilAlt, faTrash);
 
