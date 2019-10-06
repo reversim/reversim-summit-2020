@@ -7,7 +7,7 @@ import {
   Container,
   BreakLine,
 } from '../GlobalStyledComponents/ReversimStyledComps'
-import { SponsorMiniPremium } from './SponserGeneralComps';
+import HmPremiumSponsors from './HomePremiumSponsors'
 
 // Styled-components section
 
@@ -77,15 +77,7 @@ const SponsorsSection = ({ sponsors }) => {
       </HeadingAlinger>
       
         <PremiunSponsorsSection>
-          {sponsors
-            .filter(sponsor => sponsor.isPremium)
-            .map((sponsor, i) => {
-              return (
-                <div key={i}>
-                  <SponsorMiniPremium key={sponsor._id} isOnWhite={true} {...sponsor} />
-                </div>
-                );
-          })}
+          <HmPremiumSponsors sponsors={sponsors} />
         </PremiunSponsorsSection>
         <BreakLine /> 
         <CommunitySponsorsSection> {/* NOTE: This is not shown when screen width is under 992px couldn't figure out why */}
