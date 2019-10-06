@@ -7,7 +7,7 @@ import {
   Container,
   BreakLine,
 } from '../GlobalStyledComponents/ReversimStyledComps'
-import HmPremiumSponsors from './HomePremiumSponsors'
+import HomePremiumSponsors from './HomePremiumSponsors'
 
 // Styled-components section
 
@@ -40,9 +40,8 @@ const Heading = styled.h2`
       `}
 `;
 
-const PremiunSponsorsSection = styled.div`
+const PremiunSponsorsSection = styled.section`
   ${ ( { theme: { mq } } ) => `
-      max-width: 1200px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -54,7 +53,7 @@ const PremiunSponsorsSection = styled.div`
     `}
 `;
 
-const CommunitySponsorsSection = styled.div`
+const CommunitySponsorsSection = styled.section`
 ${ ( { theme: { space, mq } } ) =>`
       display: flex;
       justify-content: space-between;
@@ -68,18 +67,19 @@ ${ ( { theme: { space, mq } } ) =>`
 
 // React components section
 
-const SponsorsSection = ({ sponsors }) => {
+const HomePageSponsorsSection = ({ sponsors }) => {
   return (
     <SponserSectionContainter>
       <HeadingAlinger>
         <Heading>Meet Our Sponsors</Heading>
         <BreakLine />
+
       </HeadingAlinger>
-      
         <PremiunSponsorsSection>
-          <HmPremiumSponsors sponsors={sponsors} />
+          <HomePremiumSponsors sponsors={sponsors} />
         </PremiunSponsorsSection>
         <BreakLine /> 
+
         <CommunitySponsorsSection> {/* NOTE: This is not shown when screen width is under 992px couldn't figure out why */}
           <HomeCommunitySponsors sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}/>
         </CommunitySponsorsSection>
@@ -88,4 +88,4 @@ const SponsorsSection = ({ sponsors }) => {
 );
 };
 
-export default SponsorsSection;
+export default HomePageSponsorsSection;

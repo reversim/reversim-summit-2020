@@ -1,7 +1,7 @@
 import React from 'react';
 import { SponsorMiniPremium } from './SponserGeneralComps';
 
-const HmPremiumSponsors = ( {sponsors} ) =>{
+const HomePremiumSponsors = ( {sponsors} ) =>{
   return (
     sponsors
     .filter(sponsor => sponsor.isPremium)
@@ -15,4 +15,4 @@ const HmPremiumSponsors = ( {sponsors} ) =>{
   );
 };
 
-export default HmPremiumSponsors;
+export default HomePremiumSponsors;
