@@ -74,40 +74,60 @@ const sponsorsOrder = [
 ];
 
 const orderSponsors = (sponsors) => {
-  let orderdSponsors = []
+  let orderedSponsors = []
+  
   sponsorsOrder.forEach((key) => {
-    orderdSponsors.push(sponsors.find((sponsor) => sponsor.name === key))
+    orderedSponsors.push(sponsors.find((sponsor) => sponsor.name === key))
   })
-  return orderdSponsors
+  
+  return orderedSponsors
 }
 
+// const SponsorMini = ( props ) => {
+//   const { 
+//     name,
+//     logo,
+//     url
+//   } = props;
+    
+//   return (
+//     <SponsorMiniLink 
+//       href={hyperlink(url)}
+//       target="_blank"
+//     >
+//         <SponsorMiniImg
+//           src={image(logo, 350, 230)}
+//           alt={name}
+//         />
+//     </SponsorMiniLink>
+//   );
+// };
 
-const SponsorMini = ( props ) => {
+const CommunitySponsorsSection = ({sponsors}, props) => {
+
   const { 
     name,
     logo,
     url
   } = props;
-    
-  return (
-    <SponsorMiniLink href={hyperlink(url)} target="_blank">
-        <SponsorMiniImg
-          src={image(logo, 350, 230)}
-          alt={name}
-        />
-    </SponsorMiniLink>
-  );
-};
 
-const CommunitySponsorsSection = ({sponsors}) => {
   return (
     <Container>
       <HomeCommunityContainer>
       {orderSponsors(sponsors)
         .map((sponsor, i) => {
           return (
-            <SponsorMiniContainer key={i}>
-              <SponsorMini key={i} {...sponsor} />
+            <SponsorMiniContainer key={i} {...sponsor}>
+              <SponsorMiniLink 
+                href={hyperlink(url)}
+                target="_blank"
+              >
+                  <SponsorMiniImg
+                    src={image(logo, 350, 230)}
+                    alt={name}
+                  />
+              </SponsorMiniLink>
+              {/* <SponsorMini key={i} {...sponsor} /> */}
             </SponsorMiniContainer>
           );
         })}
