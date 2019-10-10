@@ -19,13 +19,15 @@ library.add(faPencilAlt, faTrash);
 
   //WantToBe components
 const WantToBeContainer = styled.div`
-  ${ ({ theme: { color, space } }) =>`
+  ${ ({ theme: { color, space, font } }) =>`
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
     margin: ${space.xl} 0px;
     line-height: 1.7;
+    font-family: ${font.main};
+    font-weight: ${font.weight_normal};
 
     color: ${color.text_1};
   `}
