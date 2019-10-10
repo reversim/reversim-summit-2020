@@ -24,12 +24,8 @@ const ImageContainer= styled.a`
   ${( { theme: { color, space } } ) => `
       width: 248px;
       height: 230px;
-      max-width: 248px;
 
-      position: relative;
       display: flex;
-      justify-content: center;
-      text-align: center;
       align-items: center;
       margin-bottom: ${space.m};
 
