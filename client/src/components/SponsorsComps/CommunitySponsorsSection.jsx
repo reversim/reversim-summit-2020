@@ -82,26 +82,23 @@ const orderSponsors = (sponsors) => {
 }
 
 
-class SponsorMini extends React.Component {
-  state = {
-    hovered: false
-  };
-  render() {
-    const { 
-      name,
-      logo,
-      url
-    } = this.props;
-    return (
-      <SponsorMiniLink href={hyperlink(url)} target="_blank">
-          <SponsorMiniImg
-            src={image(logo, 350, 230)}
-            alt={name}
-          />
-      </SponsorMiniLink>
-    );
-  }
-}
+const SponsorMini = ( props ) => {
+  const { 
+    name,
+    logo,
+    url
+  } = props;
+    
+  return (
+    <SponsorMiniLink href={hyperlink(url)} target="_blank">
+        <SponsorMiniImg
+          src={image(logo, 350, 230)}
+          alt={name}
+        />
+    </SponsorMiniLink>
+  );
+};
+
 const CommunitySponsorsSection = ({sponsors}) => {
   return (
     <Container>
