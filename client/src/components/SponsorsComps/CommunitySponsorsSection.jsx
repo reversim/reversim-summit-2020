@@ -83,33 +83,27 @@ const orderSponsors = (sponsors) => {
   return orderedSponsors
 }
 
-// const SponsorMini = ( props ) => {
-//   const { 
-//     name,
-//     logo,
-//     url
-//   } = props;
-    
-//   return (
-//     <SponsorMiniLink 
-//       href={hyperlink(url)}
-//       target="_blank"
-//     >
-//         <SponsorMiniImg
-//           src={image(logo, 350, 230)}
-//           alt={name}
-//         />
-//     </SponsorMiniLink>
-//   );
-// };
-
-const CommunitySponsorsSection = ({sponsors}, props) => {
-
+const SponsorMini = ( props ) => {
   const { 
     name,
     logo,
     url
   } = props;
+    
+  return (
+    <SponsorMiniLink 
+      href={hyperlink(url)}
+      target="_blank"
+    >
+        <SponsorMiniImg
+          src={image(logo, 350, 230)}
+          alt={name}
+        />
+    </SponsorMiniLink>
+  );
+};
+
+const CommunitySponsorsSection = ({sponsors}) => {
 
   return (
     <Container>
@@ -118,16 +112,7 @@ const CommunitySponsorsSection = ({sponsors}, props) => {
         .map((sponsor, i) => {
           return (
             <SponsorMiniContainer key={i} {...sponsor}>
-              <SponsorMiniLink 
-                href={hyperlink(url)}
-                target="_blank"
-              >
-                  <SponsorMiniImg
-                    src={image(logo, 350, 230)}
-                    alt={name}
-                  />
-              </SponsorMiniLink>
-              {/* <SponsorMini key={i} {...sponsor} /> */}
+              <SponsorMini key={i} {...sponsor} />
             </SponsorMiniContainer>
           );
         })}
