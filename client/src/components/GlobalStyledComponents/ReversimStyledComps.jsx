@@ -1,13 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  ${props => {
-    const {
-      mq,
-      space,
-    } = props.theme;
-
-    return (`
+  ${ ({ theme: { mq, space } }) =>`
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -32,21 +26,53 @@ export const Container = styled.div`
       @media (min-width: ${mq.xl}) {
         max-width: 1280px;
       };    
-    `)
-  }}
-
+    `}
 `
 
+export const BreakLine = styled.hr`
+  ${ ({ theme: { color, space } }) =>`
+      width: 100%;
+      flex-grow: 1;
+      align-self: center;
+      margin-left: ${space.m};
+      border-top: 1.5px solid ${color.background_2};
+    `}
+`;
+
+export const Heading2 = styled.h2`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.heading_2};
+    font-size: ${font.size_h2};
+    `}
+`;
+
+export const Heading3 = styled.h3`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_1};
+    font-size: ${font.size_h3};
+    `}
+`;
+
+export const Paragraph = styled.p`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_1};
+    font-size: ${font.size_reg};
+    `}
+`;
+
+export const SimpleLink = styled.a`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_1};
+    font-size: ${font.size_reg};
+
+    &:hover{
+      color: ${color.text_1};
+    }
+    `}
+`;
+
 export const ButtonStyledLink = styled.a`
-  ${props => {
-    const {
-
-      color,
-      font,
-      space,
-    } = props.theme;
-
-    return (`
+  ${ ({ theme: { color, font, space } }) =>`
       color: ${color.text_1};
       height: 40px;
       background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
@@ -67,7 +93,5 @@ export const ButtonStyledLink = styled.a`
         text-decoration: none;
         color: inherit;
       }
-    `)
-  }};
-
+    `};
 `;

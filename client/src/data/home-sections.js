@@ -4,7 +4,7 @@ import Hero from '../components/Hero';
 // import Register from '../components/Register';
 import SpeakersSection from '../components/SpeakersSection';
 import Location from '../components/Location';
-import {SponsorsSection} from '../components/Sponsors';
+import HomePageSponsorsSection from '../components/SponsorsComps/HomePageSponsorsSection';
 // import TimelineSection from '../components/TimelineSection';
 
 const homeSections = [
@@ -13,7 +13,7 @@ const homeSections = [
   // { name: "register", el: Register },
   // {name: 'speakers', el: SpeakersSection},
   // {name: 'timeline', el: TimelineSection},
-  {name: 'sponsors', el: SponsorsSection},
+  {name: 'sponsors', el: HomePageSponsorsSection},
   // {name: 'team', el: Team},
   {name: 'location', el: Location},
 ];

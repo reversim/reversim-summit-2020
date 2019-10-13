@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
+import cn from 'classnames';
+import styled from 'styled-components';
+
 import {
   Container as ReactstrapContainer,
   Navbar as ReactstrapNavbar,
@@ -9,7 +12,6 @@ import {
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import navItems from '../data/nav-items';
-import cn from 'classnames';
 import {
   logo,
   navLink,
@@ -17,15 +19,16 @@ import {
   newLink,
   navbarOpen
 } from './Navbar.css';
-import logoImg from '../images/SVG/nav-logo.svg';
+
 import Avatar from './Avatar';
 import {isServer} from '../utils';
 import {REVERSIM_SUMMIT} from '../utils';
 import { getLoginUrl } from "./Redirect";
-import newImg from '../images/new-nav-tag.png';
 import LinkDuo from './LinkDuo';
-import styled from 'styled-components';
 import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
+
+import newImg from '../images/new-nav-tag.png';
+import logoImg from '../images/SVG/nav-logo.svg';
 
 // styled-components section
 const NavbarContainer = styled.div`
