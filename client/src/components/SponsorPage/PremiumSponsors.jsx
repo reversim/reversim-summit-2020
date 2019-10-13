@@ -12,7 +12,7 @@ class SponsorMiniPremiumWithEdit extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        isEditing: false,
+        isEditing: true,//<-- false should be the default value
         isLoading: false
       };
     }
