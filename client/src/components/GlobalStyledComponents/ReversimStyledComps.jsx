@@ -155,6 +155,7 @@ export const Input = styled.input`
     padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
     margin: ${space.l} 0;
 
+    font-family: ${font.main};
     font-size: calc(0.875 * ${font.size_reg});
     font-weight: 300;
 
@@ -186,7 +187,8 @@ ${ ({theme: { space, font, color }}) =>`
   
   padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
   margin: ${space.l} 0;
-  
+
+  font-family: ${font.main};
   font-size: calc(0.875 * ${font.size_reg});
   font-weight: 300;
 
