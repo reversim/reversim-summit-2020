@@ -21,9 +21,10 @@ const CheckboxContainer = styled.div`
 `;
 
 const TrashIcon =styled(FontAwesomeIcon)`
-  ${ ({ theme: { space } }) => `
-    cursor: pointer;
+  ${ ({ theme: { color, space } }) => `
     margin: 0 ${space.m};
+    color: ${color.text_1};
+    cursor: pointer;
   `}
 `
 const OpenPositionContainer = styled.div`
