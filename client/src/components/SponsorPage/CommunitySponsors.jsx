@@ -5,12 +5,22 @@ import styled from 'styled-components';
 import CommunitySponsor from '../CommunitySponsor';
 import SponsorForm from './SponsorForm';
 
-import { Bkgr4, } from '../GlobalStyledComponents/ReversimStyledComps';
-import s from "../Sponsors.css";
-import cn from "classnames";
+import {
+  Bkgr4,
+  HeadingAligner,
+  HeadingCircle,
+  Heading2,
+  BreakLine
+} from '../GlobalStyledComponents/ReversimStyledComps';
 
 //styled-components components
 
+const Container = styled(Bkgr4)`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+`;
 
 //React components
 
@@ -72,21 +82,16 @@ const CommunitySponsors = ({
     deleteSponsor
   }) => {
     return (
-      <Bkgr4>
-        <div
-          className={cn(
-            "HOlllAAA d-flex justify-content-center text-align-center mb-6",
-            s.communitySponsorsTitle
-          )}
-        >
-          <svg className={s.circle}>
+      <Container>
+        <HeadingAligner>
+          <HeadingCircle>
             <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
-          </svg>
-          <div className={cn("font-size-xxl text-purple2")}>
+          </HeadingCircle>
+          <Heading2>
             Community Sponsors
-          </div>
-          <div className={cn("hl bg-purple2", s.mb10)} />
-        </div>
+          </Heading2>
+          <BreakLine />
+        </HeadingAligner>
         <div>
           {sponsors.map(sponsor => (
             <SponsorWithEdit
@@ -98,7 +103,7 @@ const CommunitySponsors = ({
             />
           ))}
         </div>
-      </Bkgr4>
+      </Container>
     );
   };
 

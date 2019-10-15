@@ -5,7 +5,8 @@ const theme = {
     text_1: 'rgb(255, 255, 255)',
     heading_2: 'rgb(81, 39, 255)',
     input_1: 'rgb(73, 80, 87)',
-    font_awsome_trash: `rgb(189, 58, 2)`,
+    font_awsome_trash: 'rgb(189, 58, 2)',
+    heading_decoratino: 'rgb(255, 97, 0)',
 
     // Background colors
     background_1: 'rgba(81, 39, 255, 0.9)',

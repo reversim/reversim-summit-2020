@@ -6,7 +6,7 @@ import SponsorForm from './SponsorForm';
 import { SponsorMiniPremium } from '../SponsorsComps/SponserGeneralComps';
 import {
   HeadingAligner,
-  HeadingImg,
+  HeadingDiamond,
   Heading2,
   BreakLine
 } from '../GlobalStyledComponents/ReversimStyledComps';
@@ -92,7 +92,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     return (
       <div>
         <HeadingAligner>
-          <HeadingImg src={diamond} alt="diamond" />
+          <HeadingDiamond src={diamond} alt="diamond" />
           <Heading>
             Premium Sponsors
           </Heading>

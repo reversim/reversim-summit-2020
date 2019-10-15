@@ -33,12 +33,15 @@ export const Container = styled.div`
 `
 
 export const BreakLine = styled.hr`
-  ${ ({ theme: { color, space } }) =>`
-      width: 100%;
+  ${ ({ theme: { color, space, mq } }) =>`
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
       border-top: 1.5px solid ${color.box_shadow_1};
+
+      @media (max-width: ${mq.m}){
+        display: none;
+      }
     `}
 `;
 
@@ -61,28 +64,52 @@ export const Bkgr4 = styled.div`
 //<h2, 3, ...> and <p>
 
 export const HeadingAligner = styled.div`
-  ${({ theme: { space } }) => `
+  ${({ theme: { space, mq } }) => `
   display: flex;
   align-items: center;
   margin-bottom: calc(2 * ${space.l});
+
+  @media (max-width: ${mq.m}){
+      text-align: center;
+    }
   `}
 `;
 
-export const HeadingImg = styled.img`
-${ ({ theme: { space } }) => `
-  width: 85px;
-  height: 85px;
-  margin-right: -${space.xxl};
-`}
+export const HeadingDiamond = styled.img`
+  ${ ({ theme: { space, mq } }) => `
+    width: 85px;
+    height: 85px;
+    margin-right: -${space.xxl};
+    
+    @media (max-width: ${mq.m}){
+      display: none;
+    }
+  `}
+`;
+
+export const HeadingCircle = styled.svg`
+  ${ ({ theme: { color, space, mq } }) => `
+      width: 100px;
+      height: 100px;
+      margin-right: -${space.xxl};
+      fill: ${color.heading_decoratino};
+
+      @media (max-width: ${mq.m}){
+        display: none;
+      }
+  `}
 `;
 
 export const Heading2 = styled.h2`
-  ${ ({ theme: { color, font } }) =>`
+  ${ ({ theme: { color, font, mq } }) =>`
     color: ${color.heading_2};
-    white-space: nowrap;
     font-family: ${font.main};
     font-size: ${font.size_h2};
     font-weight: ${font.weight_normal};
+
+    @media (min-width: ${mq.m}){
+      white-space: nowrap;
+    }
     `}
 `;
 
