@@ -132,12 +132,12 @@ class SponsorsPage extends React.Component {
       <Page title="Sponsors" {...this.props}>
         <FirstSectionContainer>
           <Container>
-          {/* {user && user.isReversimTeamMember && (             
-            )} */}
+          {user && user.isReversimTeamMember && (             
             <AddSoponsorContainer>
               <Heading3>Add sponsor</Heading3>
               <SponsorForm onSubmit={createSponsor} />
             </AddSoponsorContainer>
+            )}
             <WantToBe />
             <PremiumSponsors
               sponsors={sponsors.filter(sponsor => sponsor.isPremium)}

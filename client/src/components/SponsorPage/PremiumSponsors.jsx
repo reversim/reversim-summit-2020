@@ -1,18 +1,56 @@
 /* eslint-disable prettier/prettier */
-import React from "react";
-import cn from "classnames";
+import React from 'react';
+import styled from 'styled-components';
 
 import s from "../Sponsors.css";
 import SponsorForm from './SponsorForm';
 import { SponsorMiniPremium } from '../SponsorsComps/SponserGeneralComps';
+import { Heading2, BreakLine } from '../GlobalStyledComponents/ReversimStyledComps';
 
-import diamond from "../../images/SVG/diamond.svg";
+import diamond from '../../images/SVG/diamond.svg';
+
+//styled-components components
+const HeadingAligner = styled.div`
+  ${({ theme: { space } }) => `
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(2 * ${space.l});
+  `}
+`;
+
+const DiamondImg = styled.img`
+  ${ ({ theme: { space } }) => `
+    width: 85px;
+    height: 85px;
+    margin-right: -${space.xxl};
+  `}
+`;
+
+const Heading = styled(Heading2)`
+  ${ ({ theme: { color, } }) => `
+    color: ${color.text_1};
+  `}
+`;
+
+const BLine = styled(BreakLine)`
+  ${ ({ theme: { color, } }) => `
+    border-top: 1.5px solid ${color.box_shadow_2};
+  `}
+`;
+
+const SponsorMiniAligner = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+`;
+
+// React components
 
 class SponsorMiniPremiumWithEdit extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        isEditing: true,//<-- false should be the default value
+        isEditing: false,
         isLoading: false
       };
     }
@@ -64,14 +102,14 @@ class SponsorMiniPremiumWithEdit extends React.Component {
 const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     return (
       <div>
-        <div className="d-flex justify-content-center mb-6">
-          <img src={diamond} className={s.diamond} alt="diamond" />
-          <div className={cn("font-size-xxl text-white")}>
+        <HeadingAligner>
+          <DiamondImg src={diamond} alt="diamond" />
+          <Heading>
             Premium Sponsors
-          </div>
-          <div className="bg-white hl" />
-        </div>
-        <div className={cn("d-flex flex-wrap", s.premiumSponsorsWrap)}>
+          </Heading>
+          <BLine />
+        </HeadingAligner>
+        <SponsorMiniAligner>
           {sponsors.map(sponsor => (
             <SponsorMiniPremiumWithEdit
               key={sponsor._id}
@@ -82,7 +120,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
               deleteSponsor={deleteSponsor}
             />
           ))}
-        </div>
+        </SponsorMiniAligner>
       </div>
     );
   };

@@ -37,7 +37,7 @@ export const BreakLine = styled.hr`
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
-      border-top: 1.5px solid ${color.background_2};
+      border-top: 1.5px solid ${color.box_shadow_1};
     `}
 `;
 
@@ -46,21 +46,28 @@ export const BreakLine = styled.hr`
 export const Heading2 = styled.h2`
   ${ ({ theme: { color, font } }) =>`
     color: ${color.heading_2};
+    white-space: nowrap;
+    font-family: ${font.main};
     font-size: ${font.size_h2};
+    font-weight: ${font.weight_normal};
     `}
 `;
 
 export const Heading3 = styled.h3`
   ${ ({ theme: { color, space, font } }) =>`
     color: ${color.text_1};
+    font-family: ${font.main};
     font-size: ${font.size_h3};
-    margin-bottom: ${space.l};
+    font-weight: ${font.weight_normal};
+    margin-bottom: ${space.l};    
     `}
 `;
 
 export const Paragraph = styled.p`
   ${ ({ theme: { color, font } }) =>`
     color: ${color.text_1};
+    font-family: ${font.main};
+    font-weight: ${font.weight_normal};
     font-size: ${font.size_reg};
     `}
 `;
