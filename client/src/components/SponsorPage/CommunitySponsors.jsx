@@ -1,11 +1,18 @@
 /* eslint-disable prettier/prettier */
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
+
+import CommunitySponsor from '../CommunitySponsor';
+import SponsorForm from './SponsorForm';
+
+import { Bkgr4, } from '../GlobalStyledComponents/ReversimStyledComps';
 import s from "../Sponsors.css";
 import cn from "classnames";
-import CommunitySponsor from '../CommunitySponsor';
+
+//styled-components components
 
 
-import SponsorForm from './SponsorForm';
+//React components
 
 class SponsorWithEdit extends React.Component {
     constructor(props) {
@@ -65,10 +72,10 @@ const CommunitySponsors = ({
     deleteSponsor
   }) => {
     return (
-      <div className={cn("bg-white")}>
+      <Bkgr4>
         <div
           className={cn(
-            "d-flex justify-content-center text-align-center mb-6",
+            "HOlllAAA d-flex justify-content-center text-align-center mb-6",
             s.communitySponsorsTitle
           )}
         >
@@ -91,7 +98,7 @@ const CommunitySponsors = ({
             />
           ))}
         </div>
-      </div>
+      </Bkgr4>
     );
   };
 

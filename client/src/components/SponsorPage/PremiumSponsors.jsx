@@ -2,38 +2,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import s from "../Sponsors.css";
 import SponsorForm from './SponsorForm';
 import { SponsorMiniPremium } from '../SponsorsComps/SponserGeneralComps';
-import { Heading2, BreakLine } from '../GlobalStyledComponents/ReversimStyledComps';
+import {
+  HeadingAligner,
+  HeadingImg,
+  Heading2,
+  BreakLine
+} from '../GlobalStyledComponents/ReversimStyledComps';
 
 import diamond from '../../images/SVG/diamond.svg';
 
 //styled-components components
-const HeadingAligner = styled.div`
-  ${({ theme: { space } }) => `
-  display: flex;
-  align-items: center;
-  margin-bottom: calc(2 * ${space.l});
-  `}
-`;
 
-const DiamondImg = styled.img`
-  ${ ({ theme: { space } }) => `
-    width: 85px;
-    height: 85px;
-    margin-right: -${space.xxl};
-  `}
-`;
-
-const Heading = styled(Heading2)`
-  ${ ({ theme: { color, } }) => `
+const Heading = styled( Heading2 )`
+  ${ ({ theme: { color } }) => `
     color: ${color.text_1};
   `}
 `;
 
-const BLine = styled(BreakLine)`
-  ${ ({ theme: { color, } }) => `
+const BLine = styled( BreakLine )`
+  ${ ({ theme: { color } }) => `
     border-top: 1.5px solid ${color.box_shadow_2};
   `}
 `;
@@ -103,7 +92,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     return (
       <div>
         <HeadingAligner>
-          <DiamondImg src={diamond} alt="diamond" />
+          <HeadingImg src={diamond} alt="diamond" />
           <Heading>
             Premium Sponsors
           </Heading>

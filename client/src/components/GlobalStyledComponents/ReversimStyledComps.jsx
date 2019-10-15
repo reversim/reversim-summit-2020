@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //general elements
 
@@ -41,7 +42,39 @@ export const BreakLine = styled.hr`
     `}
 `;
 
+export const FAIcon = styled(FontAwesomeIcon)`
+  ${ ({ theme: { color, space } }) => `
+    margin: 0 ${space.m};
+    color: ${color.font_awsome_trash};
+    cursor: pointer;
+  `}
+`;
+
+//Backgrounds only
+
+export const Bkgr4 = styled.div`
+  ${ ({theme: { color } }) => `
+  background-color: ${color.background_4};
+  `}
+`;
+
 //<h2, 3, ...> and <p>
+
+export const HeadingAligner = styled.div`
+  ${({ theme: { space } }) => `
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(2 * ${space.l});
+  `}
+`;
+
+export const HeadingImg = styled.img`
+${ ({ theme: { space } }) => `
+  width: 85px;
+  height: 85px;
+  margin-right: -${space.xxl};
+`}
+`;
 
 export const Heading2 = styled.h2`
   ${ ({ theme: { color, font } }) =>`

@@ -5,10 +5,15 @@
 import React from "react";
 import pick from "lodash/pick";
 import { loadScript } from "../../utils";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styled from 'styled-components';
-import { Input, TextArea, FormButton, FileInput } from '../GlobalStyledComponents/ReversimStyledComps';
+import {
+  Input, 
+  TextArea, 
+  FormButton, 
+  FileInput, 
+  FAIcon,
+} from '../GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components section
 
@@ -20,13 +25,6 @@ const CheckboxContainer = styled.div`
   `}
 `;
 
-const TrashIcon =styled(FontAwesomeIcon)`
-  ${ ({ theme: { color, space } }) => `
-    margin: 0 ${space.m};
-    color: ${color.text_1};
-    cursor: pointer;
-  `}
-`
 const OpenPositionContainer = styled.div`
   ${ ({ theme: { space } }) => `
     margin-buttom: ${space.xxl};
@@ -216,7 +214,7 @@ class SponsorForm extends React.Component {
                   ) : (
                     <UploadImg src={image} />
                   )}
-                  <TrashIcon
+                  <FAIcon
                     icon="trash"
                     onClick={() => {
                       let images = this.state.images;
