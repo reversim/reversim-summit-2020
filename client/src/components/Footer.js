@@ -6,7 +6,7 @@ import {faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {Container} from './GlobalStyledComponents/ReversimStyledComps';
+import {AlignCenter} from './GlobalStyledComponents/ReversimStyledComps';
 
 library.add(faFacebook, faTwitter, faEnvelope);
 
@@ -85,7 +85,7 @@ const Link = styled.a`
 
 const FooterContainer = () => (
   <Footer>
-    <Container>
+    <AlignCenter>
       <List>
         <ListItem>
           <h6>Contact us:</h6>
@@ -131,7 +131,7 @@ const FooterContainer = () => (
           <h6>All Rights Reserved © 2020</h6>
         </ListItem>
       </List>
-    </Container>
+    </AlignCenter>
   </Footer>
 );
 

@@ -21,7 +21,7 @@ const Heading = styled( Heading2 )`
   `}
 `;
 
-const BLine = styled( BreakLine )`
+const BrkLine = styled( BreakLine )`
   ${ ({ theme: { color } }) => `
     border-top: 1.5px solid ${color.box_shadow_2};
   `}
@@ -96,7 +96,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
           <Heading>
             Premium Sponsors
           </Heading>
-          <BLine />
+          <BrkLine />
         </HeadingAligner>
         <SponsorMiniAligner>
           {sponsors.map(sponsor => (

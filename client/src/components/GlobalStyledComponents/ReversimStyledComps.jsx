@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //general elements
 
-export const Container = styled.div`
+export const AlignCenter = styled.div`
   ${ ({ theme: { mq, space } }) =>`
       display: flex;
       flex-wrap: wrap;
@@ -39,13 +39,13 @@ export const BreakLine = styled.hr`
       margin-left: ${space.m};
       border-top: 1.5px solid ${color.box_shadow_1};
 
-      @media (max-width: ${mq.m}){
+      @media (max-width: ${mq.l}){
         display: none;
       }
     `}
 `;
 
-export const FAIcon = styled(FontAwesomeIcon)`
+export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
   ${ ({ theme: { color, space } }) => `
     margin: 0 ${space.m};
     color: ${color.font_awsome_trash};
@@ -53,18 +53,12 @@ export const FAIcon = styled(FontAwesomeIcon)`
   `}
 `;
 
-//Backgrounds only
-
-export const Bkgr4 = styled.div`
-  ${ ({theme: { color } }) => `
-  background-color: ${color.background_4};
-  `}
-`;
-
 //<h2, 3, ...> and <p>
 
 export const HeadingAligner = styled.div`
   ${({ theme: { space, mq } }) => `
+  width: 100%;
+
   display: flex;
   align-items: center;
   margin-bottom: calc(2 * ${space.l});
@@ -107,7 +101,7 @@ export const Heading2 = styled.h2`
     font-size: ${font.size_h2};
     font-weight: ${font.weight_normal};
 
-    @media (min-width: ${mq.m}){
+    @media (min-width: ${mq.l}){
       white-space: nowrap;
     }
     `}
@@ -171,7 +165,7 @@ export const ButtonStyledLink = styled.a`
 
 export const FormButton = styled.button`
   ${ ({theme: {color, font, space,}}) => `
-    box-shadow: inset 0px 0px 10px 2px rgba(0, 238, 255, 0.1);
+    box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
     background: ${color.background_linear_gradient_1};
     font-family: ${font.form_button};
     font-size: ${font.size_reg};
@@ -233,7 +227,7 @@ export const Input = styled.input`
     background-clip: padding-box;
     border: 2px solid ${color.input_border_1};
     border-radius: calc(0.25 * ${font.size_reg});
-    box-shadow: inset 0 1px 1px ${color.input_box_shadow_1};
+    box-shadow: ${color.input_box_shadow_1};
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
     &:focus {
@@ -241,7 +235,7 @@ export const Input = styled.input`
       background-color: ${color.input_bkgr_1};
       border-color: ${color.input_border_2};
       outline: 0;
-      box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 calc(0.2 * ${font.size_reg}) ${color.input_box_shadow_2};
+      box-shadow: ${color.input_box_shadow_1}, ${color.input_box_shadow_2};
     }
   `}
 `;
@@ -266,7 +260,7 @@ ${ ({theme: { space, font, color }}) =>`
   background-clip: padding-box;
   border: 2px solid ${color.input_border_1};
   border-radius: calc(0.25 * ${font.size_reg});
-  box-shadow: inset 0 1px 1px ${color.input_box_shadow_1};
+  box-shadow: ${color.input_box_shadow_1};
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
   &:focus {
@@ -274,7 +268,7 @@ ${ ({theme: { space, font, color }}) =>`
     background-color: ${color.input_bkgr_1};
     border-color: ${color.input_border_2};
     outline: 0;
-    box-shadow: inset 0 1px 1px ${color.input_box_shadow_1}, 0 0 0 calc(0.2 * ${font.size_reg}) ${color.input_box_shadow_2};
+    box-shadow: ${color.input_box_shadow_1}, ${color.input_box_shadow_2};
   }
 `}
 `;
