@@ -1,25 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import SponsorPageRoute from "./SponsorPageRoute";
+import SponsorPageRoute from './SponsorPageRoute';
 
-import Page from "./Page";
+import Page from './Page';
 
-import triangle from "../images/SVG/triangle.svg";
-import zigzag from "../images/SVG/zigzag.svg";
+import triangle from '../images/SVG/triangle.svg';
+import zigzag from '../images/SVG/zigzag.svg';
 
-import { image } from "../images";
+import { image } from '../images';
 
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
   faLinkedin,
   faGithub,
   faMedium,
   faTwitter
-} from "@fortawesome/free-brands-svg-icons";
+} from '@fortawesome/free-brands-svg-icons';
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {Link as ScrollLink } from "react-scroll";
 import { Container, Button } from "reactstrap";
 
@@ -197,6 +198,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
   );
 };
 
+// SponsorCarousel is rendered in SponsorPage
 class SponsorCarousel extends React.Component {
   constructor(props) {
     super(props);
@@ -298,6 +300,7 @@ class SponsorCarousel extends React.Component {
   }
 }
 
+// OpenPosition is rendered in SponsorPage
 class OpenPosition extends React.Component {
   constructor(props) {
     super(props);
