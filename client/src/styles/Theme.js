@@ -3,6 +3,7 @@ const theme = {
   color: {
     // color
     text_1: 'rgb(255, 255, 255)',
+    text_2: 'rgb(0, 0, 0)',
     heading_2: 'rgb(81, 39, 255)',
     input_1: 'rgb(73, 80, 87)',
     font_awsome_trash: 'rgb(189, 58, 2)',
@@ -45,7 +46,7 @@ const theme = {
     form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
     weight_normal: '300',
-    weight_med: '500',
+    weight_med: '400',
     weight_bold: '600',
     size_reg: '16px',
     size_md: '18px',
@@ -53,6 +54,7 @@ const theme = {
 
     size_h2: '48px',
     size_h3: '35px',
+    size_h4: '24px',
   },
 
   // spaces used for padding and margins

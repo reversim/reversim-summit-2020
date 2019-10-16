@@ -1,6 +1,12 @@
+/* eslint-disable prettier/prettier */
+// NOTE: OpenPosition is rendered by SponsorPage.
+// NOTE: Each component OpenPosition is responsible for one open position description
+// NOTE: in each of the sponsors pages.
+
 import React from 'react';
 import styled from 'styled-components';
 
+import { FlexColumn, Heading4, Paragraph, ButtonStyledLink } from '../GlobalStyledComponents/ReversimStyledComps';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -9,7 +15,68 @@ import { Button } from "reactstrap";
 
 library.add(faMapMarkerAlt);
 
-// OpenPosition is rendered in SponsorPage
+// styled-components components
+
+const GeneralContainer = styled(FlexColumn)`
+  ${ ({ theme: { color, font, space } }) => `
+    flex: 1;
+    margin: ${space.xl} calc( ${space.xl} / 2);
+    
+    font-family: ${font.main};
+    background-color: ${color.background_4};
+    border: 4px solid ${color.box_shadow_1};
+  `}
+`;
+
+const HeaderContainer = styled.div`
+  ${ ({ theme: { color, space } }) => `
+    min-height: 120px;
+    padding: calc(${space.m} * 3);
+
+    background-color: ${color.background_2};
+    color: ${color.text_1};
+  `}
+`;
+
+const JobTitle = styled(Heading4)`
+  ${ ({ theme: { font } }) => `
+    font-weight: ${font.weight_bold}
+  `}
+`;
+
+const JobLocation = styled(Heading4)`
+  ${ ({ theme: { font } }) => `
+    margin: 0;
+    font-weight: ${font.weight_med};
+  `}
+`;
+
+const DescriptionContainer = styled(FlexColumn)`
+  ${ ({ theme: { space } }) =>`
+    padding: calc(${space.m} * 3);
+
+    flex-grow: 1;
+    justify-content: space-between;
+  `}
+`;
+
+const JobDescription = styled(Paragraph)`
+  ${ ({ theme: {color, font, space } }) => `
+    margin-bottom: ${space.xl};
+
+    color: ${color.text_2};
+    font-weight: ${font.weight_med};
+  `}
+`;
+
+const ApplyButton = styled(ButtonStyledLink)`
+  min-width: 90px;
+  align-self: flex-end;
+  text-align: center;
+  margin: 0;
+`;
+
+// React component
 class OpenPosition extends React.Component {
   constructor(props) {
     super(props);
@@ -21,26 +88,28 @@ class OpenPosition extends React.Component {
 
   render() {
     // const {isEditingiting} = this.state;
-    const { sponsor, canEdit, openPosition } = this.props;
+
+    const {
+      sponsor,
+      canEdit,
+      openPosition 
+    } = this.props;
+
     return (
-      <div className="mr-5 mb-4 flex-1 d-flex flex-column">
-        <div className={"bg-purple2 p-6"}>
-          <div className="text-white">
-            <div className="font-size-lg font-weight-bold">
+      <GeneralContainer>
+        <HeaderContainer>
+            <JobTitle>
               {openPosition.title}
-            </div>
-            <div>{openPosition.city}</div>
-          </div>
-        </div>
-        <div className="bg-white b-strong border-purple2 p-6 d-flex flex-column flex-grow-1 justify-content-between">
-          <div className="pb-3 premium-position">
+            </JobTitle>
+            <JobLocation>{openPosition.city}</JobLocation>
+        </HeaderContainer>
+        <DescriptionContainer>
+          <JobDescription>
             {openPosition.description}
-          </div>
-          <a href={openPosition.link} className="align-self-end">
-            <Button className="styled-button w-max-content">APPLY</Button>
-          </a>
-        </div>
-      </div>
+          </JobDescription>
+          <ApplyButton href={openPosition.link}>APPLY</ApplyButton>
+        </DescriptionContainer>
+      </GeneralContainer>
     );
   }
 }

@@ -32,6 +32,11 @@ export const AlignCenter = styled.div`
     `}
 `
 
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const BreakLine = styled.hr`
   ${ ({ theme: { color, space, mq } }) =>`
       flex-grow: 1;
@@ -114,6 +119,16 @@ export const Heading3 = styled.h3`
     font-size: ${font.size_h3};
     font-weight: ${font.weight_normal};
     margin-bottom: ${space.l};    
+    `}
+`;
+
+export const Heading4 = styled.h4`
+  ${ ({ theme: { color, space, font } }) =>`
+    color: ${color.text_1};
+    font-family: ${font.main};
+    font-size: ${font.size_h4};
+    font-weight: ${font.weight_normal};
+    margin-bottom: ${space.m};    
     `}
 `;
 
