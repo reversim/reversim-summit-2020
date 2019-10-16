@@ -6,7 +6,6 @@ import CommunitySponsor from '../CommunitySponsor';
 import SponsorForm from './SponsorForm';
 
 import {
-  Bkgr4,
   HeadingAligner,
   HeadingCircle,
   Heading2,
@@ -15,11 +14,15 @@ import {
 
 //styled-components components
 
-const Container = styled(Bkgr4)`
-  width: 80%;
+const ColumnContainer = styled.div`
+${ ({theme: { color, mq } }) => `
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  background-color: ${color.background_4};
+
+  @media (max-width: ${mq.m})
+`}
 `;
 
 //React components
@@ -82,7 +85,7 @@ const CommunitySponsors = ({
     deleteSponsor
   }) => {
     return (
-      <Container>
+      <ColumnContainer>
         <HeadingAligner>
           <HeadingCircle>
             <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
@@ -103,7 +106,7 @@ const CommunitySponsors = ({
             />
           ))}
         </div>
-      </Container>
+      </ColumnContainer>
     );
   };
 

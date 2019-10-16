@@ -6,7 +6,7 @@ import CommunitySponsorsSection from "./CommunitySponsorsSection";
 import HomePremiumSponsors from './HomePremiumSponsors';
 
 import {
-  Container,
+  AlignCenter,
   HeadingAligner,
   HeadingDiamond,
   Heading2,
@@ -18,7 +18,7 @@ import diamond from '../../images/SVG/diamond.svg';
 
 // Styled-components section
 
-const SponserSectionContainter = styled(Container)`
+const SponserSectionContainter = styled(AlignCenter)`
   margin-top: 80px;
   margin-bottom: 100px;
   flex-direction: column;

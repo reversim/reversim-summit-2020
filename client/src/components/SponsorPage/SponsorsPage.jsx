@@ -10,7 +10,7 @@ import SponsorForm from './SponsorForm';
 import PremiumSponsors from './PremiumSponsors';
 import CommunitySponsors from './CommunitySponsors';
 
-import { Container, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
+import { AlignCenter, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
 
 
 library.add(faPencilAlt, faTrash);
@@ -47,7 +47,7 @@ const WantToBelink = styled(SimpleLink)`
 
   //SponsorsPage Components
 
-const FirstSectionContainer = styled.section`
+const PremiumSectionContainer = styled.section`
   ${ ({ theme: { color, space, mq } }) => `
     display: flex;
     justify-content: center;
@@ -75,9 +75,10 @@ const AddSoponsorContainer = styled.div`
   `}
 `;
 
-const CommunityContainer = styled(Container)`
+const CommunityContainer = styled(AlignCenter)`
  ${ ({ theme: { space } }) => `
-  margin-top: ${space.xl};
+    width: 80%;
+    margin-top: ${space.xl};
  `}
 `;
 
@@ -130,14 +131,16 @@ class SponsorsPage extends React.Component {
 
     return (
       <Page title="Sponsors" {...this.props}>
-        <FirstSectionContainer>
-          <Container>
-          {user && user.isReversimTeamMember && (             
-            <AddSoponsorContainer>
-              <Heading3>Add sponsor</Heading3>
-              <SponsorForm onSubmit={createSponsor} />
-            </AddSoponsorContainer>
-            )}
+        <PremiumSectionContainer>
+          <AlignCenter>
+          {
+            user && user.isReversimTeamMember && (
+              <AddSoponsorContainer>
+                <Heading3>Add sponsor</Heading3>
+                <SponsorForm onSubmit={createSponsor} />
+              </AddSoponsorContainer>
+            )
+          }
             <WantToBe />
             <PremiumSponsors
               sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
@@ -145,8 +148,8 @@ class SponsorsPage extends React.Component {
               updateSponsor={updateSponsor}
               deleteSponsor={deleteSponsor}
             />
-          </Container>
-        </FirstSectionContainer>
+          </AlignCenter>
+        </PremiumSectionContainer>
         <CommunityContainer>
           <CommunitySponsors
             sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}
