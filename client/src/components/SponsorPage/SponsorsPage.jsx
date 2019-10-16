@@ -19,13 +19,15 @@ library.add(faPencilAlt, faTrash);
 
   //WantToBe components
 const WantToBeContainer = styled.div`
-  ${ ({ theme: { color, space } }) =>`
+  ${ ({ theme: { color, space, font } }) =>`
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
     margin: ${space.xl} 0px;
     line-height: 1.7;
+    font-family: ${font.main};
+    font-weight: ${font.weight_normal};
 
     color: ${color.text_1};
   `}
@@ -65,6 +67,7 @@ const FirstSectionContainer = styled.section`
 
 const AddSoponsorContainer = styled.div`
   ${ ({ theme: { space, color} }) =>`
+    width: inherit;
     padding: ${space.l};
     margin-bottom: ${space.xxl};
     border: 2px solid ${color.box_shadow_3};
@@ -129,11 +132,11 @@ class SponsorsPage extends React.Component {
       <Page title="Sponsors" {...this.props}>
         <FirstSectionContainer>
           <Container>
-          {user && user.isReversimTeamMember && (
+          {user && user.isReversimTeamMember && (             
             <AddSoponsorContainer>
               <Heading3>Add sponsor</Heading3>
               <SponsorForm onSubmit={createSponsor} />
-            </AddSoponsorContainer>              
+            </AddSoponsorContainer>
             )}
             <WantToBe />
             <PremiumSponsors

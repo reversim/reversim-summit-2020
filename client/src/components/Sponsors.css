@@ -10,27 +10,11 @@
     padding: 20px 180px;
 }
 
-.diamond {
-    width: 85px;
-    height: 85px;
-    margin-right: -50px;
-}
-
 .triangle {
     height: 100px;
     width: 90px;
     margin-right: -26px;
     margin-top: -23px;
-}
-
-.circle {
-    width: 100px;
-    height: 100px;
-    margin-right: -50px;
-    fill: #ff6100;
-}
-.mb10 {
-    margin-bottom: -10px
 }
 
 .hr {
@@ -116,9 +100,6 @@
         text-align: center;
         flex-direction: column !important;
     }
-    .circle {
-        display: none;
-    }
 
     .premiumCover {
         flex-direction: column;
@@ -126,9 +107,6 @@
     }
 }
 @media (min-width:767px) {
-    .communitySponsorsTitle {
-        align-items: center;
-    }
     .communitySponsorText {
         width: 0;
         flex-grow: 1;

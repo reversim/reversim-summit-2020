@@ -4,11 +4,47 @@
 
 import React from "react";
 import pick from "lodash/pick";
-import { Button, Input} from "reactstrap";
 import { loadScript } from "../../utils";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from 'styled-components';
+import {
+  Input, 
+  TextArea, 
+  FormButton, 
+  FileInput, 
+  FAIcon,
+} from '../GlobalStyledComponents/ReversimStyledComps';
 
+// styled-components section
+
+const CheckboxContainer = styled.div`
+  ${ ({ theme: { space } }) => `
+    display: flex;
+    align-items: center;
+    margin-bottom: ${space.l};
+  `}
+`;
+
+const OpenPositionContainer = styled.div`
+  ${ ({ theme: { space } }) => `
+    margin-buttom: ${space.xxl};
+  `}
+`;
+
+const SubmitOrCancelContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const UploadImg = styled.img`
+  width: 200px;
+`;
+
+const SubmitButton = styled(FormButton)`
+  width: 150px;
+`;
+
+// React components section
 
 class SponsorForm extends React.Component {
     constructor(props) {
@@ -98,14 +134,22 @@ class SponsorForm extends React.Component {
         this.setState({images});
       }
     }
+    
     render() {
-      const { onSubmit, onCancel, sponsor, isLoading } = this.props;
+      const {
+        onSubmit,
+        onCancel,
+        sponsor,
+        isLoading,
+      } = this.props;
+
       loadScript("https://widget.cloudinary.com/v2.0/global/all.js")
   
       const _id = sponsor ? sponsor._id : "";
+
       return (
         <form onSubmit={e => onSubmit(this.getData(e))}>
-          <div className="d-flex align-items-center mb-3">
+          <CheckboxContainer>
             <input
               type="checkbox"
               id={`isPremium_${_id}`}
@@ -118,20 +162,18 @@ class SponsorForm extends React.Component {
                 })
               }
             />
-            <label htmlFor={`isPremium_${_id}`} className="mb-0">
+            <label htmlFor={`isPremium_${_id}`}>
               Is this a premium sponsor
             </label>
-          </div>
+          </CheckboxContainer>
           <Input
-            className="mb-3"
-            size="sm"
             required
             placeholder="Name"
             value={this.state.name || ""}
             onChange={e => this.setState({ name: e.target.value })}
           />
-          <Button className="p-relative mb-3" size="sm">
-            <input
+          <FormButton>
+            <FileInput
               type="file"
               onChange={e => {
                 const f = e.target.files[0];
@@ -142,34 +184,20 @@ class SponsorForm extends React.Component {
                 };
                 reader.readAsDataURL(f);
               }}
-              style={{
-                opacity: 0,
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0
-              }}
             />
             Choose logo
-          </Button>
+          </FormButton>
           <Input
-            className="mb-3"
-            size="sm"
             placeholder="Link to website"
             value={this.state.url || ""}
             onChange={e => this.setState({ url: e.target.value })}
           />
           <Input
-            className="mb-3"
-            size="sm"
             placeholder="Link to job page"
             value={this.state.jobUrl || ""}
             onChange={e => this.setState({ jobUrl: e.target.value })}
           />
-          <Input
-            className="mb-3"
-            size="sm"
+          <TextArea
             type="textarea"
             placeholder="About"
             value={this.state.about || ""}
@@ -184,11 +212,10 @@ class SponsorForm extends React.Component {
                       <source src={image} type="video/mp4" />
                     </video>
                   ) : (
-                    <img src={image} style={{ width: "200px" }} />
+                    <UploadImg src={image} />
                   )}
-                  <FontAwesomeIcon
+                  <FAIcon
                     icon="trash"
-                    className="cursor-pointer"
                     onClick={() => {
                       let images = this.state.images;
                       images.splice(i, 1);
@@ -197,19 +224,17 @@ class SponsorForm extends React.Component {
                   />
                 </div>
               ))}
-              <Button className="p-relative mb-3" size="sm" onClick={() => this.openCloudinaryUploader()}>
+              <FormButton
+              onClick={() => this.openCloudinaryUploader()}
+              >
                 Add photos
-              </Button>
+              </FormButton>
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="location link from google maps"
                 value={this.state.locationLink}
                 onChange={e => this.setState({ locationLink: e.target.value })}
               />
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="city. like- Herzliya & Haifa, IL"
                 value={this.state.locationShortAddress}
                 onChange={e =>
@@ -217,50 +242,36 @@ class SponsorForm extends React.Component {
                 }
               />
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="one line description"
                 value={this.state.oneLiner}
                 onChange={e => this.setState({ oneLiner: e.target.value })}
               />
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="linkedIn"
                 value={this.state.linkedin}
                 onChange={e => this.setState({ linkedin: e.target.value })}
               />
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="github"
                 value={this.state.github}
                 onChange={e => this.setState({ github: e.target.value })}
               />
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="facebook"
                 value={this.state.facebook}
                 onChange={e => this.setState({ facebook: e.target.value })}
               />
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="twitter"
                 value={this.state.twitter}
                 onChange={e => this.setState({ twitter: e.target.value })}
               />
               <Input
-                className="mb-3"
-                size="sm"
                 placeholder="medium"
                 value={this.state.medium}
                 onChange={e => this.setState({ medium: e.target.value })}
               />
-              <Input
-                className="mb-3"
-                size="sm"
+              <TextArea
                 type="textarea"
                 placeholder="technology story"
                 value={this.state.techStory ? this.state.techStory.text : ""}
@@ -270,12 +281,9 @@ class SponsorForm extends React.Component {
                   this.setState({ techStory });
                 }}
               />
-              <Input
-                className="mb-3"
-                size="sm"
+              <TextArea
                 type="textarea"
                 placeholder="technologies separated by new line. make sure to remove unnecessary spaces and stuff"
-                // TODO NETA- clean up my mass
                 value={this.state.techStory.technologies}
                 onChange={e => {
                   let techStory = this.state.techStory;
@@ -283,15 +291,13 @@ class SponsorForm extends React.Component {
                   this.setState({ techStory });
                 }}
               />
-              <Input
-                className="mb-3"
-                size="sm"
+              <TextArea
                 placeholder="reversim and Us"
                 type="textarea"
                 value={this.state.reversimAndUs}
                 onChange={e => this.setState({ reversimAndUs: e.target.value })}
               />
-              <Button
+              <FormButton
                 onClick={() => {
                   let openPositions = this.state.openPositions || [];
                   openPositions.push({
@@ -306,13 +312,11 @@ class SponsorForm extends React.Component {
                 }}
               >
                 add an open Position
-              </Button>
+              </FormButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
-                  <div key={i} className="mb-8">
+                  <OpenPositionContainer key={i}>
                     <Input
-                      className="mb-2"
-                      size="sm"
                       placeholder="job title"
                       value={openPosition.title}
                       onChange={e => {
@@ -322,8 +326,6 @@ class SponsorForm extends React.Component {
                       }}
                     />
                     <Input
-                      className="mb-2"
-                      size="sm"
                       placeholder="city"
                       value={openPosition.city}
                       onChange={e => {
@@ -332,9 +334,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <Input
-                      className="mb-2"
-                      size="sm"
+                    <TextArea
                       type="textarea"
                       placeholder="description"
                       value={openPosition.description}
@@ -345,8 +345,6 @@ class SponsorForm extends React.Component {
                       }}
                     />
                     <Input
-                      className="mb-2"
-                      size="sm"
                       placeholder="link"
                       value={openPosition.link}
                       onChange={e => {
@@ -355,7 +353,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <Button
+                    <FormButton
                       onClick={() => {
                         let openPositions = this.state.openPositions;
                         openPositions.splice(i, 1);
@@ -363,37 +361,33 @@ class SponsorForm extends React.Component {
                       }}
                     >
                       cancel
-                    </Button>
-                  </div>
+                    </FormButton>
+                  </OpenPositionContainer>
                 ))}
             </div>
           )}
           {!onCancel && (
-            <Button
-              className="d-block mx-auto"
-              color="primary"
-              style={{ width: 150 }}
+            <SubmitButton
               disabled={isLoading}
             >
               Submit
-            </Button>
+            </SubmitButton>
           )}
           {onCancel && (
-            <div className="d-flex justify-content-around">
-              <Button
+            <SubmitOrCancelContainer>
+              <FormButton
                 outline
-                color="primary"
                 onClick={e => {
                   e.preventDefault();
                   onCancel();
                 }}
               >
                 Cancel
-              </Button>
-              <Button color="primary" disabled={isLoading}>
+              </FormButton>
+              <SubmitButton disabled={isLoading}>
                 Submit
-              </Button>
-            </div>
+              </SubmitButton>
+            </SubmitOrCancelContainer>
           )}
         </form>
       );
