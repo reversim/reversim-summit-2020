@@ -3,11 +3,18 @@ import React from "react";
 import styled from 'styled-components';
 
 import CommunitySponsorsSection from "./CommunitySponsorsSection";
+import HomePremiumSponsors from './HomePremiumSponsors';
+
 import {
   Container,
-  BreakLine,
-} from '../GlobalStyledComponents/ReversimStyledComps'
-import HomePremiumSponsors from './HomePremiumSponsors'
+  HeadingAligner,
+  HeadingDiamond,
+  Heading2,
+  BreakLine
+} from '../GlobalStyledComponents/ReversimStyledComps';
+
+
+import diamond from '../../images/SVG/diamond.svg';
 
 // Styled-components section
 
@@ -18,39 +25,23 @@ const SponserSectionContainter = styled(Container)`
   flex-wrap: nowrap;
 `;
 
-const HeadingAlinger = styled.div`
-  ${ ( { theme: { space } } ) => `
-    width: 100%;
-    display: flex;
-    align-items: baseline;
-    margin-bottom: ${space.xxl};
-  `}
+const BottomLine = styled(BreakLine)`
+  width: 100%;
 `;
-
-const Heading = styled.h2`
-  ${ ( { theme: { color, font } } ) => `
-        width: inherit;
-        text-align: center;
-        font-weight: ${font.weight_normal};
-        font-family: ${font.main};
-        font-size: ${font.size_h2};
-        color: ${color.heading_2};
-      `}
-`;
-
 
 // React components section
 
 const HomePageSponsorsSection = ({ sponsors }) => {
   return (
     <SponserSectionContainter>
-      <HeadingAlinger>
-        <Heading>Meet Our Sponsors</Heading>
+      <HeadingAligner>
+        <HeadingDiamond src={diamond} alt="diamond" />
+        <Heading2>Meet Our Sponsors</Heading2>
         <BreakLine />
-      </HeadingAlinger>
+      </HeadingAligner>
 
       <HomePremiumSponsors sponsors={sponsors} />
-      <BreakLine /> 
+      <BottomLine /> 
 
       <CommunitySponsorsSection sponsors={sponsors.filter(sponsor => !sponsor.isPremium)} />
     </SponserSectionContainter>

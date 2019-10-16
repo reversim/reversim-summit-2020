@@ -65,6 +65,8 @@ export const Bkgr4 = styled.div`
 
 export const HeadingAligner = styled.div`
   ${({ theme: { space, mq } }) => `
+  width: 100%;
+  
   display: flex;
   align-items: center;
   margin-bottom: calc(2 * ${space.l});
