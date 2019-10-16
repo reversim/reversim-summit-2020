@@ -1,29 +1,15 @@
-import React from "react";
-import cn from "classnames";
-import { Link } from "react-router-dom";
-import { getHref } from "../utils";
+import React from 'react';
+import styled from 'styled-components';
 import SponsorPageRoute from "./SponsorPageRoute";
-import * as Scroll from "react-scroll";
-import { animateScroll as scroll, Link as ScrollLink } from "react-scroll";
+
 import Page from "./Page";
-import { Container, Row, Col, Button } from "reactstrap";
+
 import triangle from "../images/SVG/triangle.svg";
 import zigzag from "../images/SVG/zigzag.svg";
-import s from "./Sponsors.css";
-import { image } from "../images";
-import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption
-} from "reactstrap";
 
-import {
-  faMapMarkerAlt,
-  faPencilAlt,
-  faTrash
-} from "@fortawesome/free-solid-svg-icons";
+import { image } from "../images";
+
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
   faLinkedin,
@@ -34,7 +20,20 @@ import {
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Link as ScrollLink } from "react-scroll";
+import { Container, Button } from "reactstrap";
+
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+} from "reactstrap";
+
 import ReactMarkdown from "react-markdown";
+
+import cn from "classnames";
+import s from "./Sponsors.css";
+
 library.add(faMapMarkerAlt);
 
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
