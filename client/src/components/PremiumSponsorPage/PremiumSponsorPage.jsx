@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import SponsorPageRoute from './SponsorPageRoute';
+import SponsorPageRoute from '../SponsorPageRoute';
 
-import Page from './Page';
+import Page from '../Page';
+import SponsorCarousel from './SponsorCarousel';
+import OpenPosition from './OpenPosition';
 
-import triangle from '../images/SVG/triangle.svg';
-import zigzag from '../images/SVG/zigzag.svg';
+import triangle from '../../images/SVG/triangle.svg';
+import zigzag from '../../images/SVG/zigzag.svg';
 
-import { image } from '../images';
+import { image } from '../../images';
 
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -22,18 +24,12 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {Link as ScrollLink } from "react-scroll";
-import { Container, Button } from "reactstrap";
-
-import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-} from "reactstrap";
+import { Container } from "reactstrap";
 
 import ReactMarkdown from "react-markdown";
 
 import cn from "classnames";
-import s from "./Sponsors.css";
+import s from "../Sponsors.css";
 
 library.add(faMapMarkerAlt);
 
@@ -197,143 +193,5 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
     </Page>
   );
 };
-
-// SponsorCarousel is rendered in SponsorPage
-class SponsorCarousel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { activeIndex: 0 };
-    this.next = this.next.bind(this);
-    this.previous = this.previous.bind(this);
-    this.goToIndex = this.goToIndex.bind(this);
-    this.onExiting = this.onExiting.bind(this);
-    this.onExited = this.onExited.bind(this);
-    this.sponsor = this.props.sponsor;
-  }
-
-  onExiting() {
-    this.animating = true;
-  }
-
-  onExited() {
-    this.animating = false;
-  }
-
-  next() {
-    if (this.animating) return;
-    const nextIndex =
-      this.state.activeIndex === this.sponsor.images.length - 1
-        ? 0
-        : this.state.activeIndex + 1;
-    this.setState({ activeIndex: nextIndex });
-  }
-
-  previous() {
-    if (this.animating) return;
-    const nextIndex =
-      this.state.activeIndex === 0
-        ? this.sponsor.images.length - 1
-        : this.state.activeIndex - 1;
-    this.setState({ activeIndex: nextIndex });
-  }
-
-  goToIndex(newIndex) {
-    if (this.animating) return;
-    this.setState({ activeIndex: newIndex });
-  }
-
-  render() {
-    const { activeIndex } = this.state;
-    const { sponsor } = this.props;
-
-    const images = sponsor.images.sort((img1, img2) =>
-      img1.endsWith("mp4") ? -1 : (img2.endsWith("mp4") ? 1 : 0)
-    );
-    const slides = images.map((item, i) => {
-      return (
-        <CarouselItem
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-          key={i}
-          className="text-align-center"
-        >
-          {item && item.endsWith("mp4") ? (
-            <video
-              // width="596"
-              // height="410"
-              controls={false}
-              autoPlay={true}
-              muted={true}
-            >
-              <source src={item} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <img src={image(item, 720, 495)} />
-          )}
-        </CarouselItem>
-      );
-    });
-
-    return (
-      <Carousel
-        activeIndex={activeIndex}
-        next={this.next}
-        previous={this.previous}
-        interval={false}
-      >
-        {slides}
-        <CarouselControl
-          direction="prev"
-          directionText="Previous"
-          onClickHandler={this.previous}
-          className={cn(s.carouselControl, "cursor-pointer bg-purple2")}
-        />
-        <CarouselControl
-          direction="next"
-          directionText="Next"
-          onClickHandler={this.next}
-          className={cn(s.carouselControl, "cursor-pointer bg-purple2")}
-        />
-      </Carousel>
-    );
-  }
-}
-
-// OpenPosition is rendered in SponsorPage
-class OpenPosition extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // isEditing: false,
-      isLoading: false
-    };
-  }
-
-  render() {
-    // const {isEditingiting} = this.state;
-    const { sponsor, canEdit, openPosition } = this.props;
-    return (
-      <div className="mr-5 mb-4 flex-1 d-flex flex-column">
-        <div className={"bg-purple2 p-6"}>
-          <div className="text-white">
-            <div className="font-size-lg font-weight-bold">
-              {openPosition.title}
-            </div>
-            <div>{openPosition.city}</div>
-          </div>
-        </div>
-        <div className="bg-white b-strong border-purple2 p-6 d-flex flex-column flex-grow-1 justify-content-between">
-          <div className="pb-3 premium-position">
-            {openPosition.description}
-          </div>
-          <a href={openPosition.link} className="align-self-end">
-            <Button className="styled-button w-max-content">APPLY</Button>
-          </a>
-        </div>
-      </div>
-    );
-  }
-}
 
 export default SponsorPageRoute(SponsorPage);
