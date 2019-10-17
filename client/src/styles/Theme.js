@@ -11,7 +11,7 @@ const theme = {
 
     // Background colors
     background_1: 'rgba(81, 39, 255, 0.9)',
-    background_2: 'rgb(81, 39, 255)',
+    background_2: 'rgb(81, 39, 255)', // #5127ff
     background_3: 'rgb(51, 18, 188)',
     background_4: 'rgb(255, 255, 255)',
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.2) 0%, rgba(0, 92, 177, 0.2) 100%)',

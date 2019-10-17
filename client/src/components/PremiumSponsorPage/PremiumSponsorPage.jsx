@@ -33,6 +33,7 @@ import {
   HeadingTriangle,
   Heading2,
   WhiteLine,
+  FlexColumn,
   Heading3
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
@@ -47,22 +48,41 @@ library.add(faMapMarkerAlt);
 
 // styled-components components
 
-const HeadingContainer = styled(HeadingAligner)`
-  padding-top: 100px;
-  background-color: #5127ff;
+const TopContainer = styled.div`
+  ${ ( {theme: { color, space } }) => `
+    width: 100%;
+
+    margin: 0 auto;
+    padding-top: calc(10 * ${space.m});
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+
+    background-color: ${color.background_2};
+  `}
 `;
 
-const PremiumDetailsContainer = styled(AlignCenter)`
-  ${ ({ theme: { space, mq } }) => `
-    margin-left: calc(45 * ${space.m});
+const HeadingContainer = styled(HeadingAligner)`
+  ${ ({theme: { color, space } }) =>`
+    padding-top: calc(10 * ${space.m});
+    background-color: ${color.background_2};
+    margin-bottom: 0;
+  `}
+`;
+
+const MiniNav = styled(AlignCenter)`
+  ${ ({ theme: { color, space, mq } }) => `
     padding-top: calc(2 * ${space.m});
     display: block;
+    background-color: ${color.background_4};
 
     @media (max-width: ${mq.l}){
       margin: 0 auto;
     }
   `}
-`;// missing media queries for bigger screens than 1400px
+`;// NOTE: missing media queries for bigger screens than 1400px
 
 const PageHeading = styled(Heading2)`
   ${ ({ theme: { color } }) => `
@@ -70,6 +90,30 @@ const PageHeading = styled(Heading2)`
   `}
 `;
 
+const SponsorHeadingContainer = styled.div`
+  ${ ({ theme: { space, color } }) =>`
+    padding-top: calc(10 * ${space.m});
+    display: flex;
+    justify-content: space-between;
+    background-color: ${color.background_2};
+  `}
+`;
+
+const SponsorLogo = styled.img`
+  ${( {theme: { color } } ) => `
+    max-width: 350px;
+    flex-basis: 100%;
+    border: 4px solid ${color.box_shadow_1};
+    position: absolute;
+  `}
+`;
+
+const SponsorHeading = styled.article`
+  ${ ({ theme: { space } }) => `
+    margin-left: ${space.l};
+    padding-bottom: ${space.m};
+  `}
+`;
 
 // React component
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
@@ -86,6 +130,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
 
   return (
     <Page title={sponsor.name} {...props}>
+      <TopContainer>
         <AlignCenter>
           <HeadingContainer>
             <HeadingTriangle src={triangle} alt="triangle" />
@@ -93,22 +138,22 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             <WhiteLine />
           </HeadingContainer>
 
-          <div className="premium-intro">
-            <div className="premium-logo">
-              <img
-                src={image(sponsor.logo, 350, 221)}
-                alt={sponsor.name}
-                style={{ maxWidth: 350 }}
-              />
-            </div>
-            <article className="premium-intro-content">
+          <SponsorHeadingContainer>
+            <SponsorLogo
+              src={image(sponsor.logo, 350, 221)}
+              alt={sponsor.name}
+            />
+            <div>
+            <SponsorHeading>
               <div className="premium-name">{sponsor.name}</div>
               <p className="premium-oneliner">{sponsor.oneLiner}</p>
-            </article>
-          </div>
+            </SponsorHeading>         
+            </div>
+          </SponsorHeadingContainer>
+          
         </AlignCenter>
-     
-      <PremiumDetailsContainer>
+      </TopContainer>
+      <MiniNav>
           <div>
             {sponsor.socials.map((social, i) => (
               <a key={i} href={social.link} target="_blank">
@@ -145,7 +190,8 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               </li>
             )}
           </ul>
-      </PremiumDetailsContainer>
+      </MiniNav>
+            
       <AlignCenter>
         <div className="premium-pr premium-mr">
           <section className="premium-who" name="about">
