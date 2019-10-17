@@ -1,3 +1,7 @@
+/* eslint-disable prettier/prettier */
+// This component is responsible for the sponsors' pages. It renders OpenPosition.jsx
+// and SponsorsCarousel.jsx
+
 import React from 'react';
 import styled from 'styled-components';
 import SponsorPageRoute from '../SponsorPageRoute';
@@ -17,11 +21,13 @@ import {
   faLinkedin,
   faGithub,
   faMedium,
-  faTwitter
+  faTwitter,
+  faRProject
 } from '@fortawesome/free-brands-svg-icons';
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { AlignCenter } from '../GlobalStyledComponents/ReversimStyledComps';
 
 import {Link as ScrollLink } from "react-scroll";
 import { Container } from "reactstrap";
@@ -33,6 +39,15 @@ import s from "../Sponsors.css";
 
 library.add(faMapMarkerAlt);
 
+// styled-components components
+
+const HeaderContainer = styled(AlignCenter)`
+  display: block;
+`;
+
+const MainCenterAlign = styled(AlignCenter)
+
+// React component
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
   const mapSocialLink = medium => {
     const mediumMapper = {
@@ -48,7 +63,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
   return (
     <Page title={sponsor.name} {...props}>
       <div className="page__hero bg-purple2">
-        <Container>
+        <HeaderContainer>
           <div className="d-flex justify-content-center mt-15 mb-12">
             <img src={triangle} className={s.triangle} alt="diamond" />
             <div className={cn("font-size-xxl text-white")}>
@@ -70,7 +85,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <p className="premium-oneliner">{sponsor.oneLiner}</p>
             </article>
           </div>
-        </Container>
+        </HeaderContainer>
       </div>
       <Container>
         <div className="premium-details">
@@ -112,7 +127,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           </ul>
         </div>
       </Container>
-      <Container>
+      <AlignCenter>
         <div className="premium-pr premium-mr">
           <section className="premium-who" name="about">
             <div className="d-flex">
@@ -189,7 +204,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             </section>
           </div>
         )}
-      </Container>
+      </AlignCenter>
     </Page>
   );
 };
