@@ -45,7 +45,17 @@ const HeaderContainer = styled(AlignCenter)`
   display: block;
 `;
 
-const MainCenterAlign = styled(AlignCenter)
+const PremiumDetailsContainer = styled(AlignCenter)`
+  ${ ({ theme: { space, mq } }) => `
+    margin-left: calc(45 * ${space.m});
+    padding-top: calc(2 * ${space.m});
+    display: block;
+
+    @media (max-width: ${mq.l}){
+      margin: 0 auto;
+    }
+  `}
+`;// missing media queries for bigger screens than 1400px
 
 // React component
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
@@ -62,7 +72,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
 
   return (
     <Page title={sponsor.name} {...props}>
-      <div className="page__hero bg-purple2">
+      <div className="page__hero bg-purple2"> {/*NOTE: don't forget to change this as well */}
         <HeaderContainer>
           <div className="d-flex justify-content-center mt-15 mb-12">
             <img src={triangle} className={s.triangle} alt="diamond" />
@@ -87,9 +97,8 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           </div>
         </HeaderContainer>
       </div>
-      <Container>
-        <div className="premium-details">
-          <div className="premium-social">
+      <PremiumDetailsContainer>
+          <div>
             {sponsor.socials.map((social, i) => (
               <a key={i} href={social.link} target="_blank">
                 <FontAwesomeIcon
@@ -125,8 +134,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               </li>
             )}
           </ul>
-        </div>
-      </Container>
+      </PremiumDetailsContainer>
       <AlignCenter>
         <div className="premium-pr premium-mr">
           <section className="premium-who" name="about">
