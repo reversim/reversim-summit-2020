@@ -8,6 +8,7 @@ import {REVERSIM_SUMMIT} from '../utils';
 const Main = styled.div`
  ${ ({ theme: { font }}) => `
  font-family: ${font.main};
+ line-height: 1.5;
  `}
 `;
 

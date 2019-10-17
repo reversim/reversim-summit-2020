@@ -50,6 +50,12 @@ export const BreakLine = styled.hr`
     `}
 `;
 
+export const WhiteLine = styled(BreakLine)`
+  ${ ({ theme: {color} }) =>`
+    border-top: 1.5px solid ${color.box_shadow_2};
+  `}
+`;
+
 export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
   ${ ({ theme: { color, space } }) => `
     margin: 0 ${space.m};
@@ -84,6 +90,15 @@ export const HeadingDiamond = styled.img`
       display: none;
     }
   `}
+`;
+
+export const HeadingTriangle = styled(HeadingDiamond)`
+  ${ ({ theme: { space } }) => `
+    width: 100px;
+    height: 90px;
+    margin-right: -${space.xl};
+    margin-top: -${space.xl};
+    `}
 `;
 
 export const HeadingCircle = styled.svg`

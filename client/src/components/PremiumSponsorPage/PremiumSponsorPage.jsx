@@ -27,10 +27,16 @@ import {
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { AlignCenter } from '../GlobalStyledComponents/ReversimStyledComps';
+import {
+  AlignCenter,
+  HeadingAligner,
+  HeadingTriangle,
+  Heading2,
+  WhiteLine,
+  Heading3
+} from '../GlobalStyledComponents/ReversimStyledComps';
 
 import {Link as ScrollLink } from "react-scroll";
-import { Container } from "reactstrap";
 
 import ReactMarkdown from "react-markdown";
 
@@ -41,8 +47,9 @@ library.add(faMapMarkerAlt);
 
 // styled-components components
 
-const HeaderContainer = styled(AlignCenter)`
-  display: block;
+const HeadingContainer = styled(HeadingAligner)`
+  padding-top: 100px;
+  background-color: #5127ff;
 `;
 
 const PremiumDetailsContainer = styled(AlignCenter)`
@@ -56,6 +63,13 @@ const PremiumDetailsContainer = styled(AlignCenter)`
     }
   `}
 `;// missing media queries for bigger screens than 1400px
+
+const PageHeading = styled(Heading2)`
+  ${ ({ theme: { color } }) => `
+    color: ${color.text_1};
+  `}
+`;
+
 
 // React component
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
@@ -72,15 +86,12 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
 
   return (
     <Page title={sponsor.name} {...props}>
-      <div className="page__hero bg-purple2"> {/*NOTE: don't forget to change this as well */}
-        <HeaderContainer>
-          <div className="d-flex justify-content-center mt-15 mb-12">
-            <img src={triangle} className={s.triangle} alt="diamond" />
-            <div className={cn("font-size-xxl text-white")}>
-              Big Thanks to our sponsor
-            </div>
-            <div className="bg-white hl" />
-          </div>
+        <AlignCenter>
+          <HeadingContainer>
+            <HeadingTriangle src={triangle} alt="triangle" />
+            <PageHeading>Big Thanks to our sponsor</PageHeading>
+            <WhiteLine />
+          </HeadingContainer>
 
           <div className="premium-intro">
             <div className="premium-logo">
@@ -95,8 +106,8 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <p className="premium-oneliner">{sponsor.oneLiner}</p>
             </article>
           </div>
-        </HeaderContainer>
-      </div>
+        </AlignCenter>
+     
       <PremiumDetailsContainer>
           <div>
             {sponsor.socials.map((social, i) => (
