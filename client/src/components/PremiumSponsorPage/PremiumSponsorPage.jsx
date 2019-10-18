@@ -66,7 +66,7 @@ const TopContainer = styled.div`
 
 const HeadingContainer = styled(HeadingAligner)`
   ${ ({theme: { color, space } }) =>`
-    padding-top: calc(10 * ${space.m});
+    padding-top: ${space.xxl};
     background-color: ${color.background_2};
     margin-bottom: 0;
   `}
@@ -74,11 +74,15 @@ const HeadingContainer = styled(HeadingAligner)`
 
 const MiniNav = styled(AlignCenter)`
   ${ ({ theme: { color, space, mq } }) => `
+    position: relative;
+    left: 370px;
+    
     padding-top: calc(2 * ${space.m});
     display: block;
     background-color: ${color.background_4};
 
     @media (max-width: ${mq.l}){
+      position: static;
       margin: 0 auto;
     }
   `}
@@ -91,11 +95,18 @@ const PageHeading = styled(Heading2)`
 `;
 
 const SponsorHeadingContainer = styled.div`
-  ${ ({ theme: { space, color } }) =>`
-    padding-top: calc(10 * ${space.m});
+  ${ ({ theme: { space, color, mq } }) =>`
+    height: 150px;
+    padding-top: ${space.xl};
     display: flex;
     justify-content: space-between;
     background-color: ${color.background_2};
+
+    @media (max-width: ${mq.l}) {
+      min-height: 400px; 
+      flex-direction: column;
+      align-items: center;
+    };
   `}
 `;
 
@@ -104,7 +115,7 @@ const SponsorLogo = styled.img`
     max-width: 350px;
     flex-basis: 100%;
     border: 4px solid ${color.box_shadow_1};
-    position: absolute;
+    position: relative;
   `}
 `;
 
@@ -139,10 +150,13 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           </HeadingContainer>
 
           <SponsorHeadingContainer>
+            <div>
             <SponsorLogo
               src={image(sponsor.logo, 350, 221)}
               alt={sponsor.name}
             />
+            </div>
+            
             <div>
             <SponsorHeading>
               <div className="premium-name">{sponsor.name}</div>

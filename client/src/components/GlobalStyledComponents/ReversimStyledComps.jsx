@@ -81,30 +81,30 @@ export const HeadingAligner = styled.div`
 `;
 
 export const HeadingDiamond = styled.img`
-  ${ ({ theme: { space, mq } }) => `
-    width: 85px;
-    height: 85px;
+  ${ ({ theme: { space, mq, font } }) => `
+    width: calc(2.4 * ${font.size_h3});
+    height: calc(2.4 * ${font.size_h3});
     margin-right: -${space.xxl};
     
     @media (max-width: ${mq.m}){
-      display: none;
+      ;
     }
   `}
 `;
 
 export const HeadingTriangle = styled(HeadingDiamond)`
-  ${ ({ theme: { space } }) => `
-    width: 100px;
-    height: 90px;
+  ${ ({ theme: { space, font } }) => `
+    width: calc(2.85 * ${font.size_h3});
+    height: calc(2.5 * ${font.size_h3});
     margin-right: -${space.xl};
     margin-top: -${space.xl};
     `}
 `;
 
 export const HeadingCircle = styled.svg`
-  ${ ({ theme: { color, space, mq } }) => `
-      width: 100px;
-      height: 100px;
+  ${ ({ theme: { color, space, mq, font } }) => `
+      width: calc(2.85 * ${font.size_h3});
+      height: calc(2.85 * ${font.size_h3});
       margin-right: -${space.xxl};
       fill: ${color.heading_decoratino};
 
