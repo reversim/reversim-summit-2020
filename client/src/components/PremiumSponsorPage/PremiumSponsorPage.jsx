@@ -65,10 +65,14 @@ const TopContainer = styled.div`
 `;
 
 const HeadingContainer = styled(HeadingAligner)`
-  ${ ({theme: { color, space } }) =>`
+  ${ ({theme: { color, space, mq } }) =>`
     padding-top: ${space.xxl};
     background-color: ${color.background_2};
     margin-bottom: 0;
+    
+    @media (min-width: ${mq.xl}){
+      max-width: ${mq.xl}; 
+    }
   `}
 `;
 
@@ -84,6 +88,11 @@ const MiniNav = styled(AlignCenter)`
     @media (max-width: ${mq.l}){
       position: static;
       margin: 0 auto;
+    }
+
+    @media (min-width: ${mq.xl}){
+      position: relative;
+      left: 400px;
     }
   `}
 `;// NOTE: missing media queries for bigger screens than 1400px
@@ -107,6 +116,10 @@ const SponsorHeadingContainer = styled.div`
       flex-direction: column;
       align-items: center;
     };
+
+    @media (min-width: ${mq.xl}){
+      max-width: ${mq.xl}; 
+    }
   `}
 `;
 
