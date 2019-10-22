@@ -47,7 +47,7 @@ import s from "../Sponsors.css";
 
 library.add(faMapMarkerAlt);
 
-// styled-components components
+// styled-components components page's intro
 
 const TopContainer = styled.div`
   ${ ( {theme: { color, space } }) => `
@@ -73,28 +73,6 @@ const HeadingContainer = styled(HeadingAligner)`
     
     @media (min-width: ${mq.xl}){
       max-width: ${mq.xl}; 
-    }
-  `}
-`;
-
-const MiniNav = styled(AlignCenter)`
-  ${ ({ theme: { color, space, mq } }) => `
-    position: relative;
-    left: 370px;
-    
-    padding-top: calc(2 * ${space.m});
-    display: block;
-    background-color: ${color.background_4};
-
-    @media (max-width: ${mq.l}){
-      position: static;
-      margin: 0 auto;
-      padding: calc(2 * ${space.l})
-    }
-
-    @media (min-width: ${mq.xl}){
-      position: relative;
-      left: 400px;
     }
   `}
 `;
@@ -154,6 +132,57 @@ const SponsorOneliner = styled(Paragraph)`
   `}
 `;
 
+const MiniNav = styled(AlignCenter)`
+  ${ ({ theme: { color, space, mq } }) => `
+    position: relative;
+    left: 370px;
+    width: 30%;
+    
+    padding-top: calc(2 * ${space.m});
+    margin-left: calc(6 * ${space.l} + ${space.s});
+    
+    display: block;
+
+    @media (max-width: ${mq.l}){
+      width: 100%;
+      position: static;
+      margin-left: calc(5 * ${space.xl});
+      padding: calc(2 * ${space.l});
+    }
+
+  `}
+`;
+
+const MiniNavIcon = styled(FontAwesomeIcon)`
+  ${ ({ theme: { font, space, color } }) =>`
+    font-size: ${font.size_bg};
+    margin-right: ${space.xl};
+    color: ${color.font_awsome_nav};
+  `}
+`;
+
+const MiniNavLinksList = styled.ul`
+  ${ ({ theme: { space, mq } }) => `
+    margin: 10px 0 0;
+
+    display: flex;
+    justify-content: space-between;
+    
+    @media (max-width: ${mq.l}) {
+      flex-direction: column;
+    }
+  `}
+    
+`;
+
+// styled-components components page's main
+
+const WhoWeAre = styled.div``;
+
+const OurTechStory = styled.div``;
+
+const RevAndUs = styled.div``;
+
 // React component
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
   const mapSocialLink = medium => {
@@ -199,14 +228,13 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           <div>
             {sponsor.socials.map((social, i) => (
               <a key={i} href={social.link} target="_blank">
-                <FontAwesomeIcon
-                  className="premium-social-icon mr-5 text-purple2"
+                <MiniNavIcon
                   icon={mapSocialLink(social.medium)}
                 />
               </a>
             ))}
           </div>
-          <ul className="premium-internal-links">
+          <MiniNavLinksList>
             <li>
               <ScrollLink href="#" to={"about"} offset={-100}>
                 About
@@ -231,11 +259,11 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                 </ScrollLink>
               </li>
             )}
-          </ul>
+          </MiniNavLinksList>
       </MiniNav>
             
       <AlignCenter>
-        <div className="premium-pr premium-mr">
+        <div className="HELO premium-pr premium-mr">
           <section className="premium-who" name="about">
             <div className="d-flex">
               <h3 className="font-size-xl text-purple2">Who We Are?</h3>
