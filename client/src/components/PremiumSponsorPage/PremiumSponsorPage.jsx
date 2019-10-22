@@ -97,7 +97,7 @@ const MiniNav = styled(AlignCenter)`
       left: 400px;
     }
   `}
-`;// NOTE: missing media queries for bigger screens than 1400px
+`;
 
 const PageHeading = styled(Heading2)`
   ${ ({ theme: { color } }) => `
