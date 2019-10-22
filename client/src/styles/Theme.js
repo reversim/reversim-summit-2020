@@ -4,6 +4,7 @@ const theme = {
     // color
     text_1: 'rgb(255, 255, 255)',
     text_2: 'rgb(0, 0, 0)',
+    text_3: 'rgb(81, 39, 255)',
     heading_2: 'rgb(81, 39, 255)',
     input_1: 'rgb(73, 80, 87)',
     font_awsome_trash: 'rgb(189, 58, 2)',
@@ -12,7 +13,7 @@ const theme = {
 
     // Background colors
     background_1: 'rgba(81, 39, 255, 0.9)',
-    background_2: 'rgb(1, 39, 255)', // #5127ff
+    background_2: 'rgb(81, 39, 255)', // #5127ff
     background_3: 'rgb(51, 18, 188)',
     background_4: 'rgb(255, 255, 255)',
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.2) 0%, rgba(0, 92, 177, 0.2) 100%)',

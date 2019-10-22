@@ -33,17 +33,14 @@ import {
   HeadingTriangle,
   Heading2,
   WhiteLine,
-  FlexColumn,
   Heading3,
-  Paragraph
+  Paragraph,
+  BreakLine
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 import {Link as ScrollLink } from "react-scroll";
 
 import ReactMarkdown from "react-markdown";
-
-import cn from "classnames";
-import s from "../Sponsors.css";
 
 library.add(faMapMarkerAlt);
 
@@ -175,13 +172,94 @@ const MiniNavLinksList = styled.ul`
     
 `;
 
-// styled-components components page's main
+// styled-components sponsor description section
 
-const WhoWeAre = styled.div``;
+const SponsorDescription = styled(AlignCenter)`
+  ${({ theme: { space } }) => `
+    margin: 0 auto;
+    margin-top: ${space.m};
+  `}
+`;
 
-const OurTechStory = styled.div``;
+const SegmentContainer = styled.div`
+  ${ ({ theme: { space, mq } }) => `
+    display: flex;
+    flex-direction: column
+    justify-content: space-between;
+    margin-bottom: ${space.xxl};
+      
+    @media (max-width: ${mq.l}) {
+      min-height: 20vh;
+      // margin-top: 0;
+      
 
-const RevAndUs = styled.div``;
+      flex-direction: column;
+      justify-content: space-between;
+    }  
+  `}
+`;
+
+const SegmentHeadingAligner = styled(HeadingAligner)`
+  margin-bottom: 0;
+`;
+
+const SegmentHeading = styled(Heading3)`
+  ${ ({ theme: { color, font, mq } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_med};
+
+    @media (max-width: ${mq.m}) {
+      text-align: left;
+    }
+  `}
+`
+
+const SegmentBreakLine = styled(BreakLine)`
+  ${ ({ theme: { mq } }) => `
+    @media (max-width: ${mq.l}) {
+      display: inline-block;
+    }
+
+    @media (max-width: ${mq.m}) {
+      display: none;
+    }
+  `}
+`;
+
+const ContentContainer = styled.div`
+  ${ ({ theme: { mq } }) => `
+    min-height: 15vh;
+    
+    display: flex;
+    justify-content: space-between;
+      
+    @media (max-width: ${mq.l}) {
+      margin-top: 0;
+      flex-direction: column;
+      justify-content: space-between;
+    }  
+  `}
+`;
+
+const ContentContainerColumn = styled(ContentContainer)`
+  ${ ({ theme: { mq } }) => `
+    min-height: 20vh;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media (max-width: ${mq.l}) {
+      min-height: 25vh;
+    };
+
+    @media (max-width: ${mq.m}) {
+      min-height: 30vh;
+    };
+
+    @media (max-width: ${mq.s}) {
+      min-height: 35vh;
+    };
+  `}
+`;
 
 // React component
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
@@ -262,28 +340,31 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           </MiniNavLinksList>
       </MiniNav>
             
-      <AlignCenter>
-        <div className="HELO premium-pr premium-mr">
-          <section className="premium-who" name="about">
-            <div className="d-flex">
-              <h3 className="font-size-xl text-purple2">Who We Are?</h3>
-              <div className="hl bg-purple2" />
-            </div>
+      <SponsorDescription>
+        <SegmentContainer>
+        <SegmentHeadingAligner name="about">
+              <SegmentHeading>Who We Are?</SegmentHeading>
+              <SegmentBreakLine />
+          </SegmentHeadingAligner>
+          <ContentContainer>
+          <div className="premium-who" >
             <ReactMarkdown className="premium-text" source={sponsor.about}></ReactMarkdown>
-          </section>
+          </div>
           {sponsor.images &&
             sponsor.images.length > 0 && (
-              <section className="premium-gallery">
+              <div className="premium-gallery">
                 <SponsorCarousel sponsor={sponsor} />
-              </section>
+              </div>
             )}
-        </div>
-        <div className="premium-mr premium-tech">
-          <div className={cn("d-flex", s.premiumSection)} name="Tech-Story">
-            <h3 className="font-size-xl text-purple2">Our Technology Story</h3>
-            <div className="hl bg-purple2" />
-          </div>
-          <div className="premium-tech-story">
+          </ContentContainer>
+        </SegmentContainer>
+
+        <SegmentContainer>
+          <SegmentHeadingAligner name="Tech-Story">
+            <SegmentHeading>Our Technology Story</SegmentHeading>
+            <SegmentBreakLine />
+          </SegmentHeadingAligner>
+          <ContentContainerColumn>
             <p className="premium-text">{sponsor.techStory.text}</p>
 
             {sponsor.techStory.technologies &&
@@ -296,25 +377,26 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                   ))}
                 </div>
               )}
-          </div>
-        </div>
+          </ContentContainerColumn>
+        </SegmentContainer>
+
         {sponsor.openPositions &&
           sponsor.openPositions.length > 0 && (
-            <div className="premium-mr">
-              <section name="open-positions">
-                <div className="d-flex align-items-center mb-8 mt-12">
+            <SegmentContainer> {/*Section container */}
+              <section name="open-positions"> {/*Section container */}
+                <div className="d-flex align-items-center mb-8 mt-12"> {/*NOTE: Heading contianer*/}
                   <img
                     src={zigzag}
                     alt=""
                     height="80"
                     style={{ marginRight: -11 }}
                   />
-                  <h3 className="text-purple2 font-size-xl mr-4">
+                  <h3 className="text-purple2 font-size-xl mr-4"> {/**Heading */}
                     Open Positions
                   </h3>
-                  <div className="flex-grow-1 border-bottom border-purple2" />
+                  <div className="flex-grow-1 border-bottom border-purple2" /> {/**Breakline */}
                 </div>
-                <div className="premium-positions">
+                <div className="premium-positions"> {/*Content container */}
                   {sponsor.openPositions.map((openPosition, i) => (
                     <OpenPosition
                       key={i}
@@ -324,22 +406,20 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                   ))}
                 </div>
               </section>
-            </div>
+            </SegmentContainer>
           )}
         {sponsor.reversimAndUs && (
-          <div className="premium-mr">
-            <section name="reversim-and-us">
-              <div className="d-flex align-items-center mb-4 mt-12">
-                <h3 className="text-purple2 font-size-xl mr-4">
+          <SegmentContainer name="reversim-and-us"> 
+              <SegmentHeadingAligner>
+                <SegmentHeading>
                   Reversim & Us
-                </h3>
-                <div className="flex-grow-1 border-bottom border-purple2" />
-              </div>
+                </SegmentHeading>
+                <SegmentBreakLine />
+              </SegmentHeadingAligner>
               <p className="premium-text">{sponsor.reversimAndUs}</p>
-            </section>
-          </div>
+          </SegmentContainer>
         )}
-      </AlignCenter>
+      </SponsorDescription>
     </Page>
   );
 };
