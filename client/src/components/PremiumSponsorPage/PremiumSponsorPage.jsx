@@ -34,7 +34,8 @@ import {
   Heading2,
   WhiteLine,
   FlexColumn,
-  Heading3
+  Heading3,
+  Paragraph
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 import {Link as ScrollLink } from "react-scroll";
@@ -88,6 +89,7 @@ const MiniNav = styled(AlignCenter)`
     @media (max-width: ${mq.l}){
       position: static;
       margin: 0 auto;
+      padding: calc(2 * ${space.l})
     }
 
     @media (min-width: ${mq.xl}){
@@ -132,10 +134,23 @@ const SponsorLogo = styled.img`
   `}
 `;
 
-const SponsorHeading = styled.article`
+const SponsorHeading = styled.div`
   ${ ({ theme: { space } }) => `
     margin-left: ${space.l};
     padding-bottom: ${space.m};
+  `}
+`;
+
+const SponsorName = styled(Heading3)`
+  ${ ({ theme: { font } }) => `
+    font-weight: ${font.weight_med};
+    margin: 0;
+  `}
+`
+const SponsorOneliner = styled(Paragraph)`
+  ${ ({ theme: { font } }) => `
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_med};
   `}
 `;
 
@@ -172,8 +187,8 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             
             <div>
             <SponsorHeading>
-              <div className="premium-name">{sponsor.name}</div>
-              <p className="premium-oneliner">{sponsor.oneLiner}</p>
+              <SponsorName>{sponsor.name}</SponsorName>
+              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner>
             </SponsorHeading>         
             </div>
           </SponsorHeadingContainer>
