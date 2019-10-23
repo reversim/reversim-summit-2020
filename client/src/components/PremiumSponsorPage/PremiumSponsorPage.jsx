@@ -34,13 +34,12 @@ import {
   HeadingZigzag,
   Heading2,
   WhiteLine,
+  SimpleLink,
   Heading3,
   Paragraph,
   Paragraph2,
   BreakLine,
 } from '../GlobalStyledComponents/ReversimStyledComps';
-
-import {Link as ScrollLink } from "react-scroll";
 
 library.add(faMapMarkerAlt);
 
@@ -139,15 +138,19 @@ const SponsorOneliner = styled(Paragraph)`
 `;
 
 const MiniNav = styled(AlignCenter)`
-  ${ ({ theme: { color, space, mq } }) => `
+  ${ ({ theme: { space, mq } }) => `
     position: relative;
-    left: 370px;
-    width: 30%;
+    left: 400px;
+    width: 40%;
     
     padding-top: calc(2 * ${space.m});
     margin-left: calc(6 * ${space.l} + ${space.s});
     
     display: block;
+
+    @media (max-width: ${mq.xl}){
+      left: 295px;
+    }
 
     @media (max-width: ${mq.l}){
       width: 100%;
@@ -169,7 +172,8 @@ const MiniNavIcon = styled(FontAwesomeIcon)`
 
 const MiniNavLinksList = styled.ul`
   ${ ({ theme: { space, mq } }) => `
-    margin: 10px 0 0;
+    max-width: 90%;
+    margin: ${space.m} 0;
 
     display: flex;
     justify-content: space-between;
@@ -181,12 +185,18 @@ const MiniNavLinksList = styled.ul`
     
 `;
 
+const MiniNavLinkItem = styled(SimpleLink)`
+  ${ ({ theme: { color, space } }) => `
+    padding: ${space.s};
+    background-color: ${color.font_awsome_nav};
+  `}
+`;
+
 // styled-components sponsor description section
 
 const SponsorDescription = styled(AlignCenter)`
   ${({ theme: { space, mq } }) => `
-    margin: 0 auto;
-    margin-top: ${space.m};
+    margin: ${space.m} auto;
 
     @media (min-width: ${mq.l}){
       margin-top: ${space.xxl};
@@ -208,8 +218,18 @@ const SegmentContainer = styled.div`
       flex-direction: column;
       justify-content: space-between;
     }
+
     @media (max-width: ${mq.s}){
       max-width: 400px;
+      justify-content: center;
+    }
+  `}
+`;
+
+const WhoWeAre = styled(SegmentContainer)`
+  ${ ({ theme: { mq } }) => `
+     @media (max-width: ${mq.m}){
+      max-width: 500px;
       justify-content: center;
     }
   `}
@@ -310,7 +330,7 @@ const PremiumTechItem = styled.li`
   `}
 `;
 
-// React component
+// React components
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
   const mapSocialLink = medium => {
     const mediumMapper = {
@@ -363,35 +383,35 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           </div>
           <MiniNavLinksList>
             <li>
-              <ScrollLink href="#" to={"about"} offset={-100}>
+              <MiniNavLinkItem href="#about">
                 About
-              </ScrollLink>
+              </MiniNavLinkItem>
             </li>
             <li>
-              <ScrollLink href="#" to={"Tech-Story"} offset={-100}>
+              <MiniNavLinkItem href="#Tech-Story">
                 Tech-Story
-              </ScrollLink>
+              </MiniNavLinkItem>
             </li>
             {!!sponsor.openPositions.length && (
               <li>
-                <ScrollLink href="#" to={"open-positions"} offset={-100}>
+                <MiniNavLinkItem href="#open-positions">
                   Open Positions
-                </ScrollLink>
+                </MiniNavLinkItem>
               </li>
             )}
             {sponsor.reversimAndUs && (
               <li>
-                <ScrollLink href="#" to={"reversim-and-us"} offset={-100}>
+                <MiniNavLinkItem href="#reversim-and-us">
                   Reversim & Us
-                </ScrollLink>
+                </MiniNavLinkItem>
               </li>
             )}
           </MiniNavLinksList>
       </MiniNav>
             
       <SponsorDescription>
-        <SegmentContainer>
-          <SegmentHeadingAligner name="about">
+        <WhoWeAre>
+          <SegmentHeadingAligner id="about">
               <SegmentHeading>Who We Are?</SegmentHeading>
               <SegmentBreakLine />
             </SegmentHeadingAligner>
@@ -404,10 +424,10 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                     </PremiumGallery>
                   )}
             </ContentContainer>
-        </SegmentContainer>
+        </WhoWeAre>
 
         <SegmentContainer>
-          <SegmentHeadingAligner name="Tech-Story">
+          <SegmentHeadingAligner id="Tech-Story">
             <SegmentHeading>Our Technology Story</SegmentHeading>
             <SegmentBreakLine />
           </SegmentHeadingAligner>
@@ -417,7 +437,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               sponsor.techStory.technologies.length > 0 && (
                 <PremiumTechList>
                   {sponsor.techStory.technologies.map(t => (
-                    <PremiumTechItem className="premium-tech-item" key={t}>
+                    <PremiumTechItem key={t}>
                       {t}
                     </PremiumTechItem>
                   ))}
@@ -428,7 +448,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
 
         {sponsor.openPositions &&
           sponsor.openPositions.length > 0 && (
-            <SegmentContainer name="open-positions">
+            <SegmentContainer id="open-positions">
               <ContentContainerColumn>
                 <HeadingAligner>
                   <HeadingZigzag
@@ -451,14 +471,14 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             </SegmentContainer>
           )}
         {sponsor.reversimAndUs && (
-          <SegmentContainer name="reversim-and-us"> 
+          <SegmentContainer id="reversim-and-us"> 
               <SegmentHeadingAligner>
                 <SegmentHeading>
                   Reversim & Us
                 </SegmentHeading>
                 <SegmentBreakLine />
               </SegmentHeadingAligner>
-              <p className="premium-text">{sponsor.reversimAndUs}</p>
+              <Paragraph2>{sponsor.reversimAndUs}</Paragraph2>
           </SegmentContainer>
         )}
       </SponsorDescription>
