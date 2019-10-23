@@ -151,8 +151,14 @@ export const Paragraph = styled.p`
   ${ ({ theme: { color, font } }) =>`
     color: ${color.text_1};
     font-family: ${font.main};
-    font-weight: ${font.weight_normal};
+    font-weight: ${font.weight_med};
     font-size: ${font.size_reg};
+    `}
+`;
+
+export const Paragraph2 = styled(Paragraph)`
+  ${ ({ theme: { color} }) =>`
+    color: ${color.text_2};
     `}
 `;
 

@@ -35,19 +35,18 @@ import {
   WhiteLine,
   Heading3,
   Paragraph,
+  Paragraph2,
   BreakLine
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 import {Link as ScrollLink } from "react-scroll";
-
-import ReactMarkdown from "react-markdown";
 
 library.add(faMapMarkerAlt);
 
 // styled-components components page's intro
 
 const TopContainer = styled.div`
-  ${ ( {theme: { color, space } }) => `
+  ${ ({ theme: { color, space } }) => `
     width: 100%;
 
     margin: 0 auto;
@@ -59,6 +58,15 @@ const TopContainer = styled.div`
     justify-content: space-evenly;
 
     background-color: ${color.background_2};
+  `}
+`;
+
+const IntroContiner = styled(AlignCenter)`
+  ${ ({ theme: { mq, space } }) => `
+    @media (min-width: ${mq.l}){
+      margin-top: ${space.xxl};
+      max-width: 1150px;
+    }
   `}
 `;
 
@@ -175,9 +183,14 @@ const MiniNavLinksList = styled.ul`
 // styled-components sponsor description section
 
 const SponsorDescription = styled(AlignCenter)`
-  ${({ theme: { space } }) => `
+  ${({ theme: { space, mq } }) => `
     margin: 0 auto;
     margin-top: ${space.m};
+
+    @media (min-width: ${mq.l}){
+      margin-top: ${space.xxl};
+      max-width: 1150px;
+    }
   `}
 `;
 
@@ -189,13 +202,15 @@ const SegmentContainer = styled.div`
     margin-bottom: ${space.xxl};
       
     @media (max-width: ${mq.l}) {
-      min-height: 20vh;
-      // margin-top: 0;
-      
+      min-height: 20vh;      
 
       flex-direction: column;
       justify-content: space-between;
-    }  
+    }
+    @media (max-width: ${mq.s}){
+      max-width: 400px;
+      justify-content: center;
+    }
   `}
 `;
 
@@ -237,7 +252,7 @@ const ContentContainer = styled.div`
       margin-top: 0;
       flex-direction: column;
       justify-content: space-between;
-    }  
+    }
   `}
 `;
 
@@ -261,6 +276,25 @@ const ContentContainerColumn = styled(ContentContainer)`
   `}
 `;
 
+const PremiumGallery = styled.div`
+  ${ ({ theme: { space, mq } }) => `
+    width: 60%;
+    margin-left: calc(4 * ${space.m});
+
+    @media (max-width: ${mq.l}) {
+      width: 100%;
+      margin: ${space.xl} auto;
+    }
+  `}
+`;
+
+const PremiumTechList = styled.div`
+  ${ ({ theme: { space, mq } }) => `
+    flex: 0 0 50%;
+    margin: ${space.xl} auto 0 auto;
+  `}
+`;
+
 // React component
 const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
   const mapSocialLink = medium => {
@@ -277,7 +311,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
   return (
     <Page title={sponsor.name} {...props}>
       <TopContainer>
-        <AlignCenter>
+        <IntroContiner>
           <HeadingContainer>
             <HeadingTriangle src={triangle} alt="triangle" />
             <PageHeading>Big Thanks to our sponsor</PageHeading>
@@ -300,7 +334,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             </div>
           </SponsorHeadingContainer>
           
-        </AlignCenter>
+        </IntroContiner>
       </TopContainer>
       <MiniNav>
           <div>
@@ -342,21 +376,19 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             
       <SponsorDescription>
         <SegmentContainer>
-        <SegmentHeadingAligner name="about">
+          <SegmentHeadingAligner name="about">
               <SegmentHeading>Who We Are?</SegmentHeading>
               <SegmentBreakLine />
-          </SegmentHeadingAligner>
-          <ContentContainer>
-          <div className="premium-who" >
-            <ReactMarkdown className="premium-text" source={sponsor.about}></ReactMarkdown>
-          </div>
-          {sponsor.images &&
-            sponsor.images.length > 0 && (
-              <div className="premium-gallery">
-                <SponsorCarousel sponsor={sponsor} />
-              </div>
-            )}
-          </ContentContainer>
+            </SegmentHeadingAligner>
+            <ContentContainer>
+              <Paragraph2>{sponsor.about}</Paragraph2>
+                {sponsor.images &&
+                  sponsor.images.length > 0 && (
+                    <PremiumGallery>
+                      <SponsorCarousel sponsor={sponsor} />
+                    </PremiumGallery>
+                  )}
+            </ContentContainer>
         </SegmentContainer>
 
         <SegmentContainer>
@@ -365,17 +397,17 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             <SegmentBreakLine />
           </SegmentHeadingAligner>
           <ContentContainerColumn>
-            <p className="premium-text">{sponsor.techStory.text}</p>
+            <Paragraph2>{sponsor.techStory.text}</Paragraph2>
 
             {sponsor.techStory.technologies &&
               sponsor.techStory.technologies.length > 0 && (
-                <div className="premium-tech-list">
+                <PremiumTechList>
                   {sponsor.techStory.technologies.map(t => (
                     <div className="premium-tech-item" key={t}>
                       {t}
                     </div>
                   ))}
-                </div>
+                </PremiumTechList>
               )}
           </ContentContainerColumn>
         </SegmentContainer>
