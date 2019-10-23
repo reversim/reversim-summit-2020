@@ -31,12 +31,13 @@ import {
   AlignCenter,
   HeadingAligner,
   HeadingTriangle,
+  HeadingZigzag,
   Heading2,
   WhiteLine,
   Heading3,
   Paragraph,
   Paragraph2,
-  BreakLine
+  BreakLine,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 import {Link as ScrollLink } from "react-scroll";
@@ -199,7 +200,7 @@ const SegmentContainer = styled.div`
     display: flex;
     flex-direction: column
     justify-content: space-between;
-    margin-bottom: ${space.xxl};
+    margin: ${space.l} 0;
       
     @media (max-width: ${mq.l}) {
       min-height: 20vh;      
@@ -288,10 +289,24 @@ const PremiumGallery = styled.div`
   `}
 `;
 
-const PremiumTechList = styled.div`
-  ${ ({ theme: { space, mq } }) => `
+const PremiumTechList = styled.ul`
+  ${ ({ theme: { space } }) => `
+    list-style: none    
     flex: 0 0 50%;
     margin: ${space.xl} auto 0 auto;
+  `}
+`;
+
+const PremiumTechItem = styled.li`
+  ${ ({ theme: { color, space, font } }) => `
+    display: inline-block;
+    margin: ${space.s} ${space.m};
+    padding: ${space.s} ${space.m};
+    
+    background: ${color.background_2};
+    
+    color: white;
+    font-weight: ${font.weight_bold};
   `}
 `;
 
@@ -398,14 +413,13 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           </SegmentHeadingAligner>
           <ContentContainerColumn>
             <Paragraph2>{sponsor.techStory.text}</Paragraph2>
-
             {sponsor.techStory.technologies &&
               sponsor.techStory.technologies.length > 0 && (
                 <PremiumTechList>
                   {sponsor.techStory.technologies.map(t => (
-                    <div className="premium-tech-item" key={t}>
+                    <PremiumTechItem className="premium-tech-item" key={t}>
                       {t}
-                    </div>
+                    </PremiumTechItem>
                   ))}
                 </PremiumTechList>
               )}
@@ -414,21 +428,17 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
 
         {sponsor.openPositions &&
           sponsor.openPositions.length > 0 && (
-            <SegmentContainer> {/*Section container */}
-              <section name="open-positions"> {/*Section container */}
-                <div className="d-flex align-items-center mb-8 mt-12"> {/*NOTE: Heading contianer*/}
-                  <img
+            <SegmentContainer name="open-positions">
+              <ContentContainerColumn>
+                <HeadingAligner>
+                  <HeadingZigzag
                     src={zigzag}
                     alt=""
-                    height="80"
-                    style={{ marginRight: -11 }}
                   />
-                  <h3 className="text-purple2 font-size-xl mr-4"> {/**Heading */}
-                    Open Positions
-                  </h3>
-                  <div className="flex-grow-1 border-bottom border-purple2" /> {/**Breakline */}
-                </div>
-                <div className="premium-positions"> {/*Content container */}
+                  <SegmentHeading>Open Positions</SegmentHeading>
+                  <SegmentBreakLine />
+                </HeadingAligner>
+                <ContentContainer>
                   {sponsor.openPositions.map((openPosition, i) => (
                     <OpenPosition
                       key={i}
@@ -436,8 +446,8 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                       {...this.props}
                     />
                   ))}
-                </div>
-              </section>
+                </ContentContainer>
+              </ContentContainerColumn>
             </SegmentContainer>
           )}
         {sponsor.reversimAndUs && (

@@ -114,6 +114,14 @@ export const HeadingCircle = styled.svg`
   `}
 `;
 
+export const HeadingZigzag = styled.img`
+  ${ ({ theme: { space, font }})=> `
+    height: calc(2.3 * ${font.size_h3});
+    margin-right: -${space.m};
+  `}
+  
+`;
+
 export const Heading2 = styled.h2`
   ${ ({ theme: { color, font, mq } }) =>`
     color: ${color.heading_2};
