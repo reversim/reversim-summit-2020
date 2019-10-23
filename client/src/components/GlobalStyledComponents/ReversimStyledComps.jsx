@@ -137,11 +137,11 @@ export const Heading2 = styled.h2`
 
 export const Heading3 = styled.h3`
   ${ ({ theme: { color, space, font } }) =>`
+    margin-bottom: ${space.l};
     color: ${color.text_1};
     font-family: ${font.main};
     font-size: ${font.size_h3};
     font-weight: ${font.weight_normal};
-    margin-bottom: ${space.l};    
     `}
 `;
 

@@ -236,11 +236,16 @@ const WhoWeAre = styled(SegmentContainer)`
 `;
 
 const SegmentHeadingAligner = styled(HeadingAligner)`
-  margin-bottom: 0;
+  ${ ({ theme: { space } }) => `
+    margin-bottom: 0;
+    margin-top: calc(-13 * ${space.m});
+    padding-top: calc(13 * ${space.m});
+  `}
 `;
 
 const SegmentHeading = styled(Heading3)`
   ${ ({ theme: { color, font, mq } }) => `
+
     color: ${color.text_3};
     font-weight: ${font.weight_med};
 
@@ -448,16 +453,15 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
 
         {sponsor.openPositions &&
           sponsor.openPositions.length > 0 && (
-            <SegmentContainer id="open-positions">
-              <ContentContainerColumn>
-                <HeadingAligner>
+            <SegmentContainer>
+                <SegmentHeadingAligner id="open-positions">
                   <HeadingZigzag
                     src={zigzag}
                     alt=""
                   />
                   <SegmentHeading>Open Positions</SegmentHeading>
                   <SegmentBreakLine />
-                </HeadingAligner>
+                </SegmentHeadingAligner>
                 <ContentContainer>
                   {sponsor.openPositions.map((openPosition, i) => (
                     <OpenPosition
@@ -467,12 +471,11 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                     />
                   ))}
                 </ContentContainer>
-              </ContentContainerColumn>
             </SegmentContainer>
           )}
         {sponsor.reversimAndUs && (
-          <SegmentContainer id="reversim-and-us"> 
-              <SegmentHeadingAligner>
+          <SegmentContainer> 
+              <SegmentHeadingAligner id="reversim-and-us">
                 <SegmentHeading>
                   Reversim & Us
                 </SegmentHeading>
