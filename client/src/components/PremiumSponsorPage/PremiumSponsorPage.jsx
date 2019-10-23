@@ -155,8 +155,8 @@ const MiniNav = styled(AlignCenter)`
     @media (max-width: ${mq.l}){
       width: 100%;
       position: static;
-      margin-left: calc(5 * ${space.xl});
-      padding: calc(2 * ${space.l});
+      padding: calc(2 * ${space.l}) 0;
+      margin-left: ${space.xxl};
     }
 
   `}
@@ -180,6 +180,7 @@ const MiniNavLinksList = styled.ul`
     
     @media (max-width: ${mq.l}) {
       flex-direction: column;
+      min-height: 20vh;
     }
   `}
     
@@ -240,6 +241,7 @@ const SegmentHeadingAligner = styled(HeadingAligner)`
     margin-bottom: 0;
     margin-top: calc(-13 * ${space.m});
     padding-top: calc(13 * ${space.m});
+    z-index: -1;
   `}
 `;
 
