@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Map from './Map';
-import { 
+import {
   AlignCenter,
   HeadingAligner,
   HeadingSquares,
@@ -11,9 +10,9 @@ import {
   Heading2,
   BreakLine,
   Paragraph,
- } from './GlobalStyledComponents/ReversimStyledComps';
+} from './GlobalStyledComponents/ReversimStyledComps';
+import Map from './Map';
 
-// import { Button, Container } from "reactstrap";
 import squares from "../images/SVG/squares.svg";
 import venuePic from "../images/bitan10.jpeg";
 
@@ -38,6 +37,18 @@ const SubHeading = styled(Paragraph)`
     font-weight: ${font.weight_bold};
   `}
 `;
+const MapWrapper = styled.div`
+  float: right;
+  position: relative;
+`;
+
+const VenueImg = styled.img`
+  ${ ({ theme: { color, space } }) => `
+    width: 100%;
+    margin-top: calc(-30 * ${space.m});
+    border: 4px solid ${color.box_shadow_1};
+  `}
+`;
 
 // React component
 const Location = () => (
@@ -50,24 +61,18 @@ const Location = () => (
             <Heading2>Venue</Heading2>
             <BreakLine />
           </FlexRow>
-          <SubHeading>TLV Convention center</SubHeading>
+          <SubHeading>TLV Convention Center</SubHeading>
         </ColumnAligner>
       </HeadingAligner>
 
       <div>
-        <div>
-          <div className="map-wrapper">
-            <Map />
-          </div>
-          <div className="venue-img">
-            <img
-              src={venuePic}
-              alt="venue"
-              style={{ width: '100%', marginTop:-300 }}
-              className="b-strong border-purple2"
-            />
-          </div>
-        </div>
+        <MapWrapper>
+          <Map />
+        </MapWrapper>
+        <VenueImg
+          src={venuePic}
+          alt="TLV Convention Center picture"
+        />
       </div>
     </AlignCenter>
   </LocationSection>
