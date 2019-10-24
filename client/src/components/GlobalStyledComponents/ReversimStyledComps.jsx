@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -101,7 +102,15 @@ export const HeadingTriangle = styled(HeadingDiamond)`
     `}
 `;
 
-export const HeadingCircle = styled.svg`
+const CircleJSX = ({className}) => {
+  return (
+    <svg className={className}>
+      <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
+    </svg>
+  );
+}; //this component is used as the basis for the HeadingCircle styled-component below
+
+export const HeadingCircle = styled(CircleJSX)`
   ${ ({ theme: { color, space, mq, font } }) => `
       width: calc(2.85 * ${font.size_h3});
       height: calc(2.85 * ${font.size_h3});

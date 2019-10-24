@@ -87,9 +87,7 @@ const CommunitySponsors = ({
     return (
       <ColumnContainer>
         <HeadingAligner>
-          <HeadingCircle>
-            <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
-          </HeadingCircle>
+          <HeadingCircle />
           <Heading2>
             Community Sponsors
           </Heading2>
