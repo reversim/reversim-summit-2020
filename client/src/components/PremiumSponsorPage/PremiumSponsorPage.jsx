@@ -5,6 +5,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SponsorPageRoute from '../SponsorPageRoute';
+import ReactMarkdown from 'react-markdown';
 
 import Page from '../Page';
 import SponsorCarousel from './SponsorCarousel';
@@ -46,7 +47,7 @@ library.add(faMapMarkerAlt);
 // styled-components components page's intro
 
 const TopContainer = styled.div`
-  ${ ({ theme: { color, space } }) => `
+  ${ ({ theme: { color, space, mq } }) => `
     width: 100%;
 
     margin: 0 auto;
@@ -58,6 +59,11 @@ const TopContainer = styled.div`
     justify-content: space-evenly;
 
     background-color: ${color.background_2};
+
+    @media (max-width: ${mq.l}){
+      position: relative;
+      right: 35px;
+    }
   `}
 `;
 
@@ -107,13 +113,18 @@ const SponsorHeadingContainer = styled.div`
     }
   `}
 `;
+const LogoAligner = styled.div`
+  ${ ({ theme: { mq } }) => `
+    @media (max-width: ${mq.l}){
+      align-self: baseline;
+    }
+  `}
+`;
 
 const SponsorLogo = styled.img`
   ${( {theme: { color } } ) => `
     max-width: 350px;
-    flex-basis: 100%;
     border: 4px solid ${color.box_shadow_1};
-    position: relative;
   `}
 `;
 
@@ -154,9 +165,13 @@ const MiniNav = styled(AlignCenter)`
 
     @media (max-width: ${mq.l}){
       width: 100%;
-      position: static;
+      left: 130px
       padding: calc(2 * ${space.l}) 0;
-      margin-left: ${space.xxl};
+      margin-left: 0;
+    }
+
+    @media (max-width: ${mq.m}){
+      left: 50px;
     }
 
   `}
@@ -198,6 +213,7 @@ const MiniNavLinkItem = styled(SimpleLink)`
 const SponsorDescription = styled(AlignCenter)`
   ${({ theme: { space, mq } }) => `
     margin: ${space.m} auto;
+    padding: 0;
 
     @media (min-width: ${mq.l}){
       margin-top: ${space.xxl};
@@ -317,17 +333,25 @@ const PremiumGallery = styled.div`
 `;
 
 const PremiumTechList = styled.ul`
-  ${ ({ theme: { space } }) => `
-    list-style: none    
+  ${ ({ theme: { space, mq } }) => `
+    margin-right: ${space.xl};
+    
     flex: 0 0 50%;
-    margin: ${space.xl} auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+    list-style: none    
+    
+
+    @media (max-width: ${mq.l}){
+      margin: ${space.l} 0 0 0;
+    }
   `}
 `;
 
 const PremiumTechItem = styled.li`
   ${ ({ theme: { color, space, font } }) => `
     display: inline-block;
-    margin: ${space.s} ${space.m};
+    margin: ${space.s} 0;
     padding: ${space.s} ${space.m};
     
     background: ${color.background_2};
@@ -361,12 +385,12 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           </HeadingContainer>
 
           <SponsorHeadingContainer>
-            <div>
+            <LogoAligner>
             <SponsorLogo
               src={image(sponsor.logo, 350, 221)}
               alt={sponsor.name}
             />
-            </div>
+            </LogoAligner>
             
             <div>
             <SponsorHeading>
@@ -423,7 +447,9 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <SegmentBreakLine />
             </SegmentHeadingAligner>
             <ContentContainer>
-              <Paragraph2>{sponsor.about}</Paragraph2>
+              <Paragraph2>
+                <ReactMarkdown source={sponsor.about}></ReactMarkdown>
+              </Paragraph2>
                 {sponsor.images &&
                   sponsor.images.length > 0 && (
                     <PremiumGallery>
@@ -438,7 +464,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             <SegmentHeading>Our Technology Story</SegmentHeading>
             <SegmentBreakLine />
           </SegmentHeadingAligner>
-          <ContentContainerColumn>
+          <ContentContainer>
             <Paragraph2>{sponsor.techStory.text}</Paragraph2>
             {sponsor.techStory.technologies &&
               sponsor.techStory.technologies.length > 0 && (
@@ -450,7 +476,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                   ))}
                 </PremiumTechList>
               )}
-          </ContentContainerColumn>
+          </ContentContainer>
         </SegmentContainer>
 
         {sponsor.openPositions &&
