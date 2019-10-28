@@ -170,6 +170,7 @@ export const Paragraph = styled.p`
     font-family: ${font.main};
     font-weight: ${font.weight_med};
     font-size: ${font.size_reg};
+    line-height: 1.7;
     `}
 `;
 
