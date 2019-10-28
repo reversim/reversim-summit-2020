@@ -50,7 +50,7 @@ const TopContainer = styled.div`
   ${ ({ theme: { color, space, mq } }) => `
     width: 100%;
 
-    margin: 0 auto;
+    margin: 0 auto calc(12 * ${space.m}) auto;
     padding-top: calc(10 * ${space.m});
 
     display: flex;
@@ -61,8 +61,7 @@ const TopContainer = styled.div`
     background-color: ${color.background_2};
 
     @media (max-width: ${mq.l}){
-      position: relative;
-      right: 35px;
+      margin: 0 auto calc(17 * ${space.m}) auto;
     }
   `}
 `;
@@ -148,34 +147,23 @@ const SponsorOneliner = styled(Paragraph)`
   `}
 `;
 
-const MiniNav = styled(AlignCenter)`
+const MiniNav = styled.div`
   ${ ({ theme: { space, mq } }) => `
-    position: relative;
-    left: 400px;
-    width: 40%;
-    
-    padding-top: calc(2 * ${space.m});
-    margin-left: calc(6 * ${space.l} + ${space.s});
-    
-    display: block;
-
-    @media (max-width: ${mq.xxl}){
-      left: 495px;
+    margin: calc(${space.m} * 3) 0 0 calc(${space.m} * 2);
+    @media (min-width: ${mq.xxl}){
+      
     }
     
     @media (max-width: ${mq.xl}){
-      left: 295px;
+      
     }
 
     @media (max-width: ${mq.l}){
-      width: 100%;
-      left: 130px
-      padding: calc(2 * ${space.l}) 0;
-      margin-left: 0;
+      margin: calc(${space.m} * 5) 0 0 0;
     }
 
     @media (max-width: ${mq.m}){
-      left: 50px;
+     
     }
 
   `}
@@ -400,49 +388,50 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             <SponsorHeading>
               <SponsorName>{sponsor.name}</SponsorName>
               <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner>
-            </SponsorHeading>         
+            </SponsorHeading>
+            <MiniNav>
+              <div>
+                {sponsor.socials.map((social, i) => (
+                  <a key={i} href={social.link} target="_blank">
+                    <MiniNavIcon
+                      icon={mapSocialLink(social.medium)}
+                    />
+                  </a>
+                ))}
+              </div>
+              <MiniNavLinksList>
+                <li>
+                  <MiniNavLinkItem href="#about">
+                    About
+                  </MiniNavLinkItem>
+                </li>
+                <li>
+                  <MiniNavLinkItem href="#Tech-Story">
+                    Tech-Story
+                  </MiniNavLinkItem>
+                </li>
+                {!!sponsor.openPositions.length && (
+                  <li>
+                    <MiniNavLinkItem href="#open-positions">
+                      Open Positions
+                    </MiniNavLinkItem>
+                  </li>
+                )}
+                {sponsor.reversimAndUs && (
+                  <li>
+                    <MiniNavLinkItem href="#reversim-and-us">
+                      Reversim & Us
+                    </MiniNavLinkItem>
+                  </li>
+                )}
+              </MiniNavLinksList>
+            </MiniNav>
             </div>
           </SponsorHeadingContainer>
           
         </IntroContiner>
       </TopContainer>
-      <MiniNav>
-          <div>
-            {sponsor.socials.map((social, i) => (
-              <a key={i} href={social.link} target="_blank">
-                <MiniNavIcon
-                  icon={mapSocialLink(social.medium)}
-                />
-              </a>
-            ))}
-          </div>
-          <MiniNavLinksList>
-            <li>
-              <MiniNavLinkItem href="#about">
-                About
-              </MiniNavLinkItem>
-            </li>
-            <li>
-              <MiniNavLinkItem href="#Tech-Story">
-                Tech-Story
-              </MiniNavLinkItem>
-            </li>
-            {!!sponsor.openPositions.length && (
-              <li>
-                <MiniNavLinkItem href="#open-positions">
-                  Open Positions
-                </MiniNavLinkItem>
-              </li>
-            )}
-            {sponsor.reversimAndUs && (
-              <li>
-                <MiniNavLinkItem href="#reversim-and-us">
-                  Reversim & Us
-                </MiniNavLinkItem>
-              </li>
-            )}
-          </MiniNavLinksList>
-      </MiniNav>
+      
             
       <SponsorDescription>
         <WhoWeAre>
