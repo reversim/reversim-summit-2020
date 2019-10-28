@@ -159,6 +159,10 @@ const MiniNav = styled(AlignCenter)`
     
     display: block;
 
+    @media (max-width: ${mq.xxl}){
+      left: 495px;
+    }
+    
     @media (max-width: ${mq.xl}){
       left: 295px;
     }
