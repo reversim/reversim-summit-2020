@@ -191,6 +191,16 @@ export const SimpleLink = styled.a`
     }
     `}
 `;
+export const InvertedColorLink = styled.a`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_3};
+    font-size: ${font.size_reg};
+
+    &:hover{
+      color: ${color.text_3};
+    }
+    `}
+`;
 
 export const ButtonStyledLink = styled.a`
   ${ ({ theme: { color, font, space } }) =>`

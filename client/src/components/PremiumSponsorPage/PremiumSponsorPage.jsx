@@ -23,7 +23,6 @@ import {
   faGithub,
   faMedium,
   faTwitter,
-  faRProject
 } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,7 +34,7 @@ import {
   HeadingZigzag,
   Heading2,
   WhiteLine,
-  SimpleLink,
+  InvertedColorLink,
   Heading3,
   Paragraph,
   Paragraph2,
@@ -61,7 +60,14 @@ const TopContainer = styled.div`
     background-color: ${color.background_2};
 
     @media (max-width: ${mq.l}){
-      margin: 0 auto calc(17 * ${space.m}) auto;
+      margin: 0 auto calc(23 * ${space.m}) auto;
+      padding: ${space.xxl} 0 0 calc(3.5 * ${space.m});
+      justify-content: initial;
+    }
+
+    @media (max-width: ${mq.s}){
+      margin: 0 0 calc(28 * ${space.m}) 0;
+      padding-bottom: ${space.xl};
     }
   `}
 `;
@@ -71,6 +77,10 @@ const IntroContiner = styled(AlignCenter)`
     @media (min-width: ${mq.l}){
       margin-top: ${space.xxl};
       max-width: 1150px;
+    }
+
+    @media (max-width: ${mq.l}){
+      margin: 0;
     }
   `}
 `;
@@ -89,7 +99,17 @@ const HeadingContainer = styled(HeadingAligner)`
 
 const PageHeading = styled(Heading2)`
   ${ ({ theme: { color } }) => `
+    text-align: initial;
     color: ${color.text_1};
+  `}
+`;
+
+const HeadingDecorationTriangel = styled(HeadingTriangle)`
+  ${ ({ theme: { space, mq } }) => `
+    @media (max-width: ${mq.s}){
+      margin-bottom: calc(7 * ${space.m});
+      text-align: initial;
+    }
   `}
 `;
 
@@ -112,6 +132,7 @@ const SponsorHeadingContainer = styled.div`
     }
   `}
 `;
+
 const LogoAligner = styled.div`
   ${ ({ theme: { mq } }) => `
     @media (max-width: ${mq.l}){
@@ -159,7 +180,7 @@ const MiniNav = styled.div`
     }
 
     @media (max-width: ${mq.l}){
-      margin: calc(${space.m} * 5) 0 0 0;
+      margin: calc(${space.m} * 5) 0 0 ${space.l};
     }
 
     @media (max-width: ${mq.m}){
@@ -170,10 +191,14 @@ const MiniNav = styled.div`
 `;
 
 const MiniNavIcon = styled(FontAwesomeIcon)`
-  ${ ({ theme: { font, space, color } }) =>`
+  ${ ({ theme: { font, space, color, mq } }) =>`
     font-size: ${font.size_bg};
     margin-right: ${space.xl};
     color: ${color.font_awsome_nav};
+
+    @media (max-width: ${mq.l}) {
+      font-size: ${font.size_xl};
+    }
   `}
 `;
 
@@ -193,10 +218,11 @@ const MiniNavLinksList = styled.ul`
     
 `;
 
-const MiniNavLinkItem = styled(SimpleLink)`
-  ${ ({ theme: { color, space } }) => `
-    padding: ${space.s};
-    background-color: ${color.font_awsome_nav};
+const MiniNavListItem = styled(InvertedColorLink)`
+  ${ ({ theme: { font, mq } }) => `
+    @media (max-width: ${mq.l}){
+      font-size: ${font.size_bg};
+    }
   `}
 `;
 
@@ -210,6 +236,14 @@ const SponsorDescription = styled(AlignCenter)`
     @media (min-width: ${mq.l}){
       margin-top: ${space.xxl};
       max-width: 1150px;
+    }
+
+    @media (max-width: ${mq.l}){
+      margin-left: calc(6 * ${space.m});
+    }
+
+    @media (max-width: ${mq.m}){
+      justify-content: initial;
     }
   `}
 `;
@@ -228,6 +262,10 @@ const SegmentContainer = styled.div`
       justify-content: space-between;
     }
 
+    @media (max-width: ${mq.m}) {
+      max-width: 660px;
+    }
+
     @media (max-width: ${mq.s}){
       max-width: 400px;
       justify-content: center;
@@ -238,7 +276,6 @@ const SegmentContainer = styled.div`
 const WhoWeAre = styled(SegmentContainer)`
   ${ ({ theme: { mq } }) => `
      @media (max-width: ${mq.m}){
-      max-width: 500px;
       justify-content: center;
     }
   `}
@@ -289,6 +326,7 @@ const ContentContainer = styled.div`
       flex-direction: column;
       justify-content: space-between;
     }
+
   `}
 `;
 
@@ -336,12 +374,13 @@ const PremiumTechList = styled.ul`
 
     @media (max-width: ${mq.l}){
       margin: ${space.l} 0 0 0;
+      flex-wrap: wrap;
     }
   `}
 `;
 
 const PremiumTechItem = styled.li`
-  ${ ({ theme: { color, space, font } }) => `
+  ${ ({ theme: { color, space, font, mq } }) => `
     display: inline-block;
     margin: ${space.s} 0;
     padding: ${space.s} ${space.m};
@@ -350,6 +389,10 @@ const PremiumTechItem = styled.li`
     
     color: white;
     font-weight: ${font.weight_bold};
+
+    @media (max-width: ${mq.l}){
+      margin: ${space.m};
+    }
   `}
 `;
 
@@ -371,7 +414,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
       <TopContainer>
         <IntroContiner>
           <HeadingContainer>
-            <HeadingTriangle src={triangle} alt="triangle" />
+            <HeadingDecorationTriangel src={triangle} alt="triangle" />
             <PageHeading>Big Thanks to our sponsor</PageHeading>
             <WhiteLine />
           </HeadingContainer>
@@ -401,27 +444,27 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               </div>
               <MiniNavLinksList>
                 <li>
-                  <MiniNavLinkItem href="#about">
+                  <MiniNavListItem href="#about">
                     About
-                  </MiniNavLinkItem>
+                  </MiniNavListItem>
                 </li>
                 <li>
-                  <MiniNavLinkItem href="#Tech-Story">
+                  <MiniNavListItem href="#Tech-Story">
                     Tech-Story
-                  </MiniNavLinkItem>
+                  </MiniNavListItem>
                 </li>
                 {!!sponsor.openPositions.length && (
                   <li>
-                    <MiniNavLinkItem href="#open-positions">
+                    <MiniNavListItem href="#open-positions">
                       Open Positions
-                    </MiniNavLinkItem>
+                    </MiniNavListItem>
                   </li>
                 )}
                 {sponsor.reversimAndUs && (
                   <li>
-                    <MiniNavLinkItem href="#reversim-and-us">
+                    <MiniNavListItem href="#reversim-and-us">
                       Reversim & Us
-                    </MiniNavLinkItem>
+                    </MiniNavListItem>
                   </li>
                 )}
               </MiniNavLinksList>

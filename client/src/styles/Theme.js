@@ -53,6 +53,7 @@ const theme = {
     size_reg: '16px',
     size_md: '18px',
     size_bg: '24px',
+    size_xl: '35px',
 
     size_h2: '48px',
     size_h3: '35px',
