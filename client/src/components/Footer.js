@@ -1,35 +1,34 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import styled from 'styled-components';
 
-import {faEnvelope, faEnvelopeSquare} from '@fortawesome/free-solid-svg-icons';
-import {faFacebook, faTwitter} from '@fortawesome/free-brands-svg-icons';
-import {library} from '@fortawesome/fontawesome-svg-core';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-
-import {AlignCenter} from './GlobalStyledComponents/ReversimStyledComps';
+import { faEnvelope, faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 library.add(faFacebook, faTwitter, faEnvelope);
 
 const Footer = styled.footer`
-  ${({ theme: { space, color, font, }}) =>`
-      padding: ${space.xxl};
+  ${({ theme: { space, color, font }}) =>`
+      width: 100%;
+      margin: calc(5 * ${space.l}) auto 0 auto;
+      padding: ${space.xl};
+      
       background-color: ${color.background_3};
       font-family: ${font.main};
+
     `};
 `;
 
 const List = styled.ul`
   ${({theme: { mq }}) =>`
       width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-
-      @media (max-width: ${mq.xl}) {
-        min-height: 300px;
-        flex-direction: column;
-        justify-content: space-evenly;
-      };    
+      display: flex; 
+      
+      @media (min-width: ${mq.xl}){
+        justify-content: space-between;
+      }
     `}
 `;
 
@@ -42,32 +41,56 @@ const ListItem = styled.li`
 
     color: ${color.text_1};
     
+    @media (min-width: ${mq.xl}){
+      margin: 0 0 ${space.xl} 0;
+    }
+    
     @media (max-width: ${mq.xl}) {
       display: flex;
-      width: 100%;
+      width: max-content;
       min-height: ${space.xxl};
-      flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       margin: 0 ${space.l};
     };
 
     @media (max-width: ${mq.m}) {
       width: 100%;
-      justify-content: space-between;
-      margin: ${space.xl} 0;
+      flex-wrap: nowrap;
+      margin: 0 ${space.xl} 0  0;
     };
     `}
 `;
 
+const ListItemText = styled.h6`
+${ ({ theme: { space, color, mq } }) => `
+
+  margin-right: ${space.m};
+  color: ${color.text_1};
+
+  @media (min-width: ${mq.l}) {
+    width: 100%;
+  };   
+`}
+`;
+
+const AllRightsReserved = styled.h6`
+  ${ ({ theme: { color,} }) => `
+    color: ${color.text_1};
+  `}
+`;
+
 const FontAwsomeContainer = styled.div`
- ${({theme: { mq }}) =>`
-      display: flex;
-      justify-content: space-between;
-      width: 30%;
-      @media (max-width: ${mq.xl}) {
-        width: 30%;
-      }
-    `}
+  width: 30%;
+
+  display: flex;
+  justify-content: space-between;
+
+`;
+
+const FooterIcon = styled(FontAwesomeIcon)`
+ ${({theme: { space }}) =>`
+  margin-right: ${space.m};
+`}
 `;
 
 const Link = styled.a`
@@ -85,12 +108,11 @@ const Link = styled.a`
 
 const FooterContainer = () => (
   <Footer>
-    <AlignCenter>
       <List>
         <ListItem>
-          <h6>Contact us:</h6>
+          <ListItemText>Contact us:</ListItemText>
           <a href="mailto:rs19team@googlegroups.com">
-            <FontAwesomeIcon
+            <FooterIcon
               color="white"
               icon={faEnvelopeSquare}
             />
@@ -98,22 +120,22 @@ const FooterContainer = () => (
         </ListItem>
 
         <ListItem>
-          <h6>Stay in touch:</h6>
+          <ListItemText>Stay in touch:</ListItemText>
           <FontAwsomeContainer>
             <a href="https://www.facebook.com/groups/reversim/">
-              <FontAwesomeIcon
+              <FooterIcon
                 color="white"
                 icon={faFacebook}
               />
             </a>
             <a href="https://twitter.com/reversim/">
-              <FontAwesomeIcon
+              <FooterIcon
                 color="white"
                 icon={faTwitter}
               />
             </a>
             <a href="https://groups.google.com/forum/#!forum/reversim-summit">
-              <FontAwesomeIcon
+              <FooterIcon
                 color="white"
                 icon={faEnvelope}
               />
@@ -126,12 +148,11 @@ const FooterContainer = () => (
           Code of Conduct
           </Link>
         </ListItem>
-
-        <ListItem>
-          <h6>All Rights Reserved © 2020</h6>
-        </ListItem>
-      </List>
-    </AlignCenter>
+        </List>
+        
+        <AllRightsReserved>All Rights Reserved © 2020</AllRightsReserved>
+        
+      
   </Footer>
 );
 
