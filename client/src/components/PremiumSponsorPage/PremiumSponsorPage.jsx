@@ -370,7 +370,8 @@ const PremiumTechList = styled.ul`
     flex: 0 0 50%;
     display: flex;
     justify-content: space-between;
-    list-style: none    
+    flex-wrap: wrap;
+    list-style: none;
     
 
     @media (max-width: ${mq.l}){
@@ -382,8 +383,10 @@ const PremiumTechList = styled.ul`
 
 const PremiumTechItem = styled.li`
   ${ ({ theme: { color, space, font, mq } }) => `
+    height: max-content;
+
     display: inline-block;
-    margin: ${space.s} 0;
+    margin: ${space.s} ${space.s};
     padding: ${space.s} ${space.m};
     
     background: ${color.background_2};
