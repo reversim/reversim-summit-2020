@@ -395,7 +395,7 @@ const PremiumTechItem = styled.li`
     font-weight: ${font.weight_bold};
 
     @media (max-width: ${mq.l}){
-      margin: ${space.m};
+      margin: ${space.s} ${space.m} ${space.s} 0;
     }
   `}
 `;
