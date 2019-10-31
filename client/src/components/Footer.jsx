@@ -22,11 +22,12 @@ const Footer = styled.footer`
 `;
 
 const List = styled.ul`
-  ${({theme: { mq }}) =>`
+  ${({theme: { space, mq }}) =>`
       width: 100%;
       display: flex; 
       
-      @media (min-width: ${mq.xl}){
+      @media (min-width: ${mq.l}){
+        margin-left: -${space.l};
         justify-content: space-between;
       }
     `}
@@ -41,7 +42,7 @@ const ListItem = styled.li`
 
     color: ${color.text_1};
     
-    @media (min-width: ${mq.xl}){
+    @media (min-width: ${mq.l}){
       margin: 0 0 ${space.xl} 0;
     }
     

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import Navbar from './Navbar';
-import Footer from './Footer';
+import Footer from './Footer.jsx';
 import {REVERSIM_SUMMIT} from '../utils';
 
 //styled-components components
