@@ -208,7 +208,6 @@ const MiniNavLinksList = styled.ul`
     margin: ${space.m} 0;
 
     display: flex;
-    justify-content: space-between;
     
     @media (max-width: ${mq.l}) {
       flex-direction: column;
@@ -219,7 +218,9 @@ const MiniNavLinksList = styled.ul`
 `;
 
 const MiniNavListItem = styled(InvertedColorLink)`
-  ${ ({ theme: { font, mq } }) => `
+  ${ ({ theme: { space, font, mq } }) => `
+  margin-right: ${space.l};
+
     @media (max-width: ${mq.l}){
       font-size: ${font.size_bg};
     }
