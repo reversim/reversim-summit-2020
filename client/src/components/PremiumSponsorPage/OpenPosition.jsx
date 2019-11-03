@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 /*
 * NOTE: OpenPosition is rendered by SponsorPage.
-* NOTE: Each component OpenPosition is responsible for one open position description
-* NOTE: in each of the sponsors pages.
+* Each component OpenPosition is responsible for one open position description
+* in each of the sponsors pages.
 */
 
 import React from 'react';
@@ -13,13 +13,11 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-import { Button } from "reactstrap";
-
 library.add(faMapMarkerAlt);
 
 // styled-components components
 
-const GeneralContainer = styled(FlexColumn)`
+const MainContainer = styled(FlexColumn)`
   ${ ({ theme: { color, font, space } }) => `
     flex: 1;
     margin: ${space.xl} calc( ${space.xl} / 2);
@@ -102,7 +100,7 @@ class OpenPosition extends React.Component {
     } = this.props;
 
     return (
-      <GeneralContainer>
+      <MainContainer>
         <HeaderContainer>
             <JobTitle>
               {openPosition.title}
@@ -115,7 +113,7 @@ class OpenPosition extends React.Component {
           </JobDescription>
           <ApplyButton href={openPosition.link}>APPLY</ApplyButton>
         </DescriptionContainer>
-      </GeneralContainer>
+      </MainContainer>
     );
   }
 }
