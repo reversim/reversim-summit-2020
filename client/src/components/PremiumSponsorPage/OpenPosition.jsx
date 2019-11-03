@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
-// NOTE: OpenPosition is rendered by SponsorPage.
-// NOTE: Each component OpenPosition is responsible for one open position description
-// NOTE: in each of the sponsors pages.
+/*
+* NOTE: OpenPosition is rendered by SponsorPage.
+* NOTE: Each component OpenPosition is responsible for one open position description
+* NOTE: in each of the sponsors pages.
+*/
 
 import React from 'react';
 import styled from 'styled-components';
