@@ -9,7 +9,7 @@ import {
   HeadingAligner,
   HeadingCircle,
   Heading2,
-  BreakLine
+  BreakLineMain
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 //styled-components components
@@ -91,7 +91,7 @@ const CommunitySponsors = ({
           <Heading2>
             Community Sponsors
           </Heading2>
-          <BreakLine />
+          <BreakLineMain />
         </HeadingAligner>
         <div>
           {sponsors.map(sponsor => (

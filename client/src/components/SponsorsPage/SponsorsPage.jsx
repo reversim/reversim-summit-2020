@@ -20,21 +20,23 @@ library.add(faPencilAlt, faTrash);
   //WantToBe components
 const WantToBeContainer = styled.div`
   ${ ({ theme: { color, space, font } }) =>`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
     margin: ${space.xl} 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    text-align: center;
     line-height: 1.7;
     font-family: ${font.main};
-    font-weight: ${font.weight_normal};
-
+    
     color: ${color.text_1};
   `}
 `;
 
 const WantToBePara = styled(Paragraph)`
   ${ ({ theme: { font } }) => `
+    font-weight: ${font.weight_normal};
     font-size: ${font.size_bg};
   `}
 `;

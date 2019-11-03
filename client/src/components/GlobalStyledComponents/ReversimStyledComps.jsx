@@ -38,7 +38,7 @@ export const FlexColumn = styled.div`
   flex-direction: column;
 `;
 
-export const BreakLine = styled.hr`
+export const BreakLineMain = styled.hr`
   ${ ({ theme: { color, space, mq } }) =>`
       flex-grow: 1;
       align-self: center;
@@ -51,7 +51,7 @@ export const BreakLine = styled.hr`
     `}
 `;
 
-export const WhiteLine = styled(BreakLine)`
+export const BreakLineInverted = styled(BreakLineMain)`
   ${ ({ theme: {color} }) =>`
     border-top: 1.5px solid ${color.box_shadow_2};
   `}

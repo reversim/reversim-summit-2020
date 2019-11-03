@@ -8,7 +8,7 @@ import {
   HeadingAligner,
   HeadingDiamond,
   Heading2,
-  BreakLine
+  BreakLineMain
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 import diamond from '../../images/SVG/diamond.svg';
@@ -21,7 +21,7 @@ const Heading = styled( Heading2 )`
   `}
 `;
 
-const BrkLine = styled( BreakLine )`
+const BrkLine = styled( BreakLineMain )`
   ${ ({ theme: { color } }) => `
     border-top: 1.5px solid ${color.box_shadow_2};
   `}

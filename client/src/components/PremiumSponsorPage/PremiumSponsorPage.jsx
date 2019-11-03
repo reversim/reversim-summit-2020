@@ -33,12 +33,12 @@ import {
   HeadingTriangle,
   HeadingZigzag,
   Heading2,
-  WhiteLine,
+  BreakLineInverted,
   InvertedColorLink,
   Heading3,
   Paragraph,
   Paragraph2,
-  BreakLine,
+  BreakLineMain,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 library.add(faMapMarkerAlt);
@@ -303,7 +303,7 @@ const SegmentHeading = styled(Heading3)`
   `}
 `
 
-const SegmentBreakLine = styled(BreakLine)`
+const SegmentBreakLine = styled(BreakLineMain)`
   ${ ({ theme: { mq } }) => `
     @media (max-width: ${mq.l}) {
       display: inline-block;
@@ -420,7 +420,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
           <HeadingContainer>
             <HeadingDecorationTriangel src={triangle} alt="triangle" />
             <PageHeading>Big Thanks to our sponsor</PageHeading>
-            <WhiteLine />
+            <BreakLineInverted />
           </HeadingContainer>
 
           <SponsorHeadingContainer>
