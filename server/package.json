@@ -27,7 +27,7 @@
     "newrelic": "^4.5.1",
     "nodemon": "^1.18.3",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^1.0.0",
+    "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
     "shuffle-seed": "^1.1.6"
   },

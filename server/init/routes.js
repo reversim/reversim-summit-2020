@@ -4,6 +4,7 @@
 import express from 'express';
 import path from 'path';
 import passport from 'passport';
+
 import keyBy from 'lodash/keyBy';
 import { controllers } from '../db';
 import { transformProposal, transformUser } from '../db/controllers/helpers';
@@ -29,18 +30,13 @@ export default (app) => {
   // google auth
   // Redirect the user to Google for authentication. When complete, Google
   // will redirect the user back to the application at
-  // /auth/google/return
+  // /auth/google/callback
   // Authentication with google requires an additional scope param, for more info go
   // here https://developers.google.com/identity/protocols/OpenIDConnect#scope-param
   app.get('/auth/google', function(req, res, next) {
     req.session.returnTo = req.query.returnTo;
     next();
-  }, passport.authenticate('google', {
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ]
-  }));
+    }, passport.authenticate('google', { scope: ['profile', 'email'] }));
 
   // Google will redirect the user to this URL after authentication. Finish the
   // process by verifying the assertion. If valid, the user will be logged in.
