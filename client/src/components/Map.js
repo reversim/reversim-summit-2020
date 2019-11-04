@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { withGoogleMap, GoogleMap, Marker, withScriptjs } from 'react-google-maps';
-// import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 
-const position = {
+const coordinates = {
   lat: 32.104836,
   lng: 34.807388
 };
@@ -34,10 +33,10 @@ const MapElement = styled.div`
 // React components section
 const MapWithLoader = withScriptjs(
   withGoogleMap(() => {
-    const markerEl = <Marker position={position} defaultAnimation={2} />;
+    const markerEl = <Marker position={coordinates} defaultAnimation={2} />;
 
     return (
-      <GoogleMap defaultZoom={17} defaultCenter={position}>
+      <GoogleMap defaultZoom={17} defaultCenter={coordinates}>
         {markerEl}
       </GoogleMap>
     );
