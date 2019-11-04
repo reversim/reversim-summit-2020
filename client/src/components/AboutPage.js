@@ -95,10 +95,7 @@ class TeamMember extends React.Component {
 const AboutPage = props => {
   return (
     <Page title="About" {...props}>
-      <IntroContainer
-        // className="CLASSSSIIIICC navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
-        // style={{ backgroundImage: `url('${x}')` }}
-      >
+      <IntroContainer>
         <Container>
           <div className="d-flex align-items-center pt-15 ">
             <img src={hoop} alt="" height="100" style={{ marginRight: -16 }} />
