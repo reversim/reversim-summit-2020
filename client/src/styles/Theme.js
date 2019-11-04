@@ -36,7 +36,7 @@ const theme = {
     input_border_1: 'rgb(206, 212, 218)',
     input_border_2: 'rgb(128, 164, 255)',
     input_box_shadow_1: 'inset 0 1px 1px rgba(0, 0, 0, 0.075)',
-    input_box_shadow_2: '0 0 0 calc(0.2 * ${font.size_reg}) rgba(0, 72, 255, 0.25)',
+    input_box_shadow_2: '0 0 0 calc(0.2 * ${font.size_reg}) rgba(0, 72, 255, 0.25)',//NOTE: when using this make sure to pass theme.font as well
     form_button_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     form_button_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
     form_button_border_hover: 'rgb(84, 91, 98)',
@@ -47,9 +47,11 @@ const theme = {
     main: 'Source Code Pro, monospace',
     form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
+
     weight_normal: '300',
     weight_med: '400',
     weight_bold: '600',
+    
     size_reg: '16px',
     size_md: '18px',
     size_bg: '24px',
