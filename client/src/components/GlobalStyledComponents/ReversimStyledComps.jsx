@@ -30,7 +30,16 @@ export const AlignCenter = styled.div`
         max-width: 1280px;
       };    
     `}
-`
+`;
+export const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const BreakLine = styled.hr`
   ${ ({ theme: { color, space, mq } }) =>`
@@ -79,6 +88,12 @@ export const HeadingDiamond = styled.img`
       display: none;
     }
   `}
+`;
+
+export const HeadingSquares = styled(HeadingDiamond)`
+  width: 122px;
+  height: 122px;
+  margin-right: 0px;
 `;
 
 export const HeadingCircle = styled.svg`
