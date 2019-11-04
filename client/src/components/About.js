@@ -1,8 +1,11 @@
 import React from 'react';
 import Section from './Section';
-import {Row, Col} from 'reactstrap';
-import aboutImg from '../images/about.png';
+
 import {REVERSIM_SUMMIT} from '../utils';
+
+import aboutImg from '../images/about.png';
+
+import {Row, Col} from 'reactstrap'; //NOTE: Should be deleted
 
 const About = () => (
   <Section title="About">

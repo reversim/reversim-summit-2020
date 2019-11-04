@@ -1,5 +1,5 @@
-import React from "react";
-import TextTruncate from "react-text-truncate";
+import React from 'react';
+import TextTruncate from 'react-text-truncate';
 
 class ReadMore extends React.Component {
   constructor(...args) {

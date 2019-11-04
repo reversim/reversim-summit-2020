@@ -1,11 +1,14 @@
-import React from "react";
-import Page from "./Page";
-import { Container, Row, Col } from "reactstrap";
-import { img } from "./Speaker2.css";
-import hoop from "../images/SVG/hoop.svg";
-import x from "../images/SVG/x.svg";
-import { image } from "../images";
-import ReadMore from './ReadMore'
+import React from 'react';
+import Page from './Page';
+
+import ReadMore from './ReadMore';
+
+import hoop from '../images/SVG/hoop.svg';
+import x from '../images/SVG/x.svg';
+import { img } from './Speaker2.css';
+import { image } from '../images';
+
+import { Container, Row, Col } from "reactstrap"; //NOTE: Should be deleted
 
 class TeamMember extends React.Component {
   constructor(props) {
