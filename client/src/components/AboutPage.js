@@ -1,6 +1,7 @@
 import React from 'react';
-import Page from './Page';
+import styled from 'styled-components';
 
+import Page from './Page';
 import ReadMore from './ReadMore';
 
 import hoop from '../images/SVG/hoop.svg';
@@ -9,6 +10,30 @@ import { img } from './Speaker2.css';
 import { image } from '../images';
 
 import { Container, Row, Col } from "reactstrap"; //NOTE: Should be deleted
+
+// styled-componets components
+
+const IntroContainer = styled.div`
+  /* navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg */
+  ${ ({ theme: { color, font, space, mq } }) => `
+    padding: calc(2 * ${space.xxl}) 0 calc(3 * ${space.xl}) 0;
+
+    background-color: ${color.background_2};
+    background-image: url(${x});
+    background-repeat: no-repeat;
+    background-size: 600px;
+    background-position: 70% 133%;
+
+    color:  ${color.text_1};
+    font-size: ${font.size_md};
+
+    @media (max-width: ${mq.l}){
+      background-position: 50% 120%;
+    }
+  `}
+`;
+
+// React Components
 
 class TeamMember extends React.Component {
   constructor(props) {
@@ -70,9 +95,9 @@ class TeamMember extends React.Component {
 const AboutPage = props => {
   return (
     <Page title="About" {...props}>
-      <div
-        className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
-        style={{ backgroundImage: `url('${x}')` }}
+      <IntroContainer
+        // className="CLASSSSIIIICC navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
+        // style={{ backgroundImage: `url('${x}')` }}
       >
         <Container>
           <div className="d-flex align-items-center pt-15 ">
@@ -108,8 +133,8 @@ const AboutPage = props => {
             </div>
           </div>
         </Container>
-      </div>
-      <div className="white-bg">
+      </IntroContainer>
+      <div className="white-bg WHITIEE">
         <Container>
           <div
             className="d-flex align-items-center text-purple2"

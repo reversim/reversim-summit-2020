@@ -1,3 +1,4 @@
+// NOTE: Find where is it imported
 import React from 'react';
 import Section from './Section';
 
