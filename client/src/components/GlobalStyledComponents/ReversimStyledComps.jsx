@@ -31,7 +31,16 @@ export const AlignCenter = styled.div`
         max-width: 1280px;
       };    
     `}
-`
+`;
+export const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const FlexColumn = styled.div`
   display: flex;
@@ -128,9 +137,15 @@ export const HeadingZigzag = styled.img`
     height: calc(2.3 * ${font.size_h3});
     margin-right: -${space.m};
   `}
-  
 `;
 
+
+export const HeadingSquares = styled(HeadingDiamond)`
+  width: 122px;
+  height: 122px;
+  margin-right: 0px;
+`;
+  
 export const Heading2 = styled.h2`
   ${ ({ theme: { color, font, mq } }) =>`
     color: ${color.heading_2};
