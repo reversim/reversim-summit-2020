@@ -5,6 +5,7 @@ const theme = {
     text_1: 'rgb(255, 255, 255)',
     text_2: 'rgb(0, 0, 0)',
     text_3: 'rgb(81, 39, 255)',
+    
     heading_2: 'rgb(81, 39, 255)',
     input_1: 'rgb(73, 80, 87)',
     font_awsome_trash: 'rgb(189, 58, 2)',

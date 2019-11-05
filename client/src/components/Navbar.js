@@ -33,7 +33,7 @@ import logoImg from '../images/SVG/nav-logo.svg';
 // styled-components section
 const NavbarContainer = styled.div`
   nav  {
-  padding: ${props => props.theme.space. xl};
+  padding: ${props => props.theme.space.xl};
     ${props => {
       if(props.isColored){
         return (`
