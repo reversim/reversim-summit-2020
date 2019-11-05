@@ -5,7 +5,7 @@ const theme = {
     text_1: 'rgb(255, 255, 255)',
     text_2: 'rgb(0, 0, 0)',
     text_3: 'rgb(81, 39, 255)',
-    
+
     heading_2: 'rgb(81, 39, 255)',
     input_1: 'rgb(73, 80, 87)',
     font_awsome_trash: 'rgb(189, 58, 2)',
@@ -71,10 +71,19 @@ const theme = {
     xl: '25px',
     xxl: '50px',
   },
-  // borders used on the website, no colors only line styles and width
-  border: {
-    button_border: 'solid 2px',
+
+  // common content widths
+
+  width: {
+    main: '1250px',
+    main_for_mq_xl: '1180px', //NOTE: make sure to pass mq as a parameter
+    main_for_mq_l: '962px', //NOTE: make sure to pass mq as a parameter
+    main_for_mq_m: '758px', //NOTE: make sure to pass mq as a parameter
+    main_for_mq_s: '430px', //NOTE: make sure to pass mq as a parameter
+    main_for_mq_xs: '300px', //NOTE: make sure to pass mq as a parameter
+
   },
+
   // media queries parameters
   mq: {
     xs: '360px',

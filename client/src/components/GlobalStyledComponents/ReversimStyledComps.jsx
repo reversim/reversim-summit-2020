@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //general elements
 
 export const AlignCenter = styled.div`
-  ${ ({ theme: { mq, space } }) =>`
+  ${ ({ theme: { mq, space, width } }) =>`
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -16,20 +16,24 @@ export const AlignCenter = styled.div`
       margin: 0 auto;
 
       @media (min-width: ${mq.s}) {
-        max-width: 440px;
+        max-width: ${width.main_for_mq_s};
       };
 
       @media (min-width: ${mq.m}) {
-        max-width: 720px;
+        max-width: ${width.main_for_mq_m};
       };
 
       @media (min-width: ${mq.l}) {
-        max-width: 960px;
+        max-width: ${width.main_for_mq_l};
       };
 
       @media (min-width: ${mq.xl}) {
-        max-width: 1280px;
-      };    
+        max-width: ${width.main_for_mq_xl}
+      };
+
+      @media (min-width: ${mq.xxl}) {
+        max-width: ${width.main}
+      };
     `}
 `;
 

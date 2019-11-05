@@ -14,6 +14,12 @@ import {
 import diamond from '../../images/SVG/diamond.svg';
 
 //styled-components components
+const HeadingDecoration = styled(HeadingDiamond)`
+  ${ ({ theme: { space } }) => `
+    margin: 0 -${space.xxl} calc(-3 * ${space.m}) 0;
+  `}
+  
+`;
 
 const Heading = styled( Heading2 )`
   ${ ({ theme: { color } }) => `
@@ -92,8 +98,8 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     return (
       <div>
         <HeadingAligner>
-          <HeadingDiamond src={diamond} alt="diamond" />
           <Heading>
+            <HeadingDecoration src={diamond} alt="diamond" />
             Premium Sponsors
           </Heading>
           <BrkLine />
