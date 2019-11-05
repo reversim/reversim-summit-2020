@@ -14,7 +14,6 @@ import { Container, Row, Col } from "reactstrap"; //NOTE: Should be deleted
 // styled-componets components
 
 const IntroContainer = styled.div`
-  /* navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg */
   ${ ({ theme: { color, font, space, mq } }) => `
     padding: calc(2 * ${space.xxl}) 0 calc(3 * ${space.xl}) 0;
 
