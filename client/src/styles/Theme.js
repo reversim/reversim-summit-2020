@@ -49,7 +49,7 @@ const theme = {
     button: 'PT Mono',
 
     weight_normal: '300',
-    weight_med: '400',
+    weight_medium: '400',
     weight_bold: '600',
     
     size_reg: '16px',

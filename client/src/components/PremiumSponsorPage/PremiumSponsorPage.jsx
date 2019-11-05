@@ -157,14 +157,14 @@ const SponsorHeading = styled.div`
 
 const SponsorName = styled(Heading3)`
   ${ ({ theme: { font } }) => `
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
     margin: 0;
   `}
 `
 const SponsorOneliner = styled(Paragraph)`
   ${ ({ theme: { font } }) => `
     font-size: ${font.size_md};
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
   `}
 `;
 
@@ -295,7 +295,7 @@ const SegmentHeading = styled(Heading3)`
   ${ ({ theme: { color, font, mq } }) => `
 
     color: ${color.text_3};
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
 
     @media (max-width: ${mq.m}) {
       text-align: left;

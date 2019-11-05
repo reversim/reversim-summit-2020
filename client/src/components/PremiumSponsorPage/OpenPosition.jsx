@@ -47,7 +47,7 @@ const JobTitle = styled(Heading4)`
 const JobLocation = styled(Heading4)`
   ${ ({ theme: { font } }) => `
     margin: 0;
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
   `}
 `;
 
@@ -65,7 +65,7 @@ const JobDescription = styled(Paragraph)`
     margin-bottom: ${space.xl};
 
     color: ${color.text_2};
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
   `}
 `;
 

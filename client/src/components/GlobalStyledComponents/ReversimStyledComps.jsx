@@ -168,7 +168,7 @@ export const Paragraph = styled.p`
   ${ ({ theme: { color, font } }) =>`
     color: ${color.text_1};
     font-family: ${font.main};
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
     font-size: ${font.size_reg};
     line-height: 1.7;
     `}
@@ -236,7 +236,7 @@ export const FormButton = styled.button`
     background: ${color.background_linear_gradient_1};
     font-family: ${font.form_button};
     font-size: ${font.size_reg};
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
     color: ${color.text_1};
     letter-spacing: 1px;
     outline: none;
