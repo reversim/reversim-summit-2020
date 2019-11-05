@@ -8,7 +8,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FlexColumn, Heading4, Paragraph, ButtonStyledLink } from '../GlobalStyledComponents/ReversimStyledComps';
+import { Heading4, Paragraph, ButtonStyledLink } from '../GlobalStyledComponents/ReversimStyledComps';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -17,8 +17,10 @@ library.add(faMapMarkerAlt);
 
 // styled-components components
 
-const MainContainer = styled(FlexColumn)`
+const MainContainer = styled.div`
   ${ ({ theme: { color, font, space } }) => `
+    display: flex;
+    flex-direction: column;
     flex: 1;
     margin: ${space.xl} calc( ${space.xl} / 2);
     
@@ -51,10 +53,12 @@ const JobLocation = styled(Heading4)`
   `}
 `;
 
-const DescriptionContainer = styled(FlexColumn)`
+const DescriptionContainer = styled.div`
   ${ ({ theme: { space } }) =>`
     padding: calc(${space.m} * 3);
 
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     justify-content: space-between;
   `}

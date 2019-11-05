@@ -31,11 +31,6 @@ export const AlignCenter = styled.div`
         max-width: 1280px;
       };    
     `}
-`
-
-export const FlexColumn = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export const BreakLineMain = styled.hr`
