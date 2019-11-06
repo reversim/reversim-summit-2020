@@ -28,7 +28,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
-  AlignCenter,
+  AlignCenterColumn,
   HeadingAligner,
   HeadingTriangle,
   HeadingZigzag,
@@ -72,7 +72,7 @@ const TopContainer = styled.div`
   `}
 `;
 
-const IntroContiner = styled(AlignCenter)`
+const IntroContiner = styled(AlignCenterColumn)`
   ${ ({ theme: { mq, space } }) => `
     @media (min-width: ${mq.l}){
       margin-top: ${space.xxl};
@@ -229,7 +229,7 @@ const MiniNavListItem = styled(InvertedColorLink)`
 
 // styled-components sponsor description section
 
-const SponsorDescription = styled(AlignCenter)`
+const SponsorDescription = styled(AlignCenterColumn)`
   ${({ theme: { space, mq } }) => `
     margin: ${space.m} auto;
     padding: 0;

@@ -18,8 +18,9 @@ const MapContainer = styled.div`
     border: 4px solid ${color.box_shadow_1};
 
     @media (max-width: ${mq.l}) {
-      width: 100%;
-      margin-right: 0;
+      width: 300px;
+      height: 300px;
+      margin: 0 -${space.xl} calc(3 * ${space.xxl}) 0;
     }
   `}
 `;

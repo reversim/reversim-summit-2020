@@ -38,6 +38,10 @@ export const AlignCenter = styled.div`
     `}
 `;
 
+export const AlignCenterColumn = styled(AlignCenter)`
+  flex-direction: column;
+`;
+
 export const BreakLineMain = styled.hr`
   ${ ({ theme: { color, space, mq } }) =>`
       flex-grow: 1;

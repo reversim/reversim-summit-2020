@@ -10,7 +10,7 @@ import SponsorForm from './SponsorForm';
 import PremiumSponsors from './PremiumSponsors';
 import CommunitySponsors from './CommunitySponsors';
 
-import { AlignCenter, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
+import { AlignCenter, AlignCenterColumn, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
 
 
 library.add(faPencilAlt, faTrash);
@@ -134,7 +134,7 @@ class SponsorsPage extends React.Component {
     return (
       <Page title="Sponsors" {...this.props}>
         <PremiumSectionContainer>
-          <AlignCenter>
+          <AlignCenterColumn>
           {
             user && user.isReversimTeamMember && (
               <AddSoponsorContainer>
@@ -150,7 +150,7 @@ class SponsorsPage extends React.Component {
               updateSponsor={updateSponsor}
               deleteSponsor={deleteSponsor}
             />
-          </AlignCenter>
+          </AlignCenterColumn>
         </PremiumSectionContainer>
         <CommunityContainer>
           <CommunitySponsors

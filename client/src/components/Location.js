@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {
-  AlignCenter,
+  AlignCenterColumn,
   HeadingAligner,
   HeadingSquares,
   Heading2,
@@ -57,7 +57,7 @@ const VenueImg = styled.img`
 // React component
 const Location = () => (
   <LocationSection>
-    <AlignCenter>
+    <AlignCenterColumn>
       <HeadingAligner>
         <HeadingSquares src={squares} alt="location icon" />
         <ColumnAligner>
@@ -78,7 +78,7 @@ const Location = () => (
           alt="TLV Convention Center picture"
         />
       </div>
-    </AlignCenter>
+    </AlignCenterColumn>
   </LocationSection>
 );
 
