@@ -16,19 +16,19 @@ export const AlignCenter = styled.div`
       margin: 0 auto;
       
 
-      @media (min-width: ${mq.s}) {
+      @media (min-width: ${mq.s}) and (max-width: ${mq.m}) {
         max-width: ${width.main_for_mq_s};
       };
 
-      @media (min-width: ${mq.m}) {
+      @media (min-width: ${mq.m}) and (max-width: ${mq.l}) {
         max-width: ${width.main_for_mq_m};
       };
 
-      @media (min-width: ${mq.l}) {
+      @media (min-width: ${mq.l}) and (max-width: ${mq.xl}) {
         max-width: ${width.main_for_mq_l};
       };
 
-      @media (min-width: ${mq.xl}) {
+      @media (min-width: ${mq.xl}) and (max-width: ${mq.xxl}) {
         max-width: ${width.main_for_mq_xl}
       };
 

@@ -89,7 +89,7 @@ const HeadingContainer = styled(HeadingAligner)`
   ${ ({theme: { color, space, mq } }) =>`
     padding-top: ${space.xxl};
     background-color: ${color.background_2};
-    margin-bottom: 0;
+    margin-bottom: ${space.xxl};
     
     @media (min-width: ${mq.xl}){
       max-width: ${mq.xl}; 
