@@ -129,6 +129,13 @@ export const HeadingZigzag = styled.img`
   `}
 `;
 
+
+export const HeadingSquares = styled(HeadingDiamond)`
+  width: 122px;
+  height: 122px;
+  margin-right: 0px;
+`;
+  
 export const Heading2 = styled.h2`
   ${ ({ theme: { color, font, mq } }) =>`
     color: ${color.heading_2};
