@@ -79,6 +79,10 @@ export const HeadingAligner = styled.div`
   align-items: center;
   margin-bottom: calc(2 * ${space.l});
 
+  @media (max-width: ${mq.l}){
+    justify-content: center;
+  }
+
   @media (max-width: ${mq.m}){
       text-align: center;
     }

@@ -76,12 +76,11 @@ const theme = {
 
   width: {
     main: '1250px',
-    main_for_mq_xl: '1180px', //NOTE: make sure to pass mq as a parameter
-    main_for_mq_l: '962px', //NOTE: make sure to pass mq as a parameter
-    main_for_mq_m: '758px', //NOTE: make sure to pass mq as a parameter
-    main_for_mq_s: '430px', //NOTE: make sure to pass mq as a parameter
-    main_for_mq_xs: '300px', //NOTE: make sure to pass mq as a parameter
-
+    main_for_mq_xl: '1180px',
+    main_for_mq_l: '962px',
+    main_for_mq_m: '758px',
+    main_for_mq_s: '430px',
+    main_for_mq_xs: '300px',
   },
 
   // media queries parameters
