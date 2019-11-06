@@ -5,10 +5,8 @@ import {
   AlignCenter,
   HeadingAligner,
   HeadingSquares,
-  FlexColumn,
-  FlexRow,
   Heading2,
-  BreakLine,
+  BreakLineMain,
   Paragraph,
 } from './GlobalStyledComponents/ReversimStyledComps';
 import Map from './Map';
@@ -22,11 +20,17 @@ const LocationSection = styled.section`
     margin: calc(8 * ${space.m}) auto calc(10 * ${space.m}) auto;
   `}
 `;
-const ColumnAligner = styled(FlexColumn)`
+const ColumnAligner = styled.div`
   ${ ({ theme: { space } }) => `
     margin-left: ${space.m};
     width: 100%;
+    display: flex;
+    flex-direction: column;
   `}
+`;
+
+const MainHeading = styled(Heading2)`
+  display: flex;
 `;
 
 const SubHeading = styled(Paragraph)`
@@ -57,10 +61,10 @@ const Location = () => (
       <HeadingAligner>
         <HeadingSquares src={squares} alt="location icon" />
         <ColumnAligner>
-          <FlexRow>
-            <Heading2>Venue</Heading2>
-            <BreakLine />
-          </FlexRow>
+          <MainHeading>
+            Venue
+            <BreakLineMain />
+          </MainHeading>
           <SubHeading>TLV Convention Center</SubHeading>
         </ColumnAligner>
       </HeadingAligner>
