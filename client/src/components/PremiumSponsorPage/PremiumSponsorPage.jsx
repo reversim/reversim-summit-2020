@@ -171,22 +171,10 @@ const SponsorOneliner = styled(Paragraph)`
 const MiniNav = styled.div`
   ${ ({ theme: { space, mq } }) => `
     margin: calc(${space.m} * 3) 0 0 calc(${space.m} * 2);
-    @media (min-width: ${mq.xxl}){
-      
-    }
-    
-    @media (max-width: ${mq.xl}){
-      
-    }
 
     @media (max-width: ${mq.l}){
       margin: calc(${space.m} * 5) 0 0 ${space.l};
     }
-
-    @media (max-width: ${mq.m}){
-     
-    }
-
   `}
 `;
 
