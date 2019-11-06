@@ -6,6 +6,7 @@ import { faEnvelope, faEnvelopeSquare } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AlignCenter } from './GlobalStyledComponents/ReversimStyledComps'
 
 library.add(faFacebook, faTwitter, faEnvelope);
 
@@ -15,17 +16,27 @@ const Footer = styled.footer`
       margin: calc(5 * ${space.l}) auto 0 auto;
       padding: ${space.xl};
       
+      display: flex;
+
       background-color: ${color.background_3};
       font-family: ${font.main};
 
     `};
 `;
-
+const MainAligner = styled(AlignCenter)`
+  ${ ({ theme: { mq } }) => `
+    @media (max-width: ${mq.l}){
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  `}
+`
 const List = styled.ul`
   ${({theme: { space, mq }}) =>`
       width: 100%;
       display: flex; 
-      
+      justify-content: space-between;
+
       @media (min-width: ${mq.l}){
         margin-left: -${space.l};
         justify-content: space-between;
@@ -35,15 +46,18 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   ${( { theme: { color, mq, space, } } ) =>`
-    width: 20%;
+    flex-basis: 25%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
 
     color: ${color.text_1};
     
     @media (min-width: ${mq.l}){
-      margin: 0 0 ${space.xl} 0;
+      margin: 0  ${space.l} 0 0;
+    }
+    
+    @media (max-width: ${mq.l}) {
+      flex-basis: 33%;
     }
     
     @media (max-width: ${mq.xl}) {
@@ -75,9 +89,14 @@ ${ ({ theme: { space, color, mq } }) => `
 `;
 
 const AllRightsReserved = styled.h6`
-  ${ ({ theme: { color,} }) => `
+  ${ ({ theme: { color, mq} }) => `
+    flex-basis: 30%;
     color: ${color.text_1};
-  `}
+    
+    @media (max-width: ${mq.xl}) {
+      flex-basis: 40%;
+    }
+    `}
 `;
 
 const FontAwsomeContainer = styled.div`
@@ -109,6 +128,7 @@ const Link = styled.a`
 
 const FooterContainer = () => (
   <Footer>
+    <MainAligner>
       <List>
         <ListItem>
           <ListItemText>Contact us:</ListItemText>
@@ -150,10 +170,8 @@ const FooterContainer = () => (
           </Link>
         </ListItem>
         </List>
-        
         <AllRightsReserved>All Rights Reserved © 2020</AllRightsReserved>
-        
-      
+      </MainAligner>
   </Footer>
 );
 

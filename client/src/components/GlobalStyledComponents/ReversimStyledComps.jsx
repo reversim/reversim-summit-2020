@@ -7,13 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const AlignCenter = styled.div`
   ${ ({ theme: { mq, space, width } }) =>`
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-between;
 
       width: 100%;
       padding: 0 ${space.l};
       margin: 0 auto;
+      
 
       @media (min-width: ${mq.s}) {
         max-width: ${width.main_for_mq_s};
