@@ -47,7 +47,7 @@ export const BreakLineMain = styled.hr`
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
-      border-top: 1.5px solid ${color.box_shadow_1};
+      border-top: 2px solid ${color.box_shadow_1};
 
       @media (max-width: ${mq.l}){
         display: none;
@@ -57,7 +57,7 @@ export const BreakLineMain = styled.hr`
 
 export const BreakLineInverted = styled(BreakLineMain)`
   ${ ({ theme: {color} }) =>`
-    border-top: 1.5px solid ${color.box_shadow_2};
+    border-top: 2px solid ${color.box_shadow_2};
   `}
 `;
 
