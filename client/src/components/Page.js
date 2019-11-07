@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 import Navbar from './Navbar';
-import Footer from './Footer';
+import Footer from './Footer.jsx';
 import {REVERSIM_SUMMIT} from '../utils';
 
+//styled-components components
+const Main = styled.div`
+ ${ ({ theme: { font }}) => `
+ font-family: ${font.main};
+ line-height: 1.5;
+ `}
+  min-height: ${props => props.isHome ? ` ` : `100vh`};
+  display: ${props => props.isHome ? ` ` : `flex`};
+  flex-direction: ${props => props.isHome ? ` ` : `column`};
+`;
+
+//React components
 class Page extends Component {
   componentDidMount() {
     document.title = this.props.title
@@ -24,8 +37,8 @@ class Page extends Component {
     } = this.props;
 
     return (
-      <div
-        style={isHome ? {} : {minHeight: '100vh', display: 'flex', flexDirection: 'column'}}
+      <Main
+        // style={isHome ? {} : {minHeight: '100vh', display: 'flex', flexDirection: 'column'}}
         className={isSingleContent ? 'page-single-content' : ''}>
         <Navbar
           isHome={isHome}
@@ -38,7 +51,7 @@ class Page extends Component {
         />
         <div className="page">{children}</div>
         <Footer isSmallScreen={isSmallScreen}/>
-      </div>
+      </Main>
     );
   }
 }

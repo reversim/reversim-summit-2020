@@ -8,12 +8,18 @@ import {
   HeadingAligner,
   HeadingDiamond,
   Heading2,
-  BreakLine
+  BreakLineInverted
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 import diamond from '../../images/SVG/diamond.svg';
 
 //styled-components components
+const HeadingDecoration = styled(HeadingDiamond)`
+  ${ ({ theme: { space } }) => `
+    margin: 0 -${space.xxl} calc(-3 * ${space.m}) 0;
+  `}
+  
+`;
 
 const Heading = styled( Heading2 )`
   ${ ({ theme: { color } }) => `
@@ -21,16 +27,19 @@ const Heading = styled( Heading2 )`
   `}
 `;
 
-const BrkLine = styled( BreakLine )`
-  ${ ({ theme: { color } }) => `
-    border-top: 1.5px solid ${color.box_shadow_2};
-  `}
-`;
-
 const SponsorMiniAligner = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  ${ ({ theme: { mq, width } })=> `
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    @media (max-width: ${mq.l}){
+      width: ${width.main_for_mq_m};
+    }
+    @media (max-width: ${mq.m}){
+      width: ${width.main_for_mq_s};
+    }
+  `}
 `;
 
 // React components
@@ -92,11 +101,11 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     return (
       <div>
         <HeadingAligner>
-          <HeadingDiamond src={diamond} alt="diamond" />
           <Heading>
+            <HeadingDecoration src={diamond} alt="diamond" />
             Premium Sponsors
           </Heading>
-          <BrkLine />
+          <BreakLineInverted />
         </HeadingAligner>
         <SponsorMiniAligner>
           {sponsors.map(sponsor => (

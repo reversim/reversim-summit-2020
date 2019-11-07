@@ -10,7 +10,7 @@ import SponsorForm from './SponsorForm';
 import PremiumSponsors from './PremiumSponsors';
 import CommunitySponsors from './CommunitySponsors';
 
-import { AlignCenter, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
+import { AlignCenter, AlignCenterColumn, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
 
 
 library.add(faPencilAlt, faTrash);
@@ -20,21 +20,23 @@ library.add(faPencilAlt, faTrash);
   //WantToBe components
 const WantToBeContainer = styled.div`
   ${ ({ theme: { color, space, font } }) =>`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
     margin: ${space.xl} 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    text-align: center;
     line-height: 1.7;
     font-family: ${font.main};
-    font-weight: ${font.weight_normal};
-
+    
     color: ${color.text_1};
   `}
 `;
 
 const WantToBePara = styled(Paragraph)`
   ${ ({ theme: { font } }) => `
+    font-weight: ${font.weight_normal};
     font-size: ${font.size_bg};
   `}
 `;
@@ -132,7 +134,7 @@ class SponsorsPage extends React.Component {
     return (
       <Page title="Sponsors" {...this.props}>
         <PremiumSectionContainer>
-          <AlignCenter>
+          <AlignCenterColumn>
           {
             user && user.isReversimTeamMember && (
               <AddSoponsorContainer>
@@ -148,7 +150,7 @@ class SponsorsPage extends React.Component {
               updateSponsor={updateSponsor}
               deleteSponsor={deleteSponsor}
             />
-          </AlignCenter>
+          </AlignCenterColumn>
         </PremiumSectionContainer>
         <CommunityContainer>
           <CommunitySponsors

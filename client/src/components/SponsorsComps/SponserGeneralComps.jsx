@@ -51,9 +51,17 @@ const SponsorImg = styled.img`
 `;
 
 const SMPLinkingButton = styled(ButtonStyledLink)`
-  &:hover{
-    color: ${props => props.theme.color.text_1};
-  }
+  ${ ({ theme: { space, color } }) =>`
+    padding: 0 ${space.xl};
+
+    display: flex;
+    align-items: center;
+
+    &:hover{
+      color: ${color.text_1};
+    }
+  `}
+  
 `;
 
 const FAButtonContainer = styled.div`

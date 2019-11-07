@@ -1,57 +1,64 @@
+import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //general elements
 
 export const AlignCenter = styled.div`
-  ${ ({ theme: { mq, space } }) =>`
+  ${ ({ theme: { mq, space, width } }) =>`
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-between;
 
       width: 100%;
       padding: 0 ${space.l};
       margin: 0 auto;
+      
 
-      @media (min-width: ${mq.s}) {
-        max-width: 440px;
+      @media (min-width: ${mq.s}) and (max-width: ${mq.m}) {
+        max-width: ${width.main_for_mq_s};
       };
 
-      @media (min-width: ${mq.m}) {
-        max-width: 720px;
+      @media (min-width: ${mq.m}) and (max-width: ${mq.l}) {
+        max-width: ${width.main_for_mq_m};
       };
 
-      @media (min-width: ${mq.l}) {
-        max-width: 960px;
+      @media (min-width: ${mq.l}) and (max-width: ${mq.xl}) {
+        max-width: ${width.main_for_mq_l};
       };
 
-      @media (min-width: ${mq.xl}) {
-        max-width: 1280px;
-      };    
+      @media (min-width: ${mq.xl}) and (max-width: ${mq.xxl}) {
+        max-width: ${width.main_for_mq_xl}
+      };
+
+      @media (min-width: ${mq.xxl}) {
+        max-width: ${width.main}
+      };
     `}
 `;
-export const FlexRow = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
-export const FlexColumn = styled.div`
-  display: flex;
+export const AlignCenterColumn = styled(AlignCenter)`
   flex-direction: column;
 `;
 
-export const BreakLine = styled.hr`
+export const BreakLineMain = styled.hr`
   ${ ({ theme: { color, space, mq } }) =>`
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
-      border-top: 1.5px solid ${color.box_shadow_1};
+      border-top: 2px solid ${color.box_shadow_1};
 
       @media (max-width: ${mq.l}){
         display: none;
       }
     `}
+`;
+
+export const BreakLineInverted = styled(BreakLineMain)`
+  ${ ({ theme: {color} }) =>`
+    border-top: 2px solid ${color.box_shadow_2};
+  `}
 `;
 
 export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
@@ -72,6 +79,10 @@ export const HeadingAligner = styled.div`
   align-items: center;
   margin-bottom: calc(2 * ${space.l});
 
+  @media (max-width: ${mq.l}){
+    justify-content: center;
+  }
+
   @media (max-width: ${mq.m}){
       text-align: center;
     }
@@ -79,27 +90,38 @@ export const HeadingAligner = styled.div`
 `;
 
 export const HeadingDiamond = styled.img`
-  ${ ({ theme: { space, mq } }) => `
-    width: 85px;
-    height: 85px;
+  ${ ({ theme: { space, mq, font } }) => `
+    width: calc(2.4 * ${font.size_h3});
+    height: calc(2.4 * ${font.size_h3});
     margin-right: -${space.xxl};
     
     @media (max-width: ${mq.m}){
-      display: none;
+      ;
     }
   `}
 `;
 
-export const HeadingSquares = styled(HeadingDiamond)`
-  width: 122px;
-  height: 122px;
-  margin-right: 0px;
+export const HeadingTriangle = styled(HeadingDiamond)`
+  ${ ({ theme: { space, font } }) => `
+    width: calc(2.85 * ${font.size_h3});
+    height: calc(2.5 * ${font.size_h3});
+    margin-right: -${space.xl};
+    margin-top: -${space.xl};
+    `}
 `;
 
-export const HeadingCircle = styled.svg`
-  ${ ({ theme: { color, space, mq } }) => `
-      width: 100px;
-      height: 100px;
+const CircleJSX = ({className}) => {
+  return (
+    <svg className={className}>
+      <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
+    </svg>
+  );
+}; //this component is used as the basis for the HeadingCircle styled-component below
+
+export const HeadingCircle = styled(CircleJSX)`
+  ${ ({ theme: { color, space, mq, font } }) => `
+      width: calc(2.85 * ${font.size_h3});
+      height: calc(2.85 * ${font.size_h3});
       margin-right: -${space.xxl};
       fill: ${color.heading_decoratino};
 
@@ -109,6 +131,20 @@ export const HeadingCircle = styled.svg`
   `}
 `;
 
+export const HeadingZigzag = styled.img`
+  ${ ({ theme: { space, font }})=> `
+    height: calc(2.3 * ${font.size_h3});
+    margin-right: -${space.m};
+  `}
+`;
+
+
+export const HeadingSquares = styled(HeadingDiamond)`
+  width: 122px;
+  height: 122px;
+  margin-right: 0px;
+`;
+  
 export const Heading2 = styled.h2`
   ${ ({ theme: { color, font, mq } }) =>`
     color: ${color.heading_2};
@@ -124,11 +160,21 @@ export const Heading2 = styled.h2`
 
 export const Heading3 = styled.h3`
   ${ ({ theme: { color, space, font } }) =>`
+    margin-bottom: ${space.l};
     color: ${color.text_1};
     font-family: ${font.main};
     font-size: ${font.size_h3};
     font-weight: ${font.weight_normal};
-    margin-bottom: ${space.l};    
+    `}
+`;
+
+export const Heading4 = styled.h4`
+  ${ ({ theme: { color, space, font } }) =>`
+    color: ${color.text_1};
+    font-family: ${font.main};
+    font-size: ${font.size_h4};
+    font-weight: ${font.weight_normal};
+    margin-bottom: ${space.m};    
     `}
 `;
 
@@ -136,8 +182,15 @@ export const Paragraph = styled.p`
   ${ ({ theme: { color, font } }) =>`
     color: ${color.text_1};
     font-family: ${font.main};
-    font-weight: ${font.weight_normal};
+    font-weight: ${font.weight_medium};
     font-size: ${font.size_reg};
+    line-height: 1.7;
+    `}
+`;
+
+export const Paragraph2 = styled(Paragraph)`
+  ${ ({ theme: { color} }) =>`
+    color: ${color.text_2};
     `}
 `;
 
@@ -152,24 +205,37 @@ export const SimpleLink = styled.a`
     }
     `}
 `;
+export const InvertedColorLink = styled.a`
+  ${ ({ theme: { color, font } }) =>`
+    color: ${color.text_3};
+    font-size: ${font.size_reg};
+
+    &:hover{
+      color: ${color.text_3};
+    }
+    `}
+`;
 
 export const ButtonStyledLink = styled.a`
   ${ ({ theme: { color, font, space } }) =>`
-      color: ${color.text_1};
       height: 40px;
+      margin-bottom: ${space.xl};
+      padding: ${space.m};
+      letter-spacing: 1px;
+      color: ${color.text_1};
+
       background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
       background-size: 205% 100%;
       border: solid 2px ${color.box_shadow_2};
       box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
 
-      transition: all .5s ease-out;
-      margin-bottom: ${space.xl};
-      padding: ${space.m};
-      letter-spacing: 1px;
       font-size: ${font.size_reg};
       font-family: ${font.button};
       font-weight: ${font.weight_bold};
       text-decoration: none;
+
+      transition: all .5s ease-out;
+
       &:hover{
         background-position: left bottom;
         text-decoration: none;
@@ -184,7 +250,7 @@ export const FormButton = styled.button`
     background: ${color.background_linear_gradient_1};
     font-family: ${font.form_button};
     font-size: ${font.size_reg};
-    font-weight: ${font.weight_med};
+    font-weight: ${font.weight_medium};
     color: ${color.text_1};
     letter-spacing: 1px;
     outline: none;

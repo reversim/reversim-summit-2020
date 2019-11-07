@@ -10,7 +10,7 @@ import {
   HeadingAligner,
   HeadingDiamond,
   Heading2,
-  BreakLine
+  BreakLineMain
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 
@@ -25,7 +25,7 @@ const SponserSectionContainter = styled(AlignCenter)`
   flex-wrap: nowrap;
 `;
 
-const BottomLine = styled(BreakLine)`
+const BottomLine = styled(BreakLineMain)`
   width: 100%;
 `;
 
@@ -37,7 +37,7 @@ const HomePageSponsorsSection = ({ sponsors }) => {
       <HeadingAligner>
         <HeadingDiamond src={diamond} alt="diamond" />
         <Heading2>Meet Our Sponsors</Heading2>
-        <BreakLine />
+        <BreakLineMain />
       </HeadingAligner>
 
       <HomePremiumSponsors sponsors={sponsors} />
