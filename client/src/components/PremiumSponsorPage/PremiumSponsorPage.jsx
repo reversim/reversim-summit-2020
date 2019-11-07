@@ -353,14 +353,10 @@ const PremiumGallery = styled.div`
 
 const PremiumTechList = styled.ul`
   ${ ({ theme: { space, mq } }) => `
-    margin-right: ${space.xl};
+    margin: 0 ${space.xl};
     
     flex: 0 0 50%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
     list-style: none;
-    
 
     @media (max-width: ${mq.l}){
       margin: ${space.l} 0 0 0;
