@@ -60,13 +60,13 @@ const TopContainer = styled.div`
     background-color: ${color.background_2};
 
     @media (max-width: ${mq.l}){
-      margin: 0 auto calc(23 * ${space.m}) auto;
+      margin: 0 auto calc(30 * ${space.m}) auto;
       padding: ${space.xxl} 0 0 calc(3.5 * ${space.m});
       justify-content: initial;
     }
 
     @media (max-width: ${mq.s}){
-      margin: 0 0 calc(28 * ${space.m}) 0;
+      margin: 0 0 calc(35 * ${space.m}) 0;
       padding-bottom: ${space.xl};
     }
   `}
@@ -173,7 +173,15 @@ const MiniNav = styled.div`
     margin: calc(${space.m} * 3) 0 0 calc(${space.m} * 2);
 
     @media (max-width: ${mq.l}){
-      margin: calc(${space.m} * 5) 0 0 ${space.l};
+      margin: ${space.xxl} 0 0 ${space.l};
+    }
+  `}
+`;
+
+const MiniNavIconContainer = styled.div`
+  ${ ({ theme: { space, mq } }) => `
+    @media (max-width: ${mq.l}) {
+      margin-bottom: ${space.xxl};
     }
   `}
 `;
@@ -421,7 +429,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner>
             </SponsorHeading>
             <MiniNav>
-              <div>
+              <MiniNavIconContainer>
                 {sponsor.socials.map((social, i) => (
                   <a key={i} href={social.link} target="_blank">
                     <MiniNavIcon
@@ -429,7 +437,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                     />
                   </a>
                 ))}
-              </div>
+              </MiniNavIconContainer>
               <MiniNavLinksList>
                 <li>
                   <MiniNavListItem href="#about">
