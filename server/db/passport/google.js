@@ -10,6 +10,7 @@ export default (req, accessToken, refreshToken, profile, done) => {
         return done(null, false, { message: 'There is already a Google account that belongs to you. Sign in with that account or delete it, then link it with your current account.' });
       }
       return User.findById(req.user.id, (findByIdErr, user) => {
+        // Update user details if user is already with a session
         user.google = profile.id;
         user.tokens.push({ kind: 'google', accessToken });
         user.name = user.name || profile._json.displayName;
@@ -23,18 +24,21 @@ export default (req, accessToken, refreshToken, profile, done) => {
     });
   }
 
+  let email = profile.emails[0].value || profile._json.email;
   return User.findOne({ google: profile.id }).exec((findByGoogleIdErr, existingUser) => {
     if (existingUser) {
       // TODO: update user info
       return done(null, existingUser);
     }
 
-    return User.findOne({ email: profile._json.emails[0].value }, (findByEmailErr, existingEmailUser) => {
+    return User.findOne({ email }, (findByEmailErr, existingEmailUser) => {
       if (existingEmailUser) {
         return done(null, false, { message: 'There is already an account using this email address. Sign in to that account and link it with Google manually from Account Settings.' });
       }
+
+      // Create a new user
       const user = new User();
-      user.email = profile.emails[0].value || profile._json.emails[0].value;
+      user.email = email;
       user.google = profile.id;
       user.tokens.push({ kind: 'google', accessToken });
       user.name = profile.displayName || profile._json.displayName;

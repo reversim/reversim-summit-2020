@@ -1,4 +1,4 @@
-import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { passport as dbPassport } from '../../db';
 
 export default (passport) => {
