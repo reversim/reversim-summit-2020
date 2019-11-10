@@ -1,4 +1,4 @@
-// NOTE: this mixin file was created to ensure consistent mobile-first media-queris.
+// NOTE: this mixin file was created to ensure consistent mobile-first media-queries.
 import { css } from 'styled-components';
 import theme from './Theme';
 

@@ -7,6 +7,7 @@ import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AlignCenter } from './GlobalStyledComponents/ReversimStyledComps'
+import mediaQueryMin from '../styles/MediaQueriesMixin';
 
 library.add(faFacebook, faTwitter, faEnvelope);
 
@@ -24,12 +25,8 @@ const Footer = styled.footer`
     `};
 `;
 const MainAligner = styled(AlignCenter)`
-  ${ ({ theme: { mq } }) => `
-    @media (max-width: ${mq.l}){
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  `}
+    flex-wrap: wrap;
+    justify-content: center;
 `
 const List = styled.ul`
   ${({theme: { space, mq }}) =>`
@@ -37,10 +34,15 @@ const List = styled.ul`
       display: flex; 
       justify-content: space-between;
 
+      @media (min-width: ${mq.xs}){
+        margin-bottom: ${space.xl};
+      }
+
       @media (min-width: ${mq.l}){
         margin-left: -${space.l};
+        margin-bottom: 0;
         justify-content: space-between;
-      }
+      }      
     `}
 `;
 
@@ -63,7 +65,7 @@ const ListItem = styled.li`
     @media (max-width: ${mq.xl}) {
       display: flex;
       width: max-content;
-      min-height: ${space.xxl};
+      min-height: ${space.xl};
       justify-content: flex-start;
       margin: 0 ${space.l};
     };
@@ -78,33 +80,45 @@ const ListItem = styled.li`
 
 const ListItemText = styled.h6`
 ${ ({ theme: { space, color, mq } }) => `
-
   margin-right: ${space.m};
   color: ${color.text_1};
-
-  @media (min-width: ${mq.l}) {
-    width: 100%;
-  };   
+  
+  @media (min-width: ${mq.m}){
+      width: max-content;
+    }
 `}
 `;
 
 const AllRightsReserved = styled.h6`
-  ${ ({ theme: { color, mq} }) => `
-    flex-basis: 30%;
+  ${ ({ theme: { color, space, mq} }) => `
     color: ${color.text_1};
     
-    @media (max-width: ${mq.xl}) {
+    @media (min-width: ${mq.xs}) {
+      padding: 0 ${space.l};
+    }
+
+    @media (min-width: ${mq.l}) {
+      margin-top: ${space.xl};
       flex-basis: 40%;
     }
     `}
 `;
 
 const FontAwsomeContainer = styled.div`
-  width: 30%;
+  ${ ({ theme: { mq } }) => `
+    width: 30%;
 
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    
+    @media (min-width: ${mq.xs}){
+      flex-wrap: wrap;
+    }
 
+    @media (min-width: ${mq.m}){
+      flex-wrap: nowrap;
+    }
+  `}
 `;
 
 const FooterIcon = styled(FontAwesomeIcon)`
