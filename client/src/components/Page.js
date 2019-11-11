@@ -37,8 +37,8 @@ class Page extends Component {
     } = this.props;
 
     return (
-      <Main isHome={isHome}
-        // style={isHome ? {} : {minHeight: '100vh', display: 'flex', flexDirection: 'column'}}
+      <Main
+        isHome={isHome}
         className={isSingleContent ? 'page-single-content' : ''}>
         <Navbar
           isHome={isHome}
