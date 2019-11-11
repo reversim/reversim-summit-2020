@@ -25,99 +25,78 @@ const Footer = styled.footer`
     `};
 `;
 const MainAligner = styled(AlignCenter)`
-    flex-wrap: wrap;
-    justify-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
 `
 const List = styled.ul`
-  ${({theme: { space, mq }}) =>`
-      width: 100%;
-      display: flex; 
-      justify-content: space-between;
+  width: 100%;
+  display: flex; 
+  justify-content: space-between;
 
-      @media (min-width: ${mq.xs}){
-        margin-bottom: ${space.xl};
-      }
+  ${mediaQueryMin.xs`
+    margin-bottom: ${props => props.theme.space.xl};
+    `}
 
-      @media (min-width: ${mq.l}){
-        margin-left: -${space.l};
-        margin-bottom: 0;
-        justify-content: space-between;
-      }      
+  ${mediaQueryMin.l`
+    margin-left: -${props => props.theme.space.l};
+    margin-bottom: 0;
+    justify-content: space-between;
     `}
 `;
 
 const ListItem = styled.li`
-  ${( { theme: { color, mq, space, } } ) =>`
-    flex-basis: 25%;
-    display: flex;
-    flex-direction: row;
-
-    color: ${color.text_1};
-    
-    @media (min-width: ${mq.l}){
-      margin: 0  ${space.l} 0 0;
-    }
-    
-    @media (max-width: ${mq.l}) {
-      flex-basis: 33%;
-    }
-    
-    @media (max-width: ${mq.xl}) {
-      display: flex;
-      width: max-content;
-      min-height: ${space.xl};
-      justify-content: flex-start;
-      margin: 0 ${space.l};
-    };
-
-    @media (max-width: ${mq.m}) {
-      width: 100%;
-      flex-wrap: nowrap;
+    ${({ theme: {space} }) => `
       margin: 0 ${space.xl} 0  0;
-    };
+    `}
+
+    ${mediaQueryMin.l`
+      ${({ theme: { space }}) =>`
+      display: flex;
+      margin: 0 ${space.m};
+      `}
     `}
 `;
 
 const ListItemText = styled.h6`
-${ ({ theme: { space, color, mq } }) => `
+${ ({ theme: { space, color } }) => `
   margin-right: ${space.m};
   color: ${color.text_1};
-  
-  @media (min-width: ${mq.m}){
-      width: max-content;
-    }
-`}
+  `}
+
+  ${mediaQueryMin.m`
+    width: max-content;
+  `}
 `;
 
 const AllRightsReserved = styled.h6`
-  ${ ({ theme: { color, space, mq} }) => `
+  ${ ({ theme: { color } }) => `
     color: ${color.text_1};
-    
-    @media (min-width: ${mq.xs}) {
-      padding: 0 ${space.l};
-    }
+    `}
 
-    @media (min-width: ${mq.l}) {
+  ${mediaQueryMin.xs`
+    ${({ theme: { space } }) => `
+      padding: 0 ${space.l};
+    `}`}
+
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
       margin-top: ${space.xl};
       flex-basis: 40%;
-    }
-    `}
+    `}`}
 `;
 
 const FontAwsomeContainer = styled.div`
-  ${ ({ theme: { mq } }) => `
-    width: 30%;
+  width: 30%;
 
-    display: flex;
-    justify-content: space-between;
-    
-    @media (min-width: ${mq.xs}){
-      flex-wrap: wrap;
-    }
-
-    @media (min-width: ${mq.m}){
-      flex-wrap: nowrap;
-    }
+  display: flex;
+  justify-content: space-between;
+  
+  ${mediaQueryMin.xs`
+    flex-wrap: wrap;
+    width: fit-content;
+  `}
+  ${mediaQueryMin.m`
+    flex-wrap: nowrap;
   `}
 `;
 
