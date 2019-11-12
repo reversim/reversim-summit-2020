@@ -215,9 +215,10 @@ export const InvertedColorLink = styled.a`
 
 export const ButtonStyledLink = styled.a`
   ${ ({ theme: { color, font, space } }) =>`
+      width: max-content;
       height: 40px;
-      margin-bottom: ${space.xl};
-      padding: ${space.m};
+      margin: 0 ${space.m} ${space.xl} ${space.m};
+      padding: ${space.m} ${space.l};
       letter-spacing: 1px;
       color: ${color.text_1};
 
@@ -229,6 +230,7 @@ export const ButtonStyledLink = styled.a`
       font-size: ${font.size_reg};
       font-family: ${font.button};
       font-weight: ${font.weight_bold};
+      text-align: center;
       text-decoration: none;
 
       transition: all .5s ease-out;

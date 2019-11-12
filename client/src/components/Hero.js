@@ -18,6 +18,8 @@ import backgroundImg from "../images/home-reg-bg.png";
 
 library.add(faMapMarkerAlt, faCalendarAlt);
 
+//styled-components components
+
 const StyledSection = styled.section`
   ${ ({ theme: { color } }) =>`
       display: flex;
@@ -32,7 +34,7 @@ const StyledSection = styled.section`
 `;
 
 const HeroInner = styled.div`
-  ${ ({ theme: { color, mq, }}) =>`
+  ${ ({ theme: { color }}) =>`
       width: 100%;
       display: flex;
       justify-content: center;
@@ -60,7 +62,7 @@ const HeroInner = styled.div`
 `;
 
 const HeroContent = styled.div`
-  ${ ({ theme: { space, color, } }) =>`
+  ${ ({ theme: { space, color } }) =>`
       display: flex !important;
       flex-direction: column;
       margin-bottom: ${space.xxl} !important;
@@ -81,7 +83,10 @@ const LogoImg = styled.img`
 `;
 
 const Subtitle = styled.div`
-  flex-direction: column;
+  ${ ({ theme: { space } }) =>`
+    flex-direction: column;
+    margin-top: ${space.xl};
+    `}
 
   ${mediaQueryMin.m`
     ${ ({ theme: { font, space } }) =>`
@@ -111,15 +116,24 @@ const IconAligner = styled.div`
     `};
 `;
 
+//NOTE: buttonContainer is not direction: flex-column
 const ButtonContainer = styled.div`
-  flex-direction: column;
+  ${ ({ theme: { space } }) => `
+    flex-direction: column;
+    height: 100px;
+    padding-top: ${space.xxl};
+    `}
+  
+  
   ${mediaQueryMin.m`
-    ${ ({ theme: { space, mq, } }) => `
+    ${ ({ theme: { space } }) => `
     display: flex !important;
     justify-content: space-around !important;
     margin-right: ${space.m} !important;
     `}`};
 `;
+
+// React components
 
 const Hero = ({ eventConfig }) => (
   <StyledSection>
