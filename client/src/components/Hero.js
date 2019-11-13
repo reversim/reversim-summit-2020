@@ -95,11 +95,9 @@ const Subtitle = styled.div`
     font-weight: 400;
     background-color: #451deb;
     
-    padding: ${space.m} !important;
-    display: flex !important;
+    padding: ${space.m};
+    display: flex;
     justify-content: space-between;
-    margin-top: ${space.l} !important;
-    margin-bottom: ${space.xxl} !important;
     `}`};
 `;
 
@@ -116,21 +114,35 @@ const IconAligner = styled.div`
     `};
 `;
 
-//NOTE: buttonContainer is not direction: flex-column
 const ButtonContainer = styled.div`
   ${ ({ theme: { space } }) => `
-    flex-direction: column;
     height: 100px;
-    padding-top: ${space.xxl};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: ${space.xl};
     `}
-  
-  
+
   ${mediaQueryMin.m`
     ${ ({ theme: { space } }) => `
-    display: flex !important;
-    justify-content: space-around !important;
-    margin-right: ${space.m} !important;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-right: ${space.m};
+    padding-top: ${space.xl};
     `}`};
+`;
+
+const VoteContainer = styled(ButtonContainer)`
+${ ({ theme: { space } }) => `
+  margin-top: calc(-3 * ${space.m});
+  padding-top: calc(6 * ${space.m});
+  `}
+
+  ${mediaQueryMin.m`
+  ${ ({ theme: { space } }) => `
+    margin-top: ${space.xl};
+    padding-top: calc(6 * ${space.m});
+    `}`}
 `;
 
 // React components
@@ -152,14 +164,15 @@ const Hero = ({ eventConfig }) => (
               TLV Convention center
             </IconAligner>
           </Subtitle>
-
+{/* 
           {eventConfig.voting && (
-            <ButtonContainer>
+
+          )} */}
+                      <VoteContainer>
               <ButtonStyledLink href="/proposals">
                 {"VOTE FOR SESSIONS"}
               </ButtonStyledLink>
-            </ButtonContainer>
-          )}
+            </VoteContainer>
 
           <ButtonContainer>
             <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
