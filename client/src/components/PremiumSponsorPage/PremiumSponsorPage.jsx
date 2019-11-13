@@ -40,6 +40,7 @@ import {
   Paragraph2,
   BreakLineMain,
 } from '../GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 library.add(faMapMarkerAlt);
 
@@ -226,23 +227,24 @@ const MiniNavListItem = styled(InvertedColorLink)`
 // styled-components sponsor description section
 
 const SponsorDescription = styled(AlignCenterColumn)`
-  ${({ theme: { space, mq } }) => `
+  ${ ({ theme: { space } }) => `
     margin: ${space.m} auto;
     padding: 0;
+    `}
 
-    @media (min-width: ${mq.l}){
-      margin-top: ${space.xxl};
-      max-width: 1150px;
-    }
+    ${mediaQueryMin.l`
+      ${ ({ theme: { space } }) =>`
+        margin-top: ${space.xxl};
+        max-width: 1150px;      
+        `}`}
 
-    @media (max-width: ${mq.l}){
+    /* @media (max-width: ${mq.l}){
       margin-left: calc(6 * ${space.m});
     }
 
     @media (max-width: ${mq.m}){
       justify-content: initial;
-    }
-  `}
+    } */
 `;
 
 const SegmentContainer = styled.div`

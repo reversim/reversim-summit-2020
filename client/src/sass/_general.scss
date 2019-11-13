@@ -1047,9 +1047,13 @@ input[type="checkbox"] {
 }
 
 .carousel-item {
-  min-width: 720px;
-  height: 410px;
+
+  @media (min-width: 991px){
+    min-width: 720px;
+    height: 410px;  
+  }
 }
+
 .carousel-item img, .carousel-item video {
   width: inherit;
 }
