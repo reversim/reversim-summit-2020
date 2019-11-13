@@ -164,15 +164,14 @@ const Hero = ({ eventConfig }) => (
               TLV Convention center
             </IconAligner>
           </Subtitle>
-{/* 
-          {eventConfig.voting && (
 
-          )} */}
-                      <VoteContainer>
+          {eventConfig.voting && (
+            <VoteContainer>
               <ButtonStyledLink href="/proposals">
                 {"VOTE FOR SESSIONS"}
               </ButtonStyledLink>
             </VoteContainer>
+          )}
 
           <ButtonContainer>
             <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
