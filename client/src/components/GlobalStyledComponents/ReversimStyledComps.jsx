@@ -50,10 +50,12 @@ export const AlignCenterColumn = styled(AlignCenter)`
 export const BreakLineMain = styled.hr`
   ${({ theme: { color } }) =>`
     border-top: 2px solid ${color.box_shadow_1};
+    display: none;
     `}
- 
+
   ${mediaQueryMin.m`
     ${({ theme: { space } }) =>`
+      display: inline-block;  
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
@@ -77,6 +79,8 @@ export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
 //<h2, 3, ...> and <p>
 
 export const HeadingAligner = styled.div`
+  display: flex;
+  width: max-content;
   text-align: center;
 
   ${mediaQueryMin.m`
@@ -119,12 +123,16 @@ const CircleJSX = ({className}) => {
 }; //this component is used as the basis for the HeadingCircle styled-component below
 
 export const HeadingCircle = styled(CircleJSX)`
-  ${mediaQueryMin.m`
     ${ ({ theme: { color, space, font } }) => `
-        width: calc(2.85 * ${font.size_h3});
-        height: calc(2.85 * ${font.size_h3});
-        margin-right: -${space.xxl};
-        fill: ${color.heading_decoratino};
+      width: calc(2.85 * ${font.size_h3});
+      height: calc(2.85 * ${font.size_h3});
+      fill: ${color.heading_decoratino};
+      margin: -${space.l} -${space.xxl} ${space.xl} 0; 
+      `}
+
+  ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+        margin-top: ${space.xl};
         `}`}
 `;
 
