@@ -216,6 +216,7 @@ export const InvertedColorLink = styled.a`
 export const ButtonStyledLink = styled.a`
   ${ ({ theme: { color, font, space } }) =>`
       width: max-content;
+      min-width: 280px;
       height: 40px;
       margin: 0 ${space.m} ${space.xl} ${space.m};
       padding: ${space.m} ${space.l};
