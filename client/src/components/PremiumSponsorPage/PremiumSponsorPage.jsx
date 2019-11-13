@@ -91,17 +91,15 @@ const HeadingContainer = styled(HeadingAligner)`
     padding-top: ${space.xxl};
     background-color: ${color.background_2};
     margin-bottom: ${space.xxl};
-    
-    @media (min-width: ${mq.xl}){
-      max-width: ${mq.xl}; 
-    }
   `}
 `;
 
 const PageHeading = styled(Heading2)`
-  ${ ({ theme: { color } }) => `
+  ${ ({ theme: { color, mq } }) => `
+    max-width: 90%;
     text-align: initial;
     color: ${color.text_1};
+
   `}
 `;
 
