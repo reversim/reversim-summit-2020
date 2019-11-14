@@ -479,9 +479,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <SegmentBreakLine />
             </SegmentHeadingAligner>
             <ContentContainer>
-              <Paragraph2>
-                <ReactMarkdown source={sponsor.about}></ReactMarkdown>
-              </Paragraph2>
+              <ReactMarkdown source={sponsor.about}></ReactMarkdown>
                 {sponsor.images &&
                   sponsor.images.length > 0 && (
                     <PremiumGallery>
