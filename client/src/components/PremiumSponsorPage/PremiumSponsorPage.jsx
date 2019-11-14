@@ -87,15 +87,20 @@ const IntroContiner = styled(AlignCenterColumn)`
 `;
 
 const HeadingContainer = styled(HeadingAligner)`
-  ${ ({theme: { color, space, mq } }) =>`
+  ${ ({theme: { color, space } }) =>`
     padding-top: ${space.xxl};
     background-color: ${color.background_2};
     margin-bottom: ${space.xxl};
   `}
+  ${mediaQueryMin.s`
+    ${({ theme: { space } }) =>`
+    width: 100%;
+    margin-top: ${space.xl};
+    `}`}
 `;
 
 const PageHeading = styled(Heading2)`
-  ${ ({ theme: { color, mq } }) => `
+  ${ ({ theme: { color } }) => `
     max-width: 90%;
     text-align: initial;
     color: ${color.text_1};
