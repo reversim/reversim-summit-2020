@@ -98,9 +98,13 @@ const GetTicketsCTA = () => (
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
   const isNew = to === 'sponsors'
+
   return (
     <NavLI key={to}>
-      <LinkDuo className={cn(navLinkClass, isNew? newLink: '')} to={to} external={!!external}>
+      <LinkDuo
+        className={cn(navLinkClass, isNew? newLink: '')}
+        to={to}
+        external={external ? 'true' : undefined}>
         {isNew && <img className={newTag} src={newImg}/>}
         {text}
       </LinkDuo>
