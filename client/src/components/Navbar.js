@@ -103,7 +103,7 @@ const NavbarItem = ({to, text, external, pathname}) => {
     <NavLI key={to}>
       <LinkDuo
         className={cn(navLinkClass, isNew? newLink: '')}
-        to={to}
+        to={external ? to : `/${to}`}
         external={external ? 'true' : undefined}>
         {isNew && <img className={newTag} src={newImg}/>}
         {text}
