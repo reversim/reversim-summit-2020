@@ -74,16 +74,13 @@ const TopContainer = styled.div`
 `;
 
 const IntroContiner = styled(AlignCenterColumn)`
-  ${ ({ theme: { mq, space } }) => `
-    @media (min-width: ${mq.l}){
+  margin: 0;
+
+  ${ mediaQueryMin.l`
+  ${ ({ theme: { space } }) => `
       margin-top: ${space.xxl};
       max-width: 1150px;
-    }
-
-    @media (max-width: ${mq.l}){
-      margin: 0;
-    }
-  `}
+    `}`}
 `;
 
 const HeadingContainer = styled(HeadingAligner)`
@@ -125,7 +122,7 @@ const SponsorHeadingContainer = styled.div`
     justify-content: space-between;
     background-color: ${color.background_2};
 
-    @media (max-width: ${mq.l}) {
+    @media (max-width: ${mq.l}) { //this
       min-height: 400px; 
       flex-direction: column;
       align-items: center;
