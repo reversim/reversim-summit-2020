@@ -76,8 +76,8 @@ const theme = {
 
   width: {
     main: '1250px',
-    main_for_mq_xl: '1180px',
-    main_for_mq_l: '962px',
+    main_for_mq_xl: '1100px',
+    main_for_mq_l: '895px',
     main_for_mq_m: '758px',
     main_for_mq_s: '430px',
     main_for_mq_xs: '300px',

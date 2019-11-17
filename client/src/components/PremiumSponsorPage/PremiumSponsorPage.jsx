@@ -47,30 +47,29 @@ library.add(faMapMarkerAlt);
 // styled-components components page's intro
 
 const TopContainer = styled.div`
-  ${ ({ theme: { color, space, mq } }) => `
+  ${ ({ theme: { color, space } }) => `
     width: 100%;
 
-    margin: 0 auto calc(12 * ${space.m}) auto;
-    padding-top: calc(10 * ${space.m});
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-
+    margin: 0 auto calc(30 * ${space.m}) auto;
+    padding: ${space.xxl} 0 ${space.xl} calc(3.5 * ${space.m});
+    
     background-color: ${color.background_2};
+    `}
+    ${mediaQueryMin.m`
+      padding-bottom: 0;
+    `}
 
-    @media (max-width: ${mq.l}){
-      margin: 0 auto calc(30 * ${space.m}) auto;
-      padding: ${space.xxl} 0 0 calc(3.5 * ${space.m});
-      justify-content: initial;
-    }
-
-    @media (max-width: ${mq.s}){
-      margin: 0 0 calc(35 * ${space.m}) 0;
-      padding-bottom: ${space.xl};
-    }
-  `}
+    ${mediaQueryMin.l`
+      ${ ({ theme: { space } }) => `
+      margin: 0 auto;
+      padding-bottom: calc(3 * ${space.m});
+      `}`}
+    
+    ${mediaQueryMin.xl`
+      padding-bottom: 0;
+      display: flex;
+      justify-content: center;
+      `}
 `;
 
 const IntroContiner = styled(AlignCenterColumn)`
@@ -105,41 +104,27 @@ const PageHeading = styled(Heading2)`
   `}
 `;
 
-const HeadingDecorationTriangel = styled(HeadingTriangle)`
-  ${ ({ theme: { space, mq } }) => `
-    @media (max-width: ${mq.s}){
-      margin-bottom: calc(7 * ${space.m});
-      text-align: initial;
-    }
-  `}
-`;
-
 const SponsorHeadingContainer = styled.div`
-  ${ ({ theme: { space, color, mq } }) =>`
+  ${ ({ theme: { space, color } }) =>`
     height: 150px;
+    min-height: 400px;
     padding-top: ${space.xl};
+
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    
     background-color: ${color.background_2};
+    `}
 
-    @media (max-width: ${mq.l}) { //this
-      min-height: 400px; 
-      flex-direction: column;
-      align-items: center;
-    };
-
-    @media (min-width: ${mq.xl}){
-      max-width: ${mq.xl}; 
-    }
-  `}
-`;
+    ${mediaQueryMin.l`
+      min-height: initial;
+      flex-direction: row;
+    `}
+  `;
 
 const LogoAligner = styled.div`
-  ${ ({ theme: { mq } }) => `
-    @media (max-width: ${mq.l}){
-      align-self: baseline;
-    }
-  `}
+  align-self: baseline;
 `;
 
 const SponsorLogo = styled.img`
@@ -170,81 +155,92 @@ const SponsorOneliner = styled(Paragraph)`
 `;
 
 const MiniNav = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    margin: calc(${space.m} * 3) 0 0 calc(${space.m} * 2);
+  ${ ({ theme: { space } }) => `
+    margin: ${space.xxl} 0 0 ${space.l};
+    `}
 
-    @media (max-width: ${mq.l}){
-      margin: ${space.xxl} 0 0 ${space.l};
-    }
-  `}
+    ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+      margin: calc(3 * ${space.m}) 0 0 calc(2 * ${space.m});
+      `}`}
 `;
 
 const MiniNavIconContainer = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    @media (max-width: ${mq.l}) {
+  ${ ({ theme: { space } }) => `
       margin-bottom: ${space.xxl};
-    }
-  `}
+    `}
+
+    ${mediaQueryMin.l`
+      margin-bottom: 0`}
 `;
 
 const MiniNavIcon = styled(FontAwesomeIcon)`
-  ${ ({ theme: { font, space, color, mq } }) =>`
-    font-size: ${font.size_bg};
+  ${ ({ theme: { font, space, color } }) =>`
+    font-size: ${font.size_xl};
     margin-right: ${space.xl};
     color: ${color.font_awsome_nav};
-
-    @media (max-width: ${mq.l}) {
-      font-size: ${font.size_xl};
-    }
-  `}
+    `}
+    
+    ${mediaQueryMin.l`
+    ${ ({ theme: { font } }) =>`
+    font-size: ${font.size_bg};
+    `}`}
 `;
 
 const MiniNavLinksList = styled.ul`
-  ${ ({ theme: { space, mq } }) => `
+  ${ ({ theme: { space } }) => `
     max-width: 90%;
+    min-height: 20vh;
+
     margin: ${space.m} 0;
 
     display: flex;
+    flex-direction: column;
+    `}
     
-    @media (max-width: ${mq.l}) {
-      flex-direction: column;
-      min-height: 20vh;
-    }
-  `}
-    
+    ${mediaQueryMin.l`
+      flex-direction: row
+      flex-wrap: wrap;
+      min-height: 50px;
+    `}
 `;
 
 const MiniNavListItem = styled(InvertedColorLink)`
-  ${ ({ theme: { space, font, mq } }) => `
+  ${ ({ theme: { space, font } }) => `
   margin-right: ${space.l};
-
-    @media (max-width: ${mq.l}){
-      font-size: ${font.size_bg};
-    }
+  font-size: ${font.size_bg};
   `}
+
+  ${mediaQueryMin.l`
+  ${ ({ theme: { font } }) => `
+    font-size: ${font.size_md};
+  `}`}
 `;
 
 // styled-components sponsor description section
 
 const SponsorDescription = styled(AlignCenterColumn)`
   ${ ({ theme: { space } }) => `
-    margin: ${space.m} auto;
+    margin: ${space.m} auto 0 ${space.xxl};
     padding: 0;
     `}
 
-    ${mediaQueryMin.l`
+    ${mediaQueryMin.m`
       ${ ({ theme: { space } }) =>`
-        margin-top: ${space.xxl};
-        max-width: 1150px;      
+        margin-left: ${space.m};
         `}`}
 
-    /* @media (max-width: ${mq.l}){
-      margin-left: calc(6 * ${space.m});
-    }
-
-    @media (max-width: ${mq.m}){
-      justify-content: initial;
-    } */
+    ${mediaQueryMin.l`
+      ${ ({ theme: { space, width } }) =>`
+        margin-top: ${space.xxl};
+        margin-left: ${space.xxl};
+        max-width: ${width.main_for_mq_l};
+        `}`}
+    
+    ${mediaQueryMin.xl`
+      ${ ({ theme: { width } }) =>`
+        max-width: ${width.main_for_mq_xl};
+        `}`}
 `;
 
 const SegmentContainer = styled.div`
@@ -412,7 +408,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
       <TopContainer>
         <IntroContiner>
           <HeadingContainer>
-            <HeadingDecorationTriangel src={triangle} alt="triangle" />
+            <HeadingTriangle src={triangle} alt="triangle" />
             <PageHeading>Big Thanks to our sponsor</PageHeading>
             <BreakLineInverted />
           </HeadingContainer>
@@ -443,18 +439,18 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <MiniNavLinksList>
                 <li>
                   <MiniNavListItem href="#about">
-                    About
+                    About |
                   </MiniNavListItem>
                 </li>
                 <li>
                   <MiniNavListItem href="#Tech-Story">
-                    Tech-Story
+                    Tech-Story |
                   </MiniNavListItem>
                 </li>
                 {!!sponsor.openPositions.length && (
                   <li>
                     <MiniNavListItem href="#open-positions">
-                      Open Positions
+                      Open Positions |
                     </MiniNavListItem>
                   </li>
                 )}
