@@ -10,8 +10,8 @@ import {
   Heading2,
   BreakLineInverted
 } from '../GlobalStyledComponents/ReversimStyledComps';
-import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import diamond from '../../images/SVG/diamond.svg';
 
 //styled-components components
