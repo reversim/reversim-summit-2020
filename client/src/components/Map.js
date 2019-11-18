@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { withGoogleMap, GoogleMap, Marker, withScriptjs } from 'react-google-maps';
-
+import mediaQueryMin from '../styles/MediaQueriesMixin';
 const coordinates = {
   lat: 32.104836,
   lng: 34.807388
@@ -11,18 +11,32 @@ const coordinates = {
 // React components section
 const MapContainer = styled.div`
   ${ ({ theme: { space, mq, color } }) => `
-    height: 480px;
-    width: 480px;
-    margin-right: ${space.xxl};
-
+    width: 300px;
+    height: 300px;
+    margin: 0 -${space.xl} calc(3 * ${space.xxl}) 0;
+    
     border: 4px solid ${color.box_shadow_1};
+    `}
 
-    @media (max-width: ${mq.l}) {
-      width: 300px;
-      height: 300px;
-      margin: 0 -${space.xl} calc(3 * ${space.xxl}) 0;
-    }
-  `}
+    ${mediaQueryMin.m`
+      ${({ theme: { space } }) => `
+        width: 300px;
+        height: 300px;
+
+        margin: ${space.xxl} -${space.m} ${space.l} 0;
+        `}`}
+
+    ${mediaQueryMin.l`
+      ${({ theme: { space } }) => `
+        height: 350px;
+        width: 350px;
+        margin-right: ${space.xxl};
+        `}`}
+    
+    ${mediaQueryMin.xl`
+      height: 480px;
+      width: 480px;
+      `}
 `;
 
 const MapElement = styled.div`
