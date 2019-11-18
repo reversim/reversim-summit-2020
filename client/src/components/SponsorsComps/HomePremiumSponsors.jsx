@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { SponsorMiniPremium } from './SponserGeneralComps';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 const Contianer = styled.div`
-  ${ ( { theme: { mq } } ) => `
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      
-      @media (max-width: ${mq.l}) {
-        justify-content: space-around;
-      }
-    `}
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  ${mediaQueryMin.l`
+  justify-content: space-between;
+  `}
 `;
 
 const HomePremiumSponsors = ({ sponsors }) =>{

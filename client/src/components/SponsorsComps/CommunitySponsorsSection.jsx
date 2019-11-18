@@ -4,33 +4,31 @@ import styled from "styled-components";
 
 import { hyperlink } from "../../utils";
 import { image } from "../../images";
-
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 // Styled-component Section
 
 const Container = styled.div`
-${ ( { theme: { space, mq } } ) =>`
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-top: ${space.xl};
-      @media (max-width: ${mq.l}) {
-        justify-content: space-around;
-      }
+${({ theme: { space } } ) =>`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: ${space.xl};
+  `}
+
+  ${mediaQueryMin.l`
+    justify-content: space-between;
     `}
 `;
 
 const HomeCommunityContainer = styled.div`
-${ ({ theme: { mq } }) => `
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   
-  @media (max-width: ${mq.s}) {
-    justify-content: center;
-  }  
-`}
-
+  ${mediaQueryMin.s`
+    justify-content: space-between;
+    `}
 `;
 
 const SponsorMiniContainer = styled.div`
