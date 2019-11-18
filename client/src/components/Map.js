@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { withGoogleMap, GoogleMap, Marker, withScriptjs } from 'react-google-maps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
+
 const coordinates = {
   lat: 32.104836,
   lng: 34.807388
