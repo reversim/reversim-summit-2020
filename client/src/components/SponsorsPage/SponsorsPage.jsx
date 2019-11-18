@@ -9,7 +9,6 @@ import Page from "../Page";
 import SponsorForm from './SponsorForm';
 import PremiumSponsors from './PremiumSponsors';
 import CommunitySponsors from './CommunitySponsors';
-import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 import { AlignCenter, AlignCenterColumn, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
 
