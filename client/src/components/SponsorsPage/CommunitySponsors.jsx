@@ -15,14 +15,12 @@ import {
 //styled-components components
 
 const ColumnContainer = styled.div`
-${ ({theme: { color, mq } }) => `
+${ ({theme: { color } }) => `
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   background-color: ${color.background_4};
-
-  @media (max-width: ${mq.m})
-`}
+  `}
 `;
 
 //React components
