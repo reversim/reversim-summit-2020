@@ -61,7 +61,7 @@ const TopContainer = styled.div`
 
     ${mediaQueryMin.l`
       ${ ({ theme: { space } }) => `
-      margin: 0 auto;
+      margin: 0 auto calc(15 * ${space.m}) auto;
       padding-bottom: calc(3 * ${space.m});
       `}`}
     
@@ -220,11 +220,8 @@ const MiniNavListItem = styled(InvertedColorLink)`
 // styled-components sponsor description section
 
 const SponsorDescription = styled(AlignCenterColumn)`
-  ${ ({ theme: { space } }) => `
-    margin: ${space.m} auto 0 ${space.xxl};
     padding: 0;
-    `}
-
+  
     ${mediaQueryMin.m`
       ${ ({ theme: { space } }) =>`
         margin-left: ${space.m};
@@ -240,40 +237,38 @@ const SponsorDescription = styled(AlignCenterColumn)`
     ${mediaQueryMin.xl`
       ${ ({ theme: { width } }) =>`
         max-width: ${width.main_for_mq_xl};
+        margin: 0 auto;
         `}`}
 `;
 
 const SegmentContainer = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    display: flex;
-    flex-direction: column
-    justify-content: space-between;
-    margin: ${space.l} 0;
-      
-    @media (max-width: ${mq.l}) {
-      min-height: 20vh;      
-
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    @media (max-width: ${mq.m}) {
-      max-width: 660px;
-    }
-
-    @media (max-width: ${mq.s}){
-      max-width: 400px;
-      justify-content: center;
-    }
+  ${({ theme: { space } }) => `
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 660px;
+  margin-bottom: calc(2 * ${space.xxl});
   `}
+    
+  ${mediaQueryMin.m`
+    min-height: 20vh;      
+    
+    flex-direction: column;
+    justify-content: space-between;
+    `}
+  
+  ${mediaQueryMin.l`
+    ${ ({ theme: { space, width } }) => `
+    max-width: ${width.main_for_mq_xl};
+    margin: ${space.m} 0;    
+    `}`}
 `;
 
 const WhoWeAre = styled(SegmentContainer)`
-  ${ ({ theme: { mq } }) => `
-     @media (max-width: ${mq.m}){
-      justify-content: center;
-    }
-  `}
+  justify-content: center;
+    ${mediaQueryMin.m`
+    justify-content: space-between;
+    `}
 `;
 
 const SegmentHeadingAligner = styled(HeadingAligner)`
@@ -282,112 +277,87 @@ const SegmentHeadingAligner = styled(HeadingAligner)`
     margin-top: calc(-13 * ${space.m});
     padding-top: calc(13 * ${space.m});
     z-index: -1;
-  `}
+    `}
+
+    ${mediaQueryMin.l`
+      ${({theme: { space } }) => `
+      margin-top: calc(-13 * ${space.m});
+      `}`}
 `;
 
 const SegmentHeading = styled(Heading3)`
-  ${ ({ theme: { color, font, mq } }) => `
-
+  ${ ({ theme: { color, font } }) => `
     color: ${color.text_3};
     font-weight: ${font.weight_medium};
-
-    @media (max-width: ${mq.m}) {
-      text-align: left;
-    }
-  `}
+    text-align: left;
+    `}
 `
 
 const SegmentBreakLine = styled(BreakLineMain)`
-  ${ ({ theme: { mq } }) => `
-    @media (max-width: ${mq.l}) {
-      display: inline-block;
-    }
+  display: none;
 
-    @media (max-width: ${mq.m}) {
-      display: none;
-    }
+  ${mediaQueryMin.s`
+    display: inline-block;
   `}
 `;
 
 const ContentContainer = styled.div`
-  ${ ({ theme: { mq } }) => `
-    min-height: 15vh;
-    
-    display: flex;
-    justify-content: space-between;
-      
-    @media (max-width: ${mq.l}) {
-      margin-top: 0;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+  min-height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  flex-direction: column;
 
-  `}
-`;
-
-const ContentContainerColumn = styled(ContentContainer)`
-  ${ ({ theme: { mq } }) => `
-    min-height: 20vh;
-    flex-direction: column;
-    justify-content: space-between;
-
-    @media (max-width: ${mq.l}) {
-      min-height: 25vh;
-    };
-
-    @media (max-width: ${mq.m}) {
-      min-height: 30vh;
-    };
-
-    @media (max-width: ${mq.s}) {
-      min-height: 35vh;
-    };
+  ${mediaQueryMin.xl`
+  flex-direction: row;
   `}
 `;
 
 const PremiumGallery = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    width: 60%;
-    margin-left: calc(4 * ${space.m});
-
-    @media (max-width: ${mq.l}) {
-      width: 100%;
-      margin: ${space.xl} auto;
-    }
-  `}
+  ${({ theme: { space } }) => `
+    width: 100%;
+    margin: ${space.xl} auto;
+    `}
+    
+    ${mediaQueryMin.xl`
+      ${({ theme: { space } }) => `
+        width: 90%;
+        margin-left: calc(4 * ${space.m});
+        `}`} /*NOTE: There is a height issue of the carousel which I couldn't solve in min-width 992px*/
 `;
 
 const PremiumTechList = styled.ul`
-  ${ ({ theme: { space, mq } }) => `
-    margin: 0 ${space.xl};
-    
-    flex: 0 0 50%;
+  ${({ theme: { space } }) => `
+    margin: ${space.l} 0 0 0;
+    flex-wrap: wrap;
     list-style: none;
-
-    @media (max-width: ${mq.l}){
-      margin: ${space.l} 0 0 0;
-      flex-wrap: wrap;
-    }
-  `}
+    flex: 0 0 50%;
+    `}
+    
+    ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+    margin: 0 ${space.xl};
+    `}`}
 `;
 
 const PremiumTechItem = styled.li`
-  ${ ({ theme: { color, space, font, mq } }) => `
+  ${ ({ theme: { color, space, font } }) => `
     height: max-content;
 
     display: inline-block;
-    margin: ${space.s} ${space.s};
+    margin: ${space.s} ${space.m} ${space.s} 0;
     padding: ${space.s} ${space.m};
     
     background: ${color.background_2};
     
     color: white;
     font-weight: ${font.weight_bold};
-
-    @media (max-width: ${mq.l}){
-      margin: ${space.s} ${space.m} ${space.s} 0;
-    }
-  `}
+    `}
+    
+    ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+    margin: ${space.s} ${space.s};
+    `}`}
 `;
 
 // React components
@@ -443,7 +413,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                   </MiniNavListItem>
                 </li>
                 <li>
-                  <MiniNavListItem href="#Tech-Story">
+                  <MiniNavListItem href="#tech-Story">
                     Tech-Story |
                   </MiniNavListItem>
                 </li>
@@ -488,7 +458,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
         </WhoWeAre>
 
         <SegmentContainer>
-          <SegmentHeadingAligner id="Tech-Story">
+          <SegmentHeadingAligner id="tech-Story">
             <SegmentHeading>Our Technology Story</SegmentHeading>
             <SegmentBreakLine />
           </SegmentHeadingAligner>
