@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import mediaQueryMin from '../styles/MediaQueriesMixin';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
@@ -17,6 +18,8 @@ import backgroundImg from "../images/home-reg-bg.png";
 
 library.add(faMapMarkerAlt, faCalendarAlt);
 
+//styled-components components
+
 const StyledSection = styled.section`
   ${ ({ theme: { color } }) =>`
       display: flex;
@@ -31,34 +34,35 @@ const StyledSection = styled.section`
 `;
 
 const HeroInner = styled.div`
-  ${ ({ theme: { color, mq, }}) =>`
+  ${ ({ theme: { color }}) =>`
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: ${color.text_1};
-
-      @media (min-width: ${mq.m}){
-        text-align: left;
-      };
-      
-      @media (max-width:${mq.m}) {
-        margin-right: 0;
-      };
-
-      @media (max-width:${mq.l}) {
-        margin-right: -80px;
-      };
-
-      @media (max-width:${mq.xl}) {
-       flex-direction: column;
-      };
       `}
+
+      ${mediaQueryMin.m`
+        text-align: left;      
+        `}
+      
+      ${mediaQueryMin.m`
+        margin-right: 0;
+        `}
+
+      ${mediaQueryMin.l`
+        margin-right: -80px;
+        `}
+
+      ${mediaQueryMin.xl`
+       flex-direction: column;
+       `}
+
 `;
 
 const HeroContent = styled.div`
-  ${ ({ theme: { space, color, } }) =>`
+  ${ ({ theme: { space, color } }) =>`
       display: flex !important;
       flex-direction: column;
       margin-bottom: ${space.xxl} !important;
@@ -68,35 +72,33 @@ const HeroContent = styled.div`
 `;
 
 const LogoImg = styled.img`
-  ${ ({ theme: { mq } }) =>`
-      width: 400px;
-      @media (max-width:${mq.m}) {
-            width: 350px;
-      };
+  width: 250px;
 
-      @media (max-width:${mq.xxs}) {
-            width: 250px;
-      };
-      `}
+  ${mediaQueryMin.xs`
+    width: 350px;
+    `}
+  ${mediaQueryMin.m`
+    width: 400px;
+    `}
 `;
 
 const Subtitle = styled.div`
-  ${ ({ theme: { font, space, mq } }) =>`
+  ${ ({ theme: { space } }) =>`
+    flex-direction: column;
+    margin-top: ${space.xl};
+    `}
+
+  ${mediaQueryMin.m`
+    ${ ({ theme: { font, space } }) =>`
     letter-spacing: 0.6px;
     font-size: ${font.size_md};
     font-weight: 400;
     background-color: #451deb;
-
-    padding: ${space.m} !important;
-    display: flex !important;
+    
+    padding: ${space.m};
+    display: flex;
     justify-content: space-between;
-    margin-top: ${space.l} !important;
-    margin-bottom: ${space.xxl} !important;
-
-    @media (max-width:${mq.m}) {
-      flex-direction: column;
-    }
-    `};
+    `}`};
 `;
 
 const IconAligner = styled.div`
@@ -113,16 +115,37 @@ const IconAligner = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  ${ ({ theme: { space, mq, } }) => `
-    display: flex !important;
-    justify-content: space-around !important;
-    margin-right: ${space.m} !important;
-    
-    @media (max-width: ${mq.m}){
-      flex-direction: column;
-      }
-    `};
+  ${ ({ theme: { space } }) => `
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: ${space.xl};
+    `}
+
+  ${mediaQueryMin.m`
+    ${ ({ theme: { space } }) => `
+    flex-direction: row;
+    justify-content: space-around;
+    margin-right: ${space.m};
+    padding-top: ${space.xl};
+    `}`};
 `;
+
+const VoteContainer = styled(ButtonContainer)`
+${ ({ theme: { space } }) => `
+  margin-top: calc(-3 * ${space.m});
+  padding-top: calc(6 * ${space.m});
+  `}
+
+  ${mediaQueryMin.m`
+  ${ ({ theme: { space } }) => `
+    margin-top: ${space.xl};
+    padding-top: calc(6 * ${space.m});
+    `}`}
+`;
+
+// React components
 
 const Hero = ({ eventConfig }) => (
   <StyledSection>
@@ -143,11 +166,11 @@ const Hero = ({ eventConfig }) => (
           </Subtitle>
 
           {eventConfig.voting && (
-            <ButtonContainer>
+            <VoteContainer>
               <ButtonStyledLink href="/proposals">
                 {"VOTE FOR SESSIONS"}
               </ButtonStyledLink>
-            </ButtonContainer>
+            </VoteContainer>
           )}
 
           <ButtonContainer>

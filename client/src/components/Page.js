@@ -10,7 +10,7 @@ const Main = styled.div`
  font-family: ${font.main};
  line-height: 1.5;
  `}
-  min-height: ${props => props.isHome ? ` ` : `100vh`};
+  min-height: ${props => (props.isHome ? ` ` : `100vh`)};
   display: ${props => props.isHome ? ` ` : `flex`};
   flex-direction: ${props => props.isHome ? ` ` : `column`};
 `;
@@ -38,7 +38,7 @@ class Page extends Component {
 
     return (
       <Main
-        // style={isHome ? {} : {minHeight: '100vh', display: 'flex', flexDirection: 'column'}}
+        isHome={isHome}
         className={isSingleContent ? 'page-single-content' : ''}>
         <Navbar
           isHome={isHome}

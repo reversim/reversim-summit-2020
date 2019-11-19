@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 //general elements
 
 export const AlignCenter = styled.div`
-  ${ ({ theme: { mq, space, width } }) =>`
+  ${ ({ theme: { space } }) =>`
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
@@ -14,28 +15,32 @@ export const AlignCenter = styled.div`
       width: 100%;
       padding: 0 ${space.l};
       margin: 0 auto;
-      
+      `}
 
-      @media (min-width: ${mq.s}) and (max-width: ${mq.m}) {
-        max-width: ${width.main_for_mq_s};
-      };
+      ${mediaQueryMin.s`
+        ${({ theme: { width } }) => `
+          max-width: ${width.main_for_mq_s};  
+          `}`};
 
-      @media (min-width: ${mq.m}) and (max-width: ${mq.l}) {
-        max-width: ${width.main_for_mq_m};
-      };
+      ${mediaQueryMin.m`
+        ${({ theme: { width } }) => `
+          max-width: ${width.main_for_mq_m};  
+          `}`};
 
-      @media (min-width: ${mq.l}) and (max-width: ${mq.xl}) {
-        max-width: ${width.main_for_mq_l};
-      };
+      ${mediaQueryMin.l`
+        ${({ theme: { width } }) => `
+          max-width: ${width.main_for_mq_l};  
+          `}`};
 
-      @media (min-width: ${mq.xl}) and (max-width: ${mq.xxl}) {
-        max-width: ${width.main_for_mq_xl}
-      };
+      ${mediaQueryMin.xl`
+        ${({ theme: { width } }) => `
+          max-width: ${width.main_for_mq_xl};  
+          `}`};
 
-      @media (min-width: ${mq.xxl}) {
-        max-width: ${width.main}
-      };
-    `}
+      ${mediaQueryMin.xxl`
+        ${({ theme: { width } }) => `
+          max-width: ${width.main_for_mq_xxl};  
+          `}`};
 `;
 
 export const AlignCenterColumn = styled(AlignCenter)`
@@ -43,16 +48,18 @@ export const AlignCenterColumn = styled(AlignCenter)`
 `;
 
 export const BreakLineMain = styled.hr`
-  ${ ({ theme: { color, space, mq } }) =>`
+  ${({ theme: { color } }) =>`
+    border-top: 2px solid ${color.box_shadow_1};
+    display: none;
+    `}
+
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) =>`
+      display: inline-block;  
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
-      border-top: 2px solid ${color.box_shadow_1};
-
-      @media (max-width: ${mq.l}){
-        display: none;
-      }
-    `}
+      `}`}
 `;
 
 export const BreakLineInverted = styled(BreakLineMain)`
@@ -72,33 +79,30 @@ export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
 //<h2, 3, ...> and <p>
 
 export const HeadingAligner = styled.div`
-  ${({ theme: { space, mq } }) => `
-  width: 100%;
-
   display: flex;
-  align-items: center;
-  margin-bottom: calc(2 * ${space.l});
+  width: max-content;
+  text-align: center;
 
-  @media (max-width: ${mq.l}){
+  ${mediaQueryMin.m`
     justify-content: center;
-  }
+    `}
 
-  @media (max-width: ${mq.m}){
-      text-align: center;
-    }
-  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      margin: ${space.l} 0;
+      `}`}
 `;
 
 export const HeadingDiamond = styled.img`
-  ${ ({ theme: { space, mq, font } }) => `
+  ${ ({ theme: { space, font } }) => `
     width: calc(2.4 * ${font.size_h3});
     height: calc(2.4 * ${font.size_h3});
     margin-right: -${space.xxl};
-    
-    @media (max-width: ${mq.m}){
-      ;
-    }
-  `}
+    `}
 `;
 
 export const HeadingTriangle = styled(HeadingDiamond)`
@@ -119,16 +123,17 @@ const CircleJSX = ({className}) => {
 }; //this component is used as the basis for the HeadingCircle styled-component below
 
 export const HeadingCircle = styled(CircleJSX)`
-  ${ ({ theme: { color, space, mq, font } }) => `
+    ${ ({ theme: { color, space, font } }) => `
       width: calc(2.85 * ${font.size_h3});
       height: calc(2.85 * ${font.size_h3});
-      margin-right: -${space.xxl};
       fill: ${color.heading_decoratino};
+      margin: -${space.l} -${space.xxl} ${space.xl} 0; 
+      `}
 
-      @media (max-width: ${mq.m}){
-        display: none;
-      }
-  `}
+  ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+        margin-top: ${space.xl};
+        `}`}
 `;
 
 export const HeadingZigzag = styled.img`
@@ -144,18 +149,18 @@ export const HeadingSquares = styled(HeadingDiamond)`
   height: 122px;
   margin-right: 0px;
 `;
-  
+
 export const Heading2 = styled.h2`
-  ${ ({ theme: { color, font, mq } }) =>`
+  ${ ({ theme: { color, font } }) =>`
     color: ${color.heading_2};
     font-family: ${font.main};
     font-size: ${font.size_h2};
     font-weight: ${font.weight_normal};
-
-    @media (min-width: ${mq.l}){
-      white-space: nowrap;
-    }
     `}
+
+    ${mediaQueryMin.l`
+      white-space: nowrap;
+      `}
 `;
 
 export const Heading3 = styled.h3`
@@ -218,9 +223,11 @@ export const InvertedColorLink = styled.a`
 
 export const ButtonStyledLink = styled.a`
   ${ ({ theme: { color, font, space } }) =>`
+      width: max-content;
+      min-width: 280px;
       height: 40px;
-      margin-bottom: ${space.xl};
-      padding: ${space.m};
+      margin: 0 ${space.m} ${space.xl} ${space.m};
+      padding: ${space.m} ${space.l};
       letter-spacing: 1px;
       color: ${color.text_1};
 
@@ -232,6 +239,7 @@ export const ButtonStyledLink = styled.a`
       font-size: ${font.size_reg};
       font-family: ${font.button};
       font-weight: ${font.weight_bold};
+      text-align: center;
       text-decoration: none;
 
       transition: all .5s ease-out;

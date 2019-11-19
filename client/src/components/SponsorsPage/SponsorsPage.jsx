@@ -12,7 +12,6 @@ import CommunitySponsors from './CommunitySponsors';
 
 import { AlignCenter, AlignCenterColumn, Heading3, Paragraph, SimpleLink } from '../GlobalStyledComponents/ReversimStyledComps';
 
-
 library.add(faPencilAlt, faTrash);
 
 // Styled-components Section
@@ -52,6 +51,7 @@ const WantToBelink = styled(SimpleLink)`
 const PremiumSectionContainer = styled.section`
   ${ ({ theme: { color, space, mq } }) => `
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -60,12 +60,8 @@ const PremiumSectionContainer = styled.section`
     padding: ${space.xl} 180px ${space.xxl} 180px;
 
     border-top: 100px solid ${color.box_shadow_1};
-    
-    @media (max-width: ${mq.m}) {
-      flex-direction: column;
-    }
   `}
-`;
+`;//NOTE: same weird display under 768px width where 100% is narrower than viewport's width for no reason.
 
 const AddSoponsorContainer = styled.div`
   ${ ({ theme: { space, color} }) =>`

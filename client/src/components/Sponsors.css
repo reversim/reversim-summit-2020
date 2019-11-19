@@ -51,7 +51,7 @@
 
 .carouselControl {
     opacity: 0.2;
-    height: 410px;
+    /* height: 410px; NOTE: I silenced this for better responsivness*/
     width: 10%;
 }
 

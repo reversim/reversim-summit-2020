@@ -26,6 +26,7 @@ import {REVERSIM_SUMMIT} from '../utils';
 import { getLoginUrl } from "./Redirect";
 import LinkDuo from './LinkDuo';
 import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from '../styles/MediaQueriesMixin';
 
 import newImg from '../images/new-nav-tag.png';
 import logoImg from '../images/SVG/nav-logo.svg';
@@ -53,7 +54,7 @@ const MainAligner = styled.div`
 `;
 
 const NavItemAligner = styled.div`
- ${({theme: { space, mq, } }) =>` 
+ ${({theme: { space, } }) =>` 
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -62,27 +63,27 @@ const NavItemAligner = styled.div`
     margin-left: auto;
     margin-bottom: 0;
     list-style: none;
+    `};
 
-    @media (min-width: ${mq.l}){
+    ${mediaQueryMin.l`
       flex-direction: row;
       padding: 0;
-    };
-   `};
+    `}
 `;
 
 const NavLI = styled.li`
-  ${ ({ theme: {font, color, mq, space,} }) => `
+  ${({ theme: { font, color } }) => `
       width: max-content;
       font-family: ${font.main};
       font-size: ${font.size_md};
       color: ${color.text_1};
       font-weight: ${font.weight_bold};
-      
-      @media (min-width: ${mq.l}){
+      `}
+
+      ${mediaQueryMin.l`
+      ${({theme: { space } }) => `
         margin-left: ${space.xl};
-      }
-    `
-  } 
+        `}`}
 `;
 
 // React.js componenets section

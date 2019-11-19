@@ -11,6 +11,7 @@ import {
   BreakLineInverted
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import diamond from '../../images/SVG/diamond.svg';
 
 //styled-components components
@@ -22,24 +23,33 @@ const HeadingDecoration = styled(HeadingDiamond)`
 `;
 
 const Heading = styled( Heading2 )`
-  ${ ({ theme: { color } }) => `
+  ${({ theme: { color } }) => `
     color: ${color.text_1};
   `}
 `;
 
 const SponsorMiniAligner = styled.div`
-  ${ ({ theme: { mq, width } })=> `
+  ${({ theme: { width } })=> `
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    width: ${width.main_for_mq_s};
+    `}
 
-    @media (max-width: ${mq.l}){
-      width: ${width.main_for_mq_m};
-    }
-    @media (max-width: ${mq.m}){
-      width: ${width.main_for_mq_s};
-    }
-  `}
+    ${mediaQueryMin.m`
+      ${({ theme: { width } }) =>`
+        width: ${width.main_for_mq_m};
+        `}`}
+    
+    ${mediaQueryMin.l`
+      ${({ theme: { width } }) => `
+       width: ${width.main_for_mq_l};
+      `}`}
+
+    ${mediaQueryMin.xl`
+      ${({ theme: { width } }) => `
+       width: ${width.main_for_mq_xl};
+      `}`}
 `;
 
 // React components

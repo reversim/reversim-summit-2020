@@ -7,6 +7,7 @@ import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AlignCenter } from './GlobalStyledComponents/ReversimStyledComps'
+import mediaQueryMin from '../styles/MediaQueriesMixin';
 
 library.add(faFacebook, faTwitter, faEnvelope);
 
@@ -24,79 +25,66 @@ const Footer = styled.footer`
     `};
 `;
 const MainAligner = styled(AlignCenter)`
-  ${ ({ theme: { mq } }) => `
-    @media (max-width: ${mq.l}){
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  `}
+  flex-wrap: wrap;
+  justify-content: center;
 `
 const List = styled.ul`
-  ${({theme: { space, mq }}) =>`
-      width: 100%;
-      display: flex; 
-      justify-content: space-between;
+  width: 100%;
+  display: flex; 
+  justify-content: space-between;
 
-      @media (min-width: ${mq.l}){
-        margin-left: -${space.l};
-        justify-content: space-between;
-      }
-    `}
+  ${mediaQueryMin.xs`
+    ${({ theme: { space } }) => `
+      margin-bottom: ${space.xl};
+      `}`}
+
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+      margin-left: -${space.l};
+      margin-bottom: 0;
+      justify-content: space-between;
+      `}`}
 `;
 
 const ListItem = styled.li`
-  ${( { theme: { color, mq, space, } } ) =>`
-    flex-basis: 25%;
-    display: flex;
-    flex-direction: row;
-
-    color: ${color.text_1};
-    
-    @media (min-width: ${mq.l}){
-      margin: 0  ${space.l} 0 0;
-    }
-    
-    @media (max-width: ${mq.l}) {
-      flex-basis: 33%;
-    }
-    
-    @media (max-width: ${mq.xl}) {
-      display: flex;
-      width: max-content;
-      min-height: ${space.xxl};
-      justify-content: flex-start;
-      margin: 0 ${space.l};
-    };
-
-    @media (max-width: ${mq.m}) {
-      width: 100%;
-      flex-wrap: nowrap;
+    ${({ theme: {space} }) => `
       margin: 0 ${space.xl} 0  0;
-    };
+      `}
+
+    ${mediaQueryMin.l`
+      ${({ theme: { space }}) =>`
+      display: flex;
+      margin: 0 ${space.m};
+      `}
     `}
 `;
 
 const ListItemText = styled.h6`
-${ ({ theme: { space, color, mq } }) => `
-
+${ ({ theme: { space, color } }) => `
   margin-right: ${space.m};
   color: ${color.text_1};
+  `}
 
-  @media (min-width: ${mq.l}) {
-    width: 100%;
-  };   
-`}
+  ${mediaQueryMin.m`
+    width: max-content;
+    `}
 `;
 
 const AllRightsReserved = styled.h6`
-  ${ ({ theme: { color, mq} }) => `
-    flex-basis: 30%;
+  ${ ({ theme: { color } }) => `
     color: ${color.text_1};
-    
-    @media (max-width: ${mq.xl}) {
-      flex-basis: 40%;
-    }
     `}
+
+  ${mediaQueryMin.xs`
+    ${({ theme: { space } }) => `
+      padding: 0 ${space.l};
+      `}`}
+
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+      margin-top: ${space.xl};
+      flex-basis: 40%;
+      `}`}
 `;
 
 const FontAwsomeContainer = styled.div`
@@ -104,7 +92,14 @@ const FontAwsomeContainer = styled.div`
 
   display: flex;
   justify-content: space-between;
-
+  
+  ${mediaQueryMin.xs`
+    flex-wrap: wrap;
+    width: fit-content;
+    `}
+  ${mediaQueryMin.m`
+    flex-wrap: nowrap;
+    `}
 `;
 
 const FooterIcon = styled(FontAwesomeIcon)`

@@ -40,105 +40,91 @@ import {
   Paragraph2,
   BreakLineMain,
 } from '../GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 library.add(faMapMarkerAlt);
 
 // styled-components components page's intro
 
 const TopContainer = styled.div`
-  ${ ({ theme: { color, space, mq } }) => `
+  ${ ({ theme: { color, space } }) => `
     width: 100%;
 
-    margin: 0 auto calc(12 * ${space.m}) auto;
-    padding-top: calc(10 * ${space.m});
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-
+    margin: 0 auto calc(30 * ${space.m}) auto;
+    padding: ${space.xxl} 0 ${space.xl} calc(3.5 * ${space.m});
+    
     background-color: ${color.background_2};
+    `}
+    ${mediaQueryMin.m`
+      padding-bottom: 0;
+    `}
 
-    @media (max-width: ${mq.l}){
-      margin: 0 auto calc(30 * ${space.m}) auto;
-      padding: ${space.xxl} 0 0 calc(3.5 * ${space.m});
-      justify-content: initial;
-    }
-
-    @media (max-width: ${mq.s}){
-      margin: 0 0 calc(35 * ${space.m}) 0;
-      padding-bottom: ${space.xl};
-    }
-  `}
+    ${mediaQueryMin.l`
+      ${ ({ theme: { space } }) => `
+      margin: 0 auto calc(15 * ${space.m}) auto;
+      padding-bottom: calc(3 * ${space.m});
+      `}`}
+    
+    ${mediaQueryMin.xl`
+      padding-bottom: 0;
+      display: flex;
+      justify-content: center;
+      `}
 `;
 
 const IntroContiner = styled(AlignCenterColumn)`
-  ${ ({ theme: { mq, space } }) => `
-    @media (min-width: ${mq.l}){
+  margin: 0;
+
+  ${ mediaQueryMin.l`
+  ${ ({ theme: { space } }) => `
       margin-top: ${space.xxl};
       max-width: 1150px;
-    }
-
-    @media (max-width: ${mq.l}){
-      margin: 0;
-    }
-  `}
+    `}`}
 `;
 
 const HeadingContainer = styled(HeadingAligner)`
-  ${ ({theme: { color, space, mq } }) =>`
+  ${ ({theme: { color, space } }) =>`
     padding-top: ${space.xxl};
     background-color: ${color.background_2};
     margin-bottom: ${space.xxl};
-    
-    @media (min-width: ${mq.xl}){
-      max-width: ${mq.xl}; 
-    }
   `}
+  ${mediaQueryMin.s`
+    ${({ theme: { space } }) =>`
+    width: 100%;
+    margin-top: ${space.xl};
+    `}`}
 `;
 
 const PageHeading = styled(Heading2)`
   ${ ({ theme: { color } }) => `
+    max-width: 90%;
     text-align: initial;
     color: ${color.text_1};
-  `}
-`;
 
-const HeadingDecorationTriangel = styled(HeadingTriangle)`
-  ${ ({ theme: { space, mq } }) => `
-    @media (max-width: ${mq.s}){
-      margin-bottom: calc(7 * ${space.m});
-      text-align: initial;
-    }
   `}
 `;
 
 const SponsorHeadingContainer = styled.div`
-  ${ ({ theme: { space, color, mq } }) =>`
+  ${ ({ theme: { space, color } }) =>`
     height: 150px;
+    min-height: 400px;
     padding-top: ${space.xl};
+
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    
     background-color: ${color.background_2};
+    `}
 
-    @media (max-width: ${mq.l}) {
-      min-height: 400px; 
-      flex-direction: column;
-      align-items: center;
-    };
-
-    @media (min-width: ${mq.xl}){
-      max-width: ${mq.xl}; 
-    }
-  `}
-`;
+    ${mediaQueryMin.l`
+      min-height: initial;
+      flex-direction: row;
+    `}
+  `;
 
 const LogoAligner = styled.div`
-  ${ ({ theme: { mq } }) => `
-    @media (max-width: ${mq.l}){
-      align-self: baseline;
-    }
-  `}
+  align-self: baseline;
 `;
 
 const SponsorLogo = styled.img`
@@ -165,117 +151,155 @@ const SponsorOneliner = styled(Paragraph)`
   ${ ({ theme: { font } }) => `
     font-size: ${font.size_md};
     font-weight: ${font.weight_medium};
+    min-height: calc(4 * ${font.size_md});
   `}
+
+  ${mediaQueryMin.m`
+    min-width: 690px;
+    `}
+
+  ${mediaQueryMin.l`
+    min-width: 560px;
+    `}
+
+  ${mediaQueryMin.xl`
+    min-width: 755px;
+    `}
 `;
 
-const MiniNav = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    margin: calc(${space.m} * 3) 0 0 calc(${space.m} * 2);
+const NoOneliner = styled.div`
+${ ({ theme: { font } }) => `
+  height: calc(4 * ${font.size_md});
+`}
 
-    @media (max-width: ${mq.l}){
-      margin: ${space.xxl} 0 0 ${space.l};
-    }
-  `}
+  ${mediaQueryMin.m`
+    width: 690px;
+    `}
+
+  ${mediaQueryMin.l`
+    width: 560px;
+    `}
+
+  ${mediaQueryMin.xl`
+    width: 755px;
+    `}
+`
+
+const MiniNav = styled.div`
+  ${ ({ theme: { space } }) => `
+    margin: ${space.xxl} 0 0 ${space.l};
+    `}
+
+    ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+      margin: calc(3 * ${space.m}) 0 0 calc(2 * ${space.m});
+      `}`}
 `;
 
 const MiniNavIconContainer = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    @media (max-width: ${mq.l}) {
+  ${ ({ theme: { space } }) => `
       margin-bottom: ${space.xxl};
-    }
-  `}
+    `}
+
+    ${mediaQueryMin.l`
+      margin-bottom: 0`}
 `;
 
 const MiniNavIcon = styled(FontAwesomeIcon)`
-  ${ ({ theme: { font, space, color, mq } }) =>`
-    font-size: ${font.size_bg};
+  ${ ({ theme: { font, space, color } }) =>`
+    font-size: ${font.size_xl};
     margin-right: ${space.xl};
     color: ${color.font_awsome_nav};
-
-    @media (max-width: ${mq.l}) {
-      font-size: ${font.size_xl};
-    }
-  `}
+    `}
+    
+    ${mediaQueryMin.l`
+    ${ ({ theme: { font } }) =>`
+    font-size: ${font.size_bg};
+    `}`}
 `;
 
 const MiniNavLinksList = styled.ul`
-  ${ ({ theme: { space, mq } }) => `
+  ${ ({ theme: { space } }) => `
     max-width: 90%;
+    min-height: 20vh;
+
     margin: ${space.m} 0;
 
     display: flex;
+    flex-direction: column;
+    `}
     
-    @media (max-width: ${mq.l}) {
-      flex-direction: column;
-      min-height: 20vh;
-    }
-  `}
-    
+    ${mediaQueryMin.l`
+      flex-direction: row
+      flex-wrap: wrap;
+      min-height: 50px;
+    `}
 `;
 
 const MiniNavListItem = styled(InvertedColorLink)`
-  ${ ({ theme: { space, font, mq } }) => `
+  ${ ({ theme: { space, font } }) => `
   margin-right: ${space.l};
-
-    @media (max-width: ${mq.l}){
-      font-size: ${font.size_bg};
-    }
+  font-size: ${font.size_bg};
   `}
+
+  ${mediaQueryMin.l`
+  ${ ({ theme: { font } }) => `
+    font-size: ${font.size_md};
+  `}`}
 `;
 
 // styled-components sponsor description section
 
 const SponsorDescription = styled(AlignCenterColumn)`
-  ${({ theme: { space, mq } }) => `
-    margin: ${space.m} auto;
     padding: 0;
+  
+    ${mediaQueryMin.m`
+      ${ ({ theme: { space } }) =>`
+        margin-left: ${space.m};
+        `}`}
 
-    @media (min-width: ${mq.l}){
-      margin-top: ${space.xxl};
-      max-width: 1150px;
-    }
-
-    @media (max-width: ${mq.l}){
-      margin-left: calc(6 * ${space.m});
-    }
-
-    @media (max-width: ${mq.m}){
-      justify-content: initial;
-    }
-  `}
+    ${mediaQueryMin.l`
+      ${ ({ theme: { space, width } }) =>`
+        margin-top: ${space.xxl};
+        margin-left: ${space.xxl};
+        max-width: ${width.main_for_mq_l};
+        `}`}
+    
+    ${mediaQueryMin.xl`
+      ${ ({ theme: { width } }) =>`
+        max-width: ${width.main_for_mq_xl};
+        margin: 0 auto;
+        `}`}
 `;
 
 const SegmentContainer = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    display: flex;
-    flex-direction: column
-    justify-content: space-between;
-    margin: ${space.l} 0;
-      
-    @media (max-width: ${mq.l}) {
-      min-height: 20vh;      
-
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    @media (max-width: ${mq.m}) {
-      max-width: 660px;
-    }
-
-    @media (max-width: ${mq.s}){
-      max-width: 400px;
-      justify-content: center;
-    }
+  ${({ theme: { space } }) => `
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 660px;
+  margin-bottom: calc(2 * ${space.xxl});
   `}
+    
+  ${mediaQueryMin.m`
+    min-height: 20vh;      
+    
+    flex-direction: column;
+    justify-content: space-between;
+    `}
+  
+  ${mediaQueryMin.l`
+    ${ ({ theme: { space, width } }) => `
+    max-width: ${width.main_for_mq_xl};
+    margin: ${space.m} 0;    
+    `}`}
 `;
 
 const WhoWeAre = styled(SegmentContainer)`
-  ${ ({ theme: { mq } }) => `
-     @media (max-width: ${mq.m}){
-      justify-content: center;
-    }
-  `}
+  justify-content: center;
+    ${mediaQueryMin.m`
+    justify-content: space-between;
+    `}
 `;
 
 const SegmentHeadingAligner = styled(HeadingAligner)`
@@ -284,112 +308,87 @@ const SegmentHeadingAligner = styled(HeadingAligner)`
     margin-top: calc(-13 * ${space.m});
     padding-top: calc(13 * ${space.m});
     z-index: -1;
-  `}
+    `}
+
+    ${mediaQueryMin.l`
+      ${({theme: { space } }) => `
+      margin-top: calc(-13 * ${space.m});
+      `}`}
 `;
 
 const SegmentHeading = styled(Heading3)`
-  ${ ({ theme: { color, font, mq } }) => `
-
+  ${ ({ theme: { color, font } }) => `
     color: ${color.text_3};
     font-weight: ${font.weight_medium};
-
-    @media (max-width: ${mq.m}) {
-      text-align: left;
-    }
-  `}
+    text-align: left;
+    `}
 `
 
 const SegmentBreakLine = styled(BreakLineMain)`
-  ${ ({ theme: { mq } }) => `
-    @media (max-width: ${mq.l}) {
-      display: inline-block;
-    }
+  display: none;
 
-    @media (max-width: ${mq.m}) {
-      display: none;
-    }
+  ${mediaQueryMin.s`
+    display: inline-block;
   `}
 `;
 
 const ContentContainer = styled.div`
-  ${ ({ theme: { mq } }) => `
-    min-height: 15vh;
-    
-    display: flex;
-    justify-content: space-between;
-      
-    @media (max-width: ${mq.l}) {
-      margin-top: 0;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+  min-height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  flex-direction: column;
 
-  `}
-`;
-
-const ContentContainerColumn = styled(ContentContainer)`
-  ${ ({ theme: { mq } }) => `
-    min-height: 20vh;
-    flex-direction: column;
-    justify-content: space-between;
-
-    @media (max-width: ${mq.l}) {
-      min-height: 25vh;
-    };
-
-    @media (max-width: ${mq.m}) {
-      min-height: 30vh;
-    };
-
-    @media (max-width: ${mq.s}) {
-      min-height: 35vh;
-    };
+  ${mediaQueryMin.xl`
+  flex-direction: row;
   `}
 `;
 
 const PremiumGallery = styled.div`
-  ${ ({ theme: { space, mq } }) => `
-    width: 60%;
-    margin-left: calc(4 * ${space.m});
-
-    @media (max-width: ${mq.l}) {
-      width: 100%;
-      margin: ${space.xl} auto;
-    }
-  `}
+  ${({ theme: { space } }) => `
+    width: 100%;
+    margin: ${space.xl} auto;
+    `}
+    
+    ${mediaQueryMin.xl`
+      ${({ theme: { space } }) => `
+        width: 90%;
+        margin-left: calc(4 * ${space.m});
+        `}`} /*NOTE: There is a height issue of the carousel which I couldn't solve in min-width 992px*/
 `;
 
 const PremiumTechList = styled.ul`
-  ${ ({ theme: { space, mq } }) => `
-    margin: 0 ${space.xl};
-    
-    flex: 0 0 50%;
+  ${({ theme: { space } }) => `
+    margin: ${space.l} 0 0 0;
+    flex-wrap: wrap;
     list-style: none;
-
-    @media (max-width: ${mq.l}){
-      margin: ${space.l} 0 0 0;
-      flex-wrap: wrap;
-    }
-  `}
+    flex: 0 0 50%;
+    `}
+    
+    ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+    margin: 0 ${space.xl};
+    `}`}
 `;
 
 const PremiumTechItem = styled.li`
-  ${ ({ theme: { color, space, font, mq } }) => `
+  ${ ({ theme: { color, space, font } }) => `
     height: max-content;
 
     display: inline-block;
-    margin: ${space.s} ${space.s};
+    margin: ${space.s} ${space.m} ${space.s} 0;
     padding: ${space.s} ${space.m};
     
     background: ${color.background_2};
     
     color: white;
     font-weight: ${font.weight_bold};
-
-    @media (max-width: ${mq.l}){
-      margin: ${space.s} ${space.m} ${space.s} 0;
-    }
-  `}
+    `}
+    
+    ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+    margin: ${space.s} ${space.s};
+    `}`}
 `;
 
 // React components
@@ -410,7 +409,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
       <TopContainer>
         <IntroContiner>
           <HeadingContainer>
-            <HeadingDecorationTriangel src={triangle} alt="triangle" />
+            <HeadingTriangle src={triangle} alt="triangle" />
             <PageHeading>Big Thanks to our sponsor</PageHeading>
             <BreakLineInverted />
           </HeadingContainer>
@@ -426,7 +425,10 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             <div>
             <SponsorHeading>
               <SponsorName>{sponsor.name}</SponsorName>
-              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner>
+              {sponsor.oneLiner ?
+              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner> :
+              <NoOneliner />
+              }
             </SponsorHeading>
             <MiniNav>
               <MiniNavIconContainer>
@@ -445,7 +447,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
                   </MiniNavListItem>
                 </li>
                 <li>
-                  <MiniNavListItem href="#Tech-Story">
+                  <MiniNavListItem href="#tech-Story">
                     Tech-Story
                   </MiniNavListItem>
                 </li>
@@ -490,7 +492,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
         </WhoWeAre>
 
         <SegmentContainer>
-          <SegmentHeadingAligner id="Tech-Story">
+          <SegmentHeadingAligner id="tech-Story">
             <SegmentHeading>Our Technology Story</SegmentHeading>
             <SegmentBreakLine />
           </SegmentHeadingAligner>
