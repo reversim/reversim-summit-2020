@@ -59,14 +59,8 @@ const theme = {
     weight_bold: '600',
 
     size_reg: '16px',
-<<<<<<< HEAD
-    size_md: '18px',
-    size_bg: '24px',
-    size_xl: '35px',
-=======
     size_md: '18px', //NOTE: used for Intros as main text size
     size_bg: '24px', //NOTE: used for Intros as an announcment like in SponsorsPage.jsx
->>>>>>> IntroContainer done at AboutPage.js
 
     size_h2: '48px',
     size_h3: '35px',
