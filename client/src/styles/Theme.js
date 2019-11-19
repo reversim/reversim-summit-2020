@@ -76,6 +76,11 @@ const theme = {
     xxl: '50px',
   },
 
+  // borders used on the website, no colors only line styles and width
+  border: {
+    button_border: 'solid 2px',
+  },
+
   // common content widths
 
   width: {
