@@ -8,6 +8,7 @@ import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
 import { img } from './Speaker2.css';
 import { image } from '../images';
+import { AlignCenterColumn, } from './GlobalStyledComponents/ReversimStyledComps';
 
 import { Container, Row, Col } from "reactstrap"; //NOTE: Should be deleted
 
@@ -32,6 +33,16 @@ const IntroContainer = styled.div`
   `}
 `;
 
+const IntroInnerContainer = styled(AlignCenterColumn)`
+  display: block;
+`;
+
+const MainContainer = styled(AlignCenterColumn)`
+  ${({ theme: { color } }) => `
+    background-color: ${color.background_4};
+    display: block;
+    `}
+`;
 // React Components
 
 class TeamMember extends React.Component {
@@ -47,8 +58,15 @@ class TeamMember extends React.Component {
   };
 
   render() {
-    const { picture, name, oneLiner, bio } = this.props;
+    const {
+      picture,
+      name,
+      oneLiner,
+      bio
+    } = this.props;
+
     const { isExpanded } = this.state;
+
     let textStyle = isExpanded
         ? { zIndex: 1, height: "auto", minHeight: 240 }
         : { height: 240 };
@@ -61,7 +79,8 @@ class TeamMember extends React.Component {
           style={{ backgroundImage: `url('${image(picture, 240, 240)}')` }}
           alt={name}
           className={img}
-        />
+        /> 
+        {/* NOTE: the picture right border dissapears at 768px and returns in 992px */}
         <div className="flex-grow-1 line-height-12">
           <div
             className={`p-4 bg-white b-strong p-relative`}
@@ -95,8 +114,8 @@ const AboutPage = props => {
   return (
     <Page title="About" {...props}>
       <IntroContainer>
-        <Container>
-          <div className="d-flex align-items-center pt-15 ">
+        <IntroInnerContainer>
+          <div className="YOOHHHOOO d-flex align-items-center pt-15 ">
             <img src={hoop} alt="" height="100" style={{ marginRight: -16 }} />
             <h3 className="font-size-xxl mr-4 font-weight-regular">About</h3>
             <div className="flex-grow-1 border-bottom border-white" />
@@ -128,10 +147,9 @@ const AboutPage = props => {
               </p>
             </div>
           </div>
-        </Container>
+        </IntroInnerContainer>
       </IntroContainer>
-      <div className="white-bg WHITIEE">
-        <Container>
+      <MainContainer> 
           <div
             className="d-flex align-items-center text-purple2"
             style={{ padding: "80px 0 60px" }}
@@ -144,8 +162,7 @@ const AboutPage = props => {
           <div className="about__team">
             {props.team.map(id => <TeamMember key={id} {...props.users[id]} />)}
           </div>
-        </Container>
-      </div>
+      </MainContainer>
     </Page>
   );
 };
