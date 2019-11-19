@@ -151,8 +151,39 @@ const SponsorOneliner = styled(Paragraph)`
   ${ ({ theme: { font } }) => `
     font-size: ${font.size_md};
     font-weight: ${font.weight_medium};
+    min-height: calc(4 * ${font.size_md});
   `}
+
+  ${mediaQueryMin.m`
+    min-width: 690px;
+    `}
+
+  ${mediaQueryMin.l`
+    min-width: 560px;
+    `}
+
+  ${mediaQueryMin.xl`
+    min-width: 755px;
+    `}
 `;
+
+const NoOneliner = styled.div`
+${ ({ theme: { font } }) => `
+  height: calc(4 * ${font.size_md});
+`}
+
+  ${mediaQueryMin.m`
+    width: 690px;
+    `}
+
+  ${mediaQueryMin.l`
+    width: 560px;
+    `}
+
+  ${mediaQueryMin.xl`
+    width: 755px;
+    `}
+`
 
 const MiniNav = styled.div`
   ${ ({ theme: { space } }) => `
@@ -394,7 +425,10 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             <div>
             <SponsorHeading>
               <SponsorName>{sponsor.name}</SponsorName>
-              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner>
+              {sponsor.oneLiner ?
+              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner> :
+              <NoOneliner />
+              }
             </SponsorHeading>
             <MiniNav>
               <MiniNavIconContainer>
@@ -409,18 +443,18 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
               <MiniNavLinksList>
                 <li>
                   <MiniNavListItem href="#about">
-                    About |
+                    About
                   </MiniNavListItem>
                 </li>
                 <li>
                   <MiniNavListItem href="#tech-Story">
-                    Tech-Story |
+                    Tech-Story
                   </MiniNavListItem>
                 </li>
                 {!!sponsor.openPositions.length && (
                   <li>
                     <MiniNavListItem href="#open-positions">
-                      Open Positions |
+                      Open Positions
                     </MiniNavListItem>
                   </li>
                 )}
