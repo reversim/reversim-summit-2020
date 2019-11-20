@@ -5,8 +5,6 @@ import Page from './Page';
 import ReadMore from './ReadMore';
 
 import x from '../images/SVG/x.svg';
-import { img } from './Speaker2.css';
-import { image } from '../images';
 
 import mediaQueryMin from '../styles/MediaQueriesMixin';
 import {
@@ -19,8 +17,7 @@ import {
   Paragraph,
   SimpleLink,
   Heading2,
-  BreakLineMain,
-
+  BreakLineMain
 } from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-componets components
@@ -122,25 +119,60 @@ const AboutTeamMember = styled.div`
 `;
 
 const MemberImg = styled.div`
-${({ theme: { color }, picture }) => `
-display: inline;
-  background-image: url(${picture});
-  width: 240px;
-  height: 240px
+  ${({ theme: { color }, picture }) => `
+    display: inline;
+    background-image: url(${picture});
+    width: 240px;
+    height: 240px;
 
-  flex: 0 0 240px;
-  
-  background-size: cover;
-  background-position: top;
-  
-  border: 4px solid ${color.box_shadow_1};
-  border-bottom: 0px;
+    flex: 0 0 240px;
+    
+    background-size: cover;
+    background-position: top;
+    
+    border: 4px solid ${color.box_shadow_1};
+    border-bottom: 0px;
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { color } }) => `
+      border: 4px solid ${color.box_shadow_1};
+      border-right: 0px;
+      `}`}
+`;
+
+const MemberDescriptionContainer = styled.div`
+  ${({ theme: { space, color }, isExpanded }) => `
+    padding: calc(2 * ${space.m});
+    border: 4px solid ${color.box_shadow_1};
+    line-height: 1.2;
+    flex-grow: 1;
+    ${isExpanded
+      ? `zIndex: 1; height: "auto"; minHeight: 240px;`
+      : `height: 240px`
+    }`}
+`;
+
+const MemberName = styled.h4`
+  ${({ theme: { font, space } }) => `
+    margin-bottom: ${space.m};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_bold};
+    line-height: 1;
+    `}
+`;
+
+const MemberOneliner = styled.p`
+${({ theme: { font, space } }) => `
+  margin-bottom: ${space.l};
+  line-height: 1.2;
+  font-weight: ${font.weight_medium};
+  font-size: ${font.size_md};
 `}
-${mediaQueryMin.m`
-${({ theme: { color } }) => `
-  border: 4px solid ${color.box_shadow_1};
-  border-right: 0px;
-  `}`}
+`;
+
+const MemberContent = styled.div`
+  margin-bottom: 0;
+  line-height: 1.5;
 `;
 
 // React Components
@@ -165,12 +197,6 @@ class TeamMember extends React.Component {
       bio
     } = this.props;
 
-    const { isExpanded } = this.state;
-
-    let textStyle = isExpanded
-        ? { zIndex: 1, height: "auto", minHeight: 240 }
-        : { height: 240 };
-
     // textStyle = { zIndex: 10, height: "auto", minHeight: 240 }
 
     return (
@@ -179,18 +205,15 @@ class TeamMember extends React.Component {
           picture={picture}
           alt={name}
         />
-        <div className="TEXT? flex-grow-1 line-height-12">
-          <div
-            className={`p-4 bg-white b-strong p-relative`}
-            // onClick={this.toggle}
-            style={textStyle}
-          >
-            <div ref={this.ref}>
-              <h4 className="line-height-1 mb-1">{name}</h4>
-              <p className="font-weight-regular line-height-12 font-size-md">
+        <MemberDescriptionContainer
+          isExpanded={this.state.isExpanded}
+          // onClick={this.toggle} this doesn't work properly
+        >
+              <MemberName className="line-height-1 mb-1">{name}</MemberName>
+              <MemberOneliner>
                 {oneLiner}
-              </p>
-              <div className="line-height-15 mb-0">
+              </MemberOneliner>
+              <MemberContent>
                 <ReadMore
                   lines={4}
                   truncateText="…"
@@ -199,10 +222,11 @@ class TeamMember extends React.Component {
                   children={bio}
                   onToggle={this.toggle}
                 />
-              </div>
-            </div>
-          </div>
-        </div>
+              </MemberContent>
+        {/* <div ref={this.ref}>
+            </div> 
+            NOTE: this div padded MemberDescriptionContainer I took it out and everything is still working*/}
+        </MemberDescriptionContainer>
       </AboutTeamMember>
     );
   }
