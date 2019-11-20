@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Page from './Page';
 import ReadMore from './ReadMore';
 
-import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
 import { img } from './Speaker2.css';
 import { image } from '../images';
@@ -17,7 +16,8 @@ import {
   PageHeading,
   BreakLineInverted,
   Heading4,
-  Paragraph
+  Paragraph,
+  SimpleLink
 } from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-componets components
@@ -84,6 +84,12 @@ const IntroParagraph = styled(Paragraph)`
     font-size: ${font.size_md};
     `}
 `
+
+const IntroLink = styled(SimpleLink)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_md};
+    `}
+`;
 
 // React Components
 
@@ -166,7 +172,7 @@ const AboutPage = props => {
             <IntroParagraphContainer>
               <IntroSubHeading>Reversim Summit</IntroSubHeading>
               <IntroParagraph>
-                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה) 
+                <IntroLink href="https://twitter.com/reversim/">#reversim</IntroLink> (רברס עם פלטפורמה) 
                 summit is our intention to create a conference for
                 developers by developers. Like in the podcast, we bring you the
                 content we are interested in, and we hope you will be too.
@@ -182,12 +188,12 @@ const AboutPage = props => {
             </IntroParagraphContainer>
             <IntroParagraphContainer>
               <IntroSubHeading>Reversim podcast</IntroSubHeading>
-              <p className="line-height-15">
-                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and
+              <IntroParagraph>
+                <IntroLink href="https://twitter.com/reversim/">#reversim</IntroLink> (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and
                 Ran Tavory which brings together software developers and
                 product, with over 300 recorded episodes and a few thousands
                 listeners.
-              </p>
+              </IntroParagraph>
             </IntroParagraphContainer>
         </IntroTextContainer>
             
