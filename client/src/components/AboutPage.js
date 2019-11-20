@@ -8,13 +8,16 @@ import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
 import { img } from './Speaker2.css';
 import { image } from '../images';
+
+import mediaQueryMin from '../styles/MediaQueriesMixin';
 import {
   AlignCenterColumn,
   HeadingAligner,
   HeadingHoop,
   PageHeading,
   BreakLineInverted,
-  Heading2,
+  Heading4,
+  Paragraph
 } from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-componets components
@@ -47,12 +50,40 @@ const MainContainer = styled(AlignCenterColumn)`
 
 const HeadingContainer = styled(HeadingAligner)`
   ${({ theme: { space } }) => `
+    width: 100%;
     padding-top: calc(3 * ${space.xl});
     align-items: center;
     `}
 `;
 
+const IntroTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 
+  ${mediaQueryMin.l`
+    flex-direction: row;
+  `}
+`;
+
+const IntroParagraphContainer = styled.div`
+  ${({ theme: { space } }) => `
+    flex: 1;
+    margin-right: calc(3 * ${space.l});
+    padding-top: ${space.xxl};
+  `}
+`
+
+const IntroSubHeading = styled(Heading4)`
+  ${({ theme: { font,  } }) => `
+    font-weight: ${font.weight_medium};
+    `}
+`
+
+const IntroParagraph = styled(Paragraph)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_md};
+    `}
+`
 
 // React Components
 
@@ -126,39 +157,40 @@ const AboutPage = props => {
     <Page title="About" {...props}>
       <IntroContainer>
         <IntroInnerContainer>
-          <HeadingContainer className="YOOHHHOOO d-flex align-items-center pt-15 ">
+          <HeadingContainer>
             <HeadingHoop />
             <PageHeading>About</PageHeading>
             <BreakLineInverted />
           </HeadingContainer>
-          
-          <div className="d-flex font-weight-regular about__intro-text">
-            <div className="pt-10 mr-9 flex-1">
-              <p className="line-height-15 font-size-lg">Reversim Summit</p>
-              <p className="line-height-15">
-                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה)  summit is our intention to create a conference for
+          <IntroTextContainer>
+            <IntroParagraphContainer>
+              <IntroSubHeading>Reversim Summit</IntroSubHeading>
+              <IntroParagraph>
+                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה) 
+                summit is our intention to create a conference for
                 developers by developers. Like in the podcast, we bring you the
                 content we are interested in, and we hope you will be too.
-              </p>
-              <p className="line-height-15">
+              </IntroParagraph>
+              <IntroParagraph>
                 This is the 7th(!) Reversim Summit. The summits of 2013 and 2014
                 (TLV Campus), 2015 (Technion), 2016 (Weizmann Institute of
                 Science), 2017 (College of Management) and 2018 (Tel Aviv
                 University) also featured community content. Watch previous
                 years' sessions to get the general feel of the Revesim Summit
                 spirit.
-              </p>
-            </div>
-            <div className="pt-10 mr-12 flex-1">
-              <p className="mb-3 font-size-lg">Reversim podcast</p>
+              </IntroParagraph>
+            </IntroParagraphContainer>
+            <IntroParagraphContainer>
+              <IntroSubHeading>Reversim podcast</IntroSubHeading>
               <p className="line-height-15">
                 <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and
                 Ran Tavory which brings together software developers and
                 product, with over 300 recorded episodes and a few thousands
                 listeners.
               </p>
-            </div>
-          </div>
+            </IntroParagraphContainer>
+        </IntroTextContainer>
+            
         </IntroInnerContainer>
       </IntroContainer>
       <MainContainer> 
