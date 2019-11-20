@@ -81,8 +81,8 @@ export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
 
 export const HeadingAligner = styled.div`
   display: flex;
-  width: max-content;
-  text-align: center;
+  width: 100%;
+  align-items: center;
 
   ${mediaQueryMin.m`
     justify-content: center;
@@ -169,8 +169,9 @@ export const HeadingSquares = styled(HeadingDiamond)`
 `;
 
 export const Heading2 = styled.h2`
-  ${ ({ theme: { color, font } }) =>`
+  ${ ({ theme: { color, font, space } }) =>`
     color: ${color.heading_2};
+    margin-right: calc(2 * ${space.m});
     font-family: ${font.main};
     font-size: ${font.size_h2};
     font-weight: ${font.weight_normal};
@@ -182,9 +183,8 @@ export const Heading2 = styled.h2`
 `;
 
 export const PageHeading = styled(Heading2)`
-${({ theme: { color, space } }) => `
+${({ theme: { color } }) => `
   max-width: 90%;
-  margin-right: calc(2 * ${space.m});
   text-align: initial;
   color: ${color.text_1};
   `}

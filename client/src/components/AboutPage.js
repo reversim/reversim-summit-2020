@@ -17,7 +17,10 @@ import {
   BreakLineInverted,
   Heading4,
   Paragraph,
-  SimpleLink
+  SimpleLink,
+  Heading2,
+  BreakLineMain,
+
 } from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-componets components
@@ -48,11 +51,9 @@ const MainContainer = styled(AlignCenterColumn)`
     `}
 `;
 
-const HeadingContainer = styled(HeadingAligner)`
+const IntroHeadingContainer = styled(HeadingAligner)`
   ${({ theme: { space } }) => `
-    width: 100%;
     padding-top: calc(3 * ${space.xl});
-    align-items: center;
     `}
 `;
 
@@ -89,6 +90,18 @@ const IntroLink = styled(SimpleLink)`
   ${({ theme: { font } }) => `
     font-size: ${font.size_md};
     `}
+`;
+
+const MainHeadingContainer = styled(HeadingAligner)`
+  ${({ theme: { space } }) => `
+    padding: calc(8 * ${space.m}) 0 calc(6 * ${space.m}) 0;
+    `}
+`;
+
+const AboutTeam = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 `;
 
 // React Components
@@ -163,11 +176,11 @@ const AboutPage = props => {
     <Page title="About" {...props}>
       <IntroContainer>
         <IntroInnerContainer>
-          <HeadingContainer>
+          <IntroHeadingContainer>
             <HeadingHoop />
             <PageHeading>About</PageHeading>
             <BreakLineInverted />
-          </HeadingContainer>
+          </IntroHeadingContainer>
           <IntroTextContainer>
             <IntroParagraphContainer>
               <IntroSubHeading>Reversim Summit</IntroSubHeading>
@@ -199,19 +212,14 @@ const AboutPage = props => {
             
         </IntroInnerContainer>
       </IntroContainer>
-      <MainContainer> 
-          <div
-            className="d-flex align-items-center text-purple2"
-            style={{ padding: "80px 0 60px" }}
-          >
-            <h3 className="font-size-xxl mr-4 font-weight-regular">
-              Meet the team
-            </h3>
-            <div className="flex-grow-1 border-bottom border-purple2" />
-          </div>
-          <div className="about__team">
+      <MainContainer>
+          <MainHeadingContainer>
+            <Heading2>Meet the team</Heading2>
+            <BreakLineMain />
+          </MainHeadingContainer>
+          <AboutTeam>
             {props.team.map(id => <TeamMember key={id} {...props.users[id]} />)}
-          </div>
+          </AboutTeam>
       </MainContainer>
     </Page>
   );
