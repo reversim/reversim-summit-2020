@@ -167,24 +167,6 @@ const SponsorOneliner = styled(Paragraph)`
     `}
 `;
 
-const NoOneliner = styled.div`
-${ ({ theme: { font } }) => `
-  height: calc(4 * ${font.size_md});
-`}
-
-  ${mediaQueryMin.m`
-    width: 690px;
-    `}
-
-  ${mediaQueryMin.l`
-    width: 560px;
-    `}
-
-  ${mediaQueryMin.xl`
-    width: 755px;
-    `}
-`
-
 const MiniNav = styled.div`
   ${ ({ theme: { space } }) => `
     margin: ${space.xxl} 0 0 ${space.l};
@@ -425,10 +407,7 @@ const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
             <div>
             <SponsorHeading>
               <SponsorName>{sponsor.name}</SponsorName>
-              {sponsor.oneLiner ?
-              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner> :
-              <NoOneliner />
-              }
+              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner> 
             </SponsorHeading>
             <MiniNav>
               <MiniNavIconContainer>
