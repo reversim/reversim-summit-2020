@@ -53,9 +53,10 @@ export const BreakLineMain = styled.hr`
     display: none;
     `}
 
-  ${mediaQueryMin.m`
+  ${mediaQueryMin.s`
     ${({ theme: { space } }) =>`
-      display: inline-block;  
+    min-width: 100px;  
+    display: inline-block;
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
@@ -123,7 +124,7 @@ const CircleJSX = ({className}) => {
 }; //this component is used as the basis for the HeadingCircle styled-component below
 
 export const HeadingCircle = styled(CircleJSX)`
-    ${ ({ theme: { color, space, font } }) => `
+    ${({ theme: { color, space, font } }) => `
       width: calc(2.85 * ${font.size_h3});
       height: calc(2.85 * ${font.size_h3});
       fill: ${color.heading_decoratino};
@@ -131,9 +132,26 @@ export const HeadingCircle = styled(CircleJSX)`
       `}
 
   ${mediaQueryMin.l`
-    ${ ({ theme: { space } }) => `
+    ${({ theme: { space } }) => `
         margin-top: ${space.xl};
         `}`}
+`;
+
+const HoopJSX = ({className}) => {
+  return (
+    <svg className={className}>
+      <path d="M50,15.62A34.38,34.38,0,1,0,84.37,50,34.43,34.43,0,0,0,50,15.62M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z"/>
+    </svg>
+  );
+};
+
+export const HeadingHoop = styled(HoopJSX)`
+  ${({ theme: { space, font, color } }) => `
+    margin-right: -${space.l};
+    width: calc(2.08 * ${font.size_h2});
+    height: calc(2.08 * ${font.size_h2});
+    fill: ${color.heading_decoratino}
+    `}
 `;
 
 export const HeadingZigzag = styled.img`
@@ -162,6 +180,15 @@ export const Heading2 = styled.h2`
       white-space: nowrap;
       `}
 `;
+
+export const PageHeading = styled(Heading2)`
+${({ theme: { color, space } }) => `
+  max-width: 90%;
+  margin-right: calc(2 * ${space.m});
+  text-align: initial;
+  color: ${color.text_1};
+  `}
+`
 
 export const Heading3 = styled.h3`
   ${ ({ theme: { color, space, font } }) =>`

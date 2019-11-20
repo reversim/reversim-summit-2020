@@ -13,6 +13,7 @@ import OpenPosition from './OpenPosition';
 
 import triangle from '../../images/SVG/triangle.svg';
 import zigzag from '../../images/SVG/zigzag.svg';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 import { image } from '../../images';
 
@@ -32,7 +33,7 @@ import {
   HeadingAligner,
   HeadingTriangle,
   HeadingZigzag,
-  Heading2,
+  PageHeading,
   BreakLineInverted,
   InvertedColorLink,
   Heading3,
@@ -40,7 +41,6 @@ import {
   Paragraph2,
   BreakLineMain,
 } from '../GlobalStyledComponents/ReversimStyledComps';
-import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 library.add(faMapMarkerAlt);
 
@@ -93,15 +93,6 @@ const HeadingContainer = styled(HeadingAligner)`
     width: 100%;
     margin-top: ${space.xl};
     `}`}
-`;
-
-const PageHeading = styled(Heading2)`
-  ${ ({ theme: { color } }) => `
-    max-width: 90%;
-    text-align: initial;
-    color: ${color.text_1};
-
-  `}
 `;
 
 const SponsorHeadingContainer = styled.div`

@@ -8,9 +8,14 @@ import hoop from '../images/SVG/hoop.svg';
 import x from '../images/SVG/x.svg';
 import { img } from './Speaker2.css';
 import { image } from '../images';
-import { AlignCenterColumn, } from './GlobalStyledComponents/ReversimStyledComps';
-
-import { Container, Row, Col } from "reactstrap"; //NOTE: Should be deleted
+import {
+  AlignCenterColumn,
+  HeadingAligner,
+  HeadingHoop,
+  PageHeading,
+  BreakLineInverted,
+  Heading2,
+} from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-componets components
 
@@ -22,14 +27,10 @@ const IntroContainer = styled.div`
     background-image: url(${x});
     background-repeat: no-repeat;
     background-size: 600px;
-    background-position: 70% 133%;
+    background-position: 50% 120%;
 
     color:  ${color.text_1};
     font-size: ${font.size_md};
-
-    @media (max-width: ${mq.l}){
-      background-position: 50% 120%;
-    }
   `}
 `;
 
@@ -43,6 +44,16 @@ const MainContainer = styled(AlignCenterColumn)`
     display: block;
     `}
 `;
+
+const HeadingContainer = styled(HeadingAligner)`
+  ${({ theme: { space } }) => `
+    padding-top: calc(3 * ${space.xl});
+    align-items: center;
+    `}
+`;
+
+
+
 // React Components
 
 class TeamMember extends React.Component {
@@ -115,11 +126,12 @@ const AboutPage = props => {
     <Page title="About" {...props}>
       <IntroContainer>
         <IntroInnerContainer>
-          <div className="YOOHHHOOO d-flex align-items-center pt-15 ">
-            <img src={hoop} alt="" height="100" style={{ marginRight: -16 }} />
-            <h3 className="font-size-xxl mr-4 font-weight-regular">About</h3>
-            <div className="flex-grow-1 border-bottom border-white" />
-          </div>
+          <HeadingContainer className="YOOHHHOOO d-flex align-items-center pt-15 ">
+            <HeadingHoop />
+            <PageHeading>About</PageHeading>
+            <BreakLineInverted />
+          </HeadingContainer>
+          
           <div className="d-flex font-weight-regular about__intro-text">
             <div className="pt-10 mr-9 flex-1">
               <p className="line-height-15 font-size-lg">Reversim Summit</p>
