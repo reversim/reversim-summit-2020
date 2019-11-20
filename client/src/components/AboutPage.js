@@ -104,6 +104,45 @@ const AboutTeam = styled.div`
   justify-content: space-between;
 `;
 
+const AboutTeamMember = styled.div`
+  ${({ theme: { space } }) => `
+    margin-bottom: calc(6* ${space.m});
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 100%;
+    `}
+
+    ${mediaQueryMin.m`
+      flex-direction: row;
+      `}
+
+  ${mediaQueryMin.xl`
+    flex: 0 0 calc(50% - 20px);
+    `}
+`;
+
+const MemberImg = styled.div`
+${({ theme: { color }, picture }) => `
+display: inline;
+  background-image: url(${picture});
+  width: 240px;
+  height: 240px
+
+  flex: 0 0 240px;
+  
+  background-size: cover;
+  background-position: top;
+  
+  border: 4px solid ${color.box_shadow_1};
+  border-bottom: 0px;
+`}
+${mediaQueryMin.m`
+${({ theme: { color } }) => `
+  border: 4px solid ${color.box_shadow_1};
+  border-right: 0px;
+  `}`}
+`;
+
 // React Components
 
 class TeamMember extends React.Component {
@@ -135,14 +174,12 @@ class TeamMember extends React.Component {
     // textStyle = { zIndex: 10, height: "auto", minHeight: 240 }
 
     return (
-      <div className="about__team-member mb-12 d-flex">
-        <div
-          style={{ backgroundImage: `url('${image(picture, 240, 240)}')` }}
+      <AboutTeamMember>
+        <MemberImg
+          picture={picture}
           alt={name}
-          className={img}
-        /> 
-        {/* NOTE: the picture right border dissapears at 768px and returns in 992px */}
-        <div className="flex-grow-1 line-height-12">
+        />
+        <div className="TEXT? flex-grow-1 line-height-12">
           <div
             className={`p-4 bg-white b-strong p-relative`}
             // onClick={this.toggle}
@@ -166,7 +203,7 @@ class TeamMember extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </AboutTeamMember>
     );
   }
 }
@@ -226,7 +263,3 @@ const AboutPage = props => {
 };
 
 export default AboutPage;
-
-/**
- * style={{background: `url('${x}') no-repeat`, backgroundSize: 'cover'}}
- **/
