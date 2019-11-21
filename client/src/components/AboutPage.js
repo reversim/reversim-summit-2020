@@ -17,13 +17,13 @@ import {
   Paragraph,
   SimpleLink,
   Heading2,
-  BreakLineMain
+  BreakLineMain,
 } from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-componets components
 
 const IntroContainer = styled.div`
-  ${ ({ theme: { color, font, space, mq } }) => `
+  ${({ theme: { color, font, space, mq } }) => `
     padding: calc(2 * ${space.xxl}) 0 calc(3 * ${space.xl}) 0;
 
     background-color: ${color.background_2};
@@ -146,10 +146,15 @@ const MemberDescriptionContainer = styled.div`
     border: 4px solid ${color.box_shadow_1};
     line-height: 1.2;
     flex-grow: 1;
-    ${isExpanded
-      ? `zIndex: 1; height: "auto"; minHeight: 240px;`
-      : `height: 240px`
-    }`}
+    transition: height 5s; //NOTE: Would love to add a transition here but did not manage to do so.
+    ${ isExpanded
+        ? (`
+        z-index: 1;
+        height: auto;
+        min-height: 240px;
+        `)
+        : `height: 240px;`
+        }`}
 `;
 
 const MemberName = styled.h4`
@@ -186,7 +191,7 @@ class TeamMember extends React.Component {
   }
 
   toggle = () => {
-    this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }));
+    this.setState( isExpanded => ({ isExpanded: !isExpanded }) );
   };
 
   render() {
@@ -197,7 +202,7 @@ class TeamMember extends React.Component {
       bio
     } = this.props;
 
-    // textStyle = { zIndex: 10, height: "auto", minHeight: 240 }
+    // textStyle = { zIndex: 10, height: "auto", minHeight: 240 } NOTE: try to understadn what does this line relate to
 
     return (
       <AboutTeamMember>
