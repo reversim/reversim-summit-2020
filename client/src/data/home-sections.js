@@ -1,5 +1,5 @@
 import Hero from '../components/Hero';
-import About from '../components/HomePageAboutSection'; //IMPORTANT: comment out after finished converting About.js to styled-components
+// import About from '../components/HomePageAboutSection';
 // import Team from '../components/Team';
 // import Register from '../components/Register';
 import SpeakersSection from '../components/SpeakersSection';
@@ -9,7 +9,7 @@ import HomePageSponsorsSection from '../components/SponsorsComps/HomePageSponsor
 
 const homeSections = [
   {name: 'hero', el: Hero},
-  {name: 'about', el: About}, //IMPORTANT: comment out after finished converting About.js to styled-components
+  // {name: 'about', el: About},
   // { name: "register", el: Register },
   // {name: 'speakers', el: SpeakersSection},
   // {name: 'timeline', el: TimelineSection},
