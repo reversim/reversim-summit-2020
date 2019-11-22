@@ -2,7 +2,7 @@ import Hero from '../components/Hero';
 // import About from '../components/HomePageAboutSection';
 // import Team from '../components/Team';
 // import Register from '../components/Register';
-import SpeakersSection from '../components/SpeakersSection';
+// import SpeakersSection from '../components/SpeakersSection';
 import Location from '../components/Location';
 import HomePageSponsorsSection from '../components/SponsorsComps/HomePageSponsorsSection';
 // import TimelineSection from '../components/TimelineSection';
