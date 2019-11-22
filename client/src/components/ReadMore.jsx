@@ -7,7 +7,7 @@ class ReadMore extends React.Component {
 
     this.state = {
       expanded: false,
-      onToggle:this.props.onToggle
+      onToggle: this.props.onToggle,
     };
 
     this.toggleLines = this.toggleLines.bind(this);
@@ -18,12 +18,18 @@ class ReadMore extends React.Component {
     this.state.onToggle();
 
     this.setState({
-      expanded: !this.state.expanded
+      expanded: !this.state.expanded,
     });
   }
 
   render() {
-    const { children, more, less, lines } = this.props;
+    const {
+      children,
+      more,
+      less,
+      lines,
+    } = this.props;
+    
     const { expanded } = this.state;
 
     return (
