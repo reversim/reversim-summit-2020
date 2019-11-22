@@ -54,17 +54,18 @@ const theme = {
     main: 'Source Code Pro, monospace',
     form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
-    weight_normal: '300',
-    weight_medium: '400',
-    weight_bold: '600',
-
+    
     size_reg: '16px',
     size_md: '18px', //NOTE: used for Intros as main text size
     size_bg: '24px', //NOTE: used for Intros as an announcment like in SponsorsPage.jsx
-
+    
     size_h2: '48px',
     size_h3: '35px',
     size_h4: '24px',
+
+    weight_normal: '300',
+    weight_medium: '400',
+    weight_bold: '600',
   },
 
   // spaces used for padding and margins
@@ -88,7 +89,7 @@ const theme = {
     main_for_mq_xl: '1100px',
     main_for_mq_l: '895px',
     main_for_mq_m: '758px',
-    main_for_mq_s: '430px',
+    main_for_mq_s: '460px',
     main_for_mq_xs: '300px',
   },
 
