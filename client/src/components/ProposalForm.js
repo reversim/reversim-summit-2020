@@ -6,7 +6,7 @@ import cn from 'classnames';
 import {findBestMatch} from 'string-similarity';
 import FormField, {SPACING} from './FormField';
 import Tags, {MAX_TAGS} from './Tags';
-import {titleInput} from './CFPPage.css';
+import {titleInput} from './CFP/CFPPage.css';
 import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,

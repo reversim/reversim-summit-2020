@@ -15,7 +15,7 @@ import TeamPage from '../components/TeamPage';
 import AdminPage from '../components/AdminPage';
 import AdminVotesDashboard from '../components/AdminVotesDashboard';
 // import WomenGathering from '../components/WomenGathering';
-import CFPPage from '../components/CFPPage';
+import CFPPage from '../components/CFP/CFPPage';
 import ProposalsPage from '../components/ProposalsPage';
 import SessionsPage from '../components/SessionsPage';
 import TimelinePage from '../components/TimelinePage';

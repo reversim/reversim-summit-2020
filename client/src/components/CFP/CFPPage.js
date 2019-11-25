@@ -1,15 +1,14 @@
 import React, {Fragment} from 'react';
 import {Button, Col, Container, Row} from 'reactstrap';
 import cn from 'classnames';
-import Page from './Page';
+import Page from '../Page';
 import {Link} from 'react-router-dom';
 import CFPTitle from './CFPTitle';
 import CFPIntro from './CFPIntro';
-import CFPFaq from './CFPFaq';
 import CFPForm from './CFPForm';
-import {heroImg, cfpCol} from './CFPPage.css';
-import {getLoginUrl} from './Redirect';
-import {getRemainingCFPDays as _x, REVERSIM_SUMMIT} from '../utils';
+import {cfpCol} from './CFPPage.css';
+import {getLoginUrl} from '../Redirect';
+import {getRemainingCFPDays as _x, REVERSIM_SUMMIT} from '../../utils';
 
 const NonAuthenticated = () => (
   <div className="text-center mb-6">

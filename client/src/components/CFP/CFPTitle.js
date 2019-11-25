@@ -1,6 +1,6 @@
 import React from 'react';
-import {CFP_ENDS_STR_SHORT} from '../data/proposals';
-import {getRemainingCFPDays, REVERSIM_SUMMIT} from '../utils';
+import {CFP_ENDS_STR_SHORT} from '../../data/proposals';
+import {getRemainingCFPDays, REVERSIM_SUMMIT} from '../../utils';
 import {daysRemaining} from './CFPPage.css';
 
 const CFPTitle = () => {

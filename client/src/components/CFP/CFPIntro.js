@@ -1,7 +1,6 @@
 import React from 'react';
-import {REVERSIM_MAIL} from '../utils';
-import {Col, Row} from 'reactstrap';
-import professionDistributionImg from '../images/reversim-2018-profession-distribution-dark.png';
+
+import professionDistributionImg from '../../images/reversim-2018-profession-distribution-dark.png';
 
 const CFPIntro = () => (
   <div className="pb-6 mb-8 border-bottom">
