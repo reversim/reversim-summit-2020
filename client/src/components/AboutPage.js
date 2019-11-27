@@ -37,10 +37,9 @@ const IntroContainer = styled.div`
   `}
 `;
 
-const MainContainer = styled(AlignCenterColumn)`
+const MeetTheTeamContainer = styled(AlignCenterColumn)`
   ${({ theme: { color } }) => `
     background-color: ${color.background_4};
-    display: block;
     `}
 `;
 
@@ -269,7 +268,7 @@ const AboutPage = props => {
             
         </AlignCenterColumn>
       </IntroContainer>
-      <MainContainer>
+      <MeetTheTeamContainer>
           <MainHeadingContainer>
             <Heading2>Meet the team</Heading2>
             <BreakLineMain />
@@ -277,7 +276,7 @@ const AboutPage = props => {
           <AboutTeam>
             {props.team.map(id => <TeamMember key={id} {...props.users[id]} />)}
           </AboutTeam>
-      </MainContainer>
+      </MeetTheTeamContainer>
     </Page>
   );
 };
