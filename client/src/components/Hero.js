@@ -21,7 +21,7 @@ library.add(faMapMarkerAlt, faCalendarAlt);
 //styled-components components
 
 const StyledSection = styled.section`
-  ${ ({ theme: { color } }) =>`
+  ${({ theme: { color } }) =>`
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,45 +30,44 @@ const StyledSection = styled.section`
       height: 100vh;
       background-color: ${color.background_2};
       border-top: 100px solid ${color.background_2};
-    `}
+  `}
 `;
 
 const HeroInner = styled.div`
-  ${ ({ theme: { color }}) =>`
+  ${({ theme: { color }}) =>`
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: ${color.text_1};
-      `}
+    `}
 
       ${mediaQueryMin.m`
         text-align: left;      
-        `}
+      `}
       
       ${mediaQueryMin.m`
         margin-right: 0;
-        `}
+      `}
 
       ${mediaQueryMin.l`
         margin-right: -80px;
-        `}
+      `}
 
       ${mediaQueryMin.xl`
        flex-direction: column;
-       `}
-
+      `}
 `;
 
 const HeroContent = styled.div`
-  ${ ({ theme: { space, color } }) =>`
+  ${({ theme: { space, color } }) =>`
       display: flex !important;
       flex-direction: column;
       margin-bottom: ${space.xxl} !important;
       background-color: ${color.background_2} !important;
       box-shadow: 0 0 30px 15px ${color.box_shadow_1};
-    `}
+  `}
 `;
 
 const LogoImg = styled.img`
@@ -76,20 +75,20 @@ const LogoImg = styled.img`
 
   ${mediaQueryMin.xs`
     width: 350px;
-    `}
+  `}
   ${mediaQueryMin.m`
     width: 400px;
-    `}
+  `}
 `;
 
 const Subtitle = styled.div`
-  ${ ({ theme: { space } }) =>`
+  ${({ theme: { space } }) =>`
     flex-direction: column;
     margin-top: ${space.xl};
-    `}
+  `}
 
   ${mediaQueryMin.m`
-    ${ ({ theme: { font, space } }) =>`
+    ${({ theme: { font, space } }) =>`
     letter-spacing: 0.6px;
     font-size: ${font.size_md};
     font-weight: 400;
@@ -98,11 +97,11 @@ const Subtitle = styled.div`
     padding: ${space.m};
     display: flex;
     justify-content: space-between;
-    `}`};
+  `}`};
 `;
 
 const IconAligner = styled.div`
-  ${ ({ theme: { space } }) =>`
+  ${({ theme: { space } }) =>`
     width: max-content;
     display: flex;
     justify-content: space-between;
@@ -111,37 +110,37 @@ const IconAligner = styled.div`
     svg {
     margin-right: 10px
     }
-    `};
+  `};
 `;
 
 const ButtonContainer = styled.div`
-  ${ ({ theme: { space } }) => `
+  ${({ theme: { space } }) => `
     height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: ${space.xl};
-    `}
+  `}
 
   ${mediaQueryMin.m`
-    ${ ({ theme: { space } }) => `
+    ${({ theme: { space } }) => `
     flex-direction: row;
     justify-content: space-around;
     margin-right: ${space.m};
     padding-top: ${space.xl};
-    `}`};
+  `}`};
 `;
 
 const VoteContainer = styled(ButtonContainer)`
-${ ({ theme: { space } }) => `
-  margin-top: calc(-3 * ${space.m});
-  padding-top: calc(6 * ${space.m});
+  ${({ theme: { space } }) => `
+    margin-top: calc(-3 * ${space.m});
+    padding-top: calc(6 * ${space.m});
   `}
 
-  ${mediaQueryMin.m`
-  ${ ({ theme: { space } }) => `
-    margin-top: ${space.xl};
-    padding-top: calc(6 * ${space.m});
+    ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin-top: ${space.xl};
+      padding-top: calc(6 * ${space.m});
     `}`}
 `;
 

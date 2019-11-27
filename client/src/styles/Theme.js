@@ -17,12 +17,16 @@ const theme = {
     background_2: 'rgb(81, 39, 255)', // #5127ff
     background_3: 'rgb(51, 18, 188)',
     background_4: 'rgb(255, 255, 255)',
+
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.2) 0%, rgba(0, 92, 177, 0.2) 100%)',
-    background_linear_gradient_2: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)', //used in FormButton :hover
+    background_linear_gradient_2: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)', //NOTE: used in FormButton :hover
+
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,
+
     button_bkgr_1: 'rgb(137, 108, 255)',
     button_bkgr_2: 'rgb(255, 97, 0)',
+
     image_link_bkgr: 'rgb(255, 255, 255)',
     input_bkgr_1: 'rgb(255, 255, 255)',
    
@@ -30,10 +34,12 @@ const theme = {
     box_shadow_1: 'rgb(81, 39, 255)',
     box_shadow_2: 'rgb(255, 255, 255)',
     box_shadow_3: 'rgb(222, 226, 230)',
+
     font_awsome_border: `rgb(0, 58, 204)`,
     font_awsome_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     font_awsome_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
     font_awsome_box_shadow_3: 'rgba(0, 238, 255, 0.1)',
+    
     input_border_1: 'rgb(206, 212, 218)',
     input_border_2: 'rgb(128, 164, 255)',
     input_box_shadow_1: 'inset 0 1px 1px rgba(0, 0, 0, 0.075)',
@@ -48,19 +54,18 @@ const theme = {
     main: 'Source Code Pro, monospace',
     form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
+    
+    size_reg: '16px',
+    size_md: '18px', //NOTE: used for Intros as main text size
+    size_bg: '24px', //NOTE: used for Intros as an announcment like in SponsorsPage.jsx
+    
+    size_h2: '48px',
+    size_h3: '35px',
+    size_h4: '24px',
 
     weight_normal: '300',
     weight_medium: '400',
     weight_bold: '600',
-
-    size_reg: '16px',
-    size_md: '18px',
-    size_bg: '24px',
-    size_xl: '35px',
-
-    size_h2: '48px',
-    size_h3: '35px',
-    size_h4: '24px',
   },
 
   // spaces used for padding and margins
@@ -72,6 +77,11 @@ const theme = {
     xxl: '50px',
   },
 
+  // borders used on the website, no colors only line styles and width
+  border: {
+    button_border: 'solid 2px',
+  },
+
   // common content widths
 
   width: {
@@ -79,7 +89,7 @@ const theme = {
     main_for_mq_xl: '1100px',
     main_for_mq_l: '895px',
     main_for_mq_m: '758px',
-    main_for_mq_s: '430px',
+    main_for_mq_s: '460px',
     main_for_mq_xs: '300px',
   },
 

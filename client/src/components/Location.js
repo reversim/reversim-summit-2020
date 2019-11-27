@@ -16,12 +16,12 @@ import venuePic from "../images/bitan10.jpeg";
 
 // styled-components components
 const LocationSection = styled.section`
-  ${ ({ theme: { space } }) => `
+  ${({ theme: { space } }) => `
     margin: calc(8 * ${space.m}) auto calc(10 * ${space.m}) auto;
   `}
 `;
 const ColumnAligner = styled.div`
-  ${ ({ theme: { space } }) => `
+  ${({ theme: { space } }) => `
     margin-left: ${space.m};
     width: 100%;
     display: flex;
@@ -34,7 +34,7 @@ const MainHeading = styled(Heading2)`
 `;
 
 const SubHeading = styled(Paragraph)`
-  ${ ({ theme: { color, space, font } }) => `
+  ${({ theme: { color, space, font } }) => `
     margin-top: ${space.m};
     color: ${color.text_2};
     font-size: ${font.size_bg};
@@ -47,7 +47,7 @@ const MapWrapper = styled.div`
 `;
 
 const VenueImg = styled.img`
-  ${ ({ theme: { color, space } }) => `
+  ${({ theme: { color, space } }) => `
     width: 100%;
     margin-top: calc(-30 * ${space.m});
     border: 4px solid ${color.box_shadow_1};

@@ -1,11 +1,181 @@
-import React from "react";
-import Page from "./Page";
-import { Container, Row, Col } from "reactstrap";
-import { img } from "./Speaker2.css";
-import hoop from "../images/SVG/hoop.svg";
-import x from "../images/SVG/x.svg";
-import { image } from "../images";
-import ReadMore from './ReadMore'
+import React from 'react';
+import styled from 'styled-components';
+
+import Page from './Page';
+import ReadMore from './ReadMore';
+
+import xBackground from '../images/SVG/x.svg';
+
+import mediaQueryMin from '../styles/MediaQueriesMixin';
+import {
+  AlignCenterColumn,
+  HeadingAligner,
+  HeadingHoop,
+  PageHeading,
+  BreakLineInverted,
+  Heading4,
+  Paragraph,
+  SimpleLink,
+  Heading2,
+  BreakLineMain,
+} from './GlobalStyledComponents/ReversimStyledComps';
+
+// styled-componets components
+
+const IntroContainer = styled.div`
+  ${({ theme: { color, font, space, mq } }) => `
+    padding: calc(2 * ${space.xxl}) 0 calc(3 * ${space.xl}) 0;
+
+    background-color: ${color.background_2};
+    background-image: url(${xBackground});
+    background-repeat: no-repeat;
+    background-size: 600px;
+    background-position: 50% 120%;
+
+    color:  ${color.text_1};
+    font-size: ${font.size_md};
+  `}
+`;
+
+const MeetTheTeamContainer = styled(AlignCenterColumn)`
+  ${({ theme: { color } }) => `
+    background-color: ${color.background_4};
+  `}
+`;
+
+const IntroHeadingContainer = styled(HeadingAligner)`
+  ${({ theme: { space } }) => `
+    padding-top: calc(3 * ${space.xl});
+  `}
+`;
+
+const IntroTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  ${mediaQueryMin.l`
+    flex-direction: row;
+  `}
+`;
+
+const IntroParagraphContainer = styled.div`
+  ${({ theme: { space } }) => `
+    flex: 1;
+    margin-right: calc(3 * ${space.l});
+    padding-top: ${space.xxl};
+  `}
+`
+
+const IntroSubHeading = styled(Heading4)`
+  ${({ theme: { font,  } }) => `
+    font-weight: ${font.weight_medium};
+  `}
+`
+
+const IntroParagraph = styled(Paragraph)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_md};
+  `}
+`
+
+const IntroLink = styled(SimpleLink)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_md};
+  `}
+`;
+
+const MainHeadingContainer = styled(HeadingAligner)`
+  ${({ theme: { space } }) => `
+    padding: calc(8 * ${space.m}) 0 calc(6 * ${space.m}) 0;
+  `}
+`;
+
+const AboutTeam = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const AboutTeamMember = styled.div`
+  ${({ theme: { space } }) => `
+    margin-bottom: calc(6* ${space.m});
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 100%;
+  `}
+
+    ${mediaQueryMin.m`
+      flex-direction: row;
+    `}
+
+  ${mediaQueryMin.xl`
+    flex: 0 0 calc(50% - 20px);
+  `}
+`;
+
+const MemberImg = styled.div`
+  ${({ theme: { color }, picture }) => `
+    display: inline;
+    background-image: url(${picture});
+    width: 240px;
+    height: 240px;
+
+    flex: 0 0 240px;
+    
+    background-size: cover;
+    background-position: top;
+    
+    border: 4px solid ${color.box_shadow_1};
+    border-bottom: 0px;
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { color } }) => `
+      border: 4px solid ${color.box_shadow_1};
+      border-right: 0px;
+    `}`}
+`;
+
+const MemberDescriptionContainer = styled.div`
+  ${({ theme: { space, color }, isExpanded }) => `
+    padding: calc(2 * ${space.m});
+    border: 4px solid ${color.box_shadow_1};
+    line-height: 1.2;
+    flex-grow: 1;
+    transition: height 5s; //NOTE: Would love to add a transition here but did not manage to do so.
+    ${ isExpanded
+        ? (`
+        z-index: 1;
+        height: auto;
+        min-height: 240px;
+        `)
+        : `height: 240px;`
+    }`}
+`;
+
+const MemberName = styled.h4`
+  ${({ theme: { font, space } }) => `
+    margin-bottom: ${space.m};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_bold};
+    line-height: 1;
+  `}
+`;
+
+const MemberOneliner = styled.p`
+  ${({ theme: { font, space } }) => `
+    margin-bottom: ${space.l};
+    line-height: 1.2;
+    font-weight: ${font.weight_medium};
+    font-size: ${font.size_md};
+  `}
+`;
+
+const MemberContent = styled.div`
+  margin-bottom: 0;
+  line-height: 1.5;
+`;
+
+// React Components
 
 class TeamMember extends React.Component {
   constructor(props) {
@@ -16,50 +186,43 @@ class TeamMember extends React.Component {
   }
 
   toggle = () => {
-    this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }));
+    this.setState({ isExpanded: !this.state.isExpanded });
   };
 
   render() {
-    const { picture, name, oneLiner, bio } = this.props;
-    const { isExpanded } = this.state;
-    let textStyle = isExpanded
-        ? { zIndex: 1, height: "auto", minHeight: 240 }
-        : { height: 240 };
-
-    // textStyle = { zIndex: 10, height: "auto", minHeight: 240 }
+    const {
+      picture,
+      name,
+      oneLiner,
+      bio
+    } = this.props;
 
     return (
-      <div className="about__team-member mb-12 d-flex">
-        <div
-          style={{ backgroundImage: `url('${image(picture, 240, 240)}')` }}
+      <AboutTeamMember>
+        <MemberImg
+          picture={picture}
           alt={name}
-          className={img}
         />
-        <div className="flex-grow-1 line-height-12">
-          <div
-            className={`p-4 bg-white b-strong p-relative`}
-            // onClick={this.toggle}
-            style={textStyle}
-          >
-            <div ref={this.ref}>
-              <h4 className="line-height-1 mb-1">{name}</h4>
-              <p className="font-weight-regular line-height-12 font-size-md">
-                {oneLiner}
-              </p>
-              <div className="line-height-15 mb-0">
-                <ReadMore
-                  lines={4}
-                  truncateText="…"
-                  more="Read more"
-                  less="Show less"
-                  children={bio}
-                  onToggle={this.toggle}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <MemberDescriptionContainer
+          isExpanded={this.state.isExpanded}
+          onClick={this.toggle} //this doesn't work properly
+        >
+          <MemberName className="line-height-1 mb-1">{name}</MemberName>
+          <MemberOneliner>
+            {oneLiner}
+          </MemberOneliner>
+          <MemberContent>
+            <ReadMore
+              lines={3}
+              truncateText="…"
+              more="Read more"
+              less="Show less"
+              children={bio}
+              onToggle={this.toggle}
+            />
+          </MemberContent>
+        </MemberDescriptionContainer>
+      </AboutTeamMember>
     );
   }
 }
@@ -67,67 +230,55 @@ class TeamMember extends React.Component {
 const AboutPage = props => {
   return (
     <Page title="About" {...props}>
-      <div
-        className="navbar-margin pb-15 bg-purple2 text-white font-size-lm x-bg"
-        style={{ backgroundImage: `url('${x}')` }}
-      >
-        <Container>
-          <div className="d-flex align-items-center pt-15 ">
-            <img src={hoop} alt="" height="100" style={{ marginRight: -16 }} />
-            <h3 className="font-size-xxl mr-4 font-weight-regular">About</h3>
-            <div className="flex-grow-1 border-bottom border-white" />
-          </div>
-          <div className="d-flex font-weight-regular about__intro-text">
-            <div className="pt-10 mr-9 flex-1">
-              <p className="line-height-15 font-size-lg">Reversim Summit</p>
-              <p className="line-height-15">
-                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה)  summit is our intention to create a conference for
+      <IntroContainer>
+        <AlignCenterColumn>
+          <IntroHeadingContainer>
+            <HeadingHoop />
+            <PageHeading>About</PageHeading>
+            <BreakLineInverted />
+          </IntroHeadingContainer>
+          <IntroTextContainer>
+            <IntroParagraphContainer>
+              <IntroSubHeading>Reversim Summit</IntroSubHeading>
+              <IntroParagraph>
+                <IntroLink href="https://twitter.com/reversim/">#reversim</IntroLink> (רברס עם פלטפורמה) 
+                summit is our intention to create a conference for
                 developers by developers. Like in the podcast, we bring you the
                 content we are interested in, and we hope you will be too.
-              </p>
-              <p className="line-height-15">
+              </IntroParagraph>
+              <IntroParagraph>
                 This is the 7th(!) Reversim Summit. The summits of 2013 and 2014
                 (TLV Campus), 2015 (Technion), 2016 (Weizmann Institute of
                 Science), 2017 (College of Management) and 2018 (Tel Aviv
                 University) also featured community content. Watch previous
                 years' sessions to get the general feel of the Revesim Summit
                 spirit.
-              </p>
-            </div>
-            <div className="pt-10 mr-12 flex-1">
-              <p className="mb-3 font-size-lg">Reversim podcast</p>
-              <p className="line-height-15">
-                <a href="https://twitter.com/reversim/" className='text-white'>#reversim</a> (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and
+              </IntroParagraph>
+            </IntroParagraphContainer>
+            <IntroParagraphContainer>
+              <IntroSubHeading>Reversim podcast</IntroSubHeading>
+              <IntroParagraph>
+                <IntroLink href="https://twitter.com/reversim/">#reversim</IntroLink> (רברס עם פלטפורמה) is a Hebrew podcast by Ori Lahav and
                 Ran Tavory which brings together software developers and
                 product, with over 300 recorded episodes and a few thousands
                 listeners.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </div>
-      <div className="white-bg">
-        <Container>
-          <div
-            className="d-flex align-items-center text-purple2"
-            style={{ padding: "80px 0 60px" }}
-          >
-            <h3 className="font-size-xxl mr-4 font-weight-regular">
-              Meet the team
-            </h3>
-            <div className="flex-grow-1 border-bottom border-purple2" />
-          </div>
-          <div className="about__team">
+              </IntroParagraph>
+            </IntroParagraphContainer>
+        </IntroTextContainer>
+            
+        </AlignCenterColumn>
+      </IntroContainer>
+      <MeetTheTeamContainer>
+          <MainHeadingContainer>
+            <Heading2>Meet the team</Heading2>
+            <BreakLineMain />
+          </MainHeadingContainer>
+          <AboutTeam>
             {props.team.map(id => <TeamMember key={id} {...props.users[id]} />)}
-          </div>
-        </Container>
-      </div>
+          </AboutTeam>
+      </MeetTheTeamContainer>
     </Page>
   );
 };
 
 export default AboutPage;
-
-/**
- * style={{background: `url('${x}') no-repeat`, backgroundSize: 'cover'}}
- **/

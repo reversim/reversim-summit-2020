@@ -15,7 +15,7 @@ import {
 //styled-components components
 
 const ColumnContainer = styled.div`
-${ ({theme: { color } }) => `
+${({theme: { color } }) => `
   display: flex;
   flex-direction: column;
   margin: 0 auto;

@@ -18,7 +18,7 @@ import {
 // styled-components section
 
 const CheckboxContainer = styled.div`
-  ${ ({ theme: { space } }) => `
+  ${({ theme: { space } }) => `
     display: flex;
     align-items: center;
     margin-bottom: ${space.l};
@@ -26,7 +26,7 @@ const CheckboxContainer = styled.div`
 `;
 
 const OpenPositionContainer = styled.div`
-  ${ ({ theme: { space } }) => `
+  ${({ theme: { space } }) => `
     margin-buttom: ${space.xxl};
   `}
 `;

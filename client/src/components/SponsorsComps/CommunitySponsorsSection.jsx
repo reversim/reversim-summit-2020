@@ -32,7 +32,7 @@ const HomeCommunityContainer = styled.div`
 `;
 
 const SponsorMiniContainer = styled.div`
-  ${ ({ theme: { space } }) => `
+  ${({ theme: { space } }) => `
     flex: 0 0 20%;
     text-align: center;
     align-self: center;
