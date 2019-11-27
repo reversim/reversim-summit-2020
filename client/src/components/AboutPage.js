@@ -37,10 +37,6 @@ const IntroContainer = styled.div`
   `}
 `;
 
-const IntroInnerContainer = styled(AlignCenterColumn)`
-  display: block;
-`;
-
 const MainContainer = styled(AlignCenterColumn)`
   ${({ theme: { color } }) => `
     background-color: ${color.background_4};
@@ -236,7 +232,7 @@ const AboutPage = props => {
   return (
     <Page title="About" {...props}>
       <IntroContainer>
-        <IntroInnerContainer>
+        <AlignCenterColumn>
           <IntroHeadingContainer>
             <HeadingHoop />
             <PageHeading>About</PageHeading>
@@ -271,7 +267,7 @@ const AboutPage = props => {
             </IntroParagraphContainer>
         </IntroTextContainer>
             
-        </IntroInnerContainer>
+        </AlignCenterColumn>
       </IntroContainer>
       <MainContainer>
           <MainHeadingContainer>
