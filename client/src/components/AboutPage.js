@@ -212,23 +212,20 @@ class TeamMember extends React.Component {
           isExpanded={this.state.isExpanded}
           onClick={this.toggle} //this doesn't work properly
         >
-              <MemberName className="line-height-1 mb-1">{name}</MemberName>
-              <MemberOneliner>
-                {oneLiner}
-              </MemberOneliner>
-              <MemberContent>
-                <ReadMore
-                  lines={3}
-                  truncateText="…"
-                  more="Read more"
-                  less="Show less"
-                  children={bio}
-                  onToggle={this.toggle}
-                />
-              </MemberContent>
-        {/* <div ref={this.ref}>
-            </div> 
-            NOTE: this div padded MemberDescriptionContainer I took it out and everything is still working*/}
+          <MemberName className="line-height-1 mb-1">{name}</MemberName>
+          <MemberOneliner>
+            {oneLiner}
+          </MemberOneliner>
+          <MemberContent>
+            <ReadMore
+              lines={3}
+              truncateText="…"
+              more="Read more"
+              less="Show less"
+              children={bio}
+              onToggle={this.toggle}
+            />
+          </MemberContent>
         </MemberDescriptionContainer>
       </AboutTeamMember>
     );
