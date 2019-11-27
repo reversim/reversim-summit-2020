@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Page from './Page';
 import ReadMore from './ReadMore';
 
-import x from '../images/SVG/x.svg';
+import xBackground from '../images/SVG/x.svg';
 
 import mediaQueryMin from '../styles/MediaQueriesMixin';
 import {
@@ -27,7 +27,7 @@ const IntroContainer = styled.div`
     padding: calc(2 * ${space.xxl}) 0 calc(3 * ${space.xl}) 0;
 
     background-color: ${color.background_2};
-    background-image: url(${x});
+    background-image: url(${xBackground});
     background-repeat: no-repeat;
     background-size: 600px;
     background-position: 50% 120%;
@@ -191,7 +191,7 @@ class TeamMember extends React.Component {
   }
 
   toggle = () => {
-    this.setState( isExpanded => ({ isExpanded: !isExpanded }) );
+    this.setState({ isExpanded: !this.state.isExpanded });
   };
 
   render() {
@@ -202,8 +202,6 @@ class TeamMember extends React.Component {
       bio
     } = this.props;
 
-    // textStyle = { zIndex: 10, height: "auto", minHeight: 240 } NOTE: try to understadn what does this line relate to
-
     return (
       <AboutTeamMember>
         <MemberImg
@@ -212,7 +210,7 @@ class TeamMember extends React.Component {
         />
         <MemberDescriptionContainer
           isExpanded={this.state.isExpanded}
-          // onClick={this.toggle} this doesn't work properly
+          onClick={this.toggle} //this doesn't work properly
         >
               <MemberName className="line-height-1 mb-1">{name}</MemberName>
               <MemberOneliner>
@@ -220,7 +218,7 @@ class TeamMember extends React.Component {
               </MemberOneliner>
               <MemberContent>
                 <ReadMore
-                  lines={4}
+                  lines={3}
                   truncateText="…"
                   more="Read more"
                   less="Show less"
