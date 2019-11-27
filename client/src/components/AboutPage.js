@@ -40,13 +40,13 @@ const IntroContainer = styled.div`
 const MeetTheTeamContainer = styled(AlignCenterColumn)`
   ${({ theme: { color } }) => `
     background-color: ${color.background_4};
-    `}
+  `}
 `;
 
 const IntroHeadingContainer = styled(HeadingAligner)`
   ${({ theme: { space } }) => `
     padding-top: calc(3 * ${space.xl});
-    `}
+  `}
 `;
 
 const IntroTextContainer = styled.div`
@@ -69,25 +69,25 @@ const IntroParagraphContainer = styled.div`
 const IntroSubHeading = styled(Heading4)`
   ${({ theme: { font,  } }) => `
     font-weight: ${font.weight_medium};
-    `}
+  `}
 `
 
 const IntroParagraph = styled(Paragraph)`
   ${({ theme: { font } }) => `
     font-size: ${font.size_md};
-    `}
+  `}
 `
 
 const IntroLink = styled(SimpleLink)`
   ${({ theme: { font } }) => `
     font-size: ${font.size_md};
-    `}
+  `}
 `;
 
 const MainHeadingContainer = styled(HeadingAligner)`
   ${({ theme: { space } }) => `
     padding: calc(8 * ${space.m}) 0 calc(6 * ${space.m}) 0;
-    `}
+  `}
 `;
 
 const AboutTeam = styled.div`
@@ -102,15 +102,15 @@ const AboutTeamMember = styled.div`
     display: flex;
     flex-direction: column;
     flex: 0 0 100%;
-    `}
+  `}
 
     ${mediaQueryMin.m`
       flex-direction: row;
-      `}
+    `}
 
   ${mediaQueryMin.xl`
     flex: 0 0 calc(50% - 20px);
-    `}
+  `}
 `;
 
 const MemberImg = styled.div`
@@ -132,7 +132,7 @@ const MemberImg = styled.div`
     ${({ theme: { color } }) => `
       border: 4px solid ${color.box_shadow_1};
       border-right: 0px;
-      `}`}
+    `}`}
 `;
 
 const MemberDescriptionContainer = styled.div`
@@ -149,7 +149,7 @@ const MemberDescriptionContainer = styled.div`
         min-height: 240px;
         `)
         : `height: 240px;`
-        }`}
+    }`}
 `;
 
 const MemberName = styled.h4`
@@ -158,16 +158,16 @@ const MemberName = styled.h4`
     font-size: ${font.size_md};
     font-weight: ${font.weight_bold};
     line-height: 1;
-    `}
+  `}
 `;
 
 const MemberOneliner = styled.p`
-${({ theme: { font, space } }) => `
-  margin-bottom: ${space.l};
-  line-height: 1.2;
-  font-weight: ${font.weight_medium};
-  font-size: ${font.size_md};
-`}
+  ${({ theme: { font, space } }) => `
+    margin-bottom: ${space.l};
+    line-height: 1.2;
+    font-weight: ${font.weight_medium};
+    font-size: ${font.size_md};
+  `}
 `;
 
 const MemberContent = styled.div`

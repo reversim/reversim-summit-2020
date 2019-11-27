@@ -36,20 +36,20 @@ const List = styled.ul`
   ${mediaQueryMin.xs`
     ${({ theme: { space } }) => `
       margin-bottom: ${space.xl};
-      `}`}
+    `}`}
 
   ${mediaQueryMin.l`
     ${({ theme: { space } }) => `
       margin-left: -${space.l};
       margin-bottom: 0;
       justify-content: space-between;
-      `}`}
+    `}`}
 `;
 
 const ListItem = styled.li`
     ${({ theme: {space} }) => `
       margin: 0 ${space.xl} 0  0;
-      `}
+    `}
 
     ${mediaQueryMin.l`
       ${({ theme: { space }}) =>`
@@ -60,31 +60,31 @@ const ListItem = styled.li`
 `;
 
 const ListItemText = styled.h6`
-${ ({ theme: { space, color } }) => `
+${({ theme: { space, color } }) => `
   margin-right: ${space.m};
   color: ${color.text_1};
   `}
 
   ${mediaQueryMin.m`
     width: max-content;
-    `}
+  `}
 `;
 
 const AllRightsReserved = styled.h6`
-  ${ ({ theme: { color } }) => `
+  ${({ theme: { color } }) => `
     color: ${color.text_1};
-    `}
+  `}
 
   ${mediaQueryMin.xs`
     ${({ theme: { space } }) => `
       padding: 0 ${space.l};
-      `}`}
+    `}`}
 
   ${mediaQueryMin.l`
     ${({ theme: { space } }) => `
       margin-top: ${space.xl};
       flex-basis: 40%;
-      `}`}
+    `}`}
 `;
 
 const FontAwsomeContainer = styled.div`
@@ -96,16 +96,16 @@ const FontAwsomeContainer = styled.div`
   ${mediaQueryMin.xs`
     flex-wrap: wrap;
     width: fit-content;
-    `}
+  `}
   ${mediaQueryMin.m`
     flex-wrap: nowrap;
-    `}
+  `}
 `;
 
 const FooterIcon = styled(FontAwesomeIcon)`
  ${({theme: { space }}) =>`
   margin-right: ${space.m};
-`}
+  `}
 `;
 
 const Link = styled.a`
@@ -118,7 +118,7 @@ const Link = styled.a`
       text-decoration: none;
       color: ${color.text_1};
     };
-    `}
+  `}
 `;
 
 const FooterContainer = () => (

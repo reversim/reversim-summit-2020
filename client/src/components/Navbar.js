@@ -63,7 +63,7 @@ const NavItemAligner = styled.div`
     margin-left: auto;
     margin-bottom: 0;
     list-style: none;
-    `};
+  `};
 
     ${mediaQueryMin.l`
       flex-direction: row;
@@ -78,12 +78,12 @@ const NavLI = styled.li`
       font-size: ${font.size_md};
       color: ${color.text_1};
       font-weight: ${font.weight_bold};
-      `}
+  `}
 
       ${mediaQueryMin.l`
       ${({theme: { space } }) => `
         margin-left: ${space.xl};
-        `}`}
+      `}`}
 `;
 
 // React.js componenets section

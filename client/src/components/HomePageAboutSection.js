@@ -16,9 +16,9 @@ import {
 
 //styled-components section
 const AboutHeading = styled(HeadingAligner)`
-${({ theme: { space,  } }) => `
-margin: ${space.xl} !important;
-`}
+  ${({ theme: { space,  } }) => `
+  margin: ${space.xl} !important;
+  `}
 `
 
 const MainContainer = styled.div`
@@ -38,10 +38,10 @@ const SegmentContainer = styled.div`
   margin-bottom: ${space.xl};
   `}
 
-  ${mediaQueryMin.l`
-  margin-bottom: 0;
-  flex-basis: 48%;
-  `}
+    ${mediaQueryMin.l`
+    margin-bottom: 0;
+    flex-basis: 48%;
+    `}
   `;
 
 const AboutImage = styled(SegmentContainer)`
@@ -51,16 +51,16 @@ const AboutImage = styled(SegmentContainer)`
   background-size: cover;
   background-position: center;
 
-  ${mediaQueryMin.l`
-  height: 45vh;
-  `}
-  ${mediaQueryMin.xl`
-  height: 40vh;
-  `}
+    ${mediaQueryMin.l`
+    height: 45vh;
+    `}
+    ${mediaQueryMin.xl`
+    height: 40vh;
+    `}
 `
 const MainHeading = styled(Heading4)`
   ${({ theme: { color } }) => `
-  color: ${color.text_3};
+    color: ${color.text_3};
   `}
   `
 

@@ -18,7 +18,7 @@ library.add(faPencilAlt, faTrash);
 
   //WantToBe components
 const WantToBeContainer = styled.div`
-  ${ ({ theme: { color, space, font } }) =>`
+  ${({ theme: { color, space, font } }) =>`
     margin: ${space.xl} 0px;
 
     display: flex;
@@ -34,14 +34,14 @@ const WantToBeContainer = styled.div`
 `;
 
 const WantToBePara = styled(Paragraph)`
-  ${ ({ theme: { font } }) => `
+  ${({ theme: { font } }) => `
     font-weight: ${font.weight_normal};
     font-size: ${font.size_bg};
   `}
 `;
 
 const WantToBelink = styled(SimpleLink)`
-  ${ ({ theme: { font } }) => `
+  ${({ theme: { font } }) => `
     font-size: ${font.size_bg};
   `}
 `;
@@ -49,7 +49,7 @@ const WantToBelink = styled(SimpleLink)`
   //SponsorsPage Components
 
 const PremiumSectionContainer = styled.section`
-  ${ ({ theme: { color, space, mq } }) => `
+  ${({ theme: { color, space, mq } }) => `
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,7 +64,7 @@ const PremiumSectionContainer = styled.section`
 `;//NOTE: same weird display under 768px width where 100% is narrower than viewport's width for no reason.
 
 const AddSoponsorContainer = styled.div`
-  ${ ({ theme: { space, color} }) =>`
+  ${({ theme: { space, color} }) =>`
     width: inherit;
     padding: ${space.l};
     margin-bottom: ${space.xxl};
@@ -74,14 +74,14 @@ const AddSoponsorContainer = styled.div`
 `;
 
 const CommunityContainer = styled(AlignCenter)`
- ${ ({ theme: { space } }) => `
+ ${({ theme: { space } }) => `
     width: 80%;
     margin-top: ${space.xl};
  `}
 `;
 
 const InviterContainer = styled.div`
-  ${ ({ theme: { space, color } }) => `
+  ${({ theme: { space, color } }) => `
     box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
     background: ${color.background_linear_gradient_1};
     padding: ${space.xl};
@@ -90,16 +90,16 @@ const InviterContainer = styled.div`
 `;
 
 const InviterHeading = styled(Heading3)`
-  ${ ({ theme: { color } }) => `
+  ${({ theme: { color } }) => `
     color: ${color.heading_2};
     text-align: center;
   `}
 `;
 
 const InviterHeadingBold = styled(InviterHeading)`
-  ${ ({ theme: { font }}) => `
+  ${({ theme: { font }}) => `
     font-weight: ${font.weight_bold};
-  ` }
+  `}
 `;
 
 // React components section

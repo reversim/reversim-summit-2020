@@ -11,7 +11,7 @@ const coordinates = {
 
 // React components section
 const MapContainer = styled.div`
-  ${ ({ theme: { space, color } }) => `
+  ${({ theme: { space, color } }) => `
     width: 200px;
     height: 200px;
     margin: 0 -${space.l} calc(2 * ${space.xxl}) 0;
@@ -25,19 +25,19 @@ const MapContainer = styled.div`
         height: 300px;
 
         margin: ${space.xxl} -${space.m} calc(3 * ${space.xxl}) 0;
-        `}`}
+    `}`}
 
     ${mediaQueryMin.l`
       ${({ theme: { space } }) => `
         height: 350px;
         width: 350px;
         margin-right: -${space.xl};
-        `}`}
+    `}`}
     
     ${mediaQueryMin.xl`
       height: 480px;
       width: 480px;
-      `}
+    `}
 `;
 
 const MapElement = styled.div`

@@ -18,7 +18,7 @@ library.add(faMapMarkerAlt);
 // styled-components components
 
 const MainContainer = styled.div`
-  ${ ({ theme: { color, font, space } }) => `
+  ${({ theme: { color, font, space } }) => `
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -31,7 +31,7 @@ const MainContainer = styled.div`
 `;
 
 const HeaderContainer = styled.div`
-  ${ ({ theme: { color, space } }) => `
+  ${({ theme: { color, space } }) => `
     min-height: 120px;
     padding: calc(${space.m} * 3);
 
@@ -41,20 +41,20 @@ const HeaderContainer = styled.div`
 `;
 
 const JobTitle = styled(Heading4)`
-  ${ ({ theme: { font } }) => `
+  ${({ theme: { font } }) => `
     font-weight: ${font.weight_bold}
   `}
 `;
 
 const JobLocation = styled(Heading4)`
-  ${ ({ theme: { font } }) => `
+  ${({ theme: { font } }) => `
     margin: 0;
     font-weight: ${font.weight_medium};
   `}
 `;
 
 const DescriptionContainer = styled.div`
-  ${ ({ theme: { space } }) =>`
+  ${({ theme: { space } }) =>`
     padding: calc(${space.m} * 3);
 
     display: flex;
@@ -65,7 +65,7 @@ const DescriptionContainer = styled.div`
 `;
 
 const JobDescription = styled(Paragraph)`
-  ${ ({ theme: {color, font, space } }) => `
+  ${({ theme: {color, font, space } }) => `
     margin-bottom: ${space.xl};
 
     color: ${color.text_2};

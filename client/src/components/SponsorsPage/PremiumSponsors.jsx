@@ -16,7 +16,7 @@ import diamond from '../../images/SVG/diamond.svg';
 
 //styled-components components
 const HeadingDecoration = styled(HeadingDiamond)`
-  ${ ({ theme: { space } }) => `
+  ${({ theme: { space } }) => `
     margin: 0 -${space.xxl} calc(-3 * ${space.m}) 0;
   `}
   
@@ -39,17 +39,17 @@ const SponsorMiniAligner = styled.div`
     ${mediaQueryMin.m`
       ${({ theme: { width } }) =>`
         width: ${width.main_for_mq_m};
-        `}`}
+    `}`}
     
     ${mediaQueryMin.l`
       ${({ theme: { width } }) => `
        width: ${width.main_for_mq_l};
-      `}`}
+    `}`}
 
     ${mediaQueryMin.xl`
       ${({ theme: { width } }) => `
        width: ${width.main_for_mq_xl};
-      `}`}
+    `}`}
 `;
 
 // React components
