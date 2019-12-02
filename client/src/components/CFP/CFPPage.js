@@ -34,33 +34,31 @@ const BottomContent = ({features: {submission}, user, ...props}) => {
   else return <CFPForm user={user} {...props} />;
 };
 
-const CFPBody = props => {
+const CFPPage = props => {
   const {eventConfig} = props;
-  if (eventConfig.cfp) {
-    return (
-      <Fragment>
-        <CFPTitle />
+
+  return (
+  <Page title="Call for papers" {...props}>
+    <Fragment>
+      <CFPTitle eventConfig={eventConfig}/>
+      <div className="container">
         <CFPIntro />
         <BottomContent {...props} />
-      </Fragment>
-    );
-  } else {
-    return <h1 className="my-5 text-primary text-white">{REVERSIM_SUMMIT} - CFP is closed!</h1>;
-  }
+      </div>
+    </Fragment>
+  </Page>
+  );
 };
 
-const CFPPage = props => (
-  <Page title="Call for papers" {...props}>
-    <div className="container navbar-margin">
-      <Container>
-        <Row>
-          <Col lg={{size: 10, offset: 1}} className={cn(cfpCol)}>
-            <CFPBody {...props} />
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  </Page>
-);
-
 export default CFPPage;
+
+//Scrape Yard:
+
+{/**NOTE: this col wrapped the body of cfp. 
+ <Col lg={{size: 10, offset: 1}} className={cn(cfpCol)}> </Col>
+* style: position: relative;
+* @media (min 992)
+* flex: 0 0 83.33333%;
+  max-width: 83.33333%; 
+  margin-left: 8.33333%;
+lg={{size: 10, offset: 1}}  */}

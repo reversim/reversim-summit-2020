@@ -39,7 +39,7 @@ export const AlignCenter = styled.div`
 
       ${mediaQueryMin.xxl`
         ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_xxl};  
+          max-width: ${width.main};  
         `}`};
 `;
 
