@@ -1,45 +1,99 @@
 import React from 'react';
+import styled from 'styled-components';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
-import professionDistributionImg from '../../images/reversim-2018-profession-distribution-dark.png';
+import {
+  AlignCenterColumn,
+  HeadingAligner,
+  Heading2,
+  Heading4,
+  BreakLineMain,
+  Paragraph2,
+
+} from '../GlobalStyledComponents/ReversimStyledComps';
+
+//styled-components section
+const MainContainer = styled(AlignCenterColumn)`
+  ${({ theme: { space } }) => `
+    margin: ${space.xxl} auto;
+    align-items: flex-start;
+  `}
+`
+const Italic = styled.span`
+  font-style: italic;
+`; 
+/*
+The above component (Italic) is needed to override the problematic reset file in:
+/home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
+
+It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
+Tried to change it in the file on line 21 (i.e. deleted '.em') but it had no effect on the text.
+*/
+
+const SubHeading = styled(Heading4)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_3};
+  `}
+`
+const ListHeading = styled(Heading4)`
+  ${({ theme: { color, space, font } }) => `
+    margin: ${space.xl} 0 ${space.s} 0;
+    font-size: ${font.size_md};
+    color: ${color.text_3};
+  `}
+`
+
+const BottomLine = styled(BreakLineMain)`
+  ${({ theme: { space } }) => `
+    width: 100%;
+    margin: ${space.xxl} 0;
+    `}
+    ${mediaQueryMin.s`
+      margin-left: 0;
+    `}
+`
+//React component section
 
 const CFPIntro = () => (
-  <div className="pb-6 mb-8 border-bottom">
-
-    <h2 className="mb-4">About</h2>
-    <p>
+  <MainContainer>
+    <HeadingAligner>
+      <Heading2>About</Heading2>
+      <BreakLineMain />
+    </HeadingAligner>
+    <Paragraph2>
       Reversim Summit is a community conference, for developers, of developers, by developers.
       We aim to present excellent, useful & inspiring content to developers and development related roles
       such as product management, development managers.
-    </p>
-    <p>
+    </Paragraph2>
+    <Paragraph2>
       Our 2018 summit audience consisted predominantly of engineers or engineering management people:
-    </p>
-    <p>
-      <img className="d-block ml-auto img-fluid" src={professionDistributionImg} alt="2-18 summit preffesion distribution" />
-    </p>
-    <p>
-      Our speaker lineup was composed of 30% women speakers and 70% men speakers.
-    </p>
-    <p>
+    </Paragraph2>
+    <Paragraph2>
+      Our speaker lineup was composed of <Italic>30% women</Italic> speakers and 70% men speakers.
+    </Paragraph2>
+    <Paragraph2>
       Our goal is to streamline the submission and review process, while maintaining superb quality;
       if you have any feedback or questions, please email us at <a href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</a>.
-    </p>
+    </Paragraph2>
 
-    <h2 className="mb-4">Suggested topics</h2>
-    <p>
+    <HeadingAligner>
+      <Heading2>Suggested topics</Heading2>
+      <BreakLineMain />
+    </HeadingAligner>
+    <Paragraph2>
       Reversim Summit is looking for submissions on all things software development.
       We encourage and welcome deep technical submissions, as well as sessions on the
       surroundings of software development such as product management, culture and business.
       We prefer sessions that can appeal to our diverse audience.
       We prefer sessions based on personal experience and learnings.
       We encourage innovative and unique topics.
-    </p>
-    <p>
+    </Paragraph2>
+    <Paragraph2>
       General HOWTOs and 101s are discouraged. Marketing and sales pitches are unwanted, as are self promotion sessions in disguise.
-    </p>
-    <p>
+    </Paragraph2>
+    <Paragraph2>
       Ideas for topics include, but not limited to:
-    </p>
+    </Paragraph2>
     <ul>
       <li>Front end / securing websites / mobile development</li>
       <li>Quality / testing / monitoring / alerting / automation</li>
@@ -55,51 +109,63 @@ const CFPIntro = () => (
       <li>Culture / scaling organizations / management / motivation and employee engagement</li>
       <li>Education / teaching / initiatives / government</li>
     </ul>
-    <p>
+    <Paragraph2>
       Can’t find what you were looking for? Please propose a topic which software developers will find to be of interest.
-    </p>
+    </Paragraph2>
 
-    <h2 className="mb-4">Proposals</h2>
-    <p>
+    <HeadingAligner>
+      <Heading2>Proposals</Heading2>
+      <BreakLineMain />
+    </HeadingAligner>
+    <SubHeading>
       We are looking for proposals in these formats:
-    </p>
+    </SubHeading>
     <ul>
       <li>
-        <strong>Full Featured sessions (30 minutes)</strong>
-        <br/>Full feature are frontal presentations of roughly 30 minutes.
+        <ListHeading>Full Featured sessions (30 minutes)</ListHeading>
+        <Paragraph2>Full feature are frontal presentations of roughly 30 minutes.</Paragraph2>
       </li>
       <li>
-        <strong>Postmortems (15 minutes)</strong>
-        <br/>Analysis of an incident or an outage at your company.
-        <br/>Consider these questions as you outline your session: What happened? How did it affect your systems? How did you react?
-        How was the problem mitigated? How did you analyze the incident? What were your takeaways? What was the followup process?
-        <br/>Please make sure your company agrees to share the experience and to dive into details.
-        Make this session professional and avoid personal criticism.
+        <ListHeading>Postmortems (15 minutes)</ListHeading>
+        <Paragraph2>
+          Analysis of an incident or an outage at your company.
+          Consider these questions as you outline your session: What happened? How did it affect your systems? How did you react?
+          How was the problem mitigated? How did you analyze the incident? What were your takeaways? What was the followup process?
+          Please make sure your company agrees to share the experience and to dive into details.
+          Make this session professional and avoid personal criticism.
+        </Paragraph2>
       </li>
       <li>
-        <strong>Lightning Sessions (5 minutes)</strong>
-        <br/>Lightning sessions are speedy 5 min sessions.
-        They are presented in a series in which each presenter has exactly 20 slides, 15 sec per slide,
-        slides are auto advanced. There are no breaks between lightning sessions.
-        It's fun, it's speedy, it's concise and it's breathtaking :-)
+        <ListHeading>Lightning Sessions (5 minutes)</ListHeading>
+        <Paragraph2>
+          Lightning sessions are speedy 5 min sessions.
+          They are presented in a series in which each presenter has exactly 20 slides, 15 sec per slide,
+          slides are auto advanced. There are no breaks between lightning sessions.
+          It's fun, it's speedy, it's concise and it's breathtaking :-)
+        </Paragraph2>
       </li>
       <li>
-        <strong>Open Source in Israel (10 minutes)</strong>
-        <br/>We are especially interested in open source projects made in Israel or created by Israelis.
-        We seek first hand developer’s experience.
+        <ListHeading>Open Source in Israel (10 minutes)</ListHeading>
+        <Paragraph2>
+          We are especially interested in open source projects made in Israel or created by Israelis.
+          We seek first hand developer’s experience.
+        </Paragraph2>
       </li>
     </ul>
-    <h5>First time submitting? No problem.</h5>
-    <p>
+    <ListHeading>First time submitting? No problem.</ListHeading>
+    <Paragraph2>
       We encourage anyone and everyone to consider submitting a session. You should be able to speak in
       front of a large audience and you should have an interesting story to tell, based on your professional experience.
-    </p>
-    <p>
+    </Paragraph2>
+    <Paragraph2>
       The moderators team will be happy to assist new speakers in turning an idea into submission,
       and to pair, followup and mentor once a proposal is accepted.
-    </p>
+    </Paragraph2>
 
-    <h2 className="mb-4">Submission guidelines</h2>
+    <HeadingAligner>
+      <Heading2>Submission guidelines</Heading2>
+      <BreakLineMain />
+    </HeadingAligner>
     <ul>
       <li>
         Write a clear and concise proposal. The audience should know what to expect when they step into your session.
@@ -134,9 +200,9 @@ const CFPIntro = () => (
       </li>
     </ul>
 
-    <p>
+    <Paragraph2>
       To get a sense of successful submissions, please consider our previous conferences content:
-    </p>
+    </Paragraph2>
     <ul>
       <li>
         <a href="https://summit2018.reversim.com">Reversim Summit 2018</a>
@@ -158,7 +224,10 @@ const CFPIntro = () => (
       </li>
     </ul>
 
-    <h2 className="mb-4">Review process</h2>
+    <HeadingAligner>
+      <Heading2>Review process</Heading2>
+      <BreakLineMain />
+    </HeadingAligner>
     <ul>
       <li>
         Once the Call for Papers closes, our moderation team will begin reviewing proposals.
@@ -180,11 +249,15 @@ const CFPIntro = () => (
       </li>
     </ul>
 
-    <h2 className="mb-4">Code of Conduct</h2>
-    <p>
+    <HeadingAligner>
+      <Heading2>Code of Conduct</Heading2>
+      <BreakLineMain />
+    </HeadingAligner>
+    <Paragraph2>
       Proposals, presentations and attendance are subject to the <a href="http://confcodeofconduct.com/">Code of Conduct</a>.
-    </p>
-  </div>
+    </Paragraph2>
+    <BottomLine />
+  </MainContainer>
 );
 
 export default CFPIntro;

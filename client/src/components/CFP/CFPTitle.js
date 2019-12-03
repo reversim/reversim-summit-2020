@@ -12,6 +12,7 @@ import {
 } from '../GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
+//styled-components section
 const TitleContainer = styled.div`
   ${({ theme: { color, space } }) => `
     padding: calc(3 * ${space.xxl}) 0 ${space.xxl} 0;
@@ -64,6 +65,8 @@ const ClosedContainer = styled(AlignCenterColumn)`
   height: 100vh;
 `;
 
+
+//React component section
 const CFPTitle = (props) => {
   const {eventConfig} = props;
   const remainingDays = getRemainingCFPDays();
