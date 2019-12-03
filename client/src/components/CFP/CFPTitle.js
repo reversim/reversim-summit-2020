@@ -16,6 +16,9 @@ const TitleContainer = styled.div`
   ${({ theme: { color, space } }) => `
     padding: calc(3 * ${space.xxl}) 0 ${space.xxl} 0;
     background: ${color.background_2};
+
+    display: flex;
+    justify-content: center;
   `}
 `;
 const PageTitle = styled(Heading2)`
@@ -57,6 +60,10 @@ const DaysRemaining = styled.span`
   `}
 `;
 
+const ClosedContainer = styled(AlignCenterColumn)`
+  height: 100vh;
+`;
+
 const CFPTitle = (props) => {
   const {eventConfig} = props;
   const remainingDays = getRemainingCFPDays();
@@ -64,22 +71,26 @@ const CFPTitle = (props) => {
   return (
     <TitleContainer>
     {eventConfig.cfp
-    ?(
-      <AlignCenterColumn>
-        <PageTitle>{REVERSIM_SUMMIT} - Proposal Submission</PageTitle>
-        <HorizontalLine />
-        <Heading4>Read carefully before submission!</Heading4>
-        <Deadline className="text-red">Deadline: {isToday ? 'Today!' : CFP_ENDS_STR_SHORT}</Deadline>
-        {isToday && (
-          <CountDown>
-            <DaysRemaining>{remainingDays}</DaysRemaining> days remaining
-          </CountDown>
-        )}
-      </AlignCenterColumn>
+    ? (
+        <AlignCenterColumn>
+          <PageTitle>{REVERSIM_SUMMIT} - Proposal Submission</PageTitle>
+          <HorizontalLine />
+          <Heading4>Read carefully before submission!</Heading4>
+          <Deadline>Deadline: {isToday ? 'Today!' : CFP_ENDS_STR_SHORT}</Deadline>
+          {isToday && (
+            <CountDown>
+              <DaysRemaining>{remainingDays}</DaysRemaining> days remaining
+            </CountDown>
+          )}
+        </AlignCenterColumn>
       )
-    :(
-      <h1 className="my-5 text-primary text-white">{REVERSIM_SUMMIT} - CFP is closed!</h1>
-    )}
+    : (
+        <ClosedContainer>
+          <PageTitle>{REVERSIM_SUMMIT} - CFP is closed!</PageTitle>
+          <HorizontalLine />
+        </ClosedContainer>
+      )
+    }
     </TitleContainer>
   );
 };
