@@ -237,10 +237,9 @@ export const SimpleLink = styled.a`
     }
   `}
 `;
-export const InvertedColorLink = styled.a`
-  ${({ theme: { color, font } }) =>`
+export const InvertedColorLink = styled(SimpleLink)`
+  ${({ theme: { color } }) =>`
     color: ${color.text_3};
-    font-size: ${font.size_reg};
 
     &:hover{
       color: ${color.text_3};

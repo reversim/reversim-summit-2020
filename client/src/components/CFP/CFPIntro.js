@@ -9,8 +9,14 @@ import {
   Heading4,
   BreakLineMain,
   Paragraph2,
-
+  InvertedColorLink,
 } from '../GlobalStyledComponents/ReversimStyledComps';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronCircleRight,
+  faCompass,
+} from '@fortawesome/free-solid-svg-icons';
+
 
 //styled-components section
 const MainContainer = styled(AlignCenterColumn)`
@@ -43,6 +49,13 @@ const ListHeading = styled(Heading4)`
   `}
 `
 
+const DecorationIcon = styled(FontAwesomeIcon)`
+ ${({theme: { space, color }}) =>`
+  margin-right: ${space.m};
+  color: ${color.font_awsome_watch};
+  `}
+`;
+
 const BottomLine = styled(BreakLineMain)`
   ${({ theme: { space } }) => `
     width: 100%;
@@ -66,14 +79,14 @@ const CFPIntro = () => (
       such as product management, development managers.
     </Paragraph2>
     <Paragraph2>
-      Our 2018 summit audience consisted predominantly of engineers or engineering management people:
+      Our 2018 summit audience consisted predominantly of engineers or engineering management people.
     </Paragraph2>
     <Paragraph2>
       Our speaker lineup was composed of <Italic>30% women</Italic> speakers and 70% men speakers.
     </Paragraph2>
     <Paragraph2>
       Our goal is to streamline the submission and review process, while maintaining superb quality;
-      if you have any feedback or questions, please email us at <a href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</a>.
+      if you have any feedback or questions, please email us at <InvertedColorLink href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</InvertedColorLink>.
     </Paragraph2>
 
     <HeadingAligner>
@@ -173,8 +186,18 @@ const CFPIntro = () => (
       <li>
         Please consider some past years suggestions on what we consider to be good content/proposals:
         <ul>
-          <li><a href="https://www.youtube.com/watch?v=Da-JcEYBjuo">https://www.youtube.com/watch?v=Da-JcEYBjuo</a></li>
-          <li><a href="https://www.youtube.com/watch?v=F09My4646hI">https://www.youtube.com/watch?v=F09My4646hI</a></li>
+          <li>
+            <DecorationIcon
+              icon={faChevronCircleRight}
+            />
+              Watch out team explain what makes a <InvertedColorLink href="https://www.youtube.com/watch?v=Da-JcEYBjuo">good submission</InvertedColorLink>
+          </li>
+          <li>
+            <DecorationIcon
+              icon={faChevronCircleRight}
+            />
+            Watch Adam describe <InvertedColorLink href="https://www.youtube.com/watch?v=F09My4646hI">how to submit a proposal and how we choose them</InvertedColorLink>
+          </li>
         </ul>
       </li>
       <li>
@@ -205,22 +228,40 @@ const CFPIntro = () => (
     </Paragraph2>
     <ul>
       <li>
-        <a href="https://summit2018.reversim.com">Reversim Summit 2018</a>
+        <DecorationIcon
+          icon={faCompass}
+        />
+        <InvertedColorLink href="https://summit2018.reversim.com">Reversim Summit 2018</InvertedColorLink>
       </li>
       <li>
-        <a href="https://summit2017.reversim.com">Reversim Summit 2017</a>
+        <DecorationIcon
+          icon={faCompass}
+        />
+        <InvertedColorLink href="https://summit2017.reversim.com">Reversim Summit 2017</InvertedColorLink>
       </li>
       <li>
-        <a href="https://summit2016.reversim.com">Reversim Summit 2016</a>
+        <DecorationIcon
+          icon={faCompass}
+        />
+        <InvertedColorLink href="https://summit2016.reversim.com">Reversim Summit 2016</InvertedColorLink>
       </li>
       <li>
-        <a href="https://summit2015.reversim.com">Reversim Summit 2015</a>
+        <DecorationIcon
+          icon={faCompass}
+        />
+        <InvertedColorLink href="https://summit2015.reversim.com">Reversim Summit 2015</InvertedColorLink>
       </li>
       <li>
-        <a href="https://summit2014.reversim.com">Reversim Summit 2014</a>
+        <DecorationIcon
+          icon={faCompass}
+        />
+        <InvertedColorLink href="https://summit2014.reversim.com">Reversim Summit 2014</InvertedColorLink>
       </li>
       <li>
-        <a href="https://summit2013.reversim.com">Reversim Summit 2013</a>
+        <DecorationIcon
+          icon={faCompass}
+        />
+        <InvertedColorLink href="https://summit2013.reversim.com">Reversim Summit 2013</InvertedColorLink>
       </li>
     </ul>
 
@@ -254,7 +295,7 @@ const CFPIntro = () => (
       <BreakLineMain />
     </HeadingAligner>
     <Paragraph2>
-      Proposals, presentations and attendance are subject to the <a href="http://confcodeofconduct.com/">Code of Conduct</a>.
+      Proposals, presentations and attendance are subject to the <InvertedColorLink href="http://confcodeofconduct.com/">Code of Conduct</InvertedColorLink>.
     </Paragraph2>
     <BottomLine />
   </MainContainer>

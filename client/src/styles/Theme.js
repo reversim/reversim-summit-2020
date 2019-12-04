@@ -9,6 +9,7 @@ const theme = {
     heading_2: 'rgb(81, 39, 255)',
     input_1: 'rgb(73, 80, 87)',
     font_awsome_trash: 'rgb(189, 58, 2)',
+    font_awsome_watch: 'rgb(255, 97, 0)',
     heading_decoratino: 'rgb(255, 97, 0)',
     font_awsome_nav: 'rgb(1, 39, 255)',
     
