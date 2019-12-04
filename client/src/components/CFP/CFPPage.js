@@ -51,14 +51,3 @@ const CFPPage = props => {
 };
 
 export default CFPPage;
-
-//Scrape Yard:
-
-{/**NOTE: this col wrapped the body of cfp. 
- <Col lg={{size: 10, offset: 1}} className={cn(cfpCol)}> </Col>
-* style: position: relative;
-* @media (min 992)
-* flex: 0 0 83.33333%;
-  max-width: 83.33333%; 
-  margin-left: 8.33333%;
-lg={{size: 10, offset: 1}}  */}
