@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Input} from 'reactstrap';
+import Page from '../Page';
 import ga from 'react-ga';
 import UserForm, {getUserData} from '../UserForm';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
@@ -87,6 +88,7 @@ class CFPForm extends Component {
     const {user, allTags} = this.props;
     const {tags, proposalType, categories} = this.state;
     return (
+      <Page title="Proposal submission form">
       <div className="mb-6">
         <h2>Submission</h2>
         <p>You may submit up to 3 proposals.</p>
@@ -118,6 +120,7 @@ class CFPForm extends Component {
           </div>
         </form>
       </div>
+      </Page>
     );
   }
 }
