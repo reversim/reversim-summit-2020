@@ -1,5 +1,5 @@
 import React from 'react';
-import FormField, {SPACING} from './FormField';
+import FormField, {SPACING} from '../FormField';
 
 export const getUserData = formElements => {
   const fullname = formElements.fullname.value;
@@ -43,9 +43,10 @@ const VideoUrlFieldCaption = () => (
 
 const UserForm = ({user}) => (
   <div>
+    {/* Step One */}
     <h4 className="mb-0">Public information</h4>
     <p className="font-size-sm text-gray-600">
-      The following information will be presented in the website
+      The following information will be presented on the website
     </p>
     <FormField
       id="fullname"
@@ -86,6 +87,7 @@ const UserForm = ({user}) => (
       placeholder="@Reversim"
       className={SPACING}
     />
+    {/* StepTwo */}
     <FormField
       id="bio"
       label="Short Bio"
@@ -110,6 +112,7 @@ const UserForm = ({user}) => (
         </span>
       }
     />
+    {/* StepThree */}
     <h4 className="mb-0">Private information</h4>
     <p className="font-size-sm text-gray-600">
       The following information will be available <b>only to the organizing committee</b>
@@ -187,6 +190,7 @@ const UserForm = ({user}) => (
         </span>
       }
     />
+    {/* StepThree is done here */}
   </div>
 );
 

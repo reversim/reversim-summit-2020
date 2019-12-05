@@ -4,9 +4,9 @@ import uniq from 'lodash/uniq';
 import without from 'lodash/without';
 import cn from 'classnames';
 import {findBestMatch} from 'string-similarity';
-import FormField, {SPACING} from './FormField';
-import Tags, {MAX_TAGS} from './Tags';
-import {titleInput} from './CFP/CFPPage.css';
+import FormField, {SPACING} from '../FormField';
+import Tags, {MAX_TAGS} from '../Tags';
+import {titleInput} from './CFPPage.css';
 import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
@@ -14,8 +14,8 @@ import {
   PROPOSAL_TYPES_ARR,
   CATEGORIES,
   MAX_CATEGORIES,
-} from '../data/proposals';
-import {categories} from './Categories.css';
+} from '../../data/proposals';
+import {categories} from '../Categories.css';
 
 const TitleFieldCaption = () => (
   <span>
@@ -89,26 +89,28 @@ const CoSpeakerFieldCaption = () => (
  );
 
 const OutlineFieldCaption = () => (
-  <span>
+  <div>
+    <p>
+    This part is only visible to the moderation team.
     The outline should include the main subjects you intend to cover with a timing estimation and
-    total timing. A general overview is fine, we don’t expect a per-slide description for now.{' '}
+    total timing. A general overview is fine, we don’t expect a per-slide description for now.
+    </p>
+    <p>For example:</p>
+    <ul>
+      <li>&bull; 2m Introduction: Who am I and my professional background</li>
+      <li>&bull; 5m Architectural overview: how we built 500 different micro-services over 5 years, and
+      why we ended up supporting 15 different programming languages.</li>
+      <li>&bull; 5m The latency math behind a micro-service call-chain, and why we had to over-provision
+      containers to avoid a 1s response time because accumulated latency is not a normal distribution</li>
+      <li>&bull; 15m Our solution: Measuring everything and using a managed machine-learning platform to
+      optimize our response time and server utilization</li>
+      <li>&bull; 5m: The open source power! How can you use our code to optimize your production system</li>
+      <li>&bull; 5m Q&A</li>
+      <li>Total time: 37m</li>
+    </ul>
     <br />
     <br />
-    <b>For example:</b>
-    <br />
-    &bull; 2m Introduction: Who am I and my professional background<br />
-    &bull; 5m Architectural overview: how we built 500 different micro-services over 5 years, and
-    why we ended up supporting 15 different programming languages.<br />
-    &bull; 5m The latency math behind a micro-service call-chain, and why we had to over-provision
-    containers to avoid a 1s response time because accumulated latency is not a normal distribution<br />
-    &bull; 15m Our solution: Measuring everything and using a managed machine-learning platform to
-    optimize our response time and server utilization<br />
-    &bull; 5m: The open source power! How can you use our code to optimize your production system<br />
-    &bull; 5m Q&A<br />
-    Total time: 37m
-    <br />
-    <br />
-  </span>
+  </div>
 );
 
 const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
@@ -277,6 +279,7 @@ class ProposalForm extends Component {
 
     return (
       <div>
+        {/* StepFour continues here and ends in */}
         <h4 className="mb-0">Public information</h4>
         <p className="font-size-sm text-gray-600">
           The following information will be presented in the website
@@ -310,6 +313,7 @@ class ProposalForm extends Component {
           className={SPACING}
           value={coSpeaker}
         />
+        {/* StepFive  (wihth title something like: StepFour Continue*/}
         <FormField
           id="abstract"
           label="Abstract"
@@ -398,7 +402,7 @@ class ProposalForm extends Component {
             !this.getOtherCategoryInState(categories) && categories.length === MAX_CATEGORIES
           }
         />
-
+        {/* StepSix (Final Step before the summery) */}
         <FormField
           id="outline"
           label="Outline &amp; private notes"

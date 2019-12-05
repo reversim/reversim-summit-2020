@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import {Button, Input} from 'reactstrap';
-import Page from '../Page';
 import ga from 'react-ga';
-import UserForm, {getUserData} from '../UserForm';
+import UserForm, {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
-import ProposalForm from '../ProposalForm';
+import ProposalForm from './ProposalForm.js';
+
+// import MultiStep from 'react-multistep';
+// import StepOne from './CFPForm/StepOne';
+
+// const steps = [
+//   { name: "Public Info", component: <StepOne />},
+// ];
 
 class CFPForm extends Component {
   state = {
@@ -88,7 +94,6 @@ class CFPForm extends Component {
     const {user, allTags} = this.props;
     const {tags, proposalType, categories} = this.state;
     return (
-      // <Page title="Proposal submission form">
       <div className="mb-6">
         <h2>Submission</h2>
         <p>You may submit up to 3 proposals.</p>
@@ -102,6 +107,7 @@ class CFPForm extends Component {
             <p className="text-gray-600">Tell us about yourself</p>
             <UserForm user={user} />
           </div>
+          {/* StepFour starts here and ends inside ProposalForm.js */}
           <h3 className="mb-0">Session proposal</h3>
           <p className="text-gray-600">Tell us about your session</p>
           <ProposalForm
@@ -119,8 +125,9 @@ class CFPForm extends Component {
             </Button>
           </div>
         </form>
+
+        {/* <MultiStep showNavigation={true} steps={steps} user={user} /> */}
       </div>
-      // </Page>
     );
   }
 }
