@@ -5,13 +5,11 @@ import UserForm, {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
 import ProposalForm from './ProposalForm.js';
 
-// import MultiStep from 'react-multistep';
-// import StepOne from './CFPForm/StepOne';
+import MultiStep from 'react-multistep';
+import StepOne from './CFPForm/StepOne';
+import StepTwo from './CFPForm/StepTwo';
 
-// const steps = [
-//   { name: "Public Info", component: <StepOne />},
-// ];
-
+import './prog-track.scss'
 class CFPForm extends Component {
   state = {
     proposalType: 'full',
@@ -93,40 +91,53 @@ class CFPForm extends Component {
   render() {
     const {user, allTags} = this.props;
     const {tags, proposalType, categories} = this.state;
+
+    const steps = [
+      { name: "Public Info", component: <StepOne user={user} />},
+      { name: "Social Media", component: <StepTwo user={user} />},
+      { name: "Public Info 2", component: <StepOne user={user} />},
+    ];
+
     return (
+      // <div className="mb-6">
+      //   <h2>Submission</h2>
+      //   <p>You may submit up to 3 proposals.</p>
+      //   <p>
+      //     Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.
+      //   </p>
+      //   <form onSubmit={this.handleSubmit}>
+      //     {/*hide if user had already submitted personal speaker data*/}
+      //     <div hidden={!!user.video_url}>
+      //       <h3 className="mb-0">About you</h3>
+      //       <p className="text-gray-600">Tell us about yourself</p>
+      //       <UserForm user={user} />
+      //     </div>
+      //     {/* StepFour starts here and ends inside ProposalForm.js */}
+      //     <h3 className="mb-0">Session proposal</h3>
+      //     <p className="text-gray-600">Tell us about your session</p>
+      //     <ProposalForm
+      //       update={this.updateState}
+      //       tags={tags}
+      //       proposalType={proposalType}
+      //       categories={categories}
+      //       missingCategories={this.state.missingCategories}
+      //       allTags={allTags}
+      //     />
+      //     <div className="text-center">
+      //       <Input type="submit" className="d-none" />
+      //       <Button color="primary" className="mr-4" style={{width: 120}}>
+      //         Submit
+      //       </Button>
+      //     </div>
+      //   </form>
+      // </div>
+
       <div className="mb-6">
         <h2>Submission</h2>
         <p>You may submit up to 3 proposals.</p>
-        <p>
-          Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.
-        </p>
-        <form onSubmit={this.handleSubmit}>
-          {/*hide if user had already submitted personal speaker data*/}
-          <div hidden={!!user.video_url}>
-            <h3 className="mb-0">About you</h3>
-            <p className="text-gray-600">Tell us about yourself</p>
-            <UserForm user={user} />
-          </div>
-          {/* StepFour starts here and ends inside ProposalForm.js */}
-          <h3 className="mb-0">Session proposal</h3>
-          <p className="text-gray-600">Tell us about your session</p>
-          <ProposalForm
-            update={this.updateState}
-            tags={tags}
-            proposalType={proposalType}
-            categories={categories}
-            missingCategories={this.state.missingCategories}
-            allTags={allTags}
-          />
-          <div className="text-center">
-            <Input type="submit" className="d-none" />
-            <Button color="primary" className="mr-4" style={{width: 120}}>
-              Submit
-            </Button>
-          </div>
-        </form>
+        <p>Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.</p>
 
-        {/* <MultiStep showNavigation={true} steps={steps} user={user} /> */}
+        <MultiStep showNavigation={true} steps={steps} />
       </div>
     );
   }
