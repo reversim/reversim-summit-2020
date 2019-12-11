@@ -16,8 +16,7 @@
     "axios": "^0.18.0",
     "cloudinary": "^1.13.2",
     "mongodb": "^3.1.1",
-    "nodemon": "^1.18.3",
-    "react-text-truncate": "^0.14.0"
+    "nodemon": "^1.18.3"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.6",
