@@ -5,7 +5,7 @@ import UserForm, {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
 import ProposalForm from './ProposalForm.js';
 
-import MultiStep from 'react-multistep';
+import StepZilla from "react-stepzilla";
 import StepOne from './CFPForm/StepOne';
 import StepTwo from './CFPForm/StepTwo';
 
@@ -136,8 +136,13 @@ class CFPForm extends Component {
         <h2>Submission</h2>
         <p>You may submit up to 3 proposals.</p>
         <p>Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.</p>
-
-        <MultiStep showNavigation={true} steps={steps} />
+        <div className='step-progress'>
+          <StepZilla
+            preventEnterSubmission={true}
+            hocValidationAppliedTo={[0]}
+            steps={steps}
+          />
+        </div>
       </div>
     );
   }

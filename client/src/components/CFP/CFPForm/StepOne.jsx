@@ -8,23 +8,25 @@ const StepOne = ({user}) => (
     <p className="font-size-sm text-gray-600">
       The following information will be presented on the website
     </p>
-    <FormField
-      id="fullname"
-      label="Full name"
-      required={true}
-      placeholder="Your name"
-      value={user.name}
-      className={SPACING}
-    />
-    <FormField
-      id="oneLiner"
-      label="One Liner"
-      value={user.oneLiner}
-      maxLength={100}
-      className={SPACING}
-      subtitle="Maximum 100 characters"
-      placeholder="COBOL developer at Acme Corp"
-    />
+    <form>
+      <FormField
+        id="fullname"
+        label="Full name"
+        required={true}
+        placeholder="Your name"
+        value={user.name}
+        className={SPACING}
+      />
+      <FormField
+        id="oneLiner"
+        label="One Liner"
+        value={user.oneLiner}
+        maxLength={100}
+        className={SPACING}
+        subtitle="Maximum 100 characters"
+        placeholder="COBOL developer at Acme Corp"
+      />
+    </form>
   </div>
 )
 
