@@ -6,8 +6,9 @@ import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
 import ProposalForm from './ProposalForm.js';
 
 import StepZilla from 'react-stepzilla';
-import StepOne from './CFPForm/StepOne';
-import StepTwo from './CFPForm/StepTwo';
+import StepOne from './CFPForm/Step1';
+import StepTwo from './CFPForm/Step2';
+import StepThree from './CFPForm/Step3';
 
 import './prog-track.scss'
 class CFPForm extends Component {
@@ -95,7 +96,7 @@ class CFPForm extends Component {
     const steps = [
       { name: "Public Info", component: <StepOne user={user} />},
       { name: "Social Media", component: <StepTwo user={user} />},
-      { name: "Public Info 2", component: <StepOne user={user} />},
+      { name: "Internal Info", component: <StepThree user={user} />},
     ];
 
     return (
@@ -139,7 +140,6 @@ class CFPForm extends Component {
         <div className='step-progress'>
           <StepZilla
             preventEnterSubmission={true}
-            hocValidationAppliedTo={[0]}
             steps={steps}
           />
         </div>
