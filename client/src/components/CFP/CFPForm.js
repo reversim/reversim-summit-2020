@@ -5,7 +5,7 @@ import UserForm, {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
 import ProposalForm from './ProposalForm.js';
 
-import StepZilla from "react-stepzilla";
+import StepZilla from 'react-stepzilla';
 import StepOne from './CFPForm/StepOne';
 import StepTwo from './CFPForm/StepTwo';
 
