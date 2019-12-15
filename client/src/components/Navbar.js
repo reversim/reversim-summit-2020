@@ -147,7 +147,6 @@ class Navbar extends Component {
   render() {
     const {
       isHome,
-      isSmallScreen,
       user,
       onLogout,
       pathname,
@@ -190,16 +189,16 @@ class Navbar extends Component {
                   navbar
                   className={navbarOpen ? 'navbarOpen': ''}
                   >
-                  {!isSmallScreen && (
-                    <NavLI> <GetTicketsCTA /> </NavLI>
-                  )}
-                  {cfp && isSmallScreen && pathname !== '/cfp' && (
+                  <NavLI>
+                    <GetTicketsCTA /> 
+                  </NavLI>
+                  {cfp && pathname !== '/cfp' && (
                     <NavbarItem 
                       text="Submit session" 
                       to="cfp"
                     />
                   )}
-                  {voting && isSmallScreen && pathname !== '/my-votes' && (
+                  {voting && pathname !== '/my-votes' && (
                     <NavbarItem 
                       text="VOTE FOR SESSION" 
                       to="proposals"
@@ -212,14 +211,13 @@ class Navbar extends Component {
                       {...item} 
                     />
                   ))}
-                  { voting && (
+                  {voting && (
                     <NavbarItem
                       key={`navbar-i-proposals`}
                       pathname={pathname}
                       {...{to: 'proposals', text: 'Proposals'}}
                     />
                   )}
-                  {isSmallScreen && user}
                   {!user && (
                     <NavbarItem
                       to={getLoginUrl()}
@@ -227,7 +225,7 @@ class Navbar extends Component {
                       external={true}
                     />
                   )}
-                  {!isServer && isSmallScreen && user && (
+                  {!isServer && user && (
                     <li>
                       <div className="ml-5">
                         {<Avatar {...user} onLogout={onLogout} />}
