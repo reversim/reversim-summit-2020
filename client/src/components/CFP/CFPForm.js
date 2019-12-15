@@ -1,16 +1,27 @@
 import React, {Component} from 'react';
-import {Button, Input} from 'reactstrap';
+import styled from 'styled-components';
 import ga from 'react-ga';
 import UserForm, {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
 import ProposalForm from './ProposalForm.js';
 
 import StepZilla from 'react-stepzilla';
-import StepOne from './CFPForm/Step1';
-import StepTwo from './CFPForm/Step2';
-import StepThree from './CFPForm/Step3';
+import PublicInfo from './CFPForm/PublicInfo';
+import ShortBio from './CFPForm/ShortBio';
+import PrivateInfo from './CFPForm/PrivateInfo';
+import SessionProposal from './CFPForm/SessionProposal';
+
 
 import './prog-track.scss'
+
+//styled-components section
+const DeadLine = styled.strong`
+  ${({ theme: { color } }) => `
+    color: ${color.important};
+  `};
+`;
+
+//React components section
 class CFPForm extends Component {
   state = {
     proposalType: 'full',
@@ -94,9 +105,11 @@ class CFPForm extends Component {
     const {tags, proposalType, categories} = this.state;
 
     const steps = [
-      { name: "Public Info", component: <StepOne user={user} />},
-      { name: "Social Media", component: <StepTwo user={user} />},
-      { name: "Internal Info", component: <StepThree user={user} />},
+      { name: '1: Public Info', component: <PublicInfo user={user} />},
+      { name: '2: Short Bio', component: <ShortBio user={user} />},
+      { name: '3: Private Info', component: <PrivateInfo user={user} />},
+      { name: '4: Session proposal', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
+      
     ];
 
     return (
@@ -113,6 +126,8 @@ class CFPForm extends Component {
       //       <p className="text-gray-600">Tell us about yourself</p>
       //       <UserForm user={user} />
       //     </div>
+      //
+      //
       //     {/* StepFour starts here and ends inside ProposalForm.js */}
       //     <h3 className="mb-0">Session proposal</h3>
       //     <p className="text-gray-600">Tell us about your session</p>
@@ -123,7 +138,11 @@ class CFPForm extends Component {
       //       categories={categories}
       //       missingCategories={this.state.missingCategories}
       //       allTags={allTags}
-      //     />
+      //     />// NOTE: Look here at the props. see what's passed to "Step Four" and update at file Step4.jsx
+      //
+      //
+      //
+      //
       //     <div className="text-center">
       //       <Input type="submit" className="d-none" />
       //       <Button color="primary" className="mr-4" style={{width: 120}}>
@@ -135,8 +154,8 @@ class CFPForm extends Component {
 
       <div className="mb-6">
         <h2>Submission</h2>
-        <p>You may submit up to 3 proposals.</p>
-        <p>Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.</p>
+        <p>Dear {user.name}, just a reminder.. you may submit up to 3 proposals.</p>
+        <p>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</p>
         <div className='step-progress'>
           <StepZilla
             preventEnterSubmission={true}

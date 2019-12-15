@@ -18,7 +18,7 @@ const VideoUrlFieldCaption = () => (
   </span>
 );
 
-const StepThree = (user) => (
+const PrivateInfo = user => (
   <Fragment>
     <h4 className="mb-0">Private information</h4>
     <p className="font-size-sm text-gray-600">
@@ -98,6 +98,6 @@ const StepThree = (user) => (
       }
     />
   </Fragment>
-)
+);
 
-export default StepThree;
+export default PrivateInfo;
