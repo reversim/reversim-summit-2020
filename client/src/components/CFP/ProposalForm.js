@@ -162,9 +162,7 @@ class ProposalForm extends Component {
       abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true,
       newTagPending: null,
       otherCategory: props.categories ? this.getOtherCategoryInState(props.categories) : null,
-      coSpeaker: props.coSpeaker 
-      //NOTE: coSpeaker comes from props and assigned to state, how should I do it in SessionProposal.jsx?
-      //NOTE2: coSpeaker also has a method onChangeCoSpeaker(e)
+      coSpeaker: props.coSpeaker,
     };
   }
 
