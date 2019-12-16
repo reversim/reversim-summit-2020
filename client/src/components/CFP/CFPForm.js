@@ -10,7 +10,8 @@ import PublicInfo from './CFPForm/PublicInfo';
 import ShortBio from './CFPForm/ShortBio';
 import PrivateInfo from './CFPForm/PrivateInfo';
 import SessionProposal from './CFPForm/SessionProposal';
-import Abstract from './CFPForm/Abstract.jsx';
+import Abstract from './CFPForm/Abstract';
+import Outline from './CFPForm/Outline';
 
 import './prog-track.scss'
 
@@ -94,7 +95,7 @@ class CFPForm extends Component {
       categories,
       legal,
       speaker_ids: [user._id],
-      coSpeaker
+      coSpeaker,
     }
   };
 
@@ -110,50 +111,11 @@ class CFPForm extends Component {
       { name: '3: Private Info', component: <PrivateInfo user={user} />},
       { name: '4: Session proposal', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
       { name: '5: Abstract', component: <Abstract update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags} />},
-      
+      { name: '6: Outline', component: <Outline />}
     ];
 
     return (
       <Fragment>
-      <div className="mb-6">
-        <h2>Submission</h2>
-        <p>You may submit up to 3 proposals.</p>
-        <p>
-          Call for paper ends: <strong>{CFP_ENDS_STR}</strong>. No kidding.
-        </p>
-        <form onSubmit={this.handleSubmit}>
-          {/*hide if user had already submitted personal speaker data*/}
-          <div hidden={!!user.video_url}>
-            <h3 className="mb-0">About you</h3>
-            <p className="text-gray-600">Tell us about yourself</p>
-            <UserForm user={user} />
-          </div>
-      
-      
-          {/* StepFour starts here and ends inside ProposalForm.js */}
-          <h3 className="mb-0">Session proposal</h3>
-          <p className="text-gray-600">Tell us about your session</p>
-          <ProposalForm
-            update={this.updateState}
-            tags={tags}
-            proposalType={proposalType}
-            categories={categories}
-            missingCategories={this.state.missingCategories}
-            allTags={allTags}
-          />
-      
-      
-      
-      
-          {/* <div className="text-center">
-            <Input type="submit" className="d-none" />
-            <Button color="primary" className="mr-4" style={{width: 120}}>
-              Submit
-            </Button>
-          </div> */}
-        </form>
-      </div>
-
       <div className="mb-6">
         <h2>Submission</h2>
         <p>Dear {user.name}, just a reminder.. you may submit up to 3 proposals.</p>
