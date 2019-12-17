@@ -35,13 +35,14 @@ const OutlineFieldCaption = () => (
 );
 
 class Outline extends Component {
-  // constructor(props){
-  //   super(props);
-  // };
+  constructor(props){
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  };
 
   handleSubmit = async e => {
     e.preventDefault();
-    const formElements = e.target.elements;
+    const formElements = e.target.elements; //NOTE: Problem here, as it is triggered by the <Button /> which is the target and also the element
 
     const {user, updateUserData, createProposal, history} = this.props;
 
@@ -54,6 +55,7 @@ class Outline extends Component {
           150;
         window.scrollTo(0, y);
         formElements.abstract.focus();
+        // NOTE: this returns a user to the abstract field in case the abstract is too long or too short
         return;
       }
 
@@ -65,8 +67,9 @@ class Outline extends Component {
           document.body.getBoundingClientRect().top -
           750;
         window.scrollTo(0, y);
+        // NOTE: this returns the user to the categories field in case there are none
         return;
-      }
+      } 
 
       try {
         let newUser = getUserData(e.target.elements);
@@ -121,7 +124,7 @@ class Outline extends Component {
         </div>
         <div className="text-center">
             <Input type="submit" className="d-none" />
-            <Button color="primary" className="mr-4" style={{width: 120}}>
+            <Button color="primary" className="mr-4" style={{width: 120}} onClick={this.handleSubmit}>
               Submit
             </Button>
           </div> 

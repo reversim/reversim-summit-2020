@@ -111,7 +111,7 @@ class CFPForm extends Component {
       { name: '3: Private Info', component: <PrivateInfo user={user} />},
       { name: '4: Session proposal', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
       { name: '5: Abstract', component: <Abstract update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags} />},
-      { name: '6: Outline', component: <Outline />}
+      { name: '6: Outline', component: <Outline user={user} updateUserData={this.props.updateUserData} createProposal={this.props.createProposal} history={this.props.history} />},
     ];
 
     return (

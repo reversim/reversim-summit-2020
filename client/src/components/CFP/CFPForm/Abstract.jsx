@@ -51,6 +51,7 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
     (minimum {ABSTRACT_MIN} characters)
   </span>
 );
+
 const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
   <div onClick={() => onChange(name)} className={cn({'text-primary': checked}, 'd-flex align-items-center mb-4', {'opacity-05': !disabled})}>
     <input
@@ -100,7 +101,27 @@ class Abstract extends Component {
       abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true,
       newTagPending: null,
     };
+    
+    this.onChangeAbstract = this.onChangeAbstract.bind(this);
+    this.onAddTag = this.onAddTag.bind(this);
+    this.onDeleteTag = this.onDeleteTag.bind(this);
+    this.toggleTagModal = this.toggleTagModal.bind(this);
+    this.addTag = this.addTag.bind(this);
+    this.onCategoryChange = this.onCategoryChange.bind(this);
+    this.onCategoryInputChange = this.onCategoryInputChange.bind(this);
   }
+
+  onChangeAbstract = e => {
+    const val = e.target.value;
+    const abstractLen = val.length;
+    const abstractErr = this.getAbstractErr(val);
+    this.setState({
+      abstractLen,
+      abstractErr,
+    });
+  };
+
+  getAbstractErr = val => val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
 
   onAddTag = tag => {
     const {allTags, tags} = this.props;
@@ -112,11 +133,68 @@ class Abstract extends Component {
       this.addTag(tag);
     }
   };
+  
+  onDeleteTag = i => {
+    const tags = [...this.props.tags.slice(0, i), ...this.props.tags.slice(i + 1)];
+    this.props.update({tags: tags});
+  };
+
+  toggleTagModal = () => {
+    this.setState({newTagPending: null});
+  };
+
+  addTag = tag => {
+    const tags = this.props.tags.concat(tag);
+    this.props.update({tags: tags});
+  };
+
+  onCategoryChange = name => {
+    if (!name) return;
+    this.props.update(state => {
+      if (CATEGORIES.find(cat => cat.name === name)) {
+        // if it's a predefined category
+        if (state.categories.includes(name)) {
+          return {categories: without(state.categories, name)};
+        } else {
+          return {categories: uniq(state.categories.concat(name)), missingCategories: false};
+        }
+      } else {
+        // it's not predefined
+        const otherCategory = this.getOtherCategoryInState(state.categories);
+        if (otherCategory) {
+          if (otherCategory !== name) {
+            return {categories: without(state.categories, otherCategory).concat(name)};
+          } else {
+            return {categories: without(state.categories, otherCategory)};
+          }
+        } else {
+          return {categories: uniq(state.categories.concat(name)), missingCategories: false};
+        }
+      }
+    });
+  };
 
   getOtherCategoryInState = categories => {
     return categories.find(cat => !CATEGORIES.find(cat2 => cat2.name === cat));
   };
   
+  onCategoryInputChange = e => {
+    const value = e.target.value;
+    this.setState({otherCategory: value}, () => {
+      this.props.update(state => {
+        let newCategories = state.categories;
+        const otherCategory = this.getOtherCategoryInState(newCategories);
+        if (otherCategory !== null) {
+          newCategories = without(newCategories, otherCategory);
+        }
+        if (value) {
+          newCategories = newCategories.concat(value);
+        }
+        return {categories: newCategories};
+      });
+    });
+  };
+
   render(){
 
     const {

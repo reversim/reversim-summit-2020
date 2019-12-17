@@ -47,6 +47,8 @@ class SessionProposal extends Component {
     this.state = {
       coSpeaker: props.coSpeaker,
     };
+    this.onChangeCoSpeaker = this.onChangeCoSpeaker.bind(this);
+    this.handleProposalTypeChange = this.handleProposalTypeChange.bind(this);
   }
   
   onChangeCoSpeaker = e => {
@@ -55,6 +57,10 @@ class SessionProposal extends Component {
     //   abstractLen,
     //   abstractErr,
     // });
+  };
+
+  handleProposalTypeChange = e => {
+    this.props.update({proposalType: e.target.value});
   };
   
   render () {  
