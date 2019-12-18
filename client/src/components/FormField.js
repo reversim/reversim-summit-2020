@@ -1,7 +1,17 @@
 import React, {createElement} from 'react';
 import {Input} from 'reactstrap';
+import styled from 'styled-components';
+import { FormSubHeading } from './GlobalStyledComponents/ReversimStyledComps';
 
-export const SPACING = 'mb-6';
+export const SPACING = 'mb-6'; //NOTE: SHOULD BE DELETED AT THE END
+
+
+const InputLabel = styled.label`
+  ${({ theme: { font } }) => `
+    font-family: ${font.main};
+    font-size: ${font.size_md};
+  `}
+`
 
 const Radio = ({id, value, values: radioValues, onChange, className}) => (
   <div className={className}>
@@ -17,7 +27,7 @@ const Radio = ({id, value, values: radioValues, onChange, className}) => (
             checked={val.value === value}
             id={optionId}
           />{' '}
-          <label htmlFor={optionId}>{val.text}</label>
+          <InputLabel htmlFor={optionId}>{val.text}</InputLabel>
         </div>
       );
     })}
@@ -60,8 +70,8 @@ export default ({
 
   return (
     <div className={className}>
-      <label htmlFor={id}>{label}</label>
-      {subtitle && <small className="d-block mb-2">{subtitle}</small>}
+      <InputLabel htmlFor={id}>{label}</InputLabel>
+      {subtitle && <FormSubHeading>{subtitle}</FormSubHeading>}
       {valueComp}
     </div>
   );

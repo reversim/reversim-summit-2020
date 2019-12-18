@@ -16,6 +16,8 @@ const theme = {
     important: 'rgb(255, 46, 95)',
     count_down: 'rgb(108, 117, 125)',
 
+    step_zilla_sub_heading: 'rgb(108, 117, 125)',
+
     // Background colors
     background_1: 'rgba(81, 39, 255, 0.9)',
     background_2: 'rgb(81, 39, 255)', // #5127ff

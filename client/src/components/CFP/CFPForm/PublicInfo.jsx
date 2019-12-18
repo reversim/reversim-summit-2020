@@ -1,12 +1,23 @@
 import React from 'react';
 import FormField, {SPACING} from '../../FormField';
 
+import {
+  StepHeading,
+  FormSubHeading,
+} from '../../GlobalStyledComponents/ReversimStyledComps';
+
+//styled-components components
+
+
+
+
+//React components
 const PublicInfo = ({user}) => (
   <div>
-    <h4 className="mb-0">Public information</h4>
-    <p className="font-size-sm text-gray-600">
+    <StepHeading>Public information</StepHeading>
+    <FormSubHeading className="font-size-sm text-gray-600">
       The following information will be presented on the website.
-    </p>
+    </FormSubHeading>
     <form>
       <FormField
         id="fullname"
@@ -25,10 +36,10 @@ const PublicInfo = ({user}) => (
         subtitle="Maximum 100 characters"
         placeholder="COBOL developer at Acme Corp"
       />
-      <h4 className="mb-0">Media</h4>
-      <p className="font-size-sm text-gray-600">
+      <StepHeading className="mb-0">Media</StepHeading>
+      <FormSubHeading className="font-size-sm text-gray-600">
         The following information will be presented on the website
-      </p>
+      </FormSubHeading>
       <FormField
         id="linkedin"
         label="Linkedin Profile"

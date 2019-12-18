@@ -13,9 +13,19 @@ import SessionProposal from './CFPForm/SessionProposal';
 import Abstract from './CFPForm/Abstract';
 import Outline from './CFPForm/Outline';
 
+import {
+  AlignCenterColumn,
+  HeadingAligner,
+  Heading2,
+  BreakLineMain,
+  Paragraph2,
+} from '../GlobalStyledComponents/ReversimStyledComps';
+
 import './prog-track.scss'
+import { Heading3 } from '../GlobalStyledComponents/ReversimStyledComps.jsx';
 
 //styled-components section
+
 const DeadLine = styled.strong`
   ${({ theme: { color } }) => `
     color: ${color.important};
@@ -115,19 +125,23 @@ class CFPForm extends Component {
     ];
 
     return (
-      <Fragment>
-      <div className="mb-6">
-        <h2>Submission</h2>
-        <p>Dear {user.name}, just a reminder.. you may submit up to 3 proposals.</p>
-        <p>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</p>
+      <AlignCenterColumn>
+        <HeadingAligner>
+        <Heading2>Submission</Heading2>
+        <BreakLineMain />
+        </HeadingAligner>
+        <div>
+        <Paragraph2>Dear {user.name}, happy to see you're submitting session proposals! :)</Paragraph2>
+        <Paragraph2>Remember, you may submit up to 3 proposals.</Paragraph2>
+        <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
+        </div>
         <div className='step-progress'>
           <StepZilla
             preventEnterSubmission={true}
             steps={steps}
           />
         </div>
-      </div>
-      </Fragment>
+      </AlignCenterColumn>
     );
   }
 }

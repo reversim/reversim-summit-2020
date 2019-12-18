@@ -10,6 +10,7 @@ import {
   BreakLineMain,
   Paragraph2,
   InvertedColorLink,
+  Italic,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -32,17 +33,6 @@ const SegmentContainer = styled.div`
     margin-bottom: ${space.xxl};
   `}
 `;
-
-const Italic = styled.span`
-  font-style: italic;
-`;
-/*IMPORTANT NOTE:
-The above component (Italic) is needed to override the problematic reset file in:
-/home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
-
-It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
-Tried to change it in the file on line 21 (i.e. deleted '.em') but it had no effect on the text.
-*/
 
 const SubHeading = styled(Heading4)`
   ${({ theme: { color } }) => `

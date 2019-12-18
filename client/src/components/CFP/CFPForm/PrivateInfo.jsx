@@ -1,29 +1,53 @@
 import React, {Fragment} from 'react';
 import FormField, {SPACING} from '../../FormField';
+import styled from 'styled-components';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  StepHeading,
+  FormSubHeading,
+  Bold,
+  Italic,
+  InvertedColorLink,
+} from '../../GlobalStyledComponents/ReversimStyledComps';
+
+const ListItem = styled.li`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.s};
+    line-height: 1.7;
+  `}
+`;
+
+const ListBolt = styled(FontAwesomeIcon)`
+ ${({theme: { space, color }}) =>`
+  margin-right: ${space.m};
+  color: ${color.font_awsome_watch};
+  `}
+`;
 
 const VideoUrlFieldCaption = () => (
   <span>
     <ul>
-      <li>
-        <b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.</li>
-      <li>
-        <b>New speakers</b>: A short video introducing you and the planned session outline.
-        <br/>Please see <a href="https://www.youtube.com/watch?v=F09My4646hI">https://www.youtube.com/watch?v=F09My4646hI</a> for guidance
-      </li>
+      <ListItem>
+        <Bold>Seasoned speakers</Bold>: A link to a video of a session given in a previous conference.</ListItem>
+      <ListItem>
+        <Bold>New speakers</Bold>: A short video introducing you and the planned session outline.
+        <br/>Please see <InvertedColorLink href="https://www.youtube.com/watch?v=F09My4646hI">https://www.youtube.com/watch?v=F09My4646hI</InvertedColorLink> for guidance
+      </ListItem>
     </ul>
-    <i>
-      <b>Note</b>: You may reuse this video link in the below "Track record" section.
-    </i>
+    <Italic>
+      <Bold>Note</Bold>: You may reuse this video link in the below "Track record" section.
+    </Italic>
   </span>
 );
 
 const PrivateInfo = user => (
   <Fragment>
-    <h4 className="mb-0">Private information</h4>
-    <p className="font-size-sm text-gray-600">
-      The following information will be available <b>only to the organizing committee</b>
-    </p>
+    <StepHeading>Private information</StepHeading>
+    <FormSubHeading>
+      The following information will be available <Bold>only to the organizing committee</Bold>
+    </FormSubHeading>
     <FormField id="email" label="Email" text={user.email} required={true} className={SPACING} />
     <FormField
       id="phone"
@@ -57,42 +81,45 @@ const PrivateInfo = user => (
           Seasonal speakers should include links to presentations, most preferable videos of them (plus
           slides)<br />
           <br />
-          <b>Example:</b>
+          <Bold>Example:</Bold>
           <ul>
-            <li>
+            <ListItem>
+              <ListBolt icon={faChevronRight} />
               ExampleCon 2017, Sweden (Keynote speaker): “Modern Fortran development with ActiveX”
               (45 minutes). Video: ,{' '}
-              <a
+              <InvertedColorLink
                 tabIndex="-1"
                 target="_blank"
                 href="https://www.youtube.com/watch?v=Nf_Y4MbUCLY"
                 rel="noopener noreferrer">
                 https://www.youtube.com/watch?v=Nf_Y4MbUCLY
-              </a>{' '}
+              </InvertedColorLink>{' '}
               slides: http://example.com/slide1
-            </li>
-            <li>
+            </ListItem>
+            <ListItem>
+              <ListBolt icon={faChevronRight} />
               EsoteriCon 2016, Tel Aviv: “How I sold my Piet program to MOMA for $20M” (20 minutes),
               Video:{' '}
-              <a
+              <InvertedColorLink
                 tabIndex="-1"
                 target="_blank"
                 href="https://youtu.be/DGXx56WqqJw"
                 rel="noopener noreferrer">
                 https://youtu.be/DGXx56WqqJw
-              </a>, slides: http://example.com/slide2
-            </li>
-            <li>
+              </InvertedColorLink>, slides: http://example.com/slide2
+            </ListItem>
+            <ListItem>
+              <ListBolt icon={faChevronRight} />
               Israeli LOLCODE meetup (February 2015), Tel Aviv, “Is LOLCODE Turing complete?” (5
               minutes), Video:{' '}
-              <a
+              <InvertedColorLink
                 tabIndex="-1"
                 target="_blank"
                 href="https://www.youtube.com/watch?v=Wpx6XnankZ8"
                 rel="noopener noreferrer">
                 https://www.youtube.com/watch?v=Wpx6XnankZ8
-              </a>, slides: http://example.com/slide3
-            </li>
+              </InvertedColorLink>, slides: http://example.com/slide3
+            </ListItem>
           </ul>
         </span>
       }

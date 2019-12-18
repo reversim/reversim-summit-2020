@@ -69,6 +69,23 @@ export const BreakLineInverted = styled(BreakLineMain)`
   `}
 `;
 
+export const Bold = styled.span`
+  ${({ theme: { font } }) => `
+    font-weight: ${font.weight_bold}
+  `}
+`;
+
+export const Italic = styled.span`
+  font-style: italic;
+`;
+/*IMPORTANT NOTE:
+The above components (Bold, Italic) is needed to override the problematic reset file in:
+/home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
+
+It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
+Tried to change it in the file on line 21 (i.e. deleted '.em') but it had no effect on the text.
+*/
+
 export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
   ${({ theme: { color, space } }) => `
     margin: 0 ${space.m};
@@ -396,3 +413,21 @@ export const FileInput = styled.input`
   left: 0;
   right: 0;
 `;
+
+//Components for the StepZilla form (CFP form)
+export const StepHeading = styled(Heading4)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_medium};
+  `}
+`;
+
+export const FormSubHeading = styled.h5`
+${({ theme: { color, font, space } }) => `
+  color: ${color.step_zilla_sub_heading};
+  font-family: ${font.main};
+  font-size: ${font.size_reg};
+  font-weight: ${font.weight_medium};
+  margin-bottom: ${space.m};
+`}
+`

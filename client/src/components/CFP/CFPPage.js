@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import {Button, Col, Container, Row} from 'reactstrap';
-import cn from 'classnames';
 import Page from '../Page';
 import {Link} from 'react-router-dom';
 import CFPTitle from './CFPTitle';
