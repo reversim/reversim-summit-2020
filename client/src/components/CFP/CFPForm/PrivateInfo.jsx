@@ -1,8 +1,6 @@
 import React, {Fragment} from 'react';
 import FormField, {SPACING} from '../../FormField';
-import styled from 'styled-components';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
   StepHeading,
@@ -10,21 +8,10 @@ import {
   Bold,
   Italic,
   InvertedColorLink,
+  ListItem,
+  ListBolt,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
-const ListItem = styled.li`
-  ${({ theme: { space } }) => `
-    margin-bottom: ${space.s};
-    line-height: 1.7;
-  `}
-`;
-
-const ListBolt = styled(FontAwesomeIcon)`
- ${({theme: { space, color }}) =>`
-  margin-right: ${space.m};
-  color: ${color.font_awsome_watch};
-  `}
-`;
 
 const VideoUrlFieldCaption = () => (
   <span>

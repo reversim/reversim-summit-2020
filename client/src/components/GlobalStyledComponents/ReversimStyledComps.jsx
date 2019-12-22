@@ -69,6 +69,16 @@ export const BreakLineInverted = styled(BreakLineMain)`
   `}
 `;
 
+
+// Emphasis
+/*NOTE:
+The above components (Bold, Italic) is needed to override the problematic reset file in:
+/home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
+
+It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
+Tried to change it in the file on line 21 (i.e. deleted '.em') but it had no effect on the text.
+*/
+
 export const Bold = styled.span`
   ${({ theme: { font } }) => `
     font-weight: ${font.weight_bold}
@@ -78,20 +88,11 @@ export const Bold = styled.span`
 export const Italic = styled.span`
   font-style: italic;
 `;
-/*IMPORTANT NOTE:
-The above components (Bold, Italic) is needed to override the problematic reset file in:
-/home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
 
-It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
-Tried to change it in the file on line 21 (i.e. deleted '.em') but it had no effect on the text.
-*/
-
-export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
-  ${({ theme: { color, space } }) => `
-    margin: 0 ${space.m};
-    color: ${color.font_awsome_trash};
-    cursor: pointer;
-  `}
+export const Important = styled.span`
+  ${({ theme: { color } }) => `
+    color: ${color.important};
+  `};
 `;
 
 //<h2, 3, ...> and <p>
@@ -240,6 +241,22 @@ export const Paragraph = styled.p`
 export const Paragraph2 = styled(Paragraph)`
   ${({ theme: { color} }) =>`
     color: ${color.text_2};
+  `}
+`;
+
+// Lists
+
+export const ListItem = styled.li`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.s};
+    line-height: 1.7;
+  `}
+`;
+
+export const ListBolt = styled(FontAwesomeIcon)`
+ ${({theme: { space, color }}) =>`
+  margin-right: ${space.m};
+  color: ${color.font_awsome_watch};
   `}
 `;
 
@@ -414,11 +431,27 @@ export const FileInput = styled.input`
   right: 0;
 `;
 
+export const FontAwsomeTrash = styled(FontAwesomeIcon)`
+  ${({ theme: { color, space } }) => `
+    margin: 0 ${space.m};
+    color: ${color.font_awsome_trash};
+    cursor: pointer;
+  `}
+`;
+
 //Components for the StepZilla form (CFP form)
 export const StepHeading = styled(Heading4)`
   ${({ theme: { color, font } }) => `
     color: ${color.text_3};
     font-weight: ${font.weight_medium};
+  `}
+`;
+
+export const InputLabel = styled.label`
+  ${({ theme: { font, color } }) => `
+    font-family: ${font.main};
+    font-size: ${font.size_md};
+    color: ${color.text_3};
   `}
 `;
 

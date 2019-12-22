@@ -26,11 +26,13 @@ import { Heading3 } from '../GlobalStyledComponents/ReversimStyledComps.jsx';
 
 //styled-components section
 
-const DeadLine = styled.strong`
+const DeadLine = styled.span`
   ${({ theme: { color } }) => `
     color: ${color.important};
   `};
 `;
+
+
 
 //React components section
 class CFPForm extends Component {

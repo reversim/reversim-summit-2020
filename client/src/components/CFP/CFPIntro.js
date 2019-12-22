@@ -11,6 +11,8 @@ import {
   Paragraph2,
   InvertedColorLink,
   Italic,
+  ListItem,
+  ListBolt,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -48,13 +50,6 @@ const ListHeading = styled(Heading4)`
   `}
 `;
 
-const ListItem = styled.li`
-  ${({ theme: { space } }) => `
-    margin-bottom: ${space.s};
-    line-height: 1.7;
-  `}
-`;
-
 const TopicsList = styled.ul`
   ${({ theme: { space } }) => `
     margin: ${space.m} 0 ${space.m} ${space.m};
@@ -70,13 +65,6 @@ const GuidelinesList = styled.ul`
 const SubList = styled.ul`
   ${({ theme: { space } }) => `
     margin-left: ${space.xl};
-  `}
-`;
-
-const ListBolt = styled(FontAwesomeIcon)`
- ${({theme: { space, color }}) =>`
-  margin-right: ${space.m};
-  color: ${color.font_awsome_watch};
   `}
 `;
 

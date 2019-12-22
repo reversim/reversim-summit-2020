@@ -12,7 +12,7 @@ import {
   TextArea, 
   FormButton, 
   FileInput, 
-  StyledFontAwsomeIcon,
+  FontAwsomeTrash,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components section
@@ -214,7 +214,7 @@ class SponsorForm extends React.Component {
                   ) : (
                     <UploadImg src={image} />
                   )}
-                  <StyledFontAwsomeIcon
+                  <FontAwsomeTrash
                     icon="trash"
                     onClick={() => {
                       let images = this.state.images;

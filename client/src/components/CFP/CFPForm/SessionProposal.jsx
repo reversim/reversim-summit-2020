@@ -1,44 +1,49 @@
 import React, {Fragment, Component} from 'react';
 import FormField, {SPACING} from '../../FormField';
 
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 import cn from 'classnames';
 import {titleInput} from '../CFPPage.css';
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
+import {
+  StepHeading,
+  FormSubHeading,
+  InvertedColorLink,
+  ListItem,
+  ListBolt,
+  Important,
+} from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const TitleFieldCaption = () => (
-  <span>
+  <Fragment>
     Make it descriptive, concise, and appealing. You are welcome to review{' '}
-    <a href="http://summit2018.reversim.com/schedule" target="_blank" rel="noopener noreferrer">
+    <InvertedColorLink href="http://summit2018.reversim.com/schedule" target="_blank" rel="noopener noreferrer">
       last year’s agenda
-    </a>, or use the following examples:<br />
+    </InvertedColorLink>, or use the following examples:<br />
     <br />
     <ul>
-      <li>
-        <i>“How we optimized micro-service utilization using machine learning”</i>
-      </li>
-      <li>
-        <i>“Writing on sand? Embracing CI-CD techniques in the HR team”</i>
-      </li>
-      <li>
-        <i>“Effective Hackathon: How to re-write a project in 24 hours and save your startup”</i>
-      </li>
-      <li>
-        <i>
-          “Cost of choosing the wrong development stack: A learn-build-measure story from the
-          trenches”
-        </i>
-      </li>
+      <ListItem>
+        <ListBolt icon={faChevronRight} />“How we optimized micro-service utilization using machine learning”
+      </ListItem>
+      <ListItem>
+        <ListBolt icon={faChevronRight} />“Writing on sand? Embracing CI-CD techniques in the HR team”
+      </ListItem>
+      <ListItem>
+        <ListBolt icon={faChevronRight} />“Effective Hackathon: How to re-write a project in 24 hours and save your startup”
+      </ListItem>
+      <ListItem>
+        <ListBolt icon={faChevronRight} />“Cost of choosing the wrong development stack: A learn-build-measure story from the trenches”
+      </ListItem>
     </ul>
     Reversim Summit is about deep-tech, and we will reject trivial introductory talks in
     software-related sessions (introduction to other topics is OK).
-  </span>
+  </Fragment>
 );
 
 const CoSpeakerFieldCaption = () => (
-  <span>
-    <span>If you want to lecture with another speaker, add their email here. Both of you will be able to edit the lecture.</span><br/>
-    <span className='text-red'>Make sure your co-speaker has already signed in to out site!</span>
-  </span>
+  <p>If you want to lecture with another speaker, add their email here. Both of you will be able to edit the lecture.<br/>
+  <Important>Make sure your co-speaker has already signed in to our site!</Important></p>
  );
 
 class SessionProposal extends Component {
@@ -78,13 +83,9 @@ class SessionProposal extends Component {
     return (
       <Fragment>
         {/* CFPForm.js section */}
-        <h3 className="mb-0">Session Proposal</h3>
-        <p className="text-gray-600">Tell us about your session</p>
+        <StepHeading>Session Proposal</StepHeading>
+        <FormSubHeading>Tell us about your session, so we can present it on our website.</FormSubHeading>
         {/* ProposalForm.js section */}
-        <h4 className="mb-0">Public information</h4>
-        <p className="font-size-sm text-gray-600">
-          The following information will be presented in the website
-        </p>
         <FormField
           id="title"
           label="Title"

@@ -13,16 +13,25 @@ import uniq from 'lodash/uniq';
 import without from 'lodash/without';
 import {findBestMatch} from 'string-similarity';
 
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  FormSubHeading,
+  Bold,
+  Important,
+  ListItem,
+  ListBolt,
+  InputLabel,
+} from '../../GlobalStyledComponents/ReversimStyledComps';
 import cn from "classnames";
 import {categories} from '../../Categories.css';
 import {Button, Input, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
-  <span>
+  <Fragment>
     Markdown syntax is supported. You can edit your proposal at any given time during the CFP
     period.<br />
     <br />
-    <b>Example:</b>
+    <Bold>Example:</Bold>
     <br />Building an effective micro-service architecture is a non-trivial task. At example.com, we
     have accumulated more than 500 different micro-services over the years, ended up with a
     micro-service spaghetti, long latency, and inevitably - a broken CI/CD pipeline. Then, we
@@ -32,24 +41,25 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
     dead.<br />
     <br />
     <br />
-    Some helpful guidance questions:
+    <Bold>Some helpful guidance questions:</Bold>
     <ul>
-      <li>
-        Why this topic is important?
-      </li>
-      <li>
-        What pain points your talk aims to address?
-      </li>
-      <li>
-        What actionable benefits / knowledge will attendees gain by attending your talk?
-      </li>
+      <ListItem>
+        <ListBolt icon={faChevronRight}/>Why this topic is important?
+      </ListItem>
+      <ListItem>
+        <ListBolt icon={faChevronRight}/>What pain points your talk aims to address?
+      </ListItem>
+      <ListItem>
+        <ListBolt icon={faChevronRight}/>What actionable benefits / knowledge will attendees gain by attending your talk?
+      </ListItem>
     </ul>
     <br />
     <span className={cn({'text-red': abstractErr}, 'font-weight-bold')}>
       {abstractLen}/{ABSTRACT_MAX}
     </span>{' '}
     (minimum {ABSTRACT_MIN} characters)
-  </span>
+
+  </Fragment>
 );
 
 const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
@@ -284,13 +294,13 @@ class Abstract extends Component {
           </ModalFooter>
         </Modal>
 
-        <label>Categories</label>
-        <small className="d-block mb-2">
+        <InputLabel>Categories</InputLabel>
+        <FormSubHeading>
           Choose 1 or 2 categories. This information will help us assign this session to one of the
           conference's tracks.
-        </small>
+        </FormSubHeading>
         <input required={true} type="hidden" id="categories_hidden" />
-        <div hidden={!this.props.missingCategories} className={'text-red mb-2'}>*choose at least one category</div>
+        <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
         {CATEGORIES.map(category => {
           const checked = categories.includes(category.name);
           return (

@@ -1,17 +1,12 @@
 import React, {createElement} from 'react';
 import {Input} from 'reactstrap';
-import styled from 'styled-components';
-import { FormSubHeading } from './GlobalStyledComponents/ReversimStyledComps';
+import { 
+  InputLabel,
+  FormSubHeading,
+ } from './GlobalStyledComponents/ReversimStyledComps';
 
 export const SPACING = 'mb-6'; //NOTE: SHOULD BE DELETED AT THE END
 
-
-const InputLabel = styled.label`
-  ${({ theme: { font } }) => `
-    font-family: ${font.main};
-    font-size: ${font.size_md};
-  `}
-`
 
 const Radio = ({id, value, values: radioValues, onChange, className}) => (
   <div className={className}>
@@ -27,7 +22,7 @@ const Radio = ({id, value, values: radioValues, onChange, className}) => (
             checked={val.value === value}
             id={optionId}
           />{' '}
-          <InputLabel htmlFor={optionId}>{val.text}</InputLabel>
+          <label htmlFor={optionId}>{val.text}</label>
         </div>
       );
     })}

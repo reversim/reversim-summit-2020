@@ -1,5 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import {WithContext as ReactTags} from 'react-tag-input';
+import { 
+  InputLabel,
+  FormSubHeading,
+} from './GlobalStyledComponents/ReversimStyledComps';
+
 import {Button} from 'reactstrap';
 import cn from 'classnames';
 import {
@@ -36,8 +42,8 @@ const Tags = ({
   className,
 }) => (
   <div className={className}>
-    <label>Tags</label>
-    <small className="d-block mb-2">Maximum {MAX_TAGS} tags. Help us and your audience classify your session.</small>
+    <InputLabel>Tags</InputLabel>
+    <FormSubHeading>Maximum {MAX_TAGS} tags. Help us and your audience classify your session.</FormSubHeading>
     <ReactTags
       tags={tags}
       suggestions={suggestions}
