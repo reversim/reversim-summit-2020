@@ -1,4 +1,5 @@
 import React, {Fragment, Component} from 'react';
+import styled from 'styled-components';
 import FormField, {SPACING} from '../../FormField';
 import {
   ABSTRACT_MAX,
@@ -16,41 +17,61 @@ import {findBestMatch} from 'string-similarity';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
   FormSubHeading,
-  Bold,
   Important,
   ListItem,
   ListBolt,
   InputLabel,
+  Heading5,
+  Paragraph,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 import cn from "classnames";
 import {categories} from '../../Categories.css';
-import {Button, Input, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Button, Input, Modal, ModalBody, ModalFooter} from 'reactstrap';
 
+//styled-components components
+const AbstractSubHeading = styled(Heading5)`
+  ${({ theme: { font, space } }) => `
+    margin-top: calc(2 * ${space.m});
+    color: inherit;
+    font-weight: ${font.weight_bold};
+  `}
+`;
+
+const AbstractParagraph = styled(Paragraph)`
+  ${({ theme: { space } }) => `
+    margin: ${space.m} 0;
+    color: inherit;
+  `}
+`;
+
+//React components
 const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
-  <Fragment>
+  <FormSubHeading>
     Markdown syntax is supported. You can edit your proposal at any given time during the CFP
-    period.<br />
-    <br />
-    <Bold>Example:</Bold>
-    <br />Building an effective micro-service architecture is a non-trivial task. At example.com, we
-    have accumulated more than 500 different micro-services over the years, ended up with a
-    micro-service spaghetti, long latency, and inevitably - a broken CI/CD pipeline. Then, we
-    decided to remove human factor out of the equation. In this session I will present our
-    open-sourced package that analyzed our microservice architecture as a graph, measured the load
-    on each server, improved server utilization by 73% and brought our CI-CD pipeline back from the
-    dead.<br />
-    <br />
-    <br />
-    <Bold>Some helpful guidance questions:</Bold>
+    period.
+    <AbstractSubHeading>Example:</AbstractSubHeading>
+    <AbstractParagraph>
+      Building an effective micro-service architecture is a non-trivial task. At example.com, we
+      have accumulated more than 500 different micro-services over the years, ended up with a
+      micro-service spaghetti, long latency, and inevitably - a broken CI/CD pipeline. Then, we
+      decided to remove human factor out of the equation. In this session I will present our
+      open-sourced package that analyzed our microservice architecture as a graph, measured the load
+      on each server, improved server utilization by 73% and brought our CI-CD pipeline back from
+      the dead.
+    </AbstractParagraph>
+    <AbstractSubHeading>Some helpful guidance questions:</AbstractSubHeading>
     <ul>
       <ListItem>
-        <ListBolt icon={faChevronRight}/>Why this topic is important?
+        <ListBolt icon={faChevronRight} />
+        Why this topic is important?
       </ListItem>
       <ListItem>
-        <ListBolt icon={faChevronRight}/>What pain points your talk aims to address?
+        <ListBolt icon={faChevronRight} />
+        What pain points your talk aims to address?
       </ListItem>
       <ListItem>
-        <ListBolt icon={faChevronRight}/>What actionable benefits / knowledge will attendees gain by attending your talk?
+        <ListBolt icon={faChevronRight} />
+        What actionable benefits / knowledge will attendees gain by attending your talk?
       </ListItem>
     </ul>
     <br />
@@ -59,7 +80,7 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
     </span>{' '}
     (minimum {ABSTRACT_MIN} characters)
 
-  </Fragment>
+  </FormSubHeading>
 );
 
 const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
@@ -143,7 +164,7 @@ class Abstract extends Component {
       this.addTag(tag);
     }
   };
-  
+
   onDeleteTag = i => {
     const tags = [...this.props.tags.slice(0, i), ...this.props.tags.slice(i + 1)];
     this.props.update({tags: tags});
@@ -255,16 +276,16 @@ class Abstract extends Component {
         />
 
         <Modal isOpen={!!newTagPending} toggle={this.toggleTagModal}>
-          <ModalHeader toggle={this.toggleTagModal}>'{newTagPending}' doesn't exist</ModalHeader>
+          <AbstractSubHeading toggle={this.toggleTagModal}>'{newTagPending}' doesn't exist</AbstractSubHeading>
           <ModalBody>
-            <p>
+            <AbstractParagraph>
               Before adding a new tag, please check if there's already an existing tag like this
               one.
-            </p>
+            </AbstractParagraph>
             {bestMatch && (
-              <p>
+              <AbstractParagraph>
                 Did you mean <b>{bestMatch}</b>?
-              </p>
+              </AbstractParagraph>
             )}
           </ModalBody>
           <ModalFooter>

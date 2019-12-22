@@ -228,6 +228,16 @@ export const Heading4 = styled.h4`
   `}
 `;
 
+export const Heading5 = styled.h4`
+  ${({ theme: { color, space, font } }) =>`
+    color: ${color.text_1};
+    font-family: ${font.main};
+    font-size: ${font.size_h5};
+    font-weight: ${font.weight_normal};
+    margin-bottom: ${space.m};    
+  `}
+`;
+
 export const Paragraph = styled.p`
   ${({ theme: { color, font } }) =>`
     color: ${color.text_1};

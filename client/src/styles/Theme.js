@@ -69,6 +69,7 @@ const theme = {
     size_h2: '48px',
     size_h3: '35px',
     size_h4: '24px',
+    size_h5: '18px',
 
     weight_normal: '300',
     weight_medium: '400',
