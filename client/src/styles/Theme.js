@@ -24,9 +24,10 @@ const theme = {
     background_3: 'rgb(51, 18, 188)',
     background_4: 'rgb(255, 255, 255)',
     background_count_down: 'rgb(222, 226, 230)',
+    background_modal: 'rgb(255, 248, 237)',
 
-    background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.2) 0%, rgba(0, 92, 177, 0.2) 100%)',
-    background_linear_gradient_2: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)', //NOTE: used in FormButton :hover
+    background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)',
+    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in FormButton :hover
 
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,
@@ -62,6 +63,7 @@ const theme = {
     form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
     
+    size_sml: '14px',
     size_reg: '16px',
     size_md: '18px', //NOTE: used for Intros as main text size
     size_bg: '24px', //NOTE: used for Intros as an announcment like in SponsorsPage.jsx

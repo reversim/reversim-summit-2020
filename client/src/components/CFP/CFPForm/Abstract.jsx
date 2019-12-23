@@ -9,7 +9,7 @@ import {
   CATEGORIES,
   MAX_CATEGORIES,
 } from '../../../data/proposals';
-import Tags, {MAX_TAGS} from '../../Tags';
+import Tags, {MAX_TAGS} from '../Tags';
 import uniq from 'lodash/uniq';
 import without from 'lodash/without';
 import {findBestMatch} from 'string-similarity';
@@ -23,6 +23,7 @@ import {
   InputLabel,
   Heading5,
   Paragraph,
+  Bold,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 import cn from "classnames";
 import {categories} from '../../Categories.css';
@@ -41,6 +42,66 @@ const AbstractParagraph = styled(Paragraph)`
   ${({ theme: { space } }) => `
     margin: ${space.m} 0;
     color: inherit;
+  `}
+`;
+const AbstractModalHeading = styled(AbstractSubHeading)`
+  ${({ theme: { color, space } }) => `
+    margin: 0;
+    padding: ${space.l};
+    background: ${color.background_modal};
+  `}
+`;
+const AbstractModalBody = styled(ModalBody)`
+  ${({ theme: { color } }) => `
+    background: ${color.background_modal};
+  `}
+`;
+const AbstractModalFooter = styled(ModalFooter)`
+  ${({ theme: { color } }) => `
+    background: ${color.background_modal};
+    border: none;
+  `}
+`;
+
+const AbstractModalButton = styled(Button)`
+    ${({theme: { color, font, space, }}) => `
+    box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
+    background: ${color.background_linear_gradient_1};
+    font-family: ${font.form_button};
+    font-size: ${font.size_reg};
+    font-weight: ${font.weight_medium};
+    color: ${color.text_1};
+    letter-spacing: 1px;
+    outline: none;
+    border: 0;
+    transition: all 200ms;
+    border-radius: 0;
+    height: 40px;
+
+    position: relative;
+
+    margin: ${space.l} 0;
+    padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
+    line-height: 1.5;
+
+    display: inline-block;
+    text-transform: none;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    overflow: visible;
+
+    &:hover{
+      background: ${color.background_linear_gradient_2};
+      box-shadow: inset 0px 0px 10px 2px ${color.form_button_box_shadow_1}, 0px 0px 10px 0px ${color.form_button_box_shadow_2};
+      color: ${color.text_1};
+      border-color: ${color.form_button_border_hover};
+      text-decoration: none;
+    }
+
+    &:active{
+      background: ${color.background_linear_gradient_2};
+    }
   `}
 `;
 
@@ -79,7 +140,6 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
       {abstractLen}/{ABSTRACT_MAX}
     </span>{' '}
     (minimum {ABSTRACT_MIN} characters)
-
   </FormSubHeading>
 );
 
@@ -276,8 +336,8 @@ class Abstract extends Component {
         />
 
         <Modal isOpen={!!newTagPending} toggle={this.toggleTagModal}>
-          <AbstractSubHeading toggle={this.toggleTagModal}>'{newTagPending}' doesn't exist</AbstractSubHeading>
-          <ModalBody>
+          <AbstractModalHeading toggle={this.toggleTagModal}>'{newTagPending}' doesn't exist</AbstractModalHeading>
+          <AbstractModalBody>
             <AbstractParagraph>
               Before adding a new tag, please check if there's already an existing tag like this
               one.
@@ -287,32 +347,29 @@ class Abstract extends Component {
                 Did you mean <b>{bestMatch}</b>?
               </AbstractParagraph>
             )}
-          </ModalBody>
-          <ModalFooter>
+          </AbstractModalBody>
+          <AbstractModalFooter>
             {bestMatch && (
-              <Button
-                size="sm"
-                color="primary"
+              <AbstractModalButton
                 onClick={e => {
                   e.preventDefault();
                   this.addTag(bestMatch);
                   this.setState({newTagPending: null});
                 }}>
-                Add <b>{bestMatch}</b>
-              </Button>
+                Add <Bold>{bestMatch}</Bold>
+              </AbstractModalButton>
             )}
-            <Button
+            <AbstractModalButton
               outline
-              color="primary"
               size="sm"
               onClick={e => {
                 e.preventDefault();
                 this.addTag(newTagPending);
                 this.setState({newTagPending: null});
               }}>
-              Add <b>{newTagPending}</b>
-            </Button>
-          </ModalFooter>
+              Add <Bold>{newTagPending}</Bold>
+            </AbstractModalButton>
+          </AbstractModalFooter>
         </Modal>
 
         <InputLabel>Categories</InputLabel>
