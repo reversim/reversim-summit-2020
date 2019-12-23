@@ -80,8 +80,7 @@ const Tags = ({
         {predefinedSuggestions.map(suggestion => (
           <TagButton
             onClick={() => handleAddition(suggestion)}
-            key={suggestion}
-          >
+            key={suggestion}>
             {suggestion}
           </TagButton>
         ))}
