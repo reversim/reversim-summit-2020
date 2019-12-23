@@ -228,7 +228,7 @@ export const Heading4 = styled.h4`
   `}
 `;
 
-export const Heading5 = styled.h4`
+export const Heading5 = styled.h5`
   ${({ theme: { color, space, font } }) =>`
     color: ${color.text_1};
     font-family: ${font.main};

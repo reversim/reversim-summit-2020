@@ -7,6 +7,7 @@ import {
 
 import {Button} from 'reactstrap';
 import styled from 'styled-components';
+import {Bold} from '../GlobalStyledComponents/ReversimStyledComps';
 import './ReactTags.css';
 
 export const MAX_TAGS = 3;
@@ -28,9 +29,9 @@ const TagButton = styled(Button)`
 
     background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
     background-size: 205% 100%;
-    border: solid 2px ${color.box_shadow_2};
+    border: solid 2px ${color.box_shadow_3};
     border-radius: 0;
-    box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
+    box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_3};
 
     font-size: ${font.size_sml};
     font-family: ${font.button};
@@ -49,7 +50,10 @@ const TagButton = styled(Button)`
 `;
 
 const SuggestionsContainer = styled.div`
-  ${({ theme: { space } }) => `
+  ${({ theme: { space, color } }) => `
+    display: flex;
+    align-items: flex-start;
+    color: ${color.step_zilla_sub_heading};
     margin-top: ${space.m};
   `}
 `;
@@ -76,11 +80,12 @@ const Tags = ({
     />
     {!readOnly && (
       <SuggestionsContainer>
-        Suggestions:{'\u00a0\u00a0'}{' '}
+        <Bold>Suggestions:</Bold>{'\u00a0\u00a0'}{' '}
         {predefinedSuggestions.map(suggestion => (
           <TagButton
             onClick={() => handleAddition(suggestion)}
-            key={suggestion}>
+            key={suggestion}
+          >
             {suggestion}
           </TagButton>
         ))}

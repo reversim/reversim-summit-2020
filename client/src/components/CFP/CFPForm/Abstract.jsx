@@ -30,11 +30,57 @@ import {categories} from '../../Categories.css';
 import {Button, Input, Modal, ModalBody, ModalFooter} from 'reactstrap';
 
 //styled-components components
-const AbstractSubHeading = styled(Heading5)`
-  ${({ theme: { font, space } }) => `
-    margin-top: calc(2 * ${space.m});
+const AbstractErr = styled.span`
+  ${({ theme: { color, font }, abstractErr }) => `
+    color: ${abstractErr ? color.important : color.text_3};
+    font: ${font.weight_bold};
+  `}
+`;
+
+const AbstractList = styled.ul`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.xl};
+  `}
+`;
+
+const CheckboxContianer = styled.div`
+  ${({ theme: { color, space }, checked, disabled }) => `
+    display: flex;
+    align-items: center;
+    margin-bottom: calc(4 * ${space.m});
+    color: ${checked ? color.text_3 : color.step_zilla_sub_heading};
+    opacity: ${disabled ? 0.5 : 1 }
+  `}
+`;
+
+const CheckboxLable = styled.label`
+  ${({ theme: { color } }) => `
+    display: flex;
+    transition: color 0.5s;
+    &:hover{
+      color: ${color.text_3};
+      cursor: pointer;
+    };
+  `}
+`;
+
+const CheckboxLableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CheckboxLableHeading = styled(Heading5)`
+  ${({ theme: { font } }) => `
+    margin: 0;
     color: inherit;
+    font-size: ${font.size_reg};
     font-weight: ${font.weight_bold};
+  `}
+`;
+
+const AbstractSubHeading = styled(CheckboxLableHeading)`
+  ${({ theme: { space } }) => `
+    margin-top: calc(2 * ${space.m});
   `}
 `;
 
@@ -74,8 +120,8 @@ const AbstractModalButton = styled(Button)`
     letter-spacing: 1px;
     outline: none;
     border: 0;
+    border-radius: 3px;
     transition: all 200ms;
-    border-radius: 0;
     height: 40px;
 
     position: relative;
@@ -114,14 +160,14 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
     <AbstractParagraph>
       Building an effective micro-service architecture is a non-trivial task. At example.com, we
       have accumulated more than 500 different micro-services over the years, ended up with a
-      micro-service spaghetti, long latency, and inevitably - a broken CI/CD pipeline. Then, we
+      micro-service spaghetti, long latency, and inevitabspanly - a broken CI/CD pipeline. Then, we
       decided to remove human factor out of the equation. In this session I will present our
       open-sourced package that analyzed our microservice architecture as a graph, measured the load
       on each server, improved server utilization by 73% and brought our CI-CD pipeline back from
       the dead.
     </AbstractParagraph>
     <AbstractSubHeading>Some helpful guidance questions:</AbstractSubHeading>
-    <ul>
+    <AbstractList>
       <ListItem>
         <ListBolt icon={faChevronRight} />
         Why this topic is important?
@@ -134,33 +180,35 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
         <ListBolt icon={faChevronRight} />
         What actionable benefits / knowledge will attendees gain by attending your talk?
       </ListItem>
-    </ul>
-    <br />
-    <span className={cn({'text-red': abstractErr}, 'font-weight-bold')}>
+    </AbstractList>
+    <AbstractErr abstractErr={abstractErr}>
       {abstractLen}/{ABSTRACT_MAX}
-    </span>{' '}
+    </AbstractErr>{' '}
     (minimum {ABSTRACT_MIN} characters)
   </FormSubHeading>
 );
 
 const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
-  <div onClick={() => onChange(name)} className={cn({'text-primary': checked}, 'd-flex align-items-center mb-4', {'opacity-05': !disabled})}>
+  <CheckboxContianer
+    onClick={() => onChange(name)}
+    checked={checked}
+    disabled={disabled} 
+  >
     <input
-      className="mr-3"
       type="checkbox"
       checked={checked}
       disabled={disabled}
       readOnly={true}
     />
-    <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
-      <div className={'d-flex flex-column'}>
-        <h5 className="mb-0">{name}</h5>
-        <small className={cn({'text-primary': checked})}>
+    <CheckboxLable>
+      <CheckboxLableContainer>
+        <CheckboxLableHeading>{name}</CheckboxLableHeading>
+        <AbstractParagraph>
           {description}
-        </small>
-      </div>
-    </label>
-  </div>
+        </AbstractParagraph>
+      </CheckboxLableContainer>
+    </CheckboxLable>
+  </CheckboxContianer>
 );
 
 const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
@@ -189,7 +237,7 @@ class Abstract extends Component {
     super(props);
     this.state = {
       abstractLen: props.abstract ? props.abstract.length : 0,
-      abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true,
+      abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true, //NOTE: truthy if props.abstract exists and below or above the min/max values
       newTagPending: null,
     };
     
@@ -344,7 +392,7 @@ class Abstract extends Component {
             </AbstractParagraph>
             {bestMatch && (
               <AbstractParagraph>
-                Did you mean <b>{bestMatch}</b>?
+                Did you mean <Bold>{bestMatch}</Bold>?
               </AbstractParagraph>
             )}
           </AbstractModalBody>
@@ -361,7 +409,6 @@ class Abstract extends Component {
             )}
             <AbstractModalButton
               outline
-              size="sm"
               onClick={e => {
                 e.preventDefault();
                 this.addTag(newTagPending);
