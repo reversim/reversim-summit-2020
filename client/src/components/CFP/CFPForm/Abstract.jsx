@@ -5,7 +5,6 @@ import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
   PREDEFINED_TAGS,
-  PROPOSAL_TYPES_ARR,
   CATEGORIES,
   MAX_CATEGORIES,
 } from '../../../data/proposals';
@@ -25,9 +24,8 @@ import {
   Paragraph,
   Bold,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
-import cn from "classnames";
-// import {categories} from '../../Categories.css';
-import {Button, Input, Modal, ModalBody, ModalFooter} from 'reactstrap';
+
+import {Button, Modal, ModalBody, ModalFooter} from 'reactstrap';
 
 //styled-components components
 const AbstractErr = styled.span`
@@ -39,7 +37,7 @@ const AbstractErr = styled.span`
 
 const AbstractList = styled.ul`
   ${({ theme: { space } }) => `
-    margin-bottom: ${space.xl};
+    margin: ${space.m} 0 ${space.xl} 0;
   `}
 `;
 
