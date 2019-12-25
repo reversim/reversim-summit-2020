@@ -466,11 +466,11 @@ export const InputLabel = styled.label`
 `;
 
 export const FormSubHeading = styled.h5`
-${({ theme: { color, font, space } }) => `
-  color: ${color.step_zilla_sub_heading};
-  font-family: ${font.main};
-  font-size: ${font.size_reg};
-  font-weight: ${font.weight_medium};
-  margin-bottom: ${space.m};
-`}
-`
+  ${({ theme: { color, font, space } }) => `
+    color: ${color.step_zilla_sub_heading};
+    font-family: ${font.main};
+    font-size: ${font.size_reg};
+    font-weight: ${font.weight_medium};
+    margin-bottom: ${space.m};
+  `}
+`;

@@ -148,6 +148,7 @@ const AbstractParagraph = styled(Paragraph)`
     color: inherit;
   `}
 `;
+
 const AbstractModalHeading = styled(AbstractSubHeading)`
   ${({ theme: { color, space } }) => `
     margin: 0;
@@ -155,11 +156,13 @@ const AbstractModalHeading = styled(AbstractSubHeading)`
     background: ${color.background_modal};
   `}
 `;
+
 const AbstractModalBody = styled(ModalBody)`
   ${({ theme: { color } }) => `
     background: ${color.background_modal};
   `}
 `;
+
 const AbstractModalFooter = styled(ModalFooter)`
   ${({ theme: { color } }) => `
     background: ${color.background_modal};
