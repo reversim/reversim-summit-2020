@@ -26,7 +26,7 @@ import {
   Bold,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 import cn from "classnames";
-import {categories} from '../../Categories.css';
+// import {categories} from '../../Categories.css';
 import {Button, Input, Modal, ModalBody, ModalFooter} from 'reactstrap';
 
 //styled-components components
@@ -53,10 +53,70 @@ const CheckboxContianer = styled.div`
   `}
 `;
 
+const CheckboxInput = styled.input`
+  ${({ theme: { color, space, font } }) => `
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+
+  & + label {
+    margin-bottom: 0;
+  }
+
+  & + label:before {
+    content: '';
+    display: inline-block;
+    border: 2px solid ${color.box_shadow_1_dimmed};
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    margin-right: ${space.s};
+    vertical-align: middle;
+    color: ${color.text_3};
+    line-height: 24px;
+    text-align: center;
+    font-size: ${font.size_bg};
+    text-indent: 1px;
+    min-width: 25px;
+  }
+
+  &:checked + label:before {
+    content: '✓';
+    border: 2px solid ${color.box_shadow_1};
+  }
+  `}
+`;
+
+const OtherInput = styled.input`
+  ${({ theme: { color, space, font } }) => `
+    width: 100%;
+    height: calc(2 * ${font.size_reg});
+    padding: ${space.s} ${space.m};
+    margin-left: ${space.m};
+
+    font-size: ${font.size_reg};
+    font-weight: 300;
+    line-height: 1.5;
+    
+    color: ${color.input_1};
+    border-radius: 3px;
+    border-radius: 0.25rem;
+    border: 2px solid ${color.input_border_1};
+    
+    box-shadow: inset 0 1px 1px ${color.input_box_shadow_1};
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:hover{
+      cursor: pointer;
+    }
+  `}
+`;
+
 const CheckboxLable = styled.label`
   ${({ theme: { color } }) => `
     display: flex;
     transition: color 0.5s;
+    
     &:hover{
       color: ${color.text_3};
       cursor: pointer;
@@ -194,7 +254,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
     checked={checked}
     disabled={disabled} 
   >
-    <input
+    <CheckboxInput
       type="checkbox"
       checked={checked}
       disabled={disabled}
@@ -212,24 +272,22 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
 );
 
 const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
-  <div className={cn({'text-primary': checked}, 'd-flex align-items-center mb-4', {'opacity-05': disabled})}>
-    <input
-      className="mr-3"
+  <CheckboxContianer>
+    <CheckboxInput
       type="checkbox"
       checked={checked}
       onChange={onChange}
       disabled={disabled}
     />
-    <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
-      <h5 className="mb-0 mr-1">Other: </h5>
-      <Input
-        bsSize="sm"
+    <CheckboxLable>
+      <CheckboxLableHeading>Other: </CheckboxLableHeading>
+      <OtherInput
         disabled={disabled}
         placeholder="lockpicking, moonwalking, etc."
         onChange={onChangeInput}
       />
-    </label>
-  </div>
+    </CheckboxLable>
+  </CheckboxContianer>
 );
 
 class Abstract extends Component {
@@ -237,7 +295,7 @@ class Abstract extends Component {
     super(props);
     this.state = {
       abstractLen: props.abstract ? props.abstract.length : 0,
-      abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true, //NOTE: truthy if props.abstract exists and below or above the min/max values
+      abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true,
       newTagPending: null,
     };
     

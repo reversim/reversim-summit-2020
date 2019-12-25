@@ -15,7 +15,7 @@ import {
   CATEGORIES,
   MAX_CATEGORIES,
 } from '../../data/proposals';
-import {categories} from '../Categories.css';
+// import {categories} from '../Categories.css';
 
 const TitleFieldCaption = () => (
   <span>

@@ -12,7 +12,7 @@ const theme = {
     font_awsome_watch: 'rgb(255, 97, 0)',
     heading_decoratino: 'rgb(255, 97, 0)',
     font_awsome_nav: 'rgb(1, 39, 255)',
-    
+
     important: 'rgb(255, 46, 95)',
     count_down: 'rgb(108, 117, 125)',
 
@@ -40,6 +40,7 @@ const theme = {
    
     // Borders and box shadows
     box_shadow_1: 'rgb(81, 39, 255)',
+    box_shadow_1_dimmed: 'rgba(81, 39, 255, 0.5)',
     box_shadow_2: 'rgb(255, 255, 255)',
     box_shadow_3: 'rgb(222, 226, 230)',
 
@@ -50,8 +51,9 @@ const theme = {
     
     input_border_1: 'rgb(206, 212, 218)',
     input_border_2: 'rgb(128, 164, 255)',
+    input_border_3: 'rgb(0, 72, 255)',
     input_box_shadow_1: 'inset 0 1px 1px rgba(0, 0, 0, 0.075)',
-    input_box_shadow_2: '0 0 0 calc(0.2 * 16px) rgba(0, 72, 255, 0.25)',//NOTE: when using this note that the size corraltes to font.size_reg
+    input_box_shadow_2: '0 0 0 calc(0.2 * 16px) rgba(0, 72, 255, 0.25)', //NOTE: when using this note that the size corraltes to font.size_reg (16px)
     form_button_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     form_button_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
     form_button_border_hover: 'rgb(84, 91, 98)',
