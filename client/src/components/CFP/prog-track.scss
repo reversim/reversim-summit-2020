@@ -1,87 +1,98 @@
 ol.progtrckr {
-    margin: 0;
+    margin: 0 auto;
     padding-bottom: 2.2rem;
     list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
   }
-  ol.progtrckr li {
+  ol.progtrckr li { // the general element containing ::before with the bolt, <em> with step number, <span> with step title and :: after
     display: inline-block;
     text-align: center;
     line-height: 4.5rem;
     padding: 0 0.7rem;
     cursor: pointer;
+    width: 16.66%;
   }
-  ol.progtrckr li span {
-    padding: 0 1.5rem;
+  ol.progtrckr li span { //<span> with step title
+    padding: 0 0.5rem;
+    margin: 0 auto;
   }
   @media (max-width: 650px) {
-    .progtrckr li span {
+    .progtrckr li span { //<span> with step title
       display: none;
     }
   }
-  .progtrckr em {
+  .progtrckr em { //<em> with step number
     display: none;
     font-weight: 700;
     padding-left: 1rem;
   }
   @media (max-width: 650px) {
-    .progtrckr em {
+    .progtrckr em { //<em> with step number
       display: inline;
     }
   }
   
   ol.progtrckr li.progtrckr-todo {
     color: silver;
-    border-bottom: 4px solid silver;
+    border-bottom: 4px solid silver; //the line of next steps
   }
   ol.progtrckr li.progtrckr-doing {
     color: black;
-    border-bottom: 4px solid #33c3f0;
+    border-bottom: 4px solid #9e87ff;  //the line of current step
   }
   ol.progtrckr li.progtrckr-done {
     color: black;
-    border-bottom: 4px solid #33c3f0;
+    border-bottom: 4px solid #9e87ff;  //the line of done steps
   }
   ol.progtrckr li:after {
     content: "\00a0\00a0";
   }
-  ol.progtrckr li:before {
+  ol.progtrckr li:after { //::before with the bolt (general)
     position: relative;
-    bottom: -3.7rem;
+    top: 5.1rem;
     float: left;
     left: 50%;
+    align-self: center;
   }
-  ol.progtrckr li.progtrckr-todo:before {
-    content: "\039F";
+  ol.progtrckr li.progtrckr-todo:after { //::before with the bolt
+    position: relative;
+    top: 2.35rem;
+    content: "\20DD"; //See if this is the right symbol and how to make it heavier
     color: silver;
     background-color: white;
     width: 1.2em;
     line-height: 1.4em;
+    align-self: flex-end;
   }
-  ol.progtrckr li.progtrckr-todo:hover:before {
-    color: #0fa0ce;
+  ol.progtrckr li.progtrckr-todo:hover:after {  //::before with the bolt when hovered
+    color: #5127ff;
   }
   
-  ol.progtrckr li.progtrckr-doing:before {
+  ol.progtrckr li.progtrckr-doing:after {  //::before with the bolt (current step)
     content: "\2022";
+    position: relative;
+    top: 2rem;
     color: white;
-    background-color: #33c3f0;
+    background-color: #9e87ff;
     width: 1.2em;
     line-height: 1.2em;
     border-radius: 1.2em;
   }
-  ol.progtrckr li.progtrckr-doing:hover:before {
-    color: #0fa0ce;
+  ol.progtrckr li.progtrckr-doing:hover:after { //::before with the bolt (current step when hovered)
+    color: #5127ff;
   }
   
-  ol.progtrckr li.progtrckr-done:before {
+  ol.progtrckr li.progtrckr-done:after {   //::before with the bolt (done step)
     content: "\2713";
     color: white;
-    background-color: #33c3f0;
+    background-color: #9e87ff;
     width: 1.2em;
     line-height: 1.2em;
     border-radius: 1.2em;
   }
-  ol.progtrckr li.progtrckr-done:hover:before {
-    color: #0fa0ce;
+  ol.progtrckr li.progtrckr-done:hover:after {
+    color: #5127ff;
   }
   
