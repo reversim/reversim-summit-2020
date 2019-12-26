@@ -49,43 +49,17 @@ ol.progtrckr {
   ol.progtrckr li:after {
     content: "\00a0\00a0";
   }
+
+
   ol.progtrckr li:after { //::before with the bolt (general)
     position: relative;
-    top: 5.1rem;
     float: left;
     left: 50%;
     align-self: center;
   }
-  ol.progtrckr li.progtrckr-todo:after { //::before with the bolt
-    position: relative;
-    top: 2.35rem;
-    content: "\20DD"; //See if this is the right symbol and how to make it heavier
-    color: silver;
-    background-color: white;
-    width: 1.2em;
-    line-height: 1.4em;
-    align-self: flex-end;
-  }
-  ol.progtrckr li.progtrckr-todo:hover:after {  //::before with the bolt when hovered
-    color: #5127ff;
-  }
-  
-  ol.progtrckr li.progtrckr-doing:after {  //::before with the bolt (current step)
-    content: "\2022";
-    position: relative;
-    top: 2rem;
-    color: white;
-    background-color: #9e87ff;
-    width: 1.2em;
-    line-height: 1.2em;
-    border-radius: 1.2em;
-  }
-  ol.progtrckr li.progtrckr-doing:hover:after { //::before with the bolt (current step when hovered)
-    color: #5127ff;
-  }
-  
-  ol.progtrckr li.progtrckr-done:after {   //::before with the bolt (done step)
+  ol.progtrckr li.progtrckr-done:after {   //::before with the bolt (DONE step)
     content: "\2713";
+    top: 0.7rem;
     color: white;
     background-color: #9e87ff;
     width: 1.2em;
@@ -95,4 +69,76 @@ ol.progtrckr {
   ol.progtrckr li.progtrckr-done:hover:after {
     color: #5127ff;
   }
+  ol.progtrckr li.progtrckr-doing:after {  //::before with the bolt (DOING step)
+    content: "\2022";
+    position: relative;
+    top: 0.7rem;
+    color: white;
+    background-color: #9e87ff;
+    width: 1.2em;
+    line-height: 1.2em;
+    border-radius: 1.2em;
+  }
+  ol.progtrckr li.progtrckr-doing:hover:after { //::before with the bolt (current step when hovered)
+    color: #5127ff;
+  }
+  ol.progtrckr li.progtrckr-todo:after { //::before with the bolt (TO DO step)
+    position: relative;
+    top: 0.9rem;
+    content: "\3007"; //See if this is the right symbol and how to make it heavier
+    color: silver;
+    background-color: white;
+    width: 1.2em;
+    line-height: 1.4em;
+    align-self: flex-end;
+    font-weight: 900;
+  }
+  ol.progtrckr li.progtrckr-todo:hover:after {  //::before with the bolt when hovered
+    color: #5127ff;
+  }
   
+@media (min-width: 480px) {
+  ol.progtrckr li.progtrckr-done:after,
+  ol.progtrckr li.progtrckr-doing:after,
+  ol.progtrckr li.progtrckr-todo:after {
+    top: 4rem;
+    left: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  ol.progtrckr li.progtrckr-done:after{
+    left: 2.5rem;
+  } 
+  ol.progtrckr li.progtrckr-doing:after{
+    top: 0.7rem;
+    left: 2.5rem;
+  } 
+  ol.progtrckr li.progtrckr-todo:after {
+    top: 0.9rem;
+  } 
+}
+@media (min-width: 992px) {
+  ol.progtrckr li.progtrckr-done:after{
+    left: 3.7rem;
+  }
+  ol.progtrckr li.progtrckr-doing:after,
+  ol.progtrckr li.progtrckr-todo:after {
+    top: 4rem;
+    left: 4rem;
+  }
+}
+@media (min-width: 1200px) {
+  ol.progtrckr li.progtrckr-done:after,
+  ol.progtrckr li.progtrckr-doing:after,
+  ol.progtrckr li.progtrckr-todo:after {
+    top: 4rem;
+    left: 5rem;
+  }
+}
+@media (min-width: 1600px) {
+  ol.progtrckr li.progtrckr-done:after,
+  ol.progtrckr li.progtrckr-doing:after,
+  ol.progtrckr li.progtrckr-todo:after {
+    left: 5.7rem;
+  }
+}
