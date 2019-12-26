@@ -118,12 +118,12 @@ class CFPForm extends Component {
     const {tags, proposalType, categories} = this.state;
 
     const steps = [
-      { name: '1', component: <PublicInfo user={user} />},
-      { name: '2', component: <ShortBio user={user} />},
-      { name: '3', component: <PrivateInfo user={user} />},
-      { name: '4', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
-      { name: '5', component: <Abstract update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags} />},
-      { name: '6', component: <Outline user={user} updateUserData={this.props.updateUserData} createProposal={this.props.createProposal} history={this.props.history} />},
+      { name: 'Info', component: <PublicInfo user={user} />},
+      { name: 'Bio', component: <ShortBio user={user} />},
+      { name: 'Private', component: <PrivateInfo user={user} />},
+      { name: 'Proposal', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
+      { name: 'Abstract', component: <Abstract update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags} />},
+      { name: 'Outline', component: <Outline user={user} updateUserData={this.props.updateUserData} createProposal={this.props.createProposal} history={this.props.history} />},
     ];
 
     return (

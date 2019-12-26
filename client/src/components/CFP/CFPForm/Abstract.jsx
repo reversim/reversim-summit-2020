@@ -15,6 +15,7 @@ import {findBestMatch} from 'string-similarity';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
+  ResponsiveContainer,
   FormSubHeading,
   Important,
   ListItem,
@@ -420,7 +421,7 @@ class Abstract extends Component {
     }
 
     return (
-      <Fragment>
+      <ResponsiveContainer>
         <FormField
           id="abstract"
           label="Abstract"
@@ -505,7 +506,7 @@ class Abstract extends Component {
             !this.getOtherCategoryInState(categories) && categories.length === MAX_CATEGORIES
           }
         />
-      </Fragment>
+      </ResponsiveContainer>
 
     )
   }

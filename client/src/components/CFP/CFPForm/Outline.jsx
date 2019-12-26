@@ -8,16 +8,13 @@ import {
 } from '../../../data/proposals';
 import {getUserData} from '../UserForm';
 import ga from 'react-ga';
-import cn from "classnames";
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
+  ResponsiveContainer,
   FormSubHeading,
-  Important,
   ListItem,
   ListBolt,
-  InputLabel,
-  Heading5,
   Paragraph,
   Bold,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
@@ -246,7 +243,7 @@ class Outline extends Component {
     } = this.props;
 
     return (
-      <Fragment>
+      <ResponsiveContainer>
         <FormField
           id="outline"
           label="Outline &amp; private notes"
@@ -275,7 +272,7 @@ class Outline extends Component {
             Submit
           </SubmitButton>
         </SubmitContainer>
-      </Fragment>
+      </ResponsiveContainer>
     );
   }
 };

@@ -4,43 +4,47 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 //general elements
+export const ResponsiveContainer = styled.div`
+  max-width: 330px;
 
-export const AlignCenter = styled.div`
+  ${mediaQueryMin.s`
+    ${({ theme: { width } }) => `
+      max-width: ${width.main_for_mq_s};  
+    `}`};
+
+  ${mediaQueryMin.m`
+    ${({ theme: { width } }) => `
+      max-width: ${width.main_for_mq_m};  
+    `}`};
+
+  ${mediaQueryMin.l`
+    ${({ theme: { width } }) => `
+      max-width: ${width.main_for_mq_l};  
+    `}`};
+
+  ${mediaQueryMin.xl`
+    ${({ theme: { width } }) => `
+      max-width: ${width.main_for_mq_xl};  
+    `}`};
+
+  ${mediaQueryMin.xxl`
+    ${({ theme: { width } }) => `
+      max-width: ${width.main};  
+    `}`};
+` 
+export const AlignCenter = styled(ResponsiveContainer)`
   ${({ theme: { space } }) =>`
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
       justify-content: space-between;
 
-      width: 100%;
+      
       padding: 0 ${space.l};
       margin: 0 auto;
     `}
 
-      ${mediaQueryMin.s`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_s};  
-        `}`};
-
-      ${mediaQueryMin.m`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_m};  
-        `}`};
-
-      ${mediaQueryMin.l`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_l};  
-        `}`};
-
-      ${mediaQueryMin.xl`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_xl};  
-        `}`};
-
-      ${mediaQueryMin.xxl`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main};  
-        `}`};
+      
 `;
 
 export const AlignCenterColumn = styled(AlignCenter)`

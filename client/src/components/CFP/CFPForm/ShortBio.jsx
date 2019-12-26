@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import styled from 'styled-components';
 
 import FormField from '../../FormField';
-import { StepHeading } from '../../GlobalStyledComponents/ReversimStyledComps';
+import { ResponsiveContainer, StepHeading } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const ShortBiography = styled(FormField)`
   ${({ theme: { space } }) => `
@@ -10,7 +10,7 @@ const ShortBiography = styled(FormField)`
   `}
 `
 const ShortBio = ({user}) => (
-  <Fragment>
+  <ResponsiveContainer>
     <StepHeading>Short Bio</StepHeading>
     <ShortBiography
       id="bio"
@@ -34,7 +34,7 @@ const ShortBio = ({user}) => (
         </span>
       }
     />
-  </Fragment>
+  </ResponsiveContainer>
 );
 
 export default ShortBio;
