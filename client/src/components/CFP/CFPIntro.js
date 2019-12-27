@@ -126,7 +126,7 @@ const CFPIntro = () => (
         <ListItem><ListBolt icon={faChevronRight} />Front end / securing websites / mobile development</ListItem>
         <ListItem><ListBolt icon={faChevronRight} />Quality / testing / monitoring / alerting / automation</ListItem>
         <ListItem><ListBolt icon={faChevronRight} />Artificial intelligence / machine learning / data science</ListItem>
-        <ListItem><ListBolt icon={faChevronRight} />Data / at rest / in transit</ListItem>
+        <ListItem><ListBolt icon={faChevronRight} />Data / at rest / in transit/ at scale</ListItem>
         <ListItem><ListBolt icon={faChevronRight} />Infrastructure / operations / deployments / internal tools</ListItem>
         <ListItem><ListBolt icon={faChevronRight} />Cloud / virtualization / containers / serverless</ListItem>
         <ListItem><ListBolt icon={faChevronRight} />Distributed systems / microservices / geo distribution / DR / availability</ListItem>
