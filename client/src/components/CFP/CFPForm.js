@@ -118,12 +118,12 @@ class CFPForm extends Component {
     const {tags, proposalType, categories} = this.state;
 
     const steps = [
-      { name: 'Info', component: <PublicInfo user={user} />},
-      { name: 'Bio', component: <ShortBio user={user} />},
-      { name: 'Private', component: <PrivateInfo user={user} />},
-      { name: 'Proposal', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
+      { name: 'Public Info', component: <PublicInfo user={user} />},
+      { name: 'Short Bio', component: <ShortBio user={user} />},
+      { name: 'Private Info', component: <PrivateInfo user={user} />},
+      { name: 'Session Proposal', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
       { name: 'Abstract', component: <Abstract update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags} />},
-      { name: 'Outline', component: <Outline user={user} updateUserData={this.props.updateUserData} createProposal={this.props.createProposal} history={this.props.history} />},
+      { name: 'Outline & Notes', component: <Outline user={user} updateUserData={this.props.updateUserData} createProposal={this.props.createProposal} history={this.props.history} />},
     ];
 
     return (

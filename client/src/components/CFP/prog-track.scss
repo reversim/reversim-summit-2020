@@ -1,5 +1,5 @@
 ol.progtrckr {
-    margin: 0 auto;
+    margin: 3rem auto 0 auto;
     padding-bottom: 2.2rem;
     list-style-type: none;
     display: flex;
@@ -22,6 +22,7 @@ ol.progtrckr {
     padding: 0 0.5rem;
     margin: 0 auto;
     text-align: center;
+    line-height: 2;
   }
   ol.progtrckr li.progtrckr-todo span {
     position: relative;
