@@ -19,7 +19,7 @@ import {
   Paragraph,
   Bold,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
-import {Button, Input,} from 'reactstrap';
+import {Button} from 'reactstrap';
 
 //styled-components components
 const OutlineParagraph = styled(Paragraph)`
@@ -29,7 +29,7 @@ const OutlineParagraph = styled(Paragraph)`
   `}
 `;
 
-const OutlineSubHeading = styled(FormSubHeading)`
+const OutlineSubHeading = styled.h6`
   ${({ theme: { font } }) => `
     font-weight: ${font.weight_bold};
   `}

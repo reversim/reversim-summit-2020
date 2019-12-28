@@ -138,9 +138,10 @@ const CheckboxLableHeading = styled(Heading5)`
   `}
 `;
 
-const AbstractSubHeading = styled(CheckboxLableHeading)`
-  ${({ theme: { space } }) => `
+const AbstractSubHeading = styled.h6`
+  ${({ theme: { space, font } }) => `
     margin-top: calc(2 * ${space.m});
+    font-weight: ${font.weight_bold};
   `}
 `;
 
