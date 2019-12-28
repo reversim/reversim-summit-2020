@@ -5,32 +5,45 @@ import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 //general elements
 export const ResponsiveContainer = styled.div`
-  max-width: 330px;
+  ${({ theme: { width } }) => `
+    min-width: ${width.main_for_mq_xs};
+    max-width: ${width.main_for_mq_xs};
+  `};
 
   ${mediaQueryMin.s`
     ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_s};    
       max-width: ${width.main_for_mq_s};  
-    `}`};
+    `}
+  `};
 
   ${mediaQueryMin.m`
     ${({ theme: { width } }) => `
-      max-width: ${width.main_for_mq_m};  
-    `}`};
+      min-width: ${width.main_for_mq_m};  
+      max-width: ${width.main_for_mq_m};
+    `}
+  `};
 
   ${mediaQueryMin.l`
     ${({ theme: { width } }) => `
-      max-width: ${width.main_for_mq_l};  
-    `}`};
+      min-width: ${width.main_for_mq_l};  
+      max-width: ${width.main_for_mq_l};
+    `}
+  `};
 
   ${mediaQueryMin.xl`
     ${({ theme: { width } }) => `
-      max-width: ${width.main_for_mq_xl};  
-    `}`};
+      min-width: ${width.main_for_mq_xl};  
+      max-width: ${width.main_for_mq_xl};
+    `}
+  `};
 
   ${mediaQueryMin.xxl`
     ${({ theme: { width } }) => `
+      min-width: ${width.main};  
       max-width: ${width.main};
-    `}`};
+    `}
+  `};
 `;
 
 export const AlignCenter = styled(ResponsiveContainer)`

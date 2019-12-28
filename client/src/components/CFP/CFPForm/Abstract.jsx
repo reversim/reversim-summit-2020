@@ -16,6 +16,7 @@ import {findBestMatch} from 'string-similarity';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
   ResponsiveContainer,
+  StepHeading,
   FormSubHeading,
   Important,
   ListItem,
@@ -422,9 +423,9 @@ class Abstract extends Component {
 
     return (
       <ResponsiveContainer>
+        <StepHeading>Abstract</StepHeading>
         <FormField
           id="abstract"
-          label="Abstract"
           required={true}
           multiline={true}
           value={abstract}

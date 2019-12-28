@@ -12,6 +12,7 @@ import ga from 'react-ga';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
   ResponsiveContainer,
+  StepHeading,
   FormSubHeading,
   ListItem,
   ListBolt,
@@ -244,9 +245,9 @@ class Outline extends Component {
 
     return (
       <ResponsiveContainer>
+        <StepHeading>Outline &amp; private notes</StepHeading>
         <FormField
           id="outline"
-          label="Outline &amp; private notes"
           required={true}
           multiline={true}
           value={outline}

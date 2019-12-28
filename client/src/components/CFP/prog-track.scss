@@ -6,7 +6,7 @@ ol.progtrckr {
     flex-wrap: wrap;
     align-items: flex-end;
   }
-  ol.progtrckr li { // the general element containing ::before with the bolt, <em> with step number, <span> with step title and :: after
+  ol.progtrckr li { // the general element containing ::after with the bolt, <em> with step number, <span> with step title and :: after
     display: inline-block;
     text-align: center;
     line-height: 4.5rem;
@@ -14,28 +14,35 @@ ol.progtrckr {
     cursor: pointer;
     width: 16.66%;
   }
-  ol.progtrckr li span { //<span> with step title
-    min-width: 40px;
-    max-width: 40px;
+  //<span> with step title
+  ol.progtrckr  li span {
+    display: none;
+    min-width: 100%;
+    max-width: 100%;
     padding: 0 0.5rem;
     margin: 0 auto;
-    border: 2px solid grey;
+    text-align: center;
+    border: 2px solid grey; //NOTE: Delete when done
   }
-  @media (max-width: 650px) {
-    .progtrckr li span { //<span> with step title
-      display: none;
+  ol.progtrckr li.progtrckr-todo span {
+    position: relative;
+    top: 0.25rem;
+  }
+  @media (min-width: 768px) {
+    ol.progtrckr li span {
+      display: inline-block;
     }
   }
 
 //<em> with step number
   .progtrckr em {
-    display: none;
+    display: inline-block;
     font-weight: 700;
     padding-left: 1rem;
   }
-  @media (max-width: 650px) {
+  @media (min-width: 768px) {
     .progtrckr em {
-      display: inline;
+      display: none;
     }
   }
   .progtrckr-todo em{
@@ -64,14 +71,14 @@ ol.progtrckr {
     content: "\00a0\00a0";
   }
 
-
-  ol.progtrckr li:after { //::before with the bolt (general)
+//::after with the bolt
+  ol.progtrckr li:after { 
     position: relative;
     float: left;
     left: 50%;
     align-self: center;
   }
-  ol.progtrckr li.progtrckr-done:after {   //::before with the bolt (DONE step)
+  ol.progtrckr li.progtrckr-done:after {   //::after with the bolt (DONE step)
     content: "\2713";
     top: 0.7rem;
     color: white;
@@ -83,7 +90,7 @@ ol.progtrckr {
   ol.progtrckr li.progtrckr-done:hover:after {
     color: #5127ff;
   }
-  ol.progtrckr li.progtrckr-doing:after {  //::before with the bolt (DOING step)
+  ol.progtrckr li.progtrckr-doing:after {  //::after with the bolt (DOING step)
     content: "\2022";
     position: relative;
     top: 0.7rem;
@@ -93,10 +100,10 @@ ol.progtrckr {
     line-height: 1.2em;
     border-radius: 1.2em;
   }
-  ol.progtrckr li.progtrckr-doing:hover:after { //::before with the bolt (current step when hovered)
+  ol.progtrckr li.progtrckr-doing:hover:after { //::after with the bolt (current step when hovered)
     color: #5127ff;
   }
-  ol.progtrckr li.progtrckr-todo:after { //::before with the bolt (TO DO step)
+  ol.progtrckr li.progtrckr-todo:after { //::after with the bolt (TO DO step)
     position: relative;
     top: 0.9rem;
     content: "\3007"; //See if this is the right symbol and how to make it heavier
@@ -107,7 +114,7 @@ ol.progtrckr {
     align-self: flex-end;
     font-weight: 900;
   }
-  ol.progtrckr li.progtrckr-todo:hover:after {  //::before with the bolt when hovered
+  ol.progtrckr li.progtrckr-todo:hover:after {  //::after with the bolt when hovered
     color: #5127ff;
   }
   
@@ -121,32 +128,41 @@ ol.progtrckr {
 }
 @media (min-width: 768px) {
   ol.progtrckr li.progtrckr-done:after{
-    left: 2.5rem;
+    top: 0.7rem;
+    left: 3rem;
   } 
   ol.progtrckr li.progtrckr-doing:after{
     top: 0.7rem;
-    left: 2.5rem;
+    left: 3rem;
   } 
   ol.progtrckr li.progtrckr-todo:after {
     top: 0.9rem;
+    left: 3rem;
   } 
 }
 @media (min-width: 992px) {
-  ol.progtrckr li.progtrckr-done:after{
-    left: 3.7rem;
+  ol.progtrckr li.progtrckr-done:after {
+    left: 3.5rem;
   }
-  ol.progtrckr li.progtrckr-doing:after,
-  ol.progtrckr li.progtrckr-todo:after {
-    top: 4rem;
-    left: 4rem;
+  ol.progtrckr li.progtrckr-doing:after {
+    top: 0.7rem;
+    left: 3.5rem;
+  }
+
+  ol.progtrckr li.progtrckr-todo:after{
+    top: 0.9rem;
+    left: 3.5rem;
   }
 }
 @media (min-width: 1200px) {
   ol.progtrckr li.progtrckr-done:after,
-  ol.progtrckr li.progtrckr-doing:after,
+  ol.progtrckr li.progtrckr-doing:after {
+    top: 0.7rem;
+    left: 4.7rem;
+  }
   ol.progtrckr li.progtrckr-todo:after {
-    top: 4rem;
-    left: 5rem;
+    top: 0.9rem;
+    left: 4.7rem;
   }
 }
 @media (min-width: 1600px) {
