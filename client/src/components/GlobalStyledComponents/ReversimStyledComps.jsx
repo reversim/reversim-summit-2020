@@ -29,9 +29,10 @@ export const ResponsiveContainer = styled.div`
 
   ${mediaQueryMin.xxl`
     ${({ theme: { width } }) => `
-      max-width: ${width.main};  
+      max-width: ${width.main};
     `}`};
-` 
+`;
+
 export const AlignCenter = styled(ResponsiveContainer)`
   ${({ theme: { space } }) =>`
       display: flex;
