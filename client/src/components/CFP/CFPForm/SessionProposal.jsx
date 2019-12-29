@@ -71,12 +71,7 @@ class SessionProposal extends Component {
   
   render () {  
     const {
-      update,
-      tags,
       proposalType,
-      categories,
-      missingCategories,
-      allTags,
       title,
     } = this.props;
     const { coSpeaker } = this.state;

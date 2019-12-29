@@ -21,18 +21,18 @@ import {
   Paragraph2,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
-import './prog-track.scss'
-import { Heading3 } from '../GlobalStyledComponents/ReversimStyledComps.jsx';
+import './prog-track.scss';
 
 //styled-components section
+const NoteContainer = styled.div`
+  width: 100%;
+`;
 
 const DeadLine = styled.span`
   ${({ theme: { color } }) => `
     color: ${color.important};
   `};
 `;
-
-
 
 //React components section
 class CFPForm extends Component {
@@ -129,14 +129,14 @@ class CFPForm extends Component {
     return (
       <AlignCenterColumn>
         <HeadingAligner>
-        <Heading2>Submission</Heading2>
-        <BreakLineMain />
+          <Heading2>Submission</Heading2>
+          <BreakLineMain />
         </HeadingAligner>
-        <div>
-        <Paragraph2>Dear {user.name}, happy to see you're submitting session proposals! :)</Paragraph2>
-        <Paragraph2>Remember, you may submit up to 3 proposals.</Paragraph2>
-        <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
-        </div>
+        <NoteContainer>
+          <Paragraph2>Dear {user.name}, happy to see you're submitting session proposals! :)</Paragraph2>
+          <Paragraph2>Remember, you may submit up to 3 proposals.</Paragraph2>
+          <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
+        </NoteContainer>
         <div className='step-progress pl-5 pr-7'>
           <StepZilla
             preventEnterSubmission={true}
