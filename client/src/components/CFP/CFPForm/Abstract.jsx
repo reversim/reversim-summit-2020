@@ -15,7 +15,7 @@ import {findBestMatch} from 'string-similarity';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
-  ResponsiveContainer,
+  StepContainer,
   StepHeading,
   FormSubHeading,
   Important,
@@ -423,7 +423,7 @@ class Abstract extends Component {
     }
 
     return (
-      <ResponsiveContainer>
+      <StepContainer>
         <StepHeading>Abstract</StepHeading>
         <FormField
           id="abstract"
@@ -508,7 +508,7 @@ class Abstract extends Component {
             !this.getOtherCategoryInState(categories) && categories.length === MAX_CATEGORIES
           }
         />
-      </ResponsiveContainer>
+      </StepContainer>
 
     )
   }

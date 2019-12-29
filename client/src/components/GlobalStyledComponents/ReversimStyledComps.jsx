@@ -468,6 +468,12 @@ export const FontAwsomeTrash = styled(FontAwesomeIcon)`
 `;
 
 //Components for the StepZilla form (CFP form)
+export const StepContainer = styled(ResponsiveContainer)`
+  ${({ theme: { space } }) => `
+    padding: 0 ${space.xl};
+  `}
+`;
+
 export const StepHeading = styled(Heading4)`
   ${({ theme: { color, font } }) => `
     color: ${color.text_3};

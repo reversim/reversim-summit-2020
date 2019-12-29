@@ -7,7 +7,7 @@ import cn from 'classnames';
 import {titleInput} from '../CFPPage.css';
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
 import {
-  ResponsiveContainer,
+  StepContainer,
   StepHeading,
   FormSubHeading,
   InvertedColorLink,
@@ -82,7 +82,7 @@ class SessionProposal extends Component {
     const { coSpeaker } = this.state;
 
     return (
-      <ResponsiveContainer>
+      <StepContainer>
         {/* CFPForm.js section */}
         <StepHeading>Session Proposal</StepHeading>
         <FormSubHeading>Tell us about your session, so we can present it on our website.</FormSubHeading>
@@ -116,7 +116,7 @@ class SessionProposal extends Component {
           className={SPACING}
           value={coSpeaker}
         />
-      </ResponsiveContainer>
+      </StepContainer>
     );
   }
 };

@@ -3,7 +3,7 @@ import FormField, {SPACING} from '../../FormField';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
-  ResponsiveContainer,
+  StepContainer,
   StepHeading,
   FormSubHeading,
   Bold,
@@ -31,7 +31,7 @@ const VideoUrlFieldCaption = () => (
 );
 
 const PrivateInfo = user => (
-  <ResponsiveContainer>
+  <StepContainer>
     <StepHeading>Private information</StepHeading>
     <FormSubHeading>
       The following information will be available <Bold>only to the organizing committee</Bold>
@@ -112,7 +112,7 @@ const PrivateInfo = user => (
         </span>
       }
     />
-  </ResponsiveContainer>
+  </StepContainer>
 );
 
 export default PrivateInfo;

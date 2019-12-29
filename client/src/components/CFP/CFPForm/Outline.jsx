@@ -11,9 +11,8 @@ import ga from 'react-ga';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
-  ResponsiveContainer,
+  StepContainer,
   StepHeading,
-  FormSubHeading,
   ListItem,
   ListBolt,
   Paragraph,
@@ -244,7 +243,7 @@ class Outline extends Component {
     } = this.props;
 
     return (
-      <ResponsiveContainer>
+      <StepContainer>
         <StepHeading>Outline &amp; private notes</StepHeading>
         <FormField
           id="outline"
@@ -273,7 +272,7 @@ class Outline extends Component {
             Submit
           </SubmitButton>
         </SubmitContainer>
-      </ResponsiveContainer>
+      </StepContainer>
     );
   }
 };

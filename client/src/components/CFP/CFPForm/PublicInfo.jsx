@@ -2,13 +2,13 @@ import React from 'react';
 import FormField, {SPACING} from '../../FormField';
 
 import {
-  ResponsiveContainer,
+  StepContainer,
   StepHeading,
   FormSubHeading,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const PublicInfo = ({user}) => (
-  <ResponsiveContainer>
+  <StepContainer>
     <StepHeading>Public information</StepHeading>
     <FormSubHeading className="font-size-sm text-gray-600">
       The following information will be presented on the website.
@@ -56,7 +56,7 @@ const PublicInfo = ({user}) => (
       placeholder="@Reversim"
       className={SPACING}
     />
-  </ResponsiveContainer>
+  </StepContainer>
 )
 
 export default PublicInfo;

@@ -1,4 +1,5 @@
 import React, {createElement} from 'react';
+import styled from 'styled-components';
 import {Input} from 'reactstrap';
 import { 
   InputLabel,
@@ -7,6 +8,9 @@ import {
 
 export const SPACING = 'mb-6'; //NOTE: SHOULD BE DELETED AT THE END
 
+const RadioLabel = styled.label`
+  display: inline;
+`;
 
 const Radio = ({id, value, values: radioValues, onChange, className}) => (
   <div className={className}>
@@ -22,7 +26,7 @@ const Radio = ({id, value, values: radioValues, onChange, className}) => (
             checked={val.value === value}
             id={optionId}
           />{' '}
-          <label htmlFor={optionId}>{val.text}</label>
+          <RadioLabel htmlFor={optionId}>{val.text}</RadioLabel>
         </div>
       );
     })}

@@ -9,6 +9,7 @@ import {Button} from 'reactstrap';
 import styled from 'styled-components';
 import {Bold} from '../GlobalStyledComponents/ReversimStyledComps';
 import './ReactTags.css';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 export const MAX_TAGS = 3;
 
@@ -17,6 +18,16 @@ export const MAX_TAGS = 3;
 const TagsContainer = styled.div`
   ${({ theme: { space } }) => `
     margin-bottom: calc(3 * ${space.m});
+  `}
+`;
+
+const TagButtonsContainer = styled.div`
+  ${({ theme: { space } }) => `
+    margin-top: ${space.m};
+  `}
+
+  ${mediaQueryMin.m`
+    margin-top: 0  
   `}
 `;
 
@@ -52,6 +63,7 @@ const TagButton = styled(Button)`
 const SuggestionsContainer = styled.div`
   ${({ theme: { space, color } }) => `
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     color: ${color.step_zilla_sub_heading};
     margin-top: ${space.m};
@@ -81,14 +93,16 @@ const Tags = ({
     {!readOnly && (
       <SuggestionsContainer>
         <Bold>Suggestions:</Bold>{'\u00a0\u00a0'}{' '}
-        {predefinedSuggestions.map(suggestion => (
-          <TagButton
-            onClick={() => handleAddition(suggestion)}
-            key={suggestion}
-          >
-            {suggestion}
-          </TagButton>
-        ))}
+        <TagButtonsContainer>
+          {predefinedSuggestions.map(suggestion => (
+            <TagButton
+              onClick={() => handleAddition(suggestion)}
+              key={suggestion}
+            >
+              {suggestion}
+            </TagButton>
+          ))}
+        </TagButtonsContainer>
       </SuggestionsContainer>
     )}
   </TagsContainer>

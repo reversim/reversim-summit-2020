@@ -137,7 +137,7 @@ class CFPForm extends Component {
         <Paragraph2>Remember, you may submit up to 3 proposals.</Paragraph2>
         <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
         </div>
-        <div className='step-progress'>
+        <div className='step-progress pl-5 pr-7'>
           <StepZilla
             preventEnterSubmission={true}
             steps={steps}

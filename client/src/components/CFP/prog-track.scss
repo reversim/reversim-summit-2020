@@ -172,3 +172,21 @@ ol.progtrckr {
     left: 5.7rem;
   }
 }
+
+//Navigation buttons
+
+.footer-buttons {
+  border: 2px solid silver; //DELETE WHEN DONE
+
+  display: flex;
+  justify-content: space-between;
+}
+
+//This is the selector for the PREVIUS button (weird but true)
+.btn-next{
+  background: green;
+}
+//This is the selector for the "NEXT" button (weird but true)
+.btn-prev{
+  background: goldenrod !important;
+}
