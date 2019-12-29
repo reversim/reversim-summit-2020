@@ -176,17 +176,67 @@ ol.progtrckr {
 //Navigation buttons
 
 .footer-buttons {
-  border: 2px solid silver; //DELETE WHEN DONE
-
   display: flex;
   justify-content: space-between;
 }
 
-//This is the selector for the PREVIUS button (weird but true)
+//This is the selector for the "PREVIUS" button (weird but true)
 .btn-next{
-  background: green;
+  width: max-content;
+  min-width: 280px;
+  height: 40px;
+  margin: 0 10px 25px 10px;
+  padding: 10px 25px;
+  letter-spacing: 1px;
+  color: rgb(255, 255, 255);
+
+  background: left bottom linear-gradient(to left, rgb(255, 97, 0) 50%, rgb(137, 108, 255) 50%);  
+  background-size: 205% 100%;
+  border: solid 2px rgb(200, 200, 200);
+  border-radius: 0;
+  box-shadow: -2px 2px rgb(81, 39, 255), -4px 4px rgb(200, 200, 200);
+
+  font-size: 16px;
+  font-family: PT Mono;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  transition: all .5s ease-out;
+
+  &:hover{
+    background-position: right bottom;
+    text-decoration: none;
+    color: inherit;
+  }
 }
 //This is the selector for the "NEXT" button (weird but true)
 .btn-prev{
-  background: goldenrod !important;
+  width: max-content;
+  min-width: 280px;
+  height: 40px;
+  margin: 0 10px 25px 10px;
+  padding: 10px 25px;
+  letter-spacing: 1px;
+  color: rgb(255, 255, 255);
+
+  background: right bottom linear-gradient(to right, rgb(255, 97, 0) 50%, rgb(137, 108, 255) 50%);  
+  background-size: 205% 100%;
+  border: solid 2px rgb(200, 200, 200);
+  border-radius: 0;
+  box-shadow: -2px 2px rgb(81, 39, 255), -4px 4px rgb(200, 200, 200);
+
+  font-size: 16px;
+  font-family: PT Mono;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  transition: all .5s ease-out;
+
+  &:hover{
+    background-position: left bottom;
+    text-decoration: none;
+    color: inherit;
+  }
 }

@@ -42,7 +42,7 @@ const theme = {
     box_shadow_1: 'rgb(81, 39, 255)',
     box_shadow_1_dimmed: 'rgba(81, 39, 255, 0.5)',
     box_shadow_2: 'rgb(255, 255, 255)',
-    box_shadow_3: 'rgb(222, 226, 230)',
+    box_shadow_3: 'rgb(200, 200, 200)',
 
     font_awsome_border: `rgb(0, 58, 204)`,
     font_awsome_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
