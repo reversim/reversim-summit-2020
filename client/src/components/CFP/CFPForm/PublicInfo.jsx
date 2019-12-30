@@ -10,7 +10,7 @@ import {
 const PublicInfo = ({user}) => (
   <StepContainer>
     <StepHeading>Public information</StepHeading>
-    <FormSubHeading className="font-size-sm text-gray-600">
+    <FormSubHeading>
       The following information will be presented on the website.
     </FormSubHeading>
     <FormField
@@ -30,8 +30,8 @@ const PublicInfo = ({user}) => (
       subtitle="Maximum 100 characters"
       placeholder="COBOL developer at Acme Corp"
     />
-    <StepHeading className="mb-0">Media</StepHeading>
-    <FormSubHeading className="font-size-sm text-gray-600">
+    <StepHeading>Media</StepHeading>
+    <FormSubHeading>
       The following information will be presented on the website
     </FormSubHeading>
     <FormField

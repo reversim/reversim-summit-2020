@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import FormField, {SPACING} from '../../FormField';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';

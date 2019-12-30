@@ -267,10 +267,8 @@ class Outline extends Component {
           </CheckboxLable>
         </AgreementContainer>
         <SubmitContainer>
-          <SubmitInput type="submit"/>
-          <SubmitButton color="primary" onClick={this.handleSubmit}>
-            Submit
-          </SubmitButton>
+          <SubmitInput type="submit" />
+          <SubmitButton>Submit</SubmitButton>
         </SubmitContainer>
       </StepContainer>
     );

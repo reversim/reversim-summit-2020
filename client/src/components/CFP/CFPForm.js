@@ -1,9 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import styled from 'styled-components';
 import ga from 'react-ga';
-import UserForm, {getUserData} from './UserForm.js';
+import {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
-import ProposalForm from './ProposalForm.js';
 
 import StepZilla from 'react-stepzilla';
 import PublicInfo from './CFPForm/PublicInfo';
@@ -37,10 +36,41 @@ const DeadLine = styled.span`
 //React components section
 class CFPForm extends Component {
   state = {
-    proposalType: 'full',
-    tags: [],
-    categories: [],
-    missingCategories:false
+    // proposalType: 'full',
+    // tags: [],
+    // categories: [], NOTE: commented out but it's still in use. DELETE WHEN DONE
+    missingCategories: false,
+    publicInfo: {
+      name: '',
+      OneLiner: '',
+    },
+    media: {
+      LinkedIn: '',
+      gitHub: '',
+      twitter: '',
+    },
+    shortBio: {
+      userBio: '',
+    },
+    privateInfo: {
+      email: '',
+      phoneNumber: '',
+      linkToVideo: '',
+      speakerTrackRecord: '',
+    },
+    sessionProposal: {
+      title: '',
+      type: '',
+      coSpeaker: '',
+    },
+    abstract: {
+      proposalAbstract: '',
+      tags: [],
+      categories: [],
+    },
+    outline: {
+      propsalOutline: '',
+    },
   };
 
   handleSubmit = async e => {
@@ -61,7 +91,7 @@ class CFPForm extends Component {
         return;
       }
 
-      const categories = this.state.categories;
+      const categories = this.state.abstract.categories;
       if (!categories.length) {
         this.setState({missingCategories: true})
         const y =
@@ -86,15 +116,16 @@ class CFPForm extends Component {
       }
     }
   };
-
+// handleSubmit was (and maybe should be) passed to a <form onSubmit={this.handleSubmit}> that wrapps <StepZilla />
+// Done what I suggested above but it doesn't work. still returnd "cant read "
   getProposalData = formElements => {
     const title = formElements.title.value;
-    const type = this.state.proposalType;
+    const type = this.state.sessionProposal.type;
     const outline = formElements.outline.value;
     const abstract = formElements.abstract.value;
     const legal = formElements.legal.checked;
-    const tags = this.state.tags;
-    const categories = this.state.categories;
+    const tags = this.state.abstract.tags;
+    const categories = this.state.abstract.categories;
     const user = this.props.user;
     const coSpeaker = formElements.coSpeaker.value;
 
@@ -110,20 +141,63 @@ class CFPForm extends Component {
       coSpeaker,
     }
   };
-
+// getProposalData is passed to handleSubmit
   updateState = state => this.setState(state);
 
   render() {
     const {user, allTags} = this.props;
-    const {tags, proposalType, categories} = this.state;
+    const { abstract: { tags, categories }, sessionProposal: { proposalType }} = this.state;
 
     const steps = [
-      { name: 'Public Info', component: <PublicInfo user={user} />},
-      { name: 'Short Bio', component: <ShortBio user={user} />},
-      { name: 'Private Info', component: <PrivateInfo user={user} />},
-      { name: 'Session Proposal', component: <SessionProposal update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags}/>},
-      { name: 'Abstract', component: <Abstract update={this.updateState} tags={tags} proposalType={proposalType} categories={categories} missingCategories={this.state.missingCategories} allTags={allTags} />},
-      { name: 'Outline & Notes', component: <Outline user={user} updateUserData={this.props.updateUserData} createProposal={this.props.createProposal} history={this.props.history} />},
+      {
+        name: 'Public Info',
+        component: <PublicInfo user={user} />
+      },
+      {
+        name: 'Short Bio',
+        component: <ShortBio user={user} />
+      },
+      {
+        name: 'Private Info',
+        component: <PrivateInfo user={user} />
+      },
+      {
+        name: 'Session Proposal',
+        component: (
+          <SessionProposal
+            update={this.updateState}
+            tags={tags}
+            proposalType={proposalType}
+            categories={categories}
+            missingCategories={this.state.missingCategories}
+            allTags={allTags}
+          />
+        )
+      },
+      {
+        name: 'Abstract',
+        component: (
+          <Abstract
+            update={this.updateState}
+            tags={tags}
+            proposalType={proposalType}
+            categories={categories}
+            missingCategories={this.state.missingCategories}
+            allTags={allTags}
+          />
+        )
+      },
+      {
+        name: 'Outline & Notes',
+        component: (
+          <Outline
+            user={user}
+            updateUserData={this.props.updateUserData}
+            createProposal={this.props.createProposal}
+            history={this.props.history}
+          />
+        )
+      },
     ];
 
     return (
@@ -138,10 +212,12 @@ class CFPForm extends Component {
           <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
         </NoteContainer>
         <div className='step-progress pl-5 pr-7'>
-          <StepZilla
-            preventEnterSubmission={true}
-            steps={steps}
-          />
+          <form onSubmit={this.handleSubmit}>
+            <StepZilla
+              preventEnterSubmission={true}
+              steps={steps}
+            />
+          </form>
         </div>
       </AlignCenterColumn>
     );
