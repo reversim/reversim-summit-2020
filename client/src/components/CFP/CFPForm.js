@@ -1,6 +1,7 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import ga from 'react-ga';
+import {debounce} from 'lodash';
 import {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
 
@@ -35,47 +36,59 @@ const DeadLine = styled.span`
 
 //React components section
 class CFPForm extends Component {
-  state = {
-    // proposalType: 'full',
-    // tags: [],
-    // categories: [], NOTE: commented out but it's still in use. DELETE WHEN DONE
-    missingCategories: false,
-    publicInfo: {
-      name: '',
-      OneLiner: '',
-    },
-    media: {
-      LinkedIn: '',
-      gitHub: '',
-      twitter: '',
-    },
-    shortBio: {
-      userBio: '',
-    },
-    privateInfo: {
-      email: '',
-      phoneNumber: '',
-      linkToVideo: '',
-      speakerTrackRecord: '',
-    },
-    sessionProposal: {
-      title: '',
-      type: '',
-      coSpeaker: '',
-    },
-    abstract: {
-      proposalAbstract: '',
-      tags: [],
-      categories: [],
-    },
-    outline: {
-      propsalOutline: '',
-    },
-  };
+  constructor (props){
+    super(props);
+    this.state = {
+      // proposalType: 'full',
+      // tags: [],
+      // categories: [], NOTE: commented out but it's still in use. DELETE WHEN DONE
+      missingCategories: false,
+      publicInfo: {
+        name: '',
+        OneLiner: '',
+      },
+      media: {
+        LinkedIn: '',
+        gitHub: '',
+        twitter: '',
+      },
+      shortBio: {
+        userBio: '',
+      },
+      privateInfo: {
+        email: '',
+        phoneNumber: '',
+        linkToVideo: '',
+        speakerTrackRecord: '',
+      },
+      sessionProposal: {
+        title: '',
+        type: '',
+        coSpeaker: '',
+      },
+      abstract: {
+        proposalAbstract: '',
+        tags: [],
+        categories: [],
+      },
+      outline: {
+        propsalOutline: '',
+      },
+    };
+  }
+
+  handleChange(event) {
+    const {name, value} = event.target;
+    this.setState({
+      [name]: value,
+    });
+  }
 
   handleSubmit = async e => {
     e.preventDefault();
     const formElements = e.target.elements;
+    /*this.handleSubmit() is dependent on formElements. 
+    Assgin it a value corresponding to this.state and make sure it's keys are called accordingly*/
 
     const {user, updateUserData, createProposal, history} = this.props;
 
