@@ -51,7 +51,16 @@ class CFPForm extends Component {
       oneLiner: '',
       name: '',
       video_url: '',
+
+      abstract: '',
+      tags: '',
+      categories: '',
+      type: '',
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.getProposalData = this.getProposalData.bind(this);
+
   }
 
   handleChange(event) {
@@ -60,17 +69,17 @@ class CFPForm extends Component {
       [name]: value,
     });
   }
+  /* NOTE: handleChange is not in use. Check out why */
 
   handleSubmit = async e => {
     e.preventDefault();
-    const formElements = e.target.elements;
+    const formElements = e.target.element;
     /* NOTE: this.handleSubmit() is dependent on formElements. 
        Assgin it a value corresponding to this.state and make sure it's keys are called accordingly */
-
+    const {abstract, categories} = this.state;
     const {user, updateUserData, createProposal, history} = this.props;
 
     if (user) {
-      const abstract = formElements.abstract.value;
       if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
         const scrollY =
           formElements.abstract.getBoundingClientRect().top -
@@ -81,7 +90,6 @@ class CFPForm extends Component {
         return;
       } /* NOTE: Scroll to Abstract if abstract.length is bigger than Max or smaller than Min*/
 
-      const categories = this.state.abstract.categories;
       if (!categories.length) {
         this.setState({missingCategories: true});
         const scrollY =
@@ -93,13 +101,13 @@ class CFPForm extends Component {
       } /* NOTE: Scroll to Categories if there's no abstract.categories.length*/
 
       try {
-        let newUser = getUserData(e.target.elements); /* NOTE: creats a newUser object with info passed to the form */
+        let newUser = getUserData(e.target.elements); /* NOTE: creates a newUser object with info passed to the form */
         newUser._id = user._id;
         await updateUserData(newUser);
         /*NOTE: the above puts the newUser obj to the '/api/user' URL. updateUserData is a prop passed by App.js which
         calls updateUser(user) from /client/src/data-service.js */
 
-        const result = await createProposal(this.getProposalData(formElements));
+        const result = await createProposal(this.getProposalData(this.state));
         /*NOTE: This POSTs the object returned by this.getProposalData(formElements) to /api/proposal */
         history.push(`/session/${result._id}`); /* NOTE: redirects to the new session's page */
       } catch (ex) {
@@ -142,7 +150,7 @@ class CFPForm extends Component {
 
   render() {
     const {user, allTags} = this.props;
-    const { propsal: { tags, categories, type }} = this.state;
+    const { tags, categories, type } = this.state;
 
     const steps = [
       {

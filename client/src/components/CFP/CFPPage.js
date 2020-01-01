@@ -1,11 +1,10 @@
 import React, {Fragment} from 'react';
-import {Button, Col, Container, Row} from 'reactstrap';
+import {Button} from 'reactstrap';
 import Page from '../Page';
 import {Link} from 'react-router-dom';
 import CFPTitle from './CFPTitle';
 import CFPIntro from './CFPIntro';
 import CFPForm from './CFPForm';
-import {cfpCol} from './CFPPage.css';
 import {getLoginUrl} from '../Redirect';
 import {getRemainingCFPDays as _x, REVERSIM_SUMMIT} from '../../utils';
 
