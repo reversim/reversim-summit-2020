@@ -64,7 +64,7 @@ class CFPForm extends Component {
     e.preventDefault();
     const formElements = e.target.element;
     /* NOTE: this.handleSubmit() is dependent on formElements. 
-       Assgin it a value corresponding to this.state and make sure it's keys are called accordingly */
+       Assgin it a value corresponding to this.state and make sure it's keys are called accordingly. Tried it, didn't work as planned */
     const {abstract, categories} = this.state;
     const {user, updateUserData, createProposal, history} = this.props;
 
@@ -98,7 +98,7 @@ class CFPForm extends Component {
 
         const result = await createProposal(this.getProposalData(this.state));
         /*NOTE: createProposal POSTs the object returned by this.getProposalData(formElements) to /api/proposal
-          NOTE: the returned promise is assinged to const result */
+          NOTE: the returned promise is assinged to the const result */
 
         history.push(`/session/${result._id}`); /* NOTE: redirects to the new session's page */
       } catch (ex) {
