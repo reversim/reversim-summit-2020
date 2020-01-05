@@ -240,6 +240,7 @@ class Outline extends Component {
     const {
       outline,
       legal,
+      setValue,
     } = this.props;
 
     return (
@@ -252,6 +253,7 @@ class Outline extends Component {
           value={outline}
           placeholder=""
           subtitle={<OutlineFieldCaption />}
+          onChange={e => setValue('porposal', 'outline', e.target.value)}
           className={SPACING}
         />
         <AgreementContainer>

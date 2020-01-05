@@ -54,9 +54,8 @@ class SessionProposal extends Component {
       coSpeaker: props.coSpeaker,
     };
     this.onChangeCoSpeaker = this.onChangeCoSpeaker.bind(this);
-    this.handleProposalTypeChange = this.handleProposalTypeChange.bind(this);
   }
-  
+
   onChangeCoSpeaker = e => {
     this.props.update({coSpeaker: e.target.value});
     // this.setState({
@@ -65,14 +64,11 @@ class SessionProposal extends Component {
     // });
   };
 
-  handleProposalTypeChange = e => {
-    this.props.update({proposalType: e.target.value});
-  };
-  
   render () {  
     const {
       proposalType,
       title,
+      setValue,
     } = this.props;
     const { coSpeaker } = this.state;
 
@@ -88,28 +84,29 @@ class SessionProposal extends Component {
           required={true}
           placeholder="Title of your talk"
           maxLength="100"
+          subtitle={<TitleFieldCaption />}
           value={title}
           className={cn(SPACING, titleInput)}
-          subtitle={<TitleFieldCaption />}
+          onChange={e => setValue('proposal', 'title', e.target.value)}
         />
         <FormField
           id="proposalType"
           inputType="radio"
           required={true}
-          onChange={this.handleProposalTypeChange}
           values={PROPOSAL_TYPES_ARR}
           value={proposalType}
           className={SPACING}
-        />
+          onChange={e => setValue('proposal', 'proposalType', e.target.value)}
+        />{/* NOTE: radio buttons don't react */}
         <FormField
           id="coSpeaker"
           label="Co-Speaker (optional)"
           required={false}
           placeholder={`co.speaker@email.com`}
-          subtitle={<CoSpeakerFieldCaption/>}
-          onChange={this.onChangeCoSpeaker}
-          className={SPACING}
+          subtitle={<CoSpeakerFieldCaption />}
           value={coSpeaker}
+          className={SPACING}
+          onChange={e => setValue('proposal', 'coSpeaker', e.target.value)}
         />
       </StepContainer>
     );

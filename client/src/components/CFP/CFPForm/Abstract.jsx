@@ -346,7 +346,7 @@ class Abstract extends Component {
 
   addTag = tag => {
     const tags = this.props.tags.concat(tag);
-    this.props.update({tags: tags});
+    this.props.setValue('proposal', tags, tags);
   };
 
   onCategoryChange = name => {
@@ -403,17 +403,18 @@ class Abstract extends Component {
       tags,
       abstract,
       allTags,
+      setValue
     } = this.props;
-    
+
     const {
       abstractLen,
       abstractErr,
       newTagPending,
     } = this.state;
-    
-    let bestMatch,
-    predefinedTags,
-    tagObjs = tags.map(t => ({id: t, text: t}));
+
+    let bestMatch;
+    let predefinedTags;
+    let tagObjs = tags.map(t => ({id: t, text: t}));
 
     const tagSuggestions = uniq(without(PREDEFINED_TAGS.concat(allTags), ...tags));
     predefinedTags = without(PREDEFINED_TAGS, ...tags);
@@ -432,7 +433,7 @@ class Abstract extends Component {
           value={abstract}
           placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
           subtitle={<AbstractFieldCaption abstractLen={abstractLen} abstractErr={abstractErr} />}
-          onChange={this.onChangeAbstract}
+          onChange={e => setValue('proposal', 'abstract', e.target.value)}
           className={SPACING}
         />
         <Tags

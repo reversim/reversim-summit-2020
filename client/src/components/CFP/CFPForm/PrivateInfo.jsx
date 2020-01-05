@@ -30,13 +30,20 @@ const VideoUrlFieldCaption = () => (
   </span>
 );
 
-const PrivateInfo = user => (
+const PrivateInfo = ({user, setValue}) => (
   <StepContainer>
     <StepHeading>Private information</StepHeading>
     <FormSubHeading>
       The following information will be available <Bold>only to the organizing committee</Bold>
     </FormSubHeading>
-    <FormField id="email" label="Email" text={user.email} required={true} className={SPACING} />
+    <FormField
+      id="email"
+      label="Email"
+      value={user.email}
+      required={true}
+      className={SPACING}
+      onChange={e => setValue('user', 'email', e.target.value)}
+    />
     <FormField
       id="phone"
       label="Phone number"
@@ -44,6 +51,7 @@ const PrivateInfo = user => (
       placeholder="05x-xxxxxxx"
       value={user.phone}
       className={SPACING}
+      onChange={e => setValue('user', 'phone', e.target.value)}
     />
     <FormField
       id="video_url"
@@ -53,6 +61,7 @@ const PrivateInfo = user => (
       placeholder="e.g. http://youtu.be/xxxx"
       subtitle={<VideoUrlFieldCaption />}
       className={SPACING}
+      onChange={e => setValue('user', 'video_url', e.target.value)}
     />
     <FormField
       id="trackRecord"
@@ -111,6 +120,7 @@ const PrivateInfo = user => (
           </ul>
         </span>
       }
+      onChange={e => setValue('user', 'trackRecord', e.target.value)}
     />
   </StepContainer>
 );

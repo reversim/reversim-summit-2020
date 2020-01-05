@@ -7,7 +7,7 @@ import {
   FormSubHeading,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
-const PublicInfo = ({user}) => (
+const PublicInfo = ({user, setValue}) => (
   <StepContainer>
     <StepHeading>Public information</StepHeading>
     <FormSubHeading>
@@ -20,6 +20,7 @@ const PublicInfo = ({user}) => (
       placeholder="Your name"
       value={user.name}
       className={SPACING}
+      onChange={e => setValue('user', 'fullname', e.target.value)}
     />
     <FormField
       id="oneLiner"
@@ -29,6 +30,7 @@ const PublicInfo = ({user}) => (
       className={SPACING}
       subtitle="Maximum 100 characters"
       placeholder="COBOL developer at Acme Corp"
+      onChange={e => setValue('user', 'oneLiner', e.target.value)}
     />
     <StepHeading>Media</StepHeading>
     <FormSubHeading>
@@ -41,6 +43,7 @@ const PublicInfo = ({user}) => (
       inputType="url"
       className={SPACING}
       placeholder="https://www.linkedin.com/in/reversim/"
+      onChange={e => setValue('user', 'linkedin', e.target.value)}
     />
     <FormField
       id="github"
@@ -48,6 +51,7 @@ const PublicInfo = ({user}) => (
       value={user.github}
       placeholder="podcaster"
       className={SPACING}
+      onChange={e => setValue('user', 'github', e.target.value)}
     />
     <FormField
       id="twitter"
@@ -55,6 +59,7 @@ const PublicInfo = ({user}) => (
       value={user.twitter}
       placeholder="@Reversim"
       className={SPACING}
+      onChange={e => setValue('user', 'twitter', e.target.value)}
     />
   </StepContainer>
 )

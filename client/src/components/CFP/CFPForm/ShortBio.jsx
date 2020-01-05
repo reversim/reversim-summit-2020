@@ -8,8 +8,9 @@ const ShortBiography = styled(FormField)`
   ${({ theme: { space } }) => `
     margin-bottom: calc(4 * ${space.m});
   `}
-`
-const ShortBio = ({user}) => (
+`;
+
+const ShortBio = ({user, setValue}) => (
   <StepContainer>
     <StepHeading>Short Bio</StepHeading>
     <ShortBiography
@@ -33,6 +34,7 @@ const ShortBio = ({user}) => (
           “I am an avid wikipedia contributor”
         </span>
       }
+      onChange={e => setValue('user', 'fullname', e.target.value)}
     />
   </StepContainer>
 );
