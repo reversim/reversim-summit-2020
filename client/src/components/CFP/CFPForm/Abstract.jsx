@@ -138,7 +138,7 @@ const CheckboxLableHeading = styled(Heading5)`
   `}
 `;
 
-const AbstractSubHeading = styled.h6`
+const AbstractSubHeading = styled.p`
   ${({ theme: { space, font } }) => `
     margin-top: calc(2 * ${space.m});
     font-weight: ${font.weight_bold};
@@ -302,7 +302,7 @@ class Abstract extends Component {
       abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true,
       newTagPending: null,
     };
-    
+
     this.onChangeAbstract = this.onChangeAbstract.bind(this);
     this.onAddTag = this.onAddTag.bind(this);
     this.onDeleteTag = this.onDeleteTag.bind(this);
@@ -326,18 +326,23 @@ class Abstract extends Component {
 
   onAddTag = tag => {
     const {allTags, tags} = this.props;
+    // NOTE: allTags is defined by the server
+    // NOTE: tags is CFPForm.state.propsal.tag: [];
+
     if (tags.indexOf(tag) > -1) {
-      return;
-    } else if (allTags && allTags.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) {
+      return; //NOTE: if tag exists in tags return
+    } else if (allTags && allTags.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) { 
       this.setState({newTagPending: tag});
+      //NOTE: if allTags exists and tag is not in it and tag is not in PREDEFINED_TAGS set this.state.newTagPending to true
     } else {
       this.addTag(tag);
+      //NOTE: else addTag(tag)
     }
   };
 
   onDeleteTag = i => {
     const tags = [...this.props.tags.slice(0, i), ...this.props.tags.slice(i + 1)];
-    this.props.update({tags: tags});
+    this.props.update({tags: tags}); //NOTE: change to setValue()
   };
 
   toggleTagModal = () => {
@@ -345,8 +350,8 @@ class Abstract extends Component {
   };
 
   addTag = tag => {
-    const tags = this.props.tags.concat(tag);
-    this.props.setValue('proposal', tags, tags);
+    const tags = this.props.tags.concat(tag); //NOTE: set the value of tags to concat tag to this.props.tags
+    this.props.setValue('proposal', 'tags', tags);
   };
 
   onCategoryChange = name => {
@@ -378,7 +383,7 @@ class Abstract extends Component {
   getOtherCategoryInState = categories => {
     return categories.find(cat => !CATEGORIES.find(cat2 => cat2.name === cat));
   };
-  
+
   onCategoryInputChange = e => {
     const value = e.target.value;
     this.setState({otherCategory: value}, () => {
@@ -490,6 +495,7 @@ class Abstract extends Component {
         <input required={true} type="hidden" id="categories_hidden" />
         <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
         {CATEGORIES.map(category => {
+          //NOTE: CATEGORIES comes from /client/src/data/proposals.js
           const checked = categories.includes(category.name);
           return (
             <CategoryCheckbox

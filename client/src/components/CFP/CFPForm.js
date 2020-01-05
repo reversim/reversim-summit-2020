@@ -66,6 +66,7 @@ class CFPForm extends Component {
   }
 
   setValue = _.debounce((form, key, value) => {
+    console.log('CFPForm.state.propsal.tags: ', this.state.proposal.tags); //DELETE WHEN DONE
     this.setState({
       [form]: {
         [key]: value,
@@ -139,7 +140,9 @@ class CFPForm extends Component {
 
   render() {
     const {user, allTags} = this.props;
-    const { proposal: { tags, categories, type } } = this.state;
+    const {
+      proposal: {tags, categories, type},
+    } = this.state;
 
     const steps = [
       {
@@ -156,14 +159,7 @@ class CFPForm extends Component {
       },
       {
         name: 'Session Proposal',
-        component: (
-          <SessionProposal
-            proposalType={type}
-            categories={categories}
-            missingCategories={this.state.missingCategories}
-            setValue={this.setValue}
-          />
-        )
+        component: <SessionProposal proposalType={type} setValue={this.setValue} />
       },
       {
         name: 'Abstract',

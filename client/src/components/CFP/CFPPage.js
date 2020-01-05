@@ -36,15 +36,15 @@ const CFPPage = props => {
   const {eventConfig} = props;
 
   return (
-  <Page title="Call for papers" {...props}>
-    <Fragment>
-      <CFPTitle eventConfig={eventConfig}/>
-      <div className="container">
-        <CFPIntro />
-        <BottomContent {...props} />
-      </div>
-    </Fragment>
-  </Page>
+    <Page title="Call for papers" {...props}>
+      <Fragment>
+        <CFPTitle eventConfig={eventConfig} />
+        <div className="container">
+          <CFPIntro />
+          <BottomContent {...props} />
+        </div>
+      </Fragment>
+    </Page>
   );
 };
 

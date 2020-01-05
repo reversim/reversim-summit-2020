@@ -482,14 +482,16 @@ export const StepHeading = styled(Heading4)`
 `;
 
 export const InputLabel = styled.label`
-  ${({ theme: { font, color } }) => `
+  ${({ theme: { space, font, color } }) => `
+    display: block;
+    margin: ${space.m} 0;
     font-family: ${font.main};
     font-size: ${font.size_md};
     color: ${color.text_3};
   `}
 `;
 
-export const FormSubHeading = styled.h5`
+export const FormSubHeading = styled.span`
   ${({ theme: { color, font, space } }) => `
     color: ${color.step_zilla_sub_heading};
     font-family: ${font.main};
