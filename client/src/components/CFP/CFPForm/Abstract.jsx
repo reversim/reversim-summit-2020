@@ -331,9 +331,9 @@ class Abstract extends Component {
 
     if (tags.indexOf(tag) > -1) {
       return; //NOTE: if tag exists in tags return
-    } else if (allTags && allTags.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) { 
+    } else if (allTags && allTags.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) {
       this.setState({newTagPending: tag});
-      //NOTE: if allTags exists and tag is not in it and tag is not in PREDEFINED_TAGS set this.state.newTagPending to true
+      //NOTE: if allTags exists and tag is not in it and tag is not in PREDEFINED_TAGS set this.state.newTagPending to tag
     } else {
       this.addTag(tag);
       //NOTE: else addTag(tag)
@@ -350,8 +350,7 @@ class Abstract extends Component {
   };
 
   addTag = tag => {
-    const tags = this.props.tags.concat(tag); //NOTE: set the value of tags to concat tag to this.props.tags
-    this.props.setValue('proposal', 'tags', tags);
+    this.props.setProposalTag(tag);
   };
 
   onCategoryChange = name => {

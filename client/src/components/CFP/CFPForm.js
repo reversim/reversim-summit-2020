@@ -78,14 +78,16 @@ class CFPForm extends Component {
   }, 1000);
 
   setProposalTag = _.debounce(newTag => {
-    let newTagsArr = this.state.proposal.tags.concat(newTag);
-    this.setState({
-      proposal: {
-        tags: newTagsArr,
-      }
-    })
-  }, 1000); //NOTE: figuer out how to make this work...
+    const proposalTags = this.state.proposal.tags;
+    const newProposalTags = [...proposalTags, newTag];
 
+    const proposal = this.state.proposal;
+
+    proposal.tags = newProposalTags;
+
+    this.setState({proposal});
+  }, 500);
+  
   handleSubmit = async e => {
     e.preventDefault();
     const formElements = e.target.element;
