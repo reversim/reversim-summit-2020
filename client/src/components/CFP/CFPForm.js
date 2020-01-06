@@ -71,23 +71,32 @@ class CFPForm extends Component {
       [form]: {
         [key]: value,
       },
-    })
+    });
     console.log('key: ', key);
     console.log('Value: ', value);
     console.log(`this.state.${form} at ${key}:  ${this.state[form][key]}`);
   }, 1000);
 
-  setProposalTag = _.debounce(newTag => {
+  setProposalTag = newTag => {
     const proposalTags = this.state.proposal.tags;
     const newProposalTags = [...proposalTags, newTag];
 
     const proposal = this.state.proposal;
-
     proposal.tags = newProposalTags;
 
     this.setState({proposal});
-  }, 500);
-  
+  };
+
+  removeProposalTag = indexToRemove => {
+    const proposalTags = this.state.proposal.tags;
+    _.remove(proposalTags, tag => tag === proposalTags[indexToRemove]);
+
+    const proposal = this.state.proposal;
+    proposal.tags = proposalTags;
+
+    this.setState({proposal});
+  };
+
   handleSubmit = async e => {
     e.preventDefault();
     const formElements = e.target.element;
@@ -175,6 +184,7 @@ class CFPForm extends Component {
             allTags={allTags}
             setValue={this.setValue}
             setProposalTag={this.setProposalTag}
+            removeProposalTag={this.removeProposalTag}
           />
         )
       },

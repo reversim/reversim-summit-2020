@@ -330,19 +330,12 @@ class Abstract extends Component {
     // NOTE: tags is CFPForm.state.propsal.tag: [];
 
     if (tags.indexOf(tag) > -1) {
-      return; //NOTE: if tag exists in tags return
+      return;
     } else if (allTags && allTags.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) {
       this.setState({newTagPending: tag});
-      //NOTE: if allTags exists and tag is not in it and tag is not in PREDEFINED_TAGS set this.state.newTagPending to tag
     } else {
       this.addTag(tag);
-      //NOTE: else addTag(tag)
     }
-  };
-
-  onDeleteTag = i => {
-    const tags = [...this.props.tags.slice(0, i), ...this.props.tags.slice(i + 1)];
-    this.props.update({tags: tags}); //NOTE: change to setValue()
   };
 
   toggleTagModal = () => {
@@ -407,7 +400,8 @@ class Abstract extends Component {
       tags,
       abstract,
       allTags,
-      setValue
+      setValue,
+      removeProposalTag,
     } = this.props;
 
     const {
@@ -445,7 +439,7 @@ class Abstract extends Component {
           suggestions={tagSuggestions}
           predefinedSuggestions={predefinedTags}
           handleAddition={this.onAddTag}
-          handleDelete={this.onDeleteTag}
+          handleDelete={removeProposalTag}
           readOnly={tags.length === MAX_TAGS}
           className={SPACING}
         />
