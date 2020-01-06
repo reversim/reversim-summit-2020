@@ -305,7 +305,6 @@ class Abstract extends Component {
 
     this.onChangeAbstract = this.onChangeAbstract.bind(this);
     this.onAddTag = this.onAddTag.bind(this);
-    this.onDeleteTag = this.onDeleteTag.bind(this);
     this.toggleTagModal = this.toggleTagModal.bind(this);
     this.addTag = this.addTag.bind(this);
     this.onCategoryChange = this.onCategoryChange.bind(this);

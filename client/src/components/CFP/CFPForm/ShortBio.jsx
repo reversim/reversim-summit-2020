@@ -34,7 +34,7 @@ const ShortBio = ({user, setValue}) => (
           “I am an avid wikipedia contributor”
         </span>
       }
-      onChange={e => setValue('user', 'fullname', e.target.value)}
+      onChange={e => setValue('userInfo', 'fullname', e.target.value)}
     />
   </StepContainer>
 );

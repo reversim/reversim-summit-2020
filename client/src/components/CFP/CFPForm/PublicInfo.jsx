@@ -20,7 +20,7 @@ const PublicInfo = ({user, setValue}) => (
       placeholder="Your name"
       value={user.name}
       className={SPACING}
-      onChange={e => setValue('user', 'fullname', e.target.value)}
+      onChange={e => setValue('userInfo', 'fullname', e.target.value)}
     />
     <FormField
       id="oneLiner"
@@ -30,7 +30,7 @@ const PublicInfo = ({user, setValue}) => (
       className={SPACING}
       subtitle="Maximum 100 characters"
       placeholder="COBOL developer at Acme Corp"
-      onChange={e => setValue('user', 'oneLiner', e.target.value)}
+      onChange={e => setValue('userInfo', 'oneLiner', e.target.value)}
     />
     <StepHeading>Media</StepHeading>
     <FormSubHeading>
@@ -43,7 +43,7 @@ const PublicInfo = ({user, setValue}) => (
       inputType="url"
       className={SPACING}
       placeholder="https://www.linkedin.com/in/reversim/"
-      onChange={e => setValue('user', 'linkedin', e.target.value)}
+      onChange={e => setValue('userInfo', 'linkedin', e.target.value)}
     />
     <FormField
       id="github"
@@ -51,7 +51,7 @@ const PublicInfo = ({user, setValue}) => (
       value={user.github}
       placeholder="podcaster"
       className={SPACING}
-      onChange={e => setValue('user', 'github', e.target.value)}
+      onChange={e => setValue('userInfo', 'github', e.target.value)}
     />
     <FormField
       id="twitter"
@@ -59,7 +59,7 @@ const PublicInfo = ({user, setValue}) => (
       value={user.twitter}
       placeholder="@Reversim"
       className={SPACING}
-      onChange={e => setValue('user', 'twitter', e.target.value)}
+      onChange={e => setValue('userInfo', 'twitter', e.target.value)}
     />
   </StepContainer>
 )

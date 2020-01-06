@@ -42,7 +42,7 @@ const PrivateInfo = ({user, setValue}) => (
       value={user.email}
       required={true}
       className={SPACING}
-      onChange={e => setValue('user', 'email', e.target.value)}
+      onChange={e => setValue('userInfo', 'email', e.target.value)}
     />
     <FormField
       id="phone"
@@ -51,7 +51,7 @@ const PrivateInfo = ({user, setValue}) => (
       placeholder="05x-xxxxxxx"
       value={user.phone}
       className={SPACING}
-      onChange={e => setValue('user', 'phone', e.target.value)}
+      onChange={e => setValue('userInfo', 'phone', e.target.value)}
     />
     <FormField
       id="video_url"
@@ -61,7 +61,7 @@ const PrivateInfo = ({user, setValue}) => (
       placeholder="e.g. http://youtu.be/xxxx"
       subtitle={<VideoUrlFieldCaption />}
       className={SPACING}
-      onChange={e => setValue('user', 'video_url', e.target.value)}
+      onChange={e => setValue('userInfo', 'video_url', e.target.value)}
     />
     <FormField
       id="trackRecord"
@@ -120,7 +120,7 @@ const PrivateInfo = ({user, setValue}) => (
           </ul>
         </span>
       }
-      onChange={e => setValue('user', 'trackRecord', e.target.value)}
+      onChange={e => setValue('userInfo', 'trackRecord', e.target.value)}
     />
   </StepContainer>
 );
