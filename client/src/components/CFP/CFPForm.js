@@ -212,12 +212,10 @@ class CFPForm extends Component {
           <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
         </NoteContainer>
         <div className='step-progress pl-5 pr-7'>
-          <form onSubmit={this.handleSubmit}>
             <StepZilla
               preventEnterSubmission={true}
               steps={steps}
             />
-          </form>
         </div>
       </AlignCenterColumn>
     );
