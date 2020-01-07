@@ -66,10 +66,11 @@ class CFPForm extends Component {
   }
 
   setValue = _.debounce((form, key, value) => {
+    const currentRelevantForm = _.get(this.state, form)
+    const updatedRelevantForm = _.assign({}, currentRelevantForm, { [key]: value })
+    
     this.setState({
-      [form]: {
-        [key]: value,
-      },
+      [form]: updatedRelevantForm,
     });
   }, 1000);
 
