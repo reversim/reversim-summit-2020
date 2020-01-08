@@ -44,7 +44,7 @@ class CFPForm extends Component {
         fullname: '',
         email: '',
         twitter: '',
-        gitHub: '',
+        github: '',
         linkedin: '',
         trackRecord: '',
         phone: '',
@@ -54,7 +54,7 @@ class CFPForm extends Component {
       },
       proposal: {
         title: '',
-        type: '',
+        proposalType: '',
         abstract: '',
         tags: [],
         categories: [],
@@ -66,13 +66,32 @@ class CFPForm extends Component {
   }
 
   setValue = _.debounce((form, key, value) => {
-    const currentRelevantForm = _.get(this.state, form)
-    const updatedRelevantForm = _.assign({}, currentRelevantForm, { [key]: value })
-    
+    const currentRelevantForm = _.get(this.state, form);
+    const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
+    const {userInfo, proposal} = this.state;
+    console.warn('setValue called'); //DELETE WHEN DONE
     this.setState({
       [form]: updatedRelevantForm,
     });
+    console.log(`value passed is: ${value}`); // DELETE WHEN DONE
+    console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
+    console.log(`userInfo: ${userInfo}`);
+    console.log(`proposal: ${proposal}`);
   }, 1000);
+
+  setProposalType = (form, key, value) => {
+    const currentRelevantForm = _.get(this.state, form);
+    const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
+    const {userInfo, proposal} = this.state;
+    console.warn('setValue called'); //DELETE WHEN DONE
+    this.setState({
+      [form]: updatedRelevantForm,
+    });
+    console.log(`value passed is: ${value}`); // DELETE WHEN DONE
+    console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
+    console.log(`userInfo: ${userInfo}`);
+    console.log(`proposal: ${proposal}`);
+  }
 
   setProposalTag = newTag => {
     const proposalTags = this.state.proposal.tags;
@@ -125,34 +144,33 @@ class CFPForm extends Component {
       //   return;
       // } /* NOTE: Scroll to Categories if there's no abstract.categories.length*/
 
-      try {
-        // let newUser = getUserData(e.target.elements); /* NOTE: creates a newUser object with info passed from the form */
-        userInfo._id = user._id;
-        await updateUserData(userInfo);
-        /* NOTE: the above puts the newUser obj to the '/api/user' URL. updateUserData is a prop passed by App.js which
-        imports updateUser(user) from /client/src/data-service.js */
+      // try {
+      //   // let newUser = getUserData(e.target.elements); /* NOTE: creates a newUser object with info passed from the form */
+      //   userInfo._id = user._id;
+      //   await updateUserData(userInfo);
+      //   /* NOTE: the above puts the newUser obj to the '/api/user' URL. updateUserData is a prop passed by App.js which
+      //   imports updateUser(user) from /client/src/data-service.js */
 
-        const result = await createProposal(proposal);
-        /* NOTE: createProposal POSTs the object stored in this.state.proposal to /api/proposal.
-           NOTE: the returned promise is assinged to the const result */
+      //   const result = await createProposal(proposal);
+      //   /* NOTE: createProposal POSTs the object stored in this.state.proposal to /api/proposal.
+      //      NOTE: the returned promise is assinged to the const result */
 
-        history.push(`/session/${result._id}`); /* NOTE: redirects to the new session's page */
-        console.log(userInfo);
-        console.log(proposal);
-      } catch (ex) {
-        ga.exception({
-          description: `Error on submit: ${ex}`,
-          fatal: true,
-        });
-      }
+      //   history.push(`/session/${result._id}`); /* NOTE: redirects to the new session's page */
+      // } catch (ex) {
+      //   ga.exception({
+      //     description: `Error on submit: ${ex}`,
+      //     fatal: true,
+      //   });
+      // }
+      console.log(userInfo);
+      console.log(proposal);
     }
   };
-  /* NOTE: handleSubmit was (and maybe should be) passed to a <form onSubmit={this.handleSubmit}> that wrapps <StepZilla />
-     NOTE: Done what I suggested above but it doesn't work. still formElements is not defined */
+  /* NOTE: I commented out the above function but it has to be solved better */
 
   render() {
     const {user, allTags} = this.props;
-    const {tags, categories, type} = this.state.proposal;
+    const {tags, categories, proposalType} = this.state.proposal;
 
     const steps = [
       {
@@ -169,7 +187,13 @@ class CFPForm extends Component {
       },
       {
         name: 'Session Proposal',
-        component: <SessionProposal proposalType={type} setValue={this.setValue} />
+        component: (
+          <SessionProposal
+            proposalType={proposalType}
+            setProposalType={this.setProposalType}
+            setValue={this.setValue}
+          />
+        )
       },
       {
         name: 'Abstract',
@@ -178,7 +202,6 @@ class CFPForm extends Component {
             categories={categories}
             tags={tags}
             abstract={this.state.proposal.abstract}
-            type={type}
             missingCategories={this.state.missingCategories}
             allTags={allTags}
             setValue={this.setValue}
@@ -196,6 +219,7 @@ class CFPForm extends Component {
             createProposal={this.props.createProposal}
             history={this.props.history}
             setValue={this.setValue}
+            handleSubmit={this.handleSubmit}
           />
         )
       },

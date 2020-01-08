@@ -69,6 +69,7 @@ class SessionProposal extends Component {
       proposalType,
       title,
       setValue,
+      setProposalType,
     } = this.props;
     const { coSpeaker } = this.state;
 
@@ -96,7 +97,7 @@ class SessionProposal extends Component {
           values={PROPOSAL_TYPES_ARR}
           value={proposalType}
           className={SPACING}
-          onChange={e => setValue('proposal', 'proposalType', e.target.value)}
+          onChange={e => setProposalType('proposal', 'proposalType', e.target.value)}
         />{/* NOTE: radio buttons don't react */}
         <FormField
           id="coSpeaker"

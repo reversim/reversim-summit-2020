@@ -241,6 +241,7 @@ class Outline extends Component {
       outline,
       legal,
       setValue,
+      handleSubmit,
     } = this.props;
 
     return (
@@ -269,8 +270,8 @@ class Outline extends Component {
           </CheckboxLable>
         </AgreementContainer>
         <SubmitContainer>
-          <SubmitInput type="submit" />
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitInput />
+          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
         </SubmitContainer>
       </StepContainer>
     );

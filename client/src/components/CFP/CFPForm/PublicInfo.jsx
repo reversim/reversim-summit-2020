@@ -10,9 +10,7 @@ import {
 const PublicInfo = ({user, setValue}) => (
   <StepContainer>
     <StepHeading>Public information</StepHeading>
-    <FormSubHeading>
-      The following information will be presented on the website.
-    </FormSubHeading>
+    <FormSubHeading>The following information will be presented on the website.</FormSubHeading>
     <FormField
       id="fullname"
       label="Full name"
@@ -33,9 +31,7 @@ const PublicInfo = ({user, setValue}) => (
       onChange={e => setValue('userInfo', 'oneLiner', e.target.value)}
     />
     <StepHeading>Media</StepHeading>
-    <FormSubHeading>
-      The following information will be presented on the website
-    </FormSubHeading>
+    <FormSubHeading>The following information will be presented on the website</FormSubHeading>
     <FormField
       id="linkedin"
       label="Linkedin Profile"
@@ -62,6 +58,6 @@ const PublicInfo = ({user, setValue}) => (
       onChange={e => setValue('userInfo', 'twitter', e.target.value)}
     />
   </StepContainer>
-)
+);
 
 export default PublicInfo;
