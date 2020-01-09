@@ -1,10 +1,7 @@
 import React, {Fragment, Component} from 'react';
-import FormField, {SPACING} from '../../FormField';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-import cn from 'classnames';
-import {titleInput} from '../CFPPage.css';
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
 import {
   StepContainer,
@@ -14,6 +11,7 @@ import {
   ListItem,
   ListBolt,
   Important,
+  FormField,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const TitleFieldCaption = () => (
@@ -87,7 +85,6 @@ class SessionProposal extends Component {
           maxLength="100"
           subtitle={<TitleFieldCaption />}
           value={title}
-          className={cn(SPACING, titleInput)}
           onChange={e => setValue('proposal', 'title', e.target.value)}
         />
         <FormField
@@ -96,7 +93,6 @@ class SessionProposal extends Component {
           required={true}
           values={PROPOSAL_TYPES_ARR}
           value={proposalType}
-          className={SPACING}
           onChange={e => setProposalType('proposal', 'proposalType', e.target.value)}
         />{/* NOTE: radio buttons don't react */}
         <FormField
@@ -106,7 +102,6 @@ class SessionProposal extends Component {
           placeholder={`co.speaker@email.com`}
           subtitle={<CoSpeakerFieldCaption />}
           value={coSpeaker}
-          className={SPACING}
           onChange={e => setValue('proposal', 'coSpeaker', e.target.value)}
         />
       </StepContainer>

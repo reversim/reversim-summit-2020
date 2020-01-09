@@ -75,9 +75,28 @@ class CFPForm extends Component {
     });
     console.log(`value passed is: ${value}`); // DELETE WHEN DONE
     console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
-    console.log(`userInfo: ${userInfo}`);
-    console.log(`proposal: ${proposal}`);
-  }, 1000);
+    console.log(`userInfo: `);
+    console.log(userInfo);
+    console.log(`proposal: `);
+    console.log(proposal);
+  }, 250);
+
+  setEmailandPhone = _.debounce((user, form, key, value) => {
+    value = value ? value : user[key];
+    const currentRelevantForm = _.get(this.state, form);
+    const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
+    const {userInfo, proposal} = this.state;
+    console.warn('setValue called'); //DELETE WHEN DONE
+    this.setState({
+      [form]: updatedRelevantForm,
+    });
+    console.log(`value passed is: ${value}`); // DELETE WHEN DONE
+    console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
+    console.log(`userInfo: `);
+    console.log(userInfo);
+    console.log(`proposal: `);
+    console.log(proposal);
+  }, 250);
 
   setProposalType = (form, key, value) => {
     const currentRelevantForm = _.get(this.state, form);
@@ -89,9 +108,11 @@ class CFPForm extends Component {
     });
     console.log(`value passed is: ${value}`); // DELETE WHEN DONE
     console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
-    console.log(`userInfo: ${userInfo}`);
-    console.log(`proposal: ${proposal}`);
-  }
+    console.log(`userInfo: `);
+    console.log(userInfo);
+    console.log(`proposal: `);
+    console.log(proposal);
+  };
 
   setProposalTag = newTag => {
     const proposalTags = this.state.proposal.tags;
@@ -183,7 +204,7 @@ class CFPForm extends Component {
       },
       {
         name: 'Private Info',
-        component: <PrivateInfo user={user} setValue={this.setValue} />
+        component: <PrivateInfo user={user} setValue={this.setValue} setEmailandPhone={this.setEmailandPhone} />
       },
       {
         name: 'Session Proposal',

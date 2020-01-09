@@ -1,6 +1,4 @@
 import React from 'react';
-import FormField, {SPACING} from '../../FormField';
-
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
   StepContainer,
@@ -11,8 +9,8 @@ import {
   InvertedColorLink,
   ListItem,
   ListBolt,
+  FormField,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
-
 
 const VideoUrlFieldCaption = () => (
   <span>
@@ -39,9 +37,9 @@ const PrivateInfo = ({user, setValue}) => (
     <FormField
       id="email"
       label="Email"
-      value={user.email}
       required={true}
-      className={SPACING}
+      placeholder="your.email@here.please"
+      value={user.email}
       onChange={e => setValue('userInfo', 'email', e.target.value)}
     />
     <FormField
@@ -50,7 +48,6 @@ const PrivateInfo = ({user, setValue}) => (
       required={true}
       placeholder="05x-xxxxxxx"
       value={user.phone}
-      className={SPACING}
       onChange={e => setValue('userInfo', 'phone', e.target.value)}
     />
     <FormField
@@ -60,7 +57,6 @@ const PrivateInfo = ({user, setValue}) => (
       value={user.video_url}
       placeholder="e.g. http://youtu.be/xxxx"
       subtitle={<VideoUrlFieldCaption />}
-      className={SPACING}
       onChange={e => setValue('userInfo', 'video_url', e.target.value)}
     />
     <FormField
@@ -70,7 +66,6 @@ const PrivateInfo = ({user, setValue}) => (
       placeholder=""
       required={true}
       multiline={true}
-      className={SPACING}
       subtitle={
         <span>
           Reversim Summit is looking for a balance between seasonal speakers and new speakers. <br/><br/>

@@ -1,7 +1,6 @@
 import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
 
-import FormField, {SPACING} from '../../FormField';
 import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
@@ -17,6 +16,7 @@ import {
   ListBolt,
   Paragraph,
   Bold,
+  FormField,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 import {Button} from 'reactstrap';
 
@@ -255,7 +255,6 @@ class Outline extends Component {
           placeholder=""
           subtitle={<OutlineFieldCaption />}
           onChange={e => setValue('porposal', 'outline', e.target.value)}
-          className={SPACING}
         />
         <AgreementContainer>
           <CheckboxInput

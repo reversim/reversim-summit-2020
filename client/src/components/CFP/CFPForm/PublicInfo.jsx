@@ -1,10 +1,9 @@
 import React from 'react';
-import FormField, {SPACING} from '../../FormField';
-
 import {
   StepContainer,
   StepHeading,
   FormSubHeading,
+  FormField,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const PublicInfo = ({user, setValue}) => (
@@ -17,7 +16,6 @@ const PublicInfo = ({user, setValue}) => (
       required={true}
       placeholder="Your name"
       value={user.name}
-      className={SPACING}
       onChange={e => setValue('userInfo', 'fullname', e.target.value)}
     />
     <FormField
@@ -25,7 +23,6 @@ const PublicInfo = ({user, setValue}) => (
       label="One Liner"
       value={user.oneLiner}
       maxLength={100}
-      className={SPACING}
       subtitle="Maximum 100 characters"
       placeholder="COBOL developer at Acme Corp"
       onChange={e => setValue('userInfo', 'oneLiner', e.target.value)}
@@ -37,7 +34,6 @@ const PublicInfo = ({user, setValue}) => (
       label="Linkedin Profile"
       value={user.linkedin}
       inputType="url"
-      className={SPACING}
       placeholder="https://www.linkedin.com/in/reversim/"
       onChange={e => setValue('userInfo', 'linkedin', e.target.value)}
     />
@@ -46,7 +42,6 @@ const PublicInfo = ({user, setValue}) => (
       label="GitHub username"
       value={user.github}
       placeholder="podcaster"
-      className={SPACING}
       onChange={e => setValue('userInfo', 'github', e.target.value)}
     />
     <FormField
@@ -54,7 +49,6 @@ const PublicInfo = ({user, setValue}) => (
       label="Twitter @name"
       value={user.twitter}
       placeholder="@Reversim"
-      className={SPACING}
       onChange={e => setValue('userInfo', 'twitter', e.target.value)}
     />
   </StepContainer>

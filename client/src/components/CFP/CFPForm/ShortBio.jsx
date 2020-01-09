@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import FormField from '../../FormField';
-import { StepContainer, StepHeading } from '../../GlobalStyledComponents/ReversimStyledComps';
+import {
+  StepContainer,
+  StepHeading,
+  FormField,
+} from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const ShortBiography = styled(FormField)`
   ${({ theme: { space } }) => `

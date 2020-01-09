@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
+import FormBit from '../FormField';
 
 //general elements
 export const ResponsiveContainer = styled.div`
@@ -471,6 +472,12 @@ export const FontAwsomeTrash = styled(FontAwesomeIcon)`
 export const StepContainer = styled(ResponsiveContainer)`
   ${({ theme: { space } }) => `
     padding: 0 ${space.xl};
+  `}
+`;
+
+export const FormField = styled(FormBit)`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.xl};
   `}
 `;
 

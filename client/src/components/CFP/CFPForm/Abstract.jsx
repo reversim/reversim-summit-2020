@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import FormField, {SPACING} from '../../FormField';
 import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
@@ -15,6 +14,7 @@ import {findBestMatch} from 'string-similarity';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import {
+  FormField,
   StepContainer,
   StepHeading,
   FormSubHeading,
@@ -303,6 +303,7 @@ class Abstract extends Component {
       newTagPending: null,
     };
 
+    this.abstractCheckLength = this.abstractCheckLength.bind(this);
     this.onChangeAbstract = this.onChangeAbstract.bind(this);
     this.onAddTag = this.onAddTag.bind(this);
     this.toggleTagModal = this.toggleTagModal.bind(this);
@@ -311,7 +312,9 @@ class Abstract extends Component {
     this.onCategoryInputChange = this.onCategoryInputChange.bind(this);
   }
 
-  onChangeAbstract = e => {
+  getAbstractErr = val => val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
+
+  abstractCheckLength = e => {
     const val = e.target.value;
     const abstractLen = val.length;
     const abstractErr = this.getAbstractErr(val);
@@ -321,7 +324,10 @@ class Abstract extends Component {
     });
   };
 
-  getAbstractErr = val => val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
+  onChangeAbstract = e => {
+    this.abstractCheckLength(e);
+    this.props.setValue('proposal', 'abstract', e.target.value);
+  };
 
   onAddTag = tag => {
     const {allTags, tags} = this.props;
@@ -347,25 +353,43 @@ class Abstract extends Component {
 
   onCategoryChange = name => {
     if (!name) return;
+
     this.props.update(state => {
+      //the below will be set to this.state because .update evaluates to state => this.setState(state)
+
       if (CATEGORIES.find(cat => cat.name === name)) {
-        // if it's a predefined category
+        // if name is in CATEGORIES (a predefined array)
+
         if (state.categories.includes(name)) {
+          // if name is in state.categories (stated is the parameter passed not this.state)
+
           return {categories: without(state.categories, name)};
+          // return an object similar to state.categories without name
+          // this will be the value passed to this.props.update
+
         } else {
           return {categories: uniq(state.categories.concat(name)), missingCategories: false};
+          // return an object with categories similar to state.categories with name and without duplicates and missingCategories: false
+          // this will be the value passed to this.props.update
         }
+
       } else {
-        // it's not predefined
+        // name is not predefined
         const otherCategory = this.getOtherCategoryInState(state.categories);
         if (otherCategory) {
           if (otherCategory !== name) {
             return {categories: without(state.categories, otherCategory).concat(name)};
+            // return an array similar to state.categories without otherCategory and concat name to the array
+
           } else {
             return {categories: without(state.categories, otherCategory)};
+            // return an array similar to state.categories without otherCategory
           }
+
         } else {
           return {categories: uniq(state.categories.concat(name)), missingCategories: false};
+          // return an object with categories similar to state.categories and with name added to them but without duplicates. 
+          // In that object, missingCategories is false
         }
       }
     });
@@ -373,6 +397,8 @@ class Abstract extends Component {
 
   getOtherCategoryInState = categories => {
     return categories.find(cat => !CATEGORIES.find(cat2 => cat2.name === cat));
+    // !CATEGORIES.find(cat2 => cat2.name === cat) returns false if any cat2 has cat2.name === cat
+    // and then the function will return undefined
   };
 
   onCategoryInputChange = e => {
@@ -399,7 +425,6 @@ class Abstract extends Component {
       tags,
       abstract,
       allTags,
-      setValue,
       removeProposalTag,
     } = this.props;
 
@@ -430,8 +455,7 @@ class Abstract extends Component {
           value={abstract}
           placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
           subtitle={<AbstractFieldCaption abstractLen={abstractLen} abstractErr={abstractErr} />}
-          onChange={e => setValue('proposal', 'abstract', e.target.value)}
-          className={SPACING}
+          onChange={e => this.onChangeAbstract(e)}
         />
         <Tags
           tags={tagObjs}
@@ -440,7 +464,6 @@ class Abstract extends Component {
           handleAddition={this.onAddTag}
           handleDelete={removeProposalTag}
           readOnly={tags.length === MAX_TAGS}
-          className={SPACING}
         />
 
         <Modal isOpen={!!newTagPending} toggle={this.toggleTagModal}>
