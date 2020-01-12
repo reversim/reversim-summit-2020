@@ -28,7 +28,7 @@ const VideoUrlFieldCaption = () => (
   </span>
 );
 
-const PrivateInfo = ({user, setValue}) => (
+const PrivateInfo = ({user, setValueDebounced}) => (
   <StepContainer>
     <StepHeading>Private information</StepHeading>
     <FormSubHeading>
@@ -40,7 +40,7 @@ const PrivateInfo = ({user, setValue}) => (
       required={true}
       placeholder="your.email@here.please"
       value={user.email}
-      onChange={e => setValue('userInfo', 'email', e.target.value)}
+      onChange={e => setValueDebounced('email', e.target.value)}
     />
     <FormField
       id="phone"
@@ -48,7 +48,7 @@ const PrivateInfo = ({user, setValue}) => (
       required={true}
       placeholder="05x-xxxxxxx"
       value={user.phone}
-      onChange={e => setValue('userInfo', 'phone', e.target.value)}
+      onChange={e => setValueDebounced('phone', e.target.value)}
     />
     <FormField
       id="video_url"
@@ -57,7 +57,7 @@ const PrivateInfo = ({user, setValue}) => (
       value={user.video_url}
       placeholder="e.g. http://youtu.be/xxxx"
       subtitle={<VideoUrlFieldCaption />}
-      onChange={e => setValue('userInfo', 'video_url', e.target.value)}
+      onChange={e => setValueDebounced('video_url', e.target.value)}
     />
     <FormField
       id="trackRecord"
@@ -115,7 +115,7 @@ const PrivateInfo = ({user, setValue}) => (
           </ul>
         </span>
       }
-      onChange={e => setValue('userInfo', 'trackRecord', e.target.value)}
+      onChange={e => setValueDebounced('trackRecord', e.target.value)}
     />
   </StepContainer>
 );

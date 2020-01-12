@@ -8,7 +8,7 @@ import {
 import {getUserData} from '../UserForm';
 import ga from 'react-ga';
 
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {
   StepContainer,
   StepHeading,
@@ -34,7 +34,7 @@ const OutlineSubHeading = styled.h6`
   `}
 `;
 
-const AbstractList = styled.ul`
+const OutlineList = styled.ul`
   ${({ theme: { space } }) => `
     margin: ${space.m} 0 ${space.xl} 0;
   `}
@@ -139,7 +139,7 @@ const OutlineFieldCaption = () => (
       don’t expect a per-slide description for now.
     </OutlineParagraph>
     <OutlineSubHeading>For example:</OutlineSubHeading>
-    <AbstractList>
+    <OutlineList>
       <ListItem>
         <ListBolt icon={faChevronRight} />
         2m: Introduction: Who am I and my professional background
@@ -170,111 +170,48 @@ const OutlineFieldCaption = () => (
       <ListItem>
         <Bold>Total time: 37m</Bold>
       </ListItem>
-    </AbstractList>
+    </OutlineList>
   </Fragment>
 );
 
-class Outline extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const Outline = props => {
+  const {
+    outline,
+    legal, //NOTE: check what it is
+    setValueDebounced,
+    handleSubmit,
+  } = props;
 
-  handleSubmit = async e => {
-    e.preventDefault();
-    const formElements = e.target.elements; //NOTE: Problem here, as it is triggered by the <Button /> which is the target and also the element
-
-    const {user, updateUserData, createProposal, history} = this.props;
-
-    if (user) {
-      const abstract = formElements.abstract.value;
-      if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
-        const y =
-          formElements.abstract.getBoundingClientRect().top -
-          document.body.getBoundingClientRect().top -
-          150;
-        window.scrollTo(0, y);
-        formElements.abstract.focus();
-        // NOTE: this returns a user to the abstract field in case the abstract is too long or too short
-        return;
-      }
-
-      const categories = this.state.categories;
-      if (!categories.length) {
-        this.setState({missingCategories: true})
-        const y =
-          formElements.categories_hidden.getBoundingClientRect().top -
-          document.body.getBoundingClientRect().top -
-          750;
-        window.scrollTo(0, y);
-        // NOTE: this returns the user to the categories field in case there are none
-        return;
-      } 
-
-      try {
-        let newUser = getUserData(e.target.elements);
-        newUser._id = user._id;
-        await updateUserData(newUser);
-        const result = await createProposal(this.getProposalData(formElements));
-        history.push(`/session/${result._id}`);
-      } catch (ex) {
-        ga.exception({
-          description: `Error on submit: ${ex}`,
-          fatal: true,
-        });
-      }
-    }
-  };
-
-  getProposalData = formElements => {
-    const outline = formElements.outline.value;
-    const legal = formElements.legal.checked;
-
-    return {
-      outline,
-      legal,
-    };
-  };
-
-  render(){
-    const {
-      outline,
-      legal,
-      setValue,
-      handleSubmit,
-    } = this.props;
-
-    return (
-      <StepContainer>
-        <StepHeading>Outline &amp; private notes</StepHeading>
-        <FormField
-          id="outline"
-          required={true}
-          multiline={true}
-          value={outline}
-          placeholder=""
-          subtitle={<OutlineFieldCaption />}
-          onChange={e => setValue('porposal', 'outline', e.target.value)}
+  return (
+    <StepContainer>
+      <StepHeading>Outline &amp; private notes</StepHeading>
+      <FormField
+        id="outline"
+        value={outline}
+        required={true}
+        multiline={true}
+        placeholder="Add your sessionn outline and notes here."
+        subtitle={<OutlineFieldCaption />}
+        onChange={e => setValueDebounced('outline', e.target.value)}
+      />
+      <AgreementContainer>
+        <CheckboxInput
+          type="checkbox"
+          id="legal"
+          defaultChecked={legal} //NOTE: what is defaultChecked?
+          required
         />
-        <AgreementContainer>
-          <CheckboxInput
-            type="checkbox" 
-            id="legal" 
-            defaultChecked={legal} 
-            required 
-          />
-          <CheckboxLable htmlFor="legal">
-            I agree that all presented materials will be shared on the web by Reversim team,
-            including the slides, video on youtube and mp3 on the podcast.
-          </CheckboxLable>
-        </AgreementContainer>
-        <SubmitContainer>
-          <SubmitInput />
-          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-        </SubmitContainer>
-      </StepContainer>
-    );
-  }
+        <CheckboxLable htmlFor="legal">
+          I agree that all presented materials will be shared on the web by Reversim team,
+          including the slides, video on youtube and mp3 on the podcast.
+        </CheckboxLable>
+      </AgreementContainer>
+      <SubmitContainer>
+        <SubmitInput />
+        <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+      </SubmitContainer>
+    </StepContainer>
+  );
 };
 
 export default Outline;

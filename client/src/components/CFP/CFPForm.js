@@ -34,14 +34,17 @@ const DeadLine = styled.span`
   `};
 `;
 
+const USER_INFO = 'userInfo';
+const PROPOSAL = 'proposal';
+
 //React components section
 class CFPForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       missingCategories: false,
-      userInfo: {
-        fullname: '',
+      [USER_INFO]: {
+        fullname: this.props.user.name,
         email: this.props.user.email,
         twitter: '',
         github: '',
@@ -52,7 +55,7 @@ class CFPForm extends Component {
         oneLiner: '',
         video_url: '',
       },
-      proposal: {
+      [PROPOSAL]: {
         title: '',
         proposalType: '',
         abstract: '',
@@ -62,59 +65,24 @@ class CFPForm extends Component {
         outline: '',
       },
     };
+    this.setValue = this.setValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.setProposalTagOrCategory = this.setProposalTagOrCategory.bind(this);
-    this.setProposalType = this.setProposalType.bind(this);
+    // this.setProposalTagOrCategory = this.setProposalTagOrCategory.bind(this);
+    // this.setProposalType = this.setProposalType.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
   }
 
-  setValue = _.debounce((form, key, value) => {
+  setValue = (form, key, value) => {
     const currentRelevantForm = _.get(this.state, form);
-    const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
-    const {userInfo, proposal} = this.state;
-    console.warn('setValue called'); //DELETE WHEN DONE
+    const currentRelevantValue = _.get(this.state, [form, key]);
+
+    const updatedRelevantForm = _.isArray(currentRelevantValue)
+      ? _.assign({}, currentRelevantForm, {[key]: [...currentRelevantValue, value]})
+      : _.assign({}, currentRelevantForm, {[key]: value});
+
     this.setState({
       [form]: updatedRelevantForm,
-    });
-    console.log(`value passed is: ${value}`); // DELETE WHEN DONE
-    console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
-    console.log(`userInfo: `);
-    console.log(userInfo);
-    console.log(`proposal: `);
-    console.log(proposal);
-  }, 250);
-
-  // setEmailandPhone = _.debounce((user, form, key, value) => {
-  //   value = value ? value : user[key];
-  //   const currentRelevantForm = _.get(this.state, form);
-  //   const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
-  //   const {userInfo, proposal} = this.state;
-  //   console.warn('setValue called'); //DELETE WHEN DONE
-  //   this.setState({
-  //     [form]: updatedRelevantForm,
-  //   });
-  //   console.log(`value passed is: ${value}`); // DELETE WHEN DONE
-  //   console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
-  //   console.log(`userInfo: `);
-  //   console.log(userInfo);
-  //   console.log(`proposal: `);
-  //   console.log(proposal);
-  // }, 250);
-
-  setProposalType = (form, key, value) => {
-    const currentRelevantForm = _.get(this.state, form);
-    const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
-    const {userInfo, proposal} = this.state;
-    console.warn('setValue called'); //DELETE WHEN DONE
-    this.setState({
-      [form]: updatedRelevantForm,
-    });
-    console.log(`value passed is: ${value}`); // DELETE WHEN DONE
-    console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
-    console.log(`userInfo: `);
-    console.log(userInfo);
-    console.log(`proposal: `);
-    console.log(proposal);
+    }, () => console.log('%c state', 'background:gold; color: red;', this.state));
   };
 
   setProposalTagOrCategory = (field, newEntry) => {
@@ -125,6 +93,9 @@ class CFPForm extends Component {
     proposal[field] = newProposalField;
 
     this.setState({proposal});
+
+
+
     console.log(`CFPForm.state.proposal.${field}: ${this.state.proposal[field]}`); //DELETE WHEN DONE
     console.log(`value to set: ${newEntry}`); // DELETE WHEN DONE
     console.log(`userInfo: `); // DELETE WHEN DONE
@@ -161,7 +132,7 @@ class CFPForm extends Component {
     console.log(`proposal: `); // DELETE WHEN DONE
     console.log(proposal); // DELETE WHEN DONE
   };
-  
+
   handleSubmit = async e => {
     e.preventDefault();
     // const formElements = e.target.element;
@@ -219,28 +190,35 @@ class CFPForm extends Component {
 
   render() {
     const {user, allTags} = this.props;
-    const {tags, categories, proposalType} = this.state.proposal;
+    const {proposal} = this.state;
+
+    const setValueDebounced = _.debounce(this.setValue, 250);
+    const setUserInfoValueDebounced = _.partial(setValueDebounced, USER_INFO);
+    const setProposalValueDebounced = _.partial(setValueDebounced, PROPOSAL);
+    const setProposalValue = _.partial(this.setValue, PROPOSAL);
 
     const steps = [
       {
         name: 'Public Info',
-        component: <PublicInfo user={user} setValue={this.setValue} />
+        component: <PublicInfo user={user} setValueDebounced={setUserInfoValueDebounced} />
       },
       {
         name: 'Short Bio',
-        component: <ShortBio user={user} setValue={this.setValue} />
+        component: <ShortBio user={user} setValueDebounced={setUserInfoValueDebounced} />
       },
       {
         name: 'Private Info',
-        component: <PrivateInfo user={user} setValue={this.setValue} setEmailandPhone={this.setEmailandPhone} />
+        component: <PrivateInfo user={user} setValueDebounced={setUserInfoValueDebounced} />
       },
       {
         name: 'Session Proposal',
         component: (
           <SessionProposal
-            proposalType={proposalType}
-            setProposalType={this.setProposalType}
-            setValue={this.setValue}
+            title={proposal.title}
+            proposalType={proposal.proposalType}
+            coSpeaker={proposal.coSpeaker}
+            setValue={setProposalValue}
+            setValueDebounced={setProposalValueDebounced}
           />
         )
       },
@@ -248,13 +226,13 @@ class CFPForm extends Component {
         name: 'Abstract',
         component: (
           <Abstract
-            categories={categories}
-            tags={tags}
-            abstract={this.state.proposal.abstract}
+            abstract={proposal.abstract}
+            tags={proposal.tags}
+            categories={proposal.categories}
             missingCategories={this.state.missingCategories}
             allTags={allTags}
-            setValue={this.setValue}
-            setProposalTagOrCategory={this.setProposalTagOrCategory}
+            setValueDebounced={setProposalValueDebounced}
+            setValue={setProposalValue}
             removeProposalTag={this.removeProposalTag}
             removeCategory={this.removeCategory}
           />
@@ -265,10 +243,11 @@ class CFPForm extends Component {
         component: (
           <Outline
             user={user}
+            outline={proposal.outline}
             updateUserData={this.props.updateUserData}
             createProposal={this.props.createProposal}
             history={this.props.history}
-            setValue={this.setValue}
+            setValueDebounced={setProposalValueDebounced}
             handleSubmit={this.handleSubmit}
           />
         )

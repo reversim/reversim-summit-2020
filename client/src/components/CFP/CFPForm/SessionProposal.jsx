@@ -45,68 +45,50 @@ const CoSpeakerFieldCaption = () => (
   <Important>Make sure your co-speaker has already signed in to our site!</Important></p>
  );
 
-class SessionProposal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      coSpeaker: props.coSpeaker,
-    };
-    this.onChangeCoSpeaker = this.onChangeCoSpeaker.bind(this);
-  }
+const SessionProposal = props => {
+  const {
+    title,
+    proposalType,
+    coSpeaker,
+    setValue,
+    setValueDebounced,
+  } = props;
 
-  onChangeCoSpeaker = e => {
-    this.props.update({coSpeaker: e.target.value});
-    // this.setState({
-    //   abstractLen,
-    //   abstractErr,
-    // });
-  };
-
-  render () {  
-    const {
-      proposalType,
-      title,
-      setValue,
-      setProposalType,
-    } = this.props;
-    const { coSpeaker } = this.state;
-
-    return (
-      <StepContainer>
-        {/* CFPForm.js section */}
-        <StepHeading>Session Proposal</StepHeading>
-        <FormSubHeading>Tell us about your session, so we can present it on our website.</FormSubHeading>
-        {/* ProposalForm.js section */}
-        <FormField
-          id="title"
-          label="Title"
-          required={true}
-          placeholder="Title of your talk"
-          maxLength="100"
-          subtitle={<TitleFieldCaption />}
-          value={title}
-          onChange={e => setValue('proposal', 'title', e.target.value)}
-        />
-        <FormField
-          id="proposalType"
-          inputType="radio"
-          required={true}
-          values={PROPOSAL_TYPES_ARR}
-          value={proposalType}
-          onChange={e => setProposalType('proposal', 'proposalType', e.target.value)}
-        />{/* NOTE: radio buttons don't react */}
-        <FormField
-          id="coSpeaker"
-          label="Co-Speaker (optional)"
-          required={false}
-          placeholder={`co.speaker@email.com`}
-          subtitle={<CoSpeakerFieldCaption />}
-          value={coSpeaker}
-          onChange={e => setValue('proposal', 'coSpeaker', e.target.value)}
-        />
-      </StepContainer>
-    );
-  }
+  return (
+    <StepContainer>
+      {/* CFPForm.js section */}
+      <StepHeading>Session Proposal</StepHeading>
+      <FormSubHeading>Tell us about your session, so we can present it on our website.</FormSubHeading>
+      {/* ProposalForm.js section */}
+      <FormField
+        id="title"
+        label="Title"
+        required={true}
+        placeholder="Title of your talk"
+        maxLength="100"
+        subtitle={<TitleFieldCaption />}
+        value={title}
+        onChange={e => setValueDebounced('title', e.target.value)}
+      />
+      <FormField
+        id="proposalType"
+        inputType="radio"
+        required={true}
+        values={PROPOSAL_TYPES_ARR}
+        value={proposalType}
+        onChange={e => setValue('proposalType', e.target.value)}
+      />
+      <FormField
+        id="coSpeaker"
+        label="Co-Speaker (optional)"
+        required={false}
+        value={coSpeaker}
+        placeholder={`co.speaker@email.com`}
+        subtitle={<CoSpeakerFieldCaption />}
+        onChange={e => setValueDebounced('coSpeaker', e.target.value)}
+      />
+    </StepContainer>
+  );
 };
 
 export default SessionProposal;

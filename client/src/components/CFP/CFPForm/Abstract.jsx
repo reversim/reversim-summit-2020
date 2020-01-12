@@ -326,7 +326,7 @@ class Abstract extends Component {
 
   onChangeAbstract = e => {
     this.abstractCheckLength(e);
-    this.props.setValue('proposal', 'abstract', e.target.value);
+    this.props.setValueDebounced('abstract', e.target.value);
   };
 
   validateNewTag = tag => {
@@ -348,17 +348,17 @@ class Abstract extends Component {
   };
 
   addTag = tag => {
-    this.props.setProposalTagOrCategory('tags', tag);
+    this.props.setValue('tags', tag);
   };
 
   onCategoryChange = checkedCategory => {
-    const {categories, setProposalTagOrCategory, removeCategory} = this.props;
+    const {categories, setValue, removeCategory} = this.props;
     const isIncluded = categories.find(category => category === checkedCategory);
 
     if (!checkedCategory) return; // NOTE: I think it's unnecessary here
 
     if (!isIncluded && categories.length < MAX_CATEGORIES) {
-      setProposalTagOrCategory('categories', checkedCategory);
+      setValue('categories', checkedCategory);
       return;
     }
     if (isIncluded) {
@@ -370,9 +370,9 @@ class Abstract extends Component {
   render(){
 
     const {
-      categories,
-      tags,
       abstract,
+      tags,
+      categories,
       allTags,
       removeProposalTag,
     } = this.props;
