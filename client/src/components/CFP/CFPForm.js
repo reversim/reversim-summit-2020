@@ -42,7 +42,7 @@ class CFPForm extends Component {
       missingCategories: false,
       userInfo: {
         fullname: '',
-        email: '',
+        email: this.props.user.email,
         twitter: '',
         github: '',
         linkedin: '',
