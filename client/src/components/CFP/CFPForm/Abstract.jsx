@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import _ from 'lodash';
 import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
@@ -305,11 +306,10 @@ class Abstract extends Component {
 
     this.abstractCheckLength = this.abstractCheckLength.bind(this);
     this.onChangeAbstract = this.onChangeAbstract.bind(this);
-    this.onAddTag = this.onAddTag.bind(this);
+    this.validateNewTag = this.validateNewTag.bind(this);
     this.toggleTagModal = this.toggleTagModal.bind(this);
     this.addTag = this.addTag.bind(this);
     this.onCategoryChange = this.onCategoryChange.bind(this);
-    this.onCategoryInputChange = this.onCategoryInputChange.bind(this);
   }
 
   getAbstractErr = val => val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
@@ -329,7 +329,7 @@ class Abstract extends Component {
     this.props.setValue('proposal', 'abstract', e.target.value);
   };
 
-  onAddTag = tag => {
+  validateNewTag = tag => {
     const {allTags, tags} = this.props;
     // NOTE: allTags is defined by the server
     // NOTE: tags is CFPForm.state.propsal.tag: [];
@@ -348,75 +348,24 @@ class Abstract extends Component {
   };
 
   addTag = tag => {
-    this.props.setProposalTag(tag);
+    this.props.setProposalTagOrCategory('tags', tag);
   };
 
-  onCategoryChange = name => {
-    if (!name) return;
+  onCategoryChange = checkedCategory => {
+    const {categories, setProposalTagOrCategory, removeCategory} = this.props;
+    const isIncluded = categories.find(category => category === checkedCategory);
 
-    this.props.update(state => {
-      //the below will be set to this.state because .update evaluates to state => this.setState(state)
+    if (!checkedCategory) return; // NOTE: I think it's unnecessary here
 
-      if (CATEGORIES.find(cat => cat.name === name)) {
-        // if name is in CATEGORIES (a predefined array)
-
-        if (state.categories.includes(name)) {
-          // if name is in state.categories (stated is the parameter passed not this.state)
-
-          return {categories: without(state.categories, name)};
-          // return an object similar to state.categories without name
-          // this will be the value passed to this.props.update
-
-        } else {
-          return {categories: uniq(state.categories.concat(name)), missingCategories: false};
-          // return an object with categories similar to state.categories with name and without duplicates and missingCategories: false
-          // this will be the value passed to this.props.update
-        }
-
-      } else {
-        // name is not predefined
-        const otherCategory = this.getOtherCategoryInState(state.categories);
-        if (otherCategory) {
-          if (otherCategory !== name) {
-            return {categories: without(state.categories, otherCategory).concat(name)};
-            // return an array similar to state.categories without otherCategory and concat name to the array
-
-          } else {
-            return {categories: without(state.categories, otherCategory)};
-            // return an array similar to state.categories without otherCategory
-          }
-
-        } else {
-          return {categories: uniq(state.categories.concat(name)), missingCategories: false};
-          // return an object with categories similar to state.categories and with name added to them but without duplicates. 
-          // In that object, missingCategories is false
-        }
-      }
-    });
+    if (!isIncluded && categories.length < MAX_CATEGORIES) {
+      setProposalTagOrCategory('categories', checkedCategory);
+      return;
+    }
+    if (isIncluded) {
+      removeCategory(checkedCategory);
+    }
   };
-
-  getOtherCategoryInState = categories => {
-    return categories.find(cat => !CATEGORIES.find(cat2 => cat2.name === cat));
-    // !CATEGORIES.find(cat2 => cat2.name === cat) returns false if any cat2 has cat2.name === cat
-    // and then the function will return undefined
-  };
-
-  onCategoryInputChange = e => {
-    const value = e.target.value;
-    this.setState({otherCategory: value}, () => {
-      this.props.update(state => {
-        let newCategories = state.categories;
-        const otherCategory = this.getOtherCategoryInState(newCategories);
-        if (otherCategory !== null) {
-          newCategories = without(newCategories, otherCategory);
-        }
-        if (value) {
-          newCategories = newCategories.concat(value);
-        }
-        return {categories: newCategories};
-      });
-    });
-  };
+  // NOTE: onCategoryChange works well but when trying to unCheck it unChecks the wrong option
 
   render(){
 
@@ -461,7 +410,7 @@ class Abstract extends Component {
           tags={tagObjs}
           suggestions={tagSuggestions}
           predefinedSuggestions={predefinedTags}
-          handleAddition={this.onAddTag}
+          handleAddition={this.validateNewTag}
           handleDelete={removeProposalTag}
           readOnly={tags.length === MAX_TAGS}
         />
@@ -511,7 +460,7 @@ class Abstract extends Component {
         <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
         {CATEGORIES.map(category => {
           //NOTE: CATEGORIES comes from /client/src/data/proposals.js
-          const checked = categories.includes(category.name);
+          const checked = categories.includes(category.name); //NOTE: returns true if category.name is included in CFPForm.state.categories
           return (
             <CategoryCheckbox
               key={category.name}
@@ -522,16 +471,7 @@ class Abstract extends Component {
             />
           );
         })}
-        <CategoryOther
-          checked={!!this.getOtherCategoryInState(categories)}
-          onChange={() => this.onCategoryChange(this.state.otherCategory)}
-          onChangeInput={this.onCategoryInputChange}
-          disabled={
-            !this.getOtherCategoryInState(categories) && categories.length === MAX_CATEGORIES
-          }
-        />
       </StepContainer>
-
     )
   }
 };

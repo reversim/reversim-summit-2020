@@ -63,6 +63,9 @@ class CFPForm extends Component {
       },
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setProposalTagOrCategory = this.setProposalTagOrCategory.bind(this);
+    this.setProposalType = this.setProposalType.bind(this);
+    this.removeCategory = this.removeCategory.bind(this);
   }
 
   setValue = _.debounce((form, key, value) => {
@@ -81,22 +84,22 @@ class CFPForm extends Component {
     console.log(proposal);
   }, 250);
 
-  setEmailandPhone = _.debounce((user, form, key, value) => {
-    value = value ? value : user[key];
-    const currentRelevantForm = _.get(this.state, form);
-    const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
-    const {userInfo, proposal} = this.state;
-    console.warn('setValue called'); //DELETE WHEN DONE
-    this.setState({
-      [form]: updatedRelevantForm,
-    });
-    console.log(`value passed is: ${value}`); // DELETE WHEN DONE
-    console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
-    console.log(`userInfo: `);
-    console.log(userInfo);
-    console.log(`proposal: `);
-    console.log(proposal);
-  }, 250);
+  // setEmailandPhone = _.debounce((user, form, key, value) => {
+  //   value = value ? value : user[key];
+  //   const currentRelevantForm = _.get(this.state, form);
+  //   const updatedRelevantForm = _.assign({}, currentRelevantForm, {[key]: value});
+  //   const {userInfo, proposal} = this.state;
+  //   console.warn('setValue called'); //DELETE WHEN DONE
+  //   this.setState({
+  //     [form]: updatedRelevantForm,
+  //   });
+  //   console.log(`value passed is: ${value}`); // DELETE WHEN DONE
+  //   console.log(`value set to this.state.${form}.${key}: ${this.state[form][key]}`); // DELETE WHEN DONE
+  //   console.log(`userInfo: `);
+  //   console.log(userInfo);
+  //   console.log(`proposal: `);
+  //   console.log(proposal);
+  // }, 250);
 
   setProposalType = (form, key, value) => {
     const currentRelevantForm = _.get(this.state, form);
@@ -114,14 +117,20 @@ class CFPForm extends Component {
     console.log(proposal);
   };
 
-  setProposalTag = newTag => {
-    const proposalTags = this.state.proposal.tags;
-    const newProposalTags = [...proposalTags, newTag];
+  setProposalTagOrCategory = (field, newEntry) => {
+    const proposalField = this.state.proposal[field];
+    const newProposalField = [...proposalField, newEntry];
 
     const proposal = this.state.proposal;
-    proposal.tags = newProposalTags;
+    proposal[field] = newProposalField;
 
     this.setState({proposal});
+    console.log(`CFPForm.state.proposal.${field}: ${this.state.proposal[field]}`); //DELETE WHEN DONE
+    console.log(`value to set: ${newEntry}`); // DELETE WHEN DONE
+    console.log(`userInfo: `); // DELETE WHEN DONE
+    console.log(this.state.userInfo); // DELETE WHEN DONE
+    console.log(`proposal: `); // DELETE WHEN DONE
+    console.log(proposal); // DELETE WHEN DONE
   };
 
   removeProposalTag = indexToRemove => {
@@ -134,6 +143,25 @@ class CFPForm extends Component {
     this.setState({proposal});
   };
 
+  removeCategory = value => {
+    const {userInfo, proposal} = this.state; // DELETE userInfo WHEN DONE
+    const currentProposal = proposal;
+    const updatedCategories = _.remove(currentProposal.categories, category => category === value);
+
+    const updatedProposal = _.assign({}, currentProposal, {categories: updatedCategories});
+
+    console.log('removeCategory called'); // DELETE WHEN DONE
+    this.setState({
+      proposal: updatedProposal,
+    });
+
+    console.log(`value to remove: ${value}`); // DELETE WHEN DONE
+    console.log(`userInfo: `); // DELETE WHEN DONE
+    console.log(userInfo); // DELETE WHEN DONE
+    console.log(`proposal: `); // DELETE WHEN DONE
+    console.log(proposal); // DELETE WHEN DONE
+  };
+  
   handleSubmit = async e => {
     e.preventDefault();
     // const formElements = e.target.element;
@@ -226,8 +254,9 @@ class CFPForm extends Component {
             missingCategories={this.state.missingCategories}
             allTags={allTags}
             setValue={this.setValue}
-            setProposalTag={this.setProposalTag}
+            setProposalTagOrCategory={this.setProposalTagOrCategory}
             removeProposalTag={this.removeProposalTag}
+            removeCategory={this.removeCategory}
           />
         )
       },
