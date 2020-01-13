@@ -334,7 +334,7 @@ class Abstract extends Component {
 
   onCategoryChange = checkedCategory => {
     const {categories, setValue, removeCategory} = this.props;
-    const isIncluded = categories.find(category => category === checkedCategory);
+    const isIncluded = categories.includes(checkedCategory);
 
     !isIncluded && categories.length < MAX_CATEGORIES && setValue('categories', checkedCategory);
 
@@ -434,7 +434,9 @@ class Abstract extends Component {
         <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
         {CATEGORIES.map(category => {
           //NOTE: CATEGORIES comes from /client/src/data/proposals.js
-          const checked = categories.includes(category.name); //NOTE: returns true if category.name is included in CFPForm.state.categories
+          const checked = categories.includes(category.name);
+          //NOTE: returns true if category.name is included in CFPForm.state.categories
+          //NOTE: problem is on unheck click categories still contian the category to unckeck.
           return (
             <CategoryCheckbox
               key={category.name}

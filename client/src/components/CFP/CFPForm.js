@@ -67,8 +67,6 @@ class CFPForm extends Component {
     };
     this.setValue = this.setValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.setProposalTagOrCategory = this.setProposalTagOrCategory.bind(this);
-    // this.setProposalType = this.setProposalType.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
   }
 
@@ -81,25 +79,8 @@ class CFPForm extends Component {
       : _.assign({}, currentRelevantForm, {[key]: value});
 
     this.setState({
-      [form]: updatedRelevantForm,
-    }, () => console.log('%c state', 'background:gold; color: red;', this.state));
-  };
-
-  setProposalTagOrCategory = (field, newEntry) => {
-    const proposalField = this.state.proposal[field];
-    const newProposalField = [...proposalField, newEntry];
-
-    const proposal = this.state.proposal;
-    proposal[field] = newProposalField;
-
-    this.setState({proposal});
-
-    console.log(`CFPForm.state.proposal.${field}: ${this.state.proposal[field]}`); //DELETE WHEN DONE
-    console.log(`value to set: ${newEntry}`); // DELETE WHEN DONE
-    console.log(`userInfo: `); // DELETE WHEN DONE
-    console.log(this.state.userInfo); // DELETE WHEN DONE
-    console.log(`proposal: `); // DELETE WHEN DONE
-    console.log(proposal); // DELETE WHEN DONE
+        [form]: updatedRelevantForm,
+    }, () => console.log('%c state', 'background:gold; color: purple;', this.state));
   };
 
   removeProposalTag = indexToRemove => {
@@ -113,22 +94,20 @@ class CFPForm extends Component {
   };
 
   removeCategory = value => {
-    const {userInfo, proposal} = this.state; // DELETE userInfo WHEN DONE
-    const currentProposal = proposal;
-    const updatedCategories = _.remove(currentProposal.categories, category => category === value);
+    const currentProposal = this.state.proposal;
+    const categories = currentProposal.categories;
+    const updatedCategories = _.remove(categories, item => item !== value);
 
     const updatedProposal = _.assign({}, currentProposal, {categories: updatedCategories});
 
     console.log('removeCategory called'); // DELETE WHEN DONE
     this.setState({
       proposal: updatedProposal,
+    }, () => {
+      console.log('%c value to remove: ', 'backgroud: firebrick', value); // DELETE WHEN DONE
+      console.log(this.state.userInfo); // DELETE WHEN DONE
+      console.log(this.state.proposal); // DELETE WHEN DONE
     });
-
-    console.log(`value to remove: ${value}`); // DELETE WHEN DONE
-    console.log(`userInfo: `); // DELETE WHEN DONE
-    console.log(userInfo); // DELETE WHEN DONE
-    console.log(`proposal: `); // DELETE WHEN DONE
-    console.log(proposal); // DELETE WHEN DONE
   };
 
   handleSubmit = async e => {
