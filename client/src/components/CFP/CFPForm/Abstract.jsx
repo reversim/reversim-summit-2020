@@ -276,25 +276,6 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
   </CheckboxContianer>
 );
 
-const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
-  <CheckboxContianer>
-    <CheckboxInput
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-      disabled={disabled}
-    />
-    <CheckboxLable>
-      <CheckboxLableHeading>Other: </CheckboxLableHeading>
-      <OtherInput
-        disabled={disabled}
-        placeholder="lockpicking, moonwalking, etc."
-        onChange={onChangeInput}
-      />
-    </CheckboxLable>
-  </CheckboxContianer>
-);
-
 class Abstract extends Component {
   constructor(props) {
     super(props);
@@ -355,17 +336,10 @@ class Abstract extends Component {
     const {categories, setValue, removeCategory} = this.props;
     const isIncluded = categories.find(category => category === checkedCategory);
 
-    if (!checkedCategory) return; // NOTE: I think it's unnecessary here
+    !isIncluded && categories.length < MAX_CATEGORIES && setValue('categories', checkedCategory);
 
-    if (!isIncluded && categories.length < MAX_CATEGORIES) {
-      setValue('categories', checkedCategory);
-      return;
-    }
-    if (isIncluded) {
-      removeCategory(checkedCategory);
-    }
+    isIncluded && removeCategory(checkedCategory);
   };
-  // NOTE: onCategoryChange works well but when trying to unCheck it unChecks the wrong option
 
   render(){
 
