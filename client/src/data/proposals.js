@@ -1,4 +1,4 @@
-export const PREDEFINED_TAGS = ['Engineering', 'Product', 'Culture'];
+export const PREDEFINED_TAGS = ['Algorithms', 'Performance', 'Social'];
 
 export const PROPOSAL_TYPES = {
   full: 'Full session (30 minutes)',

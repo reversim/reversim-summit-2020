@@ -94,8 +94,6 @@ class CFPForm extends Component {
 
     this.setState({proposal});
 
-
-
     console.log(`CFPForm.state.proposal.${field}: ${this.state.proposal[field]}`); //DELETE WHEN DONE
     console.log(`value to set: ${newEntry}`); // DELETE WHEN DONE
     console.log(`userInfo: `); // DELETE WHEN DONE
