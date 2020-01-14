@@ -27,6 +27,15 @@ const PublicInfo = ({user, setValueDebounced}) => (
       placeholder="COBOL developer at Acme Corp"
       onChange={e => setValueDebounced('oneLiner', e.target.value)}
     />
+    <FormField
+      id="affiliation"
+      label="Affiliation"
+      value={user.affiliation}
+      maxLength={100}
+      subtitle="Who is current employer or are you self-employed? What brings you to Reversim 2020?"
+      placeholder="You look familiar.."
+      onChange={e => setValueDebounced('affiliation', e.target.value)}
+    />
     <StepHeading>Media</StepHeading>
     <FormSubHeading>The following information will be presented on the website</FormSubHeading>
     <FormField

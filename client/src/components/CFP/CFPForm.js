@@ -53,11 +53,13 @@ class CFPForm extends Component {
         phone: '',
         bio: '',
         oneLiner: '',
+        affiliation: '',
         video_url: '',
       },
       [PROPOSAL]: {
         title: '',
         proposalType: '',
+        ossilProject: '',
         abstract: '',
         tags: [],
         categories: [],
@@ -193,6 +195,7 @@ class CFPForm extends Component {
           <SessionProposal
             title={proposal.title}
             proposalType={proposal.proposalType}
+            ossilProject={proposal.ossilProject}
             coSpeaker={proposal.coSpeaker}
             setValue={setProposalValue}
             setValueDebounced={setProposalValueDebounced}

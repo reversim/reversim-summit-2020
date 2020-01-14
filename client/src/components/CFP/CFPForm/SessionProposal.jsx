@@ -1,5 +1,5 @@
-import React, {Fragment, Component} from 'react';
-
+import React, {Fragment} from 'react';
+import styled from 'styled-components';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
@@ -14,6 +14,15 @@ import {
   FormField,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
+// styled-components components
+
+const PostmortemConfirm = styled(Important)`
+  ${({ theme: { font, color } }) => `
+    font-size: ${font.size_md};
+  `}
+`
+
+//React components
 const TitleFieldCaption = () => (
   <Fragment>
     Make it descriptive, concise, and appealing. You are welcome to review{' '}
@@ -37,6 +46,36 @@ const TitleFieldCaption = () => (
     </ul>
     Reversim Summit is about deep-tech, and we will reject trivial introductory talks in
     software-related sessions (introduction to other topics is OK).
+  </Fragment>
+);
+
+const ProposalType = ({proposalType, ossilProject, setValue}) => (
+  <Fragment>
+    <FormField
+      id="proposalType"
+      inputType="radio"
+      required={true}
+      values={PROPOSAL_TYPES_ARR}
+      value={proposalType}
+      onChange={e => setValue('proposalType', e.target.value)}
+    />
+    {proposalType === 'ossil' && (
+      <FormField
+        id="ossilProject"
+        label="Add a link to your relevant project"
+        value={ossilProject}
+        inputType="url"
+        placeholder="www.yourProject.com"
+        required={true}
+        onChange={e => setValue('ossilProject', e.target.value)}
+      />
+    )}
+    {proposalType === 'postmortem' && (
+      <PostmortemConfirm>
+        Are you sure this is a postmortem session? Please read about the
+        <a href="#postmortems">postmortems</a> format
+      </PostmortemConfirm>
+    )}
   </Fragment>
 );
 
@@ -70,14 +109,7 @@ const SessionProposal = props => {
         value={title}
         onChange={e => setValueDebounced('title', e.target.value)}
       />
-      <FormField
-        id="proposalType"
-        inputType="radio"
-        required={true}
-        values={PROPOSAL_TYPES_ARR}
-        value={proposalType}
-        onChange={e => setValue('proposalType', e.target.value)}
-      />
+      <ProposalType setValue={setValue} proposalType={proposalType} />
       <FormField
         id="coSpeaker"
         label="Co-Speaker (optional)"
