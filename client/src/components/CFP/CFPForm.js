@@ -96,17 +96,17 @@ class CFPForm extends Component {
   removeCategory = value => {
     const currentProposal = this.state.proposal;
     const categories = currentProposal.categories;
-    const updatedCategories = _.remove(categories, item => item !== value);
+    const updatedCategories = categories.filter(item => item !== value);
 
     const updatedProposal = _.assign({}, currentProposal, {categories: updatedCategories});
 
     console.log('removeCategory called'); // DELETE WHEN DONE
     this.setState({
-      proposal: updatedProposal,
+        proposal: updatedProposal,
     }, () => {
-      console.log('%c value to remove: ', 'backgroud: firebrick', value); // DELETE WHEN DONE
-      console.log(this.state.userInfo); // DELETE WHEN DONE
-      console.log(this.state.proposal); // DELETE WHEN DONE
+        console.log('%c value to remove: ', 'background: firebrick', value); // DELETE WHEN DONE
+        console.log(this.state.userInfo); // DELETE WHEN DONE
+        console.log(this.state.proposal); // DELETE WHEN DONE
     });
   };
 
