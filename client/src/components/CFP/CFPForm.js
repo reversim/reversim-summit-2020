@@ -72,6 +72,11 @@ class CFPForm extends Component {
     this.removeCategory = this.removeCategory.bind(this);
   }
 
+  componentWillUpdate = (nextProps, nextState) => {
+    localStorage.setItem('User info', JSON.stringify(nextState.userInfo));
+    localStorage.setItem('Current proposal', JSON.stringify(nextState.proposal));
+  };
+
   setValue = (form, key, value) => {
     const currentRelevantForm = _.get(this.state, form);
     const currentRelevantValue = _.get(this.state, [form, key]);
