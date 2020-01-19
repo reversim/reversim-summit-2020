@@ -5,10 +5,11 @@ import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
   PREDEFINED_TAGS,
+  MAX_TAGS,
   CATEGORIES,
   MAX_CATEGORIES,
 } from '../../../data/proposals';
-import Tags, {MAX_TAGS} from '../Tags';
+import Tags from '../Tags';
 import uniq from 'lodash/uniq';
 import without from 'lodash/without';
 import {findBestMatch} from 'string-similarity';
@@ -311,13 +312,16 @@ class Abstract extends Component {
   };
 
   validateNewTag = tag => {
-    const {allTags, tags} = this.props;
+    const {
+      allTags,
+      proposal: {tags},
+    } = this.props;
     // NOTE: allTags is defined by the server
     // NOTE: tags is CFPForm.state.propsal.tag: [];
 
-    if (tags.indexOf(tag) > -1) {
+    if (tags.includes(tag)) {
       return;
-    } else if (allTags && allTags.indexOf(tag) === -1 && PREDEFINED_TAGS.indexOf(tag) === -1) {
+    } else if (allTags && !allTags.includes(tag) && !PREDEFINED_TAGS.includes(tag)) {
       this.setState({newTagPending: tag});
     } else {
       this.addTag(tag);
@@ -329,11 +333,20 @@ class Abstract extends Component {
   };
 
   addTag = tag => {
-    this.props.setValue('tags', tag);
+    console.log('MAX_TAGS: ', MAX_TAGS);
+    this.props.proposal.tags.length < MAX_TAGS
+    //NOTE: MAX_TAGS: 3 try to find out what happends with this.props.proposal.tags.length
+      ? this.props.setValue('tags', tag)
+      : console.log('too many tags');
   };
 
   onCategoryChange = checkedCategory => {
-    const {categories, setValue, removeCategory} = this.props;
+    const {
+      proposal: {categories},
+      setValue,
+      removeCategory,
+    } = this.props;
+
     const isIncluded = categories.includes(checkedCategory);
 
     !isIncluded && categories.length < MAX_CATEGORIES && setValue('categories', checkedCategory);
@@ -344,9 +357,7 @@ class Abstract extends Component {
   render(){
 
     const {
-      abstract,
-      tags,
-      categories,
+      proposal: {abstract, tags, categories},
       allTags,
       removeProposalTag,
     } = this.props;

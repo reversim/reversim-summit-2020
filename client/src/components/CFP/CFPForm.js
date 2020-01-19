@@ -35,175 +35,205 @@ const DeadLine = styled.span`
 `;
 
 const USER_INFO = 'userInfo';
-const PROPOSAL = 'proposal';
+const PROPOSAL = 'currentProposal';
 
 //React components section
 class CFPForm extends Component {
   constructor(props) {
     super(props);
+
+    const userInfo = {
+      name: this.props.user.name,
+      oneLiner: null,
+      affiliation: '',
+      linkedin: '',
+      github: '',
+      twitter: '',
+      bio: '',
+      email: this.props.user.email,
+      phone: '',
+      video_url: '',
+      trackRecord: '',
+    };
+
+    const proposal = {
+      title: '',
+      proposalType: '',
+      ossilProject: '',
+      coSpeaker: '',
+      abstract: '',
+      tags: [],
+      categories: [],
+      outline: '',
+      iAgree: null,
+    };
+
+    this.USER_INFO_KEY = `${USER_INFO}@${this.props.user._id}`;
+    this.CURRENT_PROPOSAL_KEY = `${PROPOSAL}@${this.props.user._id}`;
+
+    const localUserInfo = JSON.parse(localStorage.getItem(this.USER_INFO_KEY));
+    const localCurrentProposal = JSON.parse(localStorage.getItem(this.CURRENT_PROPOSAL_KEY));
+
     this.state = {
       missingCategories: false,
-      [USER_INFO]: {
-        fullname: this.props.user.name,
-        email: this.props.user.email,
-        twitter: '',
-        github: '',
-        linkedin: '',
-        trackRecord: '',
-        phone: '',
-        bio: '',
-        oneLiner: '',
-        affiliation: '',
-        video_url: '',
-      },
-      [PROPOSAL]: {
-        title: '',
-        proposalType: '',
-        ossilProject: '',
-        abstract: '',
-        tags: [],
-        categories: [],
-        coSpeaker: '',
-        outline: '',
-      },
+      [USER_INFO]: _.assign({}, userInfo, localUserInfo),
+      [PROPOSAL]: _.assign({}, proposal, localCurrentProposal),
     };
+
+    console.log('UserInfo @constructor', this.state[USER_INFO]); //DELETE WHEN DONE
+    console.log('proposal: @constructor', this.state[PROPOSAL]); //DELETE WHEN DONE
+    console.log('user: @constructor', this.props.user); //DELETE WHEN DONE
+
     this.setValue = this.setValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
   }
 
-  componentWillUpdate = (nextProps, nextState) => {
-    localStorage.setItem('User info', JSON.stringify(nextState.userInfo));
-    localStorage.setItem('Current proposal', JSON.stringify(nextState.proposal));
-  };
-
-  setValue = (form, key, value) => {
+  setValue = (form, field, value) => {
     const currentRelevantForm = _.get(this.state, form);
-    const currentRelevantValue = _.get(this.state, [form, key]);
+    const currentRelevantValue = _.get(this.state, [form, field]);
 
     const updatedRelevantForm = _.isArray(currentRelevantValue)
-      ? _.assign({}, currentRelevantForm, {[key]: [...currentRelevantValue, value]})
-      : _.assign({}, currentRelevantForm, {[key]: value});
+      ? _.assign({}, currentRelevantForm, {[field]: [...currentRelevantValue, value]})
+      : _.assign({}, currentRelevantForm, {[field]: value});
 
-    this.setState({
+    this.setState(
+      {
         [form]: updatedRelevantForm,
-    }, () => console.log('%c state', 'background:gold; color: purple;', this.state));
+      },
+      () => {
+        console.log('%c sending state to local storage', 'background:gold; color: purple;', this.state);
+
+        form === USER_INFO
+          ? localStorage.setItem(this.USER_INFO_KEY, JSON.stringify(this.state.userInfo))
+          : localStorage.setItem(
+              this.CURRENT_PROPOSAL_KEY,
+              JSON.stringify(this.state.currentProposal)
+            );
+      },
+    );
   };
 
+  setValueDebounced = _.debounce(this.setValue, 250);
+  setUserInfoValueDebounced = _.partial(this.setValueDebounced, USER_INFO);
+  setProposalValueDebounced = _.partial(this.setValueDebounced, PROPOSAL);
+  setProposalValue = _.partial(this.setValue, PROPOSAL);
+
   removeProposalTag = indexToRemove => {
-    const proposalTags = this.state.proposal.tags;
+    const proposalTags = this.state.currentProposal.tags;
     _.remove(proposalTags, tag => tag === proposalTags[indexToRemove]);
 
-    const proposal = this.state.proposal;
+    const proposal = this.state.currentProposal;
     proposal.tags = proposalTags;
 
-    this.setState({proposal});
+    this.setState({proposal}, () => {
+      console.log('%c state', 'background:gold; color: purple;', this.state);
+    });
   };
 
   removeCategory = value => {
-    const currentProposal = this.state.proposal;
+    const currentProposal = this.state.currentProposal;
     const categories = currentProposal.categories;
     const updatedCategories = categories.filter(item => item !== value);
 
     const updatedProposal = _.assign({}, currentProposal, {categories: updatedCategories});
-
     console.log('removeCategory called'); // DELETE WHEN DONE
-    this.setState({
-        proposal: updatedProposal,
-    }, () => {
+
+    localStorage.setItem(this.CURRENT_PROPOSAL_KEY, JSON.stringify(updatedProposal));
+    this.setState(
+      {
+        [PROPOSAL]: updatedProposal,
+      },
+      () => {
         console.log('%c value to remove: ', 'background: firebrick', value); // DELETE WHEN DONE
-        console.log(this.state.userInfo); // DELETE WHEN DONE
-        console.log(this.state.proposal); // DELETE WHEN DONE
-    });
+        console.log('current proposal: ', this.state.currentProposal); // DELETE WHEN DONE
+        console.log('updated proposal: ', updatedProposal); // DELETE WHEN DONE
+      },
+    );
   };
+
+  getLocalForm = form => JSON.parse(localStorage.getItem(form));
 
   handleSubmit = async e => {
     e.preventDefault();
-    // const formElements = e.target.element;
-    /* NOTE: this.handleSubmit() is dependent on formElements. 
-       Assgin it a value corresponding to this.state and make sure it's keys are called accordingly. Tried it, didn't work as planned */
-    //NOTE: used to be: const {abstract, categories} = this.state;
+    /**
+     * PLAN:
+     * Check if all requiered fields in state are full
+     * if not, check local storage
+     * if missing, direct to fill
+     * updateUserData <- check what it does
+     * createProposal <- check what it does
+     * redirect to proposal
+     */
+
     const {userInfo, proposal} = this.state;
     const {user, updateUserData, createProposal, history} = this.props;
+    const localUserInfo = this.getLocalForm('User info');
+    const localProposal = this.getLocalForm('Current proposal');
 
-    if (user) {
-      // IMPOTANT: The following logic IS part of the function but should be modified
-      // if (proposal.abstract.length > ABSTRACT_MAX || proposal.abstract.length < ABSTRACT_MIN) {
-      //   const scrollY =
-      //     proposal.abstract.getBoundingClientRect().top -
-      //     document.body.getBoundingClientRect().top -
-      //     150;
-      //   window.scrollTo(0, scrollY);
-      //   proposal.abstract.focus();
-      //   return;
-      // } /* NOTE: Scroll to Abstract if abstract.length is bigger than Max or smaller than Min*/
+    const userForms = [user, userInfo, localUserInfo];
+    const proposalForms = [proposal, localProposal];
 
-      // if (!proposal.categories.length) {
-      //   this.setState({missingCategories: true});
-      //   const scrollY =
-      //     proposal.categories_hidden.getBoundingClientRect().top -
-      //     document.body.getBoundingClientRect().top -
-      //     750;
-      //   window.scrollTo(0, scrollY);
-      //   return;
-      // } /* NOTE: Scroll to Categories if there's no abstract.categories.length*/
+    const checkAndSend = formsArray => {
+      let incompleteFroms = 0;
+      console.log(`%c Checking form ${formsArray}`, 'background: papayawhip');
+      _.forEach(formsArray, form => {
+        if (form) {
+          let countFull = 0;
 
-      // try {
-      //   // let newUser = getUserData(e.target.elements); /* NOTE: creates a newUser object with info passed from the form */
-      //   userInfo._id = user._id;
-      //   await updateUserData(userInfo);
-      //   /* NOTE: the above puts the newUser obj to the '/api/user' URL. updateUserData is a prop passed by App.js which
-      //   imports updateUser(user) from /client/src/data-service.js */
+          _.forEach(form, (value, key) => {
+            value
+              ? countFull++
+              : console.log(`%c ${key} is missing a value`, 'background: firebrick');
+          }); // counts the full fields in form
 
-      //   const result = await createProposal(proposal);
-      //   /* NOTE: createProposal POSTs the object stored in this.state.proposal to /api/proposal.
-      //      NOTE: the returned promise is assinged to the const result */
+          !countFull === Object.keys(form).length && incompleteFroms++; //if not all fields are full add to 1 to incompleteForms
 
-      //   history.push(`/session/${result._id}`); /* NOTE: redirects to the new session's page */
-      // } catch (ex) {
-      //   ga.exception({
-      //     description: `Error on submit: ${ex}`,
-      //     fatal: true,
-      //   });
-      // }
-      console.log(userInfo);
-      console.log(proposal);
-    }
+          incompleteFroms === formsArray.length
+            ? console.log('THERE IS NO COMPLETE DATA IN SYSTEM, make sure to fill all fields') //if incompleteForms === formsArray.length notify the user
+            : formsArray === 'userForms'
+              ? updateUserData(form)
+              : createProposal(form);
+          return;
+        }
+      });
+    };
+
+    checkAndSend(userForms);
+    checkAndSend(proposalForms);
   };
-  /* NOTE: I commented out the above function but it has to be solved better */
 
   render() {
-    const {user, allTags} = this.props;
-    const {proposal} = this.state;
+    const {allTags} = this.props;
 
-    const setValueDebounced = _.debounce(this.setValue, 250);
-    const setUserInfoValueDebounced = _.partial(setValueDebounced, USER_INFO);
-    const setProposalValueDebounced = _.partial(setValueDebounced, PROPOSAL);
-    const setProposalValue = _.partial(this.setValue, PROPOSAL);
+    const {userInfo, currentProposal} = this.state;
+
+
 
     const steps = [
       {
         name: 'Public Info',
-        component: <PublicInfo user={user} setValueDebounced={setUserInfoValueDebounced} />
+        component: (
+          <PublicInfo user={userInfo} setValueDebounced={this.setUserInfoValueDebounced} />
+        ),
       },
       {
         name: 'Short Bio',
-        component: <ShortBio user={user} setValueDebounced={setUserInfoValueDebounced} />
+        component: <ShortBio user={userInfo} setValueDebounced={this.setUserInfoValueDebounced} />,
       },
       {
         name: 'Private Info',
-        component: <PrivateInfo user={user} setValueDebounced={setUserInfoValueDebounced} />
+        component: (
+          <PrivateInfo user={userInfo} setValueDebounced={this.setUserInfoValueDebounced} />
+        ),
       },
       {
         name: 'Session Proposal',
         component: (
           <SessionProposal
-            title={proposal.title}
-            proposalType={proposal.proposalType}
-            ossilProject={proposal.ossilProject}
-            coSpeaker={proposal.coSpeaker}
-            setValue={setProposalValue}
-            setValueDebounced={setProposalValueDebounced}
+            proposal={currentProposal}
+            setValue={this.setProposalValue}
+            setValueDebounced={this.setProposalValueDebounced}
           />
         )
       },
@@ -211,13 +241,11 @@ class CFPForm extends Component {
         name: 'Abstract',
         component: (
           <Abstract
-            abstract={proposal.abstract}
-            tags={proposal.tags}
-            categories={proposal.categories}
+            proposal={currentProposal}
             missingCategories={this.state.missingCategories}
             allTags={allTags}
-            setValueDebounced={setProposalValueDebounced}
-            setValue={setProposalValue}
+            setValueDebounced={this.setProposalValueDebounced}
+            setValue={this.setProposalValue}
             removeProposalTag={this.removeProposalTag}
             removeCategory={this.removeCategory}
           />
@@ -227,12 +255,11 @@ class CFPForm extends Component {
         name: 'Outline & Notes',
         component: (
           <Outline
-            user={user}
-            outline={proposal.outline}
+            proposal={currentProposal}
             updateUserData={this.props.updateUserData}
             createProposal={this.props.createProposal}
             history={this.props.history}
-            setValueDebounced={setProposalValueDebounced}
+            setValueDebounced={this.setProposalValueDebounced}
             handleSubmit={this.handleSubmit}
           />
         )
@@ -246,7 +273,7 @@ class CFPForm extends Component {
           <BreakLineMain />
         </HeadingAligner>
         <NoteContainer>
-          <Paragraph2>Dear {user.name}, happy to see you're submitting session proposals! :)</Paragraph2>
+          <Paragraph2>Dear {userInfo.name}, happy to see you're submitting session proposals! :)</Paragraph2>
           <Paragraph2>Remember, you may submit up to 3 proposals.</Paragraph2>
           <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
         </NoteContainer>

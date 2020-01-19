@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import styled from 'styled-components';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faBookDead } from '@fortawesome/free-solid-svg-icons';
 
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
 import {
@@ -17,10 +17,16 @@ import {
 // styled-components components
 
 const PostmortemConfirm = styled(Important)`
-  ${({ theme: { font, color } }) => `
+  ${({ theme: { font } }) => `
     font-size: ${font.size_md};
   `}
-`
+`;
+const PostmortemIcon = styled(ListBolt)`
+  ${({ theme: { color, font } }) => `
+    font-size: ${font.size_bg};
+    color: ${color.important};
+  `}
+`;
 
 //React components
 const TitleFieldCaption = () => (
@@ -32,16 +38,20 @@ const TitleFieldCaption = () => (
     <br />
     <ul>
       <ListItem>
-        <ListBolt icon={faChevronRight} />“How we optimized micro-service utilization using machine learning”
+        <ListBolt icon={faChevronRight} />
+        “How we optimized micro-service utilization using machine learning”
       </ListItem>
       <ListItem>
-        <ListBolt icon={faChevronRight} />“Writing on sand? Embracing CI-CD techniques in the HR team”
+        <ListBolt icon={faChevronRight} />
+        “Writing on sand? Embracing CI-CD techniques in the HR team”
       </ListItem>
       <ListItem>
-        <ListBolt icon={faChevronRight} />“Effective Hackathon: How to re-write a project in 24 hours and save your startup”
+        <ListBolt icon={faChevronRight} />
+        “Effective Hackathon: How to re-write a project in 24 hours and save your startup”
       </ListItem>
       <ListItem>
-        <ListBolt icon={faChevronRight} />“Cost of choosing the wrong development stack: A learn-build-measure story from the trenches”
+        <ListBolt icon={faChevronRight} />
+        “Cost of choosing the wrong development stack: A learn-build-measure story from the trenches”
       </ListItem>
     </ul>
     Reversim Summit is about deep-tech, and we will reject trivial introductory talks in
@@ -62,7 +72,7 @@ const ProposalType = ({proposalType, ossilProject, setValue}) => (
     {proposalType === 'ossil' && (
       <FormField
         id="ossilProject"
-        label="Add a link to your relevant project"
+        label="Add a link to the relevant project"
         value={ossilProject}
         inputType="url"
         placeholder="www.yourProject.com"
@@ -72,8 +82,9 @@ const ProposalType = ({proposalType, ossilProject, setValue}) => (
     )}
     {proposalType === 'postmortem' && (
       <PostmortemConfirm>
-        Are you sure this is a postmortem session? Please read about the
-        <a href="#postmortems">postmortems</a> format
+        <PostmortemIcon icon={faBookDead} />
+        Are you sure this is a postmortem session?
+        Please read about the <a href="#postmortems">postmortems</a> format.
       </PostmortemConfirm>
     )}
   </Fragment>
@@ -86,9 +97,7 @@ const CoSpeakerFieldCaption = () => (
 
 const SessionProposal = props => {
   const {
-    title,
-    proposalType,
-    coSpeaker,
+    proposal: {title, proposalType, ossilProject, coSpeaker},
     setValue,
     setValueDebounced,
   } = props;
@@ -109,7 +118,7 @@ const SessionProposal = props => {
         value={title}
         onChange={e => setValueDebounced('title', e.target.value)}
       />
-      <ProposalType setValue={setValue} proposalType={proposalType} />
+      <ProposalType setValue={setValue} proposalType={proposalType} ossilProject={ossilProject} />
       <FormField
         id="coSpeaker"
         label="Co-Speaker (optional)"

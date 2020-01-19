@@ -176,8 +176,7 @@ const OutlineFieldCaption = () => (
 
 const Outline = props => {
   const {
-    outline,
-    legal, //NOTE: check what it is
+    proposal: {outline},
     setValueDebounced,
     handleSubmit,
   } = props;
@@ -198,8 +197,8 @@ const Outline = props => {
         <CheckboxInput
           type="checkbox"
           id="legal"
-          defaultChecked={legal} //NOTE: what is defaultChecked?
           required
+          onChange={e => setValueDebounced('iAgree', e.target.checked ? true : false)}
         />
         <CheckboxLable htmlFor="legal">
           I agree that all presented materials will be shared on the web by Reversim team,

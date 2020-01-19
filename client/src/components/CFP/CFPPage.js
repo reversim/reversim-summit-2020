@@ -29,7 +29,9 @@ const SubmissionClosed = () => (
 const BottomContent = ({features: {submission}, user, ...props}) => {
   if (!submission) return <SubmissionClosed />;
   else if (!user) return <NonAuthenticated />;
-  else return <CFPForm user={user} {...props} />;
+  else {
+    return <CFPForm user={user} {...props} />;
+  }
 };
 
 const CFPPage = props => {

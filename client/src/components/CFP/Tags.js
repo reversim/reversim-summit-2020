@@ -11,7 +11,7 @@ import {Bold} from '../GlobalStyledComponents/ReversimStyledComps';
 import './ReactTags.css';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
-export const MAX_TAGS = 3;
+import {MAX_TAGS} from '../../data/proposals';
 
 //styled-components components
 
