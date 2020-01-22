@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import ga from 'react-ga';
 import _ from 'lodash';
+
+import ga from 'react-ga';
 import {getUserData} from './UserForm.js';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
 
@@ -115,8 +116,11 @@ class CFPForm extends Component {
   };
 
   setValueDebounced = _.debounce(this.setValue, 250);
+
   setUserInfoValueDebounced = _.partial(this.setValueDebounced, USER_INFO);
+
   setProposalValueDebounced = _.partial(this.setValueDebounced, PROPOSAL);
+
   setProposalValue = _.partial(this.setValue, PROPOSAL);
 
   removeProposalTag = indexToRemove => {
@@ -166,49 +170,22 @@ class CFPForm extends Component {
      * redirect to proposal
      */
 
-    const {userInfo, proposal} = this.state;
-    const {user, updateUserData, createProposal, history} = this.props;
-    const localUserInfo = this.getLocalForm('User info');
-    const localProposal = this.getLocalForm('Current proposal');
+    const {userInfo, currentProposal} = this.state;
+    const {updateUserData, createProposal, history} = this.props;
 
-    const userForms = [user, userInfo, localUserInfo];
-    const proposalForms = [proposal, localProposal];
-
-    const checkAndSend = formsArray => {
-      let incompleteFroms = 0;
-      console.log(`%c Checking form ${formsArray}`, 'background: papayawhip');
-      _.forEach(formsArray, form => {
-        if (form) {
-          let countFull = 0;
-
-          _.forEach(form, (value, key) => {
-            value
-              ? countFull++
-              : console.log(`%c ${key} is missing a value`, 'background: firebrick');
-          }); // counts the full fields in form
-
-          !countFull === Object.keys(form).length && incompleteFroms++; //if not all fields are full add to 1 to incompleteForms
-
-          incompleteFroms === formsArray.length
-            ? console.log('THERE IS NO COMPLETE DATA IN SYSTEM, make sure to fill all fields') //if incompleteForms === formsArray.length notify the user
-            : formsArray === 'userForms'
-              ? updateUserData(form)
-              : createProposal(form);
-          return;
-        }
-      });
-    };
-
-    checkAndSend(userForms);
-    checkAndSend(proposalForms);
+    if (currentProposal.iAgree === true) {
+      console.log('userInfo to send: ', userInfo);
+      console.log('currentProposal to send: ', currentProposal);
+      updateUserData(userInfo);
+      createProposal(currentProposal);
+    }
+    console.warn('Needs to iAgree');
   };
 
   render() {
     const {allTags} = this.props;
 
     const {userInfo, currentProposal} = this.state;
-
-
 
     const steps = [
       {
