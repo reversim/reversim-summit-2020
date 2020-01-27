@@ -1,11 +1,7 @@
 import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
+import Joi from '@hapi/joi';
 
-import {
-  ABSTRACT_MAX,
-  ABSTRACT_MIN,
-} from '../../../data/proposals';
-import {getUserData} from '../UserForm';
 import ga from 'react-ga';
 
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +13,7 @@ import {
   Paragraph,
   Bold,
   FormField,
+  ValidationWarning,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 import {Button} from 'reactstrap';
 
@@ -174,43 +171,90 @@ const OutlineFieldCaption = () => (
   </Fragment>
 );
 
-const Outline = props => {
-  const {
-    proposal: {outline},
-    setValueDebounced,
-    handleSubmit,
-  } = props;
+class Outline extends Component {
+  constructor(props){
+    super(props);
+    this.state = {      
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+  };
 
-  return (
-    <StepContainer>
-      <StepHeading>Outline &amp; private notes</StepHeading>
-      <FormField
-        id="outline"
-        value={outline}
-        required={true}
-        multiline={true}
-        placeholder="Add your sessionn outline and notes here."
-        subtitle={<OutlineFieldCaption />}
-        onChange={e => setValueDebounced('outline', e.target.value)}
-      />
-      <AgreementContainer>
-        <CheckboxInput
-          type="checkbox"
-          id="legal"
-          required
-          onChange={e => setValueDebounced('iAgree', e.target.checked ? true : false)}
+  validationSchema = Joi.object({
+    outline: Joi.string().required('Outline'),
+    iAgree: Joi.boolean().allow(true).required().label('I agree'),
+  });
+  
+  isValidated = () => {
+    const { bio } = this.props
+
+    const toValidate = {
+      bio,
+    };
+
+    const {error} = this.validationSchema.validate(toValidate);
+    
+    const validationError = error 
+    ? {
+      validationError: {
+        field: error.details[0].path[0],
+        message: error.details[0].message,
+      },
+    }
+    : {};
+    
+    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
+
+    const newState = _.assign({}, this.state, validationError);
+
+    error && this.setState(newState);
+
+    return error ? false : true;
+  };
+
+  render() {
+    const {validationError} = this.state;
+    const {
+      outline,
+      setValueDebounced,
+      handleSubmit,
+    } = this.props;
+
+    return (
+      <StepContainer>
+        <StepHeading>Outline &amp; private notes</StepHeading>
+        <FormField
+          id="outline"
+          value={outline}
+          required={true}
+          multiline={true}
+          placeholder="Add your sessionn outline and notes here."
+          subtitle={<OutlineFieldCaption />}
+          onChange={e => setValueDebounced('outline', e.target.value)}
+          onBlure={this.isValidated}
         />
-        <CheckboxLable htmlFor="legal">
-          I agree that all presented materials will be shared on the web by Reversim team,
-          including the slides, video on youtube and mp3 on the podcast.
-        </CheckboxLable>
-      </AgreementContainer>
-      <SubmitContainer>
-        <SubmitInput />
-        <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-      </SubmitContainer>
-    </StepContainer>
-  );
+        {validationError.field === "outline" && ValidationWarning(validationError.message)}
+        <AgreementContainer>
+          <CheckboxInput
+            type="checkbox"
+            id="legal"
+            required
+            onChange={e => setValueDebounced('iAgree', e.target.checked ? true : false)}
+          />
+          <CheckboxLable htmlFor="legal">
+            I agree that all presented materials will be shared on the web by Reversim team,
+            including the slides, video on youtube and mp3 on the podcast.
+          </CheckboxLable>
+          {validationError.field === "iAgree" && ValidationWarning(validationError.message)}
+        </AgreementContainer>
+        <SubmitContainer>
+          <SubmitInput />
+          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+        </SubmitContainer>
+      </StepContainer>
+    );
+  };
 };
-
 export default Outline;

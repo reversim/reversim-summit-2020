@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
+import Joi from '@hapi/joi';
+
 import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
@@ -14,7 +16,7 @@ import uniq from 'lodash/uniq';
 import without from 'lodash/without';
 import {findBestMatch} from 'string-similarity';
 
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import {
   FormField,
   StepContainer,
@@ -27,6 +29,7 @@ import {
   Heading5,
   Paragraph,
   Bold,
+  ValidationWarning,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 import {Button, Modal, ModalBody, ModalFooter} from 'reactstrap';
@@ -86,31 +89,6 @@ const CheckboxInput = styled.input`
     content: '✓';
     border: 2px solid ${color.box_shadow_1};
   }
-  `}
-`;
-
-const OtherInput = styled.input`
-  ${({ theme: { color, space, font } }) => `
-    width: 100%;
-    height: calc(2 * ${font.size_reg});
-    padding: ${space.s} ${space.m};
-    margin-left: ${space.m};
-
-    font-size: ${font.size_reg};
-    font-weight: 300;
-    line-height: 1.5;
-    
-    color: ${color.input_1};
-    border-radius: 3px;
-    border-radius: 0.25rem;
-    border: 2px solid ${color.input_border_1};
-    
-    box-shadow: inset 0 1px 1px ${color.input_box_shadow_1};
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-    &:hover{
-      cursor: pointer;
-    }
   `}
 `;
 
@@ -284,6 +262,10 @@ class Abstract extends Component {
       abstractLen: props.abstract ? props.abstract.length : 0,
       abstractErr: props.abstract ? this.getAbstractErr(props.abstract) : true,
       newTagPending: null,
+      validationError: {
+        field: '',
+        message: '',
+      },
     };
 
     this.abstractCheckLength = this.abstractCheckLength.bind(this);
@@ -293,6 +275,40 @@ class Abstract extends Component {
     this.addTag = this.addTag.bind(this);
     this.onCategoryChange = this.onCategoryChange.bind(this);
   }
+
+  validationSchema = Joi.object({
+    abstract: Joi.string().min(280).max(800).required().label('Abstract'),
+    tags: Joi.array().max(3).items(Joi.string(), Joi.string(), Joi.string()).label('Tags'),
+    categories: Joi.array().min(1).max(2).items(Joi.string(), Joi.string()).required().label('Categories'),
+  });
+
+  isValidated = () => {
+    const { abstract, tags, categories } = this.props;
+
+    const toValidate = {
+      abstract,
+      tags,
+      categories,
+    };
+
+    const {error} = this.validationSchema.validate(toValidate);
+    const validationError = error 
+    ? {
+      validationError: {
+        field: error.details[0].path[0],
+        message: error.details[0].message,
+      },
+    }
+    : {};
+    
+    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
+
+    const newState = _.assign({}, this.state, validationError);
+
+    error && this.setState(newState);
+
+    return error ? false : true;
+  };
 
   getAbstractErr = val => val.length < ABSTRACT_MIN ? 'low' : val.length > ABSTRACT_MAX ? 'high' : null;
 
@@ -314,7 +330,7 @@ class Abstract extends Component {
   validateNewTag = tag => {
     const {
       allTags,
-      proposal: {tags},
+      tags,
     } = this.props;
     // NOTE: allTags is defined by the server
     // NOTE: tags is CFPForm.state.propsal.tag: [];
@@ -334,7 +350,7 @@ class Abstract extends Component {
 
   addTag = tag => {
     console.log('MAX_TAGS: ', MAX_TAGS);
-    this.props.proposal.tags.length < MAX_TAGS
+    this.props.tags.length < MAX_TAGS
     //NOTE: MAX_TAGS: 3 try to find out what happends with this.props.proposal.tags.length
       ? this.props.setValue('tags', tag)
       : console.log('too many tags');
@@ -342,7 +358,7 @@ class Abstract extends Component {
 
   onCategoryChange = checkedCategory => {
     const {
-      proposal: {categories},
+      categories,
       setValue,
       removeCategory,
     } = this.props;
@@ -357,7 +373,7 @@ class Abstract extends Component {
   render(){
 
     const {
-      proposal: {abstract, tags, categories},
+      abstract, tags, categories,
       allTags,
       removeProposalTag,
     } = this.props;
@@ -366,6 +382,7 @@ class Abstract extends Component {
       abstractLen,
       abstractErr,
       newTagPending,
+      validationError,
     } = this.state;
 
     let bestMatch;
@@ -391,6 +408,8 @@ class Abstract extends Component {
           subtitle={<AbstractFieldCaption abstractLen={abstractLen} abstractErr={abstractErr} />}
           onChange={e => this.onChangeAbstract(e)}
         />
+        {validationError.field === "abstract" && ValidationWarning(validationError.message)}
+
         <Tags
           tags={tagObjs}
           suggestions={tagSuggestions}
@@ -399,6 +418,7 @@ class Abstract extends Component {
           handleDelete={removeProposalTag}
           readOnly={tags.length === MAX_TAGS}
         />
+        {validationError.field === "tags" && ValidationWarning(validationError.message)}
 
         <Modal isOpen={!!newTagPending} toggle={this.toggleTagModal}>
           <AbstractModalHeading toggle={this.toggleTagModal}>'{newTagPending}' doesn't exist</AbstractModalHeading>
@@ -458,6 +478,7 @@ class Abstract extends Component {
             />
           );
         })}
+        {validationError.field === "categories" && ValidationWarning(validationError.message)}
       </StepContainer>
     )
   }

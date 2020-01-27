@@ -107,11 +107,7 @@ const CFPIntro = () => (
       </Paragraph2>
       <Paragraph2>
         Our goal is to streamline the submission and review process, while maintaining superb
-        quality; if you have any feedback or questions, please email us at
-        <InvertedColorLink href="mailto:rs19team@googlegroups.com">
-          rs19team@googlegroups.com
-        </InvertedColorLink>
-        . {/*DO NOT DELETE this dot, it's the ending of the scentance above */}
+        quality; if you have any feedback or questions, please email us at <InvertedColorLink href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</InvertedColorLink>. {/*DO NOT DELETE this dot, it's the ending of the scentance*/}
       </Paragraph2>
     </SegmentContainer>
 

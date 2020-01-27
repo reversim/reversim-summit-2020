@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import FormBit from '../FormField';
 
@@ -507,3 +508,30 @@ export const FormSubHeading = styled.span`
     margin-bottom: ${space.m};
   `}
 `;
+
+const ValidationErrorContainer = styled.div`
+  ${({ theme: { color, space, font } }) => `
+    margin-bottom: ${space.l};
+    padding: ${space.m};
+    display: flex;
+    align-items: center;
+    background: ${color.important};
+    color: ${color.text_1};
+    font-weight: ${font.weight_bold};
+    border-radius: 5px;
+  `};
+`;
+
+const ValidationErrorBolt = styled(ListBolt)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_1};
+  `};
+`;
+
+
+export const ValidationWarning = (errorMessage) => (
+  <ValidationErrorContainer>
+    <ValidationErrorBolt icon={faExclamationTriangle}/>
+    <p>{errorMessage}</p>
+  </ValidationErrorContainer>
+);
