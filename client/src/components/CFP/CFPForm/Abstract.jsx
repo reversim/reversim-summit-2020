@@ -232,7 +232,7 @@ const AbstractFieldCaption = ({abstractLen, abstractErr}) => (
   </FormSubHeading>
 );
 
-const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
+const CategoryCheckbox = ({name, description, onChange, checked, disabled, onBlur}) => (
   <CheckboxContianer
     onClick={() => onChange(name)}
     checked={checked}
@@ -243,6 +243,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
       checked={checked}
       disabled={disabled}
       readOnly={true}
+      onBlur={onBlur}
     />
     <CheckboxLable>
       <CheckboxLableContainer>
@@ -299,13 +300,18 @@ class Abstract extends Component {
         message: error.details[0].message,
       },
     }
-    : {};
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
     
     error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
-    error && this.setState(newState);
+    this.setState(newState);
 
     return error ? false : true;
   };
@@ -407,6 +413,7 @@ class Abstract extends Component {
           placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
           subtitle={<AbstractFieldCaption abstractLen={abstractLen} abstractErr={abstractErr} />}
           onChange={e => this.onChangeAbstract(e)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "abstract" && ValidationWarning(validationError.message)}
 
@@ -417,6 +424,7 @@ class Abstract extends Component {
           handleAddition={this.validateNewTag}
           handleDelete={removeProposalTag}
           readOnly={tags.length === MAX_TAGS}
+          onBlur={this.isValidated}
         />
         {validationError.field === "tags" && ValidationWarning(validationError.message)}
 
@@ -475,6 +483,7 @@ class Abstract extends Component {
               onChange={this.onCategoryChange}
               checked={checked}
               disabled={!checked && categories.length === MAX_CATEGORIES}
+              onBlur={this.isValidated}
             />
           );
         })}

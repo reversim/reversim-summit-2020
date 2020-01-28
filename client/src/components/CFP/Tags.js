@@ -77,6 +77,7 @@ const Tags = ({
   handleAddition,
   readOnly,
   predefinedSuggestions,
+  onBlur
 }) => (
   <TagsContainer>
     <InputLabel>Tags</InputLabel>
@@ -89,6 +90,7 @@ const Tags = ({
       handleDelete={handleDelete}
       handleAddition={handleAddition}
       autofocus={false}
+      onBlur={onBlur}
     />
     {!readOnly && (
       <SuggestionsContainer>

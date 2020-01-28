@@ -112,13 +112,18 @@ class ShortBio extends Component {
         message: error.details[0].message,
       },
     }
-    : {};
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
     
     error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
-    error && this.setState(newState);
+    this.setState(newState);
 
     return error ? false : true;
   };
@@ -137,6 +142,7 @@ class ShortBio extends Component {
           multiline={true}
           subtitle={<Caption />}
           onChange={e => setValueDebounced('bio', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "bio" && ValidationWarning(validationError.message)}
       </StepContainer>

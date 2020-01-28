@@ -25,7 +25,7 @@ class PublicInfo extends Component {
     oneLiner: Joi.string().max(100).required().label('One Liner'),
     affiliation: Joi.string().label('Affiliation'),
     linkedin: Joi.string().regex(/^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile).*$/, 'Linkedin profile url').label('Linkedin Profile'),
-    github: Joi.string().regex(/^\w[\w-]*$/, 'GitHub username').label('GitHub Username'),
+    github: Joi.string().regex(/^\w[\w-]{0,38}$/, 'GitHub username').label('GitHub Username'),
     twitter: Joi.string().regex(/^@\w{2,15}$/, 'Twitter username').label('Twitter @username'),
   });
 
@@ -57,13 +57,18 @@ class PublicInfo extends Component {
         message: error.details[0].message,
       },
     }
-    : {};
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
     
     error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
-    error && this.setState(newState);
+    this.setState(newState, console.log('%cnewState: ', 'background: green', newState));
 
     return error ? false : true;
   };
@@ -92,6 +97,7 @@ class PublicInfo extends Component {
           placeholder="Your name"
           value={fullname}
           onChange={e => setValueDebounced('fullname', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "fullname" && ValidationWarning(validationError.message)}
 
@@ -103,6 +109,7 @@ class PublicInfo extends Component {
           subtitle="Maximum 100 characters"
           placeholder="COBOL developer at Acme Corp"
           onChange={e => setValueDebounced('oneLiner', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "oneLiner" && ValidationWarning(validationError.message)}
 
@@ -114,6 +121,7 @@ class PublicInfo extends Component {
           subtitle="Who is current employer or are you self-employed? What brings you to Reversim 2020?"
           placeholder="You look familiar.."
           onChange={e => setValueDebounced('affiliation', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "affiliation" && ValidationWarning(validationError.message)}
 
@@ -126,6 +134,7 @@ class PublicInfo extends Component {
           inputType="url"
           placeholder="https://www.linkedin.com/in/reversim/"
           onChange={e => setValueDebounced('linkedin', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "linkedin" && ValidationWarning(validationError.message)}
 
@@ -135,6 +144,7 @@ class PublicInfo extends Component {
           value={github}
           placeholder="podcaster"
           onChange={e => setValueDebounced('github', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "github" && ValidationWarning(validationError.message)}
 
@@ -144,6 +154,7 @@ class PublicInfo extends Component {
           value={twitter}
           placeholder="@Reversim"
           onChange={e => setValueDebounced('twitter', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "twitter" && ValidationWarning(validationError.message)}
         

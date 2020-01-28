@@ -139,13 +139,18 @@ class SessionProposal extends Component {
         message: error.details[0].message,
       },
     }
-    : {};
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
     
     error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
-    error && this.setState(newState);
+    this.setState(newState);
 
     return error ? false : true;
   };
@@ -176,9 +181,15 @@ class SessionProposal extends Component {
           subtitle={<TitleFieldCaption />}
           value={title}
           onChange={e => setValueDebounced('title', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "title" && ValidationWarning(validationError.message)}
-        <ProposalType setValue={setValue} proposalType={proposalType} ossilProject={ossilProject} />
+        <ProposalType 
+          setValue={setValue}
+          proposalType={proposalType}
+          ossilProject={ossilProject}
+          onBlur={this.isValidated}
+        />
         {validationError.field === "proposalType" && ValidationWarning(validationError.message)}
         {validationError.field === "ossilProject" && ValidationWarning(validationError.message)}
         <FormField
@@ -189,6 +200,7 @@ class SessionProposal extends Component {
           placeholder={`co.speaker@email.com`}
           subtitle={<CoSpeakerFieldCaption />}
           onChange={e => setValueDebounced('coSpeaker', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "coSpeaker" && ValidationWarning(validationError.message)}
       </StepContainer>

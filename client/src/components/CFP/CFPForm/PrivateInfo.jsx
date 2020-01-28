@@ -43,7 +43,7 @@ class PrivateInfo extends Component {
   
   validationSchema = Joi.object({
     email: Joi.string().email({ tlds: { allow: false } }).required().label('Email'),
-    phone: Joi.string().pattern(/^[0-9\+]{9,13}$/,).required().label('Phone'),
+    phone: Joi.string().pattern(/^[0-9\+]{9,13}$/, 'valid Phone Number').required().label('Phone'),
     videoUrl: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').label('Video URL'),
     trackRecord: Joi.string().max(600).required().label('Track Record'),
   });
@@ -72,13 +72,18 @@ class PrivateInfo extends Component {
         message: error.details[0].message,
       },
     }
-    : {};
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
     
     error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
-    error && this.setState(newState);
+    this.setState(newState);
 
     return error ? false : true;
   };
@@ -107,6 +112,7 @@ class PrivateInfo extends Component {
           placeholder="your.email@here.please"
           value={email}
           onChange={e => setValueDebounced('email', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "email" && ValidationWarning(validationError.message)}
         <FormField
@@ -116,6 +122,7 @@ class PrivateInfo extends Component {
           placeholder="05x-xxxxxxx"
           value={phone}
           onChange={e => setValueDebounced('phone', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "phone" && ValidationWarning(validationError.message)}
         <FormField
@@ -126,6 +133,7 @@ class PrivateInfo extends Component {
           placeholder="e.g. http://youtu.be/xxxx"
           subtitle={<VideoUrlFieldCaption />}
           onChange={e => setValueDebounced('video_url', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "videoUrl" && ValidationWarning(validationError.message)}
         
@@ -186,6 +194,7 @@ class PrivateInfo extends Component {
             </span>
           }
           onChange={e => setValueDebounced('trackRecord', e.target.value)}
+          onBlur={this.isValidated}
         />
         {validationError.field === "trackRecord" && ValidationWarning(validationError.message)}
 

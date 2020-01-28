@@ -44,7 +44,7 @@ const AgreementContainer = styled.div`
   `}
 `;
 
-const CheckboxInput = styled.input`
+const CheckboxInputStyle = styled.input`
   ${({ theme: { color, space, font } }) => `
   opacity: 0;
   position: absolute;
@@ -77,6 +77,8 @@ const CheckboxInput = styled.input`
   }
   `}
 `;
+
+const CheckboxInput = props => <CheckboxInputStyle {...props} onBlur={props.onBlur} />
 
 const CheckboxLable = styled.label`
   ${({ theme: { color } }) => `
@@ -184,14 +186,15 @@ class Outline extends Component {
 
   validationSchema = Joi.object({
     outline: Joi.string().required('Outline'),
-    iAgree: Joi.boolean().allow(true).required().label('I agree'),
+    iAgree: Joi.boolean().invalid(false).required().label('I agree'),
   });
-  
+
   isValidated = () => {
-    const { bio } = this.props
+    const { outline, iAgree } = this.props
 
     const toValidate = {
-      bio,
+      outline,
+      iAgree,
     };
 
     const {error} = this.validationSchema.validate(toValidate);
@@ -200,16 +203,21 @@ class Outline extends Component {
     ? {
       validationError: {
         field: error.details[0].path[0],
-        message: error.details[0].message,
+        message: error.details[0].path[0] === 'iAgree' 
+        ? 'Please agree to share all presented material.' 
+        : error.details[0].message,
       },
     }
-    : {};
-    
-    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
 
     const newState = _.assign({}, this.state, validationError);
 
-    error && this.setState(newState);
+    this.setState(newState);
 
     return error ? false : true;
   };
@@ -233,22 +241,24 @@ class Outline extends Component {
           placeholder="Add your sessionn outline and notes here."
           subtitle={<OutlineFieldCaption />}
           onChange={e => setValueDebounced('outline', e.target.value)}
-          onBlure={this.isValidated}
+          onBlur={this.isValidated}
         />
         {validationError.field === "outline" && ValidationWarning(validationError.message)}
+
         <AgreementContainer>
           <CheckboxInput
             type="checkbox"
             id="legal"
             required
             onChange={e => setValueDebounced('iAgree', e.target.checked ? true : false)}
+            onBlur={this.isValidated}
           />
           <CheckboxLable htmlFor="legal">
             I agree that all presented materials will be shared on the web by Reversim team,
             including the slides, video on youtube and mp3 on the podcast.
           </CheckboxLable>
-          {validationError.field === "iAgree" && ValidationWarning(validationError.message)}
         </AgreementContainer>
+          {validationError.field === "iAgree" && ValidationWarning(validationError.message)}
         <SubmitContainer>
           <SubmitInput />
           <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
