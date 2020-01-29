@@ -44,7 +44,7 @@ class PrivateInfo extends Component {
   validationSchema = Joi.object({
     email: Joi.string().email({ tlds: { allow: false } }).required().label('Email'),
     phone: Joi.string().pattern(/^[0-9\+]{9,13}$/, 'valid Phone Number').required().label('Phone'),
-    videoUrl: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').required().label('Video URL'),
+    videoUrl: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').allow('').label('Video URL'),
     trackRecord: Joi.string().max(600).required().label('Track Record'),
   });
 

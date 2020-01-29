@@ -21,17 +21,17 @@ class PublicInfo extends Component {
   };
 
   validationSchema = Joi.object({
-    fullname: Joi.string().required().label('Full Name'),
+    name: Joi.string().required().label('Full Name'),
     oneLiner: Joi.string().max(100).required().label('One Liner'),
     affiliation: Joi.string().required().label('Affiliation'),
-    linkedin: Joi.string().regex(/^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile).*$/, 'Linkedin profile url').label('Linkedin Profile'),
-    github: Joi.string().regex(/^\w[\w-]{0,38}$/, 'GitHub username').label('GitHub Username'),
-    twitter: Joi.string().regex(/^@\w{2,15}$/, 'Twitter username').label('Twitter @username'),
+    linkedin: Joi.string().regex(/^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile).*$/, 'Linkedin profile url').allow('').label('Linkedin Profile'),
+    github: Joi.string().regex(/^\w[\w-]{0,38}$/, 'GitHub username').allow('').label('GitHub Username'),
+    twitter: Joi.string().regex(/^@\w{2,15}$/, 'Twitter username').allow('').label('Twitter @username'),
   });
 
   isValidated = () => {
     const {
-      fullname,
+      name,
       oneLiner,
       affiliation,
       linkedin,
@@ -40,7 +40,7 @@ class PublicInfo extends Component {
     } = this.props
 
     const toValidate = {
-      fullname,
+      name,
       oneLiner,
       affiliation,
       linkedin,
@@ -77,7 +77,7 @@ class PublicInfo extends Component {
     const {validationError} = this.state;
 
     const {
-      fullname,
+      name,
       oneLiner,
       affiliation,
       linkedin,
@@ -95,11 +95,11 @@ class PublicInfo extends Component {
           label="Full Name"
           required={true}
           placeholder="Your name"
-          value={fullname}
-          onChange={e => setValueDebounced('fullname', e.target.value)}
+          value={name}
+          onChange={e => setValueDebounced('name', e.target.value)}
           onBlur={this.isValidated}
         />
-        {validationError.field === "fullname" && ValidationWarning(validationError.message)}
+        {validationError.field === "name" && ValidationWarning(validationError.message)}
 
         <FormField
           id="oneLiner"

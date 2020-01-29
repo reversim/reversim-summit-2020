@@ -223,7 +223,7 @@ class CFPForm extends Component {
         name: 'Public Info',
         component: (
           <PublicInfo
-          fullname={name}
+          name={name}
           oneLiner={oneLiner}
           affiliation={affiliation}
           linkedin={linkedin}

@@ -185,7 +185,7 @@ class Outline extends Component {
   };
 
   validationSchema = Joi.object({
-    outline: Joi.string().required('Outline'),
+    outline: Joi.string().required().label('Outline'),
     iAgree: Joi.boolean().invalid(false).required().label('I agree'),
   });
 
