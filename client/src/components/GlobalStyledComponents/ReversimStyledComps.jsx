@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
+import FormBit from '../FormField';
 
 //general elements
 export const ResponsiveContainer = styled.div`
@@ -474,6 +476,12 @@ export const StepContainer = styled(ResponsiveContainer)`
   `}
 `;
 
+export const FormField = styled(FormBit)`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.xl};
+  `}
+`;
+
 export const StepHeading = styled(Heading4)`
   ${({ theme: { color, font } }) => `
     color: ${color.text_3};
@@ -482,14 +490,16 @@ export const StepHeading = styled(Heading4)`
 `;
 
 export const InputLabel = styled.label`
-  ${({ theme: { font, color } }) => `
+  ${({ theme: { space, font, color } }) => `
+    display: block;
+    margin: ${space.m} 0;
     font-family: ${font.main};
     font-size: ${font.size_md};
     color: ${color.text_3};
   `}
 `;
 
-export const FormSubHeading = styled.h5`
+export const FormSubHeading = styled.span`
   ${({ theme: { color, font, space } }) => `
     color: ${color.step_zilla_sub_heading};
     font-family: ${font.main};
@@ -498,3 +508,30 @@ export const FormSubHeading = styled.h5`
     margin-bottom: ${space.m};
   `}
 `;
+
+const ValidationErrorContainer = styled.div`
+  ${({ theme: { color, space, font } }) => `
+    margin-bottom: ${space.l};
+    padding: ${space.m};
+    display: flex;
+    align-items: center;
+    background: ${color.important};
+    color: ${color.text_1};
+    font-weight: ${font.weight_bold};
+    border-radius: 5px;
+  `};
+`;
+
+const ValidationErrorBolt = styled(ListBolt)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_1};
+  `};
+`;
+
+
+export const ValidationWarning = (errorMessage) => (
+  <ValidationErrorContainer>
+    <ValidationErrorBolt icon={faExclamationTriangle}/>
+    <p>{errorMessage}</p>
+  </ValidationErrorContainer>
+);

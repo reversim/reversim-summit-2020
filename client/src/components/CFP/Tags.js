@@ -11,7 +11,7 @@ import {Bold} from '../GlobalStyledComponents/ReversimStyledComps';
 import './ReactTags.css';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
-export const MAX_TAGS = 3;
+import {MAX_TAGS} from '../../data/proposals';
 
 //styled-components components
 
@@ -77,6 +77,7 @@ const Tags = ({
   handleAddition,
   readOnly,
   predefinedSuggestions,
+  onBlur
 }) => (
   <TagsContainer>
     <InputLabel>Tags</InputLabel>
@@ -89,6 +90,7 @@ const Tags = ({
       handleDelete={handleDelete}
       handleAddition={handleAddition}
       autofocus={false}
+      onBlur={onBlur}
     />
     {!readOnly && (
       <SuggestionsContainer>

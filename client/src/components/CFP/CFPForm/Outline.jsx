@@ -1,15 +1,10 @@
 import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
+import Joi from '@hapi/joi';
 
-import FormField, {SPACING} from '../../FormField';
-import {
-  ABSTRACT_MAX,
-  ABSTRACT_MIN,
-} from '../../../data/proposals';
-import {getUserData} from '../UserForm';
 import ga from 'react-ga';
 
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {
   StepContainer,
   StepHeading,
@@ -17,6 +12,8 @@ import {
   ListBolt,
   Paragraph,
   Bold,
+  FormField,
+  ValidationWarning,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 import {Button} from 'reactstrap';
 
@@ -34,7 +31,7 @@ const OutlineSubHeading = styled.h6`
   `}
 `;
 
-const AbstractList = styled.ul`
+const OutlineList = styled.ul`
   ${({ theme: { space } }) => `
     margin: ${space.m} 0 ${space.xl} 0;
   `}
@@ -47,7 +44,7 @@ const AgreementContainer = styled.div`
   `}
 `;
 
-const CheckboxInput = styled.input`
+const CheckboxInputStyle = styled.input`
   ${({ theme: { color, space, font } }) => `
   opacity: 0;
   position: absolute;
@@ -80,6 +77,8 @@ const CheckboxInput = styled.input`
   }
   `}
 `;
+
+const CheckboxInput = props => <CheckboxInputStyle {...props} onBlur={props.onBlur} />
 
 const CheckboxLable = styled.label`
   ${({ theme: { color } }) => `
@@ -139,7 +138,7 @@ const OutlineFieldCaption = () => (
       don’t expect a per-slide description for now.
     </OutlineParagraph>
     <OutlineSubHeading>For example:</OutlineSubHeading>
-    <AbstractList>
+    <OutlineList>
       <ListItem>
         <ListBolt icon={faChevronRight} />
         2m: Introduction: Who am I and my professional background
@@ -170,76 +169,65 @@ const OutlineFieldCaption = () => (
       <ListItem>
         <Bold>Total time: 37m</Bold>
       </ListItem>
-    </AbstractList>
+    </OutlineList>
   </Fragment>
 );
 
 class Outline extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit = async e => {
-    e.preventDefault();
-    const formElements = e.target.elements; //NOTE: Problem here, as it is triggered by the <Button /> which is the target and also the element
-
-    const {user, updateUserData, createProposal, history} = this.props;
-
-    if (user) {
-      const abstract = formElements.abstract.value;
-      if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
-        const y =
-          formElements.abstract.getBoundingClientRect().top -
-          document.body.getBoundingClientRect().top -
-          150;
-        window.scrollTo(0, y);
-        formElements.abstract.focus();
-        // NOTE: this returns a user to the abstract field in case the abstract is too long or too short
-        return;
-      }
-
-      const categories = this.state.categories;
-      if (!categories.length) {
-        this.setState({missingCategories: true})
-        const y =
-          formElements.categories_hidden.getBoundingClientRect().top -
-          document.body.getBoundingClientRect().top -
-          750;
-        window.scrollTo(0, y);
-        // NOTE: this returns the user to the categories field in case there are none
-        return;
-      } 
-
-      try {
-        let newUser = getUserData(e.target.elements);
-        newUser._id = user._id;
-        await updateUserData(newUser);
-        const result = await createProposal(this.getProposalData(formElements));
-        history.push(`/session/${result._id}`);
-      } catch (ex) {
-        ga.exception({
-          description: `Error on submit: ${ex}`,
-          fatal: true,
-        });
-      }
-    }
-  };
-
-  getProposalData = formElements => {
-    const outline = formElements.outline.value;
-    const legal = formElements.legal.checked;
-
-    return {
-      outline,
-      legal,
+    this.state = {      
+      validationError: {
+        field: '',
+        message: '',
+      },
     };
   };
 
-  render(){
+  validationSchema = Joi.object({
+    outline: Joi.string().required().label('Outline'),
+    iAgree: Joi.boolean().invalid(false).required().label('I agree'),
+  });
+
+  isValidated = () => {
+    const { outline, iAgree } = this.props
+
+    const toValidate = {
+      outline,
+      iAgree,
+    };
+
+    const {error} = this.validationSchema.validate(toValidate);
+    
+    const validationError = error 
+    ? {
+      validationError: {
+        field: error.details[0].path[0],
+        message: error.details[0].path[0] === 'iAgree' 
+        ? 'Please agree to share all presented material.' 
+        : error.details[0].message,
+      },
+    }
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+
+    const newState = _.assign({}, this.state, validationError);
+
+    this.setState(newState);
+
+    return error ? false : true;
+  };
+
+  render() {
+    const {validationError} = this.state;
     const {
       outline,
-      legal,
+      setValueDebounced,
+      handleSubmit,
     } = this.props;
 
     return (
@@ -247,34 +235,36 @@ class Outline extends Component {
         <StepHeading>Outline &amp; private notes</StepHeading>
         <FormField
           id="outline"
+          value={outline}
           required={true}
           multiline={true}
-          value={outline}
-          placeholder=""
+          placeholder="Add your sessionn outline and notes here."
           subtitle={<OutlineFieldCaption />}
-          className={SPACING}
+          onChange={e => setValueDebounced('outline', e.target.value)}
+          onBlur={this.isValidated}
         />
+        {validationError.field === "outline" && ValidationWarning(validationError.message)}
+
         <AgreementContainer>
           <CheckboxInput
-            type="checkbox" 
-            id="legal" 
-            defaultChecked={legal} 
-            required 
+            type="checkbox"
+            id="legal"
+            required
+            onChange={e => setValueDebounced('iAgree', e.target.checked ? true : false)}
+            onBlur={this.isValidated}
           />
           <CheckboxLable htmlFor="legal">
             I agree that all presented materials will be shared on the web by Reversim team,
             including the slides, video on youtube and mp3 on the podcast.
           </CheckboxLable>
         </AgreementContainer>
+          {validationError.field === "iAgree" && ValidationWarning(validationError.message)}
         <SubmitContainer>
-          <SubmitInput type="submit"/>
-          <SubmitButton color="primary" onClick={this.handleSubmit}>
-            Submit
-          </SubmitButton>
+          <SubmitInput />
+          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
         </SubmitContainer>
       </StepContainer>
     );
-  }
+  };
 };
-
 export default Outline;

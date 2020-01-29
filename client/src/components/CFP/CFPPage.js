@@ -1,11 +1,10 @@
 import React, {Fragment} from 'react';
-import {Button, Col, Container, Row} from 'reactstrap';
+import {Button} from 'reactstrap';
 import Page from '../Page';
 import {Link} from 'react-router-dom';
 import CFPTitle from './CFPTitle';
 import CFPIntro from './CFPIntro';
 import CFPForm from './CFPForm';
-import {cfpCol} from './CFPPage.css';
 import {getLoginUrl} from '../Redirect';
 import {getRemainingCFPDays as _x, REVERSIM_SUMMIT} from '../../utils';
 
@@ -30,22 +29,24 @@ const SubmissionClosed = () => (
 const BottomContent = ({features: {submission}, user, ...props}) => {
   if (!submission) return <SubmissionClosed />;
   else if (!user) return <NonAuthenticated />;
-  else return <CFPForm user={user} {...props} />;
+  else {
+    return <CFPForm user={user} {...props} />;
+  }
 };
 
 const CFPPage = props => {
   const {eventConfig} = props;
 
   return (
-  <Page title="Call for papers" {...props}>
-    <Fragment>
-      <CFPTitle eventConfig={eventConfig}/>
-      <div className="container">
-        <CFPIntro />
-        <BottomContent {...props} />
-      </div>
-    </Fragment>
-  </Page>
+    <Page title="Call for papers" {...props}>
+      <Fragment>
+        <CFPTitle eventConfig={eventConfig} />
+        <div className="container">
+          <CFPIntro />
+          <BottomContent {...props} />
+        </div>
+      </Fragment>
+    </Page>
   );
 };
 

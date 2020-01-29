@@ -23,7 +23,7 @@ export const getUserData = formElements => {
     phone: phone,
     video_url: videoUrl,
   };
-};
+}; // NOTE: This beauty returns an Object with the user's info based on what was typed in the form
 
 const VideoUrlFieldCaption = () => (
   <span>

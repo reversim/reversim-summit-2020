@@ -368,7 +368,7 @@ const PremiumTechItem = styled.li`
 `;
 
 // React components
-const SponsorPage = ({ sponsor, color, isFull, ...props }) => {
+const SponsorPage = ({ sponsor, ...props }) => {
   const mapSocialLink = medium => {
     const mediumMapper = {
       linkedin: faLinkedin,

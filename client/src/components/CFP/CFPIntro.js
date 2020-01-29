@@ -73,9 +73,15 @@ const BottomLine = styled(BreakLineMain)`
     width: 100%;
     margin: ${space.xxl} 0;
     `}
-      ${mediaQueryMin.s`
-        margin-left: 0;
-      `}
+  ${mediaQueryMin.s`
+    margin-left: 0;
+    `}
+`;
+const PostmortemsHeading = styled(ListHeading)`
+  ${({ theme: { space } }) => `
+    margin-top: calc(-13 * ${space.m});
+    padding-top: calc(15.5 * ${space.m});
+  `}
 `;
 
 //React component section
@@ -101,11 +107,7 @@ const CFPIntro = () => (
       </Paragraph2>
       <Paragraph2>
         Our goal is to streamline the submission and review process, while maintaining superb
-        quality; if you have any feedback or questions, please email us at
-        <InvertedColorLink href="mailto:rs19team@googlegroups.com">
-          rs19team@googlegroups.com
-        </InvertedColorLink>
-        . {/*DO NOT DELETE this dot, it's the ending of the scentance above */}
+        quality; if you have any feedback or questions, please email us at <InvertedColorLink href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</InvertedColorLink>. {/*DO NOT DELETE this dot, it's the ending of the scentance*/}
       </Paragraph2>
     </SegmentContainer>
 
@@ -216,7 +218,7 @@ const CFPIntro = () => (
           </Paragraph2>
         </ListItem>
         <ListItem>
-          <ListHeading>Postmortems (15 minutes)</ListHeading>
+          <PostmortemsHeading id='postmortems'>Postmortems (15 minutes)</PostmortemsHeading>
           <Paragraph2>
             Analysis of an incident or an outage at your company. Consider these questions as you
             outline your session: What happened? How did it affect your systems? How did you react?
