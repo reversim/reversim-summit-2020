@@ -119,16 +119,6 @@ class SessionProposal extends Component {
     coSpeaker: Joi.string().email({ tlds: { allow: false } }).label('Co Speaker Email'),
   });
 
-  /**
-   * const schema = Joi.object().keys({
-    conditional: Joi.number().when('$condition', {
-        is: Joi.boolean().valid(true).required(),
-        then: Joi.required(),
-        otherwise: Joi.optional()
-    })
-});
-   */
-
   isValidated = () => {
     const {
       title,
