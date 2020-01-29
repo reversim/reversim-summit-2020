@@ -111,7 +111,7 @@ class SessionProposal extends Component {
   validationSchema = Joi.object({
     title: Joi.string().required().label('Proposal Title'),
     proposalType: Joi.string().required().label('Proposal Type'),
-    ossilProject: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').required().label('Open Source Project'),
+    ossilProject: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').required().label('Open Source Project'), //make it a conditional requirement
     coSpeaker: Joi.string().email({ tlds: { allow: false } }).label('Co Speaker Email'),
   });
 

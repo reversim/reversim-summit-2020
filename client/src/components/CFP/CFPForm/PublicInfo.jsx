@@ -23,7 +23,7 @@ class PublicInfo extends Component {
   validationSchema = Joi.object({
     fullname: Joi.string().required().label('Full Name'),
     oneLiner: Joi.string().max(100).required().label('One Liner'),
-    affiliation: Joi.string().label('Affiliation'),
+    affiliation: Joi.string().required().label('Affiliation'),
     linkedin: Joi.string().regex(/^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile).*$/, 'Linkedin profile url').label('Linkedin Profile'),
     github: Joi.string().regex(/^\w[\w-]{0,38}$/, 'GitHub username').label('GitHub Username'),
     twitter: Joi.string().regex(/^@\w{2,15}$/, 'Twitter username').label('Twitter @username'),
