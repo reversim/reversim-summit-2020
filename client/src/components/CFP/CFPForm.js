@@ -66,6 +66,7 @@ class CFPForm extends Component {
       tags: [],
       categories: [],
       outline: '',
+      speaker_ids: [this.props.user._id],
       iAgree: false,
     };
 
