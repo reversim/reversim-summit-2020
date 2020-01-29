@@ -131,8 +131,12 @@ class CFPForm extends Component {
     const proposal = this.state.currentProposal;
     proposal.tags = proposalTags;
 
-    this.setState({proposal}, () => {
-      console.log('%c state', 'background:gold; color: purple;', this.state);
+    localStorage.setItem(this.CURRENT_PROPOSAL_KEY, JSON.stringify(proposal));
+    this.setState(
+      {
+         [PROPOSAL]: proposal
+      }, () => {
+      console.log('%c state after removeProposalTags ', 'background:gold; color: purple;', this.state); // DELETE WHEN DONE
     });
   };
 

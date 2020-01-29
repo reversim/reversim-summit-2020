@@ -357,7 +357,6 @@ class Abstract extends Component {
   addTag = tag => {
     console.log('MAX_TAGS: ', MAX_TAGS);
     this.props.tags.length < MAX_TAGS
-    //NOTE: MAX_TAGS: 3 try to find out what happends with this.props.proposal.tags.length
       ? this.props.setValue('tags', tag)
       : console.log('too many tags');
   };
@@ -472,10 +471,7 @@ class Abstract extends Component {
         <input required={true} type="hidden" id="categories_hidden" />
         <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
         {CATEGORIES.map(category => {
-          //NOTE: CATEGORIES comes from /client/src/data/proposals.js
           const checked = categories.includes(category.name);
-          //NOTE: returns true if category.name is included in CFPForm.state.categories
-          //NOTE: problem is on unheck click categories still contian the category to unckeck.
           return (
             <CategoryCheckbox
               key={category.name}
