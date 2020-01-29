@@ -48,6 +48,7 @@ export default ({
   minLength,
   maxLength,
   className,
+  onBlur
 }) => {
   if (inputType === 'radio') return <Radio {...{id, value, values, onChange, className}} />;
 
@@ -64,6 +65,7 @@ export default ({
       required,
       minLength,
       maxLength,
+      onBlur,
       rows: multiline ? 6 : undefined,
     });
 

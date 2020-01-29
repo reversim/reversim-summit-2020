@@ -1,5 +1,6 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
+import Joi from '@hapi/joi';
 import { faChevronRight, faBookDead } from '@fortawesome/free-solid-svg-icons';
 
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
@@ -12,6 +13,7 @@ import {
   ListBolt,
   Important,
   FormField,
+  ValidationWarning,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components components
@@ -95,41 +97,114 @@ const CoSpeakerFieldCaption = () => (
   <Important>Make sure your co-speaker has already signed in to our site!</Important></p>
  );
 
-const SessionProposal = props => {
-  const {
-    proposal: {title, proposalType, ossilProject, coSpeaker},
-    setValue,
-    setValueDebounced,
-  } = props;
+class SessionProposal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {      
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+  };
 
-  return (
-    <StepContainer>
-      {/* CFPForm.js section */}
-      <StepHeading>Session Proposal</StepHeading>
-      <FormSubHeading>Tell us about your session, so we can present it on our website.</FormSubHeading>
-      {/* ProposalForm.js section */}
-      <FormField
-        id="title"
-        label="Title"
-        required={true}
-        placeholder="Title of your talk"
-        maxLength="100"
-        subtitle={<TitleFieldCaption />}
-        value={title}
-        onChange={e => setValueDebounced('title', e.target.value)}
-      />
-      <ProposalType setValue={setValue} proposalType={proposalType} ossilProject={ossilProject} />
-      <FormField
-        id="coSpeaker"
-        label="Co-Speaker (optional)"
-        required={false}
-        value={coSpeaker}
-        placeholder={`co.speaker@email.com`}
-        subtitle={<CoSpeakerFieldCaption />}
-        onChange={e => setValueDebounced('coSpeaker', e.target.value)}
-      />
-    </StepContainer>
-  );
+  validationSchema = Joi.object({
+    title: Joi.string().required().label('Proposal Title'),
+    proposalType: Joi.string().required().label('Proposal Type'),
+    ossilProject: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').required().label('Open Source Project'),
+    coSpeaker: Joi.string().email({ tlds: { allow: false } }).label('Co Speaker Email'),
+  });
+
+  isValidated = () => {
+    const {
+      title,
+      proposalType,
+      ossilProject,
+      coSpeaker,
+    } = this.props
+
+    const toValidate = {
+      title,
+      proposalType,
+      ossilProject,
+      coSpeaker,
+    };
+
+    const {error} = this.validationSchema.validate(toValidate);
+    
+    const validationError = error 
+    ? {
+      validationError: {
+        field: error.details[0].path[0],
+        message: error.details[0].message,
+      },
+    }
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+    
+    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
+
+    const newState = _.assign({}, this.state, validationError);
+
+    this.setState(newState);
+
+    return error ? false : true;
+  };
+
+  render() {
+    const {validationError} = this.state;
+    const {
+      title,
+      proposalType,
+      ossilProject,
+      coSpeaker,
+      setValue,
+      setValueDebounced,
+    } = this.props;
+
+    return (
+      <StepContainer>
+        {/* CFPForm.js section */}
+        <StepHeading>Session Proposal</StepHeading>
+        <FormSubHeading>Tell us about your session, so we can present it on our website.</FormSubHeading>
+        {/* ProposalForm.js section */}
+        <FormField
+          id="title"
+          label="Title"
+          required={true}
+          placeholder="Title of your talk"
+          maxLength="100"
+          subtitle={<TitleFieldCaption />}
+          value={title}
+          onChange={e => setValueDebounced('title', e.target.value)}
+          onBlur={this.isValidated}
+        />
+        {validationError.field === "title" && ValidationWarning(validationError.message)}
+        <ProposalType 
+          setValue={setValue}
+          proposalType={proposalType}
+          ossilProject={ossilProject}
+          onBlur={this.isValidated}
+        />
+        {validationError.field === "proposalType" && ValidationWarning(validationError.message)}
+        {validationError.field === "ossilProject" && ValidationWarning(validationError.message)}
+        <FormField
+          id="coSpeaker"
+          label="Co-Speaker (optional)"
+          required={false}
+          value={coSpeaker}
+          placeholder={`co.speaker@email.com`}
+          subtitle={<CoSpeakerFieldCaption />}
+          onChange={e => setValueDebounced('coSpeaker', e.target.value)}
+          onBlur={this.isValidated}
+        />
+        {validationError.field === "coSpeaker" && ValidationWarning(validationError.message)}
+      </StepContainer>
+    );
+  };
 };
-
 export default SessionProposal;

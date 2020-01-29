@@ -1,11 +1,7 @@
 import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
+import Joi from '@hapi/joi';
 
-import {
-  ABSTRACT_MAX,
-  ABSTRACT_MIN,
-} from '../../../data/proposals';
-import {getUserData} from '../UserForm';
 import ga from 'react-ga';
 
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +13,7 @@ import {
   Paragraph,
   Bold,
   FormField,
+  ValidationWarning,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 import {Button} from 'reactstrap';
 
@@ -47,7 +44,7 @@ const AgreementContainer = styled.div`
   `}
 `;
 
-const CheckboxInput = styled.input`
+const CheckboxInputStyle = styled.input`
   ${({ theme: { color, space, font } }) => `
   opacity: 0;
   position: absolute;
@@ -80,6 +77,8 @@ const CheckboxInput = styled.input`
   }
   `}
 `;
+
+const CheckboxInput = props => <CheckboxInputStyle {...props} onBlur={props.onBlur} />
 
 const CheckboxLable = styled.label`
   ${({ theme: { color } }) => `
@@ -174,43 +173,98 @@ const OutlineFieldCaption = () => (
   </Fragment>
 );
 
-const Outline = props => {
-  const {
-    proposal: {outline},
-    setValueDebounced,
-    handleSubmit,
-  } = props;
+class Outline extends Component {
+  constructor(props){
+    super(props);
+    this.state = {      
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+  };
 
-  return (
-    <StepContainer>
-      <StepHeading>Outline &amp; private notes</StepHeading>
-      <FormField
-        id="outline"
-        value={outline}
-        required={true}
-        multiline={true}
-        placeholder="Add your sessionn outline and notes here."
-        subtitle={<OutlineFieldCaption />}
-        onChange={e => setValueDebounced('outline', e.target.value)}
-      />
-      <AgreementContainer>
-        <CheckboxInput
-          type="checkbox"
-          id="legal"
-          required
-          onChange={e => setValueDebounced('iAgree', e.target.checked ? true : false)}
+  validationSchema = Joi.object({
+    outline: Joi.string().required('Outline'),
+    iAgree: Joi.boolean().invalid(false).required().label('I agree'),
+  });
+
+  isValidated = () => {
+    const { outline, iAgree } = this.props
+
+    const toValidate = {
+      outline,
+      iAgree,
+    };
+
+    const {error} = this.validationSchema.validate(toValidate);
+    
+    const validationError = error 
+    ? {
+      validationError: {
+        field: error.details[0].path[0],
+        message: error.details[0].path[0] === 'iAgree' 
+        ? 'Please agree to share all presented material.' 
+        : error.details[0].message,
+      },
+    }
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+
+    const newState = _.assign({}, this.state, validationError);
+
+    this.setState(newState);
+
+    return error ? false : true;
+  };
+
+  render() {
+    const {validationError} = this.state;
+    const {
+      outline,
+      setValueDebounced,
+      handleSubmit,
+    } = this.props;
+
+    return (
+      <StepContainer>
+        <StepHeading>Outline &amp; private notes</StepHeading>
+        <FormField
+          id="outline"
+          value={outline}
+          required={true}
+          multiline={true}
+          placeholder="Add your sessionn outline and notes here."
+          subtitle={<OutlineFieldCaption />}
+          onChange={e => setValueDebounced('outline', e.target.value)}
+          onBlur={this.isValidated}
         />
-        <CheckboxLable htmlFor="legal">
-          I agree that all presented materials will be shared on the web by Reversim team,
-          including the slides, video on youtube and mp3 on the podcast.
-        </CheckboxLable>
-      </AgreementContainer>
-      <SubmitContainer>
-        <SubmitInput />
-        <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-      </SubmitContainer>
-    </StepContainer>
-  );
-};
+        {validationError.field === "outline" && ValidationWarning(validationError.message)}
 
+        <AgreementContainer>
+          <CheckboxInput
+            type="checkbox"
+            id="legal"
+            required
+            onChange={e => setValueDebounced('iAgree', e.target.checked ? true : false)}
+            onBlur={this.isValidated}
+          />
+          <CheckboxLable htmlFor="legal">
+            I agree that all presented materials will be shared on the web by Reversim team,
+            including the slides, video on youtube and mp3 on the podcast.
+          </CheckboxLable>
+        </AgreementContainer>
+          {validationError.field === "iAgree" && ValidationWarning(validationError.message)}
+        <SubmitContainer>
+          <SubmitInput />
+          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+        </SubmitContainer>
+      </StepContainer>
+    );
+  };
+};
 export default Outline;

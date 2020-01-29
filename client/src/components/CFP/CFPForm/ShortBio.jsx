@@ -1,5 +1,6 @@
-import React, {Fragment} from 'react';
+import React, {Component, Fragment} from 'react';
 import styled from 'styled-components';
+import Joi from '@hapi/joi';
 
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {
@@ -9,6 +10,7 @@ import {
   ListItem,
   ListBolt,
   FormField,
+  ValidationWarning,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 //styled-components components
@@ -79,19 +81,72 @@ const Caption = () => (
   </Fragment>
 );
 
-const ShortBio = ({user, setValueDebounced}) => (
-  <StepContainer>
-    <StepHeading>Short Bio</StepHeading>
-    <ShortBiography
-      id="bio"
-      value={user.bio}
-      placeholder="We want to know you better."
-      required={true}
-      multiline={true}
-      subtitle={<Caption />}
-      onChange={e => setValueDebounced('bio', e.target.value)}
-    />
-  </StepContainer>
-);
+class ShortBio extends Component { 
+  constructor(props){
+    super(props);
+    this.state = {      
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+  };
 
+  validationSchema = Joi.object({
+    bio: Joi.string().min(30).max(300).required().label('Short Bio'),
+  });
+
+  isValidated = () => {
+    const { bio } = this.props
+
+    const toValidate = {
+      bio,
+    };
+
+    const {error} = this.validationSchema.validate(toValidate);
+    
+    const validationError = error 
+    ? {
+      validationError: {
+        field: error.details[0].path[0],
+        message: error.details[0].message,
+      },
+    }
+    : {
+      validationError: {
+        field: '',
+        message: '',
+      },
+    };
+    
+    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
+
+    const newState = _.assign({}, this.state, validationError);
+
+    this.setState(newState);
+
+    return error ? false : true;
+  };
+
+  render() {
+    const {validationError} = this.state;
+    const {bio, setValueDebounced} = this.props;
+    return (
+      <StepContainer>
+        <StepHeading>Short Bio</StepHeading>
+        <ShortBiography
+          id="bio"
+          value={bio}
+          placeholder="We want to know you better."
+          required={true}
+          multiline={true}
+          subtitle={<Caption />}
+          onChange={e => setValueDebounced('bio', e.target.value)}
+          onBlur={this.isValidated}
+        />
+        {validationError.field === "bio" && ValidationWarning(validationError.message)}
+      </StepContainer>
+    );
+  }
+};
 export default ShortBio;

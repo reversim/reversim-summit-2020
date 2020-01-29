@@ -187,22 +187,60 @@ class CFPForm extends Component {
     const {allTags} = this.props;
 
     const {userInfo, currentProposal} = this.state;
+    const {
+      userInfo:{
+        name,
+        oneLiner,
+        affiliation,
+        linkedin,
+        github,
+        twitter,
+        bio,
+        email,
+        phone,
+        video_url,
+        trackRecord
+      },
+      currentProposal: {
+        title,
+        proposalType,
+        ossilProject,
+        coSpeaker,
+        abstract,
+        tags,
+        categories,
+        outline,
+        iAgree,
+      }
+    } = this.state ;
 
     const steps = [
       {
         name: 'Public Info',
         component: (
-          <PublicInfo user={userInfo} setValueDebounced={this.setUserInfoValueDebounced} />
+          <PublicInfo
+          fullname={name}
+          oneLiner={oneLiner}
+          affiliation={affiliation}
+          linkedin={linkedin}
+          github={github}
+          twitter={twitter}
+          setValueDebounced={this.setUserInfoValueDebounced} />
         ),
       },
       {
         name: 'Short Bio',
-        component: <ShortBio user={userInfo} setValueDebounced={this.setUserInfoValueDebounced} />,
+        component: <ShortBio bio={bio} setValueDebounced={this.setUserInfoValueDebounced} />,
       },
       {
         name: 'Private Info',
         component: (
-          <PrivateInfo user={userInfo} setValueDebounced={this.setUserInfoValueDebounced} />
+          <PrivateInfo user={userInfo}
+          email={email}
+          phone={phone}
+          videoUrl={video_url}
+          trackRecord={trackRecord}
+          setValueDebounced={this.setUserInfoValueDebounced} />
         ),
       },
       {
@@ -210,6 +248,10 @@ class CFPForm extends Component {
         component: (
           <SessionProposal
             proposal={currentProposal}
+            title={title}
+            proposalType={proposalType}
+            ossilProject={ossilProject}
+            coSpeaker={coSpeaker}
             setValue={this.setProposalValue}
             setValueDebounced={this.setProposalValueDebounced}
           />
@@ -219,7 +261,9 @@ class CFPForm extends Component {
         name: 'Abstract',
         component: (
           <Abstract
-            proposal={currentProposal}
+            abstract={abstract}
+            tags={tags}
+            categories={categories}
             missingCategories={this.state.missingCategories}
             allTags={allTags}
             setValueDebounced={this.setProposalValueDebounced}
@@ -234,6 +278,8 @@ class CFPForm extends Component {
         component: (
           <Outline
             proposal={currentProposal}
+            outline={outline}
+            iAgree={iAgree}
             updateUserData={this.props.updateUserData}
             createProposal={this.props.createProposal}
             history={this.props.history}
