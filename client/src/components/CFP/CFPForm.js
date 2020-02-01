@@ -172,6 +172,7 @@ class CFPForm extends Component {
      * if missing, direct to fill
      * updateUserData <- check what it does
      * createProposal <- check what it does
+     * Clear localStorage //NOTE: VERY IMPORTANT
      * redirect to proposal
      */
 
