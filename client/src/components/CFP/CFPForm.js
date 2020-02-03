@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import ga from 'react-ga';
 import {getUserData} from './UserForm.js';
-import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../../data/proposals';
+import {CFP_ENDS_STR} from '../../data/proposals';
 
 import StepZilla from 'react-stepzilla';
 import PublicInfo from './CFPForm/PublicInfo';

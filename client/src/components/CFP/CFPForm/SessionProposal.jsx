@@ -116,7 +116,7 @@ class SessionProposal extends Component {
       then: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').required(),
       otherwise: Joi.optional(),
     }).label('Open Source Project'),
-    coSpeaker: Joi.string().email({ tlds: { allow: false } }).label('Co Speaker Email'),
+    coSpeaker: Joi.string().email({ tlds: { allow: false } }).label('Co Speaker Email').allow(''),
   });
 
   isValidated = () => {
@@ -172,10 +172,8 @@ class SessionProposal extends Component {
 
     return (
       <StepContainer>
-        {/* CFPForm.js section */}
         <StepHeading>Session Proposal</StepHeading>
         <FormSubHeading>Tell us about your session, so we can present it on our website.</FormSubHeading>
-        {/* ProposalForm.js section */}
         <FormField
           id="title"
           label="Title"
