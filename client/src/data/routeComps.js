@@ -15,7 +15,8 @@ import TeamPage from '../components/TeamPage';
 import AdminPage from '../components/AdminPage';
 import AdminVotesDashboard from '../components/AdminVotesDashboard';
 // import WomenGathering from '../components/WomenGathering';
-import CFPPage from '../components/CFPPage';
+import CFPPage from '../components/CFP/CFPPage';
+// import CFPForm from '../components/CFP/CFPForm';
 import ProposalsPage from '../components/ProposalsPage';
 import SessionsPage from '../components/SessionsPage';
 import TimelinePage from '../components/TimelinePage';
@@ -42,6 +43,7 @@ export default [
   // { path: "/women-gathering", comp: WomenGathering },
   // {path: '/my-votes', comp: ProposalsPage, props: {myVotes: true}},
   {path: '/cfp', comp: CFPPage},
+  // {path: '/cfp/form', comp: CFPForm},
   {path: '/sessions', comp: SessionsPage},
   {path: '/proposals', comp: ProposalsPage},
   {path: '/timeline', comp: TimelinePage},

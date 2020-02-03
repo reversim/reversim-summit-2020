@@ -1,46 +1,66 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
+import FormBit from '../FormField';
 
 //general elements
+export const ResponsiveContainer = styled.div`
+  ${({ theme: { width } }) => `
+    min-width: ${width.main_for_mq_xs};
+    max-width: ${width.main_for_mq_xs};
+  `};
 
-export const AlignCenter = styled.div`
+  ${mediaQueryMin.s`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_s};    
+      max-width: ${width.main_for_mq_s};  
+    `}
+  `};
+
+  ${mediaQueryMin.m`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_m};  
+      max-width: ${width.main_for_mq_m};
+    `}
+  `};
+
+  ${mediaQueryMin.l`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_l};  
+      max-width: ${width.main_for_mq_l};
+    `}
+  `};
+
+  ${mediaQueryMin.xl`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_xl};  
+      max-width: ${width.main_for_mq_xl};
+    `}
+  `};
+
+  ${mediaQueryMin.xxl`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main};  
+      max-width: ${width.main};
+    `}
+  `};
+`;
+
+export const AlignCenter = styled(ResponsiveContainer)`
   ${({ theme: { space } }) =>`
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
       justify-content: space-between;
 
-      width: 100%;
+      
       padding: 0 ${space.l};
       margin: 0 auto;
     `}
 
-      ${mediaQueryMin.s`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_s};  
-        `}`};
-
-      ${mediaQueryMin.m`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_m};  
-        `}`};
-
-      ${mediaQueryMin.l`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_l};  
-        `}`};
-
-      ${mediaQueryMin.xl`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_xl};  
-        `}`};
-
-      ${mediaQueryMin.xxl`
-        ${({ theme: { width } }) => `
-          max-width: ${width.main_for_mq_xxl};  
-        `}`};
+      
 `;
 
 export const AlignCenterColumn = styled(AlignCenter)`
@@ -69,12 +89,30 @@ export const BreakLineInverted = styled(BreakLineMain)`
   `}
 `;
 
-export const StyledFontAwsomeIcon = styled(FontAwesomeIcon)`
-  ${({ theme: { color, space } }) => `
-    margin: 0 ${space.m};
-    color: ${color.font_awsome_trash};
-    cursor: pointer;
+
+// Emphasis
+/*NOTE:
+The above components (Bold, Italic) is needed to override the problematic reset file in:
+/home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
+
+It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
+Tried to change it in the file on line 21 (i.e. deleted '.em') but it had no effect on the text.
+*/
+
+export const Bold = styled.span`
+  ${({ theme: { font } }) => `
+    font-weight: ${font.weight_bold}
   `}
+`;
+
+export const Italic = styled.span`
+  font-style: italic;
+`;
+
+export const Important = styled.span`
+  ${({ theme: { color } }) => `
+    color: ${color.important};
+  `};
 `;
 
 //<h2, 3, ...> and <p>
@@ -210,6 +248,16 @@ export const Heading4 = styled.h4`
   `}
 `;
 
+export const Heading5 = styled.h5`
+  ${({ theme: { color, space, font } }) =>`
+    color: ${color.text_1};
+    font-family: ${font.main};
+    font-size: ${font.size_h5};
+    font-weight: ${font.weight_normal};
+    margin-bottom: ${space.m};    
+  `}
+`;
+
 export const Paragraph = styled.p`
   ${({ theme: { color, font } }) =>`
     color: ${color.text_1};
@@ -226,6 +274,22 @@ export const Paragraph2 = styled(Paragraph)`
   `}
 `;
 
+// Lists
+
+export const ListItem = styled.li`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.s};
+    line-height: 1.7;
+  `}
+`;
+
+export const ListBolt = styled(FontAwesomeIcon)`
+ ${({theme: { space, color }}) =>`
+  margin-right: ${space.m};
+  color: ${color.font_awsome_watch};
+  `}
+`;
+
 // <a>s and <button>s
 export const SimpleLink = styled.a`
   ${({ theme: { color, font } }) =>`
@@ -237,10 +301,9 @@ export const SimpleLink = styled.a`
     }
   `}
 `;
-export const InvertedColorLink = styled.a`
-  ${({ theme: { color, font } }) =>`
+export const InvertedColorLink = styled(SimpleLink)`
+  ${({ theme: { color } }) =>`
     color: ${color.text_3};
-    font-size: ${font.size_reg};
 
     &:hover{
       color: ${color.text_3};
@@ -397,3 +460,78 @@ export const FileInput = styled.input`
   left: 0;
   right: 0;
 `;
+
+export const FontAwsomeTrash = styled(FontAwesomeIcon)`
+  ${({ theme: { color, space } }) => `
+    margin: 0 ${space.m};
+    color: ${color.font_awsome_trash};
+    cursor: pointer;
+  `}
+`;
+
+//Components for the StepZilla form (CFP form)
+export const StepContainer = styled(ResponsiveContainer)`
+  ${({ theme: { space } }) => `
+    padding: 0 ${space.xl};
+  `}
+`;
+
+export const FormField = styled(FormBit)`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.xl};
+  `}
+`;
+
+export const StepHeading = styled(Heading4)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_medium};
+  `}
+`;
+
+export const InputLabel = styled.label`
+  ${({ theme: { space, font, color } }) => `
+    display: block;
+    margin: ${space.m} 0;
+    font-family: ${font.main};
+    font-size: ${font.size_md};
+    color: ${color.text_3};
+  `}
+`;
+
+export const FormSubHeading = styled.span`
+  ${({ theme: { color, font, space } }) => `
+    color: ${color.step_zilla_sub_heading};
+    font-family: ${font.main};
+    font-size: ${font.size_reg};
+    font-weight: ${font.weight_medium};
+    margin-bottom: ${space.m};
+  `}
+`;
+
+const ValidationErrorContainer = styled.div`
+  ${({ theme: { color, space, font } }) => `
+    margin-bottom: ${space.l};
+    padding: ${space.m};
+    display: flex;
+    align-items: center;
+    background: ${color.important};
+    color: ${color.text_1};
+    font-weight: ${font.weight_bold};
+    border-radius: 5px;
+  `};
+`;
+
+const ValidationErrorBolt = styled(ListBolt)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_1};
+  `};
+`;
+
+
+export const ValidationWarning = (errorMessage) => (
+  <ValidationErrorContainer>
+    <ValidationErrorBolt icon={faExclamationTriangle}/>
+    <p>{errorMessage}</p>
+  </ValidationErrorContainer>
+);

@@ -129,7 +129,7 @@ class SessionPage extends Component {
           </div>
           {outline && (
             <div className='text-break'>
-              <h4>Outline & private notes</h4>
+              <h4>???</h4>
               <ReactMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
               {/* consolidate line breaks */}
             </div>

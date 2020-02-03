@@ -1,4 +1,5 @@
-export const PREDEFINED_TAGS = ['Engineering', 'Product', 'Culture'];
+export const PREDEFINED_TAGS = ['Algorithms', 'Performance', 'Social'];
+export const MAX_TAGS = 3;
 
 export const PROPOSAL_TYPES = {
   full: 'Full session (30 minutes)',
@@ -22,7 +23,7 @@ export const PROPOSAL_TYPES_ARR = Object.keys(PROPOSAL_TYPES).map(type => ({
 }));
 
 export const CFP_ENDS = new Date(2019, 1, 28);
-export const CFP_ENDS_STR = 'February 28st midnight UTC';
+export const CFP_ENDS_STR = 'February 28th midnight UTC';
 export const CFP_ENDS_STR_SHORT = 'Feb 28';
 export const ABSTRACT_MAX = 800;
 export const ABSTRACT_MIN = 280;

@@ -10,16 +10,19 @@ class CFPForm extends Component {
     proposalType: 'full',
     tags: [],
     categories: [],
-    missingCategories:false
+    missingCategories: false,
   };
 
   handleSubmit = async e => {
     e.preventDefault();
     const formElements = e.target.elements;
-
+        /* NOTE: this.handleSubmit() is dependent on formElements. 
+       Assgin it a value corresponding to this.state and make sure it's keys are called accordingly. Tried it, didn't work as planned */
+    //NOTE: used to be: const {abstract, categories} = this.state;
     const {user, updateUserData, createProposal, history} = this.props;
 
     if (user) {
+      // IMPOTANT: The following logic IS part of the function but should be modified
       const abstract = formElements.abstract.value;
       if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
         const y =
@@ -29,7 +32,7 @@ class CFPForm extends Component {
         window.scrollTo(0, y);
         formElements.abstract.focus();
         return;
-      }
+      } /* NOTE: Scroll to Abstract if abstract.length is bigger than Max or smaller than Min*/
 
       const categories = this.state.categories;
       if (!categories.length) {
@@ -40,14 +43,20 @@ class CFPForm extends Component {
           750;
         window.scrollTo(0, y);
         return;
-      }
+      } /* NOTE: Scroll to Categories if there's no abstract.categories.length*/
 
       try {
-        let newUser = getUserData(e.target.elements);
+        let newUser = getUserData(e.target.elements); /* NOTE: creates a newUser object with info passed from the form */
         newUser._id = user._id;
         await updateUserData(newUser);
+        /* NOTE: the above puts the newUser obj to the '/api/user' URL. updateUserData is a prop passed by App.js which
+         imports updateUser(user) from /client/src/data-service.js */
+
         const result = await createProposal(this.getProposalData(formElements));
-        history.push(`/session/${result._id}`);
+        /* NOTE: createProposal POSTs the object stored in this.state.proposal to /api/proposal.
+           NOTE: the returned promise is assinged to the const result */
+
+        history.push(`/session/${result._id}/?submited=true`); /* NOTE: redirects to the new session's page */
       } catch (ex) {
         ga.exception({
           description: `Error on submit: ${ex}`,

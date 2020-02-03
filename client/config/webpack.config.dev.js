@@ -175,7 +175,7 @@ module.exports = {
             ],
           },
           {
-            test: /bootstrap\.scss$/,
+            test: /\.scss$/,
             use: [
               require.resolve('style-loader'),
               {

@@ -1,3 +1,5 @@
+//NOTE: looks like it isn't rendered by anyone
+
 import React from 'react';
 
 const CFPFaq = () => (

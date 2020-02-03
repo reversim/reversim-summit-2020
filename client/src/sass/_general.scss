@@ -61,7 +61,7 @@ small {
 }
 
 label {
-  display: block;
+  // display: block;
   margin-bottom: $spacer;
   letter-spacing: 0.6px;
 }
@@ -77,10 +77,6 @@ input[type='checkbox'] {
   display: inline-block;
   width: auto;
   margin-right: 10px;
-
-  & + label {
-    display: inline-block;
-  }
 }
 
 ////// Chen's Addition ////////
@@ -375,33 +371,33 @@ a.unstyled-link:active {
   }
 }
 
-button.btn {
-  box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.1);
-  background: linear-gradient(to right, rgba(118,12,146,0.2) 0%,rgba(0,92,177,0.2) 100%);
-  font-family: Montserrat, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: 1px;
-  //text-transform: uppercase;
-  outline: none;
-  border: 0;
-  transition: all 200ms;
-  border-radius: 0;
-  height: 40px;
-  padding-top: 0;
-  padding-bottom: 0;
+// button.btn {
+//   box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.1);
+//   background: linear-gradient(to right, rgba(118,12,146,0.2) 0%,rgba(0,92,177,0.2) 100%);
+//   font-family: Montserrat, sans-serif;
+//   font-size: 16px;
+//   font-weight: 500;
+//   color: #fff;
+//   letter-spacing: 1px;
+//   //text-transform: uppercase;
+//   outline: none;
+//   border: 0;
+//   transition: all 200ms;
+//   border-radius: 0;
+//   height: 40px;
+//   padding-top: 0;
+//   padding-bottom: 0;
 
-  &:hover {
-    background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);
-    box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.2), 0px 0px 10px 0px rgba(89,0,255,0.8);
-  }
+//   &:hover {
+//     background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);
+//     box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.2), 0px 0px 10px 0px rgba(89,0,255,0.8);
+//   }
 
-  &:active {
-    background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);
-    box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.2), 0px 0px 20px 0px rgba(89,0,255,1);
-  }
-}
+//   &:active {
+//     background: linear-gradient(to right, rgba(118,12,146,0.4) 0%,rgba(0,92,177,0.8) 100%);
+//     box-shadow: inset 0px 0px 10px 2px rgba(0,238,255,0.2), 0px 0px 20px 0px rgba(89,0,255,1);
+//   }
+// } NOTE: Silenced because it overides styled-components
 
 .bg-emph {
   background-image: linear-gradient(#04004880, #03004880), linear-gradient(to top, #c000ff80, #00baff80);
@@ -658,36 +654,36 @@ $speaker-picture-size: 230px;
   }
 }
 
-input[type="checkbox"] {
-  opacity: 0;
-  position: absolute;
-  pointer-events: none;
+// input[type="checkbox"] {
+//   opacity: 0;
+//   position: absolute;
+//   pointer-events: none;
 
-  & + label {
-    margin-bottom: 0;
-  }
+//   & + label {
+//     margin-bottom: 0;
+//   }
 
-  & + label:before {
-    content: '';
-    display: inline-block;
-    border: 2px solid $cyan;
-    border-radius: 5px;
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
-    vertical-align: middle;
-    color: $cyan;
-    line-height: 24px;
-    text-align: center;
-    font-size: 24px;
-    text-indent: 1px;
-    min-width: 25px;
-  }
+//   & + label:before {
+//     content: '';
+//     display: inline-block;
+//     border: 2px solid $cyan;
+//     border-radius: 5px;
+//     width: 25px;
+//     height: 25px;
+//     margin-right: 5px;
+//     vertical-align: middle;
+//     color: $cyan;
+//     line-height: 24px;
+//     text-align: center;
+//     font-size: 24px;
+//     text-indent: 1px;
+//     min-width: 25px;
+//   }
 
-  &:checked + label:before {
-    content: '✓';
-  }
-}
+//   &:checked + label:before {
+//     content: '✓';
+//   }
+// }
 
 .agenda-day-filter {
   @media (min-width:768px) {

@@ -1,7 +1,16 @@
 import React, {createElement} from 'react';
+import styled from 'styled-components';
 import {Input} from 'reactstrap';
+import { 
+  InputLabel,
+  FormSubHeading,
+ } from './GlobalStyledComponents/ReversimStyledComps';
 
-export const SPACING = 'mb-6';
+export const SPACING = 'mb-6'; //NOTE: SHOULD BE DELETED AT THE END
+
+const RadioLabel = styled.label`
+  display: inline;
+`;
 
 const Radio = ({id, value, values: radioValues, onChange, className}) => (
   <div className={className}>
@@ -17,7 +26,7 @@ const Radio = ({id, value, values: radioValues, onChange, className}) => (
             checked={val.value === value}
             id={optionId}
           />{' '}
-          <label htmlFor={optionId}>{val.text}</label>
+          <RadioLabel htmlFor={optionId}>{val.text}</RadioLabel>
         </div>
       );
     })}
@@ -39,6 +48,7 @@ export default ({
   minLength,
   maxLength,
   className,
+  onBlur
 }) => {
   if (inputType === 'radio') return <Radio {...{id, value, values, onChange, className}} />;
 
@@ -55,13 +65,14 @@ export default ({
       required,
       minLength,
       maxLength,
+      onBlur,
       rows: multiline ? 6 : undefined,
     });
 
   return (
     <div className={className}>
-      <label htmlFor={id}>{label}</label>
-      {subtitle && <small className="d-block mb-2">{subtitle}</small>}
+      <InputLabel htmlFor={id}>{label}</InputLabel>
+      {subtitle && <FormSubHeading>{subtitle}</FormSubHeading>}
       {valueComp}
     </div>
   );
