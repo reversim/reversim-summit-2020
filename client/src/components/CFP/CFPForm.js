@@ -165,27 +165,26 @@ class CFPForm extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    /**
-     * PLAN:
-     * Check if all requiered fields in state are full
-     * if not, check local storage
-     * if missing, direct to fill
-     * updateUserData <- check what it does
-     * createProposal <- check what it does
-     * Clear localStorage //NOTE: VERY IMPORTANT
-     * redirect to proposal
-     */
 
     const {userInfo, currentProposal} = this.state;
     const {updateUserData, createProposal, history} = this.props;
 
     if (currentProposal.iAgree === true) {
+      try {
+        await updateUserData(userInfo);
+        const result = await createProposal(currentProposal);
+        result && localStorage.clear();
+
+        history.push(`/session/${result._id}/?submited=true`);
+      } catch (ex) {
+        ga.exception({
+          description: `Error on submit: ${ex}`,
+          fatal: true,
+        });
+      }
       console.log('userInfo to send: ', userInfo);
       console.log('currentProposal to send: ', currentProposal);
-      updateUserData(userInfo);
-      createProposal(currentProposal);
     }
-    console.warn('Needs to iAgree');
   };
 
   render() {
