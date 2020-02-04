@@ -6,11 +6,7 @@ import {Link} from 'react-router-dom';
 import {Button} from 'reactstrap';
 
 import ga from 'react-ga';
-<<<<<<< HEAD
 import {CFP_ENDS_STR} from '../../data/proposals';
-=======
-import {getUserData} from './UserForm.js';
->>>>>>> Moved the CFPForm to /cfp/form
 
 import Page from '../Page';
 import PublicInfo from './CFPForm/PublicInfo';
