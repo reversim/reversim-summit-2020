@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import _ from 'lodash';
 
 import ga from 'react-ga';
-import {getUserData} from './UserForm.js'; // NOTE: maybe it can be cleared
 import {CFP_ENDS_STR} from '../../data/proposals';
 
 import StepZilla from 'react-stepzilla';
@@ -182,8 +181,6 @@ class CFPForm extends Component {
           fatal: true,
         });
       }
-      console.log('userInfo to send: ', userInfo);
-      console.log('currentProposal to send: ', currentProposal);
     }
   };
 
