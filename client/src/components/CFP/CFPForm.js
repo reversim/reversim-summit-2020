@@ -4,9 +4,7 @@ import _ from 'lodash';
 import StepZilla from 'react-stepzilla';
 import {Link} from 'react-router-dom';
 import {Button} from 'reactstrap';
-
 import ga from 'react-ga';
-import {CFP_ENDS_STR} from '../../data/proposals';
 
 import Page from '../Page';
 import PublicInfo from './CFPForm/PublicInfo';
@@ -17,7 +15,7 @@ import Abstract from './CFPForm/Abstract';
 import Outline from './CFPForm/Outline';
 
 import {getUserProposals} from '../../../src/data-service';
-import {CFP_ENDS_STR} from '../../data/proposals';
+import {MAX_PROPOSALS, CFP_ENDS_STR} from '../../data/proposals';
 import {getLoginUrl} from '../Redirect';
 import {
   AlignCenterColumn,
@@ -111,10 +109,6 @@ class ProposalForm extends Component {
       [USER_INFO]: _.assign({}, userInfo, localUserInfo),
       [PROPOSAL]: _.assign({}, proposal, localCurrentProposal),
     };
-
-    console.log('UserInfo @constructor', this.state[USER_INFO]); //DELETE WHEN DONE
-    console.log('proposal: @constructor', this.state[PROPOSAL]); //DELETE WHEN DONE
-    console.log('user: @constructor', this.props.user); //DELETE WHEN DONE
 
     this.setValue = this.setValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -213,20 +207,6 @@ class ProposalForm extends Component {
         });
       }
     }
-  };
-
-  checkProposals = async () => {
-    try {
-      let response = await getUserProposals();
-      // let JSONResponse = JSON.parse(response);
-      console.log('Response is', response.proposals.length);
-    } catch(error) {
-      console.log(error);
-    }
-  };
-
-  async componentDidMount() {
-    this.checkProposals()
   };
 
   render() {
@@ -358,17 +338,57 @@ class ProposalForm extends Component {
   }
 };
 
-const CFPForm = ({features: {submission}, user, ...props}) => (
-  <Page title="New Session Form" {...props}>
-    {
-      !submission 
-        ? <SubmissionClosed />
-        : !user 
-          ? <NonAuthenticated />
-          : <ProposalForm user={user} {...props} />
-    } 
-  </Page>
-);
+class CFPForm extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      hasProposalsMaxed: false,
+    };
+  };
 
+  hasProposalsMaxed = async () => {
+    let response;
+
+    try {
+      response = await getUserProposals();
+    } catch(error) {
+      console.log('hasProposalsMaxed error: ', error);
+    }
+    const result = !!response && response.proposals.length < MAX_PROPOSALS ? false : true;
+    this.setState({
+      hasProposalsMaxed: result,
+    })
+  };
+
+  async componentDidMount() {
+    this.hasProposalsMaxed();
+  };
+
+  render() {
+    const {
+      features: {submission},
+      user,
+      ...props
+    } = this.props;
+
+    return (
+      <Page title="New Session Form" {...props}>
+        {
+          !submission 
+            ? <SubmissionClosed />
+            : !user 
+              ? <NonAuthenticated />
+              : this.state.hasProposalsMaxed
+                ? (
+                  <div style={{ padding: '200px 0 0 0'}}>
+                    <h1>YOU ARE MAXED OUT!</h1>
+                  </div>
+                )// NOTE: CHANGE TO a react Component.
+                : <ProposalForm user={user} {...props} />
+        } 
+      </Page>
+    );
+  }
+}
 
 export default CFPForm;

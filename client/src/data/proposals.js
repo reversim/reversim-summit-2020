@@ -1,6 +1,7 @@
 export const PREDEFINED_TAGS = ['Algorithms', 'Performance', 'Social'];
 export const MAX_TAGS = 3;
 
+export const MAX_PROPOSALS = 3;
 export const PROPOSAL_TYPES = {
   full: 'Full session (30 minutes)',
   postmortem: 'Postmortem (15 minutes)',
