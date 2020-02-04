@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
+import StepZilla from 'react-stepzilla';
+import {Link} from 'react-router-dom';
+import {Button} from 'reactstrap';
 
 import ga from 'react-ga';
+<<<<<<< HEAD
 import {CFP_ENDS_STR} from '../../data/proposals';
+=======
+import {getUserData} from './UserForm.js';
+>>>>>>> Moved the CFPForm to /cfp/form
 
-import StepZilla from 'react-stepzilla';
+import Page from '../Page';
 import PublicInfo from './CFPForm/PublicInfo';
 import ShortBio from './CFPForm/ShortBio';
 import PrivateInfo from './CFPForm/PrivateInfo';
@@ -13,6 +20,9 @@ import SessionProposal from './CFPForm/SessionProposal';
 import Abstract from './CFPForm/Abstract';
 import Outline from './CFPForm/Outline';
 
+import {getUserProposals} from '../../../src/data-service';
+import {CFP_ENDS_STR} from '../../data/proposals';
+import {getLoginUrl} from '../Redirect';
 import {
   AlignCenterColumn,
   HeadingAligner,
@@ -34,11 +44,36 @@ const DeadLine = styled.span`
   `};
 `;
 
+const FormContainer = styled(AlignCenterColumn)`
+${({ theme: { space } }) => `
+  margin-top: calc(2 * ${space.xxl});
+`};
+`;
+
 const USER_INFO = 'userInfo';
 const PROPOSAL = 'currentProposal';
 
 //React components section
-class CFPForm extends Component {
+
+const SubmissionClosed = () => (
+  <h6>
+    Call for papers is closed for submission. You can view the submitted proposals{' '}
+    <Link to="proposals">here</Link>.
+  </h6>
+);
+
+const NonAuthenticated = () => (
+  <div className="text-center mb-6">
+    <h6>Login with Google is required in order to submit a proposal</h6>
+    <a href={getLoginUrl()}>
+      <Button outline color="primary">
+        Login
+      </Button>
+    </a>
+  </div>
+);
+
+class ProposalForm extends Component {
   constructor(props) {
     super(props);
 
@@ -184,6 +219,20 @@ class CFPForm extends Component {
     }
   };
 
+  checkProposals = async () => {
+    try {
+      let response = await getUserProposals();
+      // let JSONResponse = JSON.parse(response);
+      console.log('Response is', response.proposals.length);
+    } catch(error) {
+      console.log(error);
+    }
+  };
+
+  async componentDidMount() {
+    this.checkProposals()
+  };
+
   render() {
     const {allTags} = this.props;
 
@@ -292,9 +341,9 @@ class CFPForm extends Component {
     ];
 
     return (
-      <AlignCenterColumn>
+      <FormContainer>
         <HeadingAligner>
-          <Heading2>Submission</Heading2>
+          <Heading2>Add your New Session Proposal</Heading2>
           <BreakLineMain />
         </HeadingAligner>
         <NoteContainer>
@@ -308,9 +357,22 @@ class CFPForm extends Component {
               steps={steps}
             />
         </div>
-      </AlignCenterColumn>
+      </FormContainer>
     );
   }
-}
+};
+
+const CFPForm = ({features: {submission}, user, ...props}) => (
+  <Page title="New Session Form" {...props}>
+    {
+      !submission 
+        ? <SubmissionClosed />
+        : !user 
+          ? <NonAuthenticated />
+          : <ProposalForm user={user} {...props} />
+    } 
+  </Page>
+);
+
 
 export default CFPForm;

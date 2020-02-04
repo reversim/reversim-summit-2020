@@ -60,6 +60,10 @@ export async function updateUser(user) {
   return await put('/api/user', user);
 }
 
+export async function getUserProposals() {
+    return await get('/api/me');
+}
+
 export async function registerTeamMember(token) {
   return await put('/api/team', {token});
 }
