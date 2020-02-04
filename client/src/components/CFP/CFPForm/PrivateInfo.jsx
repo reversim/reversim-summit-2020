@@ -33,7 +33,7 @@ const VideoUrlFieldCaption = () => (
 class PrivateInfo extends Component {
   constructor(props){
     super(props);
-    this.state = {      
+    this.state = {
       validationError: {
         field: '',
         message: '',

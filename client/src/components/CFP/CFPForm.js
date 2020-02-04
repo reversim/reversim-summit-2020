@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import _ from 'lodash';
 
 import ga from 'react-ga';
-import {getUserData} from './UserForm.js';
+import {getUserData} from './UserForm.js'; // NOTE: maybe it can be cleared
 import {CFP_ENDS_STR} from '../../data/proposals';
 
 import StepZilla from 'react-stepzilla';
@@ -175,7 +175,7 @@ class CFPForm extends Component {
         const result = await createProposal(currentProposal);
         result && localStorage.clear();
 
-        history.push(`/session/${result._id}/?submited=true`);
+        history.push(`/session/${result._id}`);
       } catch (ex) {
         ga.exception({
           description: `Error on submit: ${ex}`,
