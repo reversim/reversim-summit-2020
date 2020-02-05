@@ -5,7 +5,7 @@ import Footer from './Footer.jsx';
 import {REVERSIM_SUMMIT} from '../utils';
 
 //styled-components components
-const Main = styled.div`
+const Container = styled.div`
  ${({ theme: { font }}) => `
  font-family: ${font.main};
  line-height: 1.5;
@@ -14,6 +14,11 @@ const Main = styled.div`
   display: ${props => props.isHome ? ` ` : `flex`};
   flex-direction: ${props => props.isHome ? ` ` : `column`};
 `;
+
+ const Main = styled.div`
+  flex-grow: 1;
+  position: relative;
+ `;
 
 //React components
 class Page extends Component {
@@ -37,7 +42,7 @@ class Page extends Component {
     } = this.props;
 
     return (
-      <Main
+      <Container
         isHome={isHome}
         className={isSingleContent ? 'page-single-content' : ''}>
         <Navbar
@@ -49,9 +54,9 @@ class Page extends Component {
           history={history}
           eventConfig={eventConfig || {}}
         />
-        <div className="page">{children}</div>
+        <Main>{children}</Main>
         <Footer isSmallScreen={isSmallScreen}/>
-      </Main>
+      </Container>
     );
   }
 }

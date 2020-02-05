@@ -13,7 +13,6 @@ import PrivateInfo from './CFPForm/PrivateInfo';
 import SessionProposal from './CFPForm/SessionProposal';
 import Abstract from './CFPForm/Abstract';
 import Outline from './CFPForm/Outline';
-
 import {getUserProposals} from '../../../src/data-service';
 import {MAX_PROPOSALS, CFP_ENDS_STR} from '../../data/proposals';
 import {getLoginUrl} from '../Redirect';
@@ -21,10 +20,13 @@ import {
   AlignCenterColumn,
   HeadingAligner,
   Heading2,
+  Heading4,
   BreakLineMain,
   Paragraph2,
+  PageHeading,
+  SimpleLink,
 } from '../GlobalStyledComponents/ReversimStyledComps';
-
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import './prog-track.scss';
 
 //styled-components section
@@ -39,15 +41,48 @@ const DeadLine = styled.span`
 `;
 
 const FormContainer = styled(AlignCenterColumn)`
-${({ theme: { space } }) => `
-  margin-top: calc(2 * ${space.xxl});
-`};
+  ${({ theme: { space } }) => `
+    margin-top: calc(2 * ${space.xxl});
+  `};
 `;
+
+const MaxedOutContainer = styled.div`
+  ${({ theme: { color } }) => `
+    width: 100%;
+    background: ${color.background_2};
+  `};
+`;
+
+const MaxedOutBoundries = styled(AlignCenterColumn)`
+  ${({ theme: { space } }) => `
+    min-height: 100vh;  
+    padding: calc(3 * ${space.xxl}) ${space.l};
+    justify-content: center;
+  `};
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+    padding: calc(3 * ${space.xxl}) ${space.xl};
+    `}
+  `};
+`;
+
+const MaxedOutHeading = styled(PageHeading)`
+  ${({ theme: { space } }) => `
+    margin: ${space.xl} 0;
+  `}
+`;
+
+const MaxedOutLink = styled(SimpleLink)`
+  ${({ theme: { font } }) => `
+  font-size: ${font.size_h4};
+  font-style: italic;
+  `};
+`;
+
+//React components section
 
 const USER_INFO = 'userInfo';
 const PROPOSAL = 'currentProposal';
-
-//React components section
 
 const SubmissionClosed = () => (
   <h6>
@@ -67,6 +102,28 @@ const NonAuthenticated = () => (
   </div>
 );
 
+const ProposalsMaxedOut = props => {
+  const {user, cfpEndDate} = props;
+
+  const dispEndDate = date => {
+    const dateElements = date.split('-')
+    return `${dateElements[2]}/${dateElements[1]}/${dateElements[0]}`;
+  };
+  return (
+    <MaxedOutContainer>
+      <MaxedOutBoundries>
+        <Heading4>
+          Hey {user.name}, you can submit up to {MAX_PROPOSALS} proposals.
+        </Heading4>
+        <MaxedOutHeading>It looks like you have maxed out!</MaxedOutHeading>
+        <Heading4>
+          You can update your proposals from <MaxedOutLink href="/profile">your profile</MaxedOutLink> {' '}
+          until {dispEndDate(cfpEndDate)} or after our moderation team finished going over your proposal.
+        </Heading4>
+      </MaxedOutBoundries>
+    </MaxedOutContainer>
+  );
+ }
 class ProposalForm extends Component {
   constructor(props) {
     super(props);
@@ -368,6 +425,9 @@ class CFPForm extends Component {
     const {
       features: {submission},
       user,
+      eventConfig: {
+        cfpEndDate,
+      },
       ...props
     } = this.props;
 
@@ -379,11 +439,7 @@ class CFPForm extends Component {
             : !user 
               ? <NonAuthenticated />
               : this.state.hasProposalsMaxed
-                ? (
-                  <div style={{ padding: '200px 0 0 0'}}>
-                    <h1>YOU ARE MAXED OUT!</h1>
-                  </div>
-                )// NOTE: CHANGE TO a react Component.
+                ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
                 : <ProposalForm user={user} {...props} />
         } 
       </Page>
