@@ -30,10 +30,10 @@ export class SpeakerPage extends React.Component {
   render() {
     const {speaker, proposals: allProposals, user, isUser, eventConfig, acceptedProposals} = this.props;
     const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
-    const { moderationCompleted } = eventConfig;
+    const { cfp, moderationCompleted } = eventConfig;
     const {isUploadingPhoto} = this.state;
     const canEdit = (user && user.isReversimTeamMember) || isUser;
-    const canSeeStatus = canEdit && moderationCompleted;
+    const canSeeStatus = canEdit && cfp || moderationCompleted;
 
     let sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
     if(!canSeeStatus){
