@@ -165,7 +165,7 @@ export const HeadingCircle = styled(CircleJSX)`
     ${({ theme: { color, space, font } }) => `
       width: calc(2.85 * ${font.size_h3});
       height: calc(2.85 * ${font.size_h3});
-      fill: ${color.heading_decoratino};
+      fill: ${color.heading_decoration};
       margin: -${space.l} -${space.xxl} ${space.xl} 0; 
     `}
 
@@ -188,7 +188,7 @@ export const HeadingHoop = styled(HoopJSX)`
     margin-right: -${space.l};
     width: calc(2.08 * ${font.size_h2});
     height: calc(2.08 * ${font.size_h2});
-    fill: ${color.heading_decoratino}
+    fill: ${color.heading_decoration}
   `}
 `;
 
