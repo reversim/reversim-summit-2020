@@ -17,14 +17,17 @@ import {getUserProposals} from '../../../src/data-service';
 import {MAX_PROPOSALS, CFP_ENDS_STR} from '../../data/proposals';
 import {getLoginUrl} from '../Redirect';
 import {
+  LoadingPage,
   AlignCenterColumn,
   HeadingAligner,
   Heading2,
   Heading4,
   BreakLineMain,
   Paragraph2,
-  PageHeading,
-  SimpleLink,
+  ItalicLink,
+  FullScreenBkg2,
+  FullScreenBoundries,
+  MarginedPageHeading,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import './prog-track.scss';
@@ -43,39 +46,6 @@ const DeadLine = styled.span`
 const FormContainer = styled(AlignCenterColumn)`
   ${({ theme: { space } }) => `
     margin-top: calc(2 * ${space.xxl});
-  `};
-`;
-
-const MaxedOutContainer = styled.div`
-  ${({ theme: { color } }) => `
-    width: 100%;
-    background: ${color.background_2};
-  `};
-`;
-
-const MaxedOutBoundries = styled(AlignCenterColumn)`
-  ${({ theme: { space } }) => `
-    min-height: 100vh;  
-    padding: calc(3 * ${space.xxl}) ${space.l};
-    justify-content: center;
-  `};
-  ${mediaQueryMin.m`
-    ${({ theme: { space } }) => `
-    padding: calc(3 * ${space.xxl}) ${space.xl};
-    `}
-  `};
-`;
-
-const MaxedOutHeading = styled(PageHeading)`
-  ${({ theme: { space } }) => `
-    margin: ${space.xl} 0;
-  `}
-`;
-
-const MaxedOutLink = styled(SimpleLink)`
-  ${({ theme: { font } }) => `
-  font-size: ${font.size_h4};
-  font-style: italic;
   `};
 `;
 
@@ -109,21 +79,23 @@ const ProposalsMaxedOut = props => {
     const dateElements = date.split('-')
     return `${dateElements[2]}/${dateElements[1]}/${dateElements[0]}`;
   };
+
   return (
-    <MaxedOutContainer>
-      <MaxedOutBoundries>
+    <FullScreenBkg2>
+      <FullScreenBoundries>
         <Heading4>
           Hey {user.name}, you can submit up to {MAX_PROPOSALS} proposals.
         </Heading4>
-        <MaxedOutHeading>It looks like you have maxed out!</MaxedOutHeading>
+        <MarginedPageHeading>It looks like you have maxed out!</MarginedPageHeading>
         <Heading4>
-          You can update your proposals from <MaxedOutLink href="/profile">your profile</MaxedOutLink> {' '}
+          You can update your proposals from <ItalicLink href="/profile">your profile</ItalicLink> {' '}
           until {dispEndDate(cfpEndDate)} or after our moderation team finished going over your proposal.
         </Heading4>
-      </MaxedOutBoundries>
-    </MaxedOutContainer>
+      </FullScreenBoundries>
+    </FullScreenBkg2>
   );
- }
+ };
+
 class ProposalForm extends Component {
   constructor(props) {
     super(props);
@@ -399,6 +371,7 @@ class CFPForm extends Component {
   constructor(props){
     super(props);
     this.state = {
+      loading: true,
       hasProposalsMaxed: false,
     };
   };
@@ -411,8 +384,10 @@ class CFPForm extends Component {
     } catch(error) {
       console.log('hasProposalsMaxed error: ', error);
     }
+
     const result = !!response && response.proposals.length < MAX_PROPOSALS ? false : true;
     this.setState({
+      loading: false,
       hasProposalsMaxed: result,
     })
   };
@@ -431,16 +406,20 @@ class CFPForm extends Component {
       ...props
     } = this.props;
 
+    const {loading} = this.state;
+    
     return (
       <Page title="New Session Form" {...props}>
         {
-          !submission 
-            ? <SubmissionClosed />
-            : !user 
-              ? <NonAuthenticated />
-              : this.state.hasProposalsMaxed
-                ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
-                : <ProposalForm user={user} {...props} />
+          loading
+          ?  <LoadingPage />
+          :  !submission 
+              ? <SubmissionClosed />
+              : !user 
+                ? <NonAuthenticated />
+                : this.state.hasProposalsMaxed
+                  ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
+                  : <ProposalForm user={user} {...props} />
         } 
       </Page>
     );

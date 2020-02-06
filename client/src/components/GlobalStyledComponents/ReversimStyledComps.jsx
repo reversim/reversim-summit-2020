@@ -1,7 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faCog } from '@fortawesome/free-solid-svg-icons';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import FormBit from '../FormField';
 
@@ -290,6 +290,32 @@ export const ListBolt = styled(FontAwesomeIcon)`
   `}
 `;
 
+export const FullScreenBkg2 = styled.div`
+  ${({ theme: { color } }) => `
+    width: 100%;
+    background: ${color.background_2};
+  `};
+`;
+
+export const FullScreenBoundries = styled(AlignCenterColumn)`
+  ${({ theme: { space } }) => `
+    min-height: 100vh;  
+    padding: calc(3 * ${space.xxl}) ${space.l};
+    justify-content: center;
+  `};
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+    padding: calc(3 * ${space.xxl}) ${space.xl};
+    `}
+  `};
+`;
+
+export const MarginedPageHeading = styled(PageHeading)`
+  ${({ theme: { space } }) => `
+    margin: ${space.xl} 0;
+  `}
+`;
+
 // <a>s and <button>s
 export const SimpleLink = styled.a`
   ${({ theme: { color, font } }) =>`
@@ -309,6 +335,13 @@ export const InvertedColorLink = styled(SimpleLink)`
       color: ${color.text_3};
     }
   `}
+`;
+
+export const ItalicLink = styled(SimpleLink)`
+  ${({ theme: { font } }) => `
+  font-size: ${font.size_h4};
+  font-style: italic;
+  `};
 `;
 
 export const ButtonStyledLink = styled.a`
@@ -535,3 +568,34 @@ export const ValidationWarning = (errorMessage) => (
     <p>{errorMessage}</p>
   </ValidationErrorContainer>
 );
+
+// Loading Page
+
+const spin360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const SpinnerContainer = styled(FontAwesomeIcon)`
+${({ theme: { color } }) => `
+  color: ${color.font_awsome_watch}
+`};
+
+  font-size: 100px;
+  animation: 1.5s linear infinite ${spin360};
+`;
+
+export const LoadingPage = () => (
+  <FullScreenBkg2>
+    <FullScreenBoundries>
+      <MarginedPageHeading>Loading...</MarginedPageHeading>
+      <SpinnerContainer icon={faCog}/>
+    </FullScreenBoundries>
+  </FullScreenBkg2>
+  );
+
