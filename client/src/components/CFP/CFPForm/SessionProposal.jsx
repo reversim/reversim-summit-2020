@@ -13,10 +13,21 @@ import {
   ListBolt,
   Important,
   FormField,
+  InputLabel,
   ValidationWarning,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components components
+const TitlesList = styled.ul`
+  ${({ theme: { space } }) => `
+    margin: ${space.l} auto;
+  `};
+`;
+const ProposalTypes = styled.div`
+  ${({ theme: { space } }) => `
+    margin: ${space.l} auto
+  `};
+`;
 
 const PostmortemConfirm = styled(Important)`
   ${({ theme: { font } }) => `
@@ -36,9 +47,8 @@ const TitleFieldCaption = () => (
     Make it descriptive, concise, and appealing. You are welcome to review{' '}
     <InvertedColorLink href="http://summit2018.reversim.com/schedule" target="_blank" rel="noopener noreferrer">
       last year’s agenda
-    </InvertedColorLink>, or use the following examples:<br />
-    <br />
-    <ul>
+    </InvertedColorLink>, or use the following examples:
+    <TitlesList>
       <ListItem>
         <ListBolt icon={faChevronRight} />
         “How we optimized micro-service utilization using machine learning”
@@ -55,18 +65,18 @@ const TitleFieldCaption = () => (
         <ListBolt icon={faChevronRight} />
         “Cost of choosing the wrong development stack: A learn-build-measure story from the trenches”
       </ListItem>
-    </ul>
+    </TitlesList>
     Reversim Summit is about deep-tech, and we will reject trivial introductory talks in
     software-related sessions (introduction to other topics is OK).
   </Fragment>
 );
 
 const ProposalType = ({proposalType, ossilProject, setValue}) => (
-  <Fragment>
+  <ProposalTypes>
+    <InputLabel>Proposal Types</InputLabel>
     <FormField
       id="proposalType"
       inputType="radio"
-      required={true}
       values={PROPOSAL_TYPES_ARR}
       value={proposalType}
       onChange={e => setValue('proposalType', e.target.value)}
@@ -78,7 +88,6 @@ const ProposalType = ({proposalType, ossilProject, setValue}) => (
         value={ossilProject}
         inputType="url"
         placeholder="www.yourProject.com"
-        required={true}
         onChange={e => setValue('ossilProject', e.target.value)}
       />
     )}
@@ -86,10 +95,10 @@ const ProposalType = ({proposalType, ossilProject, setValue}) => (
       <PostmortemConfirm>
         <PostmortemIcon icon={faBookDead} />
         Are you sure this is a postmortem session?
-        Please read about the <a href="#postmortems">postmortems</a> format.
+        Please read about the <a href="/cfp#postmortems" target="_blank">postmortems</a> format.
       </PostmortemConfirm>
     )}
-  </Fragment>
+  </ProposalTypes>
 );
 
 const CoSpeakerFieldCaption = () => (
@@ -177,7 +186,6 @@ class SessionProposal extends Component {
         <FormField
           id="title"
           label="Title"
-          required={true}
           placeholder="Title of your talk"
           maxLength="100"
           subtitle={<TitleFieldCaption />}

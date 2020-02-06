@@ -106,7 +106,8 @@ const CFPIntro = () => (
       </Paragraph2>
       <Paragraph2>
         Our goal is to streamline the submission and review process, while maintaining superb
-        quality; if you have any feedback or questions, please email us at <InvertedColorLink href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</InvertedColorLink>. {/*DO NOT DELETE this dot, it's the ending of the scentance*/}
+        quality; if you have any feedback or questions, please email us at {' '}
+        <InvertedColorLink href="mailto:rs19team@googlegroups.com" target="_blank">rs19team@googlegroups.com</InvertedColorLink>.
       </Paragraph2>
     </SegmentContainer>
 
@@ -258,14 +259,14 @@ const CFPIntro = () => (
           <SubList>
             <ListItem>
               <ListBolt icon={faChevronCircleRight} />
-              Watch our team explain what makes a
+              Watch our team explain what makes a {' '}
               <InvertedColorLink href="https://www.youtube.com/watch?v=Da-JcEYBjuo">
                 good submission
               </InvertedColorLink>
             </ListItem>
             <ListItem>
               <ListBolt icon={faChevronCircleRight} />
-              Watch Adam describe
+              Watch Adam describe {' '}
               <InvertedColorLink href="https://www.youtube.com/watch?v=F09My4646hI">
                 how to submit a proposal and how we choose them
               </InvertedColorLink>

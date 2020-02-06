@@ -93,7 +93,6 @@ class PublicInfo extends Component {
         <FormField
           id="fullname"
           label="Full Name"
-          required={true}
           placeholder="Your name"
           value={name}
           onChange={e => setValueDebounced('name', e.target.value)}

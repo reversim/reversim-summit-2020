@@ -235,8 +235,7 @@ class Outline extends Component {
         <StepHeading>Outline &amp; private notes</StepHeading>
         <FormField
           id="outline"
-          value={outline}
-          required={true}
+          value={outline}          
           multiline={true}
           placeholder="Add your sessionn outline and notes here."
           subtitle={<OutlineFieldCaption />}

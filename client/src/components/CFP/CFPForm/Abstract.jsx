@@ -406,7 +406,6 @@ class Abstract extends Component {
         <StepHeading>Abstract</StepHeading>
         <FormField
           id="abstract"
-          required={true}
           multiline={true}
           value={abstract}
           placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
@@ -468,7 +467,7 @@ class Abstract extends Component {
           Choose 1 or 2 categories. This information will help us assign this session to one of the
           conference's tracks.
         </FormSubHeading>
-        <input required={true} type="hidden" id="categories_hidden" />
+        <input type="hidden" id="categories_hidden" />
         <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
         {CATEGORIES.map(category => {
           const checked = categories.includes(category.name);
