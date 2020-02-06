@@ -84,10 +84,6 @@ class ProposalForm extends Component {
       [USER_INFO]: _.assign({}, userInfo, localUserInfo),
       [PROPOSAL]: _.assign({}, proposal, localCurrentProposal),
     };
-
-    this.setValue = this.setValue.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.removeCategory = this.removeCategory.bind(this);
   }
 
   setValue = (form, field, value) => {
@@ -172,7 +168,7 @@ class ProposalForm extends Component {
       try {
         await updateUserData(userInfo);
         const result = await createProposal(currentProposal);
-        result && localStorage.clear();
+        result && localStorage.removeItem(this.CURRENT_PROPOSAL_KEY);
 
         history.push(`/session/${result._id}`);
       } catch (ex) {
