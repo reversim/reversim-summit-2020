@@ -12,6 +12,7 @@ import {
   ListBolt,
   FormField,
   ValidationWarning,
+  NoteMessage,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const VideoUrlFieldCaption = () => (
@@ -133,7 +134,9 @@ class PrivateInfo extends Component {
           onBlur={this.isValidated}
         />
         {validationError.field === "videoUrl" && ValidationWarning(validationError.message)}
-        
+        {!videoUrl && NoteMessage(
+          'Did you forget to provide a video link? Although not strictly required, a video link will immensely improve your odds of getting accepted. We just need to see you speaking somewhere somehow.'
+        )}
         <FormField
           id="trackRecord"
           label="Track record as speaker, if available"

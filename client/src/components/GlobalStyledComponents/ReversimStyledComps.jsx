@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationTriangle, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faVideo, faExclamationTriangle, faCog } from '@fortawesome/free-solid-svg-icons';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import FormBit from '../FormField';
 
@@ -555,16 +555,28 @@ const ValidationErrorContainer = styled.div`
   `};
 `;
 
-const ValidationErrorBolt = styled(ListBolt)`
+const NoteConatiner = styled(ValidationErrorContainer)`
+  ${({ theme: { color } }) => `
+  background: ${color.note_this};
+  `};
+`;
+
+const NoteOrErrorBolt = styled(ListBolt)`
   ${({ theme: { color } }) => `
     color: ${color.text_1};
   `};
 `;
 
+export const NoteMessage = noteMessage => (
+  <NoteConatiner>
+    <NoteOrErrorBolt icon={faVideo}/>
+    <p>{noteMessage}</p>
+  </NoteConatiner>
+);
 
-export const ValidationWarning = (errorMessage) => (
+export const ValidationWarning = errorMessage => (
   <ValidationErrorContainer>
-    <ValidationErrorBolt icon={faExclamationTriangle}/>
+    <NoteOrErrorBolt icon={faExclamationTriangle}/>
     <p>{errorMessage}</p>
   </ValidationErrorContainer>
 );
