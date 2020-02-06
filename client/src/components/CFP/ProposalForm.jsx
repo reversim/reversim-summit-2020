@@ -37,6 +37,30 @@ const FormContainer = styled(AlignCenterColumn)`
   `};
 `;
 
+const CFPItalicLink = styled(ItalicLink)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_h3};
+  `};
+
+  ${mediaQueryMin.l`
+    ${({ theme: { font } }) =>`
+      font-size: ${font.size_h2};
+    `}
+  `}
+`;
+
+const MaxedOutSubheading = styled(Heading4)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_3};
+  `};
+`;
+
+const MaxedOutLink = styled(ItalicLink)`
+  ${({ theme: { font } }) =>`
+    font-size: ${font.size_h4};
+  `};
+`;
+
 //React components section
 
 const USER_INFO = 'userInfo';
