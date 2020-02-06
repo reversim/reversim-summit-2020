@@ -108,7 +108,6 @@ class PrivateInfo extends Component {
         <FormField
           id="email"
           label="Email"
-          required={true}
           placeholder="your.email@here.please"
           value={email}
           onChange={e => setValueDebounced('email', e.target.value)}
@@ -118,7 +117,6 @@ class PrivateInfo extends Component {
         <FormField
           id="phone"
           label="Phone Number"
-          required={true}
           placeholder="05x-xxxxxxx"
           value={phone}
           onChange={e => setValueDebounced('phone', e.target.value)}
@@ -128,7 +126,6 @@ class PrivateInfo extends Component {
         <FormField
           id="video_url"
           label="Link to Video"
-          required={true}
           value={videoUrl}
           placeholder="e.g. http://youtu.be/xxxx"
           subtitle={<VideoUrlFieldCaption />}
@@ -142,7 +139,6 @@ class PrivateInfo extends Component {
           label="Track record as speaker, if available"
           value={trackRecord}
           placeholder=""
-          required={true}
           multiline={true}
           subtitle={
             <span>
@@ -161,7 +157,8 @@ class PrivateInfo extends Component {
                     tabIndex="-1"
                     target="_blank"
                     href="https://www.youtube.com/watch?v=Nf_Y4MbUCLY"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer"
+                  >
                     https://www.youtube.com/watch?v=Nf_Y4MbUCLY
                   </InvertedColorLink>{' '}
                   slides: http://example.com/slide1
@@ -174,7 +171,8 @@ class PrivateInfo extends Component {
                     tabIndex="-1"
                     target="_blank"
                     href="https://youtu.be/DGXx56WqqJw"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer"
+                  >
                     https://youtu.be/DGXx56WqqJw
                   </InvertedColorLink>, slides: http://example.com/slide2
                 </ListItem>

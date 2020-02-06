@@ -138,7 +138,6 @@ class ShortBio extends Component {
           id="bio"
           value={bio}
           placeholder="We want to know you better."
-          required={true}
           multiline={true}
           subtitle={<Caption />}
           onChange={e => setValueDebounced('bio', e.target.value)}
