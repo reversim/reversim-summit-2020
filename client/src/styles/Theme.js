@@ -14,6 +14,7 @@ const theme = {
     font_awsome_nav: 'rgb(1, 39, 255)',
 
     important: 'rgb(255, 46, 95)',
+    note_this: 'rgb(255, 97, 0)',
     count_down: 'rgb(108, 117, 125)',
 
     step_zilla_sub_heading: 'rgb(108, 117, 125)',
