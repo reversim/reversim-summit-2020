@@ -211,12 +211,15 @@ export const Heading2 = styled.h2`
     color: ${color.heading_2};
     margin-right: calc(2 * ${space.m});
     font-family: ${font.main};
-    font-size: ${font.size_h2};
+    font-size: ${font.size_h3};
     font-weight: ${font.weight_normal};
   `}
 
     ${mediaQueryMin.l`
-      white-space: nowrap;
+      ${({ theme: { font } }) =>`
+        white-space: nowrap;
+        font-size: ${font.size_h2};
+      `}
     `}
 `;
 
@@ -290,13 +293,6 @@ export const ListBolt = styled(FontAwesomeIcon)`
   `}
 `;
 
-export const FullScreenBkg2 = styled.div`
-  ${({ theme: { color } }) => `
-    width: 100%;
-    background: ${color.background_2};
-  `};
-`;
-
 export const FullScreenBoundries = styled(AlignCenterColumn)`
   ${({ theme: { space } }) => `
     min-height: 100vh;  
@@ -311,9 +307,14 @@ export const FullScreenBoundries = styled(AlignCenterColumn)`
 `;
 
 export const MarginedPageHeading = styled(PageHeading)`
-  ${({ theme: { space } }) => `
+  ${({ theme: { color, space } }) => `
+    color: ${color.text_3};
     margin: ${space.xl} 0;
-  `}
+    text-align: center;
+    `}
+    ${mediaQueryMin.l`
+      white-space: inherit;
+    `}
 `;
 
 // <a>s and <button>s
@@ -337,11 +338,8 @@ export const InvertedColorLink = styled(SimpleLink)`
   `}
 `;
 
-export const ItalicLink = styled(SimpleLink)`
-  ${({ theme: { font } }) => `
-  font-size: ${font.size_h4};
+export const ItalicLink = styled(InvertedColorLink)`
   font-style: italic;
-  `};
 `;
 
 export const ButtonStyledLink = styled.a`
@@ -603,11 +601,9 @@ ${({ theme: { color } }) => `
 `;
 
 export const LoadingPage = () => (
-  <FullScreenBkg2>
-    <FullScreenBoundries>
-      <MarginedPageHeading>Loading...</MarginedPageHeading>
-      <SpinnerContainer icon={faCog}/>
-    </FullScreenBoundries>
-  </FullScreenBkg2>
+  <FullScreenBoundries>
+    <MarginedPageHeading>Loading...</MarginedPageHeading>
+    <SpinnerContainer icon={faCog}/>
+  </FullScreenBoundries>
   );
 
