@@ -9,6 +9,7 @@ import {
   StepHeading,
   FormSubHeading,
   InvertedColorLink,
+  Paragraph2,
   ListItem,
   ListBolt,
   Important,
@@ -102,8 +103,10 @@ const ProposalType = ({proposalType, ossilProject, setValue}) => (
 );
 
 const CoSpeakerFieldCaption = () => (
-  <p>If you want to lecture with another speaker, add their email here. Both of you will be able to edit the lecture.<br/>
-  <Important>Make sure your co-speaker has already signed in to our site!</Important></p>
+  <Fragment>
+    <Paragraph2>If you want to lecture with another speaker, add their email here. Both of you will be able to edit the lecture.</Paragraph2>
+    <Important>Make sure your co-speaker has already signed in to our site!</Important>
+  </Fragment>
  );
 
 class SessionProposal extends Component {
