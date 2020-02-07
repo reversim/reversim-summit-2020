@@ -25,9 +25,16 @@ const NoteContainer = styled.div`
   width: 100%;
 `;
 
+const CFPparagraph = styled(Paragraph2)`
+${({ theme: { font } }) => `
+font-size: ${font.size_md};
+`};
+`;
+
 const DeadLine = styled.span`
-  ${({ theme: { color } }) => `
+  ${({ theme: { color, font } }) => `
     color: ${color.important};
+    font-size: ${font.size_h5};
   `};
 `;
 
@@ -318,16 +325,14 @@ class ProposalForm extends Component {
           <BreakLineMain />
         </HeadingAligner>
         <NoteContainer>
-          <Paragraph2>Dear {userInfo.name}, happy to see you're submitting session proposals! :)</Paragraph2>
-          <Paragraph2>Remember, you may submit up to 3 proposals.</Paragraph2>
-          <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
+          <CFPparagraph>Dear {userInfo.name}, happy to see you're submitting session proposals! :)</CFPparagraph>
+          <CFPparagraph>Remember, you may submit up to 3 proposals.</CFPparagraph>
+          <CFPparagraph>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</CFPparagraph>
         </NoteContainer>
-        <div className='step-progress pl-5 pr-7'>
-            <StepZilla
-              preventEnterSubmission={true}
-              steps={steps}
-            />
-        </div>
+        <StepZilla
+          preventEnterSubmission={true}
+          steps={steps}
+        />
       </FormContainer>
     );
   }
