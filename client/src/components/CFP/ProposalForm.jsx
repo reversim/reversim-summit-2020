@@ -314,7 +314,7 @@ class ProposalForm extends Component {
     return (
       <FormContainer>
         <HeadingAligner>
-          <Heading2>Add your New Session Proposal</Heading2>
+          <Heading2>Add a Session Proposal</Heading2>
           <BreakLineMain />
         </HeadingAligner>
         <NoteContainer>
