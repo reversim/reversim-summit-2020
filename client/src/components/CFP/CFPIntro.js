@@ -385,7 +385,7 @@ const CFPIntro = () => (
       </HeadingAligner>
       <Paragraph2>
         Proposals, presentations and attendance are subject to the {''}
-        <InvertedColorLink href="http://confcodeofconduct.com/">Code of Conduct</InvertedColorLink>.
+        <InvertedColorLink href="http://confcodeofconduct.com/" target="_blank">Code of Conduct</InvertedColorLink>.
       </Paragraph2>
     </SegmentContainer>
     <LinkToForm href="/cfp/form">Submit a New Proposal</LinkToForm>

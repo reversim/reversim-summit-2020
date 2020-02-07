@@ -1,0 +1,50 @@
+/* Styles for selected tags */
+.ReactTags__tag {
+  display: inline-block;
+  padding: 5px;
+  margin: 0 10px 10px 0;
+  border-radius: 2px;
+
+  color: #ffffff;
+  font-family: 'PT Mono' !important;
+  font-weight: bold !important;
+  border: solid 2px #5127ff !important;
+  box-shadow: -2px 2px #fff, -4px 4px #5127ff !important;
+  background: right bottom linear-gradient(to right, #ff6100 50%, #896cff 50%) !important;
+  background-size: 205% 100% !important;
+  transition: all .5s ease-out !important;
+}
+
+.ReactTags__remove {
+  text-decoration: none;
+  color: #000; // Does not applay because of the reboot.scss file
+  margin-left: 5px;
+  cursor: pointer;
+
+  :hover{
+    color: rgb(255, 97, 0); // Does not applay because of the reboot.scss file
+  }
+}
+
+.ReactTags__suggestions ul{
+  position: absolute;
+  height: 200px;
+  min-width: 320px;
+  overflow: auto;
+  background: rgba(81, 39, 255, 0.75);
+  color: rgb(225, 225, 225);
+  font-weight: 600;
+  
+  li{
+    margin-left: 5px;
+    
+    span mark{
+      color: rgb(225, 225, 225);
+      background: rgb(255, 97, 0);
+    }
+  }
+}
+
+.ReactTags__activeSuggestion{
+  background: rgb(255, 97, 0);
+}
