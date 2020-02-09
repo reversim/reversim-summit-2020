@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import StepZilla from 'react-stepzilla';
 import styled from 'styled-components';
 import _ from 'lodash';
 import StepZilla from 'react-stepzilla';
@@ -16,7 +15,6 @@ import {CFP_ENDS_STR} from '../../data/proposals';
 import {
   AlignCenterColumn,
   HeadingAligner,
-  AlignCenterColumn,
   Heading2,
   BreakLineMain,
   Paragraph2,
