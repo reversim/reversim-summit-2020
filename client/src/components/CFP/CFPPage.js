@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 import Page from '../Page';
 import CFPTitle from './CFPTitle';
 import CFPIntro from './CFPIntro';
-import {getRemainingCFPDays as _x} from '../../utils';
 
 const CFPPage = props => {
   const {eventConfig} = props;

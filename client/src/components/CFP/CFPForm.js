@@ -75,7 +75,7 @@ const NonAuthenticated = () => (
 const ProposalsMaxedOut = props => {
   const {user, cfpEndDate} = props;
 
-  const dispEndDate = date => {
+  const dateFormatted = date => {
     const dateElements = date.split('-')
     return `${dateElements[2]}/${dateElements[1]}/${dateElements[0]}`;
   };
@@ -89,7 +89,7 @@ const ProposalsMaxedOut = props => {
         <MarginedPageHeading>It looks like you have maxed out!</MarginedPageHeading>
         <Heading4>
           You can update your proposals from <ItalicLink href="/profile">your profile</ItalicLink> {' '}
-          until {dispEndDate(cfpEndDate)} or after our moderation team finished going over your proposal.
+          until {dateFormatted(cfpEndDate)} or after our moderation team finished going over your proposal.
         </Heading4>
       </FullScreenBoundries>
     </FullScreenBkg2>
@@ -385,7 +385,7 @@ class CFPForm extends Component {
       console.log('hasProposalsMaxed error: ', error);
     }
 
-    const result = !!response && response.proposals.length < MAX_PROPOSALS ? false : true;
+    const result = !!response && _.size(response.proposals) < MAX_PROPOSALS ? false : true;
     this.setState({
       loading: false,
       hasProposalsMaxed: result,
