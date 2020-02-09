@@ -12,7 +12,6 @@ import {
   LoadingPage,
   Heading4,
   ItalicLink,
-  FullScreenBkg2,
   FullScreenBoundries,
   MarginedPageHeading,
 } from '../GlobalStyledComponents/ReversimStyledComps';
@@ -47,18 +46,16 @@ const ProposalsMaxedOut = props => {
   };
 
   return (
-    <FullScreenBkg2>
-      <FullScreenBoundries>
-        <Heading4>
-          Hey {user.name}, you can submit up to {MAX_PROPOSALS} proposals.
-        </Heading4>
-        <MarginedPageHeading>It looks like you have maxed out!</MarginedPageHeading>
-        <Heading4>
-          You can update your proposals from <ItalicLink href="/profile">your profile</ItalicLink> {' '}
-          until {dateFormatted(cfpEndDate)} or after our moderation team finished going over your proposal.
-        </Heading4>
-      </FullScreenBoundries>
-    </FullScreenBkg2>
+    <FullScreenBoundries>
+      <Heading4>
+        Hey {user.name}, you can submit up to {MAX_PROPOSALS} proposals.
+      </Heading4>
+      <MarginedPageHeading>It looks like you have maxed out!</MarginedPageHeading>
+      <Heading4>
+        You can update your proposals from <ItalicLink href="/profile">your profile</ItalicLink> {' '}
+        until {dateFormatted(cfpEndDate)} or after our moderation team finished going over your proposal.
+      </Heading4>
+    </FullScreenBoundries>
   );
  };
 
