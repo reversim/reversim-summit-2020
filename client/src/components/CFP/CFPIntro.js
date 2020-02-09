@@ -388,7 +388,7 @@ const CFPIntro = () => (
         <InvertedColorLink href="http://confcodeofconduct.com/" target="_blank">Code of Conduct</InvertedColorLink>.
       </Paragraph2>
     </SegmentContainer>
-    <LinkToForm href="/cfp/form">Submit a New Proposal</LinkToForm>
+    <LinkToForm href="/cfp/submission">Submit a New Proposal</LinkToForm>
   </MainContainer>
 );
 
