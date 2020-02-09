@@ -3,7 +3,7 @@ import {Button, Input} from 'reactstrap';
 import ga from 'react-ga';
 import UserForm, {getUserData} from './UserForm';
 import {ABSTRACT_MAX, ABSTRACT_MIN, CFP_ENDS_STR} from '../data/proposals';
-import ProposalForm from './ProposalForm';
+import ProposalForm from './OldProposalForm';
 
 class CFPForm extends Component {
   state = {
