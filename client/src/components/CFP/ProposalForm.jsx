@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import StepZilla from 'react-stepzilla';
 import styled from 'styled-components';
 import _ from 'lodash';
 import StepZilla from 'react-stepzilla';
@@ -15,12 +16,14 @@ import {CFP_ENDS_STR} from '../../data/proposals';
 import {
   AlignCenterColumn,
   HeadingAligner,
+  AlignCenterColumn,
   Heading2,
   BreakLineMain,
   Paragraph2,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 //styled-components section
+
 const NoteContainer = styled.div`
   width: 100%;
 `;
@@ -44,29 +47,6 @@ const FormContainer = styled(AlignCenterColumn)`
   `};
 `;
 
-const CFPItalicLink = styled(ItalicLink)`
-  ${({ theme: { font } }) => `
-    font-size: ${font.size_h3};
-  `};
-
-  ${mediaQueryMin.l`
-    ${({ theme: { font } }) =>`
-      font-size: ${font.size_h2};
-    `}
-  `}
-`;
-
-const MaxedOutSubheading = styled(Heading4)`
-  ${({ theme: { color } }) => `
-    color: ${color.text_3};
-  `};
-`;
-
-const MaxedOutLink = styled(ItalicLink)`
-  ${({ theme: { font } }) =>`
-    font-size: ${font.size_h4};
-  `};
-`;
 
 //React components section
 

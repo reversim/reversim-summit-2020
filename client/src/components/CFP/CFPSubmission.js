@@ -101,18 +101,18 @@ class CFPSubmission extends Component {
       ...props
     } = this.props;
 
-    const {loading} = this.state;
+    const {loading, hasProposalsMaxed} = this.state;
     
     return (
-      <Page title="New Session Form" {...props}>
+      <Page title="New Session Form" user={user} {...props}>
         {
           loading
           ?  <LoadingPage />
-          :  !submission 
+          :  !submission
               ? <SubmissionClosed />
               : !user 
                 ? <NonAuthenticated />
-                : this.state.hasProposalsMaxed
+                : hasProposalsMaxed
                   ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
                   : <ProposalForm user={user} {...props} />
         } 
