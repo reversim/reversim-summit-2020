@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
-
-import ga from 'react-ga';
-import {CFP_ENDS_STR} from '../../data/proposals';
-
 import StepZilla from 'react-stepzilla';
+import ga from 'react-ga';
+
 import PublicInfo from './CFPForm/PublicInfo';
 import ShortBio from './CFPForm/ShortBio';
 import PrivateInfo from './CFPForm/PrivateInfo';
@@ -13,6 +11,7 @@ import SessionProposal from './CFPForm/SessionProposal';
 import Abstract from './CFPForm/Abstract';
 import Outline from './CFPForm/Outline';
 
+import {CFP_ENDS_STR} from '../../data/proposals';
 import {
   AlignCenterColumn,
   HeadingAligner,
@@ -20,8 +19,6 @@ import {
   BreakLineMain,
   Paragraph2,
 } from '../GlobalStyledComponents/ReversimStyledComps';
-
-import './prog-track.scss';
 
 //styled-components section
 const NoteContainer = styled.div`
@@ -34,11 +31,18 @@ const DeadLine = styled.span`
   `};
 `;
 
+const FormContainer = styled(AlignCenterColumn)`
+  ${({ theme: { space } }) => `
+    margin-top: calc(2 * ${space.xxl});
+  `};
+`;
+
+//React components section
+
 const USER_INFO = 'userInfo';
 const PROPOSAL = 'currentProposal';
 
-//React components section
-class CFPForm extends Component {
+class ProposalForm extends Component {
   constructor(props) {
     super(props);
 
@@ -80,10 +84,6 @@ class CFPForm extends Component {
       [USER_INFO]: _.assign({}, userInfo, localUserInfo),
       [PROPOSAL]: _.assign({}, proposal, localCurrentProposal),
     };
-
-    console.log('UserInfo @constructor', this.state[USER_INFO]); //DELETE WHEN DONE
-    console.log('proposal: @constructor', this.state[PROPOSAL]); //DELETE WHEN DONE
-    console.log('user: @constructor', this.props.user); //DELETE WHEN DONE
 
     this.setValue = this.setValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -292,9 +292,9 @@ class CFPForm extends Component {
     ];
 
     return (
-      <AlignCenterColumn>
+      <FormContainer>
         <HeadingAligner>
-          <Heading2>Submission</Heading2>
+          <Heading2>Add your New Session Proposal</Heading2>
           <BreakLineMain />
         </HeadingAligner>
         <NoteContainer>
@@ -308,9 +308,9 @@ class CFPForm extends Component {
               steps={steps}
             />
         </div>
-      </AlignCenterColumn>
+      </FormContainer>
     );
   }
-}
+};
 
-export default CFPForm;
+export default ProposalForm;

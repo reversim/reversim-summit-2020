@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 import {
   AlignCenterColumn,
@@ -14,6 +13,7 @@ import {
   ListItem,
   ListBolt,
   Bold,
+  ButtonStyledLink,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 import {
   faChevronCircleRight,
@@ -68,15 +68,6 @@ const SubList = styled.ul`
   `}
 `;
 
-const BottomLine = styled(BreakLineMain)`
-  ${({ theme: { space } }) => `
-    width: 100%;
-    margin: ${space.xxl} 0;
-    `}
-  ${mediaQueryMin.s`
-    margin-left: 0;
-    `}
-`;
 const PostmortemsHeading = styled(ListHeading)`
   ${({ theme: { space } }) => `
     margin-top: calc(-13 * ${space.m});
@@ -84,6 +75,14 @@ const PostmortemsHeading = styled(ListHeading)`
   `}
 `;
 
+const LinkToForm = styled(ButtonStyledLink)`
+  ${({ theme: { space, font } }) => `
+  height: initial;
+  padding: ${space.l};
+  font-size: ${font.size_bg};
+  align-self: center;
+  `};
+`;
 //React component section
 
 const CFPIntro = () => (
@@ -384,11 +383,11 @@ const CFPIntro = () => (
         <BreakLineMain />
       </HeadingAligner>
       <Paragraph2>
-        Proposals, presentations and attendance are subject to the
+        Proposals, presentations and attendance are subject to the {''}
         <InvertedColorLink href="http://confcodeofconduct.com/">Code of Conduct</InvertedColorLink>.
       </Paragraph2>
     </SegmentContainer>
-    <BottomLine />
+    <LinkToForm href="/cfp/form">Submit a New Proposal</LinkToForm>
   </MainContainer>
 );
 

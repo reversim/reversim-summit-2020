@@ -14,7 +14,7 @@ library.add(faFacebook, faTwitter, faEnvelope);
 const Footer = styled.footer`
   ${({ theme: { space, color, font }}) =>`
       width: 100%;
-      margin: calc(5 * ${space.l}) auto 0 auto;
+      margin: 0 auto;
       padding: ${space.xl};
       
       display: flex;

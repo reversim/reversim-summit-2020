@@ -192,7 +192,7 @@ class Navbar extends Component {
                   <NavLI>
                     <GetTicketsCTA /> 
                   </NavLI>
-                  {cfp && pathname !== '/cfp' && (
+                  {cfp && (
                     <NavbarItem 
                       text="Submit session" 
                       to="cfp"

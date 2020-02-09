@@ -4,7 +4,7 @@ import ga from "react-ga";
 import { Container, Row, Col, Input, Button } from "reactstrap";
 import SessionPageRoute from "./SessionPageRoute";
 import Redirect from "./Redirect";
-import ProposalForm from "./CFP/ProposalForm";
+import ProposalForm from "./CFP/OldProposalForm";
 import { ABSTRACT_MAX, ABSTRACT_MIN } from "../data/proposals";
 import { getHref } from "../utils";
 
