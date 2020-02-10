@@ -39,6 +39,7 @@ class PrivateInfo extends Component {
         field: '',
         message: '',
       },
+      showVideoUrlMessage: null,
     };
   };
   
@@ -89,8 +90,17 @@ class PrivateInfo extends Component {
     return error ? false : true;
   };
 
+  validateVideoUrl = (e) =>{
+    e.target.value === ''
+      ? this.setState({ showVideoUrlMessage: true })
+      : this.state.showVideoUrlMessage === true && this.setState({showVideoUrlMessage: false})
+    
+      this.state.showVideoUrlMessage === false && this.isValidated();
+  
+  }
+
   render() {
-    const {validationError} = this.state;
+    const {validationError, showVideoUrlMessage} = this.state;
 
     const {
       email,
@@ -115,6 +125,7 @@ class PrivateInfo extends Component {
           onBlur={this.isValidated}
         />
         {validationError.field === "email" && ValidationWarning(validationError.message)}
+
         <FormField
           id="phone"
           label="Phone Number"
@@ -124,6 +135,7 @@ class PrivateInfo extends Component {
           onBlur={this.isValidated}
         />
         {validationError.field === "phone" && ValidationWarning(validationError.message)}
+
         <FormField
           id="video_url"
           label="Link to Video"
@@ -131,12 +143,13 @@ class PrivateInfo extends Component {
           placeholder="e.g. http://youtu.be/xxxx"
           subtitle={<VideoUrlFieldCaption />}
           onChange={e => setValueDebounced('video_url', e.target.value)}
-          onBlur={this.isValidated}
+          onBlur={this.validateVideoUrl}
         />
         {validationError.field === "videoUrl" && ValidationWarning(validationError.message)}
-        {!videoUrl && NoteMessage(
+        {showVideoUrlMessage && NoteMessage(
           'Did you forget to provide a video link? Although not strictly required, a video link will immensely improve your odds of getting accepted. We just need to see you speaking somewhere somehow.'
         )}
+
         <FormField
           id="trackRecord"
           label="Track record as speaker, if available"
