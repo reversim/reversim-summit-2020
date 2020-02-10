@@ -4,9 +4,9 @@ import uniq from 'lodash/uniq';
 import without from 'lodash/without';
 import cn from 'classnames';
 import {findBestMatch} from 'string-similarity';
-import FormField, {SPACING} from '../FormField';
+import FormField from '../FormField';
 import Tags from './Tags';
-import {titleInput} from './CFPPage.css';
+// import {titleInput} from './CFPPage.css';
 import {
   ABSTRACT_MAX,
   ABSTRACT_MIN,
@@ -17,6 +17,8 @@ import {
   MAX_CATEGORIES,
 } from '../../data/proposals';
 // import {categories} from '../Categories.css';
+
+const SPACING = 'mb-6'; //NOTE: Should get rid of this
 
 const TitleFieldCaption = () => (
   <span>
@@ -292,7 +294,7 @@ class ProposalForm extends Component {
           placeholder="Title of your talk"
           maxLength="100"
           value={title}
-          className={cn(SPACING, titleInput)}
+          className={cn(SPACING, 'max-width: 500px;')} //titleInput from the css file was max-width: 500px
           subtitle={<TitleFieldCaption />}
         />
         <FormField

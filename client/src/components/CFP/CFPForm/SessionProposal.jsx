@@ -161,8 +161,6 @@ class SessionProposal extends Component {
         message: '',
       },
     };
-    
-    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 

@@ -90,7 +90,6 @@ class ProposalForm extends Component {
     const localCurrentProposal = JSON.parse(localStorage.getItem(this.CURRENT_PROPOSAL_KEY));
 
     this.state = {
-      missingCategories: false,
       [USER_INFO]: _.assign({}, userInfo, localUserInfo),
       [PROPOSAL]: _.assign({}, proposal, localCurrentProposal),
     };
@@ -137,12 +136,7 @@ class ProposalForm extends Component {
     proposal.tags = proposalTags;
 
     localStorage.setItem(this.CURRENT_PROPOSAL_KEY, JSON.stringify(proposal));
-    this.setState(
-      {
-         [PROPOSAL]: proposal
-      }, () => {
-      console.log('%c state after removeProposalTags ', 'background:gold; color: purple;', this.state); // DELETE WHEN DONE
-    });
+    this.setState({ [PROPOSAL]: proposal });
   };
 
   removeCategory = value => {
@@ -151,19 +145,9 @@ class ProposalForm extends Component {
     const updatedCategories = categories.filter(item => item !== value);
 
     const updatedProposal = _.assign({}, currentProposal, {categories: updatedCategories});
-    console.log('removeCategory called'); // DELETE WHEN DONE
 
     localStorage.setItem(this.CURRENT_PROPOSAL_KEY, JSON.stringify(updatedProposal));
-    this.setState(
-      {
-        [PROPOSAL]: updatedProposal,
-      },
-      () => {
-        console.log('%c value to remove: ', 'background: firebrick', value); // DELETE WHEN DONE
-        console.log('current proposal: ', this.state.currentProposal); // DELETE WHEN DONE
-        console.log('updated proposal: ', updatedProposal); // DELETE WHEN DONE
-      },
-    );
+    this.setState({ [PROPOSAL]: updatedProposal });
   };
 
   getLocalForm = form => JSON.parse(localStorage.getItem(form));
@@ -271,7 +255,6 @@ class ProposalForm extends Component {
             abstract={abstract}
             tags={tags}
             categories={categories}
-            missingCategories={this.state.missingCategories}
             allTags={allTags}
             setValueDebounced={this.setProposalValueDebounced}
             setValue={this.setProposalValue}

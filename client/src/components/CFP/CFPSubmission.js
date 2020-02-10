@@ -129,7 +129,7 @@ class CFPSubmission extends Component {
     const {loading, hasProposalsMaxed} = this.state;
     
     return (
-      <Page title="New Session Form" user={user} {...props}>
+      <Page title="New Session Form" user={user} {...this.props}>
         {
           loading
           ?  <LoadingPage />
