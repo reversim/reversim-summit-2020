@@ -124,7 +124,7 @@ const SubmitButton = styled(Button)`
     &:hover{
       background-position: left bottom;
       text-decoration: none;
-      color: inherit;
+      color: ${color.text_1};
     }      
   `};
 `;
