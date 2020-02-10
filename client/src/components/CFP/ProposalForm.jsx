@@ -67,6 +67,7 @@ class ProposalForm extends Component {
       phone: '',
       video_url: '',
       trackRecord: '',
+      _id: [this.props.user._id],
     };
 
     const proposal = {
