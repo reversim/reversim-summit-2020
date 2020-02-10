@@ -295,8 +295,6 @@ class Abstract extends Component {
         message: '',
       },
     };
-    
-    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
@@ -327,8 +325,6 @@ class Abstract extends Component {
       allTags,
       tags,
     } = this.props;
-    // NOTE: allTags is defined by the server
-    // NOTE: tags is CFPForm.state.propsal.tag: [];
 
     if (tags.includes(tag)) {
       return;
@@ -456,8 +452,7 @@ class Abstract extends Component {
           Choose 1 or 2 categories. This information will help us assign this session to one of the
           conference's tracks.
         </FormSubHeading>
-        <input type="hidden" id="categories_hidden" />
-        <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
+
         {CATEGORIES.map(category => {
           const checked = categories.includes(category.name);
           return (

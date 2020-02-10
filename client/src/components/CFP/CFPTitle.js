@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import {CFP_ENDS_STR_SHORT} from '../../data/proposals';
 import {getRemainingCFPDays, REVERSIM_SUMMIT} from '../../utils';
-import {daysRemaining} from './CFPPage.css';
 import {
   AlignCenterColumn,
   Heading2,
