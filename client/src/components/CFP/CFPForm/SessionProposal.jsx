@@ -76,13 +76,13 @@ const ProposalType = ({proposalType, ossilProject, setValue}) => (
   <ProposalTypes>
     <InputLabel>Proposal Types</InputLabel>
     <FormField
-      id="proposalType"
+      id="type"
       inputType="radio"
       values={PROPOSAL_TYPES_ARR}
-      value={proposalType}
-      onChange={e => setValue('proposalType', e.target.value)}
+      value={type}
+      onChange={e => setValue('type', e.target.value)}
     />
-    {proposalType === 'ossil' && (
+    {type === 'ossil' && (
       <FormField
         id="ossilProject"
         label="Add a link to the relevant project"
@@ -92,7 +92,7 @@ const ProposalType = ({proposalType, ossilProject, setValue}) => (
         onChange={e => setValue('ossilProject', e.target.value)}
       />
     )}
-    {proposalType === 'postmortem' && (
+    {type === 'postmortem' && (
       <PostmortemConfirm>
         <PostmortemIcon icon={faBookDead} />
         Are you sure this is a postmortem session?
@@ -122,8 +122,8 @@ class SessionProposal extends Component {
 
   validationSchema = Joi.object().keys({
     title: Joi.string().required().label('Proposal Title'),
-    proposalType: Joi.string().required().label('Proposal Type'),
-    ossilProject: Joi.when('proposalType', {
+    type: Joi.string().required().label('Proposal Type'),
+    ossilProject: Joi.when('type', {
       is: Joi.string().valid('ossil').required(),
       then: Joi.string().regex(/^(http(s)?:\/\/)(www\.).*$/, 'valid URL').required(),
       otherwise: Joi.optional(),
@@ -134,14 +134,14 @@ class SessionProposal extends Component {
   isValidated = () => {
     const {
       title,
-      proposalType,
+      type,
       ossilProject,
       coSpeaker,
     } = this.props
 
     const toValidate = {
       title,
-      proposalType,
+      type,
       ossilProject,
       coSpeaker,
     };
@@ -173,7 +173,7 @@ class SessionProposal extends Component {
     const {validationError} = this.state;
     const {
       title,
-      proposalType,
+      type,
       ossilProject,
       coSpeaker,
       setValue,
@@ -197,11 +197,11 @@ class SessionProposal extends Component {
         {validationError.field === "title" && ValidationWarning(validationError.message)}
         <ProposalType 
           setValue={setValue}
-          proposalType={proposalType}
+          type={type}
           ossilProject={ossilProject}
           onBlur={this.isValidated}
         />
-        {validationError.field === "proposalType" && ValidationWarning(validationError.message)}
+        {validationError.field === "type" && ValidationWarning(validationError.message)}
         {validationError.field === "ossilProject" && ValidationWarning(validationError.message)}
         <FormField
           id="coSpeaker"

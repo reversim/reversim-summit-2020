@@ -16,6 +16,11 @@ import {
   Modal
 } from "reactstrap";
 
+import {
+  ResponsiveContainer,
+  Heading2,
+
+} from './GlobalStyledComponents/ReversimStyledComps'
 import Page from "./Page";
 import { getHref, key } from "../utils";
 import Tag from "./Tag";
@@ -24,11 +29,47 @@ import SessionDayTime from "./SessionDayTime";
 import VoteButton from "./VoteButton";
 import {image} from '../images';
 import SessionInfo from "./SessionInfo";
+import mediaQueryMin from "../styles/MediaQueriesMixin";
 
 library.add(faPencilAlt, faTrash);
 
 //styled-components components
 
+const ContentContainer = styled(ResponsiveContainer)`
+  ${({ theme: { space } }) => `
+    padding: 0 ${space.l};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin: ${space.xl} ${space.xl} 0 ${space.xl};
+    `}
+  `}
+  ${mediaQueryMin.xxl`
+    margin: 0 auto;
+  `}
+`;
+
+const SessionPageHero = styled.div`
+  ${({ theme: { space, color } }) => `
+    padding: calc(12 * ${space.m}) 0 calc(3 * ${space.m}) 0;
+    background: ${color.background_2};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin: 0 auto;
+      padding: calc(18.5 * ${space.m}) 0 calc(6.5 * ${space.m}) 0;
+    `}
+  `}
+`;
+
+const HeroHeading = styled(Heading2)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_1};
+  `}
+  ${mediaQueryMin.l`
+    white-space: initial;
+  `}
+`;
 
 
 //React component
@@ -103,15 +144,17 @@ class SessionPage extends Component {
 
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
-        <div className="navbar-margin session-page__hero bg-purple2 pb-8">
-          <Container>
-            <h3 className="session-page__title mb-0 line-height-15 font-size-xxl text-white">
+        <SessionPageHero>
+          <ContentContainer>
+            <HeroHeading>
               {title}
-            </h3>
-          </Container>
-        </div>
-        <Container className="mt-4">
+            </HeroHeading>
+          </ContentContainer>
+        </SessionPageHero>
+        
+        <ContentContainer className="mt-4">
           <div className="mb-5">
+            <p>{session.proposalType} </p>
             <SessionInfo session={session} size="md" />
             {/* <div className="d-flex">{tags.map(Tag)}</div> */}
             <div>
@@ -222,7 +265,7 @@ class SessionPage extends Component {
           {/*    <FontAwesomeIcon icon="trash" />*/}
           {/*  </Button>*/}
           {/*)}*/}
-        </Container>
+        </ContentContainer>
         {/* NOTE: couldn't get the Modal to be shown */}
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
           <ModalBody>

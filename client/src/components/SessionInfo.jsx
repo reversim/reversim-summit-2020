@@ -13,7 +13,7 @@ export default function SessionInfo({ session, size, onTagClick, location }) {
         <div>
           <FontAwesomeIcon icon={faClock} className="mr-2" />
           <span className="mr-4 font-weight-bold w-max-content">
-            {getSessionTypeStr(session.type)}
+            {session.type}
           </span>
         </div>
         {location &&
