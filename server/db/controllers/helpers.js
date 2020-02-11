@@ -51,7 +51,7 @@ export function transformProposal(proposal, loggedInUser) {
         attended = proposal.notAttendees.indexOf(loggedInUser._id) > -1 ? false : undefined;
       }
     }
-    proposal.id == '5e42bc55fc75cb54efa714f1' && console.log("transformProposal, proposal id=" + proposal.id, 'proposal.type ' + proposal.type); // DELETE WHEN DONE
+    // console.log("transformProposal, proposal id=" + proposal.id, 'speaker_ids ' + proposal.speaker_ids); // DELETE WHEN DONE
 
     return {
       _id: String(proposal._id),
