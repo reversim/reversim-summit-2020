@@ -1,6 +1,12 @@
 import React, { Component } from "react";
-import cn from "classnames";
-import Page from "./Page";
+import styled from 'styled-components';
+import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 import {
   Container,
   Button,
@@ -9,20 +15,23 @@ import {
   ModalFooter,
   Modal
 } from "reactstrap";
+
+import Page from "./Page";
 import { getHref, key } from "../utils";
 import Tag from "./Tag";
-import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
 import SessionPageRoute from "./SessionPageRoute";
 import SessionDayTime from "./SessionDayTime";
 import VoteButton from "./VoteButton";
 import {image} from '../images';
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import SessionInfo from "./SessionInfo";
+
 library.add(faPencilAlt, faTrash);
 
+//styled-components components
+
+
+
+//React component
 class SessionPage extends Component {
   constructor(props) {
     super(props);
@@ -55,8 +64,10 @@ class SessionPage extends Component {
       match: {
         params: { id }
       }
-    } = this.props;
+     } = this.props;
+
     const { voting, cfp, moderationCompleted } = eventConfig;
+
     const {
       title,
       abstract,
@@ -68,20 +79,26 @@ class SessionPage extends Component {
       speaker_ids,
       attended
     } = session;
+
     const trackRecords = sessionSpeakers.map(speaker => ({
       name: speaker.name,
       trackRecord: speaker.trackRecord
     }));
+
     const video_urls = sessionSpeakers.map(speaker => ({
       name: speaker.name,
       video_url: speaker.video_url
     }));
+
     const isAuthor = user && session.speaker_ids.includes(user._id);
+    
     const isTeamMember = user && user.isReversimTeamMember;
     // const editPeriod = cfp || moderationCompleted;
     // TODO: NETA- remove the always true
     const editPeriod = true;
+    
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
+    
     const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
 
     return (
@@ -206,6 +223,7 @@ class SessionPage extends Component {
           {/*  </Button>*/}
           {/*)}*/}
         </Container>
+        {/* NOTE: couldn't get the Modal to be shown */}
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
           <ModalBody>
             <p>are you sure you want to delete this proposal?</p>
