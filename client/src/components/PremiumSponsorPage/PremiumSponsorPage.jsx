@@ -265,9 +265,8 @@ const SegmentContainer = styled.div`
       `}
   
     ${mediaQueryMin.l`
-      ${ ({ theme: { space, width } }) => `
+      ${ ({ theme: { width } }) => `
       max-width: ${width.main_for_mq_xl};
-      margin: ${space.m} 0;    
       `}`}
 `;
 
@@ -472,7 +471,7 @@ const SponsorPage = ({ sponsor, ...props }) => {
           <ContentContainer>
             <Paragraph2>{sponsor.techStory.text}</Paragraph2>
             {sponsor.techStory.technologies &&
-              sponsor.techStory.technologies.length > 0 && (
+              sponsor.techStory.technologies[0].length > 0 && (
                 <PremiumTechList>
                   {sponsor.techStory.technologies.map(t => (
                     <PremiumTechItem key={t}>
