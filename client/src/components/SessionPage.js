@@ -19,6 +19,7 @@ import {
 import {
   ResponsiveContainer,
   Heading2,
+  Heading4,
 
 } from './GlobalStyledComponents/ReversimStyledComps'
 import Page from "./Page";
@@ -64,6 +65,7 @@ const SessionPageHero = styled.div`
 
 const HeroHeading = styled(Heading2)`
   ${({ theme: { color } }) => `
+    margin-right: 0;  
     color: ${color.text_1};
   `}
   ${mediaQueryMin.l`
@@ -71,6 +73,20 @@ const HeroHeading = styled(Heading2)`
   `}
 `;
 
+const SessionStatandEdit = styled.div`
+  ${({ theme: { space } }) => `
+  margin-bottom: ${space.m};
+  display: flex;
+  justify-content: center;
+  `}
+`;
+
+const SessionStatus = styled(Heading4)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_bold};
+  `}
+`;
 
 //React component
 class SessionPage extends Component {
@@ -152,23 +168,26 @@ class SessionPage extends Component {
           </ContentContainer>
         </SessionPageHero>
         
-        <ContentContainer className="mt-4">
+        <ContentContainer>
           <div className="mb-5">
             <p>{session.proposalType} </p>
-            <SessionInfo session={session} size="md" />
+            <SessionInfo session={session} size="md" className="SessionInfo"/> {/*NOTE: GET BACK TO IT responsible for the type and Tags above the edit icon*/}
             {/* <div className="d-flex">{tags.map(Tag)}</div> */}
             <div>
-              <SessionDayTime id={id} />
+              <SessionDayTime id={id} className="DayTime"/>  {/*NOTE: GET BACK TO IT responsible for the day and time above the edit icon*/}
             </div>
           </div>
 
-          <div className="mb-2 d-flex align-items-center">
+          <SessionStatandEdit>
+
             {canSeeStatus && (
-              <div className="text-purple2 font-weight-bold font-size-lm">
+              <SessionStatus>
                 Status:
                 {session.status === "accepted" ? " Accepted" : " Sadly not this time"}
-              </div>
+              </SessionStatus>
             )}
+            
+            {/* Stopped here */}
             {canEdit && (
               <Link
                 className="unstyled-link"
@@ -182,7 +201,7 @@ class SessionPage extends Component {
                 </Button>
               </Link>
             )}
-          </div>
+          </SessionStatandEdit>
 
           <div className="font-size-md mb-12">
             <ReactMarkdown source={abstract} />

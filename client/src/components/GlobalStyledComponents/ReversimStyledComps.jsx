@@ -10,6 +10,7 @@ export const ResponsiveContainer = styled.div`
   ${({ theme: { width } }) => `
     min-width: ${width.main_for_mq_xs};
     max-width: ${width.main_for_mq_xs};
+    margin: 0 auto;
   `};
 
   ${mediaQueryMin.s`
