@@ -20,7 +20,9 @@ import {
   ResponsiveContainer,
   Heading2,
   Heading4,
-
+  ButtonStyledLink,
+  Paragraph2,
+  
 } from './GlobalStyledComponents/ReversimStyledComps'
 import Page from "./Page";
 import { getHref, key } from "../utils";
@@ -73,7 +75,13 @@ const HeroHeading = styled(Heading2)`
   `}
 `;
 
-const SessionStatandEdit = styled.div`
+const TypeAndTimeContianer = styled.div`
+  ${({ theme: { space } }) => `
+   margin: ${space.xl} auto;
+  `}
+`;
+
+const StatAndEditContainer = styled.div`
   ${({ theme: { space } }) => `
   margin-bottom: ${space.m};
   display: flex;
@@ -86,6 +94,10 @@ const SessionStatus = styled(Heading4)`
     color: ${color.text_3};
     font-weight: ${font.weight_bold};
   `}
+`;
+
+const EditButton = styled(ButtonStyledLink)`
+  min-width: initial;
 `;
 
 //React component
@@ -169,40 +181,30 @@ class SessionPage extends Component {
         </SessionPageHero>
         
         <ContentContainer>
-          <div className="mb-5">
-            <p>{session.proposalType} </p>
+          <TypeAndTimeContianer>
             <SessionInfo session={session} size="md" className="SessionInfo"/> {/*NOTE: GET BACK TO IT responsible for the type and Tags above the edit icon*/}
             {/* <div className="d-flex">{tags.map(Tag)}</div> */}
-            <div>
               <SessionDayTime id={id} className="DayTime"/>  {/*NOTE: GET BACK TO IT responsible for the day and time above the edit icon*/}
-            </div>
-          </div>
+          </TypeAndTimeContianer>
 
-          <SessionStatandEdit>
-
+          <StatAndEditContainer>
             {canSeeStatus && (
               <SessionStatus>
                 Status:
                 {session.status === "accepted" ? " Accepted" : " Sadly not this time"}
               </SessionStatus>
             )}
-            
-            {/* Stopped here */}
-            {canEdit && (
-              <Link
-                className="unstyled-link"
-                to={`/session/${getHref(session)}/edit`}
-              >
-                <Button
-                  size="sm"
-                  className="ml-3 styled-button btn btn-secondary"
-                >
-                  <FontAwesomeIcon icon="pencil-alt" />
-                </Button>
-              </Link>
-            )}
-          </SessionStatandEdit>
 
+            {canEdit && (
+              <EditButton
+                href={`/session/${getHref(session)}/edit`}
+              >
+                <FontAwesomeIcon icon="pencil-alt" />
+              </EditButton>
+            )}
+          </StatAndEditContainer>
+
+            {/* Stopped here */}
           <div className="font-size-md mb-12">
             <ReactMarkdown source={abstract} />
           </div>
