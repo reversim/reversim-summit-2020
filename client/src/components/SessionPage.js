@@ -20,8 +20,9 @@ import {
   ResponsiveContainer,
   Heading2,
   Heading4,
-  ButtonStyledLink,
-  Paragraph2,
+  Heading5,
+  InvertedColorLink,
+  InvertedButtonStyleLink,
   
 } from './GlobalStyledComponents/ReversimStyledComps'
 import Page from "./Page";
@@ -96,8 +97,23 @@ const SessionStatus = styled(Heading4)`
   `}
 `;
 
-const EditButton = styled(ButtonStyledLink)`
+const EditButton = styled(InvertedButtonStyleLink)`
   min-width: initial;
+`;
+
+const TextContainer = styled.div`
+  ${({ theme: { space, font } }) => `
+    margin-bottom: ${space.xxl};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_normal};
+  `}
+`;
+
+const TextHeading = styled(Heading5)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_bold};
+  `}
 `;
 
 //React component
@@ -182,9 +198,8 @@ class SessionPage extends Component {
         
         <ContentContainer>
           <TypeAndTimeContianer>
-            <SessionInfo session={session} size="md" className="SessionInfo"/> {/*NOTE: GET BACK TO IT responsible for the type and Tags above the edit icon*/}
-            {/* <div className="d-flex">{tags.map(Tag)}</div> */}
-              <SessionDayTime id={id} className="DayTime"/>  {/*NOTE: GET BACK TO IT responsible for the day and time above the edit icon*/}
+            <SessionInfo session={session} size="md" className="SessionInfo"/>
+              <SessionDayTime id={id} className="DayTime"/>  {/*NOTE: Try to understand if it doesn't render on purpose or what, also might be repetative*/}
           </TypeAndTimeContianer>
 
           <StatAndEditContainer>
@@ -203,43 +218,41 @@ class SessionPage extends Component {
               </EditButton>
             )}
           </StatAndEditContainer>
-
-            {/* Stopped here */}
-          <div className="font-size-md mb-12">
+          
+          <TextContainer>
+            <TextHeading>Abstract</TextHeading>
             <ReactMarkdown source={abstract} />
-          </div>
+          </TextContainer>
           {outline && (
-            <div className='text-break'>
-              <h4>???</h4>
+            <TextContainer>
+              <TextHeading>Outline</TextHeading>
               <ReactMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
-              {/* consolidate line breaks */}
-            </div>
+              {/* Is this replace good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
+            </TextContainer>
           )}
-          {isTeamMember &&
+          {!isTeamMember &&
             trackRecords &&
             trackRecords.map((trackRecord, i) => (
-              <div className="mb-3" key={i}>
-                <h4>Track record- {trackRecord.name}</h4>
-                <div className="font-size-sm">
-                  <ReactMarkdown source={trackRecord.trackRecord} />
-                </div>
-              </div>
-            ))}
-          {isTeamMember &&
+              <TextContainer key={i}>
+                <TextHeading>{trackRecord.name}'s Track record</TextHeading>
+                <ReactMarkdown source={trackRecord.trackRecord} />
+              </TextContainer>
+            ))}{/**NOTE: Change back to isTeamMember && */}
+          {!isTeamMember &&
             video_urls &&
-            video_urls.map((video_url, i) => (
-              <div className="mb-3" key={i}>
-                <h4>Video URL- {video_url.name}</h4>
-                <div>
-                  <a href={video_url.video_url} target="_blank">
-                    {video_url.video_url}
-                  </a>
-                </div>
-              </div>
-            ))}
+            video_urls.map((speaker, i) => (
+              speaker.video_url && (
+              <TextContainer className="mb-3" key={i}>
+                <TextHeading>Watch {speaker.name}</TextHeading>
+                <InvertedColorLink href={speaker.video_url} target="_blank">
+                  Link to {speaker.name}'s video
+                </InvertedColorLink>
+              </TextContainer>
+              )
+            ))}{/**NOTE: Change back to isTeamMember && */}
 
           <div className="session-page__voting mb-10">
-            {voting && (
+            {!voting && (
               <VoteButton
                 user={user}
                 attended={attended}
@@ -247,7 +260,7 @@ class SessionPage extends Component {
                 attendProposal={attendProposal}
                 eventConfig={eventConfig}
               />
-            )}
+            )}{/**NOTE: Change back to voting && */}
           </div>
           <div className="session-page__speakers">
             {sessionSpeakers.map(speaker => (

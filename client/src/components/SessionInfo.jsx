@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import cn from 'classnames';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
@@ -7,9 +6,7 @@ import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { getSessionTypeStr } from '../utils';
 import halls from '../data/halls';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
-import {
-  Heading5,
-} from './GlobalStyledComponents/ReversimStyledComps';
+import { Heading5 } from './GlobalStyledComponents/ReversimStyledComps';
 
 // styled-components section
 const InfoContainer = styled.div`
@@ -29,57 +26,86 @@ const SessionType = styled.div`
   `}
 `;
 
-const TypeText = styled(Heading5)`
-  ${({ theme: { space, font, color }}) => `
+const ClockIcon = styled(FontAwesomeIcon)`
+  ${({ theme: { space } }) => `
+    margin-right: ${space.l};
+  `}
+`;
+
+const InfoText = styled(Heading5)`
+  ${({ theme: { font, color }}) => `
     display: inline;
     width: max-content;
-    margin: 0 ${space.l};
     color: ${color.text_2};
     font-weight: ${font.weight_bold};
   `}
 `;
 
+const TagsContainer = styled.div`
+  ${({ theme: { color, font } }) => `
+    display: flex;
+    flex-wrap: wrap;
+    color: ${color.text_3};
+    font-weight: ${font.weight_bold};
+  `}
+`;
+
+const RegularTag = styled.div`
+  ${({ theme: { color, space } }) => `
+    border: 2px solid ${color.border_1};
+    padding: 0 ${space.s};
+    margin: ${space.s} calc(2*${space.m}) ${space.s} 0;
+    cursor: pointer;
+  `}
+`;
+
+const ClickTag = styled.div`
+  ${({ theme: { color, space } }) => `
+    border: 2px solid ${color.border_1};
+    padding: 0 ${space.s};
+    margin: ${space.s} calc(2*${space.m}) ${space.s} 0;
+    cursor: pointer;
+  `}
+`;
+
+const Category = styled.span`
+  ${({ theme: { color, space, font } }) => `
+    padding: 0 ${space.m};  
+    color: ${color.session_category};
+    font-weight: ${font.weight_bold};
+    border: 2px solid ${color.session_category_border};
+  `}
+`;
+
 // React components section
-export default function SessionInfo({ session, size, onTagClick, location }) {
+export default function SessionInfo({ session, onTagClick, location }) {
   return (
     <Fragment>
       <InfoContainer>
         <SessionType>
-          <FontAwesomeIcon icon={faClock}/>
-          <TypeText>
-            {session.type}
-          </TypeText>
+          <ClockIcon icon={faClock}/>
+          <InfoText>
+            {getSessionTypeStr(session.type)}
+          </InfoText>
         </SessionType>
-        {/*STOPPED HERE */}
-        {location &&
-        <div>
-          <span className="mr-4 font-weight-bold w-max-content">
-            {`day ${location.day+1} ${location.time} at class ${halls[location.hall]}`}
-          </span>
-        </div>}
-        <div className="mr-4 text-purple2 font-weight-bold d-flex flex-wrap">
+        {location && 
+          <InfoText>
+            {`Day ${location.day+1} | ${location.time} | ${halls[location.hall]}`}
+          </InfoText>
+        }
+        <TagsContainer>
           {session.tags.map(tag =>
             onTagClick ? (
-              <div
-                key={tag}
-                className="b-regular px-1 w-max-content mr-4 my-1 cursor-pointer"
-                onClick={() => onTagClick(tag)}
-              >
-                {tag}
-              </div>
+              <ClickTag key={tag} onClick={() => onTagClick(tag)}>{tag}</ClickTag>
             ) : (
-              <div key={tag} className="b-regular px-1 w-max-content mr-4 my-1">
-                {tag}
-              </div>
+              <RegularTag key={tag}>{tag}</RegularTag>
             )
           )}
-        </div>
+        </TagsContainer>
+        {session.category && (
+          <Category>{session.category}</Category>
+        )}
       </InfoContainer>
-      {session.category && (
-        <span className="text-indigo px-2 b-heavy font-weight-bold">
-          {session.category}
-        </span>
-      )}
     </Fragment>
   );
 }

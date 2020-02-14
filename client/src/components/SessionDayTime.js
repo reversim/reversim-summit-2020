@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import {agenda1, agenda2} from '../data/agenda';
 import halls from '../data/halls';
 
@@ -51,18 +52,25 @@ export const getDateAndTime = id => {
   return _getDateAndTime(0, id) || _getDateAndTime(1, id);
 };
 
+const DayAndTime = styled.span`
+  ${({ theme: { font } }) => `
+    font-family: ${font.main};
+    font-weight: ${font.weight_normal};
+  `}
+`;
+
 export default ({id}) => {
   const dateTime = getDateAndTime(id);
   if (dateTime) {
     const {day, time, hall} = dateTime;
     return (
-      <span className="font-mono font-weight-bold">
+      <DayAndTime>
         Day {day + 1}
         {'\u00A0'}|{'\u00A0'}
         {time}
         {'\u00A0'}|{'\u00A0'}
         {halls[hall]}
-      </span>
+      </DayAndTime>
     );
   } else return null;
 };
