@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { getLoginUrl } from "./Redirect";
 
 import {
   Container,
@@ -30,7 +31,7 @@ import { getHref, key } from "../utils";
 import Tag from "./Tag";
 import SessionPageRoute from "./SessionPageRoute";
 import SessionDayTime from "./SessionDayTime";
-import VoteButton from "./VoteButton";
+import VoteButtons from "./VoteButtons";
 import {image} from '../images';
 import SessionInfo from "./SessionInfo";
 import mediaQueryMin from "../styles/MediaQueriesMixin";
@@ -185,7 +186,7 @@ class SessionPage extends Component {
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
     
     const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
-
+    
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
         <SessionPageHero>
@@ -227,7 +228,7 @@ class SessionPage extends Component {
             <TextContainer>
               <TextHeading>Outline</TextHeading>
               <ReactMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
-              {/* Is this replace good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
+              {/* Is this .replace() good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
             </TextContainer>
           )}
           {!isTeamMember &&
@@ -252,15 +253,16 @@ class SessionPage extends Component {
             ))}{/**NOTE: Change back to isTeamMember && */}
 
           <div className="session-page__voting mb-10">
-            {!voting && (
-              <VoteButton
-                user={user}
-                attended={attended}
-                proposalId={id}
-                attendProposal={attendProposal}
-                eventConfig={eventConfig}
+            {!user && voting && <InvertedColorLink href={getLoginUrl()}>Login to vote!</InvertedColorLink>}
+            {user && voting && (
+              <VoteButtons
+              user={user}
+              attended={attended}
+              proposalId={id}
+              attendProposal={attendProposal}
+              eventConfig={eventConfig}
               />
-            )}{/**NOTE: Change back to voting && */}
+            )}
           </div>
           <div className="session-page__speakers">
             {sessionSpeakers.map(speaker => (
