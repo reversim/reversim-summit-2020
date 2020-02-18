@@ -22,13 +22,13 @@ import {
   Heading2,
   Heading4,
   Heading5,
-  InvertedColorLink,
+  Paragraph2,
   InvertedButtonStyleLink,
+  InvertedColorLink,
   
 } from './GlobalStyledComponents/ReversimStyledComps'
 import Page from "./Page";
 import { getHref, key } from "../utils";
-import Tag from "./Tag";
 import SessionPageRoute from "./SessionPageRoute";
 import SessionDayTime from "./SessionDayTime";
 import VoteButtons from "./VoteButtons";
@@ -39,6 +39,12 @@ import mediaQueryMin from "../styles/MediaQueriesMixin";
 library.add(faPencilAlt, faTrash);
 
 //styled-components components
+
+const GeneralLink = styled(InvertedColorLink)`
+  ${({ theme: { font } }) => `
+    font-weight: ${font.weight_medium};
+  `}
+`;
 
 const ContentContainer = styled(ResponsiveContainer)`
   ${({ theme: { space } }) => `
@@ -114,6 +120,77 @@ const TextHeading = styled(Heading5)`
   ${({ theme: { color, font } }) => `
     color: ${color.text_3};
     font-weight: ${font.weight_bold};
+  `}
+`;
+
+const StyledMarkdown = styled(ReactMarkdown)`
+  ${({ theme: { font }}) => `
+    font-size: ${font.size_reg};
+    font-weight: ${font.weight_medium};
+  `}
+`;
+
+const VoteAndSpeakersContainer = styled.div`
+  ${({ theme: { space } }) => `
+    width: 100%;  
+    margin: ${space.xxl} auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    `}
+
+    ${mediaQueryMin.l`
+      flex-direction: row;
+      justify-content: space-around;
+    `}
+`;
+
+const SpeakerContainer = styled.div`
+  ${({ theme: { space, color } }) => `
+    display: flex;
+    width: 100%;
+    margin-bottom: calc(4 * ${space.m});
+    border: 4px solid ${color.border_1};
+  `}
+
+  ${mediaQueryMin.l`
+    width: 42.5%;
+  `}
+`;
+
+const SpeakerImg = styled.div`
+  ${({ theme: {color}, speaker: {picture} }) => `
+    min-width: 50%;
+    height: 240px;
+    border-right: 4px solid ${color.border_1};
+
+    background-image: url('${image(picture, 236, 240)}');
+    background-size: cover;
+    background-position: center;
+  `}
+  ${mediaQueryMin.m`
+    min-width: 35%;
+  `}
+  ${mediaQueryMin.l`
+    min-width: 50%;
+  `}
+`;
+
+const SpeakerNameAndLink = styled.div`
+  ${({ theme: { space } }) => `
+    padding: ${space.xl};
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  `}
+`;
+
+const SpeakerName = styled.p`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_bg};
+    font-weight: ${font.weight_medium};
+    overflow-wrap: break-word;
   `}
 `;
 
@@ -222,38 +299,48 @@ class SessionPage extends Component {
           
           <TextContainer>
             <TextHeading>Abstract</TextHeading>
-            <ReactMarkdown source={abstract} />
+            <StyledMarkdown source={abstract} />
           </TextContainer>
           {outline && (
             <TextContainer>
               <TextHeading>Outline</TextHeading>
-              <ReactMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
+              <StyledMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
               {/* Is this .replace() good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
             </TextContainer>
           )}
           {!isTeamMember &&
             trackRecords &&
-            trackRecords.map((trackRecord, i) => (
+            trackRecords.map((speaker, i) => {
+            return speaker.trackRecord 
+            ? (
+                <TextContainer key={i}>
+                  <TextHeading>{speaker.name}'s Track record</TextHeading>
+                  <StyledMarkdown source={speaker.trackRecord} />
+                </TextContainer>
+              )
+            : (
               <TextContainer key={i}>
-                <TextHeading>{trackRecord.name}'s Track record</TextHeading>
-                <ReactMarkdown source={trackRecord.trackRecord} />
+                <TextHeading>{speaker.name}'s Track record</TextHeading>
+                <Paragraph2>{speaker.name} has not submitted any trackRecords.</Paragraph2>
               </TextContainer>
-            ))}{/**NOTE: Change back to isTeamMember && */}
-          {!isTeamMember &&
+            )
+            }
+            )}
+          {isTeamMember &&
             video_urls &&
             video_urls.map((speaker, i) => (
               speaker.video_url && (
               <TextContainer className="mb-3" key={i}>
                 <TextHeading>Watch {speaker.name}</TextHeading>
-                <InvertedColorLink href={speaker.video_url} target="_blank">
+                <GeneralLink href={speaker.video_url} target="_blank">
                   Link to {speaker.name}'s video
-                </InvertedColorLink>
+                </GeneralLink>
               </TextContainer>
               )
-            ))}{/**NOTE: Change back to isTeamMember && */}
+            ))}
 
-          <div className="session-page__voting mb-10">
-            {!user && voting && <InvertedColorLink href={getLoginUrl()}>Login to vote!</InvertedColorLink>}
+          <VoteAndSpeakersContainer>
+            {!user && voting && <InvertedButtonStyleLink href={getLoginUrl()}>Login to vote!</InvertedButtonStyleLink>}
             {user && voting && (
               <VoteButtons
               user={user}
@@ -263,21 +350,16 @@ class SessionPage extends Component {
               eventConfig={eventConfig}
               />
             )}
-          </div>
-          <div className="session-page__speakers">
+          </VoteAndSpeakersContainer>
+
+          <VoteAndSpeakersContainer>
             {sessionSpeakers.map(speaker => (
-              <div
-                className="b-strong session-page__speaker-box mb-8 d-flex"
-                key={key()}
-              >
-                <div
-                  className="session-page__speaker"
-                  style={{ backgroundImage: `url('${image(speaker.picture, 236, 240)}')` }}
-                />
-                <div className="p-5 d-flex flex-column flex-grow-1">
-                  <h4 className="font-weight-bold font-size-lg">
+              <SpeakerContainer key={key()}>
+                <SpeakerImg speaker={speaker} />
+                <SpeakerNameAndLink>
+                  <SpeakerName>
                     {speaker.name}
-                  </h4>
+                  </SpeakerName>
                   <div className="flex-grow-1 d-flex justify-content-end align-items-end">
                     <Link
                       key={speaker._id}
@@ -287,10 +369,10 @@ class SessionPage extends Component {
                       <Button className="styled-button mobile-height-auto">Read more</Button>
                     </Link>
                   </div>
-                </div>
-              </div>
+                </SpeakerNameAndLink>
+              </SpeakerContainer>
             ))}
-          </div>
+          </VoteAndSpeakersContainer>
           {/*{canEdit && (*/}
           {/*  <Button*/}
           {/*    color="primary"*/}

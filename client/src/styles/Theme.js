@@ -46,7 +46,8 @@ const theme = {
 
     button_bkgr_1: 'rgb(137, 108, 255)',
     button_bkgr_2: 'rgb(255, 97, 0)',
-    button_bkgr_3: 'rgb(255, 46, 95)',
+    button_bkgr_3: 'rgb(41, 179, 66)',
+    button_bkgr_4: 'rgb(255, 46, 95)',
 
     image_link_bkgr: 'rgb(255, 255, 255)',
     input_bkgr_1: 'rgb(255, 255, 255)',
