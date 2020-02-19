@@ -35,7 +35,8 @@ const ErrorPageHeadingLink = styled(ItalicLink)`
 
 const ErrorPageSubHeading = styled(Heading4)`
   ${({ theme: { color } }) => `
-    color: ${color.text_3}
+    color: ${color.text_3};
+    text-align: center;
   `};
 `;
 
@@ -138,8 +139,8 @@ class CFPSubmission extends Component {
               : !user 
                 ? <NonAuthenticated />
                 : hasProposalsMaxed
-                  ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
-                  : <ProposalForm user={user} {...props} />
+                ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
+                : <ProposalForm user={user} {...props} />
         } 
       </Page>
     );

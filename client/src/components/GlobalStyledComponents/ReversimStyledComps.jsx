@@ -89,10 +89,31 @@ export const BreakLineInverted = styled(BreakLineMain)`
   `}
 `;
 
+export const LongTextContainer = styled.div`
+${({ theme: { width } }) => `
+    min-width: ${width.main_for_mq_xs};
+    max-width: ${width.main_for_mq_xs};
+  `};
+
+  ${mediaQueryMin.s`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_s};    
+      max-width: ${width.main_for_mq_s};  
+    `}
+  `};
+
+  ${mediaQueryMin.m`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_m};  
+      max-width: ${width.main_for_mq_m};
+    `}
+  `};
+`;
+
 
 // Emphasis
 /*NOTE:
-The above components (Bold, Italic) is needed to override the problematic reset file in:
+The below components (Bold, Italic) is needed to override the problematic reset file in:
 /home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
 
 It assigns <em> with "font-style: inherit" which does not let it be 'italic'.

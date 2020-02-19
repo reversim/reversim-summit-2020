@@ -2,9 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 import {
+  faChevronCircleRight,
+  faCompass,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+
+import {
   AlignCenterColumn,
+  LongTextContainer,
   HeadingAligner,
-  Heading2,
+  Heading3,
   Heading4,
   BreakLineMain,
   Paragraph2,
@@ -15,24 +22,24 @@ import {
   Bold,
   ButtonStyledLink,
 } from '../GlobalStyledComponents/ReversimStyledComps';
-import {
-  faChevronCircleRight,
-  faCompass,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
 
 //styled-components section
 const MainContainer = styled(AlignCenterColumn)`
   ${({ theme: { space } }) => `
     margin: ${space.xxl} auto;
-    align-items: flex-start;
+    align-items: center;
   `}
 `;
 
-const SegmentContainer = styled.div`
+const SegmentContainer = styled(LongTextContainer)`
   ${({ theme: { space } }) => `
-    width: 100%;
     margin-bottom: ${space.xxl};
+  `}
+`;
+
+const SegmentHeading = styled(Heading3)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_3};
   `}
 `;
 
@@ -83,13 +90,14 @@ const LinkToForm = styled(ButtonStyledLink)`
   align-self: center;
   `};
 `;
+
 //React component section
 
 const CFPIntro = () => (
   <MainContainer>
     <SegmentContainer>
       <HeadingAligner>
-        <Heading2>About</Heading2>
+        <SegmentHeading>About</SegmentHeading>
         <BreakLineMain />
       </HeadingAligner>
       <Paragraph2>
@@ -113,11 +121,11 @@ const CFPIntro = () => (
 
     <SegmentContainer>
       <HeadingAligner>
-        <Heading2>Suggested topics</Heading2>
+        <SegmentHeading>Suggested topics</SegmentHeading>
         <BreakLineMain />
       </HeadingAligner>
       <Paragraph2>
-        Reversim Summit is looking for submissions on all things software development.We encourage
+        Reversim Summit is looking for submissions on all things software development. We encourage
         and welcome deep technical submissions, as well as sessions on the surroundings of software
         development such as product management, culture and business. We prefer sessions that can
         appeal to our diverse audience. We prefer sessions based on personal experience and
@@ -192,7 +200,7 @@ const CFPIntro = () => (
 
     <SegmentContainer>
       <HeadingAligner>
-        <Heading2>Proposals</Heading2>
+        <SegmentHeading>Proposals</SegmentHeading>
         <BreakLineMain />
       </HeadingAligner>
       <SubHeading>We are looking for proposals in these formats:</SubHeading>
@@ -243,7 +251,7 @@ const CFPIntro = () => (
 
     <SegmentContainer>
       <HeadingAligner>
-        <Heading2>Submission guidelines</Heading2>
+        <SegmentHeading>Submission guidelines</SegmentHeading>
         <BreakLineMain />
       </HeadingAligner>
       <GuidelinesList>
@@ -344,7 +352,7 @@ const CFPIntro = () => (
 
     <SegmentContainer>
       <HeadingAligner>
-        <Heading2>Review process</Heading2>
+        <SegmentHeading>Review process</SegmentHeading>
         <BreakLineMain />
       </HeadingAligner>
       <ul>
@@ -380,7 +388,7 @@ const CFPIntro = () => (
 
     <SegmentContainer>
       <HeadingAligner>
-        <Heading2>Code of Conduct</Heading2>
+        <SegmentHeading>Code of Conduct</SegmentHeading>
         <BreakLineMain />
       </HeadingAligner>
       <Paragraph2>
