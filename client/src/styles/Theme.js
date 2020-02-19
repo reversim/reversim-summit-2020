@@ -14,14 +14,9 @@ const theme = {
     font_awsome_nav: 'rgb(1, 39, 255)',
     
     important: 'rgb(255, 46, 95)',
-<<<<<<< HEAD
     note_this: 'rgb(255, 97, 0)',
     count_down: 'rgb(255, 255, 255)',
 
-=======
-    count_down: 'rgb(108, 117, 125)',
-    
->>>>>>> Finished styling SessionInfo and debugged video_urls section
     step_zilla_sub_heading: 'rgb(108, 117, 125)',
     
     session_category: 'rgb(137, 108, 255)',
@@ -35,11 +30,7 @@ const theme = {
     background_modal: 'rgb(255, 248, 237)',
 
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)',
-<<<<<<< HEAD
-    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in InvertedButtonStyledLink :hover
-=======
     background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in StyledButton :hover
->>>>>>> Styled voting buttons
 
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,
@@ -48,6 +39,7 @@ const theme = {
     button_bkgr_2: 'rgb(255, 97, 0)',
     button_bkgr_3: 'rgb(41, 179, 66)',
     button_bkgr_4: 'rgb(255, 46, 95)',
+    button_bkgr_5: 'rgb(108, 117, 125)',
 
     image_link_bkgr: 'rgb(255, 255, 255)',
     input_bkgr_1: 'rgb(255, 255, 255)',

@@ -9,9 +9,7 @@ import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { getLoginUrl } from "./Redirect";
 
 import {
-  Container,
   Button,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   Modal
@@ -227,7 +225,45 @@ const SpeakerProfileLink = styled(InvertedButtonStyleLink)`
 const TrashButton = styled(StyledButton)`
   ${({theme: {color }}) => `
   background-image: linear-gradient(to right, ${color.button_bkgr_4} 50%, ${color.button_bkgr_1} 50%);
+  position: relative;
+  float: right;
   `}
+`;
+
+const TrashModalBody = styled(ModalBody)`
+  ${({ theme: { color } }) => `
+    min-height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${color.background_5};
+  `}
+`;
+
+const ModalMessage = styled.p`
+  ${({ theme: { font } }) => `
+    font-family: ${font.main};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_bold};
+    width: 85%;
+  `}
+`;
+
+const TrashModalFooter = styled(ModalFooter)`
+  ${({ theme: { color } }) => `
+    display: flex;
+    align-items: flex-end;
+    background: ${color.background_5};
+    border: 0;
+  `}
+`;
+
+const DeleteButton = styled(TrashButton)`
+  min-width: initial;
+`;
+
+const CancelButton = styled(StyledButton)`
+  min-width: initial;
 `;
 
 //React component
@@ -411,23 +447,23 @@ class SessionPage extends Component {
            <TrashButton
              onClick={this.askDelete}
            >
-             <FontAwesomeIcon icon="trash" />
+             <FontAwesomeIcon icon="trash" /> Delete Proposal
            </TrashButton>
           )}
 
         </ContentContainer>
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
-          <ModalBody>
-            <p>are you sure you want to delete this proposal?</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.deleteProposal}>
+          <TrashModalBody>
+            <ModalMessage>are you sure you want to delete this proposal?</ModalMessage>
+          </TrashModalBody>
+          <TrashModalFooter>
+            <DeleteButton onClick={this.deleteProposal}>
               Yes, Delete
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggleDeleteModal}>
+            </DeleteButton>{" "}
+            <CancelButton onClick={this.toggleDeleteModal}>
               Cancel
-            </Button>
-          </ModalFooter>
+            </CancelButton>
+          </TrashModalFooter>
         </Modal>
       </Page>
     );
