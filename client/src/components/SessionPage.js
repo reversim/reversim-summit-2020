@@ -329,7 +329,7 @@ class SessionPage extends Component {
     
     const isTeamMember = user && user.isReversimTeamMember;
     // const editPeriod = cfp || moderationCompleted;
-    // TODO: NETA- remove the always true
+    // IMPORTANT: NETA- remove the always true
     const editPeriod = true;
     
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
@@ -377,7 +377,7 @@ class SessionPage extends Component {
             <TextContainer>
               <TextHeading>Outline</TextHeading>
               <StyledMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
-              {/* Is this .replace() good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
+              {/* NOTE: Is this .replace() good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
             </TextContainer>
           )}
           {!isTeamMember &&
