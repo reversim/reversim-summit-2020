@@ -110,7 +110,7 @@ const theme = {
     main: '1250px',
     main_for_mq_xl: '1100px',
     main_for_mq_l: '895px',
-    main_for_mq_m: '758px',
+    main_for_mq_m: '748px',
     main_for_mq_s: '460px',
     main_for_mq_xs: '340px',
   },

@@ -6,6 +6,20 @@ import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import FormBit from '../FormField';
 
 //general elements
+
+export const PageHero = styled.div`
+  ${({ theme: { space, color } }) => `
+    padding: calc(12 * ${space.m}) 0 calc(3 * ${space.m}) 0;
+    background: ${color.background_2};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin: 0 auto;
+      padding: calc(18.5 * ${space.m}) 0 calc(6.5 * ${space.m}) 0;
+    `}
+  `}
+`;
+
 export const ResponsiveContainer = styled.div`
   ${({ theme: { width } }) => `
     min-width: ${width.main_for_mq_xs};

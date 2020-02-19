@@ -1,17 +1,78 @@
 import React from 'react';
 import cn from 'classnames';
-import Page from './Page';
-import {Container} from 'reactstrap';
-import {getHref, key} from '../utils';
-import {Link} from 'react-router-dom';
-// import Tag from './Tag';
-import {Button} from 'reactstrap';
-import SpeakerPageRoute from './SpeakerPageRoute';
+import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
+
+import Page from './Page';
+import SpeakerPageRoute from './SpeakerPageRoute';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
 import SessionInfo from './SessionInfo';
 import plus from '../images/SVG/plus.svg';
+import {Link} from 'react-router-dom';
+import {Container, Button} from 'reactstrap';
+import {getHref, key} from '../utils';
 import {image} from '../images';
+import {
+  PageHero,
+  ResponsiveContainer,
+} from './GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from '../styles/MediaQueriesMixin';
+
+// import Tag from './Tag';
+
+// styled-components components
+
+const SpeakerHero = styled(PageHero)`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.xl}; 
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      padding: calc(2 * ${space.xxl}) 0 0 0 ; 
+      margin-bottom: ${space.xl}; 
+    `}
+  `}  
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+      padding-top: calc(2 * ${space.xxl}); 
+      margin-bottom: ${space.xl}; 
+    `}
+  `}  
+`;
+
+const HeroContainer = styled(ResponsiveContainer)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  margin: 0 auto;
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      align-items: flex-start;  
+      margin: 0 ${space.xxl};
+    `}  
+  `}
+  ${mediaQueryMin.l`
+    height: 195px;
+    margin: 0 auto;
+  `}
+`;
+
+
+// const SpeakerImg = styled.div`
+//   ${({ theme: { space, color  }, speaker: {picture} }) => `
+//   position: relative;
+//   width: 230px;
+//   height: 230px;
+//   top: calc(7 * ${space.m});
+//   margin-right: ${space.xl};
+
+//   background-image: url(${image(picture, 222, 222)});
+//   background-size: cover;
+//   border: 4px solid ${color.border_1};
+//   `}
+// `;
+
+// React components
 
 export class SpeakerPage extends React.Component {
   state = {
@@ -31,6 +92,7 @@ export class SpeakerPage extends React.Component {
     const {speaker, proposals: allProposals, user, isUser, eventConfig, acceptedProposals} = this.props;
     const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
     const { cfp, moderationCompleted } = eventConfig;
+
     const {isUploadingPhoto} = this.state;
     const canEdit = (user && user.isReversimTeamMember) || isUser;
     const canSeeStatus = canEdit && cfp || moderationCompleted;
@@ -42,32 +104,31 @@ export class SpeakerPage extends React.Component {
 
       return (
       <Page title={name} user={user} {...this.props}>
-        <div className="navbar-margin bg-purple2 mb-4">
-          <Container>
-            <div className="speaker-page__hero">
-              <div
-                style={{backgroundImage: `url(${image(speaker.picture, 222, 222)})`}}
-                className="speaker-page__speaker-picture b-strong mr-5 p-relative"
-              />
-              <div className="flex-grow-1">
-                <h3 className="mb-3 line-height-1 font-size-xxl text-white">
-                  {speaker.name}
-                  {canEdit && (
-                    <Link to={`/speaker/${speaker._id}/edit`} className="d-block">
-                      <Button className="styled-button on-purple btn btn-secondary">Edit</Button>
-                    </Link>
-                  )}
-                  {isReversimTeamMember && (
-                    <div className="mb-3 text-center text-md-left">
-                      <small className="py-1 px-2 bg-danger text-white">Team member</small>
-                    </div>
-                  )}
-                </h3>
-                <p className="text-white font-size-lm mb-4 line-height-15">{speaker.oneLiner}</p>
-              </div>
+        <SpeakerHero>
+          <HeroContainer>
+            <div
+              style={{backgroundImage: `url(${image(speaker.picture, 222, 222)})`}}
+              className="speaker-page__speaker-picture b-strong mr-5 p-relative"
+            />
+            
+            <div className="flex-grow-1">
+              <h3 className="mb-3 line-height-1 font-size-xxl text-white">
+                {speaker.name}
+                {canEdit && (
+                  <Link to={`/speaker/${speaker._id}/edit`} className="d-block">
+                    <Button className="styled-button on-purple btn btn-secondary">Edit</Button>
+                  </Link>
+                )}
+                {isReversimTeamMember && (
+                  <div className="mb-3 text-center text-md-left">
+                    <small className="py-1 px-2 bg-danger text-white">Team member</small>
+                  </div>
+                )}
+              </h3>
+              <p className="text-white font-size-lm mb-4 line-height-15">{speaker.oneLiner}</p>
             </div>
-          </Container>
-        </div>
+          </HeroContainer>
+        </SpeakerHero>
         <div className="white-bg">
         <Container>
             <SpeakerSocialLinks {...speaker} />
