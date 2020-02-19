@@ -25,7 +25,8 @@ import {
   Paragraph2,
   InvertedButtonStyleLink,
   InvertedColorLink,
-  
+  StyledButton,
+
 } from './GlobalStyledComponents/ReversimStyledComps'
 import Page from "./Page";
 import { getHref, key } from "../utils";
@@ -154,7 +155,7 @@ const SpeakerContainer = styled.div`
   `}
 
   ${mediaQueryMin.l`
-    width: 42.5%;
+    width: 47.5%;
   `}
 `;
 
@@ -178,19 +179,54 @@ const SpeakerImg = styled.div`
 
 const SpeakerNameAndLink = styled.div`
   ${({ theme: { space } }) => `
-    padding: ${space.xl};
+    padding: ${space.m};
 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     flex-grow: 1;
+  `}
+  ${mediaQueryMin.xl`
+    ${({ theme: { space } }) =>`
+      padding: ${space.l};
+    `}
   `}
 `;
 
 const SpeakerName = styled.p`
   ${({ theme: { font } }) => `
+    max-width: 135px;
     font-size: ${font.size_bg};
     font-weight: ${font.weight_medium};
     overflow-wrap: break-word;
+  `}
+  ${mediaQueryMin.s`
+    max-width: initial;
+  `}
+`;
+
+const SpeakerProfileLink = styled(InvertedButtonStyleLink)`
+  ${({ theme: { space } }) => `
+  min-width: initial;
+  max-width: 130px;
+  height: initial;
+  margin: 0 0 ${space.s} 0;
+  align-self: flex-end;
+  `}
+  ${mediaQueryMin.m`
+  max-width: initial;
+  `}
+  ${mediaQueryMin.l`
+  max-width: 130px;
+  `}
+  ${mediaQueryMin.xl`
+  max-width: initial;
+  `}
+`;
+
+const TrashButton = styled(StyledButton)`
+  ${({theme: {color }}) => `
+  background-image: linear-gradient(to right, ${color.button_bkgr_4} 50%, ${color.button_bkgr_1} 50%);
   `}
 `;
 
@@ -360,31 +396,26 @@ class SessionPage extends Component {
                   <SpeakerName>
                     {speaker.name}
                   </SpeakerName>
-                  <div className="flex-grow-1 d-flex justify-content-end align-items-end">
-                    <Link
-                      key={speaker._id}
-                      to={`/speaker/${getHref(speaker)}`}
-                      className="unstyled-link"
-                    >
-                      <Button className="styled-button mobile-height-auto">Read more</Button>
-                    </Link>
-                  </div>
+                  <SpeakerProfileLink
+                    key={speaker._id}
+                    href={`/speaker/${getHref(speaker)}`}
+                  >
+                    Speaker's Profile
+                  </SpeakerProfileLink>
                 </SpeakerNameAndLink>
               </SpeakerContainer>
             ))}
           </VoteAndSpeakersContainer>
-          {/*{canEdit && (*/}
-          {/*  <Button*/}
-          {/*    color="primary"*/}
-          {/*    size="sm"*/}
-          {/*    className="ml-3"*/}
-          {/*    onClick={this.askDelete}*/}
-          {/*  >*/}
-          {/*    <FontAwesomeIcon icon="trash" />*/}
-          {/*  </Button>*/}
-          {/*)}*/}
+
+          {canEdit && (
+           <TrashButton
+             onClick={this.askDelete}
+           >
+             <FontAwesomeIcon icon="trash" />
+           </TrashButton>
+          )}
+
         </ContentContainer>
-        {/* NOTE: couldn't get the Modal to be shown */}
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
           <ModalBody>
             <p>are you sure you want to delete this proposal?</p>
