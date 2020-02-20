@@ -18,7 +18,8 @@ import {
   Heading2,
   ButtonStyledLink,
   StyledButton,
-
+  Heading5,
+  InvertedColorLink,
 } from './GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
 
@@ -202,7 +203,42 @@ const Oneliner = styled.p`
 `;
 
 const MainContainer = styled(ResponsiveContainer)`
-margin: 0 auto;
+  margin: 0 auto;
+`;
+
+const ShortBio = styled.p`
+  ${({ theme: { space, font } }) => `
+    margin: -${space.xl} 0 ${space.xxl} 0;
+    font-size: ${font.size_md};
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+      margin-top: 0;
+    `}
+  `}
+`;
+
+// mb-3 text-break
+
+const TrackAndVidLinkContainer = styled.div`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.xl};
+    word-break: break-word;
+    overflow-wrap: break-word;
+  `}
+`;
+
+const TrackAndVidLinkHeading = styled(Heading5)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_medium};
+  `}
+`;
+
+const TrackRecord = styled(ReactMarkdown)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_reg};
+  `}
 `;
 
 // React components
@@ -291,26 +327,30 @@ export class SpeakerPage extends React.Component {
         </SpeakerHero>
 
         <MainContainer>
-            <SpeakerSocialLinks {...speaker} />
-          <p className="font-size-md mb-10 mt-16">{bio}</p>
+          <SpeakerSocialLinks {...speaker} />
+          
+          <ShortBio>{bio}</ShortBio>
+
           {trackRecord && (
-            <div className="mb-3 text-break">
-              <h4>Track record</h4>
-              <div className="font-size-sm">
-                <ReactMarkdown source={trackRecord} />
-              </div>
-            </div>
+            <TrackAndVidLinkContainer>
+              <TrackAndVidLinkHeading>Track record</TrackAndVidLinkHeading>
+              <TrackRecord source={trackRecord} />
+            </TrackAndVidLinkContainer>
           )}
+          
           {video_url && (
-            <div className="mb-3 text-break">
-              <h4>Video URL</h4>
-              <div>
-                <a href={video_url} target="_blank">
-                  {video_url}
-                </a>
-              </div>
-            </div>
+            <TrackAndVidLinkContainer>
+              <TrackAndVidLinkHeading>Video URL</TrackAndVidLinkHeading>
+              <InvertedColorLink
+                href={video_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {video_url}
+              </InvertedColorLink>
+            </TrackAndVidLinkContainer>
           )}
+
           {sessions && sessions.length ? (
             <React.Fragment>
               <div className="d-flex align-items-center mb-8">
