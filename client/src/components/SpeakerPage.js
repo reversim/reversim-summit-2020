@@ -68,6 +68,10 @@ const SpeakerImgContainer = styled.div`
   top: calc(7 * ${space.m});
   margin-right: ${space.xl};
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) =>`
@@ -92,6 +96,26 @@ const SpeakerImg = styled.div`
     background-size: cover;
     border: 4px solid ${color.border_1};
   `}
+`;
+
+const ChangePhotoButton = styled(StyledButton)`
+  min-width: initial;
+  width: fit-content;
+  ${mediaQueryMin.l`
+    ${({ theme: { color } }) => `
+      border: solid 2px ${color.box_shadow_1};
+      box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
+    `}
+  `}  
+`;
+
+const ChangePhotoInput = styled.input`
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 const SpeakerIntroContainer = styled.div`
@@ -197,6 +221,15 @@ export class SpeakerPage extends React.Component {
     this.setState({isUploadingPhoto: false});
   };
 
+  onChangePhoto = e => {
+    const f = e.target.files[0];
+    if (!f) return;
+    const reader = new FileReader();
+    reader.onload = e2 => this.onPhotoUploaded(e2.target.result);
+    reader.readAsDataURL(f);
+    this.onUploadingPhoto();
+  };
+
   render() {
     const {speaker, proposals: allProposals, user, isUser, eventConfig, acceptedProposals} = this.props;
     const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
@@ -218,7 +251,7 @@ export class SpeakerPage extends React.Component {
             <SpeakerImgContainer>
               <SpeakerImg speaker={speaker}/>
               {canEdit && (
-                <StyledButton
+                <ChangePhotoButton
                   disabled={isUploadingPhoto}
                 >
                   {
@@ -228,29 +261,14 @@ export class SpeakerPage extends React.Component {
                         ? 'Uploading'
                         : 'Upload Photo'
                   }
-                  <input
+                  <ChangePhotoInput
                     type="file"
                     disabled={isUploadingPhoto}
-                    style={{
-                      opacity: 0,
-                      position: 'absolute',
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                    }}
-                    onChange={e => {
-                      const f = e.target.files[0];
-                      if (!f) return;
-                      const reader = new FileReader();
-                      reader.onload = e2 => this.onPhotoUploaded(e2.target.result);
-                      reader.readAsDataURL(f);
-                      this.onUploadingPhoto();
-                    }}
+                    onChange={e => this.onChangePhoto(e)}
                   />
-                </StyledButton>
-              )}
-              
+                </ChangePhotoButton>
+                )
+              }
             </SpeakerImgContainer>
 
             <SpeakerIntroContainer>
