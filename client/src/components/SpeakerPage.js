@@ -17,6 +17,7 @@ import {
   ResponsiveContainer,
   Heading2,
   ButtonStyledLink,
+  StyledButton,
 
 } from './GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
@@ -61,18 +62,12 @@ const HeroContainer = styled(ResponsiveContainer)`
   `}
 `;
 
-
-const SpeakerImg = styled.div`
-  ${({ theme: { space, color  }, speaker: {picture} }) => `
+const SpeakerImgContainer = styled.div`
+  ${({ theme: { space } }) => `
   position: relative;
-  min-width: 230px;
-  min-height: 230px;
   top: calc(7 * ${space.m});
   margin-right: ${space.xl};
 
-  background-image: url(${image(picture, 222, 222)});
-  background-size: cover;
-  border: 4px solid ${color.border_1};
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) =>`
@@ -86,6 +81,19 @@ const SpeakerImg = styled.div`
   `}
 `;
 
+const SpeakerImg = styled.div`
+  ${({ theme: { space, color }, speaker: {picture} }) => `
+    min-width: 230px;
+    min-height: 230px; 
+
+    margin-bottom: ${space.l};
+
+    background-image: url(${image(picture, 222, 222)});
+    background-size: cover;
+    border: 4px solid ${color.border_1};
+  `}
+`;
+
 const SpeakerIntroContainer = styled.div`
   ${({ theme: { space } }) => `
     display: flex;
@@ -95,13 +103,13 @@ const SpeakerIntroContainer = styled.div`
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      top: 0;
-      left: calc(25 * ${space.m});
+      top: -${space.xl};
+      left: calc(32 * ${space.m});
     `}
   `}
   ${mediaQueryMin.l`
     ${({ theme: { space } }) => `
-      top: calc(-14 * ${space.m});
+      top: calc(-23 * ${space.m});
     `}
   `}
 `;
@@ -207,8 +215,44 @@ export class SpeakerPage extends React.Component {
       <Page title={name} user={user} {...this.props}>
         <SpeakerHero>
           <HeroContainer>
-            <SpeakerImg speaker={speaker}/>
-            
+            <SpeakerImgContainer>
+              <SpeakerImg speaker={speaker}/>
+              {canEdit && (
+                <StyledButton
+                  disabled={isUploadingPhoto}
+                >
+                  {
+                    !!speaker.picture 
+                      ? 'Change Photo'
+                      : isUploadingPhoto 
+                        ? 'Uploading'
+                        : 'Upload Photo'
+                  }
+                  <input
+                    type="file"
+                    disabled={isUploadingPhoto}
+                    style={{
+                      opacity: 0,
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                    }}
+                    onChange={e => {
+                      const f = e.target.files[0];
+                      if (!f) return;
+                      const reader = new FileReader();
+                      reader.onload = e2 => this.onPhotoUploaded(e2.target.result);
+                      reader.readAsDataURL(f);
+                      this.onUploadingPhoto();
+                    }}
+                  />
+                </StyledButton>
+              )}
+              
+            </SpeakerImgContainer>
+
             <SpeakerIntroContainer>
               <NameAndEditContainer>
                 <SpeakerName>{speaker.name}</SpeakerName>
@@ -248,42 +292,6 @@ export class SpeakerPage extends React.Component {
                 </a>
               </div>
             </div>
-          )}
-          {canEdit && (
-            <Button
-              disabled={isUploadingPhoto}
-
-              className="d-block mb-4 mx-auto mx-md-0 mt-3 styled-button btn btn-secondary"
-              style={{position: 'relative', overflow: 'hidden'}}
-            >
-              {
-                !!speaker.picture 
-                  ? 'Change Photo'
-                  : isUploadingPhoto 
-                    ? 'Uploading'
-                    : 'Upload Photo'
-              }
-              <input
-                type="file"
-                disabled={isUploadingPhoto}
-                style={{
-                  opacity: 0,
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                }}
-                onChange={e => {
-                  const f = e.target.files[0];
-                  if (!f) return;
-                  const reader = new FileReader();
-                  reader.onload = e2 => this.onPhotoUploaded(e2.target.result);
-                  reader.readAsDataURL(f);
-                  this.onUploadingPhoto();
-                }}
-              />
-            </Button>
           )}
           {sessions && sessions.length ? (
             <React.Fragment>

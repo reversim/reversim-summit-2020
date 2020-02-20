@@ -21,12 +21,13 @@ const SocialLinksContainer = styled.div`
     ${mediaQueryMin.m`
       ${({ theme: { space } }) => `
         position: relative;
-        left: calc(24.5 * ${space.m});
+        left: calc(31.5 * ${space.m});
+        bottom: calc(16 * ${space.m});
       `}
     `}
     ${mediaQueryMin.l`
       ${({ theme: { space } }) => `
-        left: calc(20 * ${space.m});
+        left: calc(27.5 * ${space.m});
         bottom:  calc(13 * ${space.m});  
         margin-bottom: 0;
       `}
@@ -38,6 +39,16 @@ const SocialLinkIcon = styled(FontAwesomeIcon)`
     font-size: ${font.size_bg};
     margin-right: ${space.xl};
     color: ${color.font_awsome_nav};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { color } }) => `
+      color: ${color.text_1};
+    `}
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { color } }) => `
+      color: ${color.font_awsome_nav};
+    `}
   `}
 `;
 
