@@ -15,27 +15,31 @@ import {image} from '../images';
 import {
   PageHero,
   ResponsiveContainer,
+  Heading2,
+  ButtonStyledLink,
+
 } from './GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
 
-// import Tag from './Tag';
+// import Tag from './Tag'; //IMPORTAT: See if should delete this.
 
 // styled-components components
 
 const SpeakerHero = styled(PageHero)`
   ${({ theme: { space } }) => `
+    padding: calc(12 * ${space.m}) 0 calc(10 * ${space.m}) 0;
     margin-bottom: ${space.xl}; 
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      padding: calc(2 * ${space.xxl}) 0 0 0 ; 
+      padding: 0 ; 
       margin-bottom: ${space.xl}; 
     `}
   `}  
   ${mediaQueryMin.l`
     ${({ theme: { space } }) => `
       padding-top: calc(2 * ${space.xxl}); 
-      margin-bottom: ${space.xl}; 
+      margin: 0 auto calc(15 * ${space.m}) auto;
     `}
   `}  
 `;
@@ -58,19 +62,112 @@ const HeroContainer = styled(ResponsiveContainer)`
 `;
 
 
-// const SpeakerImg = styled.div`
-//   ${({ theme: { space, color  }, speaker: {picture} }) => `
-//   position: relative;
-//   width: 230px;
-//   height: 230px;
-//   top: calc(7 * ${space.m});
-//   margin-right: ${space.xl};
+const SpeakerImg = styled.div`
+  ${({ theme: { space, color  }, speaker: {picture} }) => `
+  position: relative;
+  min-width: 230px;
+  min-height: 230px;
+  top: calc(7 * ${space.m});
+  margin-right: ${space.xl};
 
-//   background-image: url(${image(picture, 222, 222)});
-//   background-size: cover;
-//   border: 4px solid ${color.border_1};
-//   `}
-// `;
+  background-image: url(${image(picture, 222, 222)});
+  background-size: cover;
+  border: 4px solid ${color.border_1};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) =>`
+      top: calc(17 * ${space.m});
+    `}
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) =>`
+      top: calc(7 * ${space.m});
+    `}
+  `}
+`;
+
+const SpeakerIntroContainer = styled.div`
+  ${({ theme: { space } }) => `
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: calc(9 * ${space.m});
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      top: 0;
+      left: calc(25 * ${space.m});
+    `}
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+      top: calc(-14 * ${space.m});
+    `}
+  `}
+`;
+
+const NameAndEditContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${mediaQueryMin.l`
+    flex-direction: row;
+  `}
+`;
+
+const SpeakerName = styled(Heading2)`
+  ${({ theme: { color, space } }) => `
+    color: ${color.text_1};
+    line-height: 1;
+    margin: 0 0 ${space.l} 0;
+  `}
+`;
+
+const EditAndTeamContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${mediaQueryMin.m`
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { space } }) => `
+      margin-left: ${space.xl};
+    `}
+  `}
+`;
+
+const TopEditButton = styled(ButtonStyledLink)`
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      min-width: initial;
+      width: min-content;
+      margin-left: ${space.xl};
+    `}
+  `}
+`;
+
+const TeamMemberTag = styled.p`
+  ${({ theme: { space, color, font } }) => `
+    padding: ${space.s} ${space.m};
+    margin-bottom: ${space.l};
+    
+    color: ${color.text_1};
+    background: ${color.important};
+    font-size: ${font.size_reg};
+    font-weight: ${font.weight_medium}
+  `}
+`;
+
+const Oneliner = styled.p`
+  ${({ theme: { color, font, space } }) => `
+    color: ${color.text_1};
+    font-size: ${font.size_bg};
+    margin-bottom: ${space.xl};
+  `}
+`;
 
 // React components
 
@@ -106,29 +203,27 @@ export class SpeakerPage extends React.Component {
       <Page title={name} user={user} {...this.props}>
         <SpeakerHero>
           <HeroContainer>
-            <div
-              style={{backgroundImage: `url(${image(speaker.picture, 222, 222)})`}}
-              className="speaker-page__speaker-picture b-strong mr-5 p-relative"
-            />
+            <SpeakerImg speaker={speaker}/>
             
-            <div className="flex-grow-1">
-              <h3 className="mb-3 line-height-1 font-size-xxl text-white">
-                {speaker.name}
-                {canEdit && (
-                  <Link to={`/speaker/${speaker._id}/edit`} className="d-block">
-                    <Button className="styled-button on-purple btn btn-secondary">Edit</Button>
-                  </Link>
-                )}
-                {isReversimTeamMember && (
-                  <div className="mb-3 text-center text-md-left">
-                    <small className="py-1 px-2 bg-danger text-white">Team member</small>
-                  </div>
-                )}
-              </h3>
-              <p className="text-white font-size-lm mb-4 line-height-15">{speaker.oneLiner}</p>
-            </div>
+            <SpeakerIntroContainer>
+              <NameAndEditContainer>
+                <SpeakerName>{speaker.name}</SpeakerName>
+                <EditAndTeamContainer>
+                  {isReversimTeamMember && (
+                    <TeamMemberTag>Team member</TeamMemberTag>
+                  )}
+                  {canEdit && (
+                    <TopEditButton href={`/speaker/${speaker._id}/edit`}>Edit</TopEditButton>
+                  )}
+                </EditAndTeamContainer>
+              </NameAndEditContainer>
+
+              <Oneliner>{speaker.oneLiner}</Oneliner>
+            
+            </SpeakerIntroContainer>
           </HeroContainer>
         </SpeakerHero>
+
         <div className="white-bg">
         <Container>
             <SpeakerSocialLinks {...speaker} />

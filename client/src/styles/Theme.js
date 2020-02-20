@@ -11,8 +11,8 @@ const theme = {
     font_awsome_trash: 'rgb(189, 58, 2)',
     font_awsome_watch: 'rgb(255, 97, 0)',
     heading_decoration: 'rgb(255, 97, 0)',
-    font_awsome_nav: 'rgb(1, 39, 255)',
-    
+    font_awsome_nav: 'rgb(81, 39, 255)',
+
     important: 'rgb(255, 46, 95)',
     note_this: 'rgb(255, 97, 0)',
     count_down: 'rgb(255, 255, 255)',

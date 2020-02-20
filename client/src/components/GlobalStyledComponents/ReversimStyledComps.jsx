@@ -637,3 +637,31 @@ export const LoadingPage = () => (
   </FullScreenBoundries>
   );
 
+// Premium Sponsor and Speaker Page
+
+export const TopContainer = styled.div`
+${({ theme: { color, space } }) => `
+  width: 100%;
+
+  margin: 0 auto calc(30 * ${space.m}) auto;
+  padding: ${space.xxl} 0 ${space.xl} calc(3.5 * ${space.m});
+  
+  background-color: ${color.background_2};
+`}
+
+  ${mediaQueryMin.m`
+    padding-bottom: 0;
+  `}
+
+  ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+    margin: 0 auto calc(15 * ${space.m}) auto;
+    padding-bottom: calc(3 * ${space.m});
+  `}`}
+  
+  ${mediaQueryMin.xl`
+    padding-bottom: 0;
+    display: flex;
+    justify-content: center;
+  `}
+`;
