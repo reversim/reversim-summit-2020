@@ -251,14 +251,18 @@ export class SpeakerPage extends React.Component {
           )}
           {canEdit && (
             <Button
-              className="d-block mb-4 mx-auto mx-md-0 mt-3 styled-button btn btn-secondary"
               disabled={isUploadingPhoto}
-              style={{position: 'relative', overflow: 'hidden'}}>
-              {!!speaker.picture 
-              ? 'Change Photo'
-              : isUploadingPhoto 
-                ? 'Uploading'
-                : 'Upload Photo'}
+
+              className="d-block mb-4 mx-auto mx-md-0 mt-3 styled-button btn btn-secondary"
+              style={{position: 'relative', overflow: 'hidden'}}
+            >
+              {
+                !!speaker.picture 
+                  ? 'Change Photo'
+                  : isUploadingPhoto 
+                    ? 'Uploading'
+                    : 'Upload Photo'
+              }
               <input
                 type="file"
                 disabled={isUploadingPhoto}
