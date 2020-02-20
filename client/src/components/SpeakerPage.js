@@ -9,7 +9,7 @@ import SpeakerSocialLinks from './SpeakerSocialLinks';
 import SessionInfo from './SessionInfo';
 import plus from '../images/SVG/plus.svg';
 import {Link} from 'react-router-dom';
-import {Container, Button} from 'reactstrap';
+import {Button} from 'reactstrap';
 import {getHref, key} from '../utils';
 import {image} from '../images';
 import {
@@ -169,6 +169,10 @@ const Oneliner = styled.p`
   `}
 `;
 
+const MainContainer = styled(ResponsiveContainer)`
+margin: 0 auto;
+`;
+
 // React components
 
 export class SpeakerPage extends React.Component {
@@ -224,8 +228,7 @@ export class SpeakerPage extends React.Component {
           </HeroContainer>
         </SpeakerHero>
 
-        <div className="white-bg">
-        <Container>
+        <MainContainer>
             <SpeakerSocialLinks {...speaker} />
           <p className="font-size-md mb-10 mt-16">{bio}</p>
           {trackRecord && (
@@ -309,8 +312,7 @@ export class SpeakerPage extends React.Component {
           ) : (
             undefined
           )}
-        </Container>
-          </div>
+          </MainContainer>
       </Page>
     );
   }
