@@ -41,7 +41,7 @@ const InfoText = styled(Heading5)`
   `}
 `;
 
-const TagsContainer = styled.div`
+  const TagsContainer = styled.div`
   ${({ theme: { color, font } }) => `
     display: flex;
     flex-wrap: wrap;

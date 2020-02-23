@@ -222,7 +222,7 @@ export const HeadingHoop = styled(HoopJSX)`
     margin-right: -${space.l};
     width: calc(2.08 * ${font.size_h2});
     height: calc(2.08 * ${font.size_h2});
-    fill: ${color.heading_decoration}
+    fill: ${color.heading_decoration};
   `}
 `;
 
@@ -238,6 +238,26 @@ export const HeadingSquares = styled(HeadingDiamond)`
   width: 122px;
   height: 122px;
   margin-right: 0px;
+`;
+
+const PlusJSX = ({className}) => (
+  <svg className={className}>
+    <polygon class="cls-1" points="100 65.83 100 34.17 65.83 34.17 65.83 0 34.17 0 34.17 34.17 0 34.17 0 65.83 34.17 65.83 34.17 100 65.83 100 65.83 65.83 100 65.83"/>
+  </svg>
+);
+
+export const HeadingPlus = styled(PlusJSX)`
+  ${({ theme: { space, font, color } }) => `
+    margin-right: calc(-15 * ${space.m});
+    height: calc(2.08 * ${font.size_h2});
+    fill: ${color.heading_decoration};
+  `}
+  ${mediaQueryMin.s`
+    ${({ theme: { space, font, color } }) => `
+      margin-right: -${space.l};
+      width: calc(2.08 * ${font.size_h2});
+    `}
+  `}
 `;
 
 export const Heading2 = styled.h2`
@@ -382,7 +402,7 @@ export const ButtonStyledLink = styled.a`
       min-width: 280px;
       height: 40px;
       margin: 0 ${space.m} ${space.xl} ${space.m};
-      padding: ${space.m} ${space.l};
+      padding: ${space.m} ${space.l} calc(3 * ${space.m}) ${space.l};
       letter-spacing: 1px;
       color: ${color.text_1};
 

@@ -7,23 +7,23 @@ import Page from './Page';
 import SpeakerPageRoute from './SpeakerPageRoute';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
 import SessionInfo from './SessionInfo';
-import plus from '../images/SVG/plus.svg';
-import {Link} from 'react-router-dom';
-import {Button} from 'reactstrap';
 import {getHref, key} from '../utils';
 import {image} from '../images';
 import {
   PageHero,
   ResponsiveContainer,
   Heading2,
-  ButtonStyledLink,
-  StyledButton,
+  Heading3,
+  Heading4,
   Heading5,
+  BreakLineMain,
+  HeadingPlus,
+  ButtonStyledLink,
+  InvertedButtonStyledLink,
+  StyledButton,
   InvertedColorLink,
 } from './GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
-
-// import Tag from './Tag'; //IMPORTAT: See if should delete this.
 
 // styled-components components
 
@@ -218,8 +218,6 @@ const ShortBio = styled.p`
   `}
 `;
 
-// mb-3 text-break
-
 const TrackAndVidLinkContainer = styled.div`
   ${({ theme: { space } }) => `
     margin-bottom: ${space.xl};
@@ -239,6 +237,76 @@ const TrackRecord = styled(ReactMarkdown)`
   ${({ theme: { font } }) => `
     font-size: ${font.size_reg};
   `}
+`;
+
+const SessionsHeadingContainer = styled.div`
+  ${({ theme: { space } }) => `
+    display: flex;
+    align-items: center
+    margin-bottom: ${space.xxl};
+  `}
+`;
+
+const SessionsHeading = styled(Heading3)`
+  ${({ theme: { color } }) => `
+    width: min-content;
+    color: ${color.text_3};
+  `}
+`;
+
+const SessionsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+`;
+
+const SessionInfoContainer = styled.div`
+  ${({ theme: { space, color }, index }) => `
+    min-height: 310px;  
+    margin-bottom: ${space.xxl};
+    margin-right: ${index % 2 ? `0` : `calc(4 * ${space.m})`};
+    padding: ${space.l};
+
+    border: 4px solid ${color.border_1};
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0 0 100%;
+  `}
+  ${mediaQueryMin.l`
+    min-height: 390px; 
+    flex: 0 0 calc(50% - 20px);
+  `}
+  ${mediaQueryMin.xl`
+    min-height: 310px;
+  `}
+`;
+
+const SessionHeading = styled(Heading4)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.wieght_bold};
+  `}
+`;
+
+const StatusAndMoreContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ${mediaQueryMin.xl`
+    flex-direction: row;
+  `}
+`;
+
+const SessionStatus = styled(SessionHeading)`
+  display: block;
+`;
+
+const ToSessionLink = styled(InvertedButtonStyledLink)`
+  min-width: max-content;
+  align-self: flex-end;
 `;
 
 // React components
@@ -350,41 +418,44 @@ export class SpeakerPage extends React.Component {
               </InvertedColorLink>
             </TrackAndVidLinkContainer>
           )}
-
-          {sessions && sessions.length ? (
+          
+          {sessions && sessions.length && (
             <React.Fragment>
-              <div className="d-flex align-items-center mb-8">
-                <img src={plus} alt="" height="100" className="mr-2" />
-                <h3 className="text-purple2 font-size-xl mr-4">
+              <SessionsHeadingContainer>
+                <HeadingPlus />
+                <SessionsHeading>
                   {speaker.name.split(' ')[0]}'s sessions
-                </h3>
-                <div className="flex-grow-1 border-bottom border-purple2" />
-              </div>
-              <div className="d-flex flex-wrap align-items-start">
-                {sessions.map((session, i) => (
-                  <div
-                    className={cn('b-strong p-4 speaker-page__session mb-8', {'mr-8': !(i % 2)})}
-                    key={key()}>
-                    <h4 className="font-weight-bold font-size-lg">{session.title}</h4>
-                    <div className="mb-9">
-                      <SessionInfo session={session} />
-                    </div>
-                    {/* <div className="d-flex">{session.tags.map(Tag)}</div> */}
-                    <div className='d-flex justify-content-between mobile-flex-column'>
-                      {canSeeStatus && <div className='text-purple2 font-weight-bold font-size-lm'>Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}</div>}
-                      <Link
+                </SessionsHeading>
+                <BreakLineMain/>
+              </SessionsHeadingContainer>
+              <SessionsContainer>
+                {sessions.map((session, index) => (
+                  <SessionInfoContainer
+                    key={key()}
+                    index={index}
+                  >
+                    <SessionHeading className="font-weight-bold font-size-lg">{session.title}</SessionHeading>
+                    
+                    <SessionInfo session={session} />
+                    
+                    <StatusAndMoreContainer>
+                      {
+                        canSeeStatus && 
+                        <SessionStatus className='text-purple2 font-weight-bold font-size-lm'>
+                          Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}
+                        </SessionStatus>
+                      }
+                      <ToSessionLink
                         key={session._id}
-                        to={`/session/${getHref(session)}`}
-                        className="unstyled-link float-right">
-                        <Button className="styled-button">Read more</Button>
-                      </Link>
-                    </div>
-                  </div>
+                        href={`/session/${getHref(session)}`}
+                      >
+                        To Session Page
+                      </ToSessionLink>
+                    </StatusAndMoreContainer>
+                  </SessionInfoContainer>
                 ))}
-              </div>
+              </SessionsContainer>
             </React.Fragment>
-          ) : (
-            undefined
           )}
           </MainContainer>
       </Page>
