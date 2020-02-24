@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CommunitySponsor from '../CommunitySponsor';
+import CommunitySponsor from './CommunitySponsor';
 import SponsorForm from './SponsorForm';
 
 import {
@@ -90,7 +90,7 @@ class SponsorWithEdit extends React.Component {
           onEdit={canEdit && this.onEdit}
           onDelete={canEdit && this.onDelete}
           sponsor={sponsor}
-        />
+        /> 
       );
     }
   }  

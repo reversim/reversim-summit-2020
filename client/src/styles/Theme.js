@@ -39,6 +39,8 @@ const theme = {
     input_bkgr_1: 'rgb(255, 255, 255)',
    
     // Borders and box shadows
+    border_1: 'rgb(81, 39, 255)',
+
     box_shadow_1: 'rgb(81, 39, 255)',
     box_shadow_1_dimmed: 'rgba(81, 39, 255, 0.5)',
     box_shadow_2: 'rgb(255, 255, 255)',
