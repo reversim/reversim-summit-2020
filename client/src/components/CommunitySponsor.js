@@ -14,7 +14,7 @@ library.add(faPencilAlt, faTrash);
 
 const CommunitySponsor = ({ canEdit, onEdit, onDelete, sponsor }) => {
   return (
-    <div className={cn("d-flex mb-12 b-strong", s.communitySponsors)}>
+    <div className={cn("d-flex mb-12 b-strong flex-wrap mx-3", s.communitySponsors)}>
       <div className={cn("session__speaker d-flex flex-column", s.communitySponsorsImageSection)}>
         <a href={hyperlink(sponsor.url)} target="_blank"
           style={{
