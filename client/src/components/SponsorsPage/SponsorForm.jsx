@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import {
   Input, 
   TextArea, 
-  FormButton, 
+  StyledButton, 
   FileInput, 
   FontAwsomeTrash,
 } from '../GlobalStyledComponents/ReversimStyledComps';
@@ -40,7 +40,7 @@ const UploadImg = styled.img`
   width: 200px;
 `;
 
-const SubmitButton = styled(FormButton)`
+const SubmitButton = styled(StyledButton)`
   width: 150px;
 `;
 
@@ -172,7 +172,7 @@ class SponsorForm extends React.Component {
             value={this.state.name || ""}
             onChange={e => this.setState({ name: e.target.value })}
           />
-          <FormButton>
+          <StyledButton>
             <FileInput
               type="file"
               onChange={e => {
@@ -186,7 +186,7 @@ class SponsorForm extends React.Component {
               }}
             />
             Choose logo
-          </FormButton>
+          </StyledButton>
           <Input
             placeholder="Link to website"
             value={this.state.url || ""}
@@ -224,11 +224,11 @@ class SponsorForm extends React.Component {
                   />
                 </div>
               ))}
-              <FormButton
+              <StyledButton
               onClick={() => this.openCloudinaryUploader()}
               >
                 Add photos
-              </FormButton>
+              </StyledButton>
               <Input
                 placeholder="location link from google maps"
                 value={this.state.locationLink}
@@ -297,7 +297,7 @@ class SponsorForm extends React.Component {
                 value={this.state.reversimAndUs}
                 onChange={e => this.setState({ reversimAndUs: e.target.value })}
               />
-              <FormButton
+              <StyledButton
                 onClick={() => {
                   let openPositions = this.state.openPositions || [];
                   openPositions.push({
@@ -312,7 +312,7 @@ class SponsorForm extends React.Component {
                 }}
               >
                 add an open Position
-              </FormButton>
+              </StyledButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
                   <OpenPositionContainer key={i}>
@@ -353,7 +353,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <FormButton
+                    <StyledButton
                       onClick={() => {
                         let openPositions = this.state.openPositions;
                         openPositions.splice(i, 1);
@@ -361,7 +361,7 @@ class SponsorForm extends React.Component {
                       }}
                     >
                       cancel
-                    </FormButton>
+                    </StyledButton>
                   </OpenPositionContainer>
                 ))}
             </div>
@@ -375,7 +375,7 @@ class SponsorForm extends React.Component {
           )}
           {onCancel && (
             <SubmitOrCancelContainer>
-              <FormButton
+              <StyledButton
                 outline
                 onClick={e => {
                   e.preventDefault();
@@ -383,7 +383,7 @@ class SponsorForm extends React.Component {
                 }}
               >
                 Cancel
-              </FormButton>
+              </StyledButton>
               <SubmitButton disabled={isLoading}>
                 Submit
               </SubmitButton>

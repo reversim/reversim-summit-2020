@@ -1,7 +1,6 @@
 import React from 'react';
 import ReadMore from '../ReadMore';
 import styled from 'styled-components';
-import ReactMarkdown from 'react-markdown';
 
 import { hyperlink } from '../../utils';
 
@@ -10,9 +9,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 library.add(faPencilAlt, faTrash);
-import {Heading5} from '../GlobalStyledComponents/ReversimStyledComps';
 
-import { Button } from "reactstrap";
+import {
+  Heading5,
+  StyledButton,
+} from '../GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 // Styled components components
@@ -82,6 +83,7 @@ const JobOps = styled.a`
     font-size: ${font.size_h5};
     font-weight: ${font.weight_bold};
     text-decoration: none;
+    white-space: nowrap;
   `}
 `;
 
@@ -96,6 +98,25 @@ const SponsorContentContainer = styled.div`
   `}
 `;
 
+const ButtonsContainer = styled.div`
+  ${({ theme: { space } }) => `
+    margin-top: ${space.xl}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  `}  
+`;
+
+const EditButton = styled(StyledButton)`
+  min-width: initial;
+`;
+
+const TrashButton = styled(StyledButton)`
+  ${({ theme: { color } }) => `
+    min-width: initial;
+    background-image: linear-gradient(to right, ${color.button_bkgr_4} 50%, ${color.button_bkgr_1} 50%);
+  `}
+`;
 // React components
 
 const CommunitySponsor = ({ canEdit, onEdit, onDelete, sponsor }) => (
@@ -104,41 +125,35 @@ const CommunitySponsor = ({ canEdit, onEdit, onDelete, sponsor }) => (
       <SponsorLogo href={hyperlink(sponsor.url)} target="_blank" sponsor={sponsor} />
       <NameAndJobsContainer>
         <SponsorName>{sponsor.name}</SponsorName>
-        {sponsor.jobUrl && <JobOps href={sponsor.jobUrl} target="_blank"> JOB OPPORTUNITIES>></JobOps>}
+        {sponsor.jobUrl && <JobOps href={sponsor.jobUrl} target="_blank">JOB OPPORTUNITIES >></JobOps>}
       </NameAndJobsContainer>
     </LogoContainer>
 
     <SponsorContentContainer>
-      <div className="content">
-        <ReadMore
-          lines={10}
-          truncateText="…"
-          more="Read more"
-          less="Show less"
-          children={sponsor.about}
-          onToggle={() => {}}
-        />
-        {/*<ReactMarkdown*/}
-        {/*  className="mb-4 session__abstract"*/}
-        {/*  source={sponsor.about}*/}
-        {/*/>*/}
-      </div>
-      {canEdit && <div>
-        <Button
-          size="sm"
-          className="ml-2 styled-button btn btn-secondary"
-          onClick={onEdit}
-        >
-          <FontAwesomeIcon icon={faPencilAlt} />
-        </Button>
-        <Button
-          size="sm"
-          className="ml-2 styled-button btn btn-secondary"
-          onClick={onDelete}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </Button>
-      </div>}
+      <ReadMore
+        lines={10}
+        truncateText="…"
+        more="Read more"
+        less="Show less"
+        children={sponsor.about}
+        onToggle={() => {}}
+      />
+      {
+        !canEdit && 
+        <ButtonsContainer>
+          <EditButton
+            onClick={onEdit}
+          >
+            <FontAwesomeIcon icon={faPencilAlt} />
+          </EditButton>
+
+          <TrashButton
+            onClick={onDelete}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </TrashButton>
+        </ButtonsContainer>
+      }
     </SponsorContentContainer>
   </SponsorContainer>
 );
