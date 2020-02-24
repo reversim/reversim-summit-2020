@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
@@ -7,6 +6,7 @@ import Page from './Page';
 import SpeakerPageRoute from './SpeakerPageRoute';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
 import SessionInfo from './SessionInfo';
+
 import {getHref, key} from '../utils';
 import {image} from '../images';
 import {
@@ -252,6 +252,9 @@ const SessionsHeading = styled(Heading3)`
     width: min-content;
     color: ${color.text_3};
   `}
+  ${mediaQueryMin.m`
+    white-space: nowrap;
+  `}
 `;
 
 const SessionsContainer = styled.div`
@@ -284,9 +287,12 @@ const SessionInfoContainer = styled.div`
 `;
 
 const SessionHeading = styled(Heading4)`
-  ${({ theme: { color, font } }) => `
+  ${({ theme: { space, color, font } }) => `
+    margin-bottom: ${space.m};
+    min-height: calc(3 * ${font.size_h4});
     color: ${color.text_3};
-    font-weight: ${font.wieght_bold};
+    font-weight: ${font.weight_bold};
+    line-height: 1.5;
   `}
 `;
 
@@ -434,9 +440,9 @@ export class SpeakerPage extends React.Component {
                     key={key()}
                     index={index}
                   >
-                    <SessionHeading className="font-weight-bold font-size-lg">{session.title}</SessionHeading>
+                    <SessionHeading>{session.title}</SessionHeading>
                     
-                    <SessionInfo session={session} />
+                    <SessionInfo session={session} location={location} />
                     
                     <StatusAndMoreContainer>
                       {

@@ -248,7 +248,7 @@ const PlusJSX = ({className}) => (
 
 export const HeadingPlus = styled(PlusJSX)`
   ${({ theme: { space, font, color } }) => `
-    margin-right: calc(-15 * ${space.m});
+    margin-right: calc(-18 * ${space.m});
     height: calc(2.08 * ${font.size_h2});
     fill: ${color.heading_decoration};
   `}
