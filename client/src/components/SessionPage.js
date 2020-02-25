@@ -21,7 +21,7 @@ import {
   Heading4,
   Heading5,
   Paragraph2,
-  InvertedButtonStyleLink,
+  InvertedButtonStyledLink,
   InvertedColorLink,
   StyledButton,
 
@@ -103,7 +103,7 @@ const SessionStatus = styled(Heading4)`
   `}
 `;
 
-const EditButton = styled(InvertedButtonStyleLink)`
+const EditButton = styled(InvertedButtonStyledLink)`
   min-width: initial;
 `;
 
@@ -203,7 +203,7 @@ const SpeakerName = styled.p`
   `}
 `;
 
-const SpeakerProfileLink = styled(InvertedButtonStyleLink)`
+const SpeakerProfileLink = styled(InvertedButtonStyledLink)`
   ${({ theme: { space } }) => `
   min-width: initial;
   max-width: 130px;
@@ -412,7 +412,7 @@ class SessionPage extends Component {
             ))}
 
           <VoteAndSpeakersContainer>
-            {!user && voting && <InvertedButtonStyleLink href={getLoginUrl()}>Login to vote!</InvertedButtonStyleLink>}
+            {!user && voting && <InvertedButtonStyledLink href={getLoginUrl()}>Login to vote!</InvertedButtonStyledLink>}
             {user && voting && (
               <VoteButtons
               user={user}
