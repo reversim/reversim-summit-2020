@@ -1,28 +1,269 @@
 import React, { Component } from "react";
-import cn from "classnames";
-import Page from "./Page";
+import styled from 'styled-components';
+import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { getLoginUrl } from "./Redirect";
+
 import {
-  Container,
   Button,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   Modal
 } from "reactstrap";
+
+import {
+  LongTextContainer,
+  Heading2,
+  Heading4,
+  Paragraph2,
+  InvertedButtonStyledLink,
+  InvertedColorLink,
+  StyledButton,
+
+} from './GlobalStyledComponents/ReversimStyledComps'
+import Page from "./Page";
 import { getHref, key } from "../utils";
-import Tag from "./Tag";
-import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
 import SessionPageRoute from "./SessionPageRoute";
 import SessionDayTime from "./SessionDayTime";
-import VoteButton from "./VoteButton";
+import VoteButtons from "./VoteButtons";
 import {image} from '../images';
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import SessionInfo from "./SessionInfo";
+import mediaQueryMin from "../styles/MediaQueriesMixin";
+
 library.add(faPencilAlt, faTrash);
 
+//styled-components components
+
+const GeneralLink = styled(InvertedColorLink)`
+  ${({ theme: { font } }) => `
+    font-weight: ${font.weight_medium};
+  `}
+`;
+
+const ContentContainer = styled(LongTextContainer)`
+  ${({ theme: { space } }) => `
+    padding: 0 ${space.l};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin: ${space.xl} auto 0 auto;
+    `}
+  `}
+  ${mediaQueryMin.xxl`
+    margin: 0 auto;
+  `}
+`;
+
+const SessionPageHero = styled.div`
+  ${({ theme: { space, color } }) => `
+    padding: calc(12 * ${space.m}) 0 calc(3 * ${space.m}) 0;
+    background: ${color.background_2};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin: 0 auto;
+      padding: calc(18.5 * ${space.m}) 0 calc(6.5 * ${space.m}) 0;
+    `}
+  `}
+`;
+
+const HeroHeading = styled(Heading2)`
+  ${({ theme: { color } }) => `
+    margin-right: 0;  
+    color: ${color.text_1};
+  `}
+  ${mediaQueryMin.l`
+    white-space: initial;
+  `}
+`;
+
+const TypeAndTimeContianer = styled.div`
+  ${({ theme: { space } }) => `
+   margin: ${space.xl} auto;
+  `}
+`;
+
+const StatAndEditContainer = styled.div`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.m};
+    display: flex;
+    justify-content: center;
+  `}
+`;
+
+const SessionStatus = styled(Heading4)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_bold};
+  `}
+`;
+
+const EditButton = styled(InvertedButtonStyledLink)`
+  min-width: initial;
+`;
+
+const TextContainer = styled.div`
+  ${({ theme: { space, font } }) => `
+    margin-bottom: ${space.xxl};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_normal};
+  `}
+`;
+
+const TextHeading = styled(Heading4)`
+  ${({ theme: { color, font } }) => `
+    color: ${color.text_3};
+    font-weight: ${font.weight_medium};
+  `}
+`;
+
+const StyledMarkdown = styled(ReactMarkdown)`
+  ${({ theme: { font }}) => `
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_normal};
+  `}
+`;
+
+const VoteAndSpeakersContainer = styled.div`
+  ${({ theme: { space } }) => `
+    width: 100%;  
+    margin: ${space.xxl} auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  `}
+
+    ${mediaQueryMin.l`
+      flex-direction: row;
+      justify-content: space-around;
+    `}
+`;
+
+const SpeakerContainer = styled.div`
+  ${({ theme: { space, color } }) => `
+    display: flex;
+    width: 100%;
+    margin-bottom: calc(4 * ${space.m});
+    border: 4px solid ${color.border_1};
+  `}
+
+  ${mediaQueryMin.l`
+    width: 47.5%;
+  `}
+`;
+
+const SpeakerImg = styled.div`
+  ${({ theme: {color}, speaker: {picture} }) => `
+    min-width: 50%;
+    height: 240px;
+    border-right: 4px solid ${color.border_1};
+
+    background-image: url('${image(picture, 236, 240)}');
+    background-size: cover;
+    background-position: center;
+  `}
+  ${mediaQueryMin.m`
+    min-width: 35%;
+  `}
+  ${mediaQueryMin.l`
+    min-width: 50%;
+  `}
+`;
+
+const SpeakerNameAndLink = styled.div`
+  ${({ theme: { space } }) => `
+    padding: ${space.m};
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  `}
+  ${mediaQueryMin.xl`
+    ${({ theme: { space } }) =>`
+      padding: ${space.l};
+    `}
+  `}
+`;
+
+const SpeakerName = styled.p`
+  ${({ theme: { font } }) => `
+    max-width: 135px;
+    font-size: ${font.size_bg};
+    font-weight: ${font.weight_medium};
+    overflow-wrap: break-word;
+  `}
+  ${mediaQueryMin.s`
+    max-width: initial;
+  `}
+`;
+
+const SpeakerProfileLink = styled(InvertedButtonStyledLink)`
+  ${({ theme: { space } }) => `
+    min-width: initial;
+    max-width: 130px;
+    height: initial;
+    margin: 0 0 ${space.s} 0;
+    align-self: flex-end;
+    margin-right: ${space.m};
+  `}
+  ${mediaQueryMin.m`
+    max-width: initial;
+  `}
+  ${mediaQueryMin.l`
+    max-width: 130px;
+  `}
+`;
+
+const TrashButton = styled(StyledButton)`
+  ${({theme: {color }}) => `
+    background-image: linear-gradient(to right, ${color.button_bkgr_4} 50%, ${color.button_bkgr_1} 50%);
+    position: relative;
+    float: right;
+  `}
+`;
+
+const TrashModalBody = styled(ModalBody)`
+  ${({ theme: { color } }) => `
+    min-height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${color.background_5};
+  `}
+`;
+
+const ModalMessage = styled.p`
+  ${({ theme: { font } }) => `
+    font-family: ${font.main};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_bold};
+    width: 85%;
+  `}
+`;
+
+const TrashModalFooter = styled(ModalFooter)`
+  ${({ theme: { color } }) => `
+    display: flex;
+    align-items: flex-end;
+    background: ${color.background_5};
+    border: 0;
+  `}
+`;
+
+const DeleteButton = styled(TrashButton)`
+  min-width: initial;
+`;
+
+const CancelButton = styled(StyledButton)`
+  min-width: initial;
+`;
+
+//React component
 class SessionPage extends Component {
   constructor(props) {
     super(props);
@@ -55,8 +296,10 @@ class SessionPage extends Component {
       match: {
         params: { id }
       }
-    } = this.props;
+     } = this.props;
+
     const { voting, cfp, moderationCompleted } = eventConfig;
+
     const {
       title,
       abstract,
@@ -68,156 +311,156 @@ class SessionPage extends Component {
       speaker_ids,
       attended
     } = session;
+
     const trackRecords = sessionSpeakers.map(speaker => ({
       name: speaker.name,
       trackRecord: speaker.trackRecord
     }));
+
     const video_urls = sessionSpeakers.map(speaker => ({
       name: speaker.name,
       video_url: speaker.video_url
     }));
+
     const isAuthor = user && session.speaker_ids.includes(user._id);
+    
     const isTeamMember = user && user.isReversimTeamMember;
     // const editPeriod = cfp || moderationCompleted;
-    // TODO: NETA- remove the always true
+    // IMPORTANT: NETA- remove the always true
     const editPeriod = true;
+    
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
+    
     const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
-
+    
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
-        <div className="navbar-margin session-page__hero bg-purple2 pb-8">
-          <Container>
-            <h3 className="session-page__title mb-0 line-height-15 font-size-xxl text-white">
+        <SessionPageHero>
+          <ContentContainer>
+            <HeroHeading>
               {title}
-            </h3>
-          </Container>
-        </div>
-        <Container className="mt-4">
-          <div className="mb-5">
-            <SessionInfo session={session} size="md" />
-            {/* <div className="d-flex">{tags.map(Tag)}</div> */}
-            <div>
-              <SessionDayTime id={id} />
-            </div>
-          </div>
+            </HeroHeading>
+          </ContentContainer>
+        </SessionPageHero>
+        
+        <ContentContainer>
+          <TypeAndTimeContianer>
+            <SessionInfo session={session} />
+            <SessionDayTime id={id} />
+          </TypeAndTimeContianer>
 
-          <div className="mb-2 d-flex align-items-center">
+          <StatAndEditContainer>
             {canSeeStatus && (
-              <div className="text-purple2 font-weight-bold font-size-lm">
+              <SessionStatus>
                 Status:
                 {session.status === "accepted" ? " Accepted" : " Sadly not this time"}
-              </div>
+              </SessionStatus>
             )}
-            {canEdit && (
-              <Link
-                className="unstyled-link"
-                to={`/session/${getHref(session)}/edit`}
-              >
-                <Button
-                  size="sm"
-                  className="ml-3 styled-button btn btn-secondary"
-                >
-                  <FontAwesomeIcon icon="pencil-alt" />
-                </Button>
-              </Link>
-            )}
-          </div>
 
-          <div className="font-size-md mb-12">
-            <ReactMarkdown source={abstract} />
-          </div>
+            {canEdit && (
+              <EditButton
+                href={`/session/${getHref(session)}/edit`}
+              >
+                <FontAwesomeIcon icon="pencil-alt" />
+              </EditButton>
+            )}
+          </StatAndEditContainer>
+          
+          <TextContainer>
+            <TextHeading>Abstract</TextHeading>
+            <StyledMarkdown source={abstract} />
+          </TextContainer>
           {outline && (
-            <div className='text-break'>
-              <h4>???</h4>
-              <ReactMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
-              {/* consolidate line breaks */}
-            </div>
+            <TextContainer>
+              <TextHeading>Outline</TextHeading>
+              <StyledMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
+              {/* NOTE: Is this .replace() good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
+            </TextContainer>
           )}
-          {isTeamMember &&
+          {!isTeamMember &&
             trackRecords &&
-            trackRecords.map((trackRecord, i) => (
-              <div className="mb-3" key={i}>
-                <h4>Track record- {trackRecord.name}</h4>
-                <div className="font-size-sm">
-                  <ReactMarkdown source={trackRecord.trackRecord} />
-                </div>
-              </div>
-            ))}
+            trackRecords.map((speaker, i) => {
+            return speaker.trackRecord 
+            ? (
+                <TextContainer key={i}>
+                  <TextHeading>{speaker.name}'s Track record</TextHeading>
+                  <StyledMarkdown source={speaker.trackRecord} />
+                </TextContainer>
+              )
+            : (
+              <TextContainer key={i}>
+                <TextHeading>{speaker.name}'s Track record</TextHeading>
+                <Paragraph2>{speaker.name} has not submitted any trackRecords.</Paragraph2>
+              </TextContainer>
+            )
+            }
+            )}
           {isTeamMember &&
             video_urls &&
-            video_urls.map((video_url, i) => (
-              <div className="mb-3" key={i}>
-                <h4>Video URL- {video_url.name}</h4>
-                <div>
-                  <a href={video_url.video_url} target="_blank">
-                    {video_url.video_url}
-                  </a>
-                </div>
-              </div>
+            video_urls.map((speaker, i) => (
+              speaker.video_url && (
+              <TextContainer className="mb-3" key={i}>
+                <TextHeading>Watch {speaker.name}</TextHeading>
+                <GeneralLink href={speaker.video_url} target="_blank">
+                  Link to {speaker.name}'s video
+                </GeneralLink>
+              </TextContainer>
+              )
             ))}
 
-          <div className="session-page__voting mb-10">
-            {voting && (
-              <VoteButton
-                user={user}
-                attended={attended}
-                proposalId={id}
-                attendProposal={attendProposal}
-                eventConfig={eventConfig}
+          <VoteAndSpeakersContainer>
+            {!user && voting && <InvertedButtonStyledLink href={getLoginUrl()}>Login to vote!</InvertedButtonStyledLink>}
+            {user && voting && (
+              <VoteButtons
+              user={user}
+              attended={attended}
+              proposalId={id}
+              attendProposal={attendProposal}
+              eventConfig={eventConfig}
               />
             )}
-          </div>
-          <div className="session-page__speakers">
+          </VoteAndSpeakersContainer>
+
+          <VoteAndSpeakersContainer>
             {sessionSpeakers.map(speaker => (
-              <div
-                className="b-strong session-page__speaker-box mb-8 d-flex"
-                key={key()}
-              >
-                <div
-                  className="session-page__speaker"
-                  style={{ backgroundImage: `url('${image(speaker.picture, 236, 240)}')` }}
-                />
-                <div className="p-5 d-flex flex-column flex-grow-1">
-                  <h4 className="font-weight-bold font-size-lg">
+              <SpeakerContainer key={key()}>
+                <SpeakerImg speaker={speaker} />
+                <SpeakerNameAndLink>
+                  <SpeakerName>
                     {speaker.name}
-                  </h4>
-                  <div className="flex-grow-1 d-flex justify-content-end align-items-end">
-                    <Link
-                      key={speaker._id}
-                      to={`/speaker/${getHref(speaker)}`}
-                      className="unstyled-link"
-                    >
-                      <Button className="styled-button mobile-height-auto">Read more</Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
+                  </SpeakerName>
+                  <SpeakerProfileLink
+                    key={speaker._id}
+                    href={`/speaker/${getHref(speaker)}`}
+                  >
+                    Speaker's Profile
+                  </SpeakerProfileLink>
+                </SpeakerNameAndLink>
+              </SpeakerContainer>
             ))}
-          </div>
-          {/*{canEdit && (*/}
-          {/*  <Button*/}
-          {/*    color="primary"*/}
-          {/*    size="sm"*/}
-          {/*    className="ml-3"*/}
-          {/*    onClick={this.askDelete}*/}
-          {/*  >*/}
-          {/*    <FontAwesomeIcon icon="trash" />*/}
-          {/*  </Button>*/}
-          {/*)}*/}
-        </Container>
+          </VoteAndSpeakersContainer>
+
+          {canEdit && (
+           <TrashButton
+             onClick={this.askDelete}
+           >
+             <FontAwesomeIcon icon="trash" /> Delete Proposal
+           </TrashButton>
+          )}
+
+        </ContentContainer>
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
-          <ModalBody>
-            <p>are you sure you want to delete this proposal?</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.deleteProposal}>
+          <TrashModalBody>
+            <ModalMessage>Are you sure you want to delete this proposal?</ModalMessage>
+          </TrashModalBody>
+          <TrashModalFooter>
+            <DeleteButton onClick={this.deleteProposal}>
               Yes, Delete
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggleDeleteModal}>
+            </DeleteButton>{" "}
+            <CancelButton onClick={this.toggleDeleteModal}>
               Cancel
-            </Button>
-          </ModalFooter>
+            </CancelButton>
+          </TrashModalFooter>
         </Modal>
       </Page>
     );

@@ -5,20 +5,22 @@ const theme = {
     text_1: 'rgb(255, 255, 255)',
     text_2: 'rgb(0, 0, 0)',
     text_3: 'rgb(81, 39, 255)',
-
+    
     heading_2: 'rgb(81, 39, 255)',
     input_1: 'rgb(73, 80, 87)',
     font_awsome_trash: 'rgb(189, 58, 2)',
     font_awsome_watch: 'rgb(255, 97, 0)',
     heading_decoration: 'rgb(255, 97, 0)',
     font_awsome_nav: 'rgb(1, 39, 255)',
-
+    
     important: 'rgb(255, 46, 95)',
     note_this: 'rgb(255, 97, 0)',
     count_down: 'rgb(255, 255, 255)',
 
     step_zilla_sub_heading: 'rgb(108, 117, 125)',
-
+    
+    session_category: 'rgb(137, 108, 255)',
+    
     // Background colors
     background_1: 'rgba(81, 39, 255, 0.9)',
     background_2: 'rgb(81, 39, 255)', // #5127ff
@@ -28,23 +30,28 @@ const theme = {
     background_modal: 'rgb(255, 248, 237)',
 
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)',
-    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in InvertedButtonStyledLink :hover
+    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in StyledButton :hover
 
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,
 
     button_bkgr_1: 'rgb(137, 108, 255)',
     button_bkgr_2: 'rgb(255, 97, 0)',
+    button_bkgr_3: 'rgb(41, 179, 66)',
+    button_bkgr_4: 'rgb(255, 46, 95)',
+    button_bkgr_5: 'rgb(108, 117, 125)',
 
     image_link_bkgr: 'rgb(255, 255, 255)',
     input_bkgr_1: 'rgb(255, 255, 255)',
    
     // Borders and box shadows
+    border_1: 'rgb(81, 39, 255)',
+    
     box_shadow_1: 'rgb(81, 39, 255)',
     box_shadow_1_dimmed: 'rgba(81, 39, 255, 0.5)',
     box_shadow_2: 'rgb(255, 255, 255)',
     box_shadow_3: 'rgb(200, 200, 200)',
-
+    
     font_awsome_border: `rgb(0, 58, 204)`,
     font_awsome_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     font_awsome_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
@@ -58,6 +65,8 @@ const theme = {
     form_button_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     form_button_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
     form_button_border_hover: 'rgb(84, 91, 98)',
+    
+    session_category_border: 'rgb(137, 108, 255)',
   },
 
   // the website's fonts
@@ -103,7 +112,7 @@ const theme = {
     main_for_mq_l: '895px',
     main_for_mq_m: '758px',
     main_for_mq_s: '460px',
-    main_for_mq_xs: '300px',
+    main_for_mq_xs: '340px',
   },
 
   // media queries parameters

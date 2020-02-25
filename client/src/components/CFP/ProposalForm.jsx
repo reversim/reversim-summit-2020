@@ -72,7 +72,7 @@ class ProposalForm extends Component {
 
     const proposal = {
       title: '',
-      proposalType: '',
+      type: '',
       ossilProject: '',
       coSpeaker: '',
       abstract: '',
@@ -194,7 +194,7 @@ class ProposalForm extends Component {
       },
       currentProposal: {
         title,
-        proposalType,
+        type,
         ossilProject,
         coSpeaker,
         abstract,
@@ -240,7 +240,7 @@ class ProposalForm extends Component {
           <SessionProposal
             proposal={currentProposal}
             title={title}
-            proposalType={proposalType}
+            type={type} //NOTE HERE
             ossilProject={ossilProject}
             coSpeaker={coSpeaker}
             setValue={this.setProposalValue}
