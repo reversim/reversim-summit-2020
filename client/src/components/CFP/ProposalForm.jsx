@@ -21,13 +21,21 @@ import {
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 //styled-components section
+
 const NoteContainer = styled.div`
   width: 100%;
 `;
 
+const CFPparagraph = styled(Paragraph2)`
+${({ theme: { font } }) => `
+font-size: ${font.size_md};
+`};
+`;
+
 const DeadLine = styled.span`
-  ${({ theme: { color } }) => `
+  ${({ theme: { color, font } }) => `
     color: ${color.important};
+    font-size: ${font.size_h5};
   `};
 `;
 
@@ -36,6 +44,7 @@ const FormContainer = styled(AlignCenterColumn)`
     margin-top: calc(2 * ${space.xxl});
   `};
 `;
+
 
 //React components section
 
@@ -58,6 +67,7 @@ class ProposalForm extends Component {
       phone: '',
       video_url: '',
       trackRecord: '',
+      _id: [this.props.user._id],
     };
 
     const proposal = {
@@ -80,14 +90,9 @@ class ProposalForm extends Component {
     const localCurrentProposal = JSON.parse(localStorage.getItem(this.CURRENT_PROPOSAL_KEY));
 
     this.state = {
-      missingCategories: false,
       [USER_INFO]: _.assign({}, userInfo, localUserInfo),
       [PROPOSAL]: _.assign({}, proposal, localCurrentProposal),
     };
-
-    this.setValue = this.setValue.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.removeCategory = this.removeCategory.bind(this);
   }
 
   setValue = (form, field, value) => {
@@ -131,12 +136,7 @@ class ProposalForm extends Component {
     proposal.tags = proposalTags;
 
     localStorage.setItem(this.CURRENT_PROPOSAL_KEY, JSON.stringify(proposal));
-    this.setState(
-      {
-         [PROPOSAL]: proposal
-      }, () => {
-      console.log('%c state after removeProposalTags ', 'background:gold; color: purple;', this.state); // DELETE WHEN DONE
-    });
+    this.setState({ [PROPOSAL]: proposal });
   };
 
   removeCategory = value => {
@@ -145,19 +145,9 @@ class ProposalForm extends Component {
     const updatedCategories = categories.filter(item => item !== value);
 
     const updatedProposal = _.assign({}, currentProposal, {categories: updatedCategories});
-    console.log('removeCategory called'); // DELETE WHEN DONE
 
     localStorage.setItem(this.CURRENT_PROPOSAL_KEY, JSON.stringify(updatedProposal));
-    this.setState(
-      {
-        [PROPOSAL]: updatedProposal,
-      },
-      () => {
-        console.log('%c value to remove: ', 'background: firebrick', value); // DELETE WHEN DONE
-        console.log('current proposal: ', this.state.currentProposal); // DELETE WHEN DONE
-        console.log('updated proposal: ', updatedProposal); // DELETE WHEN DONE
-      },
-    );
+    this.setState({ [PROPOSAL]: updatedProposal });
   };
 
   getLocalForm = form => JSON.parse(localStorage.getItem(form));
@@ -172,7 +162,7 @@ class ProposalForm extends Component {
       try {
         await updateUserData(userInfo);
         const result = await createProposal(currentProposal);
-        result && localStorage.clear();
+        result && localStorage.removeItem(this.CURRENT_PROPOSAL_KEY);
 
         history.push(`/session/${result._id}`);
       } catch (ex) {
@@ -265,7 +255,6 @@ class ProposalForm extends Component {
             abstract={abstract}
             tags={tags}
             categories={categories}
-            missingCategories={this.state.missingCategories}
             allTags={allTags}
             setValueDebounced={this.setProposalValueDebounced}
             setValue={this.setProposalValue}
@@ -294,20 +283,18 @@ class ProposalForm extends Component {
     return (
       <FormContainer>
         <HeadingAligner>
-          <Heading2>Add your New Session Proposal</Heading2>
+          <Heading2>Add a Session Proposal</Heading2>
           <BreakLineMain />
         </HeadingAligner>
         <NoteContainer>
-          <Paragraph2>Dear {userInfo.name}, happy to see you're submitting session proposals! :)</Paragraph2>
-          <Paragraph2>Remember, you may submit up to 3 proposals.</Paragraph2>
-          <Paragraph2>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</Paragraph2>
+          <CFPparagraph>Dear {userInfo.name}, happy to see you're submitting session proposals! :)</CFPparagraph>
+          <CFPparagraph>Remember, you may submit up to 3 proposals.</CFPparagraph>
+          <CFPparagraph>Call for paper ends: <DeadLine>{CFP_ENDS_STR}</DeadLine>. No kidding.</CFPparagraph>
         </NoteContainer>
-        <div className='step-progress pl-5 pr-7'>
-            <StepZilla
-              preventEnterSubmission={true}
-              steps={steps}
-            />
-        </div>
+        <StepZilla
+          preventEnterSubmission={true}
+          steps={steps}
+        />
       </FormContainer>
     );
   }

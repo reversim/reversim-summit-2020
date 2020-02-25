@@ -14,7 +14,8 @@ const theme = {
     font_awsome_nav: 'rgb(1, 39, 255)',
 
     important: 'rgb(255, 46, 95)',
-    count_down: 'rgb(108, 117, 125)',
+    note_this: 'rgb(255, 97, 0)',
+    count_down: 'rgb(255, 255, 255)',
 
     step_zilla_sub_heading: 'rgb(108, 117, 125)',
 
@@ -23,11 +24,11 @@ const theme = {
     background_2: 'rgb(81, 39, 255)', // #5127ff
     background_3: 'rgb(51, 18, 188)',
     background_4: 'rgb(255, 255, 255)',
-    background_count_down: 'rgb(222, 226, 230)',
+    background_count_down: 'rgb(255, 255, 255)',
     background_modal: 'rgb(255, 248, 237)',
 
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)',
-    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in FormButton :hover
+    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in InvertedButtonStyledLink :hover
 
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,

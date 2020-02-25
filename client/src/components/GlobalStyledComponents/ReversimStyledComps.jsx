@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationTriangle, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faVideo, faExclamationTriangle, faCog } from '@fortawesome/free-solid-svg-icons';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import FormBit from '../FormField';
 
@@ -89,10 +89,31 @@ export const BreakLineInverted = styled(BreakLineMain)`
   `}
 `;
 
+export const LongTextContainer = styled.div`
+${({ theme: { width } }) => `
+    min-width: ${width.main_for_mq_xs};
+    max-width: ${width.main_for_mq_xs};
+  `};
+
+  ${mediaQueryMin.s`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_s};    
+      max-width: ${width.main_for_mq_s};  
+    `}
+  `};
+
+  ${mediaQueryMin.m`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_m};  
+      max-width: ${width.main_for_mq_m};
+    `}
+  `};
+`;
+
 
 // Emphasis
 /*NOTE:
-The above components (Bold, Italic) is needed to override the problematic reset file in:
+The below components (Bold, Italic) is needed to override the problematic reset file in:
 /home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
 
 It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
@@ -211,12 +232,15 @@ export const Heading2 = styled.h2`
     color: ${color.heading_2};
     margin-right: calc(2 * ${space.m});
     font-family: ${font.main};
-    font-size: ${font.size_h2};
+    font-size: ${font.size_h3};
     font-weight: ${font.weight_normal};
   `}
 
     ${mediaQueryMin.l`
-      white-space: nowrap;
+      ${({ theme: { font } }) =>`
+        white-space: nowrap;
+        font-size: ${font.size_h2};
+      `}
     `}
 `;
 
@@ -290,13 +314,6 @@ export const ListBolt = styled(FontAwesomeIcon)`
   `}
 `;
 
-export const FullScreenBkg2 = styled.div`
-  ${({ theme: { color } }) => `
-    width: 100%;
-    background: ${color.background_2};
-  `};
-`;
-
 export const FullScreenBoundries = styled(AlignCenterColumn)`
   ${({ theme: { space } }) => `
     min-height: 100vh;  
@@ -311,16 +328,21 @@ export const FullScreenBoundries = styled(AlignCenterColumn)`
 `;
 
 export const MarginedPageHeading = styled(PageHeading)`
-  ${({ theme: { space } }) => `
+  ${({ theme: { color, space } }) => `
+    color: ${color.text_3};
     margin: ${space.xl} 0;
-  `}
+    text-align: center;
+    `}
+    ${mediaQueryMin.l`
+      white-space: inherit;
+    `}
 `;
 
 // <a>s and <button>s
 export const SimpleLink = styled.a`
-  ${({ theme: { color, font } }) =>`
+  ${({ theme: { color } }) =>`
     color: ${color.text_1};
-    font-size: ${font.size_reg};
+    font-size: inherit;
 
     &:hover{
       color: ${color.text_1};
@@ -337,11 +359,8 @@ export const InvertedColorLink = styled(SimpleLink)`
   `}
 `;
 
-export const ItalicLink = styled(SimpleLink)`
-  ${({ theme: { font } }) => `
-  font-size: ${font.size_h4};
+export const ItalicLink = styled(InvertedColorLink)`
   font-style: italic;
-  `};
 `;
 
 export const ButtonStyledLink = styled.a`
@@ -375,47 +394,12 @@ export const ButtonStyledLink = styled.a`
   `};
 `;
 
-export const FormButton = styled.button`
-  ${({theme: {color, font, space,}}) => `
-    box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
-    background: ${color.background_linear_gradient_1};
-    font-family: ${font.form_button};
-    font-size: ${font.size_reg};
-    font-weight: ${font.weight_medium};
-    color: ${color.text_1};
-    letter-spacing: 1px;
-    outline: none;
-    border: 0;
-    transition: all 200ms;
-    border-radius: 0;
-    height: 40px;
-
-    position: relative;
-
-    margin: ${space.l} 0;
-    padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
-    line-height: 1.5;
-
-    display: inline-block;
-    text-transform: none;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    overflow: visible;
-
-    &:hover{
-      background: ${color.background_linear_gradient_2};
-      box-shadow: inset 0px 0px 10px 2px ${color.form_button_box_shadow_1}, 0px 0px 10px 0px ${color.form_button_box_shadow_2};
-      color: ${color.text_1};
-      border-color: ${color.form_button_border_hover};
-      text-decoration: none;
-    }
-
-    &:active{
-      background: ${color.background_linear_gradient_2};
-    }
+export const InvertedButtonStyledLink = styled(ButtonStyledLink)`
+  ${({ theme: { color } }) => `
+    border: solid 2px ${color.box_shadow_1};
+    box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
   `}
-`;
+`; 
 
 // <input>s and <textarea>
 
@@ -555,16 +539,28 @@ const ValidationErrorContainer = styled.div`
   `};
 `;
 
-const ValidationErrorBolt = styled(ListBolt)`
+const NoteConatiner = styled(ValidationErrorContainer)`
+  ${({ theme: { color } }) => `
+  background: ${color.note_this};
+  `};
+`;
+
+const NoteOrErrorBolt = styled(ListBolt)`
   ${({ theme: { color } }) => `
     color: ${color.text_1};
   `};
 `;
 
+export const NoteMessage = noteMessage => (
+  <NoteConatiner>
+    <NoteOrErrorBolt icon={faVideo}/>
+    <p>{noteMessage}</p>
+  </NoteConatiner>
+);
 
-export const ValidationWarning = (errorMessage) => (
+export const ValidationWarning = errorMessage => (
   <ValidationErrorContainer>
-    <ValidationErrorBolt icon={faExclamationTriangle}/>
+    <NoteOrErrorBolt icon={faExclamationTriangle}/>
     <p>{errorMessage}</p>
   </ValidationErrorContainer>
 );
@@ -591,11 +587,9 @@ ${({ theme: { color } }) => `
 `;
 
 export const LoadingPage = () => (
-  <FullScreenBkg2>
-    <FullScreenBoundries>
-      <MarginedPageHeading>Loading...</MarginedPageHeading>
-      <SpinnerContainer icon={faCog}/>
-    </FullScreenBoundries>
-  </FullScreenBkg2>
+  <FullScreenBoundries>
+    <MarginedPageHeading>Loading...</MarginedPageHeading>
+    <SpinnerContainer icon={faCog}/>
+  </FullScreenBoundries>
   );
 

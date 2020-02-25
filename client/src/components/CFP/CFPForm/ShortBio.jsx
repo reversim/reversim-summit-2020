@@ -118,8 +118,6 @@ class ShortBio extends Component {
         message: '',
       },
     };
-    
-    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
@@ -138,7 +136,6 @@ class ShortBio extends Component {
           id="bio"
           value={bio}
           placeholder="We want to know you better."
-          required={true}
           multiline={true}
           subtitle={<Caption />}
           onChange={e => setValueDebounced('bio', e.target.value)}

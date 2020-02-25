@@ -6,8 +6,6 @@ import {
   FormSubHeading,
  } from './GlobalStyledComponents/ReversimStyledComps';
 
-export const SPACING = 'mb-6'; //NOTE: SHOULD BE DELETED AT THE END
-
 const RadioLabel = styled.label`
   display: inline;
 `;

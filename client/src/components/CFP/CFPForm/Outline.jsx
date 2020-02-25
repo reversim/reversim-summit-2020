@@ -124,7 +124,7 @@ const SubmitButton = styled(Button)`
     &:hover{
       background-position: left bottom;
       text-decoration: none;
-      color: inherit;
+      color: ${color.text_1};
     }      
   `};
 `;
@@ -235,8 +235,7 @@ class Outline extends Component {
         <StepHeading>Outline &amp; private notes</StepHeading>
         <FormField
           id="outline"
-          value={outline}
-          required={true}
+          value={outline}          
           multiline={true}
           placeholder="Add your sessionn outline and notes here."
           subtitle={<OutlineFieldCaption />}

@@ -12,30 +12,58 @@ import {
   LoadingPage,
   Heading4,
   ItalicLink,
-  FullScreenBkg2,
+  ButtonStyledLink,
   FullScreenBoundries,
   MarginedPageHeading,
 } from '../GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import './prog-track.scss';
+
+//sytled-components section
+
+const ErrorPageHeadingLink = styled(ItalicLink)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_h3};
+  `};
+  ${mediaQueryMin.l`
+  ${({ theme: { font } }) =>`
+    white-space: nowrap;
+    font-size: ${font.size_h2};
+  `}
+`}
+`;
+
+const ErrorPageSubHeading = styled(Heading4)`
+  ${({ theme: { color } }) => `
+    color: ${color.text_3};
+    text-align: center;
+  `};
+`;
+
+const ErrorPageLink = styled(ItalicLink)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_h4};
+  `};
+`;
 
 //React components section
 
 const SubmissionClosed = () => (
-  <h6>
-    Call for papers is closed for submission. You can view the submitted proposals{' '}
-    <Link to="proposals">here</Link>.
-  </h6>
+  <FullScreenBoundries>
+    <MarginedPageHeading>
+      Call for papers is closed for submission. You can view the submitted proposals{' '}
+      <ErrorPageHeadingLink href="/proposals">here</ErrorPageHeadingLink>.
+    </MarginedPageHeading>
+  </FullScreenBoundries>
 );
 
 const NonAuthenticated = () => (
-  <div className="text-center mb-6">
-    <h6>Login with Google is required in order to submit a proposal</h6>
-    <a href={getLoginUrl()}>
-      <Button outline color="primary">
-        Login
-      </Button>
-    </a>
-  </div>
+  <FullScreenBoundries>
+    <MarginedPageHeading>Login with Google is required in order to submit a proposal</MarginedPageHeading>
+    <ButtonStyledLink href={getLoginUrl()}>
+      Login
+    </ButtonStyledLink>
+  </FullScreenBoundries>
 );
 
 const ProposalsMaxedOut = props => {
@@ -47,18 +75,16 @@ const ProposalsMaxedOut = props => {
   };
 
   return (
-    <FullScreenBkg2>
-      <FullScreenBoundries>
-        <Heading4>
-          Hey {user.name}, you can submit up to {MAX_PROPOSALS} proposals.
-        </Heading4>
-        <MarginedPageHeading>It looks like you have maxed out!</MarginedPageHeading>
-        <Heading4>
-          You can update your proposals from <ItalicLink href="/profile">your profile</ItalicLink> {' '}
-          until {dateFormatted(cfpEndDate)} or after our moderation team finished going over your proposal.
-        </Heading4>
-      </FullScreenBoundries>
-    </FullScreenBkg2>
+    <FullScreenBoundries>
+      <ErrorPageSubHeading>
+        Hey {user.name}, you can submit up to {MAX_PROPOSALS} proposals.
+      </ErrorPageSubHeading>
+      <MarginedPageHeading>It looks like you have maxed out!</MarginedPageHeading>
+      <ErrorPageSubHeading>
+        You can update your proposals from <ErrorPageLink href="/profile">your profile</ErrorPageLink> {' '}
+        until {dateFormatted(cfpEndDate)} or after our moderation team finished going over your proposal.
+      </ErrorPageSubHeading>
+    </FullScreenBoundries>
   );
  };
 
@@ -66,8 +92,7 @@ class CFPSubmission extends Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: true,
-      hasProposalsMaxed: false,
+      hasProposalsMaxed: null,
     };
   };
 
@@ -82,7 +107,6 @@ class CFPSubmission extends Component {
 
     const result = !!response && _.size(response.proposals) < MAX_PROPOSALS ? false : true;
     this.setState({
-      loading: false,
       hasProposalsMaxed: result,
     })
   };
@@ -101,18 +125,20 @@ class CFPSubmission extends Component {
       ...props
     } = this.props;
 
-    const {loading} = this.state;
-    
+    const {hasProposalsMaxed} = this.state;
+
+    const loading = !(hasProposalsMaxed !== null && user);
+
     return (
-      <Page title="New Session Form" {...props}>
+      <Page title="New Session Form" user={user} {...this.props}>
         {
           loading
           ?  <LoadingPage />
-          :  !submission 
+          :  !submission
               ? <SubmissionClosed />
               : !user 
                 ? <NonAuthenticated />
-                : this.state.hasProposalsMaxed
+                : hasProposalsMaxed
                   ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
                   : <ProposalForm user={user} {...props} />
         } 

@@ -1,5 +1,5 @@
 import React from 'react';
-import FormField, {SPACING} from '../FormField';
+import FormField from '../FormField';
 
 export const getUserData = formElements => {
   const fullname = formElements.fullname.value;
@@ -24,6 +24,8 @@ export const getUserData = formElements => {
     video_url: videoUrl,
   };
 }; // NOTE: This beauty returns an Object with the user's info based on what was typed in the form
+
+const SPACING = 'mb-6'; //NOTE: Should get rid of this
 
 const VideoUrlFieldCaption = () => (
   <span>
