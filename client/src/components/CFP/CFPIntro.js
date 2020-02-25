@@ -102,10 +102,12 @@ const IntroListItem = styled(ListItem)`
   `}
 `;
 
-const LinkToForm = styled(InvertedButtonStyledLink)`
+const SubmitButton = styled(InvertedButtonStyledLink)`
   ${({ theme: { space, font } }) => `
-  height: initial;
+  width: initial;
+  margin: 0 ${space.m};
   padding: ${space.l};
+  height: initial;
   font-size: ${font.size_bg};
   align-self: center;
   `};
@@ -416,7 +418,7 @@ const CFPIntro = () => (
         <InvertedColorLink href="http://confcodeofconduct.com/" target="_blank">Code of Conduct</InvertedColorLink>.
       </IntroPagragraph>
     </SegmentContainer>
-    <LinkToForm href="/cfp/submission">Submit a New Proposal</LinkToForm>
+    <SubmitButton href="/cfp/submission">Submit a New Proposal</SubmitButton>
   </MainContainer>
 );
 

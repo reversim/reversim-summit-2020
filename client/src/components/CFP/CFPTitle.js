@@ -49,14 +49,17 @@ const CountDown = styled.p`
 `;
 
 const DaysRemaining = styled.span`
-  ${({ theme: { color, space } }) => `
+  ${({ theme: { color, space } }) => `  
+    padding: ${space.s} ${space.m};
     box-sizing: content-box;
     display: inline-block;
-    padding: ${space.s} ${space.m};
+    
+    color: ${color.text_3};
     line-height: 20px;
-    border-radius: 14px;
-    background: ${color.background_count_down};
     letter-spacing: 1px;
+
+    background: ${color.background_count_down};
+    border-radius: 14px;
   `}
 `;
 

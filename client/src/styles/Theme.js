@@ -15,7 +15,7 @@ const theme = {
 
     important: 'rgb(255, 46, 95)',
     note_this: 'rgb(255, 97, 0)',
-    count_down: 'rgb(108, 117, 125)',
+    count_down: 'rgb(255, 255, 255)',
 
     step_zilla_sub_heading: 'rgb(108, 117, 125)',
 
@@ -24,7 +24,7 @@ const theme = {
     background_2: 'rgb(81, 39, 255)', // #5127ff
     background_3: 'rgb(51, 18, 188)',
     background_4: 'rgb(255, 255, 255)',
-    background_count_down: 'rgb(222, 226, 230)',
+    background_count_down: 'rgb(255, 255, 255)',
     background_modal: 'rgb(255, 248, 237)',
 
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)',
