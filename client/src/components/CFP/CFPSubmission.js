@@ -92,8 +92,7 @@ class CFPSubmission extends Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: true,
-      hasProposalsMaxed: false,
+      hasProposalsMaxed: null,
     };
   };
 
@@ -108,7 +107,6 @@ class CFPSubmission extends Component {
 
     const result = !!response && _.size(response.proposals) < MAX_PROPOSALS ? false : true;
     this.setState({
-      loading: false,
       hasProposalsMaxed: result,
     })
   };
@@ -127,8 +125,10 @@ class CFPSubmission extends Component {
       ...props
     } = this.props;
 
-    const {loading, hasProposalsMaxed} = this.state;
-    
+    const {hasProposalsMaxed} = this.state;
+
+    const loading = !(hasProposalsMaxed !== null && user);
+
     return (
       <Page title="New Session Form" user={user} {...this.props}>
         {
