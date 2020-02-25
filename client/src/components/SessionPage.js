@@ -348,8 +348,8 @@ class SessionPage extends Component {
         
         <ContentContainer>
           <TypeAndTimeContianer>
-            <SessionInfo session={session} size="md" className="SessionInfo"/>
-              <SessionDayTime id={id} className="DayTime"/>  {/*NOTE: Try to understand if it doesn't render on purpose or what, also might be repetative*/}
+            <SessionInfo session={session} />
+            <SessionDayTime id={id} />
           </TypeAndTimeContianer>
 
           <StatAndEditContainer>

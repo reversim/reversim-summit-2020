@@ -54,8 +54,8 @@ export const getDateAndTime = id => {
 
 const DayAndTime = styled.span`
   ${({ theme: { font } }) => `
-    font-family: ${font.main};
-    font-weight: ${font.weight_normal};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_bold};
   `}
 `;
 
