@@ -56,10 +56,16 @@ const SubHeading = styled(Heading4)`
   `}
 `;
 
-const IntroPagragraph = styled(Paragraph2)`
+const GeneralPagragraph = styled(Paragraph2)`
   ${({ theme: { font } }) => `
     font-size: ${font.size_md};
     margin-right: ${font.size_md};
+  `}
+`;
+
+const IntroPagragraph = styled(GeneralPagragraph)`
+  ${({ theme: { font } }) => `
+    display: inline;
   `}
 `;
 
@@ -73,7 +79,7 @@ const ListHeading = styled(Heading5)`
 
 const TopicsList = styled.ul`
   ${({ theme: { space } }) => `
-    margin: ${space.m} 0 ${space.m} ${space.m};
+    margin: ${space.xl} 0 ${space.xl} ${space.l};
   `}
 `;
 
@@ -85,7 +91,7 @@ const GuidelinesList = styled.ul`
 
 const SubList = styled.ul`
   ${({ theme: { space } }) => `
-    margin-left: ${space.xl};
+    margin: ${space.l} 0 ${space.m} ${space.xl};
   `}
 `;
 
@@ -136,9 +142,12 @@ const CFPIntro = () => (
       </IntroPagragraph>
       <IntroPagragraph>
         Our goal is to streamline the submission and review process, while maintaining superb
-        quality; if you have any feedback or questions, please email us at {' '}
-        <InvertedColorLink href="mailto:rs19team@googlegroups.com" target="_blank">rs19team@googlegroups.com</InvertedColorLink>.
+        quality. 
       </IntroPagragraph>
+      <GeneralPagragraph>
+        if you have any feedback or questions, please email us at {' '}
+        <InvertedColorLink href="mailto:rs19team@googlegroups.com" target="_blank">rs19team@googlegroups.com</InvertedColorLink>.
+      </GeneralPagragraph>
     </SegmentContainer>
 
     <SegmentContainer>
@@ -157,9 +166,9 @@ const CFPIntro = () => (
         General HOWTOs and 101s are discouraged. Marketing and sales pitches are unwanted, as are
         self promotion sessions in disguise.
       </IntroPagragraph>
-      <IntroPagragraph>
+      <GeneralPagragraph>
         Ideas for topics include, but not limited to:
-      </IntroPagragraph>
+      </GeneralPagragraph>
       <TopicsList>
         <IntroListItem>
           <ListBolt icon={faChevronRight} />
