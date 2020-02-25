@@ -16,10 +16,9 @@ import {
 } from "reactstrap";
 
 import {
-  ResponsiveContainer,
+  LongTextContainer,
   Heading2,
   Heading4,
-  Heading5,
   Paragraph2,
   InvertedButtonStyledLink,
   InvertedColorLink,
@@ -45,13 +44,13 @@ const GeneralLink = styled(InvertedColorLink)`
   `}
 `;
 
-const ContentContainer = styled(ResponsiveContainer)`
+const ContentContainer = styled(LongTextContainer)`
   ${({ theme: { space } }) => `
     padding: 0 ${space.l};
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      margin: ${space.xl} ${space.xl} 0 ${space.xl};
+      margin: ${space.xl} auto 0 auto;
     `}
   `}
   ${mediaQueryMin.xxl`
@@ -90,9 +89,9 @@ const TypeAndTimeContianer = styled.div`
 
 const StatAndEditContainer = styled.div`
   ${({ theme: { space } }) => `
-  margin-bottom: ${space.m};
-  display: flex;
-  justify-content: center;
+    margin-bottom: ${space.m};
+    display: flex;
+    justify-content: center;
   `}
 `;
 
@@ -115,17 +114,17 @@ const TextContainer = styled.div`
   `}
 `;
 
-const TextHeading = styled(Heading5)`
+const TextHeading = styled(Heading4)`
   ${({ theme: { color, font } }) => `
     color: ${color.text_3};
-    font-weight: ${font.weight_bold};
+    font-weight: ${font.weight_medium};
   `}
 `;
 
 const StyledMarkdown = styled(ReactMarkdown)`
   ${({ theme: { font }}) => `
-    font-size: ${font.size_reg};
-    font-weight: ${font.weight_medium};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_normal};
   `}
 `;
 
@@ -136,7 +135,7 @@ const VoteAndSpeakersContainer = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    `}
+  `}
 
     ${mediaQueryMin.l`
       flex-direction: row;
@@ -205,28 +204,26 @@ const SpeakerName = styled.p`
 
 const SpeakerProfileLink = styled(InvertedButtonStyledLink)`
   ${({ theme: { space } }) => `
-  min-width: initial;
-  max-width: 130px;
-  height: initial;
-  margin: 0 0 ${space.s} 0;
-  align-self: flex-end;
+    min-width: initial;
+    max-width: 130px;
+    height: initial;
+    margin: 0 0 ${space.s} 0;
+    align-self: flex-end;
+    margin-right: ${space.m};
   `}
   ${mediaQueryMin.m`
-  max-width: initial;
+    max-width: initial;
   `}
   ${mediaQueryMin.l`
-  max-width: 130px;
-  `}
-  ${mediaQueryMin.xl`
-  max-width: initial;
+    max-width: 130px;
   `}
 `;
 
 const TrashButton = styled(StyledButton)`
   ${({theme: {color }}) => `
-  background-image: linear-gradient(to right, ${color.button_bkgr_4} 50%, ${color.button_bkgr_1} 50%);
-  position: relative;
-  float: right;
+    background-image: linear-gradient(to right, ${color.button_bkgr_4} 50%, ${color.button_bkgr_1} 50%);
+    position: relative;
+    float: right;
   `}
 `;
 
@@ -454,7 +451,7 @@ class SessionPage extends Component {
         </ContentContainer>
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>
           <TrashModalBody>
-            <ModalMessage>are you sure you want to delete this proposal?</ModalMessage>
+            <ModalMessage>Are you sure you want to delete this proposal?</ModalMessage>
           </TrashModalBody>
           <TrashModalFooter>
             <DeleteButton onClick={this.deleteProposal}>
