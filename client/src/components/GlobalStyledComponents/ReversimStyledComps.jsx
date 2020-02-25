@@ -340,9 +340,9 @@ export const MarginedPageHeading = styled(PageHeading)`
 
 // <a>s and <button>s
 export const SimpleLink = styled.a`
-  ${({ theme: { color, font } }) =>`
+  ${({ theme: { color } }) =>`
     color: ${color.text_1};
-    font-size: ${font.size_reg};
+    font-size: inherit;
 
     &:hover{
       color: ${color.text_1};
@@ -394,47 +394,12 @@ export const ButtonStyledLink = styled.a`
   `};
 `;
 
-export const FormButton = styled.button`
-  ${({theme: {color, font, space,}}) => `
-    box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
-    background: ${color.background_linear_gradient_1};
-    font-family: ${font.form_button};
-    font-size: ${font.size_reg};
-    font-weight: ${font.weight_medium};
-    color: ${color.text_1};
-    letter-spacing: 1px;
-    outline: none;
-    border: 0;
-    transition: all 200ms;
-    border-radius: 0;
-    height: 40px;
-
-    position: relative;
-
-    margin: ${space.l} 0;
-    padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
-    line-height: 1.5;
-
-    display: inline-block;
-    text-transform: none;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    overflow: visible;
-
-    &:hover{
-      background: ${color.background_linear_gradient_2};
-      box-shadow: inset 0px 0px 10px 2px ${color.form_button_box_shadow_1}, 0px 0px 10px 0px ${color.form_button_box_shadow_2};
-      color: ${color.text_1};
-      border-color: ${color.form_button_border_hover};
-      text-decoration: none;
-    }
-
-    &:active{
-      background: ${color.background_linear_gradient_2};
-    }
+export const InvertedButtonStyledLink = styled(ButtonStyledLink)`
+  ${({ theme: { color } }) => `
+    border: solid 2px ${color.box_shadow_1};
+    box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
   `}
-`;
+`; 
 
 // <input>s and <textarea>
 

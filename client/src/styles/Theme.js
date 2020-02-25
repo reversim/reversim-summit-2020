@@ -28,7 +28,7 @@ const theme = {
     background_modal: 'rgb(255, 248, 237)',
 
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)',
-    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in FormButton :hover
+    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)', //NOTE: used in InvertedButtonStyledLink :hover
 
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,

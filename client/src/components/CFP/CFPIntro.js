@@ -13,6 +13,7 @@ import {
   HeadingAligner,
   Heading3,
   Heading4,
+  Heading5,
   BreakLineMain,
   Paragraph2,
   InvertedColorLink,
@@ -20,7 +21,7 @@ import {
   ListItem,
   ListBolt,
   Bold,
-  ButtonStyledLink,
+  InvertedButtonStyledLink,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 //styled-components section
@@ -38,9 +39,15 @@ const SegmentContainer = styled(LongTextContainer)`
 `;
 
 const SegmentHeading = styled(Heading3)`
-  ${({ theme: { color } }) => `
+  ${({ theme: { space, color, font } }) => `
     color: ${color.text_3};
+    font-size: calc(0.85 * ${font.size_h3});
+    margin-bottom: ${space.m};
   `}
+`;
+
+const IntroBreakLine = styled(BreakLineMain)`
+  border-width: 1px;
 `;
 
 const SubHeading = styled(Heading4)`
@@ -49,10 +56,17 @@ const SubHeading = styled(Heading4)`
   `}
 `;
 
-const ListHeading = styled(Heading4)`
+const IntroPagragraph = styled(Paragraph2)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_md};
+    margin-right: ${font.size_md};
+  `}
+`;
+
+const ListHeading = styled(Heading5)`
   ${({ theme: { color, space, font } }) => `
     margin: ${space.xl} 0 ${space.s} 0;
-    font-size: ${font.size_md};
+    font-size: calc(1.11 * ${font.size_md}); //Brings it close to 20px
     color: ${color.text_3};
   `}
 `;
@@ -82,7 +96,13 @@ const PostmortemsHeading = styled(ListHeading)`
   `}
 `;
 
-const LinkToForm = styled(ButtonStyledLink)`
+const IntroListItem = styled(ListItem)`
+  ${({ theme: { font } }) => `
+    font-size: ${font.size_md};
+  `}
+`;
+
+const LinkToForm = styled(InvertedButtonStyledLink)`
   ${({ theme: { space, font } }) => `
   height: initial;
   padding: ${space.l};
@@ -98,303 +118,303 @@ const CFPIntro = () => (
     <SegmentContainer>
       <HeadingAligner>
         <SegmentHeading>About</SegmentHeading>
-        <BreakLineMain />
+        <IntroBreakLine />
       </HeadingAligner>
-      <Paragraph2>
+      <IntroPagragraph>
         Reversim Summit is a community conference, for developers, of developers, by developers. We
         aim to present excellent, useful & inspiring content to developers and development related
         roles such as product management, development managers.
-      </Paragraph2>
-      <Paragraph2>
+      </IntroPagragraph>
+      <IntroPagragraph>
         Our 2018 summit audience consisted predominantly of engineers or engineering management
         people.
-      </Paragraph2>
-      <Paragraph2>
+      </IntroPagragraph>
+      <IntroPagragraph>
         Our speaker lineup was composed of <Italic>30% women</Italic> speakers and 70% men speakers.
-      </Paragraph2>
-      <Paragraph2>
+      </IntroPagragraph>
+      <IntroPagragraph>
         Our goal is to streamline the submission and review process, while maintaining superb
         quality; if you have any feedback or questions, please email us at {' '}
         <InvertedColorLink href="mailto:rs19team@googlegroups.com" target="_blank">rs19team@googlegroups.com</InvertedColorLink>.
-      </Paragraph2>
+      </IntroPagragraph>
     </SegmentContainer>
 
     <SegmentContainer>
       <HeadingAligner>
         <SegmentHeading>Suggested topics</SegmentHeading>
-        <BreakLineMain />
+        <IntroBreakLine />
       </HeadingAligner>
-      <Paragraph2>
+      <IntroPagragraph>
         Reversim Summit is looking for submissions on all things software development. We encourage
         and welcome deep technical submissions, as well as sessions on the surroundings of software
         development such as product management, culture and business. We prefer sessions that can
         appeal to our diverse audience. We prefer sessions based on personal experience and
         learnings. We encourage innovative and unique topics.
-      </Paragraph2>
-      <Paragraph2>
+      </IntroPagragraph>
+      <IntroPagragraph>
         General HOWTOs and 101s are discouraged. Marketing and sales pitches are unwanted, as are
         self promotion sessions in disguise.
-      </Paragraph2>
-      <Paragraph2>
+      </IntroPagragraph>
+      <IntroPagragraph>
         Ideas for topics include, but not limited to:
-      </Paragraph2>
+      </IntroPagragraph>
       <TopicsList>
-        <ListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Front end / securing websites / mobile development
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Quality / testing / monitoring / alerting / automation
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Artificial intelligence / machine learning / data science
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Data / at rest / in transit/ at scale
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Infrastructure / operations / deployments / internal tools
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Cloud / virtualization / containers / serverless
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Distributed systems / microservices / geo distribution / DR / availability
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Low level / kernel / drivers / file systems / network
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Software design / programming languages / API design / software fundamentals
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Open source projects / technical / maintainership / personal experience / culture
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Customer facing development / UX / design / product / marketing
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Culture / scaling organizations / management / motivation and employee engagement
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Education / teaching / initiatives / government
-        </ListItem>
+        </IntroListItem>
       </TopicsList>
-      <Paragraph2>
+      <IntroPagragraph>
         Can’t find what you were looking for? Please propose a topic which software developers will
           find to be of interest.
-      </Paragraph2>
+      </IntroPagragraph>
     </SegmentContainer>
 
     <SegmentContainer>
       <HeadingAligner>
         <SegmentHeading>Proposals</SegmentHeading>
-        <BreakLineMain />
+        <IntroBreakLine />
       </HeadingAligner>
       <SubHeading>We are looking for proposals in these formats:</SubHeading>
       <ul>
-        <ListItem>
+        <IntroListItem>
           <ListHeading>Full Featured sessions (30 minutes)</ListHeading>
-          <Paragraph2>Full feature are frontal presentations of roughly 30 minutes.</Paragraph2>
-        </ListItem>
-        <ListItem>
+          <IntroPagragraph>Full feature are frontal presentations of roughly 30 minutes.</IntroPagragraph>
+        </IntroListItem>
+        <IntroListItem>
           <ListHeading>Lightning Sessions (5 minutes)</ListHeading>
-          <Paragraph2>
+          <IntroPagragraph>
             Lightning sessions are speedy 5 min sessions. They are presented in a series in which
             each presenter has exactly 20 slides, 15 sec per slide, slides are auto advanced. There
             are no breaks between lightning sessions. It's fun, it's speedy, it's concise and it's
             breathtaking :-)
-          </Paragraph2>
-        </ListItem>
-        <ListItem>
+          </IntroPagragraph>
+        </IntroListItem>
+        <IntroListItem>
           <ListHeading>Open Source in Israel (10 minutes)</ListHeading>
-          <Paragraph2>
+          <IntroPagragraph>
             We are especially interested in open source projects made in Israel or created by
             Israelis. We seek first hand developer’s experience.
-          </Paragraph2>
-        </ListItem>
-        <ListItem>
+          </IntroPagragraph>
+        </IntroListItem>
+        <IntroListItem>
           <PostmortemsHeading id='postmortems'>Postmortems (15 minutes)</PostmortemsHeading>
-          <Paragraph2>
+          <IntroPagragraph>
             Analysis of an incident or an outage at your company. Consider these questions as you
             outline your session: What happened? How did it affect your systems? How did you react?
             How was the problem mitigated? How did you analyze the incident? What were your
             takeaways? What was the followup process? Please make sure your company agrees to share
             the experience and to dive into details. Make this session professional and avoid
             personal criticism.
-          </Paragraph2>
-        </ListItem>
+          </IntroPagragraph>
+        </IntroListItem>
       </ul>
       <ListHeading>First time submitting? No problem!</ListHeading>
-      <Paragraph2>
+      <IntroPagragraph>
         We encourage anyone and everyone to consider submitting a session. You should be able to
         speak in front of a large audience and you should have an interesting story to tell, based
         on your professional experience.
-      </Paragraph2>
-      <Paragraph2>
+      </IntroPagragraph>
+      <IntroPagragraph>
         The moderators team will be happy to assist new speakers in turning an idea into submission,
         and to pair, followup and mentor once a proposal is accepted.
-      </Paragraph2>
+      </IntroPagragraph>
     </SegmentContainer>
 
     <SegmentContainer>
       <HeadingAligner>
         <SegmentHeading>Submission guidelines</SegmentHeading>
-        <BreakLineMain />
+        <IntroBreakLine />
       </HeadingAligner>
       <GuidelinesList>
-        <ListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Write a clear and concise proposal. The audience should know what to expect when they step
           into your session.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Please consider some past years suggestions on what we consider to be good
           content/proposals:
           <SubList>
-            <ListItem>
+            <IntroListItem>
               <ListBolt icon={faChevronCircleRight} />
               Watch our team explain what makes a {' '}
               <InvertedColorLink href="https://www.youtube.com/watch?v=Da-JcEYBjuo">
                 good submission
               </InvertedColorLink>
-            </ListItem>
-            <ListItem>
+            </IntroListItem>
+            <IntroListItem>
               <ListBolt icon={faChevronCircleRight} />
               Watch Adam describe {' '}
               <InvertedColorLink href="https://www.youtube.com/watch?v=F09My4646hI">
                 how to submit a proposal and how we choose them
               </InvertedColorLink>
-            </ListItem>
+            </IntroListItem>
           </SubList>
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Avoid sales, marketing pitches, or self promotion.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           The conference is held in Hebrew, and sessions should be delivered in Hebrew. If a speaker
           does not speak the language, the session will be presented in English.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />A speaker may submit up to three (3) proposals.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />A session may be presented by up to two speakers. All
           speakers <Italic>must</Italic> be indicated on submission.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Assuming your session is accepted, our moderators will be in continuous contact with you,
           and follow up on your progress.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           <Bold>
             Your cooperation is expected and may be required. Not being able to cooperate or respond
             in a timely manner may endanger your participance.
           </Bold>
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           <Bold>
             You will be requested to participate in at least one dry run session. Your presentation
             at the conference may depends on that dry run. In our experience, speakers consider the
             dry run as beneficial to their presentation and personal preparation.
           </Bold>
-        </ListItem>
+        </IntroListItem>
       </GuidelinesList>
 
-      <Paragraph2>
+      <IntroPagragraph>
         To get a sense of successful submissions, please consider our previous conferences content:
-      </Paragraph2>
+      </IntroPagragraph>
       <SubList>
-        <ListItem>
+        <IntroListItem>
           <ListBolt icon={faCompass} />
           <InvertedColorLink href="https://summit2018.reversim.com">Reversim Summit 2018</InvertedColorLink>
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faCompass} />
           <InvertedColorLink href="https://summit2017.reversim.com">Reversim Summit 2017</InvertedColorLink>
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faCompass} />
           <InvertedColorLink href="https://summit2016.reversim.com">Reversim Summit 2016</InvertedColorLink>
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faCompass} />
           <InvertedColorLink href="https://summit2015.reversim.com">Reversim Summit 2015</InvertedColorLink>
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faCompass} />
           <InvertedColorLink href="https://summit2014.reversim.com">Reversim Summit 2014</InvertedColorLink>
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faCompass} />
           <InvertedColorLink href="https://summit2013.reversim.com">Reversim Summit 2013</InvertedColorLink>
-        </ListItem>
+        </IntroListItem>
       </SubList>
     </SegmentContainer>
 
     <SegmentContainer>
       <HeadingAligner>
         <SegmentHeading>Review process</SegmentHeading>
-        <BreakLineMain />
+        <IntroBreakLine />
       </HeadingAligner>
       <ul>
-        <ListItem> 
+        <IntroListItem> 
           <ListBolt icon={faChevronRight} />
           Once the Call for Papers closes, our moderation team will begin reviewing proposals.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Reviewing is not anonymous.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           We will also hold a public vote to measure demand and interest. Results of this vote will
           remain confidential.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           Moderators may contact submitters for questions & clarifications.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           At the end of the proposal selection process, and before schedule is published, all
           submitters will be notified on their proposal status.
-        </ListItem>
-        <ListItem>
+        </IntroListItem>
+        <IntroListItem>
           <ListBolt icon={faChevronRight} />
           A few speakers may be contacted to agree to have their session waitlisted, so that they can
           be scheduled in case of another session’s last moment cancellation.
-        </ListItem>
+        </IntroListItem>
       </ul>
     </SegmentContainer>
 
     <SegmentContainer>
       <HeadingAligner>
         <SegmentHeading>Code of Conduct</SegmentHeading>
-        <BreakLineMain />
+        <IntroBreakLine />
       </HeadingAligner>
-      <Paragraph2>
+      <IntroPagragraph>
         Proposals, presentations and attendance are subject to the {''}
         <InvertedColorLink href="http://confcodeofconduct.com/" target="_blank">Code of Conduct</InvertedColorLink>.
-      </Paragraph2>
+      </IntroPagragraph>
     </SegmentContainer>
     <LinkToForm href="/cfp/submission">Submit a New Proposal</LinkToForm>
   </MainContainer>
