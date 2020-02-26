@@ -52,6 +52,13 @@ const InfoText = styled(Heading5)`
   `}
 `;
 
+const LocationContainer = styled(InfoText)`
+  width: 290px;
+  ${mediaQueryMin.l`
+    width: initial;
+  `}
+`;
+
   const TagsContainer = styled.div`
   ${({ theme: { space, color, font } }) => `
     margin-bottom: ${space.m};
@@ -102,9 +109,9 @@ export default function SessionInfo({ session, onTagClick, location }) {
           </InfoText>
         </SessionType>
         {location && 
-          <InfoText>
+          <LocationContainer>
             {`Day ${location.day+1} | ${location.time} | ${halls[location.hall]}`}
-          </InfoText>
+          </LocationContainer>
         }
         <TagsContainer>
           {session.tags.map(tag =>

@@ -469,6 +469,13 @@ export const StyledButton = styled.button`
   `}
 `;
 
+export const InvertedStyledButton = styled(StyledButton)`
+  ${({ theme: { color } }) => `
+    border: solid 2px ${color.box_shadow_2};
+    box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
+  `}
+`;
+
 // <input>s and <textarea>
 
 export const Input = styled.input`

@@ -14,9 +14,9 @@ import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 const SocialLinksContainer = styled.div`
   ${({ theme: { space } }) => `
-      display: flex;
-      align-items: center
       margin: 0 0 ${space.xxl} calc(2 * ${space.m});
+      display: flex;
+      align-items: center;
       align-self: flex-start;
     `}
     ${mediaQueryMin.s`
@@ -28,7 +28,7 @@ const SocialLinksContainer = styled.div`
       ${({ theme: { space } }) => `
         position: relative;
         left: calc(28 * ${space.m});
-        bottom: calc(6 * ${space.m});
+        bottom: calc(9 * ${space.m});
       `}
     `}
     ${mediaQueryMin.l`

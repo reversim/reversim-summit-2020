@@ -5,7 +5,7 @@ const theme = {
     text_1: '#ffffff',
     text_2: '#000000',
     text_3: '#5127ff',
-    
+
     heading_2: '#5127ff',
     input_1: '#495057',
     font_awsome_trash: '#bd3a02',
@@ -18,7 +18,7 @@ const theme = {
     count_down: '#ffffff',
 
     step_zilla_sub_heading: '#6c757d',
-    
+
     session_category: '#896cff',
 
     session_status_proposed: '#ff6100',
@@ -48,7 +48,7 @@ const theme = {
 
     image_link_bkgr: '#ffffff',
     input_bkgr_1: '#ffffff',
-   
+
     // Borders and box shadows
     border_1: '#5127ff',
     border_2: '#ffffff',
@@ -57,12 +57,12 @@ const theme = {
     box_shadow_1_dimmed: 'rgba(81, 39, 255, 0.5)',
     box_shadow_2: '#ffffff',
     box_shadow_3: '#c8c8c8',
-    
+
     font_awsome_border: `#003acc`,
     font_awsome_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     font_awsome_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
     font_awsome_box_shadow_3: 'rgba(0, 238, 255, 0.1)',
-    
+
     input_border_1: '#ced4da',
     input_border_2: '#80a4ff',
     input_border_3: '#0048ff',
@@ -71,7 +71,7 @@ const theme = {
     form_button_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     form_button_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
     form_button_border_hover: '#545b62',
-    
+
     session_category_border: '#896cff',
   },
 
@@ -80,12 +80,12 @@ const theme = {
     main: 'Source Code Pro, monospace',
     form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
-    
+
     size_sml: '14px',
     size_reg: '16px',
     size_md: '18px', //NOTE: used for Intros as main text size
     size_bg: '24px', //NOTE: used for Intros as an announcment like in SponsorsPage.jsx
-    
+
     size_h2: '48px',
     size_h3: '35px',
     size_h4: '24px',

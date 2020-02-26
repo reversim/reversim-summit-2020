@@ -110,7 +110,7 @@ const SpeakerImgContainer = styled.div`
 
   `}
   ${mediaQueryMin.m`
-    ${({ theme: { space } }) =>`
+    ${({ theme: { space, color } }) =>`
       top: calc(17 * ${space.m});
     `}
   `}
@@ -130,7 +130,12 @@ const SpeakerImg = styled.div`
 
     background-image: url(${image(picture, 230, 230)});
     background-size: cover;
-    border: 4px solid ${color.border_1};
+    border: 4px solid ${color.border_2};
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { color } }) => `
+      border: 4px solid ${color.border_1};
+    `}
   `}
 `;
 
@@ -163,7 +168,7 @@ const SpeakerIntroContainer = styled.div`
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      top: -${space.xl};
+      top: calc(-13.5 * ${space.m});
       left: calc(32 * ${space.m});
     `}
   `}
@@ -354,13 +359,19 @@ const SessionInfoContainer = styled.div`
     min-height: 310px;
 
     padding: ${space.l};
-
     border: 4px solid ${color.border_1};
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 0 0 100%;
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space }, index }) => `
+    max-width: initial;
+    width: 47.5%;
+      margin: 0 ${index % 2 ? `auto` : `calc(4 * ${space.m})`} ${space.xxl} auto;
+    `}
   `}
   ${mediaQueryMin.l`
     min-height: 455px;

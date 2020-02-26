@@ -373,7 +373,7 @@ class SessionPage extends Component {
               <StyledMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
             </TextContainer>
           )}
-          {!isTeamMember &&
+          {isTeamMember &&
             trackRecords &&
             trackRecords.map((speaker, i) => {
             return speaker.trackRecord 
@@ -429,7 +429,7 @@ class SessionPage extends Component {
                     key={speaker._id}
                     href={`/speaker/${getHref(speaker)}`}
                   >
-                    Speaker's Profile
+                    {speaker.name.split(' ')[0]}'s Profile
                   </SpeakerProfileLink>
                 </SpeakerNameAndLink>
               </SpeakerContainer>
