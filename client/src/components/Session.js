@@ -5,7 +5,7 @@ import {getHref} from '../utils';
 import {Button} from 'reactstrap';
 // import Tag from './Tag';
 // import SessionDayTime from './SessionDayTime';
-import SessionInfo from './SessionInfo';
+import SessionInfo from './SessionPage/SessionInfo';
 import VoteButtons from './VoteButtons';
 import {key} from '../utils';
 import {image} from '../images';

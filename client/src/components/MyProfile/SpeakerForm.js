@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button, Input} from 'reactstrap';
-import UserForm, {getUserData} from './CFP/UserForm';
+import UserForm, {getUserData} from '../CFP/UserForm';
 import ga from 'react-ga';
 import {Link} from 'react-router-dom';
-import {getHref} from '../utils';
+import {getHref} from '../../utils';
 
 class SpeakerForm extends React.Component {
   handleSubmit = async e => {

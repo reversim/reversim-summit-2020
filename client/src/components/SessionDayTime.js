@@ -52,12 +52,17 @@ export const getDateAndTime = id => {
   return _getDateAndTime(0, id) || _getDateAndTime(1, id);
 };
 
+//styled-components components
+
 const DayAndTime = styled.span`
   ${({ theme: { font } }) => `
     font-size: ${font.size_md};
     font-weight: ${font.weight_bold};
   `}
 `;
+
+
+//React components
 
 export default ({id}) => {
   const dateTime = getDateAndTime(id);

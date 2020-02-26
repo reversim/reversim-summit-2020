@@ -1,5 +1,5 @@
 import React from 'react';
-import Redirect from './Redirect';
+import Redirect from '../Redirect';
 import {SpeakerPage} from './SpeakerPage';
 
 const MyProfile = Redirect(({user, ...props}) => (

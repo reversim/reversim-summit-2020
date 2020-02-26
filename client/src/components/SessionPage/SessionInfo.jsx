@@ -1,28 +1,39 @@
-import React, { Fragment } from 'react';
-import styled from 'styled-components'
+import React, {Fragment} from 'react';
+import styled from 'styled-components';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 
-import { getSessionTypeStr } from '../utils';
-import halls from '../data/halls';
-import mediaQueryMin from '../styles/MediaQueriesMixin';
-import { Heading5 } from './GlobalStyledComponents/ReversimStyledComps';
+import { getSessionTypeStr } from '../../utils';
+import halls from '../../data/halls';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
+import { Heading5 } from '../GlobalStyledComponents/ReversimStyledComps';
 
-// styled-components section
+//styled-components components
 const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme: { space } }) =>`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: ${space.xl};
+  `}  
   ${mediaQueryMin.m`
     align-items: flex-start;
   `}
 `;
 
 const SessionType = styled.div`
-  ${({ theme: { color, space, font } }) => `
+  ${({ theme: { color, font, space } }) => `
+    margin-bottom: ${space.m}  
     color: ${color.text_2};
     font-weight: ${font.weight_bold};
-    margin-right: ${space.xl}; 
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { font } }) => `
+      height: calc(3 * ${font.size_h5})
+    `}
+  `}
+  ${mediaQueryMin.xl`
+    height: auto;
   `}
 `;
 
@@ -41,8 +52,9 @@ const InfoText = styled(Heading5)`
   `}
 `;
 
-const TagsContainer = styled.div`
-  ${({ theme: { color, font } }) => `
+  const TagsContainer = styled.div`
+  ${({ theme: { space, color, font } }) => `
+    margin-bottom: ${space.m};
     display: flex;
     flex-wrap: wrap;
     color: ${color.text_3};
@@ -70,6 +82,7 @@ const ClickTag = styled.div`
 
 const Category = styled.span`
   ${({ theme: { color, space, font } }) => `
+    width: min-content;  
     padding: 0 ${space.m};  
     color: ${color.session_category};
     font-weight: ${font.weight_bold};
@@ -102,9 +115,10 @@ export default function SessionInfo({ session, onTagClick, location }) {
             )
           )}
         </TagsContainer>
-        {session.category && (
-          <Category>{session.category}</Category>
-        )}
+        {
+          session.categories && 
+          session.categories.map(category =>  <Category key={category}>{category}</Category>)
+        }
       </InfoContainer>
     </Fragment>
   );
