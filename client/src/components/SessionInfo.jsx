@@ -9,22 +9,31 @@ import halls from '../data/halls';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
 import { Heading5 } from './GlobalStyledComponents/ReversimStyledComps';
 
-import cn from "classnames";
-
 //styled-components components
 const InfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme: { space } }) =>`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: ${space.xl};
+  `}  
   ${mediaQueryMin.m`
     align-items: flex-start;
   `}
 `;
 
 const SessionType = styled.div`
-  ${({ theme: { color, space, font } }) => `
+  ${({ theme: { color, font, space } }) => `
+    margin-bottom: ${space.m}  
     color: ${color.text_2};
     font-weight: ${font.weight_bold};
-    margin-right: ${space.xl}; 
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { font } }) => `
+      height: calc(3 * ${font.size_h5})
+    `}
+  `}
+  ${mediaQueryMin.xl`
+    height: auto;
   `}
 `;
 
@@ -44,7 +53,8 @@ const InfoText = styled(Heading5)`
 `;
 
   const TagsContainer = styled.div`
-  ${({ theme: { color, font } }) => `
+  ${({ theme: { space, color, font } }) => `
+    margin-bottom: ${space.m};
     display: flex;
     flex-wrap: wrap;
     color: ${color.text_3};
@@ -72,6 +82,7 @@ const ClickTag = styled.div`
 
 const Category = styled.span`
   ${({ theme: { color, space, font } }) => `
+    width: min-content;  
     padding: 0 ${space.m};  
     color: ${color.session_category};
     font-weight: ${font.weight_bold};
@@ -104,9 +115,10 @@ export default function SessionInfo({ session, onTagClick, location }) {
             )
           )}
         </TagsContainer>
-        {session.category && (
-          <Category>{session.category}</Category>
-        )}
+        {
+          session.categories && 
+          session.categories.map(category =>  <Category key={category}>{category}</Category>)
+        }
       </InfoContainer>
     </Fragment>
   );

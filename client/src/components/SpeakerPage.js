@@ -182,7 +182,7 @@ const TopEditButton = styled(ButtonStyledLink)`
   `}
 `;
 
-const TeamMemberTag = styled.p`
+const TeamMemberBadge = styled.p`
   ${({ theme: { space, color, font } }) => `
     padding: ${space.s} ${space.m};
     margin-bottom: ${space.l};
@@ -204,6 +204,9 @@ const Oneliner = styled.p`
 
 const MainContainer = styled(ResponsiveContainer)`
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ShortBio = styled.p`
@@ -218,36 +221,63 @@ const ShortBio = styled.p`
   `}
 `;
 
-const TrackAndVidLinkContainer = styled.div`
+const PersonalInfoConainer = styled.div`
   ${({ theme: { space } }) => `
+    width: 100%;
     margin-bottom: ${space.xl};
+    align-self: flex-start;
     word-break: break-word;
     overflow-wrap: break-word;
   `}
 `;
 
-const TrackAndVidLinkHeading = styled(Heading5)`
-  ${({ theme: { color, font } }) => `
+const EmailAndPhoneContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const PersonalInfoHeading = styled(Heading4)`
+  ${({ theme: { space, color, font } }) => `
+    margin-top: ${space.xl};
     color: ${color.text_3};
     font-weight: ${font.weight_medium};
   `}
 `;
 
+const PersonalInfoLink = styled(InvertedColorLink)`
+  ${({ theme: { space, color } }) => `
+    margin: 0 0 ${space.l} ${space.l};
+    color: ${color.text_3};
+    font-style: italic;
+  `}
+`;
+
+const NoInfoText = styled(Heading5)`
+  ${({ theme: { space, color } }) => `
+    margin: 0 0 ${space.l} ${space.l};
+    color: ${color.text_2};
+    font-style: italic;
+  `}
+`;
+
 const TrackRecord = styled(ReactMarkdown)`
-  ${({ theme: { font } }) => `
+  ${({ theme: { space, font } }) => `
+    margin: 0 0 ${space.l} ${space.l};  
     font-size: ${font.size_reg};
   `}
 `;
 
 const SessionsHeadingContainer = styled.div`
   ${({ theme: { space } }) => `
+    width: 100%;  
     display: flex;
-    align-items: center
+    align-items: center;
     margin-bottom: ${space.xxl};
   `}
 `;
 
-const SessionsHeading = styled(Heading3)`
+const SectionHeading = styled(Heading3)`
   ${({ theme: { color } }) => `
     width: min-content;
     color: ${color.text_3};
@@ -278,7 +308,7 @@ const SessionInfoContainer = styled.div`
     flex: 0 0 100%;
   `}
   ${mediaQueryMin.l`
-    min-height: 390px; 
+    min-height: 455px; 
     flex: 0 0 calc(50% - 20px);
   `}
   ${mediaQueryMin.xl`
@@ -341,8 +371,25 @@ export class SpeakerPage extends React.Component {
   };
 
   render() {
-    const {speaker, proposals: allProposals, user, isUser, eventConfig, acceptedProposals} = this.props;
-    const {name, proposals, bio, isReversimTeamMember, video_url, trackRecord} = speaker;
+    const {
+      speaker,
+      proposals: allProposals,
+      user,
+      isUser,
+      eventConfig,
+      acceptedProposals
+    } = this.props;
+
+    const {
+      name,
+      proposals,
+      bio,
+      isReversimTeamMember,
+      video_url,
+      trackRecord,
+      email,
+      phone
+    } = speaker;
     const { cfp, moderationCompleted } = eventConfig;
 
     const {isUploadingPhoto} = this.state;
@@ -386,7 +433,7 @@ export class SpeakerPage extends React.Component {
                 <SpeakerName>{speaker.name}</SpeakerName>
                 <EditAndTeamContainer>
                   {isReversimTeamMember && (
-                    <TeamMemberTag>Team member</TeamMemberTag>
+                    <TeamMemberBadge>Team member</TeamMemberBadge>
                   )}
                   {canEdit && (
                     <TopEditButton href={`/speaker/${speaker._id}/edit`}>Edit</TopEditButton>
@@ -405,33 +452,68 @@ export class SpeakerPage extends React.Component {
           
           <ShortBio>{bio}</ShortBio>
 
-          {trackRecord && (
-            <TrackAndVidLinkContainer>
-              <TrackAndVidLinkHeading>Track record</TrackAndVidLinkHeading>
-              <TrackRecord source={trackRecord} />
-            </TrackAndVidLinkContainer>
+          {isReversimTeamMember && 
+           (
+            <PersonalInfoConainer>
+
+              <SessionsHeadingContainer>
+                <HeadingPlus />
+                <SectionHeading>
+                  Personal information
+                </SectionHeading>
+                <BreakLineMain/>
+              </SessionsHeadingContainer>
+
+              <PersonalInfoHeading>Track record</PersonalInfoHeading>
+              {
+                trackRecord
+                  ? <TrackRecord source={trackRecord} />
+                  : <NoInfoText>No track records found.</NoInfoText>
+              }
+
+              <PersonalInfoHeading>Video URL</PersonalInfoHeading>
+              {
+                video_url
+                ? <PersonalInfoLink
+                    href={video_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {video_url}
+                  </PersonalInfoLink>
+                : <NoInfoText>{speaker.name.split(' ')[0]} did not submit a video.</NoInfoText>
+              }
+              <PersonalInfoHeading>Email and Phone Number</PersonalInfoHeading>
+              <EmailAndPhoneContainer>
+                {
+                  email
+                  ?
+                  <PersonalInfoLink
+                    href={`mailto: ${email}`}
+                    target="_blank"
+                  >
+                  {email}
+                  </PersonalInfoLink>
+                  : <NoInfoText>No Email found.</NoInfoText>
+                }
+                {
+                  phone
+                  ? <PersonalInfoLink
+                      href={`tel: ${phone}`}
+                    >
+                      {phone}
+                    </PersonalInfoLink>
+                  : <NoInfoText>No phone number found.</NoInfoText>
+                }
+                  </EmailAndPhoneContainer>
+          </PersonalInfoConainer>
           )}
-          
-          {video_url && (
-            <TrackAndVidLinkContainer>
-              <TrackAndVidLinkHeading>Video URL</TrackAndVidLinkHeading>
-              <InvertedColorLink
-                href={video_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {video_url}
-              </InvertedColorLink>
-            </TrackAndVidLinkContainer>
-          )}
-          
+
           {sessions && sessions.length && (
             <React.Fragment>
               <SessionsHeadingContainer>
                 <HeadingPlus />
-                <SessionsHeading>
-                  {speaker.name.split(' ')[0]}'s sessions
-                </SessionsHeading>
+                <SectionHeading>Sessions</SectionHeading>
                 <BreakLineMain/>
               </SessionsHeadingContainer>
               <SessionsContainer>

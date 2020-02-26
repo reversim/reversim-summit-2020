@@ -242,7 +242,7 @@ export const HeadingSquares = styled(HeadingDiamond)`
 
 const PlusJSX = ({className}) => (
   <svg className={className}>
-    <polygon class="cls-1" points="100 65.83 100 34.17 65.83 34.17 65.83 0 34.17 0 34.17 34.17 0 34.17 0 65.83 34.17 65.83 34.17 100 65.83 100 65.83 65.83 100 65.83"/>
+    <polygon points="100 65.83 100 34.17 65.83 34.17 65.83 0 34.17 0 34.17 34.17 0 34.17 0 65.83 34.17 65.83 34.17 100 65.83 100 65.83 65.83 100 65.83"/>
   </svg>
 );
 

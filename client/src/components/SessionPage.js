@@ -374,7 +374,6 @@ class SessionPage extends Component {
             <TextContainer>
               <TextHeading>Outline</TextHeading>
               <StyledMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
-              {/* NOTE: Is this .replace() good for us? it's regex that means replace all \n with <br/>\n globaly so there will be linke breaks when needed */}
             </TextContainer>
           )}
           {!isTeamMember &&
