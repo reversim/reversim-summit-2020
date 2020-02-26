@@ -16,18 +16,24 @@ const SocialLinksContainer = styled.div`
   ${({ theme: { space } }) => `
       display: flex;
       align-items: center
-      margin: 0 0 ${space.xxl} ${space.xxl};
+      margin: 0 0 ${space.xxl} calc(2 * ${space.m});
+      align-self: flex-start;
+    `}
+    ${mediaQueryMin.s`
+      ${({ theme: { space } }) => `
+        margin: 0 0 ${space.xxl} calc(8 * ${space.m});
+      `}
     `}
     ${mediaQueryMin.m`
       ${({ theme: { space } }) => `
         position: relative;
-        left: calc(31.5 * ${space.m});
-        bottom: calc(16 * ${space.m});
+        left: calc(28 * ${space.m});
+        bottom: calc(6 * ${space.m});
       `}
     `}
     ${mediaQueryMin.l`
       ${({ theme: { space } }) => `
-        left: calc(27.5 * ${space.m});
+        left: calc(24 * ${space.m});
         bottom:  calc(13 * ${space.m});  
         margin-bottom: 0;
       `}

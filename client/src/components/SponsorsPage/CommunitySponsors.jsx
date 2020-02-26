@@ -77,7 +77,7 @@ class SponsorWithEdit extends React.Component {
     render() {
       const { isEditing } = this.state;
       const { sponsor, canEdit } = this.props;
-      return !isEditing ? (
+      return isEditing ? (
         <SponsorForm
           sponsor={sponsor}
           onSubmit={this.onSubmit}

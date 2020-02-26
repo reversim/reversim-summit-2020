@@ -402,7 +402,7 @@ export const ButtonStyledLink = styled.a`
       min-width: 280px;
       height: 40px;
       margin: 0 ${space.m} ${space.xl} ${space.m};
-      padding: ${space.m} ${space.l} calc(3 * ${space.m}) ${space.l};
+      padding: ${space.m} ${space.l} ${space.m} ${space.l};
       letter-spacing: 1px;
       color: ${color.text_1};
 

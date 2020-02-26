@@ -139,7 +139,7 @@ const CommunitySponsor = ({ canEdit, onEdit, onDelete, sponsor }) => (
         onToggle={() => {}}
       />
       {
-        !canEdit && 
+        canEdit && 
         <ButtonsContainer>
           <EditButton
             onClick={onEdit}
