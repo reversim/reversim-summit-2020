@@ -133,10 +133,12 @@ const AbstractParagraph = styled(Paragraph)`
 `;
 
 const AbstractModalHeading = styled(AbstractSubHeading)`
-  ${({ theme: { color, space } }) => `
+  ${({ theme: { color, space, font } }) => `
     margin: 0;
     padding: ${space.l};
     background: ${color.background_modal};
+    font-size: ${font.size_bg};
+    font-family: ${font.main}
   `}
 `;
 
@@ -154,45 +156,32 @@ const AbstractModalFooter = styled(ModalFooter)`
 `;
 
 const AbstractModalButton = styled(Button)`
-    ${({theme: { color, font, space, }}) => `
-    box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
-    background: ${color.background_linear_gradient_1};
-    font-family: ${font.form_button};
-    font-size: ${font.size_reg};
-    font-weight: ${font.weight_medium};
-    color: ${color.text_1};
-    letter-spacing: 1px;
-    outline: none;
-    border: 0;
-    border-radius: 3px;
-    transition: all 200ms;
+  ${({ theme: { color, font, space } }) =>`
     height: 40px;
+    margin: 0 ${space.m} ${space.xl} ${space.m};
+    padding: 0 ${space.s};
+    color: ${color.text_1};
 
-    position: relative;
+    background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
+    background-size: 205% 100%;
+    border: solid 2px ${color.box_shadow_3};
+    border-radius: 0;
+    box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_3};
 
-    margin: ${space.l} 0;
-    padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
-    line-height: 1.5;
-
-    display: inline-block;
-    text-transform: none;
+    font-size: ${font.size_sml};
+    font-family: ${font.button};
+    font-weight: ${font.weight_bold};
     text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    overflow: visible;
+    text-decoration: none;
+
+    transition: all .5s ease-out;
 
     &:hover{
-      background: ${color.background_linear_gradient_2};
-      box-shadow: inset 0px 0px 10px 2px ${color.form_button_box_shadow_1}, 0px 0px 10px 0px ${color.form_button_box_shadow_2};
-      color: ${color.text_1};
-      border-color: ${color.form_button_border_hover};
+      background-position: left bottom;
       text-decoration: none;
-    }
-
-    &:active{
-      background: ${color.background_linear_gradient_2};
-    }
-  `}
+      color: ${color.text_1};
+    }    
+  `};
 `;
 
 //React components
@@ -306,8 +295,6 @@ class Abstract extends Component {
         message: '',
       },
     };
-    
-    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
@@ -338,8 +325,6 @@ class Abstract extends Component {
       allTags,
       tags,
     } = this.props;
-    // NOTE: allTags is defined by the server
-    // NOTE: tags is CFPForm.state.propsal.tag: [];
 
     if (tags.includes(tag)) {
       return;
@@ -406,7 +391,6 @@ class Abstract extends Component {
         <StepHeading>Abstract</StepHeading>
         <FormField
           id="abstract"
-          required={true}
           multiline={true}
           value={abstract}
           placeholder={`Between ${ABSTRACT_MIN}-${ABSTRACT_MAX} characters (the length of 2-5 tweets)`}
@@ -468,8 +452,7 @@ class Abstract extends Component {
           Choose 1 or 2 categories. This information will help us assign this session to one of the
           conference's tracks.
         </FormSubHeading>
-        <input required={true} type="hidden" id="categories_hidden" />
-        <Important hidden={!this.props.missingCategories}>*choose at least one category</Important>
+
         {CATEGORIES.map(category => {
           const checked = categories.includes(category.name);
           return (

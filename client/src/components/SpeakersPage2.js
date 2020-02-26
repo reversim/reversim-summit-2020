@@ -8,7 +8,7 @@ import { image } from "../images";
 import ReadMore from "./ReadMore";
 import { getHref } from "../utils";
 import { Link } from "react-router-dom";
-import SpeakerSocialLinks from "./SpeakerSocialLinks";
+import SpeakerSocialLinks from "./MyProfile/SpeakerSocialLinks";
 // import SpeakersPage from "./SpeakersPage";
 
 class Speaker extends React.Component {

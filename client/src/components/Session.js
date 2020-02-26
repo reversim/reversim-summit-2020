@@ -5,8 +5,8 @@ import {getHref} from '../utils';
 import {Button} from 'reactstrap';
 // import Tag from './Tag';
 // import SessionDayTime from './SessionDayTime';
-import SessionInfo from './SessionInfo';
-import VoteButton from './VoteButton';
+import SessionInfo from './SessionPage/SessionInfo';
+import VoteButtons from './VoteButtons';
 import {key} from '../utils';
 import {image} from '../images';
 
@@ -38,7 +38,7 @@ const Session = ({proposal, speakers, user, attendProposal, onTagClick, eventCon
           <ReactMarkdown className="mb-4 session__abstract" source={abstract} />
         </div>
         <div className="d-flex justify-content-end align-items-center">
-          <VoteButton
+          <VoteButtons
             user={user}
             attended={attended}
             proposalId={_id}

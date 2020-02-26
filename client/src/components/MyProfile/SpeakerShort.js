@@ -4,7 +4,7 @@ import cn from 'classnames';
 import s from './SpeakerPage.css';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
 import {Link} from 'react-router-dom';
-import {getHref} from '../utils';
+import {getHref} from '../../utils';
 
 const SpeakerShort = ({speaker, editable, hasLink}) => {
   const {name, picture, oneLiner} = speaker;

@@ -1,15 +1,30 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationTriangle, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faVideo, faExclamationTriangle, faCog } from '@fortawesome/free-solid-svg-icons';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import FormBit from '../FormField';
 
 //general elements
+
+export const PageHero = styled.div`
+  ${({ theme: { space, color } }) => `
+    padding: calc(12 * ${space.m}) 0 calc(3 * ${space.m}) 0;
+    background: ${color.background_2};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin: 0 auto;
+      padding: calc(18.5 * ${space.m}) 0 calc(6.5 * ${space.m}) 0;
+    `}
+  `}
+`;
+
 export const ResponsiveContainer = styled.div`
   ${({ theme: { width } }) => `
     min-width: ${width.main_for_mq_xs};
     max-width: ${width.main_for_mq_xs};
+    margin: 0 auto;
   `};
 
   ${mediaQueryMin.s`
@@ -58,9 +73,7 @@ export const AlignCenter = styled(ResponsiveContainer)`
       
       padding: 0 ${space.l};
       margin: 0 auto;
-    `}
-
-      
+    `}      
 `;
 
 export const AlignCenterColumn = styled(AlignCenter)`
@@ -89,10 +102,31 @@ export const BreakLineInverted = styled(BreakLineMain)`
   `}
 `;
 
+export const LongTextContainer = styled.div`
+${({ theme: { width } }) => `
+    min-width: ${width.main_for_mq_xs};
+    max-width: ${width.main_for_mq_xs};
+  `};
+
+  ${mediaQueryMin.s`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_s};    
+      max-width: ${width.main_for_mq_s};  
+    `}
+  `};
+
+  ${mediaQueryMin.m`
+    ${({ theme: { width } }) => `
+      min-width: ${width.main_for_mq_m};  
+      max-width: ${width.main_for_mq_m};
+    `}
+  `};
+`;
+
 
 // Emphasis
 /*NOTE:
-The above components (Bold, Italic) is needed to override the problematic reset file in:
+The below components (Bold, Italic) is needed to override the problematic reset file in:
 /home/yariv/Projects/reversim/client/node_modules/styled-reset/lib/index.js
 
 It assigns <em> with "font-style: inherit" which does not let it be 'italic'.
@@ -188,7 +222,7 @@ export const HeadingHoop = styled(HoopJSX)`
     margin-right: -${space.l};
     width: calc(2.08 * ${font.size_h2});
     height: calc(2.08 * ${font.size_h2});
-    fill: ${color.heading_decoration}
+    fill: ${color.heading_decoration};
   `}
 `;
 
@@ -206,17 +240,40 @@ export const HeadingSquares = styled(HeadingDiamond)`
   margin-right: 0px;
 `;
 
+const PlusJSX = ({className}) => (
+  <svg className={className}>
+    <polygon points="100 65.83 100 34.17 65.83 34.17 65.83 0 34.17 0 34.17 34.17 0 34.17 0 65.83 34.17 65.83 34.17 100 65.83 100 65.83 65.83 100 65.83"/>
+  </svg>
+);
+
+export const HeadingPlus = styled(PlusJSX)`
+  ${({ theme: { space, font, color } }) => `
+    margin-right: calc(-18 * ${space.m});
+    height: calc(2.08 * ${font.size_h2});
+    fill: ${color.heading_decoration};
+  `}
+  ${mediaQueryMin.s`
+    ${({ theme: { space, font, color } }) => `
+      margin-right: -${space.l};
+      width: calc(2.08 * ${font.size_h2});
+    `}
+  `}
+`;
+
 export const Heading2 = styled.h2`
   ${({ theme: { color, font, space } }) =>`
     color: ${color.heading_2};
     margin-right: calc(2 * ${space.m});
     font-family: ${font.main};
-    font-size: ${font.size_h2};
+    font-size: ${font.size_h3};
     font-weight: ${font.weight_normal};
   `}
 
     ${mediaQueryMin.l`
-      white-space: nowrap;
+      ${({ theme: { font } }) =>`
+        white-space: nowrap;
+        font-size: ${font.size_h2};
+      `}
     `}
 `;
 
@@ -290,13 +347,6 @@ export const ListBolt = styled(FontAwesomeIcon)`
   `}
 `;
 
-export const FullScreenBkg2 = styled.div`
-  ${({ theme: { color } }) => `
-    width: 100%;
-    background: ${color.background_2};
-  `};
-`;
-
 export const FullScreenBoundries = styled(AlignCenterColumn)`
   ${({ theme: { space } }) => `
     min-height: 100vh;  
@@ -311,16 +361,21 @@ export const FullScreenBoundries = styled(AlignCenterColumn)`
 `;
 
 export const MarginedPageHeading = styled(PageHeading)`
-  ${({ theme: { space } }) => `
+  ${({ theme: { color, space } }) => `
+    color: ${color.text_3};
     margin: ${space.xl} 0;
-  `}
+    text-align: center;
+    `}
+    ${mediaQueryMin.l`
+      white-space: inherit;
+    `}
 `;
 
 // <a>s and <button>s
 export const SimpleLink = styled.a`
-  ${({ theme: { color, font } }) =>`
+  ${({ theme: { color } }) =>`
     color: ${color.text_1};
-    font-size: ${font.size_reg};
+    font-size: inherit;
 
     &:hover{
       color: ${color.text_1};
@@ -337,11 +392,8 @@ export const InvertedColorLink = styled(SimpleLink)`
   `}
 `;
 
-export const ItalicLink = styled(SimpleLink)`
-  ${({ theme: { font } }) => `
-  font-size: ${font.size_h4};
+export const ItalicLink = styled(InvertedColorLink)`
   font-style: italic;
-  `};
 `;
 
 export const ButtonStyledLink = styled.a`
@@ -350,7 +402,7 @@ export const ButtonStyledLink = styled.a`
       min-width: 280px;
       height: 40px;
       margin: 0 ${space.m} ${space.xl} ${space.m};
-      padding: ${space.m} ${space.l};
+      padding: ${space.m} ${space.l} calc(3 * ${space.m}) ${space.l};
       letter-spacing: 1px;
       color: ${color.text_1};
 
@@ -374,6 +426,14 @@ export const ButtonStyledLink = styled.a`
       }
   `};
 `;
+
+
+export const InvertedButtonStyledLink = styled(ButtonStyledLink)`
+  ${({ theme: { color } }) => `
+    border: solid 2px ${color.box_shadow_1};
+    box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
+  `}
+`; 
 
 export const StyledButton = styled.button`
   ${({theme: {color, font, space,}}) => `
@@ -544,16 +604,28 @@ const ValidationErrorContainer = styled.div`
   `};
 `;
 
-const ValidationErrorBolt = styled(ListBolt)`
+const NoteConatiner = styled(ValidationErrorContainer)`
+  ${({ theme: { color } }) => `
+  background: ${color.note_this};
+  `};
+`;
+
+const NoteOrErrorBolt = styled(ListBolt)`
   ${({ theme: { color } }) => `
     color: ${color.text_1};
   `};
 `;
 
+export const NoteMessage = noteMessage => (
+  <NoteConatiner>
+    <NoteOrErrorBolt icon={faVideo}/>
+    <p>{noteMessage}</p>
+  </NoteConatiner>
+);
 
-export const ValidationWarning = (errorMessage) => (
+export const ValidationWarning = errorMessage => (
   <ValidationErrorContainer>
-    <ValidationErrorBolt icon={faExclamationTriangle}/>
+    <NoteOrErrorBolt icon={faExclamationTriangle}/>
     <p>{errorMessage}</p>
   </ValidationErrorContainer>
 );
@@ -580,11 +652,37 @@ ${({ theme: { color } }) => `
 `;
 
 export const LoadingPage = () => (
-  <FullScreenBkg2>
-    <FullScreenBoundries>
-      <MarginedPageHeading>Loading...</MarginedPageHeading>
-      <SpinnerContainer icon={faCog}/>
-    </FullScreenBoundries>
-  </FullScreenBkg2>
+  <FullScreenBoundries>
+    <MarginedPageHeading>Loading...</MarginedPageHeading>
+    <SpinnerContainer icon={faCog}/>
+  </FullScreenBoundries>
   );
 
+// Premium Sponsor and Speaker Page
+
+export const TopContainer = styled.div`
+${({ theme: { color, space } }) => `
+  width: 100%;
+
+  margin: 0 auto calc(30 * ${space.m}) auto;
+  padding: ${space.xxl} 0 ${space.xl} calc(3.5 * ${space.m});
+  
+  background-color: ${color.background_2};
+`}
+
+  ${mediaQueryMin.m`
+    padding-bottom: 0;
+  `}
+
+  ${mediaQueryMin.l`
+    ${ ({ theme: { space } }) => `
+    margin: 0 auto calc(15 * ${space.m}) auto;
+    padding-bottom: calc(3 * ${space.m});
+  `}`}
+  
+  ${mediaQueryMin.xl`
+    padding-bottom: 0;
+    display: flex;
+    justify-content: center;
+  `}
+`;

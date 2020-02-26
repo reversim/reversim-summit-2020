@@ -183,7 +183,7 @@ const MiniNavIconContainer = styled.div`
 
 const MiniNavIcon = styled(FontAwesomeIcon)`
   ${({ theme: { font, space, color } }) =>`
-    font-size: ${font.size_xl};
+    font-size: ${font.size_bg};
     margin-right: ${space.xl};
     color: ${color.font_awsome_nav};
   `}

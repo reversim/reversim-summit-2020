@@ -12,6 +12,7 @@ import {
   ListBolt,
   FormField,
   ValidationWarning,
+  NoteMessage,
 } from '../../GlobalStyledComponents/ReversimStyledComps';
 
 const VideoUrlFieldCaption = () => (
@@ -38,6 +39,7 @@ class PrivateInfo extends Component {
         field: '',
         message: '',
       },
+      showVideoUrlMessage: null,
     };
   };
   
@@ -78,8 +80,6 @@ class PrivateInfo extends Component {
         message: '',
       },
     };
-    
-    error && console.log('Error is: ', error.details[0]); // DELETE WHEN DONE
 
     const newState = _.assign({}, this.state, validationError);
 
@@ -88,8 +88,17 @@ class PrivateInfo extends Component {
     return error ? false : true;
   };
 
+  validateVideoUrl = (e) =>{
+    e.target.value === ''
+      ? this.setState({ showVideoUrlMessage: true })
+      : this.state.showVideoUrlMessage === true && this.setState({showVideoUrlMessage: false})
+    
+      this.state.showVideoUrlMessage === false && this.isValidated();
+  
+  }
+
   render() {
-    const {validationError} = this.state;
+    const {validationError, showVideoUrlMessage} = this.state;
 
     const {
       email,
@@ -108,41 +117,42 @@ class PrivateInfo extends Component {
         <FormField
           id="email"
           label="Email"
-          required={true}
           placeholder="your.email@here.please"
           value={email}
           onChange={e => setValueDebounced('email', e.target.value)}
           onBlur={this.isValidated}
         />
         {validationError.field === "email" && ValidationWarning(validationError.message)}
+
         <FormField
           id="phone"
           label="Phone Number"
-          required={true}
           placeholder="05x-xxxxxxx"
           value={phone}
           onChange={e => setValueDebounced('phone', e.target.value)}
           onBlur={this.isValidated}
         />
         {validationError.field === "phone" && ValidationWarning(validationError.message)}
+
         <FormField
           id="video_url"
           label="Link to Video"
-          required={true}
           value={videoUrl}
           placeholder="e.g. http://youtu.be/xxxx"
           subtitle={<VideoUrlFieldCaption />}
           onChange={e => setValueDebounced('video_url', e.target.value)}
-          onBlur={this.isValidated}
+          onBlur={this.validateVideoUrl}
         />
         {validationError.field === "videoUrl" && ValidationWarning(validationError.message)}
-        
+        {showVideoUrlMessage && NoteMessage(
+          'Did you forget to provide a video link? Although not strictly required, a video link will immensely improve your odds of getting accepted. We just need to see you speaking somewhere somehow.'
+        )}
+
         <FormField
           id="trackRecord"
           label="Track record as speaker, if available"
           value={trackRecord}
           placeholder=""
-          required={true}
           multiline={true}
           subtitle={
             <span>
@@ -161,7 +171,8 @@ class PrivateInfo extends Component {
                     tabIndex="-1"
                     target="_blank"
                     href="https://www.youtube.com/watch?v=Nf_Y4MbUCLY"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer"
+                  >
                     https://www.youtube.com/watch?v=Nf_Y4MbUCLY
                   </InvertedColorLink>{' '}
                   slides: http://example.com/slide1
@@ -174,7 +185,8 @@ class PrivateInfo extends Component {
                     tabIndex="-1"
                     target="_blank"
                     href="https://youtu.be/DGXx56WqqJw"
-                    rel="noopener noreferrer">
+                    rel="noopener noreferrer"
+                  >
                     https://youtu.be/DGXx56WqqJw
                   </InvertedColorLink>, slides: http://example.com/slide2
                 </ListItem>

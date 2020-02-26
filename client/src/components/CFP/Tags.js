@@ -1,14 +1,14 @@
 import React from 'react';
 import {WithContext as ReactTags} from 'react-tag-input';
+import {Button} from 'reactstrap';
+import styled from 'styled-components';
+
+import './ReactTags.scss';
 import { 
   InputLabel,
   FormSubHeading,
 } from '../GlobalStyledComponents/ReversimStyledComps';
-
-import {Button} from 'reactstrap';
-import styled from 'styled-components';
 import {Bold} from '../GlobalStyledComponents/ReversimStyledComps';
-import './ReactTags.css';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 import {MAX_TAGS} from '../../data/proposals';
@@ -55,7 +55,7 @@ const TagButton = styled(Button)`
     &:hover{
       background-position: left bottom;
       text-decoration: none;
-      color: inherit;
+      color: ${color.text_1};
     }      
   `};
 `;

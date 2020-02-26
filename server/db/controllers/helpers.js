@@ -51,7 +51,7 @@ export function transformProposal(proposal, loggedInUser) {
         attended = proposal.notAttendees.indexOf(loggedInUser._id) > -1 ? false : undefined;
       }
     }
-    // console.log("transformProposal, proposal=" + proposal.id, "loggedInUser=", loggedInUser && loggedInUser._id, "isAuthor=", isAuthor, "isTeamMember=", isTeamMember);
+    // console.log("transformProposal, proposal id=" + proposal.id, 'speaker_ids ' + proposal.speaker_ids); // DELETE WHEN DONE
 
     return {
       _id: String(proposal._id),

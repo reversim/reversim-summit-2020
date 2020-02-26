@@ -188,7 +188,7 @@ class SponsorForm extends React.Component {
             value={this.state.name || ""}
             onChange={e => this.setState({ name: e.target.value })}
           />
-          <FormButton>
+          <StyledButton>
             <FileInput
               type="file"
               onChange={e => {
@@ -202,7 +202,7 @@ class SponsorForm extends React.Component {
               }}
             />
             Choose logo
-          </FormButton>
+          </StyledButton>
           <Input
             placeholder="Link to website"
             value={this.state.url || ""}
@@ -240,11 +240,11 @@ class SponsorForm extends React.Component {
                   />
                 </div>
               ))}
-              <FormButton
+              <StyledButton
               onClick={() => this.openCloudinaryUploader()}
               >
                 Add photos
-              </FormButton>
+              </StyledButton>
               <Input
                 placeholder="location link from google maps"
                 value={this.state.locationLink}
@@ -313,7 +313,7 @@ class SponsorForm extends React.Component {
                 value={this.state.reversimAndUs}
                 onChange={e => this.setState({ reversimAndUs: e.target.value })}
               />
-              <FormButton
+              <StyledButton
                 onClick={() => {
                   let openPositions = this.state.openPositions || [];
                   openPositions.push({
@@ -328,7 +328,7 @@ class SponsorForm extends React.Component {
                 }}
               >
                 add an open Position
-              </FormButton>
+              </StyledButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
                   <OpenPositionContainer key={i}>
@@ -369,15 +369,15 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <FormButton
+                    <StyledButton
                       onClick={() => {
-                        let openPositions = this.state.openPositions;
+                        let openhttps://github.com/reversim/reversim-summit-2020/pull/40/conflict?name=client%252Fsrc%252Fstyles%252FTheme.js&ancestor_oid=4504a8d0c7f7d0dc5f1bcda4a168b191f96e0df2&base_oid=f7b310782aa64bec56a2482a957d3a0c7f6f7bb4&head_oid=cd1abf62ca9bede3f589203745016ddb0ca1ac78Positions = this.state.openPositions;
                         openPositions.splice(i, 1);
                         this.setState({ openPositions });
                       }}
                     >
                       cancel
-                    </FormButton>
+                    </StyledButton>
                   </OpenPositionContainer>
                 ))}
             </div>

@@ -207,9 +207,10 @@ ol.progtrckr {
   &:hover{
     background-position: right bottom;
     text-decoration: none;
-    color: inherit;
+    color: rgb(255, 255, 255);
   }
 }
+
 //This is the selector for the "NEXT" button (weird but true)
 .btn-prev{
   width: max-content;
@@ -220,7 +221,7 @@ ol.progtrckr {
   letter-spacing: 1px;
   color: rgb(255, 255, 255);
 
-  background: right bottom linear-gradient(to right, rgb(255, 97, 0) 50%, rgb(137, 108, 255) 50%);  
+ background: right bottom linear-gradient(to right, rgb(255, 97, 0) 50%, rgb(137, 108, 255) 50%);  
   background-size: 205% 100%;
   border: solid 2px rgb(200, 200, 200);
   border-radius: 0;
@@ -237,6 +238,6 @@ ol.progtrckr {
   &:hover{
     background-position: left bottom;
     text-decoration: none;
-    color: inherit;
+    color: rgb(255, 255, 255);
   }
 }
