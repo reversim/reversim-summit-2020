@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import Page from '../Page';
 import SpeakerPageRoute from './SpeakerPageRoute';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
-import SessionInfo from '../SessionInfo';
+import SessionInfo from '../SessionPage/SessionInfo';
 
 import {getHref, key} from '../../utils';
 import {image} from '../../images';

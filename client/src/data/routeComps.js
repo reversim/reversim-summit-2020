@@ -4,7 +4,7 @@ import MyProfile from '../components/MyProfile/MyProfile';
 import AboutPage from '../components/AboutPage';
 import SpeakerPage from '../components/MyProfile/SpeakerPage';
 import SpeakerEditPage from '../components/MyProfile/SpeakerEditPage';
-import SessionPage from '../components/SessionPage';
+import SessionPage from '../components/SessionPage/SessionPage';
 import SessionEditPage from '../components/SessionEditPage';
 import SpeakersPage from '../components/SpeakersPage2';
 import SponsorsPage from '../components/SponsorsPage/SponsorsPage.jsx';

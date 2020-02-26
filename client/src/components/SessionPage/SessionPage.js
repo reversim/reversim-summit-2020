@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { getLoginUrl } from "./Redirect";
+import { getLoginUrl } from "../Redirect";
 
 import {
-  Button,
   ModalBody,
   ModalFooter,
   Modal
@@ -23,16 +21,15 @@ import {
   InvertedButtonStyledLink,
   InvertedColorLink,
   StyledButton,
-
-} from './GlobalStyledComponents/ReversimStyledComps'
-import Page from "./Page";
-import { getHref, key } from "../utils";
-import SessionPageRoute from "./SessionPageRoute";
-import SessionDayTime from "./SessionDayTime";
-import VoteButtons from "./VoteButtons";
-import {image} from '../images';
+} from '../GlobalStyledComponents/ReversimStyledComps'
+import Page from "../Page";
+import { getHref, key } from "../../utils";
+import SessionPageRoute from "../SessionPageRoute";
+import SessionDayTime from "../SessionDayTime";
+import VoteButtons from "../VoteButtons";
+import {image} from '../../images';
 import SessionInfo from "./SessionInfo";
-import mediaQueryMin from "../styles/MediaQueriesMixin";
+import mediaQueryMin from "../../styles/MediaQueriesMixin";
 
 library.add(faPencilAlt, faTrash);
 

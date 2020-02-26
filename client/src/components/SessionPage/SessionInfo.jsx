@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 
-import { getSessionTypeStr } from '../utils';
-import halls from '../data/halls';
-import mediaQueryMin from '../styles/MediaQueriesMixin';
-import { Heading5 } from './GlobalStyledComponents/ReversimStyledComps';
+import { getSessionTypeStr } from '../../utils';
+import halls from '../../data/halls';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
+import { Heading5 } from '../GlobalStyledComponents/ReversimStyledComps';
 
 //styled-components components
 const InfoContainer = styled.div`
