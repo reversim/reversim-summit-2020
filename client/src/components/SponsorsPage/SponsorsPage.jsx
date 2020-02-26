@@ -48,20 +48,28 @@ const WantToBelink = styled(SimpleLink)`
 
   //SponsorsPage Components
 
-const PremiumSectionContainer = styled.section`
-  ${({ theme: { color, space, mq } }) => `
+const PremiumSectionContainer = styled.div`
+  ${({ theme: { color } }) => `
+    background-color: ${color.background_2};
+    display: flex;
+    justify-content: center;
+  `}
+`;
+
+const PremiumSectionAligner = styled.section`
+  ${({ theme: { color, space } }) => `
+    width: max-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     background-size: contain;
-    background-color: ${color.background_2};
-    padding: ${space.xl} 180px ${space.xxl} 180px;
+    padding: ${space.xl} 0 ${space.xxl} 0;
 
     border-top: 100px solid ${color.box_shadow_1};
   `}
-`;//NOTE: same weird display under 768px width where 100% is narrower than viewport's width for no reason.
+`;
 
 const AddSoponsorContainer = styled.div`
   ${({ theme: { space, color} }) =>`
@@ -73,10 +81,17 @@ const AddSoponsorContainer = styled.div`
   `}
 `;
 
-const CommunityContainer = styled(AlignCenter)`
+const CommunityContainer = styled.div`
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const CommunityAligner = styled(AlignCenter)`
  ${({ theme: { space } }) => `
     width: 80%;
     margin-top: ${space.xl};
+    justify-content: center;
  `}
 `;
 
@@ -130,35 +145,39 @@ class SponsorsPage extends React.Component {
     return (
       <Page title="Sponsors" {...this.props}>
         <PremiumSectionContainer>
-          <AlignCenterColumn>
-          {
-            user && user.isReversimTeamMember && (
-              <AddSoponsorContainer>
-                <Heading3>Add sponsor</Heading3>
-                <SponsorForm onSubmit={createSponsor} />
-              </AddSoponsorContainer>
-            )
-          }
-            <WantToBe />
-            <PremiumSponsors
-              sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
+          <PremiumSectionAligner>
+            <AlignCenterColumn>
+            {
+              user && user.isReversimTeamMember && (
+                <AddSoponsorContainer>
+                  <Heading3>Add sponsor</Heading3>
+                  <SponsorForm onSubmit={createSponsor} />
+                </AddSoponsorContainer>
+              )
+            }
+              <WantToBe />
+              <PremiumSponsors
+                sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
+                user={user}
+                updateSponsor={updateSponsor}
+                deleteSponsor={deleteSponsor}
+              />
+            </AlignCenterColumn>
+          </PremiumSectionAligner>
+        </PremiumSectionContainer>
+        <CommunityContainer>
+          <CommunityAligner>
+            <CommunitySponsors
+              sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}
               user={user}
               updateSponsor={updateSponsor}
               deleteSponsor={deleteSponsor}
             />
-          </AlignCenterColumn>
-        </PremiumSectionContainer>
-        <CommunityContainer>
-          <CommunitySponsors
-            sponsors={sponsors.filter(sponsor => !sponsor.isPremium)}
-            user={user}
-            updateSponsor={updateSponsor}
-            deleteSponsor={deleteSponsor}
-          />
-          {/* <InviterContainer>
-            <InviterHeading>The annual Reversim conference is here</InviterHeading>
-            <InviterHeadingBold>and we can't do it without you!</InviterHeadingBold>
-          </InviterContainer> */}
+            {/* <InviterContainer>
+              <InviterHeading>The annual Reversim conference is here</InviterHeading>
+              <InviterHeadingBold>and we can't do it without you!</InviterHeadingBold>
+            </InviterContainer> */}
+          </CommunityAligner>
         </CommunityContainer>
       </Page>
     );

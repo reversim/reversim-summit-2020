@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CommunitySponsor from '../CommunitySponsor';
+import CommunitySponsor from './CommunitySponsor';
 import SponsorForm from './SponsorForm';
 
 import {
@@ -16,11 +16,30 @@ import {
 
 const ColumnContainer = styled.div`
 ${({theme: { color } }) => `
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  align-items: center;
+  
   background-color: ${color.background_4};
   `}
+`;
+
+const CommunityHeadingAligner = styled(HeadingAligner)`
+  ${({ theme: { space } }) => `
+    margin-bottom: ${space.xxl};
+  `}
+`;
+
+const CommunityHeading = styled(Heading2)`
+  max-width: min-content;
+`;
+
+const SponsorsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 //React components
@@ -71,7 +90,7 @@ class SponsorWithEdit extends React.Component {
           onEdit={canEdit && this.onEdit}
           onDelete={canEdit && this.onDelete}
           sponsor={sponsor}
-        />
+        /> 
       );
     }
   }  
@@ -84,14 +103,14 @@ const CommunitySponsors = ({
   }) => {
     return (
       <ColumnContainer>
-        <HeadingAligner>
+        <CommunityHeadingAligner>
           <HeadingCircle />
-          <Heading2>
+          <CommunityHeading>
             Community Sponsors
-          </Heading2>
+          </CommunityHeading>
           <BreakLineMain />
-        </HeadingAligner>
-        <div>
+        </CommunityHeadingAligner>
+        <SponsorsContainer>
           {sponsors.map(sponsor => (
             <SponsorWithEdit
               key={sponsor._id}
@@ -101,7 +120,7 @@ const CommunitySponsors = ({
               deleteSponsor={deleteSponsor}
             />
           ))}
-        </div>
+        </SponsorsContainer>
       </ColumnContainer>
     );
   };

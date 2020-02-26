@@ -14,8 +14,23 @@ import {
   FileInput, 
   FontAwsomeTrash,
 } from '../GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from "../../styles/MediaQueriesMixin";
 
 // styled-components section
+
+const TheForm = styled.form`
+  ${({ theme: { space, color } }) => `  
+  width: 100%;
+  margin: ${space.m};
+  padding: ${space.m} ${space.m} 0 ${space.m};
+  border: 2px solid ${color.border_1};
+  `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      width: 44.5%;
+    `}
+  `}
+`;
 
 const CheckboxContainer = styled.div`
   ${({ theme: { space } }) => `
@@ -34,14 +49,15 @@ const OpenPositionContainer = styled.div`
 const SubmitOrCancelContainer = styled.div`
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 `;
 
 const UploadImg = styled.img`
   width: 200px;
 `;
 
-const SubmitButton = styled(StyledButton)`
-  width: 150px;
+const FormButton = styled(StyledButton)`
+  min-width: max-content;
 `;
 
 // React components section
@@ -148,7 +164,7 @@ class SponsorForm extends React.Component {
       const _id = sponsor ? sponsor._id : "";
 
       return (
-        <form onSubmit={e => onSubmit(this.getData(e))}>
+        <TheForm onSubmit={e => onSubmit(this.getData(e))}>
           <CheckboxContainer>
             <input
               type="checkbox"
@@ -172,7 +188,7 @@ class SponsorForm extends React.Component {
             value={this.state.name || ""}
             onChange={e => this.setState({ name: e.target.value })}
           />
-          <StyledButton>
+          <FormButton>
             <FileInput
               type="file"
               onChange={e => {
@@ -186,7 +202,7 @@ class SponsorForm extends React.Component {
               }}
             />
             Choose logo
-          </StyledButton>
+          </FormButton>
           <Input
             placeholder="Link to website"
             value={this.state.url || ""}
@@ -224,11 +240,11 @@ class SponsorForm extends React.Component {
                   />
                 </div>
               ))}
-              <StyledButton
+              <FormButton
               onClick={() => this.openCloudinaryUploader()}
               >
                 Add photos
-              </StyledButton>
+              </FormButton>
               <Input
                 placeholder="location link from google maps"
                 value={this.state.locationLink}
@@ -297,7 +313,7 @@ class SponsorForm extends React.Component {
                 value={this.state.reversimAndUs}
                 onChange={e => this.setState({ reversimAndUs: e.target.value })}
               />
-              <StyledButton
+              <FormButton
                 onClick={() => {
                   let openPositions = this.state.openPositions || [];
                   openPositions.push({
@@ -312,7 +328,7 @@ class SponsorForm extends React.Component {
                 }}
               >
                 add an open Position
-              </StyledButton>
+              </FormButton>
               {this.state.openPositions &&
                 this.state.openPositions.map((openPosition, i) => (
                   <OpenPositionContainer key={i}>
@@ -353,7 +369,7 @@ class SponsorForm extends React.Component {
                         this.setState({ openPositions });
                       }}
                     />
-                    <StyledButton
+                    <FormButton
                       onClick={() => {
                         let openPositions = this.state.openPositions;
                         openPositions.splice(i, 1);
@@ -361,7 +377,7 @@ class SponsorForm extends React.Component {
                       }}
                     >
                       cancel
-                    </StyledButton>
+                    </FormButton>
                   </OpenPositionContainer>
                 ))}
             </div>
@@ -375,7 +391,7 @@ class SponsorForm extends React.Component {
           )}
           {onCancel && (
             <SubmitOrCancelContainer>
-              <StyledButton
+              <FormButton
                 outline
                 onClick={e => {
                   e.preventDefault();
@@ -383,13 +399,13 @@ class SponsorForm extends React.Component {
                 }}
               >
                 Cancel
-              </StyledButton>
-              <SubmitButton disabled={isLoading}>
+              </FormButton>
+              <FormButton disabled={isLoading}>
                 Submit
-              </SubmitButton>
+              </FormButton>
             </SubmitOrCancelContainer>
           )}
-        </form>
+        </TheForm>
       );
     }
   }

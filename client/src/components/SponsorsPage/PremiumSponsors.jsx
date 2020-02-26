@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
 
 import SponsorForm from './SponsorForm';
@@ -15,6 +15,7 @@ import mediaQueryMin from '../../styles/MediaQueriesMixin';
 import diamond from '../../images/SVG/diamond.svg';
 
 //styled-components components
+
 const HeadingDecoration = styled(HeadingDiamond)`
   ${({ theme: { space } }) => `
     margin: 0 -${space.xxl} calc(-3 * ${space.m}) 0;
@@ -109,7 +110,7 @@ class SponsorMiniPremiumWithEdit extends React.Component {
 
 const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     return (
-      <div>
+      <Fragment>
         <HeadingAligner>
           <Heading>
             <HeadingDecoration src={diamond} alt="diamond" />
@@ -129,7 +130,7 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
             />
           ))}
         </SponsorMiniAligner>
-      </div>
+      </Fragment>
     );
   };
 

@@ -197,10 +197,10 @@ const CircleJSX = ({className}) => {
 
 export const HeadingCircle = styled(CircleJSX)`
     ${({ theme: { color, space, font } }) => `
-      width: calc(2.85 * ${font.size_h3});
+      // width: calc(2.85 * ${font.size_h3});
       height: calc(2.85 * ${font.size_h3});
       fill: ${color.heading_decoration};
-      margin: -${space.l} -${space.xxl} ${space.xl} 0; 
+      margin: ${space.xl} calc(-10 * ${space.xl}) ${space.xl} 0; 
     `}
 
   ${mediaQueryMin.l`
@@ -402,7 +402,7 @@ export const ButtonStyledLink = styled.a`
       min-width: 280px;
       height: 40px;
       margin: 0 ${space.m} ${space.xl} ${space.m};
-      padding: ${space.m} ${space.l} calc(3 * ${space.m}) ${space.l};
+      padding: ${space.m} ${space.l} ${space.m} ${space.l};
       letter-spacing: 1px;
       color: ${color.text_1};
 
@@ -427,6 +427,7 @@ export const ButtonStyledLink = styled.a`
   `};
 `;
 
+
 export const InvertedButtonStyledLink = styled(ButtonStyledLink)`
   ${({ theme: { color } }) => `
     border: solid 2px ${color.box_shadow_1};
@@ -446,8 +447,8 @@ export const StyledButton = styled.button`
 
   background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
   background-size: 205% 100%;
-  border: solid 2px ${color.box_shadow_2};
-  box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
+  border: solid 2px ${color.box_shadow_1};
+  box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
 
   font-size: ${font.size_reg};
   font-family: ${font.button};
