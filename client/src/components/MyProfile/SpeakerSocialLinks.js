@@ -8,7 +8,7 @@ import {
   faStackOverflow,
 } from '@fortawesome/free-brands-svg-icons';
 
-import mediaQueryMin from '../styles/MediaQueriesMixin';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 //styled-components components
 

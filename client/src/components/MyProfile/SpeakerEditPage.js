@@ -1,9 +1,9 @@
 import React from 'react';
 import SpeakerForm from './SpeakerForm';
-import Page from './Page';
+import Page from '../Page';
 import {Container, Row, Col} from 'reactstrap';
 import SpeakerPageRoute from './SpeakerPageRoute';
-import Redirect from './Redirect';
+import Redirect from '../Redirect';
 
 const SpeakerEditPage = ({speaker, user, updateUserData, ...props}) => (
   <Page title={`Edit ${speaker.name}`} user={user} {...props}>

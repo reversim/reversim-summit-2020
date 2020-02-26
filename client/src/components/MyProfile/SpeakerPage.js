@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
-import Page from './Page';
+import Page from '../Page';
 import SpeakerPageRoute from './SpeakerPageRoute';
 import SpeakerSocialLinks from './SpeakerSocialLinks';
-import SessionInfo from './SessionInfo';
+import SessionInfo from '../SessionInfo';
 
-import {getHref, key} from '../utils';
-import {image} from '../images';
+import {getHref, key} from '../../utils';
+import {image} from '../../images';
 import {
   PageHero,
   ResponsiveContainer,
@@ -22,8 +22,8 @@ import {
   InvertedButtonStyledLink,
   StyledButton,
   InvertedColorLink,
-} from './GlobalStyledComponents/ReversimStyledComps';
-import mediaQueryMin from '../styles/MediaQueriesMixin';
+} from '../GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 // styled-components components
 
