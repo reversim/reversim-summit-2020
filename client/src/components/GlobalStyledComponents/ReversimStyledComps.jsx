@@ -88,8 +88,8 @@ export const BreakLineMain = styled.hr`
 
   ${mediaQueryMin.s`
     ${({ theme: { space } }) =>`
-    min-width: 100px;  
-    display: inline-block;
+      min-width: 100px;  
+      display: inline-block;
       flex-grow: 1;
       align-self: center;
       margin-left: ${space.m};
@@ -167,7 +167,8 @@ export const HeadingAligner = styled.div`
       display: flex;
       align-items: center;
       margin: ${space.l} 0;
-    `}`}
+    `}
+  `}
 `;
 
 export const HeadingDiamond = styled.img`
@@ -193,7 +194,7 @@ const CircleJSX = ({className}) => {
       <path d="M50,0A50,50,0,1,1,0,50,50,50,0,0,1,50,0Z" />
     </svg>
   );
-}; //this component is used as the basis for the HeadingCircle styled-component below
+};
 
 export const HeadingCircle = styled(CircleJSX)`
     ${({ theme: { color, space, font } }) => `

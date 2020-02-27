@@ -1,24 +1,28 @@
 import React from 'react';
-import SpeakerForm from './SpeakerForm';
-import Page from '../Page';
-import {Container, Row, Col} from 'reactstrap';
-import SpeakerPageRoute from './SpeakerPageRoute';
+import styled from 'styled-components';
+
 import Redirect from '../Redirect';
+import SpeakerPageRoute from './SpeakerPageRoute';
+import Page from '../Page';
+
+import SpeakerForm from './SpeakerForm';
+import {AlignCenterColumn} from '../GlobalStyledComponents/ReversimStyledComps';
+
+// styled-components components
+
+const MainContainer = styled(AlignCenterColumn)`
+  ${({ theme: { space } }) => `
+    margin: calc(3 * ${space.xxl}) auto ${space.xxl} auto;
+  `}
+`;
+
+// React components components
 
 const SpeakerEditPage = ({speaker, user, updateUserData, ...props}) => (
   <Page title={`Edit ${speaker.name}`} user={user} {...props}>
-    <div className='navbar-margin'>
-    <Container className="my-8">
-      <Row>
-        <Col sm={{size: 8, offset: 2}}>
-          <h1 className="my-4">
-            Edit <b>{speaker.name}'s</b> details
-          </h1>
-          <SpeakerForm user={speaker} updateUserData={updateUserData} {...props} />
-        </Col>
-      </Row>
-    </Container>
-    </div>
+    <MainContainer>
+      <SpeakerForm user={speaker} updateUserData={updateUserData} {...props} />
+    </MainContainer>
   </Page>
 );
 
