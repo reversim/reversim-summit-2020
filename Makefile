@@ -1,8 +1,11 @@
 run:
-	cd client && npm install
-	cd server && npm install
 	npm install
 	npm run dev
+
+clean:
+	rm -rf node_modules
+	rm -rf client/node_modules
+	rm -rf server/node_modules
 
 initial-data-import:
 	scripts/import_dev_db.sh
