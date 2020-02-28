@@ -7,6 +7,9 @@ clean:
 	rm -rf client/node_modules
 	rm -rf server/node_modules
 
+build-prod:
+	npm run heroku-postbuild
+
 initial-data-import:
 	scripts/import_dev_db.sh
 
