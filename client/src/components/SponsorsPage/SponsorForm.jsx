@@ -5,6 +5,7 @@
 import React from "react";
 import pick from "lodash/pick";
 import { loadScript } from "../../utils";
+import {Button} from 'reactstrap';
 
 import styled from 'styled-components';
 import {
@@ -17,6 +18,8 @@ import {
 import mediaQueryMin from "../../styles/MediaQueriesMixin";
 
 // styled-components section
+
+const SubmitButton = Button;
 
 const TheForm = styled.form`
   ${({ theme: { space, color } }) => `  
