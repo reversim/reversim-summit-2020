@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Joi from '@hapi/joi';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import assign from 'lodash/assign';
+
 import {
   StepContainer,
   StepHeading,
@@ -81,7 +83,7 @@ class PrivateInfo extends Component {
       },
     };
 
-    const newState = _.assign({}, this.state, validationError);
+    const newState = assign({}, this.state, validationError);
 
     this.setState(newState);
 

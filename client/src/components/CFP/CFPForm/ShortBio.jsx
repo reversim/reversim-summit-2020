@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import styled from 'styled-components';
 import Joi from '@hapi/joi';
+import assign from 'lodash/assign';
 
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {
@@ -119,7 +120,7 @@ class ShortBio extends Component {
       },
     };
 
-    const newState = _.assign({}, this.state, validationError);
+    const newState = assign({}, this.state, validationError);
 
     this.setState(newState);
 

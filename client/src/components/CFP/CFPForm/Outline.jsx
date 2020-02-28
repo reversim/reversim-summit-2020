@@ -1,7 +1,7 @@
 import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
 import Joi from '@hapi/joi';
-
+import assign from 'lodash/assign';
 import ga from 'react-ga';
 
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
@@ -215,7 +215,7 @@ class Outline extends Component {
       },
     };
 
-    const newState = _.assign({}, this.state, validationError);
+    const newState = assign({}, this.state, validationError);
 
     this.setState(newState);
 

@@ -2,6 +2,7 @@ import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
 import Joi from '@hapi/joi';
 import { faChevronRight, faBookDead } from '@fortawesome/free-solid-svg-icons';
+import assign from 'lodash/assign';
 
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
 import {
@@ -162,7 +163,7 @@ class SessionProposal extends Component {
       },
     };
 
-    const newState = _.assign({}, this.state, validationError);
+    const newState = assign({}, this.state, validationError);
 
     this.setState(newState);
 
