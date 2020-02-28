@@ -8,13 +8,14 @@ import { image } from '../../images';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
-library.add(faPencilAlt, faTrash);
 
 import {
   Heading5,
   StyledButton,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
+
+library.add(faPencilAlt, faTrash);
 
 // Styled components components
 

@@ -2,6 +2,7 @@ import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
 import Joi from '@hapi/joi';
 import { faChevronRight, faBookDead } from '@fortawesome/free-solid-svg-icons';
+import assign from 'lodash/assign';
 
 import {PROPOSAL_TYPES_ARR} from '../../../data/proposals';
 import {
@@ -72,7 +73,7 @@ const TitleFieldCaption = () => (
   </Fragment>
 );
 
-const ProposalType = ({proposalType, ossilProject, setValue}) => (
+const ProposalType = ({type, ossilProject, setValue}) => (
   <ProposalTypes>
     <InputLabel>Proposal Types</InputLabel>
     <FormField
@@ -162,7 +163,7 @@ class SessionProposal extends Component {
       },
     };
 
-    const newState = _.assign({}, this.state, validationError);
+    const newState = assign({}, this.state, validationError);
 
     this.setState(newState);
 
@@ -195,7 +196,7 @@ class SessionProposal extends Component {
           onBlur={this.isValidated}
         />
         {validationError.field === "title" && ValidationWarning(validationError.message)}
-        <ProposalType 
+        <ProposalType
           setValue={setValue}
           type={type}
           ossilProject={ossilProject}

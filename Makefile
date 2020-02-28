@@ -1,8 +1,14 @@
 run:
-	cd client && npm install
-	cd server && npm install
 	npm install
-	node dev.js
+	npm run dev
+
+clean:
+	rm -rf node_modules
+	rm -rf client/node_modules
+	rm -rf server/node_modules
+
+build-prod:
+	npm run heroku-postbuild
 
 initial-data-import:
 	scripts/import_dev_db.sh

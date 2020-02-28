@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Joi from '@hapi/joi';
+import assign from 'lodash/assign';
 
 import {
   StepContainer,
@@ -64,7 +65,7 @@ class PublicInfo extends Component {
       },
     };
 
-    const newState = _.assign({}, this.state, validationError);
+    const newState = assign({}, this.state, validationError);
 
     this.setState(newState, console.log('%cnewState: ', 'background: green', newState));
 

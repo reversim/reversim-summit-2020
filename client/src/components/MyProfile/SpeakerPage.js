@@ -523,12 +523,10 @@ export class SpeakerPage extends React.Component {
                     index={index}
                   >
                     <SessionHeading>{session.title}</SessionHeading>
-                    
-                    <SessionInfo session={session} location={location} />
-                    
+                    <SessionInfo session={session} location={session.location} />
                     <StatusAndMoreContainer>
                       {
-                        canSeeStatus && 
+                        canSeeStatus &&
                         <SessionStatus className='text-purple2 font-weight-bold font-size-lm'>
                           Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}
                         </SessionStatus>

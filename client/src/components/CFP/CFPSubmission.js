@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import {Button} from 'reactstrap';
+import size from 'lodash/size';
 
 import Page from '../Page';
 import ProposalForm from './ProposalForm';
@@ -105,7 +106,7 @@ class CFPSubmission extends Component {
       console.log('hasProposalsMaxed error: ', error);
     }
 
-    const result = !!response && _.size(response.proposals) < MAX_PROPOSALS ? false : true;
+    const result = !!response && size(response.proposals) < MAX_PROPOSALS ? false : true;
     this.setState({
       hasProposalsMaxed: result,
     })

@@ -125,7 +125,7 @@ const CategoryCheckbox = ({name, description, onChange, checked, disabled}) => (
       disabled={disabled}
       readOnly={true}
     />
-    <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
+    <label className={cn({'text-primary': checked},'align-items-center d-flex')}>
       <div className={'d-flex flex-column'}>
         <h5 className="mb-0">{name}</h5>
         <small className={cn({'text-primary': checked})}>
@@ -145,7 +145,7 @@ const CategoryOther = ({onChange, onChangeInput, checked, disabled}) => (
       onChange={onChange}
       disabled={disabled}
     />
-    <label className={cn({'text-primary': checked},'align-items-center d-flex', categories)}>
+    <label className={cn({'text-primary': checked},'align-items-center d-flex')}>
       <h5 className="mb-0 mr-1">Other: </h5>
       <Input
         bsSize="sm"

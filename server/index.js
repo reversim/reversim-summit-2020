@@ -1,6 +1,3 @@
-if (process.env.NEW_RELIC_LICENSE_KEY) {
-  require('newrelic');
-}
 require("babel-register");
 const path = require('path');
 const { config } = require("dotenv");
