@@ -1,11 +1,11 @@
 #!/bin/bash
 
-initial_uri="https://summit2019.reversim.com/api/initial"
+initial_uri="https://summit2020.reversim.com/api/initial"
 initial_json_file="$1"
 
 if [ -z "$initial_json_file" ] ; then
   echo "usage: export-initial-to-csv <initial.json file>"
-  echo "Grab the most up to date initial file from https://summit2019.reversim.com/api/initial while logged in."
+  echo "Grab the most up to date initial file from https://summit2020.reversim.com/api/initial while logged in."
   exit 1
 fi
 
@@ -42,7 +42,7 @@ main() {
     proposal=$(proposal $pid)
 
     proposal_title="$(echo $proposal | jq .title)"
-    proposal_url="https://summit2019.reversim.com/session/${pid}"
+    proposal_url="https://summit2020.reversim.com/session/${pid}"
     proposal_type=$(echo $proposal | jq '.type' -r)
     proposal_categories=$(echo $proposal | jq '.categories | join(", ")' -r)
     proposal_tags=$(echo $proposal | jq '.tags | join(", ")' -r)
@@ -65,8 +65,8 @@ main() {
     speaker1_phone="$(echo $speaker1 | jq .phone -r)"
     speaker2_phone="$(echo $speaker2 | jq .phone -r)"
 
-    speaker1_url="https://summit2019.reversim.com/speaker/${speaker1_id}"
-    speaker2_url="https://summit2019.reversim.com/speaker/${speaker2_id}"
+    speaker1_url="https://summit2020.reversim.com/speaker/${speaker1_id}"
+    speaker2_url="https://summit2020.reversim.com/speaker/${speaker2_id}"
 
     speaker_names="$speaker1_name"
     [ -n "$speaker2_id" ] && speaker_names="$speaker_names, $speaker2_name"
