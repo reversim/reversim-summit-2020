@@ -276,7 +276,7 @@ module.exports = {
     // Otherwise React will be compiled in the very slow development mode.
     new webpack.DefinePlugin(env.stringified),
     // Minify the code.
-    // TODO(rantav): Return this uglify plugin after the issue with is solved joi-browser.min.js
+    // No need to uglify because gzip.
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: {
     //     warnings: false,
