@@ -23,7 +23,10 @@ export default Component => props => {
     users,
     fetchComplete,
   } = props;
-  let speaker = users[id];
+
+  
+  let speaker = users[id] ? users[id] : user;
+  
   if (!fetchComplete) return null;
   if (!speaker) return <NoUserFound user={user} {...props} />;
 

@@ -128,7 +128,12 @@ const SpeakerImg = styled.div`
 
     margin-bottom: ${space.l};
 
+<<<<<<< HEAD
     background-image: url(${image(picture, 230, 230)});
+=======
+    background-color: ${color.background_4};
+    background-image: url(${image(picture, 222, 222)});
+>>>>>>> Found some stying problems and fixed them
     background-size: cover;
     border: 4px solid ${color.border_2};
   `}
@@ -479,9 +484,10 @@ export class SpeakerPage extends React.Component {
     const canSeeStatus = canEdit && cfp || moderationCompleted;
 
     let sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
+
     if(!canSeeStatus){
       sessions = proposals.map(proposalId => acceptedProposals[proposalId]).filter(x => x);
-    }
+    };
 
       return (
       <Page title={name} user={user} {...this.props}>
@@ -591,35 +597,42 @@ export class SpeakerPage extends React.Component {
           </PersonalInfoConainer>
           )}
 
-          {sessions && sessions.length && (
-            <Fragment>
               <SessionsHeadingContainer>
                 <HeadingPlus />
                 <SectionHeading>Sessions</SectionHeading>
                 <BreakLineMain/>
               </SessionsHeadingContainer>
+          {
+            sessions && sessions.length
+              ? (
               <SessionsContainer>
                 {sessions.map((session, index) => (
-                  <InfoAndStatusContainer sessions={sessions}>
-                    {canSeeStatus && SessionStatus(session.status)}
+                  <InfoAndStatusContainer>
                     <SessionInfoContainer
                       key={key()}
                       index={index}
                     >
                       <SessionHeading>{session.title}</SessionHeading>
                       <SessionInfo session={session} location={session.location} />
-                      <ToSessionLink
-                      key={session._id}
-                      href={`/session/${getHref(session)}`}
-                      >
-                        To Session Page
-                      </ToSessionLink>
-                    </SessionInfoContainer>
-                  </InfoAndStatusContainer>
+                        {
+                          canSeeStatus &&
+                          <SessionStatus>
+                            Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}
+                          </SessionStatus>
+                        }
+                        <ToSessionLink
+                        key={session._id}
+                        href={`/session/${getHref(session)}`}
+                        >
+                          To Session Page
+                        </ToSessionLink>
+                      </SessionInfoContainer>
+                    </InfoAndStatusContainer>
                 ))}
               </SessionsContainer>
-            </Fragment>
-          )}
+          )
+          : <SessionHeading>No sessions found for {speaker.name.split(' ')[0]}</SessionHeading>
+        }
           </MainContainer>
       </Page>
     );

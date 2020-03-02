@@ -190,8 +190,8 @@ const SpeakerNameAndLink = styled.div`
 const SpeakerName = styled.p`
   ${({ theme: { font } }) => `
     max-width: 135px;
-    font-size: ${font.size_bg};
-    font-weight: ${font.weight_medium};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_bold};
     overflow-wrap: break-word;
   `}
   ${mediaQueryMin.s`
@@ -230,7 +230,9 @@ const TrashModalBody = styled(ModalBody)`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${color.background_5};
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: ${color.background_4};
   `}
 `;
 
@@ -241,13 +243,19 @@ const ModalMessage = styled.p`
     font-weight: ${font.weight_bold};
     width: 85%;
   `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      align-self: flex-start;
+      margin-top: ${space.xl};
+    `}
+  `}
 `;
 
 const TrashModalFooter = styled(ModalFooter)`
   ${({ theme: { color } }) => `
     display: flex;
     align-items: flex-end;
-    background: ${color.background_5};
+    background: ${color.background_4};
     border: 0;
   `}
 `;
@@ -322,9 +330,7 @@ class SessionPage extends Component {
     const isAuthor = user && session.speaker_ids.includes(user._id);
     
     const isTeamMember = user && user.isReversimTeamMember;
-    // const editPeriod = cfp || moderationCompleted;
-    // IMPORTANT: NETA- remove the always true
-    const editPeriod = true;
+    const editPeriod = cfp || moderationCompleted;
     
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
     
