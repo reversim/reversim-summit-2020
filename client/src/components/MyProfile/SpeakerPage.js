@@ -145,8 +145,12 @@ const SpeakerImg = styled.div`
 `;
 
 const ChangePhotoButton = styled(StyledButton)`
-  min-width: initial;
-  width: fit-content;
+  ${({ theme: { color } }) => `
+    min-width: initial;
+    width: fit-content;
+    border: solid 2px ${color.box_shadow_2};
+    box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
+  `}
   ${mediaQueryMin.l`
     ${({ theme: { color } }) => `
       border: solid 2px ${color.box_shadow_1};
