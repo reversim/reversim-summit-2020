@@ -3,7 +3,7 @@
 * This project uses Yarn (any version will do, lockfile is versioned)
 * Use the 'yarn' variants: e.g. `yarn add --save` instead of `npm install --save`
 * We don't uglify (we have gzip)
-* We don't eslint as part of webpack (we have CI + feel free to set up your editor [VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) [Vim](https://medium.com/@hpux/vim-and-eslint-16fa08cc580f) [Intellij](https://www.jetbrains.com/help/idea/eslint.html)
+* We don't eslint as part of webpack (we have CI + feel free to set up your editor [VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) [Vim](https://medium.com/@hpux/vim-and-eslint-16fa08cc580f) [Intellij](https://www.jetbrains.com/help/idea/eslint.html))
 
 
 ## Table of Contents
