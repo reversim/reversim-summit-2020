@@ -1,6 +1,6 @@
 run:
-	npm install
-	npm run dev
+	yarn install
+	yarn run dev
 
 clean:
 	rm -rf node_modules
@@ -8,7 +8,7 @@ clean:
 	rm -rf server/node_modules
 
 build-prod:
-	npm run heroku-postbuild
+	yarn run heroku-postbuild
 
 initial-data-import:
 	scripts/import_dev_db.sh
