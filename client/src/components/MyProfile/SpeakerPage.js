@@ -480,6 +480,7 @@ export class SpeakerPage extends React.Component {
     const { cfp, moderationCompleted } = eventConfig;
 
     const {isUploadingPhoto} = this.state;
+    
     const canEdit = (user && user.isReversimTeamMember) || isUser;
     const canSeeStatus = canEdit && cfp || moderationCompleted;
 
@@ -488,6 +489,15 @@ export class SpeakerPage extends React.Component {
     if(!canSeeStatus){
       sessions = proposals.map(proposalId => acceptedProposals[proposalId]).filter(x => x);
     };
+
+    /* NOTE:
+       sessions needs some refacatoring:
+
+       * If the user looks at his own profile, user can see sessions all the time and also status.
+       * If user looks at other user's sessions he can only see the sessions if they were accepted.
+       
+       Session status needs to be available to ??? waiting on a replay from Ran.
+    */
 
       return (
       <Page title={name} user={user} {...this.props}>

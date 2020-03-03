@@ -401,7 +401,7 @@ class SessionPage extends Component {
             video_urls &&
             video_urls.map((speaker, i) => (
               speaker.video_url && (
-              <TextContainer className="mb-3" key={i}>
+              <TextContainer key={i}>
                 <TextHeading>Watch {speaker.name}</TextHeading>
                 <GeneralLink href={speaker.video_url} target="_blank">
                   Link to {speaker.name}'s video
