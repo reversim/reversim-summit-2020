@@ -313,7 +313,7 @@ const TrackRecord = styled(ReactMarkdown)`
   `}
 `;
 
-const SessionsHeadingContainer = styled.div`
+const SegmentHeadingContainer = styled.div`
   ${({ theme: { space } }) => `
     width: 100%;
     display: flex;
@@ -373,9 +373,15 @@ const SessionInfoContainer = styled.div`
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space }, index }) => `
+<<<<<<< HEAD
     max-width: initial;
     width: 47.5%;
       margin: 0 ${index % 2 ? `auto` : `calc(4 * ${space.m})`} ${space.xxl} auto;
+=======
+      max-width: initial;
+      width: 47.5%;
+      margin: 0  ${index % 2 ? `auto` : space.m} ${space.xxl} auto;
+>>>>>>> Fixed odd number of sessions style
     `}
   `}
   ${mediaQueryMin.l`
@@ -480,24 +486,15 @@ export class SpeakerPage extends React.Component {
     const { cfp, moderationCompleted } = eventConfig;
 
     const {isUploadingPhoto} = this.state;
-    
+
     const canEdit = (user && user.isReversimTeamMember) || isUser;
     const canSeeStatus = canEdit && cfp || moderationCompleted;
 
     let sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
 
-    if(!canSeeStatus){
+    if(!isUser){
       sessions = proposals.map(proposalId => acceptedProposals[proposalId]).filter(x => x);
     };
-
-    /* NOTE:
-       sessions needs some refacatoring:
-
-       * If the user looks at his own profile, user can see sessions all the time and also status.
-       * If user looks at other user's sessions he can only see the sessions if they were accepted.
-       
-       Session status needs to be available to ??? waiting on a replay from Ran.
-    */
 
       return (
       <Page title={name} user={user} {...this.props}>
@@ -554,13 +551,13 @@ export class SpeakerPage extends React.Component {
            (
             <PersonalInfoConainer>
 
-              <SessionsHeadingContainer>
+              <SegmentHeadingContainer>
                 <HeadingPlus />
                 <SectionHeading>
                   Personal information
                 </SectionHeading>
                 <BreakLineMain/>
-              </SessionsHeadingContainer>
+              </SegmentHeadingContainer>
 
               <PersonalInfoHeading>Track record</PersonalInfoHeading>
               {
@@ -607,11 +604,11 @@ export class SpeakerPage extends React.Component {
           </PersonalInfoConainer>
           )}
 
-              <SessionsHeadingContainer>
+              <SegmentHeadingContainer>
                 <HeadingPlus />
                 <SectionHeading>Sessions</SectionHeading>
                 <BreakLineMain/>
-              </SessionsHeadingContainer>
+              </SegmentHeadingContainer>
           {
             sessions && sessions.length
               ? (
