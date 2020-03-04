@@ -262,18 +262,21 @@ export const HeadingPlus = styled(PlusJSX)`
 
 export const Heading2 = styled.h2`
   ${({ theme: { color, font, space } }) =>`
+    width: min-content; 
     color: ${color.heading_2};
     margin-right: calc(2 * ${space.m});
     font-family: ${font.main};
     font-size: ${font.size_h3};
     font-weight: ${font.weight_normal};
   `}
-
-    ${mediaQueryMin.l`
-      ${({ theme: { font } }) =>`
-        white-space: nowrap;
-        font-size: ${font.size_h2};
-      `}
+  ${mediaQueryMin.m`
+    width: initial;
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { font } }) =>`
+      white-space: nowrap;
+      font-size: ${font.size_h2};
+    `}
     `}
 `;
 

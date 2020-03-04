@@ -112,8 +112,8 @@ const PremiumSponsors = ({ sponsors, user, updateSponsor, deleteSponsor }) => {
     return (
       <Fragment>
         <HeadingAligner>
-          <Heading>
             <HeadingDecoration src={diamond} alt="diamond" />
+          <Heading>
             Premium Sponsors
           </Heading>
           <BreakLineInverted />

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import {CFP_ENDS_STR_SHORT} from '../../data/proposals';
 import {getRemainingCFPDays, REVERSIM_SUMMIT} from '../../utils';
+import CFPIntro from './CFPIntro';
 import {
   AlignCenterColumn,
   Heading2,
@@ -21,15 +22,33 @@ const TitleContainer = styled.div`
     justify-content: center;
   `}
 `;
+
+const HeadingContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 const PageTitle = styled(Heading2)`
   ${({ theme: { color } }) => `
     color: ${color.text_1};
+  `}
+  ${mediaQueryMin.l`
+    white-space: normal;
+  `}
+`;
+
+const Dash = styled(PageTitle)`
+  display: none;
+  ${mediaQueryMin.xxl`
+  display: inline;
   `}
 `;
 
 const HorizontalLine = styled(BreakLineInverted)`
   ${mediaQueryMin.s`
     width: 100%;
+    max-height: 1vh;
     align-self: flex-start;
     margin-left: 0;
   `}
@@ -64,7 +83,8 @@ const DaysRemaining = styled.span`
 `;
 
 const ClosedContainer = styled(AlignCenterColumn)`
-  height: 100vh;
+  height: 70vh;
+  justify-content: center;
 `;
 
 
@@ -74,29 +94,40 @@ const CFPTitle = (props) => {
   const remainingDays = getRemainingCFPDays();
   const isToday = remainingDays <= 0;
   return (
-    <TitleContainer>
-    {eventConfig.cfp
-    ? (
-        <AlignCenterColumn>
-          <PageTitle>{REVERSIM_SUMMIT} - Proposal Submission</PageTitle>
-          <HorizontalLine />
-          <Heading4>Read carefully before submission!</Heading4>
-          <Deadline>Deadline: {isToday ? 'Today!' : CFP_ENDS_STR_SHORT}</Deadline>
-          {isToday && (
-            <CountDown>
-              <DaysRemaining>{remainingDays}</DaysRemaining> days remaining
-            </CountDown>
-          )}
-        </AlignCenterColumn>
-      )
-    : (
-        <ClosedContainer>
-          <PageTitle>{REVERSIM_SUMMIT} - CFP is closed!</PageTitle>
-          <HorizontalLine />
-        </ClosedContainer>
-      )
-    }
-    </TitleContainer>
+    <Fragment>
+      <TitleContainer>
+      {eventConfig.cfp //IMPORTANT: remove bang
+      ? (
+          <AlignCenterColumn>
+            <HeadingContainer>
+              <PageTitle>{REVERSIM_SUMMIT}</PageTitle>
+              <Dash>-</Dash>
+              <PageTitle>Proposal Submission</PageTitle>
+            </HeadingContainer>
+            <HorizontalLine />
+            <Heading4>Read carefully before submission!</Heading4>
+            <Deadline>Deadline: {isToday ? 'Today!' : CFP_ENDS_STR_SHORT}</Deadline>
+            {isToday && (
+              <CountDown>
+                <DaysRemaining>{remainingDays}</DaysRemaining> days remaining
+              </CountDown>
+            )}
+          </AlignCenterColumn>
+        )
+      : (
+          <ClosedContainer>
+            <HeadingContainer>
+              <PageTitle>{REVERSIM_SUMMIT}</PageTitle>
+              <Dash>-</Dash>
+              <PageTitle>CFP ended on {CFP_ENDS_STR_SHORT}</PageTitle>
+            </HeadingContainer>
+            <HorizontalLine />
+          </ClosedContainer>
+        )
+      }
+      </TitleContainer>
+      {eventConfig.cfp && <CFPIntro />}
+    </Fragment>
   );
 };
 

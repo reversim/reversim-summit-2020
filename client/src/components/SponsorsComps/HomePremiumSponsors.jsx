@@ -11,7 +11,7 @@ const Contianer = styled.div`
   flex-wrap: wrap;
 
   ${mediaQueryMin.l`
-  justify-content: space-between;
+  justify-content: space-around;
   `}
 `;
 

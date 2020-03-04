@@ -33,7 +33,7 @@ const CommunityHeadingAligner = styled(HeadingAligner)`
 `;
 
 const CommunityHeading = styled(Heading2)`
-  max-width: min-content;
+  max-width: initial;
 `;
 
 const SponsorsContainer = styled.div`
@@ -105,9 +105,7 @@ const CommunitySponsors = ({
       <ColumnContainer>
         <CommunityHeadingAligner>
           <HeadingCircle />
-          <CommunityHeading>
-            Community Sponsors
-          </CommunityHeading>
+          <CommunityHeading>Community Sponsors</CommunityHeading>
           <BreakLineMain />
         </CommunityHeadingAligner>
         <SponsorsContainer>

@@ -13,7 +13,7 @@ import {
   LoadingPage,
   Heading4,
   ItalicLink,
-  ButtonStyledLink,
+  InvertedButtonStyledLink,
   FullScreenBoundries,
   MarginedPageHeading,
 } from '../GlobalStyledComponents/ReversimStyledComps';
@@ -61,9 +61,9 @@ const SubmissionClosed = () => (
 const NonAuthenticated = () => (
   <FullScreenBoundries>
     <MarginedPageHeading>Login with Google is required in order to submit a proposal</MarginedPageHeading>
-    <ButtonStyledLink href={getLoginUrl()}>
+    <InvertedButtonStyledLink href={getLoginUrl()}>
       Login
-    </ButtonStyledLink>
+    </InvertedButtonStyledLink>
   </FullScreenBoundries>
 );
 
