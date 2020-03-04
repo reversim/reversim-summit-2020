@@ -166,6 +166,10 @@ const ChangePhotoInput = styled.input`
   bottom: 0;
   left: 0;
   right: 0;
+
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const SpeakerIntroContainer = styled.div`
