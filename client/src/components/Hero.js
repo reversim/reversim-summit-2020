@@ -12,7 +12,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { Container } from "reactstrap";
 import { ButtonStyledLink } from './GlobalStyledComponents/ReversimStyledComps';
 
-import logoImg from "../images/SVG/logo.svg";
+import logoImg from "../images/SVG/RS20-02.svg";
 import backgroundImg from "../images/home-reg-bg.png";
 
 

@@ -29,7 +29,7 @@ import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
 
 import newImg from '../images/new-nav-tag.png';
-import logoImg from '../images/SVG/nav-logo.svg';
+import logoImg from '../images/SVG/RS20-03.svg';
 
 // styled-components section
 const NavbarContainer = styled.div`
