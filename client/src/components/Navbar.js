@@ -200,7 +200,7 @@ class Navbar extends Component {
                   )}
                   {voting && pathname !== '/my-votes' && (
                     <NavbarItem 
-                      text="Vote for session" 
+                      text="Vote for sessions" 
                       to="proposals"
                     />
                   )}
