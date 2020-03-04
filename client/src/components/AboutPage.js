@@ -23,7 +23,7 @@ import {
 // styled-componets components
 
 const IntroContainer = styled.div`
-  ${({ theme: { color, font, space, mq } }) => `
+  ${({ theme: { color, font, space } }) => `
     padding: calc(2 * ${space.xxl}) 0 calc(3 * ${space.xl}) 0;
 
     background-color: ${color.background_2};
@@ -90,10 +90,14 @@ const MainHeadingContainer = styled(HeadingAligner)`
   `}
 `;
 
+const MainHeading = styled(Heading2)`
+  width: initial;
+`;
+
 const AboutTeam = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const AboutTeamMember = styled.div`
@@ -104,35 +108,46 @@ const AboutTeamMember = styled.div`
     flex: 0 0 100%;
   `}
 
-    ${mediaQueryMin.m`
-      flex-direction: row;
-    `}
+  ${mediaQueryMin.m`
+    flex-direction: row;
+  `}
+
+  ${mediaQueryMin.l`
+    min-width: 780px;
+    max-width: 780px;
+    align-self: center;
+  `}
 
   ${mediaQueryMin.xl`
     flex: 0 0 calc(50% - 20px);
   `}
 `;
 
+const MemberImgContainer = styled.div`
+  ${({ theme: { color } }) => `
+  display: flex;
+  justify-content: center;
+  height: 240px;
+  flex: 0 0 240px;
+
+  border: 4px solid ${color.box_shadow_1};
+  border-bottom: 0px;
+  `}
+  ${mediaQueryMin.m`
+  ${({ theme: { color } }) => `
+    border: 4px solid ${color.box_shadow_1};
+    border-right: 0px;
+  `}`}
+`
+
 const MemberImg = styled.div`
-  ${({ theme: { color }, picture }) => `
-    display: inline;
+  ${({ picture }) => `
     background-image: url(${picture});
     width: 240px;
-    height: 240px;
-
-    flex: 0 0 240px;
     
     background-size: cover;
     background-position: top;
-    
-    border: 4px solid ${color.box_shadow_1};
-    border-bottom: 0px;
   `}
-  ${mediaQueryMin.m`
-    ${({ theme: { color } }) => `
-      border: 4px solid ${color.box_shadow_1};
-      border-right: 0px;
-    `}`}
 `;
 
 const MemberDescriptionContainer = styled.div`
@@ -199,10 +214,12 @@ class TeamMember extends React.Component {
 
     return (
       <AboutTeamMember>
-        <MemberImg
-          picture={picture}
-          alt={name}
-        />
+        <MemberImgContainer>
+          <MemberImg
+            picture={picture}
+            alt={name}
+          />
+        </MemberImgContainer>
         <MemberDescriptionContainer
           isExpanded={this.state.isExpanded}
           onClick={this.toggle} //this doesn't work properly
@@ -270,7 +287,7 @@ const AboutPage = props => {
       </IntroContainer>
       <MeetTheTeamContainer>
           <MainHeadingContainer>
-            <Heading2>Meet the team</Heading2>
+            <MainHeading>Meet the team</MainHeading>
             <BreakLineMain />
           </MainHeadingContainer>
           <AboutTeam>
