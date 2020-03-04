@@ -1,10 +1,10 @@
 import moment from 'moment-timezone';
 import moment2 from 'moment';
 const config = {
-  cfpStartDate: process.env.CFP_START_DATE ||  "2019-01-20",
-  cfpEndDate: process.env.CFP_END_DATE || "2020-02-28",
-  votingStartDate: process.env.VOTING_START_DATE || "2020-02-12",
-  votingEndDate: process.env.VOTING_END_DATE || "2020-03-23",
+  cfpStartDate: process.env.CFP_START_DATE ||  "2019-05-01",
+  cfpEndDate: process.env.CFP_END_DATE || "2020-06-01",
+  votingStartDate: process.env.VOTING_START_DATE || "2020-06-14",
+  votingEndDate: process.env.VOTING_END_DATE || "2020-06-31",
   summitStartDate: process.env.SUMMIT_START_DATE || "2020-10-14",
 }
 
@@ -26,6 +26,8 @@ export default () => {
     votingEnded,
     votingCountDown,
     summitStartCountDown,
-    moderationCompleted
+    moderationCompleted,
+    agendaPublished: false, // TODO: use env var
+    registrationOpen: false, // TODO: use env var
   }
 }

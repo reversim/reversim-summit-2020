@@ -54,7 +54,7 @@ const MainAligner = styled.div`
 `;
 
 const NavItemAligner = styled.div`
- ${({theme: { space, } }) =>` 
+ ${({theme: { space, } }) =>`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -93,7 +93,6 @@ const GetTicketsCTA = () => (
     href="https://ti.to/reversim-summit/2019">
       Get Tickets
     </ButtonStyledLink>
-  
 );
 
 const NavbarItem = ({to, text, external, pathname}) => {
@@ -151,13 +150,10 @@ class Navbar extends Component {
       onLogout,
       pathname,
       history,
-      eventConfig: {
-        cfp,
-        voting,
-      },
+      eventConfig,
     } = this.props;
     const {fixed, currentPage: _currentPage} = this.state;
-    const items = navItems(isHome);
+    const items = navItems(eventConfig);
     const isColored = !isHome || fixed;
 
     const logoEl = (
@@ -189,16 +185,18 @@ class Navbar extends Component {
                   navbar
                   className={navbarOpen ? 'navbarOpen': ''}
                   >
-                  <NavLI>
-                    <GetTicketsCTA /> 
-                  </NavLI>
-                  {cfp && (
+                  { eventConfig.registrationOpen &&
+                    <NavLI>
+                      <GetTicketsCTA /> 
+                    </NavLI>
+                  }
+                  {eventConfig.cfp && (
                     <NavbarItem 
                       text="Submit session" 
                       to="cfp"
                     />
                   )}
-                  {voting && pathname !== '/my-votes' && (
+                  {eventConfig.voting && pathname !== '/my-votes' && (
                     <NavbarItem 
                       text="Vote for sessions" 
                       to="proposals"
@@ -211,7 +209,7 @@ class Navbar extends Component {
                       {...item} 
                     />
                   ))}
-                  {voting && (
+                  {eventConfig.voting && (
                     <NavbarItem
                       key={`navbar-i-proposals`}
                       pathname={pathname}
