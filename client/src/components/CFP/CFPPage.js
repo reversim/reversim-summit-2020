@@ -8,12 +8,7 @@ const CFPPage = props => {
 
   return (
     <Page title="Call for papers" {...props}>
-      <Fragment>
-        <CFPTitle eventConfig={eventConfig} />
-        <div className="container">
-          <CFPIntro />
-        </div>
-      </Fragment>
+      <CFPTitle eventConfig={eventConfig} />
     </Page>
   );
 };
