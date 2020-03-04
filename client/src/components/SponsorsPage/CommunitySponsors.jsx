@@ -105,9 +105,7 @@ const CommunitySponsors = ({
       <ColumnContainer>
         <CommunityHeadingAligner>
           <HeadingCircle />
-          <CommunityHeading>
-            Community Sponsors
-          </CommunityHeading>
+          <CommunityHeading>Community Sponsors</CommunityHeading>
           <BreakLineMain />
         </CommunityHeadingAligner>
         <SponsorsContainer>
