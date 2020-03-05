@@ -1,17 +1,12 @@
 import {isServer} from '../utils';
-
-const _register = {to: 'register', text: 'Register'};
-const _team = {to: 'team', text: 'Team'};
-const location = {to: 'location', text: 'Venue'};
+// import eventConfig from '../init/eventConfig';
 const speakers = {to: 'speakers', text: 'Speakers'};
 const sponsors = {to: 'sponsors', text: 'Sponsors'};
 const agenda = {to: 'agenda', text: 'Agenda'};
-const _proposals = {to: 'proposals', text: 'Proposals'};
 const sessions = {to: 'sessions', text: 'Sessions'};
-const _timeline = {to: 'timeline', text: 'Timeline'};
 const about = {to: 'about', text: 'About'};
 
-export default () => {
+export default (eventConfig) => {
   let items;
 
   if (isServer) {
@@ -21,7 +16,13 @@ export default () => {
       to: `/${item.to}.html`,
     }));
   } else {
-    items = [about, agenda, sponsors, speakers, sessions];
+    items = [about];
+    if (eventConfig.agendaPublished) {
+      items.push(agenda);
+    }
+    items.push(sponsors);
+    eventConfig.agendaPublished && items.push(speakers);
+    items.push(sessions);
   }
 
   return items;
