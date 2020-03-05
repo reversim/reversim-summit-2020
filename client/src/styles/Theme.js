@@ -20,6 +20,10 @@ const theme = {
     step_zilla_sub_heading: 'rgb(108, 117, 125)',
     
     session_category: 'rgb(137, 108, 255)',
+
+    session_status_proposed: 'rgb(255, 97, 0)',
+    session_status_accepted: 'rgb(41, 179, 66)',
+    session_status_decline: 'rgb(255, 46, 95)',
     
     // Background colors
     background_1: 'rgba(81, 39, 255, 0.9)',

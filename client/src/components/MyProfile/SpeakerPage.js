@@ -337,7 +337,18 @@ const StatusAndMoreContainer = styled.div`
 `;
 
 const SessionStatus = styled(SessionHeading)`
-  display: block;
+${ ({ theme: { color }, status }) => `
+display: block;
+color: ${
+  status === 'proposed' 
+    ? color.session_status_proposed
+    : status === 'accepted' 
+      ? color.session_status_accepted 
+      : status === 'withdrawn'
+      ? color.session_status_decline
+      : color.session_status_decline
+};
+`}  
 `;
 
 const ToSessionLink = styled(InvertedButtonStyledLink)`
@@ -351,14 +362,14 @@ const SessionStatusComponent = status => {
   
   const statusMessage = status === 'proposed' 
                           ? 'Waiting for review'
-                          : status === 'withdrawn'
+                          : status === 'accepted' 
+                            ? 'Accepted' 
+                            : status === 'withdrawn'
                             ? 'Session withdrawn'
-                            : status === 'accepted' 
-                              ? 'Accepted' 
-                              : 'Sadly not this time'
+                            : 'Sadly not this time'
   
   return (
-    <SessionStatus>Status: {statusMessage}</SessionStatus>
+    <SessionStatus status={status}>Status: {statusMessage}</SessionStatus>
   )
 }
 
