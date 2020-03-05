@@ -72,9 +72,10 @@ const HeroContent = styled.div`
 
 const LogoImg = styled.img`
   width: 250px;
+  align-self: center;
 
   ${mediaQueryMin.xs`
-    width: 350px;
+    width: 320px;
   `}
   ${mediaQueryMin.m`
     width: 400px;
