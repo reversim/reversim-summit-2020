@@ -42,7 +42,7 @@ Then run `mongod` in a separate tab, e.g. open a new tab and type
 
 The default database name is `ReversimSummit20`, and it's defined in /server/db/constants.js
 
-It's possible to set a custom db connection string by: `MONGODB_URI=<your_db_url> npm start`
+It's possible to set a custom db connection string by: `MONGODB_URI=<your_db_url> yarn start`
 
 Intial data import:
 

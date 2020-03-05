@@ -45,8 +45,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "sec:audit": "yarn run improved-yarn-audit --ignore-dev-deps",
     "static:ssr": "NODE_ENV=production webpack -p --config config/webpack.config.ssr.js --progress",
-    "static:watch": "npm run static:ssr --watch",
-    "static:build": "npm run static:ssr && node build/render.js"
+    "static:watch": "yarn run static:ssr --watch",
+    "static:build": "yarn run static:ssr && node build/render.js"
   },
   "proxy": {
     "/api": {
