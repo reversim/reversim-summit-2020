@@ -336,19 +336,25 @@ const StatusAndMoreContainer = styled.div`
   `}
 `;
 
-const SessionStatus = styled(SessionHeading)`
-${ ({ theme: { color }, status }) => `
-display: block;
-color: ${
-  status === 'proposed' 
-    ? color.session_status_proposed
-    : status === 'accepted' 
-      ? color.session_status_accepted 
-      : status === 'withdrawn'
-      ? color.session_status_decline
-      : color.session_status_decline
-};
-`}  
+const SessionStatus = styled.p`
+  ${ ({ theme: { space, color, font }, status }) => `
+    max-height: 45px;
+    padding: ${space.m};
+    color: ${color.text_1};
+    background: ${
+      status === 'proposed' 
+        ? color.session_status_proposed
+        : status === 'accepted' 
+          ? color.session_status_accepted 
+          : status === 'withdrawn'
+          ? color.session_status_decline
+          : color.session_status_decline
+    };
+
+    font-weight: ${font.weight_bold};
+    font-size: ${font.size_md};
+    border-radius: 5px;
+  `}  
 `;
 
 const ToSessionLink = styled(InvertedButtonStyledLink)`
@@ -369,7 +375,7 @@ const SessionStatusComponent = status => {
                             : 'Sadly not this time'
   
   return (
-    <SessionStatus status={status}>Status: {statusMessage}</SessionStatus>
+    <SessionStatus status={status}>{statusMessage}</SessionStatus>
   )
 }
 
