@@ -329,10 +329,18 @@ const SessionHeading = styled(Heading4)`
 const StatusAndMoreContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-content: center;
+  ${mediaQueryMin.m`
+    justify-content: space-between;
+  `}
+  ${mediaQueryMin.l`
+    justify-content: flex-end;
+  `}
+  ${mediaQueryMin.xl`
+    justify-content: space-between;
+  `}
 `;
-
 const SessionStatus = styled.p`
   ${ ({ theme: { space, color, font }, status }) => `
     max-height: 55px;
@@ -364,6 +372,7 @@ const SessionStatus = styled.p`
 const ToSessionLink = styled(InvertedButtonStyledLink)`
   ${({theme: { space } }) => `
     height: 50px;
+    margin-right: ${space.s};
     padding-top: ${space.l};
     min-width: max-content;
     align-self: flex-end;
