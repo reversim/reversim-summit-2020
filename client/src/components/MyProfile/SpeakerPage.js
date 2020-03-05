@@ -328,18 +328,19 @@ const SessionHeading = styled(Heading4)`
 
 const StatusAndMoreContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-between;
-
-  ${mediaQueryMin.xl`
-    flex-direction: row;
-  `}
+  align-content: center;
 `;
 
 const SessionStatus = styled.p`
   ${ ({ theme: { space, color, font }, status }) => `
-    max-height: 45px;
+    max-height: 55px;
+    max-width: fit-content;
+
     padding: ${space.m};
+    margin-bottom: ${space.m};
+
     color: ${color.text_1};
     background: ${
       status === 'proposed' 
@@ -354,12 +355,19 @@ const SessionStatus = styled.p`
     font-weight: ${font.weight_bold};
     font-size: ${font.size_md};
     border-radius: 5px;
-  `}  
+    border: double 5px ${color.border_2};
+
+    text-align: center;
+  `}
 `;
 
 const ToSessionLink = styled(InvertedButtonStyledLink)`
-  min-width: max-content;
-  align-self: flex-end;
+  ${({theme: { space } }) => `
+    height: 50px;
+    padding-top: ${space.l};
+    min-width: max-content;
+    align-self: flex-end;
+  `}
 `;
 
 // React components

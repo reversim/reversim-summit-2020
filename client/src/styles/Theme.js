@@ -51,6 +51,7 @@ const theme = {
    
     // Borders and box shadows
     border_1: 'rgb(81, 39, 255)',
+    border_2: 'rgb(255, 255, 255)',
 
     box_shadow_1: 'rgb(81, 39, 255)',
     box_shadow_1_dimmed: 'rgba(81, 39, 255, 0.5)',
