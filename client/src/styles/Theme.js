@@ -2,77 +2,75 @@ const theme = {
   // the website's color scheme
   color: {
     // color
-    text_1: 'rgb(255, 255, 255)',
-    text_2: 'rgb(0, 0, 0)',
-    text_3: 'rgb(81, 39, 255)',
+    text_1: '#ffffff',
+    text_2: '#000000',
+    text_3: '#5127ff',
     
-    heading_2: 'rgb(81, 39, 255)',
-    input_1: 'rgb(73, 80, 87)',
-    font_awsome_trash: 'rgb(189, 58, 2)',
-    font_awsome_watch: 'rgb(255, 97, 0)',
-    heading_decoration: 'rgb(255, 97, 0)',
-    font_awsome_nav: 'rgb(81, 39, 255)',
+    heading_2: '#5127ff',
+    input_1: '#495057',
+    font_awsome_trash: '#bd3a02',
+    font_awsome_watch: '#ff6100',
+    heading_decoration: '#ff6100',
+    font_awsome_nav: '#5127ff',
 
-    important: 'rgb(255, 46, 95)',
-    note_this: 'rgb(255, 97, 0)',
-    count_down: 'rgb(255, 255, 255)',
+    important: '#ff2e5f',
+    note_this: '#ff6100',
+    count_down: '#ffffff',
 
-    step_zilla_sub_heading: 'rgb(108, 117, 125)',
+    step_zilla_sub_heading: '#6c757d',
     
-    session_category: 'rgb(137, 108, 255)',
+    session_category: '#896cff',
 
-    session_status_proposed: 'rgb(255, 97, 0)',
-    session_status_accepted: 'rgb(41, 179, 66)',
-    session_status_decline: 'rgb(255, 46, 95)',
+    session_status_proposed: '#ff6100',
+    session_status_accepted: '#29b342',
+    session_status_decline: '#ff2e5f',
     
     // Background colors
-    background_1: 'rgba(81, 39, 255, 0.9)',
-    background_2: 'rgb(81, 39, 255)', // #5127ff
-    background_3: 'rgb(51, 18, 188)',
-    background_4: 'rgb(255, 255, 255)',
-    background_count_down: 'rgb(255, 255, 255)',
-    background_modal: 'rgb(255, 248, 237)',
+    background_1: 'rgba(81, 39, 255, 0.9)', // #5127ff
+    background_2: '#5127ff',
+    background_3: '#3312bc',
+    background_4: '#ffffff',
+    background_count_down: '#ffffff',
+    background_modal: '#fff8ed',
 
     background_linear_gradient_1: 'linear-gradient(to right, rgba(118, 12, 146, 0.4) 0%, rgba(0, 92, 177, 0.8) 100%)',
-
-    background_linear_gradient_2: 'linear-gradient(to right, rgb(118, 12, 146) 0%, rgb(0, 92, 177) 100%)',
 
     font_awsome_background_1: 'rgba(118, 12, 146, 0.4)',
     font_awsome_background_2: `rgba(0, 92, 177, 0.2)`,
 
-    button_bkgr_1: 'rgb(137, 108, 255)',
-    button_bkgr_2: 'rgb(255, 97, 0)',
-    button_bkgr_3: 'rgb(41, 179, 66)',
-    button_bkgr_4: 'rgb(255, 46, 95)',
-    button_bkgr_5: 'rgb(108, 117, 125)',
+    button_bkgr_1: '#896cff',
+    button_bkgr_2: '#ff6100',
+    button_bkgr_3: '#29b342',
+    button_bkgr_4: '#ff2e5f',
+    button_bkgr_5: '#6c757d',
 
-    image_link_bkgr: 'rgb(255, 255, 255)',
-    input_bkgr_1: 'rgb(255, 255, 255)',
+    image_link_bkgr: '#ffffff',
+    input_bkgr_1: '#ffffff',
    
     // Borders and box shadows
-    border_1: 'rgb(81, 39, 255)',
-    border_2: 'rgb(255, 255, 255)',
+    border_1: '#5127ff',
+    border_2: '#ffffff',
 
-    box_shadow_1: 'rgb(81, 39, 255)',
+    box_shadow_1: '#5127ff',
     box_shadow_1_dimmed: 'rgba(81, 39, 255, 0.5)',
-    box_shadow_2: 'rgb(255, 255, 255)',
-    box_shadow_3: 'rgb(200, 200, 200)',
+    box_shadow_2: '#ffffff',
+    box_shadow_3: '#c8c8c8',
     
-    font_awsome_border: `rgb(0, 58, 204)`,
+    font_awsome_border: `#003acc`,
     font_awsome_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     font_awsome_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
     font_awsome_box_shadow_3: 'rgba(0, 238, 255, 0.1)',
     
-    input_border_1: 'rgb(206, 212, 218)',
-    input_border_2: 'rgb(128, 164, 255)',
-    input_border_3: 'rgb(0, 72, 255)',
+    input_border_1: '#ced4da',
+    input_border_2: '#80a4ff',
+    input_border_3: '#0048ff',
     input_box_shadow_1: 'inset 0 1px 1px rgba(0, 0, 0, 0.075)',
     input_box_shadow_2: '0 0 0 calc(0.2 * 16px) rgba(0, 72, 255, 0.25)', //NOTE: when using this note that the size corraltes to font.size_reg (16px)
     form_button_box_shadow_1: 'rgba(0, 238, 255, 0.2)',
     form_button_box_shadow_2: 'rgba(89, 0, 255, 0.8)',
-    form_button_border_hover: 'rgb(84, 91, 98)',
+    form_button_border_hover: '#545b62',
     
-    session_category_border: 'rgb(137, 108, 255)',
+    session_category_border: '#896cff',
   },
 
   // the website's fonts
