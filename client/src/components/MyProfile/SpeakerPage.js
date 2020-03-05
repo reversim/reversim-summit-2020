@@ -341,7 +341,7 @@ const StatusAndMoreContainer = styled.div`
     justify-content: space-between;
   `}
 `;
-const SessionStatus = styled.p`
+const SessionStatusBadge = styled.p`
   ${ ({ theme: { space, color, font }, status }) => `
     max-height: 55px;
     max-width: fit-content;
@@ -362,7 +362,6 @@ const SessionStatus = styled.p`
 
     font-weight: ${font.weight_bold};
     font-size: ${font.size_md};
-    border-radius: 5px;
     border: double 5px ${color.border_2};
 
     text-align: center;
@@ -381,7 +380,7 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 
 // React components
 
-const SessionStatusComponent = status => {
+const SessionStatus = status => {
   
   const statusMessage = status === 'proposed' 
                           ? 'Waiting for review'
@@ -392,7 +391,7 @@ const SessionStatusComponent = status => {
                             : 'Sadly not this time'
   
   return (
-    <SessionStatus status={status}>{statusMessage}</SessionStatus>
+    <SessionStatusBadge status={status}>{statusMessage}</SessionStatusBadge>
   )
 }
 
@@ -574,7 +573,7 @@ export class SpeakerPage extends React.Component {
                     <SessionHeading>{session.title}</SessionHeading>
                     <SessionInfo session={session} location={session.location} />
                     <StatusAndMoreContainer>
-                      {canSeeStatus && SessionStatusComponent(session.status)}
+                      {canSeeStatus && SessionStatus(session.status)}
                       <ToSessionLink
                         key={session._id}
                         href={`/session/${getHref(session)}`}
