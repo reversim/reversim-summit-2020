@@ -347,6 +347,21 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 
 // React components
 
+const SessionStatusComponent = status => {
+  
+  const statusMessage = status === 'proposed' 
+                          ? 'Waiting for review'
+                          : status === 'withdrawn'
+                            ? 'Session withdrawn'
+                            : status === 'accepted' 
+                              ? 'Accepted' 
+                              : 'Sadly not this time'
+  
+  return (
+    <SessionStatus>Status: {statusMessage}</SessionStatus>
+  )
+}
+
 export class SpeakerPage extends React.Component {
   state = {
     isUploadingPhoto: false,
@@ -525,12 +540,7 @@ export class SpeakerPage extends React.Component {
                     <SessionHeading>{session.title}</SessionHeading>
                     <SessionInfo session={session} location={session.location} />
                     <StatusAndMoreContainer>
-                      {
-                        canSeeStatus &&
-                        <SessionStatus className='text-purple2 font-weight-bold font-size-lm'>
-                          Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}
-                        </SessionStatus>
-                      }
+                      {canSeeStatus && SessionStatusComponent(session.status)}
                       <ToSessionLink
                         key={session._id}
                         href={`/session/${getHref(session)}`}
