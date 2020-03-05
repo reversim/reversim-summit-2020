@@ -173,7 +173,7 @@ const Hero = ({ eventConfig }) => (
 
           <ButtonContainer>
             {eventConfig.registrationOpen &&
-              <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
+              <ButtonStyledLink href="https://ti.to/reversim-summit/2020">
                 {'Get Tickets'}
               </ButtonStyledLink>
             }
