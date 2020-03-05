@@ -151,7 +151,7 @@ const Hero = ({ eventConfig }) => (
     <Container>
       <HeroInner>
         <HeroContent>
-          <LogoImg src={logoImg} alt="rs19" />
+          <LogoImg src={logoImg} alt="rs20" />
 
           <Subtitle>
             <IconAligner>
