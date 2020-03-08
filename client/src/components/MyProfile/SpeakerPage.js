@@ -30,32 +30,32 @@ import mediaQueryMin from '../../styles/MediaQueriesMixin';
 const SpeakerHero = styled(PageHero)`
   ${({ theme: { space } }) => `
     padding: calc(12 * ${space.m}) 0 calc(10 * ${space.m}) 0;
-    margin-bottom: ${space.xl}; 
+    margin-bottom: ${space.xl};
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      padding: 0 ; 
-      margin-bottom: ${space.xl}; 
+      padding: 0 ;
+      margin-bottom: ${space.xl};
     `}
-  `}  
+  `}
   ${mediaQueryMin.l`
     ${({ theme: { space } }) => `
-      padding-top: calc(2 * ${space.xxl}); 
+      padding-top: calc(2 * ${space.xxl});
       margin: 0 auto calc(15 * ${space.m}) auto;
     `}
-  `}  
+  `}
 `;
 
 const HeroContainer = styled(ResponsiveContainer)`
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
   margin: 0 auto;
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      align-items: flex-start;  
+      align-items: flex-start;
       margin: 0 ${space.xxl};
-    `}  
+    `}
   `}
   ${mediaQueryMin.l`
     height: 195px;
@@ -89,11 +89,11 @@ const SpeakerImgContainer = styled.div`
 const SpeakerImg = styled.div`
   ${({ theme: { space, color }, speaker: {picture} }) => `
     min-width: 230px;
-    min-height: 230px; 
+    min-height: 230px;
 
     margin-bottom: ${space.l};
 
-    background-image: url(${image(picture, 222, 222)});
+    background-image: url(${image(picture, 230, 230)});
     background-size: cover;
     border: 4px solid ${color.border_1};
   `}
@@ -107,7 +107,7 @@ const ChangePhotoButton = styled(StyledButton)`
       border: solid 2px ${color.box_shadow_1};
       box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
     `}
-  `}  
+  `}
 `;
 
 const ChangePhotoInput = styled.input`
@@ -186,7 +186,7 @@ const TeamMemberBadge = styled.p`
   ${({ theme: { space, color, font } }) => `
     padding: ${space.s} ${space.m};
     margin-bottom: ${space.l};
-    
+
     color: ${color.text_1};
     background: ${color.important};
     font-size: ${font.size_reg};
@@ -263,14 +263,14 @@ const NoInfoText = styled(Heading5)`
 
 const TrackRecord = styled(ReactMarkdown)`
   ${({ theme: { space, font } }) => `
-    margin: 0 0 ${space.l} ${space.l};  
+    margin: 0 0 ${space.l} ${space.l};
     font-size: ${font.size_reg};
   `}
 `;
 
 const SessionsHeadingContainer = styled.div`
   ${({ theme: { space } }) => `
-    width: 100%;  
+    width: 100%;
     display: flex;
     align-items: center;
     margin-bottom: ${space.xxl};
@@ -295,7 +295,7 @@ const SessionsContainer = styled.div`
 
 const SessionInfoContainer = styled.div`
   ${({ theme: { space, color }, index }) => `
-    min-height: 310px;  
+    min-height: 310px;
     margin-bottom: ${space.xxl};
     margin-right: ${index % 2 ? `0` : `calc(4 * ${space.m})`};
     padding: ${space.l};
@@ -308,7 +308,7 @@ const SessionInfoContainer = styled.div`
     flex: 0 0 100%;
   `}
   ${mediaQueryMin.l`
-    min-height: 455px; 
+    min-height: 455px;
     flex: 0 0 calc(50% - 20px);
   `}
   ${mediaQueryMin.xl`
@@ -351,13 +351,15 @@ const SessionStatusBadge = styled.p`
 
     color: ${color.text_1};
     background: ${
-      status === 'proposed' 
+      status === 'proposed'
         ? color.session_status_proposed
-        : status === 'accepted' 
-          ? color.session_status_accepted 
+        : status === 'accepted'
+          ? color.session_status_accepted
           : status === 'withdrawn'
-          ? color.session_status_decline
-          : color.session_status_decline
+            ? color.session_status_decline
+            : status === 'rejected'
+              ? color.session_status_decline
+              : color.session_status_not_found
     };
 
     font-weight: ${font.weight_bold};
@@ -381,15 +383,17 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 // React components
 
 const SessionStatus = status => {
-  
-  const statusMessage = status === 'proposed' 
+
+  const statusMessage = status === 'proposed'
                           ? 'Waiting for review'
-                          : status === 'accepted' 
-                            ? 'Accepted' 
+                          : status === 'accepted'
+                            ? 'Accepted'
                             : status === 'withdrawn'
                             ? 'Session withdrawn'
-                            : 'Sadly not this time'
-  
+                            : status === 'rejected'
+                              ? 'Sadly not this time'
+                              : 'no status found'
+
   return (
     <SessionStatusBadge status={status}>{statusMessage}</SessionStatusBadge>
   )
@@ -460,9 +464,9 @@ export class SpeakerPage extends React.Component {
                   disabled={isUploadingPhoto}
                 >
                   {
-                    !!speaker.picture 
+                    !!speaker.picture
                       ? 'Change Photo'
-                      : isUploadingPhoto 
+                      : isUploadingPhoto
                         ? 'Uploading'
                         : 'Upload Photo'
                   }
@@ -490,17 +494,17 @@ export class SpeakerPage extends React.Component {
               </NameAndEditContainer>
 
               <Oneliner>{speaker.oneLiner}</Oneliner>
-            
+
             </SpeakerIntroContainer>
           </HeroContainer>
         </SpeakerHero>
 
         <MainContainer>
           <SpeakerSocialLinks {...speaker} />
-          
+
           <ShortBio>{bio}</ShortBio>
 
-          {isReversimTeamMember && 
+          {isReversimTeamMember &&
            (
             <PersonalInfoConainer>
 

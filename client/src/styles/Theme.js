@@ -24,6 +24,8 @@ const theme = {
     session_status_proposed: '#ff6100',
     session_status_accepted: '#29b342',
     session_status_decline: '#ff2e5f',
+    session_status_not_found: '#c8c8c8',
+
     
     // Background colors
     background_1: 'rgba(81, 39, 255, 0.9)', // #5127ff
