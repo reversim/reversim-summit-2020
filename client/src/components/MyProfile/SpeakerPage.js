@@ -23,6 +23,8 @@ import {
   StyledButton,
   InvertedColorLink,
 } from '../GlobalStyledComponents/ReversimStyledComps';
+
+import theme from '../../styles/Theme';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 // styled-components components
@@ -343,13 +345,22 @@ const StatusAndMoreContainer = styled.div`
 `;
 
 const statusColors = status => {
+  const {
+    color: {
+      session_status_proposed,
+      session_status_accepted,
+      session_status_decline,
+      session_status_not_found,
+    }
+  } = theme;
+
   const colorsDict = {
-    'proposed': '#ff6100',
-    'accepted': '#29b342',
-    'withdrawn': '#ff2e5f',
-    'rejected': '#ff2e5f',
+    'proposed': session_status_proposed,
+    'accepted': session_status_accepted,
+    'withdrawn': session_status_decline,
+    'rejected': session_status_decline,
   };
-  return colorsDict[status] || '#c8c8c8';
+  return colorsDict[status] || session_status_not_found;
 };
 
 const SessionStatusBadge = styled.p`
