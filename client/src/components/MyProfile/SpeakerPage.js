@@ -341,6 +341,17 @@ const StatusAndMoreContainer = styled.div`
     justify-content: space-between;
   `}
 `;
+
+const statusColors = status => {
+  const colorsDict = {
+    'proposed': '#ff6100',
+    'accepted': '#29b342',
+    'withdrawn': '#ff2e5f',
+    'rejected': '#ff2e5f',
+  };
+  return colorsDict[status] || '#c8c8c8';
+};
+
 const SessionStatusBadge = styled.p`
   ${ ({ theme: { space, color, font }, status }) => `
     max-height: 55px;
@@ -350,17 +361,7 @@ const SessionStatusBadge = styled.p`
     margin-bottom: ${space.m};
 
     color: ${color.text_1};
-    background: ${
-      status === 'proposed'
-        ? color.session_status_proposed
-        : status === 'accepted'
-          ? color.session_status_accepted
-          : status === 'withdrawn'
-            ? color.session_status_decline
-            : status === 'rejected'
-              ? color.session_status_decline
-              : color.session_status_not_found
-    };
+    background: ${statusColors(status) || color.session_status_not_found};
 
     font-weight: ${font.weight_bold};
     font-size: ${font.size_md};
@@ -383,16 +384,13 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 // React components
 
 const SessionStatus = status => {
-
-  const statusMessage = status === 'proposed'
-                          ? 'Waiting for review'
-                          : status === 'accepted'
-                            ? 'Accepted'
-                            : status === 'withdrawn'
-                            ? 'Session withdrawn'
-                            : status === 'rejected'
-                              ? 'Sadly not this time'
-                              : 'no status found'
+  const messagesDict = {
+    'proposed': 'Waiting for review',
+    'accepted': 'Accepted',
+    'withdrawn': 'Session withdrawn',
+    'rejected': 'Sadly not this time',
+  };
+  const statusMessage = messagesDict[status] || 'no status found';
 
   return (
     <SessionStatusBadge status={status}>{statusMessage}</SessionStatusBadge>
