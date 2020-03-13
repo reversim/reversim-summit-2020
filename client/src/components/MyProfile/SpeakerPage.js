@@ -299,6 +299,9 @@ const InfoAndStatusContainer = styled.div`
   ${({ theme: { space } }) => `
     width: 100%;
     margin-bottom: ${space.xxl};
+
+    display: flex;
+    flex-direction: column;
   `}
   ${mediaQueryMin.l`
     ${({ theme: { space }, index }) => `
@@ -362,20 +365,17 @@ const statusColors = status => {
 const SessionStatusBadge = styled.p`
   ${ ({ theme: { space, color, font }, status }) => `
     max-height: 55px;
-    max-width: 100%;
 
-    padding: ${space.m};
-    margin-bottom: ${space.m};
+    padding: ${space.m} ${space.l} ${space.m} ${space.m};
+
+    align-self: flex-start;
+    text-align: end;
 
     color: ${color.text_1};
     background: ${statusColors(status) || color.session_status_not_found};
 
+    font-size: ${font.size_sml};
     font-weight: ${font.weight_bold};
-    font-size: ${font.size_md};
-    border: solid 4px ${color.border_1};
-    border-top: none;
-
-    text-align: center;
   `}
 `;
 
@@ -401,7 +401,7 @@ const SessionStatus = status => {
   const statusMessage = messagesDict[status] || 'no status found';
 
   return (
-    <SessionStatusBadge status={status}>{statusMessage}</SessionStatusBadge>
+    <SessionStatusBadge status={status}>Status: {statusMessage}</SessionStatusBadge>
   )
 }
 
@@ -577,6 +577,7 @@ export class SpeakerPage extends React.Component {
               <SessionsContainer>
                 {sessions.map((session, index) => (
                   <InfoAndStatusContainer>
+                    {canSeeStatus && SessionStatus(session.status)}
                     <SessionInfoContainer
                       key={key()}
                       index={index}
@@ -590,8 +591,6 @@ export class SpeakerPage extends React.Component {
                         To Session Page
                       </ToSessionLink>
                     </SessionInfoContainer>
-
-                    {canSeeStatus && SessionStatus(session.status)}
                   </InfoAndStatusContainer>
                 ))}
               </SessionsContainer>
