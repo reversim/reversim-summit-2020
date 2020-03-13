@@ -34,7 +34,7 @@ const STATUS_ACCEPTED = 'accepted';
 const STATUS_WITHDRAWN = 'withdrawn';
 const STATUS_REJECTED = 'rejected';
 
-const messagesDictionary = {
+const STATUS_TO_MESSAGES_SIDTIONARY = {
   [STATUS_PROPOSED]: 'Waiting for review',
   [STATUS_ACCEPTED]: 'Accepted',
   [STATUS_WITHDRAWN]: 'Session withdrawn',
@@ -50,7 +50,7 @@ const {
   }
 } = theme;
 
-const colorsDictionary = {
+const STATUS_TO_COLOR_SIDTIONARY = {
   [STATUS_PROPOSED]: session_status_proposed,
   [STATUS_ACCEPTED]: session_status_accepted,
   [STATUS_WITHDRAWN]: session_status_decline,
@@ -58,7 +58,7 @@ const colorsDictionary = {
 };
 
 
-const getStatusColors = status => (colorsDictionary[status] || session_status_not_found);
+const getStatusColors = status => (STATUS_TO_COLOR_SIDTIONARY[status] || session_status_not_found);
 
 // styled-components components
 
@@ -411,7 +411,7 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 // React components
 
 const SessionStatus = status => {
-  const statusMessage = messagesDictionary[status] || 'no status found';
+  const statusMessage = STATUS_TO_MESSAGES_SIDTIONARY[status] || 'no status found';
 
   return (
     <SessionStatusBadge status={status}>Status: {statusMessage}</SessionStatusBadge>
