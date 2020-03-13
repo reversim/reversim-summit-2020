@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
@@ -295,11 +295,23 @@ const SessionsContainer = styled.div`
   align-items: flex-start;
 `;
 
+const InfoAndStatusContainer = styled.div`
+  ${({ theme: { space } }) => `
+    width: 100%;
+    margin-bottom: ${space.xxl};
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { space }, index }) => `
+      width: 45%;
+      margin-right: ${index % 2 ? `0` : `calc(4 * ${space.m})`};
+    `}
+  `}
+`;
+
 const SessionInfoContainer = styled.div`
   ${({ theme: { space, color }, index }) => `
     min-height: 310px;
-    margin-bottom: ${space.xxl};
-    margin-right: ${index % 2 ? `0` : `calc(4 * ${space.m})`};
+
     padding: ${space.l};
 
     border: 4px solid ${color.border_1};
@@ -328,22 +340,6 @@ const SessionHeading = styled(Heading4)`
   `}
 `;
 
-const StatusAndMoreContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-content: center;
-  ${mediaQueryMin.m`
-    justify-content: space-between;
-  `}
-  ${mediaQueryMin.l`
-    justify-content: flex-end;
-  `}
-  ${mediaQueryMin.xl`
-    justify-content: space-between;
-  `}
-`;
-
 const statusColors = status => {
   const {
     color: {
@@ -354,19 +350,19 @@ const statusColors = status => {
     }
   } = theme;
 
-  const colorsDict = {
+  const colorsDictionary = {
     'proposed': session_status_proposed,
     'accepted': session_status_accepted,
     'withdrawn': session_status_decline,
     'rejected': session_status_decline,
   };
-  return colorsDict[status] || session_status_not_found;
+  return colorsDictionary[status] || session_status_not_found;
 };
 
 const SessionStatusBadge = styled.p`
   ${ ({ theme: { space, color, font }, status }) => `
     max-height: 55px;
-    max-width: fit-content;
+    max-width: 100%;
 
     padding: ${space.m};
     margin-bottom: ${space.m};
@@ -376,7 +372,8 @@ const SessionStatusBadge = styled.p`
 
     font-weight: ${font.weight_bold};
     font-size: ${font.size_md};
-    border: double 5px ${color.border_2};
+    border: solid 4px ${color.border_1};
+    border-top: none;
 
     text-align: center;
   `}
@@ -571,7 +568,7 @@ export class SpeakerPage extends React.Component {
           )}
 
           {sessions && sessions.length && (
-            <React.Fragment>
+            <Fragment>
               <SessionsHeadingContainer>
                 <HeadingPlus />
                 <SectionHeading>Sessions</SectionHeading>
@@ -579,25 +576,26 @@ export class SpeakerPage extends React.Component {
               </SessionsHeadingContainer>
               <SessionsContainer>
                 {sessions.map((session, index) => (
-                  <SessionInfoContainer
-                    key={key()}
-                    index={index}
-                  >
-                    <SessionHeading>{session.title}</SessionHeading>
-                    <SessionInfo session={session} location={session.location} />
-                    <StatusAndMoreContainer>
-                      {canSeeStatus && SessionStatus(session.status)}
+                  <InfoAndStatusContainer>
+                    <SessionInfoContainer
+                      key={key()}
+                      index={index}
+                    >
+                      <SessionHeading>{session.title}</SessionHeading>
+                      <SessionInfo session={session} location={session.location} />
                       <ToSessionLink
-                        key={session._id}
-                        href={`/session/${getHref(session)}`}
+                      key={session._id}
+                      href={`/session/${getHref(session)}`}
                       >
                         To Session Page
                       </ToSessionLink>
-                    </StatusAndMoreContainer>
-                  </SessionInfoContainer>
+                    </SessionInfoContainer>
+
+                    {canSeeStatus && SessionStatus(session.status)}
+                  </InfoAndStatusContainer>
                 ))}
               </SessionsContainer>
-            </React.Fragment>
+            </Fragment>
           )}
           </MainContainer>
       </Page>
