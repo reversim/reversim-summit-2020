@@ -27,6 +27,39 @@ import {
 import theme from '../../styles/Theme';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
+// Global variables
+
+const STATUS_PROPOSED = 'proposed';
+const STATUS_ACCEPTED = 'accepted';
+const STATUS_WITHDRAWN = 'withdrawn';
+const STATUS_REJECTED = 'rejected';
+
+const messagesDictionary = {
+  [STATUS_PROPOSED]: 'Waiting for review',
+  [STATUS_ACCEPTED]: 'Accepted',
+  [STATUS_WITHDRAWN]: 'Session withdrawn',
+  [STATUS_REJECTED]: 'Sadly not this time',
+};
+
+const {
+  color: {
+    session_status_proposed,
+    session_status_accepted,
+    session_status_decline,
+    session_status_not_found,
+  }
+} = theme;
+
+const colorsDictionary = {
+  [STATUS_PROPOSED]: session_status_proposed,
+  [STATUS_ACCEPTED]: session_status_accepted,
+  [STATUS_WITHDRAWN]: session_status_decline,
+  [STATUS_REJECTED]: session_status_decline,
+};
+
+
+const getStatusColors = status => (colorsDictionary[status] || session_status_not_found);
+
 // styled-components components
 
 const SpeakerHero = styled(PageHero)`
@@ -304,9 +337,14 @@ const InfoAndStatusContainer = styled.div`
     flex-direction: column;
   `}
   ${mediaQueryMin.l`
-    ${({ theme: { space }, index }) => `
-      width: 45%;
-      margin-right: ${index % 2 ? `0` : `calc(4 * ${space.m})`};
+    ${({ theme: { space }, sessions, index }) => `
+      width: ${sessions.length === 1 ? `100%` : `45%`};
+      margin-right: ${
+        sessions.length === 1
+          ? `0`
+          : index % 2
+            ? `0`
+            : `calc(4 * ${space.m})`};
     `}
   `}
 `;
@@ -343,25 +381,6 @@ const SessionHeading = styled(Heading4)`
   `}
 `;
 
-const statusColors = status => {
-  const {
-    color: {
-      session_status_proposed,
-      session_status_accepted,
-      session_status_decline,
-      session_status_not_found,
-    }
-  } = theme;
-
-  const colorsDictionary = {
-    'proposed': session_status_proposed,
-    'accepted': session_status_accepted,
-    'withdrawn': session_status_decline,
-    'rejected': session_status_decline,
-  };
-  return colorsDictionary[status] || session_status_not_found;
-};
-
 const SessionStatusBadge = styled.p`
   ${ ({ theme: { space, color, font }, status }) => `
     max-height: 55px;
@@ -372,7 +391,7 @@ const SessionStatusBadge = styled.p`
     text-align: end;
 
     color: ${color.text_1};
-    background: ${statusColors(status) || color.session_status_not_found};
+    background: ${getStatusColors(status) || color.session_status_not_found};
 
     font-size: ${font.size_sml};
     font-weight: ${font.weight_bold};
@@ -392,13 +411,7 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 // React components
 
 const SessionStatus = status => {
-  const messagesDict = {
-    'proposed': 'Waiting for review',
-    'accepted': 'Accepted',
-    'withdrawn': 'Session withdrawn',
-    'rejected': 'Sadly not this time',
-  };
-  const statusMessage = messagesDict[status] || 'no status found';
+  const statusMessage = messagesDictionary[status] || 'no status found';
 
   return (
     <SessionStatusBadge status={status}>Status: {statusMessage}</SessionStatusBadge>
@@ -576,7 +589,7 @@ export class SpeakerPage extends React.Component {
               </SessionsHeadingContainer>
               <SessionsContainer>
                 {sessions.map((session, index) => (
-                  <InfoAndStatusContainer>
+                  <InfoAndStatusContainer sessions={sessions}>
                     {canSeeStatus && SessionStatus(session.status)}
                     <SessionInfoContainer
                       key={key()}
