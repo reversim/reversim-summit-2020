@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
@@ -23,39 +23,74 @@ import {
   StyledButton,
   InvertedColorLink,
 } from '../GlobalStyledComponents/ReversimStyledComps';
+
+import theme from '../../styles/Theme';
 import mediaQueryMin from '../../styles/MediaQueriesMixin';
+
+// Global variables
+
+const STATUS_PROPOSED = 'proposed';
+const STATUS_ACCEPTED = 'accepted';
+const STATUS_WITHDRAWN = 'withdrawn';
+const STATUS_REJECTED = 'rejected';
+
+const STATUS_TO_MESSAGES_SIDTIONARY = {
+  [STATUS_PROPOSED]: 'Waiting for review',
+  [STATUS_ACCEPTED]: 'Accepted',
+  [STATUS_WITHDRAWN]: 'Session withdrawn',
+  [STATUS_REJECTED]: 'Sadly not this time',
+};
+
+const {
+  color: {
+    session_status_proposed,
+    session_status_accepted,
+    session_status_decline,
+    session_status_not_found,
+  }
+} = theme;
+
+const STATUS_TO_COLOR_SIDTIONARY = {
+  [STATUS_PROPOSED]: session_status_proposed,
+  [STATUS_ACCEPTED]: session_status_accepted,
+  [STATUS_WITHDRAWN]: session_status_decline,
+  [STATUS_REJECTED]: session_status_decline,
+};
+
+
+const getStatusColors = status => (STATUS_TO_COLOR_SIDTIONARY[status] || session_status_not_found);
 
 // styled-components components
 
 const SpeakerHero = styled(PageHero)`
   ${({ theme: { space } }) => `
     padding: calc(12 * ${space.m}) 0 calc(10 * ${space.m}) 0;
-    margin-bottom: ${space.xl}; 
+    margin-bottom: ${space.xl};
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      padding: 0 ; 
-      margin-bottom: ${space.xl}; 
+      padding: 0 ;
+      margin-bottom: ${space.xl};
     `}
-  `}  
+  `}
   ${mediaQueryMin.l`
     ${({ theme: { space } }) => `
-      padding-top: calc(2 * ${space.xxl}); 
+      padding-top: calc(2 * ${space.xxl});
       margin: 0 auto calc(15 * ${space.m}) auto;
     `}
-  `}  
+  `}
 `;
 
 const HeroContainer = styled(ResponsiveContainer)`
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
   margin: 0 auto;
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      align-items: flex-start;  
+      align-items: flex-start;
       margin: 0 ${space.xxl};
-    `}  
+    `}
   `}
   ${mediaQueryMin.l`
     height: 195px;
@@ -89,11 +124,11 @@ const SpeakerImgContainer = styled.div`
 const SpeakerImg = styled.div`
   ${({ theme: { space, color }, speaker: {picture} }) => `
     min-width: 230px;
-    min-height: 230px; 
+    min-height: 230px;
 
     margin-bottom: ${space.l};
 
-    background-image: url(${image(picture, 222, 222)});
+    background-image: url(${image(picture, 230, 230)});
     background-size: cover;
     border: 4px solid ${color.border_1};
   `}
@@ -107,7 +142,7 @@ const ChangePhotoButton = styled(StyledButton)`
       border: solid 2px ${color.box_shadow_1};
       box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
     `}
-  `}  
+  `}
 `;
 
 const ChangePhotoInput = styled.input`
@@ -186,7 +221,7 @@ const TeamMemberBadge = styled.p`
   ${({ theme: { space, color, font } }) => `
     padding: ${space.s} ${space.m};
     margin-bottom: ${space.l};
-    
+
     color: ${color.text_1};
     background: ${color.important};
     font-size: ${font.size_reg};
@@ -263,14 +298,14 @@ const NoInfoText = styled(Heading5)`
 
 const TrackRecord = styled(ReactMarkdown)`
   ${({ theme: { space, font } }) => `
-    margin: 0 0 ${space.l} ${space.l};  
+    margin: 0 0 ${space.l} ${space.l};
     font-size: ${font.size_reg};
   `}
 `;
 
 const SessionsHeadingContainer = styled.div`
   ${({ theme: { space } }) => `
-    width: 100%;  
+    width: 100%;
     display: flex;
     align-items: center;
     margin-bottom: ${space.xxl};
@@ -293,11 +328,31 @@ const SessionsContainer = styled.div`
   align-items: flex-start;
 `;
 
+const InfoAndStatusContainer = styled.div`
+  ${({ theme: { space } }) => `
+    width: 100%;
+    margin-bottom: ${space.xxl};
+
+    display: flex;
+    flex-direction: column;
+  `}
+  ${mediaQueryMin.l`
+    ${({ theme: { space }, sessions, index }) => `
+      width: ${sessions.length === 1 ? `100%` : `45%`};
+      margin-right: ${
+        sessions.length === 1
+          ? `0`
+          : index % 2
+            ? `0`
+            : `calc(4 * ${space.m})`};
+    `}
+  `}
+`;
+
 const SessionInfoContainer = styled.div`
   ${({ theme: { space, color }, index }) => `
-    min-height: 310px;  
-    margin-bottom: ${space.xxl};
-    margin-right: ${index % 2 ? `0` : `calc(4 * ${space.m})`};
+    min-height: 310px;
+
     padding: ${space.l};
 
     border: 4px solid ${color.border_1};
@@ -308,7 +363,7 @@ const SessionInfoContainer = styled.div`
     flex: 0 0 100%;
   `}
   ${mediaQueryMin.l`
-    min-height: 455px; 
+    min-height: 455px;
     flex: 0 0 calc(50% - 20px);
   `}
   ${mediaQueryMin.xl`
@@ -326,26 +381,42 @@ const SessionHeading = styled(Heading4)`
   `}
 `;
 
-const StatusAndMoreContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+const SessionStatusBadge = styled.p`
+  ${ ({ theme: { space, color, font }, status }) => `
+    max-height: 55px;
 
-  ${mediaQueryMin.xl`
-    flex-direction: row;
+    padding: ${space.m} ${space.l} ${space.m} ${space.m};
+
+    align-self: flex-start;
+    text-align: end;
+
+    color: ${color.text_1};
+    background: ${getStatusColors(status) || color.session_status_not_found};
+
+    font-size: ${font.size_sml};
+    font-weight: ${font.weight_bold};
   `}
 `;
 
-const SessionStatus = styled(SessionHeading)`
-  display: block;
-`;
-
 const ToSessionLink = styled(InvertedButtonStyledLink)`
-  min-width: max-content;
-  align-self: flex-end;
+  ${({theme: { space } }) => `
+    height: 50px;
+    margin-right: ${space.s};
+    padding-top: ${space.l};
+    min-width: max-content;
+    align-self: flex-end;
+  `}
 `;
 
 // React components
+
+const SessionStatus = status => {
+  const statusMessage = STATUS_TO_MESSAGES_SIDTIONARY[status] || 'no status found';
+
+  return (
+    <SessionStatusBadge status={status}>Status: {statusMessage}</SessionStatusBadge>
+  )
+}
 
 export class SpeakerPage extends React.Component {
   state = {
@@ -412,9 +483,9 @@ export class SpeakerPage extends React.Component {
                   disabled={isUploadingPhoto}
                 >
                   {
-                    !!speaker.picture 
+                    !!speaker.picture
                       ? 'Change Photo'
-                      : isUploadingPhoto 
+                      : isUploadingPhoto
                         ? 'Uploading'
                         : 'Upload Photo'
                   }
@@ -442,17 +513,17 @@ export class SpeakerPage extends React.Component {
               </NameAndEditContainer>
 
               <Oneliner>{speaker.oneLiner}</Oneliner>
-            
+
             </SpeakerIntroContainer>
           </HeroContainer>
         </SpeakerHero>
 
         <MainContainer>
           <SpeakerSocialLinks {...speaker} />
-          
+
           <ShortBio>{bio}</ShortBio>
 
-          {isReversimTeamMember && 
+          {isReversimTeamMember &&
            (
             <PersonalInfoConainer>
 
@@ -510,7 +581,7 @@ export class SpeakerPage extends React.Component {
           )}
 
           {sessions && sessions.length && (
-            <React.Fragment>
+            <Fragment>
               <SessionsHeadingContainer>
                 <HeadingPlus />
                 <SectionHeading>Sessions</SectionHeading>
@@ -518,30 +589,25 @@ export class SpeakerPage extends React.Component {
               </SessionsHeadingContainer>
               <SessionsContainer>
                 {sessions.map((session, index) => (
-                  <SessionInfoContainer
-                    key={key()}
-                    index={index}
-                  >
-                    <SessionHeading>{session.title}</SessionHeading>
-                    <SessionInfo session={session} location={session.location} />
-                    <StatusAndMoreContainer>
-                      {
-                        canSeeStatus &&
-                        <SessionStatus className='text-purple2 font-weight-bold font-size-lm'>
-                          Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}
-                        </SessionStatus>
-                      }
+                  <InfoAndStatusContainer sessions={sessions}>
+                    {canSeeStatus && SessionStatus(session.status)}
+                    <SessionInfoContainer
+                      key={key()}
+                      index={index}
+                    >
+                      <SessionHeading>{session.title}</SessionHeading>
+                      <SessionInfo session={session} location={session.location} />
                       <ToSessionLink
-                        key={session._id}
-                        href={`/session/${getHref(session)}`}
+                      key={session._id}
+                      href={`/session/${getHref(session)}`}
                       >
                         To Session Page
                       </ToSessionLink>
-                    </StatusAndMoreContainer>
-                  </SessionInfoContainer>
+                    </SessionInfoContainer>
+                  </InfoAndStatusContainer>
                 ))}
               </SessionsContainer>
-            </React.Fragment>
+            </Fragment>
           )}
           </MainContainer>
       </Page>

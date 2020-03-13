@@ -52,7 +52,7 @@ const TopContainer = styled.div`
 
     margin: 0 auto calc(30 * ${space.m}) auto;
     padding: ${space.xxl} 0 ${space.xl} calc(3.5 * ${space.m});
-    
+
     background-color: ${color.background_2};
   `}
 
@@ -65,7 +65,7 @@ const TopContainer = styled.div`
       margin: 0 auto calc(15 * ${space.m}) auto;
       padding-bottom: calc(3 * ${space.m});
     `}`}
-    
+
     ${mediaQueryMin.xl`
       padding-bottom: 0;
       display: flex;
@@ -106,7 +106,7 @@ const SponsorHeadingContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+
     background-color: ${color.background_2};
   `}
 
@@ -187,7 +187,7 @@ const MiniNavIcon = styled(FontAwesomeIcon)`
     margin-right: ${space.xl};
     color: ${color.font_awsome_nav};
   `}
-    
+
     ${mediaQueryMin.l`
       ${({ theme: { font } }) =>`
       font-size: ${font.size_bg};
@@ -204,7 +204,7 @@ const MiniNavLinksList = styled.ul`
     display: flex;
     flex-direction: column;
   `}
-    
+
     ${mediaQueryMin.l`
       flex-direction: row
       flex-wrap: wrap;
@@ -228,7 +228,7 @@ const MiniNavListItem = styled(InvertedColorLink)`
 
 const SponsorDescription = styled(AlignCenterColumn)`
     padding: 0;
-  
+
     ${mediaQueryMin.m`
       ${({ theme: { space } }) =>`
         margin-left: ${space.m};
@@ -240,7 +240,7 @@ const SponsorDescription = styled(AlignCenterColumn)`
         margin-left: ${space.xxl};
         max-width: ${width.main_for_mq_l};
       `}`}
-    
+
     ${mediaQueryMin.xl`
       ${({ theme: { width } }) =>`
         max-width: ${width.main_for_mq_xl};
@@ -256,14 +256,14 @@ const SegmentContainer = styled.div`
     max-width: 660px;
     margin-bottom: calc(2 * ${space.xxl});
   `}
-    
+
     ${mediaQueryMin.m`
-      min-height: 20vh;      
-      
+      min-height: 20vh;
+
       flex-direction: column;
       justify-content: space-between;
       `}
-  
+
     ${mediaQueryMin.l`
       ${ ({ theme: { width } }) => `
       max-width: ${width.main_for_mq_xl};
@@ -324,7 +324,7 @@ const PremiumGallery = styled.div`
     width: 100%;
     margin: ${space.xl} auto;
     `}
-    
+
     ${mediaQueryMin.xl`
       ${({ theme: { space } }) => `
         width: 90%;
@@ -339,7 +339,7 @@ const PremiumTechList = styled.ul`
     list-style: none;
     flex: 0 0 50%;
     `}
-    
+
     ${mediaQueryMin.l`
       ${({ theme: { space } }) => `
       margin: 0 ${space.xl};
@@ -353,13 +353,13 @@ const PremiumTechItem = styled.li`
     display: inline-block;
     margin: ${space.s} ${space.m} ${space.s} 0;
     padding: ${space.s} ${space.m};
-    
+
     background: ${color.background_2};
-    
+
     color: white;
     font-weight: ${font.weight_bold};
     `}
-    
+
     ${mediaQueryMin.l`
       ${({ theme: { space } }) => `
       margin: ${space.s} ${space.s};
@@ -396,11 +396,11 @@ const SponsorPage = ({ sponsor, ...props }) => {
               alt={sponsor.name}
             />
             </LogoAligner>
-            
+
             <div>
             <SponsorHeading>
               <SponsorName>{sponsor.name}</SponsorName>
-              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner> 
+              <SponsorOneliner>{sponsor.oneLiner}</SponsorOneliner>
             </SponsorHeading>
             <MiniNav>
               <MiniNavIconContainer>
@@ -441,11 +441,11 @@ const SponsorPage = ({ sponsor, ...props }) => {
             </MiniNav>
             </div>
           </SponsorHeadingContainer>
-          
+
         </IntroContiner>
       </TopContainer>
-      
-            
+
+
       <SponsorDescription>
         <WhoWeAre>
           <SegmentHeadingAligner id="about">
@@ -506,7 +506,7 @@ const SponsorPage = ({ sponsor, ...props }) => {
             </SegmentContainer>
           )}
         {sponsor.reversimAndUs && (
-          <SegmentContainer> 
+          <SegmentContainer>
               <SegmentHeadingAligner id="reversim-and-us">
                 <SegmentHeading>
                   Reversim & Us

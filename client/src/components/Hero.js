@@ -72,9 +72,10 @@ const HeroContent = styled.div`
 
 const LogoImg = styled.img`
   width: 250px;
+  align-self: center;
 
   ${mediaQueryMin.xs`
-    width: 350px;
+    width: 320px;
   `}
   ${mediaQueryMin.m`
     width: 400px;
@@ -172,7 +173,7 @@ const Hero = ({ eventConfig }) => (
 
           <ButtonContainer>
             {eventConfig.registrationOpen &&
-              <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
+              <ButtonStyledLink href="https://ti.to/reversim-summit/2020">
                 {'Get Tickets'}
               </ButtonStyledLink>
             }
