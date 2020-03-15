@@ -72,9 +72,10 @@ const HeroContent = styled.div`
 
 const LogoImg = styled.img`
   width: 250px;
+  align-self: center;
 
   ${mediaQueryMin.xs`
-    width: 350px;
+    width: 320px;
   `}
   ${mediaQueryMin.m`
     width: 400px;
@@ -166,19 +167,19 @@ const Hero = ({ eventConfig }) => (
 
           {eventConfig.voting && (
             <VoteContainer>
-              <ButtonStyledLink href="/proposals">
-                {"VOTE FOR SESSIONS"}
-              </ButtonStyledLink>
+              <ButtonStyledLink href="/proposals">{'VOTE FOR SESSIONS'}</ButtonStyledLink>
             </VoteContainer>
           )}
 
           <ButtonContainer>
-            <ButtonStyledLink href="https://ti.to/reversim-summit/2019">
-              {"Get Tickets"}
-            </ButtonStyledLink>
-            <ButtonStyledLink href="/agenda">
-              {"View Agenda"}
-            </ButtonStyledLink>
+            {eventConfig.registrationOpen &&
+              <ButtonStyledLink href="https://ti.to/reversim-summit/2020">
+                {'Get Tickets'}
+              </ButtonStyledLink>
+            }
+            {eventConfig.agendaPublished &&
+              <ButtonStyledLink href="/agenda">{'View Agenda'}</ButtonStyledLink>
+            }
           </ButtonContainer>
         </HeroContent>
       </HeroInner>

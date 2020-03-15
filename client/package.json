@@ -23,7 +23,7 @@
     "react-dom": "^16.4.2",
     "react-ga": "^2.5.3",
     "react-google-maps": "^9.4.5",
-    "react-hot-loader": "next",
+    "react-hot-loader": "^4.12.19",
     "react-markdown": "^2.5.1",
     "react-router-dom": "^4.3.1",
     "react-router-hash-link": "^1.2.1",
@@ -45,8 +45,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "sec:audit": "yarn run improved-yarn-audit --ignore-dev-deps",
     "static:ssr": "NODE_ENV=production webpack -p --config config/webpack.config.ssr.js --progress",
-    "static:watch": "npm run static:ssr --watch",
-    "static:build": "npm run static:ssr && node build/render.js"
+    "static:watch": "yarn run static:ssr --watch",
+    "static:build": "yarn run static:ssr && node build/render.js"
   },
   "proxy": {
     "/api": {

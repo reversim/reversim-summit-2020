@@ -51,17 +51,21 @@ const SponsorImg = styled.img`
 `;
 
 const SMPLinkingButton = styled(ButtonStyledLink)`
-  ${({ theme: { space, color } }) =>`
+  ${({ theme: { space, color }, isOnWhite }) =>`
     padding: 0 ${space.xl};
 
     display: flex;
     align-items: center;
 
+    ${isOnWhite && `
+      border: solid 2px ${color.box_shadow_1};
+      box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};   
+    `}
+
     &:hover{
       color: ${color.text_1};
     }
   `}
-  
 `;
 
 const FAButtonContainer = styled.div`
@@ -135,7 +139,7 @@ export class SponsorMiniPremium extends React.Component {
                 alt={name}
               />
             </ImageContainer>
-            <SMPLinkingButton href={`/sponsor/${name}`}>
+            <SMPLinkingButton isOnWhite={isOnWhite} href={`/sponsor/${name}`}>
               Explore Opportunities
             </SMPLinkingButton>
 

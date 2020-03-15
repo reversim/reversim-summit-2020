@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server",
     "dev": "node dev.js",
-    "postinstall": "cd server && npm install && cd ../client && yarn install",
+    "postinstall": "cd server && yarn install && cd ../client && yarn install",
     "heroku-postbuild": "cd client && yarn install --production=false && yarn run build"
   },
   "engines": {
