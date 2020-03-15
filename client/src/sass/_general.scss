@@ -864,20 +864,6 @@ $speaker-picture-size: 230px;
   }
 }
 
-.hero__right {
-  background: url('../images/rs19.gif') center;
-  background-size: cover;
-  width: 760px;
-  height: 560px;
-  position: relative;
-
-  @media (max-width:1200px) {
-    background: none;
-    width: auto;
-    height: auto;
-  }
-}
-
 .hero__timer-wrapper {
   position: absolute;
   right: 50px;

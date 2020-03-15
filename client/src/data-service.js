@@ -61,7 +61,7 @@ export async function updateUser(user) {
 }
 
 export async function getUserProposals() {
-    return await get('/api/me');
+  return await get('/api/me');
 }
 
 export async function registerTeamMember(token) {

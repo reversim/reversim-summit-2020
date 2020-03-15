@@ -142,11 +142,11 @@ const CFPIntro = () => (
       </IntroPagragraph>
       <IntroPagragraph>
         Our goal is to streamline the submission and review process, while maintaining superb
-        quality. 
+        quality.
       </IntroPagragraph>
       <GeneralPagragraph>
         if you have any feedback or questions, please email us at {' '}
-        <InvertedColorLink href="mailto:rs19team@googlegroups.com" target="_blank">rs19team@googlegroups.com</InvertedColorLink>.
+        <InvertedColorLink href="mailto:rs20team@googlegroups.com" target="_blank">rs20team@googlegroups.com</InvertedColorLink>.
       </GeneralPagragraph>
     </SegmentContainer>
 

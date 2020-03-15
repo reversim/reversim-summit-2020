@@ -113,7 +113,7 @@ const Link = styled.a`
     color: ${color.text_1};
     font-size: 1rem;
     cursor: pointer;
-    
+
     &:hover {
       text-decoration: none;
       color: ${color.text_1};
@@ -127,7 +127,7 @@ const FooterContainer = () => (
       <List>
         <ListItem>
           <ListItemText>Contact us:</ListItemText>
-          <a href="mailto:rs19team@googlegroups.com">
+          <a href="mailto:rs20team@googlegroups.com">
             <FooterIcon
               color="white"
               icon={faEnvelopeSquare}

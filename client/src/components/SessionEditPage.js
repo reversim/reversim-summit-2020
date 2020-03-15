@@ -16,7 +16,7 @@ const EditNotAllowed = props => (
         <Row>
           <Col>
             <h2 className="text-center my-12">Editing is over</h2>
-            <h3 className="text-center my-12">If you really have to, contact us at-  <a href="mailto:rs19team@googlegroups.com">rs19team@googlegroups.com</a></h3>
+            <h3 className="text-center my-12">If you really have to, contact us at <a href="mailto:rs20team@googlegroups.com">rs20team@googlegroups.com</a></h3>
           </Col>
         </Row>
       </Container>
