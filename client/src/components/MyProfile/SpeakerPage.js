@@ -110,7 +110,7 @@ const SpeakerImgContainer = styled.div`
 
   `}
   ${mediaQueryMin.m`
-    ${({ theme: { space, color } }) =>`
+    ${({ theme: { space } }) =>`
       top: calc(17 * ${space.m});
     `}
   `}
@@ -128,29 +128,15 @@ const SpeakerImg = styled.div`
 
     margin-bottom: ${space.l};
 
-<<<<<<< HEAD
     background-image: url(${image(picture, 230, 230)});
-=======
-    background-color: ${color.background_4};
-    background-image: url(${image(picture, 222, 222)});
->>>>>>> Found some stying problems and fixed them
     background-size: cover;
-    border: 4px solid ${color.border_2};
-  `}
-  ${mediaQueryMin.l`
-    ${({ theme: { color } }) => `
-      border: 4px solid ${color.border_1};
-    `}
+    border: 4px solid ${color.border_1};
   `}
 `;
 
 const ChangePhotoButton = styled(StyledButton)`
-  ${({ theme: { color } }) => `
-    min-width: initial;
-    width: fit-content;
-    border: solid 2px ${color.box_shadow_2};
-    box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
-  `}
+  min-width: initial;
+  width: fit-content;
   ${mediaQueryMin.l`
     ${({ theme: { color } }) => `
       border: solid 2px ${color.box_shadow_1};
@@ -166,10 +152,6 @@ const ChangePhotoInput = styled.input`
   bottom: 0;
   left: 0;
   right: 0;
-
-  &:hover{
-    cursor: pointer;
-  }
 `;
 
 const SpeakerIntroContainer = styled.div`
@@ -181,7 +163,7 @@ const SpeakerIntroContainer = styled.div`
   `}
   ${mediaQueryMin.m`
     ${({ theme: { space } }) => `
-      top: calc(-13.5 * ${space.m});
+      top: -${space.xl};
       left: calc(32 * ${space.m});
     `}
   `}
@@ -321,7 +303,7 @@ const TrackRecord = styled(ReactMarkdown)`
   `}
 `;
 
-const SegmentHeadingContainer = styled.div`
+const SessionsHeadingContainer = styled.div`
   ${({ theme: { space } }) => `
     width: 100%;
     display: flex;
@@ -344,6 +326,7 @@ const SessionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: flex-end;
 `;
 
 const InfoAndStatusContainer = styled.div`
@@ -372,25 +355,13 @@ const SessionInfoContainer = styled.div`
     min-height: 310px;
 
     padding: ${space.l};
+
     border: 4px solid ${color.border_1};
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 0 0 100%;
-  `}
-  ${mediaQueryMin.m`
-    ${({ theme: { space }, index }) => `
-<<<<<<< HEAD
-    max-width: initial;
-    width: 47.5%;
-      margin: 0 ${index % 2 ? `auto` : `calc(4 * ${space.m})`} ${space.xxl} auto;
-=======
-      max-width: initial;
-      width: 47.5%;
-      margin: 0  ${index % 2 ? `auto` : space.m} ${space.xxl} auto;
->>>>>>> Fixed odd number of sessions style
-    `}
   `}
   ${mediaQueryMin.l`
     min-height: 455px;
@@ -494,15 +465,13 @@ export class SpeakerPage extends React.Component {
     const { cfp, moderationCompleted } = eventConfig;
 
     const {isUploadingPhoto} = this.state;
-
     const canEdit = (user && user.isReversimTeamMember) || isUser;
     const canSeeStatus = canEdit && cfp || moderationCompleted;
 
     let sessions = proposals.map(proposalId => allProposals[proposalId]).filter(x => x);
-
-    if(!isUser){
+    if(!canSeeStatus){
       sessions = proposals.map(proposalId => acceptedProposals[proposalId]).filter(x => x);
-    };
+    }
 
       return (
       <Page title={name} user={user} {...this.props}>
@@ -559,13 +528,13 @@ export class SpeakerPage extends React.Component {
            (
             <PersonalInfoConainer>
 
-              <SegmentHeadingContainer>
+              <SessionsHeadingContainer>
                 <HeadingPlus />
                 <SectionHeading>
                   Personal information
                 </SectionHeading>
                 <BreakLineMain/>
-              </SegmentHeadingContainer>
+              </SessionsHeadingContainer>
 
               <PersonalInfoHeading>Track record</PersonalInfoHeading>
               {
@@ -612,42 +581,35 @@ export class SpeakerPage extends React.Component {
           </PersonalInfoConainer>
           )}
 
-              <SegmentHeadingContainer>
+          {sessions && sessions.length && (
+            <Fragment>
+              <SessionsHeadingContainer>
                 <HeadingPlus />
                 <SectionHeading>Sessions</SectionHeading>
                 <BreakLineMain/>
-              </SegmentHeadingContainer>
-          {
-            sessions && sessions.length
-              ? (
+              </SessionsHeadingContainer>
               <SessionsContainer>
                 {sessions.map((session, index) => (
-                  <InfoAndStatusContainer>
+                  <InfoAndStatusContainer sessions={sessions}>
+                    {canSeeStatus && SessionStatus(session.status)}
                     <SessionInfoContainer
                       key={key()}
                       index={index}
                     >
                       <SessionHeading>{session.title}</SessionHeading>
                       <SessionInfo session={session} location={session.location} />
-                        {
-                          canSeeStatus &&
-                          <SessionStatus>
-                            Status: {session.status === 'accepted' ? 'Accepted' : 'Sadly not this time'}
-                          </SessionStatus>
-                        }
-                        <ToSessionLink
-                        key={session._id}
-                        href={`/session/${getHref(session)}`}
-                        >
-                          To Session Page
-                        </ToSessionLink>
-                      </SessionInfoContainer>
-                    </InfoAndStatusContainer>
+                      <ToSessionLink
+                      key={session._id}
+                      href={`/session/${getHref(session)}`}
+                      >
+                        To Session Page
+                      </ToSessionLink>
+                    </SessionInfoContainer>
+                  </InfoAndStatusContainer>
                 ))}
               </SessionsContainer>
-          )
-          : <SessionHeading>No sessions found for {speaker.name.split(' ')[0]}</SessionHeading>
-        }
+            </Fragment>
+          )}
           </MainContainer>
       </Page>
     );
