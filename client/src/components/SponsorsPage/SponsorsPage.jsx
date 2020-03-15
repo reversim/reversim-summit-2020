@@ -1,4 +1,3 @@
-/*global cloudinary */
 import React from "react";
 import styled from 'styled-components';
 
@@ -24,11 +23,11 @@ const WantToBeContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+
     text-align: center;
     line-height: 1.7;
     font-family: ${font.main};
-    
+
     color: ${color.text_1};
   `}
 `;
@@ -100,7 +99,7 @@ const InviterContainer = styled.div`
     box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_3};
     background: ${color.background_linear_gradient_1};
     padding: ${space.xl};
-    margin-bottom: ${space.xl};  
+    margin-bottom: ${space.xl};
   `}
 `;
 
@@ -121,7 +120,7 @@ const InviterHeadingBold = styled(InviterHeading)`
 
 const WantToBe = () => (
   <WantToBeContainer>
-    <Heading3>Want to be a sponsor?</Heading3> 
+    <Heading3>Want to be a sponsor?</Heading3>
     <WantToBePara>
       {"Contact our amazing Gilli at "}
       <WantToBelink href="mailto:gilli@reversim.com">

@@ -29,13 +29,13 @@ const ImageContainer= styled.a`
     align-items: center;
     margin-bottom: ${space.m};
 
-    color: inherit;      
+    color: inherit;
     border: 4px solid ${color.box_shadow_1};
     background: ${color.image_link_bkgr};
     text-decoration: none;
     cursor: pointer;
     transition: opacity 300ms linear;
-    
+
     &:hover{
       opacity: 0.5;
     }
@@ -59,7 +59,7 @@ const SMPLinkingButton = styled(ButtonStyledLink)`
 
     ${isOnWhite && `
       border: solid 2px ${color.box_shadow_1};
-      box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};   
+      box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
     `}
 
     &:hover{
@@ -76,13 +76,13 @@ const FAButton = styled.button`
   ${({ theme: { color } }) => `
     width: 50%;
     height: 40px;
-    
+
     display: flex;
     justify-content: center;
-    
+
     user-select: none;
     cursor: pointer;
-    
+
     color: ${color.text_1};
     text-decoration: none;
     background: linear-gradient(to right, ${color.font_awsome_background_1} 0%, ${color.font_awsome_background_2} 100%);
@@ -90,7 +90,7 @@ const FAButton = styled.button`
     border-radius: 0;
     border-color: ${color.font_awsome_border};
     transition: all 200ms;
-    
+
     &:hover{
       color: ${color.text_1};
       text-decoration: none;
@@ -107,7 +107,7 @@ export class SponsorMiniPremium extends React.Component {
     hovered: false
   };
   render() {
-    const { 
+    const {
       name,
       logo,
       onEdit,
@@ -119,7 +119,7 @@ export class SponsorMiniPremium extends React.Component {
       <div>
         {onEdit && (
           <FAButtonContainer>
-            <FAButton 
+            <FAButton
               onClick={onEdit}
             >
               <FontAwesomeIcon icon={faPencilAlt} />
@@ -135,7 +135,7 @@ export class SponsorMiniPremium extends React.Component {
         <SponsorItem>
             <ImageContainer href={`/sponsor/${name}`}>
               <SponsorImg
-                src={image(logo, 350, 150)}
+                src={image(logo, 240, 150)}
                 alt={name}
               />
             </ImageContainer>
