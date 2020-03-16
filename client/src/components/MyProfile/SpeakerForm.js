@@ -1,18 +1,33 @@
 //SpeakerForm.js //DELETE WHEN DONE
 
 import React from 'react';
+import styled from 'styled-components';
 import ga from 'react-ga';
 
-import {Link} from 'react-router-dom';
-import {Button, Input} from 'reactstrap';
 import {getHref} from '../../utils';
 import UserForm, {getUserData} from '../CFP/UserForm';
+import {StyledButton, InvertedColorLink} from '../GlobalStyledComponents/ReversimStyledComps';
+
 
 // styled-components components
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SubmitButton = styled(StyledButton)`
+  ${({ theme: { space } }) => `
+    width: max-content;
+    min-width: initial;
+    margin: 0 ${space.xl} ${space.s} 0px;
+    `}
+`;
 
 
 // React components
+
 class SpeakerForm extends React.Component {
   handleSubmit = async e => {
     e.preventDefault();
@@ -36,16 +51,17 @@ class SpeakerForm extends React.Component {
 
   render() {
     const {user} = this.props;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <UserForm user={user} />
 
-        <div className="d-flex justify-content-center align-items-center">
-          <Button color="primary" className="styled-button w-max-content btn btn-secondary mr-4">
+        <ButtonContainer>
+          <SubmitButton>
             Submit
-          </Button>
-          <Link to={`/speaker/${getHref(user)}`}>Cancel</Link>
-        </div>
+          </SubmitButton>
+          <InvertedColorLink href={`/speaker/${getHref(user)}`}>Cancel</InvertedColorLink>
+        </ButtonContainer>
 
       </form>
     );
