@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import FormField from '../FormField';
+import _ from 'lodash';
 
+import FormField from '../FormField';
 import PublicInfo from '../CFP/CFPForm/PublicInfo';
 import ShortBio from '../CFP/CFPForm/ShortBio';
 import PrivateInfo from '../CFP/CFPForm/PrivateInfo';
