@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ga from 'react-ga';
 
 import {getHref} from '../../utils';
-import UserForm, {getUserData} from '../CFP/UserForm';
+import UserForm, {getUserData} from './UserForm';
 import {StyledButton, InvertedColorLink} from '../GlobalStyledComponents/ReversimStyledComps';
 
 
