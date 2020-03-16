@@ -590,7 +590,7 @@ export class SpeakerPage extends React.Component {
               </SessionsHeadingContainer>
               <SessionsContainer>
                 {sessions.map((session, index) => (
-                  <InfoAndStatusContainer sessions={sessions}>
+                  <InfoAndStatusContainer sessions={sessions} key={session._id}>
                     {canSeeStatus && SessionStatus(session.status)}
                     <SessionInfoContainer
                       key={key()}
@@ -598,10 +598,7 @@ export class SpeakerPage extends React.Component {
                     >
                       <SessionHeading>{session.title}</SessionHeading>
                       <SessionInfo session={session} location={session.location} />
-                      <ToSessionLink
-                      key={session._id}
-                      href={`/session/${getHref(session)}`}
-                      >
+                      <ToSessionLink href={`/session/${getHref(session)}`} >
                         To Session Page
                       </ToSessionLink>
                     </SessionInfoContainer>
