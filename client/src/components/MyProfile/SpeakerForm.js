@@ -142,7 +142,7 @@ class SpeakerForm extends Component {
             linkedin={linkedin}
             github={github}
             twitter={twitter}
-            setValueDebounced={this.setUserInfoValueDebounced} 
+            setValueDebounced={this.setUserInfoValueDebounced}
           />
         ),
       },
@@ -153,7 +153,7 @@ class SpeakerForm extends Component {
       {
         name: 'Private Info',
         component: (
-          <SpeakerEditPrivateInfo 
+          <SpeakerEditPrivateInfo
             user={userInfo}
             email={email}
             phone={phone}

@@ -42,7 +42,7 @@ class SpeakerEditPrivateInfo extends Component {
       showVideoUrlMessage: null,
     };
   };
-  
+
   validationSchema = Joi.object({
     email: Joi.string().email({ tlds: { allow: false } }).required().label('Email'),
     phone: Joi.string().pattern(/^[0-9\+]{9,13}$/, 'valid Phone Number').required().label('Phone'),
@@ -66,20 +66,20 @@ class SpeakerEditPrivateInfo extends Component {
     };
 
     const {error} = this.validationSchema.validate(toValidate);
-    
-    const validationError = error 
-    ? {
-      validationError: {
-        field: error.details[0].path[0],
-        message: error.details[0].message,
-      },
-    }
-    : {
-      validationError: {
-        field: '',
-        message: '',
-      },
-    };
+
+    const validationError = error
+      ? {
+        validationError: {
+          field: error.details[0].path[0],
+          message: error.details[0].message,
+        },
+      }
+      : {
+        validationError: {
+          field: '',
+          message: '',
+        },
+      };
 
     const newState = _.assign({}, this.state, validationError);
 
@@ -92,9 +92,9 @@ class SpeakerEditPrivateInfo extends Component {
     e.target.value === ''
       ? this.setState({ showVideoUrlMessage: true })
       : this.state.showVideoUrlMessage === true && this.setState({showVideoUrlMessage: false})
-    
+
       this.state.showVideoUrlMessage === false && this.isValidated();
-  
+
   }
 
   render() {

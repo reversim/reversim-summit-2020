@@ -29,35 +29,35 @@ export const ResponsiveContainer = styled.div`
 
   ${mediaQueryMin.s`
     ${({ theme: { width } }) => `
-      min-width: ${width.main_for_mq_s};    
-      max-width: ${width.main_for_mq_s};  
+      min-width: ${width.main_for_mq_s};
+      max-width: ${width.main_for_mq_s};
     `}
   `};
 
   ${mediaQueryMin.m`
     ${({ theme: { width } }) => `
-      min-width: ${width.main_for_mq_m};  
+      min-width: ${width.main_for_mq_m};
       max-width: ${width.main_for_mq_m};
     `}
   `};
 
   ${mediaQueryMin.l`
     ${({ theme: { width } }) => `
-      min-width: ${width.main_for_mq_l};  
+      min-width: ${width.main_for_mq_l};
       max-width: ${width.main_for_mq_l};
     `}
   `};
 
   ${mediaQueryMin.xl`
     ${({ theme: { width } }) => `
-      min-width: ${width.main_for_mq_xl};  
+      min-width: ${width.main_for_mq_xl};
       max-width: ${width.main_for_mq_xl};
     `}
   `};
 
   ${mediaQueryMin.xxl`
     ${({ theme: { width } }) => `
-      min-width: ${width.main};  
+      min-width: ${width.main};
       max-width: ${width.main};
     `}
   `};
@@ -70,10 +70,10 @@ export const AlignCenter = styled(ResponsiveContainer)`
       align-items: center;
       justify-content: space-between;
 
-      
+
       padding: 0 ${space.l};
       margin: 0 auto;
-    `}      
+    `}
 `;
 
 export const AlignCenterColumn = styled(AlignCenter)`
@@ -88,7 +88,7 @@ export const BreakLineMain = styled.hr`
 
   ${mediaQueryMin.s`
     ${({ theme: { space } }) =>`
-      min-width: 100px;  
+      min-width: 100px;
       display: inline-block;
       flex-grow: 1;
       align-self: center;
@@ -110,14 +110,14 @@ ${({ theme: { width } }) => `
 
   ${mediaQueryMin.s`
     ${({ theme: { width } }) => `
-      min-width: ${width.main_for_mq_s};    
-      max-width: ${width.main_for_mq_s};  
+      min-width: ${width.main_for_mq_s};
+      max-width: ${width.main_for_mq_s};
     `}
   `};
 
   ${mediaQueryMin.m`
     ${({ theme: { width } }) => `
-      min-width: ${width.main_for_mq_m};  
+      min-width: ${width.main_for_mq_m};
       max-width: ${width.main_for_mq_m};
     `}
   `};
@@ -201,7 +201,7 @@ export const HeadingCircle = styled(CircleJSX)`
       // width: calc(2.85 * ${font.size_h3});
       height: calc(2.85 * ${font.size_h3});
       fill: ${color.heading_decoration};
-      margin: ${space.xl} calc(-10 * ${space.xl}) ${space.xl} 0; 
+      margin: ${space.xl} calc(-10 * ${space.xl}) ${space.xl} 0;
     `}
 
   ${mediaQueryMin.l`
@@ -263,7 +263,7 @@ export const HeadingPlus = styled(PlusJSX)`
 
 export const Heading2 = styled.h2`
   ${({ theme: { color, font, space } }) =>`
-    width: min-content; 
+    width: min-content;
     color: ${color.heading_2};
     margin-right: calc(2 * ${space.m});
     font-family: ${font.main};
@@ -305,7 +305,7 @@ export const Heading4 = styled.h4`
     font-family: ${font.main};
     font-size: ${font.size_h4};
     font-weight: ${font.weight_normal};
-    margin-bottom: ${space.m};    
+    margin-bottom: ${space.m};
   `}
 `;
 
@@ -315,7 +315,7 @@ export const Heading5 = styled.h5`
     font-family: ${font.main};
     font-size: ${font.size_h5};
     font-weight: ${font.weight_normal};
-    margin-bottom: ${space.m};    
+    margin-bottom: ${space.m};
   `}
 `;
 
@@ -353,7 +353,7 @@ export const ListBolt = styled(FontAwesomeIcon)`
 
 export const FullScreenBoundries = styled(AlignCenterColumn)`
   ${({ theme: { space } }) => `
-    min-height: 100vh;  
+    min-height: 100vh;
     padding: calc(3 * ${space.xxl}) ${space.l};
     justify-content: center;
   `};
@@ -410,7 +410,7 @@ export const ButtonStyledLink = styled.a`
       letter-spacing: 1px;
       color: ${color.text_1};
 
-      background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
+      background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);
       background-size: 205% 100%;
       border: solid 2px ${color.box_shadow_2};
       box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
@@ -437,7 +437,7 @@ export const InvertedButtonStyledLink = styled(ButtonStyledLink)`
     border: solid 2px ${color.box_shadow_1};
     box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
   `}
-`; 
+`;
 
 export const StyledButton = styled.button`
   ${({theme: {color, font, space,}}) => `
@@ -449,7 +449,7 @@ export const StyledButton = styled.button`
   letter-spacing: 1px;
   color: ${color.text_1};
 
-  background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);  
+  background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);
   background-size: 205% 100%;
   border: solid 2px ${color.box_shadow_1};
   box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
@@ -482,9 +482,9 @@ export const InvertedStyledButton = styled(StyledButton)`
 export const Input = styled.input`
   ${({theme: { space, font, color }}) =>`
     display: block;
-  
+
     width: 100%;
-    
+
     padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
     margin: ${space.l} 0;
 
@@ -493,7 +493,7 @@ export const Input = styled.input`
     font-weight: 300;
 
     line-height: 1.5;
-    
+
     color: ${color.input_1};
     background-color: ${color.input_bkgr_1};
     background-clip: padding-box;
@@ -517,7 +517,7 @@ export const TextArea = styled.textarea`
     display: block;
 
     width: 100%;
-    
+
     padding: calc(0.25 * ${font.size_reg}) calc(0.5 * ${font.size_reg});
     margin: ${space.l} 0;
 
@@ -526,7 +526,7 @@ export const TextArea = styled.textarea`
     font-weight: 300;
 
     line-height: 1.5;
-    
+
     color: ${color.input_1};
     background-color: ${color.input_bkgr_1};
     background-clip: padding-box;
@@ -563,7 +563,7 @@ export const FontAwsomeTrash = styled(FontAwesomeIcon)`
 `;
 
 //Components for the StepZilla form (CFP form)
-export const StepContainer = styled(ResponsiveContainer)`
+export const StepContainer = styled(LongTextContainer)`
   ${({ theme: { space } }) => `
     padding: 0 ${space.xl};
   `}
@@ -677,7 +677,7 @@ ${({ theme: { color, space } }) => `
 
   margin: 0 auto calc(30 * ${space.m}) auto;
   padding: ${space.xxl} 0 ${space.xl} calc(3.5 * ${space.m});
-  
+
   background-color: ${color.background_2};
 `}
 
@@ -690,7 +690,7 @@ ${({ theme: { color, space } }) => `
     margin: 0 auto calc(15 * ${space.m}) auto;
     padding-bottom: calc(3 * ${space.m});
   `}`}
-  
+
   ${mediaQueryMin.xl`
     padding-bottom: 0;
     display: flex;

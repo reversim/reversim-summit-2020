@@ -7,6 +7,7 @@ import Page from '../Page';
 
 import SpeakerForm from './SpeakerForm';
 import {AlignCenterColumn} from '../GlobalStyledComponents/ReversimStyledComps';
+import mediaQueryMin from '../../styles/MediaQueriesMixin';
 
 // styled-components components
 
