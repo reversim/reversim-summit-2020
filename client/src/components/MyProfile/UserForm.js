@@ -6,52 +6,6 @@ import PublicInfo from '../CFP/CFPForm/PublicInfo';
 import ShortBio from '../CFP/CFPForm/ShortBio';
 import PrivateInfo from '../CFP/CFPForm/PrivateInfo';
 
-
-
-export const getUserData = formElements => {
-  const fullname = formElements.fullname.value;
-  const oneLiner = formElements.oneLiner.value;
-  const bio = formElements.bio.value;
-  const trackRecord = formElements.trackRecord.value;
-  const linkedin = formElements.linkedin.value;
-  const twitter = formElements.twitter.value;
-  const github = formElements.github.value;
-  const phone = formElements.phone.value;
-  const videoUrl = formElements.video_url.value;
-
-  return {
-    name: fullname,
-    bio: bio,
-    trackRecord: trackRecord,
-    linkedin: linkedin,
-    twitter: twitter,
-    github: github,
-    oneLiner: oneLiner,
-    phone: phone,
-    video_url: videoUrl,
-  };
-}; // NOTE: This beauty returns an Object with the user's info based on what was typed in the form
-
-const SPACING = 'mb-6'; //NOTE: Should get rid of this
-
-const VideoUrlFieldCaption = () => (
-  <span>
-    <ul>
-      <li>
-        <b>Seasoned speakers</b>: A link to a video of a session given in a previous conference.</li>
-      <li>
-        <b>New speakers</b>: A short video introducing you and the planned session outline.
-        <br/>Please see <a href="https://www.youtube.com/watch?v=F09My4646hI">https://www.youtube.com/watch?v=F09My4646hI</a> for guidance
-      </li>
-    </ul>
-    <i>
-      <b>Note</b>: You may reuse this video link in the below "Track record" section.
-    </i>
-  </span>
-);
-
-
-
 const USER_INFO = 'userInfo';
 
 class UserForm extends Component {

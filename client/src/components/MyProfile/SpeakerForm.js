@@ -5,9 +5,33 @@ import styled from 'styled-components';
 import ga from 'react-ga';
 
 import {getHref} from '../../utils';
-import UserForm, {getUserData} from './UserForm';
+import UserForm from './UserForm';
 import {StyledButton, InvertedColorLink} from '../GlobalStyledComponents/ReversimStyledComps';
 
+
+const getUserData = formElements => {
+  const fullname = formElements.fullname.value;
+  const oneLiner = formElements.oneLiner.value;
+  const bio = formElements.bio.value;
+  const trackRecord = formElements.trackRecord.value;
+  const linkedin = formElements.linkedin.value;
+  const twitter = formElements.twitter.value;
+  const github = formElements.github.value;
+  const phone = formElements.phone.value;
+  const videoUrl = formElements.video_url.value;
+
+  return {
+    name: fullname,
+    bio: bio,
+    trackRecord: trackRecord,
+    linkedin: linkedin,
+    twitter: twitter,
+    github: github,
+    oneLiner: oneLiner,
+    phone: phone,
+    video_url: videoUrl,
+  };
+};
 
 // styled-components components
 
