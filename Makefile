@@ -25,6 +25,10 @@ stg-db-import:
 	source .private/ENV_VARS; \
 		scripts/stg_mongo_backup.sh --import
 
+stg-populate-db:
+	source .private/ENV_VARS; \
+		scripts/populate_stg_db.sh
+
 prepare-data-for-github:
 	mv data/users.json data/_users.json
 	mv data/proposals.json data/_proposals.json
