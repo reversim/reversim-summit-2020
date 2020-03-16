@@ -356,6 +356,10 @@ const CFPIntro = () => (
       <SubList>
         <IntroListItem>
           <ListBolt icon={faCompass} />
+          <InvertedColorLink href="https://summit2019.reversim.com">Reversim Summit 2019</InvertedColorLink>
+        </IntroListItem>
+        <IntroListItem>
+          <ListBolt icon={faCompass} />
           <InvertedColorLink href="https://summit2018.reversim.com">Reversim Summit 2018</InvertedColorLink>
         </IntroListItem>
         <IntroListItem>
