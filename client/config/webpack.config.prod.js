@@ -170,6 +170,20 @@ module.exports = {
               ),
             ),
           },
+          {
+            test: /\.scss$/,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: {sourceMap: true},
+              },
+              {
+                loader: require.resolve('sass-loader'),
+                options: {sourceMap: true},
+              },
+            ],
+          },
           // The notation here is somewhat confusing.
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
