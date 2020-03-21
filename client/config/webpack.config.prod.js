@@ -150,27 +150,6 @@ module.exports = {
             },
           },
           {
-            test: /bootstrap\.scss$/,
-            loader: ExtractTextPlugin.extract(
-              Object.assign(
-                {
-                  fallback: require.resolve('style-loader'),
-                  use: [
-                    {
-                      loader: require.resolve('css-loader'),
-                      options: {sourceMap: true, minimize: true},
-                    },
-                    {
-                      loader: require.resolve('sass-loader'),
-                      options: {sourceMap: true},
-                    },
-                  ],
-                },
-                extractTextPluginOptions,
-              ),
-            ),
-          },
-          {
             test: /\.scss$/,
             use: [
               require.resolve('style-loader'),
