@@ -240,7 +240,7 @@ class ProposalForm extends Component {
           <SessionProposal
             proposal={currentProposal}
             title={title}
-            type={type} //NOTE HERE
+            type={type}
             ossilProject={ossilProject}
             coSpeaker={coSpeaker}
             setValue={this.setProposalValue}

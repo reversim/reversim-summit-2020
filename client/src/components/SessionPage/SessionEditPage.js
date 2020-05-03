@@ -1,14 +1,18 @@
-import React from "react";
-import Page from "./Page";
-import ga from "react-ga";
-import { Container, Row, Col, Input, Button } from "reactstrap";
-import SessionPageRoute from "./SessionPageRoute";
-import Redirect from "./Redirect";
-import ProposalForm from "./CFP/OldProposalForm";
-import { ABSTRACT_MAX, ABSTRACT_MIN } from "../data/proposals";
-import { getHref } from "../utils";
+import React, {Component} from 'react';
+import ga from 'react-ga';
+
+import { getHref } from '../../utils';
+import { ABSTRACT_MAX, ABSTRACT_MIN } from '../../data/proposals';
+import Redirect from '../Redirect';
+import SessionPageRoute from '../SessionPageRoute';
+
+import Page from '../Page';
+
+import ProposalForm from '../CFP/OldProposalForm';
+import { Container, Row, Col, Input, Button } from 'reactstrap';
 
 
+// React Components
 const EditNotAllowed = props => (
     <Page title={`Edit ${props.session.title}`} {...props}>
       <div className='navbar-margin'>
@@ -24,7 +28,7 @@ const EditNotAllowed = props => (
     </Page>
 );
 
-class SessionEditPage extends React.Component {
+class SessionEditPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -118,9 +122,6 @@ class SessionEditPage extends React.Component {
           <Container className="my-8">
             <Row>
               <Col sm={{ size: 8, offset: 2 }}>
-                <h1 className="my-4">
-                  Edit <b>{session.title}</b>
-                </h1>
                 <form onSubmit={this.handleSubmit}>
                   <ProposalForm
                     update={this.updateState}
