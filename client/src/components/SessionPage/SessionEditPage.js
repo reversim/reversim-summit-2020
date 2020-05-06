@@ -32,14 +32,12 @@ class SessionEditPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: props.session.categories || [],
-      tags: props.session.tags,
-      proposalType: props.session.type,
-      users: props.users
+      categories: props.session.categories || [], // NOTE: session's categories or empty Array
+      tags: props.session.tags, // NOTE: session's tags
+      proposalType: props.session.type, // NOTE: session's type
+      users: props.users, //NOTE: All the website's users
+      coSpeaker: props.session.speaker_ids[1] ? props.users[props.session.speaker_ids[1]].name : null,
     };
-    if (props.session.speaker_ids[1]) {
-      this.state.coSpeaker = props.users[props.session.speaker_ids[1]].name;
-    }
   }
 
   handleSubmit = async e => {
