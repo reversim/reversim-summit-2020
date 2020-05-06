@@ -8,7 +8,7 @@ import SessionPageRoute from '../SessionPageRoute';
 
 import Page from '../Page';
 
-import ProposalForm from '../CFP/OldProposalForm';
+import ProposalForm from './EditProposalForm';
 import { Container, Row, Col, Input, Button } from 'reactstrap';
 
 
@@ -46,27 +46,6 @@ class SessionEditPage extends Component {
 
     const { updateProposal, session } = this.props;
 
-    const abstract = formElements.abstract.value;
-    if (abstract.length > ABSTRACT_MAX || abstract.length < ABSTRACT_MIN) {
-      const y =
-        formElements.abstract.getBoundingClientRect().top -
-        document.body.getBoundingClientRect().top -
-        150;
-      window.scrollTo(0, y);
-      formElements.abstract.focus();
-      return;
-    }
-
-    const categories = this.state.categories;
-    if (!categories.length) {
-      const y =
-        formElements.categories_hidden.getBoundingClientRect().top -
-        document.body.getBoundingClientRect().top -
-        750;
-      window.scrollTo(0, y);
-      return;
-    }
-
     try {
       await updateProposal(session._id, this.getProposalData(formElements));
       this.props.history.push(`/session/${getHref(session)}`);
@@ -80,10 +59,10 @@ class SessionEditPage extends Component {
 
   getProposalData = formElements => {
     const title = formElements.title.value;
-    const type = this.state.proposalType;
     const outline = formElements.outline.value;
     const abstract = formElements.abstract.value;
     const legal = formElements.legal.checked;
+    const type = this.state.proposalType;
     const tags = this.state.tags;
     const categories = this.state.categories;
     const coSpeaker = this.state.coSpeaker;
@@ -121,6 +100,7 @@ class SessionEditPage extends Component {
             <Row>
               <Col sm={{ size: 8, offset: 2 }}>
                 <form onSubmit={this.handleSubmit}>
+
                   <ProposalForm
                     update={this.updateState}
                     tags={tags}
@@ -133,6 +113,7 @@ class SessionEditPage extends Component {
                     legal={legal}
                     coSpeaker={coSpeaker}
                   />
+
                   <div className="text-center">
                     <Input type="submit" className="d-none" />
                     <Button

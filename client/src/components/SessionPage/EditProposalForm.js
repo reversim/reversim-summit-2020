@@ -5,7 +5,7 @@ import without from 'lodash/without';
 import cn from 'classnames';
 import {findBestMatch} from 'string-similarity';
 import FormField from '../FormField';
-import Tags from './Tags';
+import Tags from '../CFP/Tags';
 // import {titleInput} from './CFPPage.css';
 import {
   ABSTRACT_MAX,
