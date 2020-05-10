@@ -8,7 +8,7 @@ import SessionPageRoute from '../SessionPageRoute';
 
 import Page from '../Page';
 
-import ProposalForm from './EditProposalForm';
+import EditProposalForm from './EditProposalForm';
 import { Container, Row, Col, Input, Button } from 'reactstrap';
 
 
@@ -36,26 +36,28 @@ class SessionEditPage extends Component {
       tags: props.session.tags, // NOTE: session's tags
       proposalType: props.session.type, // NOTE: session's type
       users: props.users, //NOTE: All the website's users
-      coSpeaker: props.session.speaker_ids[1] ? props.users[props.session.speaker_ids[1]].name : null,
+      speaker: props.user,
+      coSpeaker: props.session.speaker_ids[1] ? props.users[props.session.speaker_ids[1]] : null,
+      ossilProject: props.session.ossilProject,
     };
   }
 
-  handleSubmit = async e => {
-    e.preventDefault();
-    const formElements = e.target.elements;
-
-    const { updateProposal, session } = this.props;
-
-    try {
-      await updateProposal(session._id, this.getProposalData(formElements));
-      this.props.history.push(`/session/${getHref(session)}`);
-    } catch (ex) {
-      ga.exception({
-        description: `Error on submit: ${ex}`,
-        fatal: true
-      });
-    }
-  };
+  // handleSubmit = async e => {
+  //   e.preventDefault();
+  //   const formElements = e.target.elements;
+  //
+  //   const { updateProposal, session } = this.props;
+  //
+  //   try {
+  //     await updateProposal(session._id, this.getProposalData(formElements));
+  //     this.props.history.push(`/session/${getHref(session)}`);
+  //   } catch (ex) {
+  //     ga.exception({
+  //       description: `Error on submit: ${ex}`,
+  //       fatal: true
+  //     });
+  //   }
+  // };
 
   getProposalData = formElements => {
     const title = formElements.title.value;
@@ -82,7 +84,7 @@ class SessionEditPage extends Component {
   updateState = state => this.setState(state);
 
   render() {
-    const {session, allTags, eventConfig, user} = this.props;
+    const {session, allTags, eventConfig, user, updateProposal} = this.props;
     const {proposalType, categories, tags} = this.state;
     const {title, outline, abstract, legal} = session;
     const coSpeaker = this.state.coSpeaker
@@ -99,31 +101,22 @@ class SessionEditPage extends Component {
           <Container className="my-8">
             <Row>
               <Col sm={{ size: 8, offset: 2 }}>
-                <form onSubmit={this.handleSubmit}>
-
-                  <ProposalForm
-                    update={this.updateState}
-                    tags={tags}
-                    proposalType={proposalType}
-                    categories={categories}
-                    allTags={allTags}
-                    title={title}
-                    outline={outline}
-                    abstract={abstract}
-                    legal={legal}
-                    coSpeaker={coSpeaker}
+                <EditProposalForm
+                  update={this.updateState}
+                  sessionId={session._id}
+                  tags={tags}
+                  proposalType={proposalType}
+                  categories={categories}
+                  allTags={allTags}
+                  title={title}
+                  outline={outline}
+                  abstract={abstract}
+                  legal={legal}
+                  speaker={this.state.speaker}
+                  coSpeaker={coSpeaker}
+                  updateProposal={updateProposal}
+                  history={this.props.history}
                   />
-
-                  <div className="text-center">
-                    <Input type="submit" className="d-none" />
-                    <Button
-                      className="mr-4 styled-button btn btn-secondary"
-                      // style={{ width: 120 }}
-                    >
-                      Submit
-                    </Button>
-                  </div>
-                </form>
               </Col>
             </Row>
           </Container>
