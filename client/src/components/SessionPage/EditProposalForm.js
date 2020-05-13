@@ -1,7 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import _ from 'lodash';
 import ga from 'react-ga';
-import {updateProposal} from '../../data-service';
+import {updateProposal, getProposals, getProposers} from '../../data-service';
+import {getHref} from '../../utils';
 import SessionProposal from '../CFP/CFPForm/SessionProposal';
 import Abstract from '../CFP/CFPForm/Abstract';
 import Outline from '../CFP/CFPForm/Outline';
@@ -110,12 +111,14 @@ class EditProposalForm extends Component {
 
 
     const {currentProposal} = this.state;
-    const {history, sessionId} = this.props;
+    const {history, session} = this.props;
 
     if (currentProposal.iAgree === true) {
       try {
-        await updateProposal(sessionId, currentProposal);
-        history.push(`/session/${sessionId}`);
+        await updateProposal(session._id, currentProposal);
+        history.push(`/session/${getHref(session)}`);
+        await getProposals();
+        await getProposers();
       } catch (ex) {
         ga.exception({
           description: `Error on submit: ${ex}`,

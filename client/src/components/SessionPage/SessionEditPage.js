@@ -103,7 +103,7 @@ class SessionEditPage extends Component {
               <Col sm={{ size: 8, offset: 2 }}>
                 <EditProposalForm
                   update={this.updateState}
-                  sessionId={session._id}
+                  session={session}
                   tags={tags}
                   proposalType={proposalType}
                   categories={categories}
