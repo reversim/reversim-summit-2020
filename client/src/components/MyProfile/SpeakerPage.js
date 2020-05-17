@@ -365,10 +365,12 @@ const SessionInfoContainer = styled.div`
   `}
   ${mediaQueryMin.l`
     min-height: 455px;
+    max-height: 455px;
     flex: 0 0 calc(50% - 20px);
   `}
   ${mediaQueryMin.xl`
-    min-height: 310px;
+    min-height: 455px;
+    max-height: 455px;
   `}
 `;
 
@@ -588,6 +590,7 @@ export class SpeakerPage extends React.Component {
                 <SectionHeading>Sessions</SectionHeading>
                 <BreakLineMain/>
               </SessionsHeadingContainer>
+
               <SessionsContainer>
                 {sessions.map((session, index) => (
                   <InfoAndStatusContainer sessions={sessions} key={session._id}>

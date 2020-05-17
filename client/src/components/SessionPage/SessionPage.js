@@ -355,7 +355,7 @@ class SessionPage extends Component {
 
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
 
-    const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
+    const canSeeStatus = (isAuthor || isTeamMember) || moderationCompleted;
 
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
@@ -382,8 +382,7 @@ class SessionPage extends Component {
           </TypeAndTimeContianer>
 
           <StatContainer>
-          {!canSeeStatus && SessionStatus(session.status)}
-
+            {canSeeStatus && SessionStatus(session.status)}
           </StatContainer>
 
           <TextContainer>

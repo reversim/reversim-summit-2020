@@ -12,6 +12,7 @@ import { Heading5 } from '../GlobalStyledComponents/ReversimStyledComps';
 //styled-components components
 const InfoContainer = styled.div`
   ${({ theme: { space } }) =>`
+    height: 135px;
     display: flex;
     flex-direction: column;
     margin-bottom: ${space.xl};
