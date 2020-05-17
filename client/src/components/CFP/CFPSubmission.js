@@ -137,12 +137,12 @@ class CFPSubmission extends Component {
           ?  <LoadingPage />
           :  !submission
               ? <SubmissionClosed />
-              : !user 
+              : !user
                 ? <NonAuthenticated />
                 : hasProposalsMaxed
                   ? <ProposalsMaxedOut user={user} cfpEndDate={cfpEndDate}/>
                   : <ProposalForm user={user} {...props} />
-        } 
+        }
       </Page>
     );
   }
