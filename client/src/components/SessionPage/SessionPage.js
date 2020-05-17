@@ -164,7 +164,9 @@ const SpeakerContainer = styled.div`
   `}
 
   ${mediaQueryMin.l`
-    width: 47.5%;
+    ${({ hasCoSpeaker }) => `
+      width: ${hasCoSpeaker ? '47.5%' : '100%'};
+    `}
   `}
 `;
 
@@ -182,7 +184,9 @@ const SpeakerImg = styled.div`
     min-width: 35%;
   `}
   ${mediaQueryMin.l`
-    min-width: 50%;
+    ${({hasCoSpeaker}) => `
+      min-width: ${hasCoSpeaker ? '50%' : '35%'};
+    `}
   `}
 `;
 
@@ -342,6 +346,8 @@ class SessionPage extends Component {
       video_url: speaker.video_url
     }));
 
+    const hasCoSpeaker = sessionSpeakers.length === 2
+
     const isAuthor = !!user && session.speaker_ids.includes(user._id);
 
     const isTeamMember = user && user.isReversimTeamMember;
@@ -450,8 +456,8 @@ class SessionPage extends Component {
           <TextHeading>Speakers</TextHeading>
           <VoteAndSpeakersContainer>
             {sessionSpeakers.map(speaker => (
-              <SpeakerContainer key={key()}>
-                <SpeakerImg speaker={speaker} />
+              <SpeakerContainer hasCoSpeaker={hasCoSpeaker} key={key()}>
+                <SpeakerImg speaker={speaker} hasCoSpeaker={hasCoSpeaker}/>
                 <SpeakerNameAndLink>
                   <SpeakerName>
                     {speaker.name}
