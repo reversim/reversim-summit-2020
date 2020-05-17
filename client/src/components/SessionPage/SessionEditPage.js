@@ -32,66 +32,23 @@ class SessionEditPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: props.session.categories || [], // NOTE: session's categories or empty Array
-      tags: props.session.tags, // NOTE: session's tags
-      proposalType: props.session.type, // NOTE: session's type
-      users: props.users, //NOTE: All the website's users
+      categories: props.session.categories || [],
+      tags: props.session.tags,
+      proposalType: props.session.type,
+      users: props.users,
       speaker: props.user,
       coSpeaker: props.session.speaker_ids[1] ? props.users[props.session.speaker_ids[1]] : null,
       ossilProject: props.session.ossilProject,
     };
   }
 
-  // handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const formElements = e.target.elements;
-  //
-  //   const { updateProposal, session } = this.props;
-  //
-  //   try {
-  //     await updateProposal(session._id, this.getProposalData(formElements));
-  //     this.props.history.push(`/session/${getHref(session)}`);
-  //   } catch (ex) {
-  //     ga.exception({
-  //       description: `Error on submit: ${ex}`,
-  //       fatal: true
-  //     });
-  //   }
-  // };
-
-  getProposalData = formElements => {
-    const title = formElements.title.value;
-    const outline = formElements.outline.value;
-    const abstract = formElements.abstract.value;
-    const legal = formElements.legal.checked;
-    const type = this.state.proposalType;
-    const tags = this.state.tags;
-    const categories = this.state.categories;
-    const coSpeaker = this.state.coSpeaker;
-
-    return {
-      title,
-      type,
-      abstract,
-      outline,
-      tags,
-      categories,
-      legal,
-      coSpeaker
-    };
-  };
-
-  updateState = state => this.setState(state);
-
   render() {
-    const {session, allTags, eventConfig, user, updateProposal} = this.props;
+    const {session, allTags, user, updateProposal} = this.props;
     const {proposalType, categories, tags} = this.state;
     const {title, outline, abstract, legal} = session;
-    const coSpeaker = this.state.coSpeaker
-    const {cfp} = eventConfig;
+    const coSpeaker = this.state.coSpeaker;
     const isAuthor = user && session.speaker_ids.includes(user._id);
     const isTeamMember = user && user.isReversimTeamMember;
-    // TODO neta: fix the editing period
     const canEdit = isAuthor || isTeamMember;
 
     if (!canEdit) return <EditNotAllowed {...this.props} />;
@@ -102,7 +59,6 @@ class SessionEditPage extends Component {
             <Row>
               <Col sm={{ size: 8, offset: 2 }}>
                 <EditProposalForm
-                  update={this.updateState}
                   session={session}
                   tags={tags}
                   proposalType={proposalType}
@@ -111,7 +67,6 @@ class SessionEditPage extends Component {
                   title={title}
                   outline={outline}
                   abstract={abstract}
-                  legal={legal}
                   speaker={this.state.speaker}
                   coSpeaker={coSpeaker}
                   updateProposal={updateProposal}

@@ -14,30 +14,11 @@ class EditProposalForm extends Component {
   constructor(props) {
     super(props);
 
-
-          /*
-          NOTE: props passed from SessionEditPage:
-
-          <EditProposalForm
-            update={this.updateState}
-            tags={tags}
-            proposalType={proposalType}
-            categories={categories}
-            allTags={allTags}
-            title={title}
-            outline={outline}
-            abstract={abstract}
-            legal={legal}
-            coSpeaker={coSpeaker}
-          />
-
-          */
     const proposal = {
       title: props.title,
       type: props.proposalType,
       ossilProject: props.ossilProject,
       speaker: props.speaker,
-      // coSpeaker: props.coSpeaker.email, //NOTE: this might need renaming
       abstract: props.abstract,
       tags: props.tags,
       categories: props.categories,

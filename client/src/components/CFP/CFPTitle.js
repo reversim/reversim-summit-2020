@@ -68,11 +68,11 @@ const CountDown = styled.p`
 `;
 
 const DaysRemaining = styled.span`
-  ${({ theme: { color, space } }) => `  
+  ${({ theme: { color, space } }) => `
     padding: ${space.s} ${space.m};
     box-sizing: content-box;
     display: inline-block;
-    
+
     color: ${color.text_3};
     line-height: 20px;
     letter-spacing: 1px;
@@ -96,7 +96,7 @@ const CFPTitle = (props) => {
   return (
     <Fragment>
       <TitleContainer>
-      {eventConfig.cfp //IMPORTANT: remove bang
+      {eventConfig.cfp
       ? (
           <AlignCenterColumn>
             <HeadingContainer>

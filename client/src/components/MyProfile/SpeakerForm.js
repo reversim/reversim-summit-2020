@@ -1,5 +1,3 @@
-//SpeakerForm.js //DELETE WHEN DONE
-
 import React from 'react';
 import styled from 'styled-components';
 import ga from 'react-ga';
