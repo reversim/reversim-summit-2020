@@ -23,7 +23,8 @@ import {
   InvertedColorLink,
   StyledButton,
   BreakLineMain,
-} from '../GlobalStyledComponents/ReversimStyledComps'
+} from '../GlobalStyledComponents/ReversimStyledComps';
+import {SessionStatus} from '../MyProfile/SpeakerPage';
 import Page from "../Page";
 import { getHref, key } from "../../utils";
 import SessionPageRoute from "../SessionPageRoute";
@@ -100,13 +101,6 @@ const StatContainer = styled.div`
     margin-bottom: ${space.m};
     display: flex;
     justify-content: center;
-  `}
-`;
-
-const SessionStatus = styled(Heading4)`
-  ${({ theme: { color, font } }) => `
-    color: ${color.text_3};
-    font-weight: ${font.weight_bold};
   `}
 `;
 
@@ -382,12 +376,7 @@ class SessionPage extends Component {
           </TypeAndTimeContianer>
 
           <StatContainer>
-            {canSeeStatus && (
-              <SessionStatus>
-                Status:
-                {session.status === "accepted" ? " Accepted" : " Sadly not this time"}
-              </SessionStatus>
-            )}
+          {!canSeeStatus && SessionStatus(session.status)}
 
           </StatContainer>
 

@@ -411,13 +411,13 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 
 // React components
 
-const SessionStatus = status => {
+export const SessionStatus = status => {
   const statusMessage = STATUS_TO_MESSAGES_DICTIONARY[status] || 'no status found';
 
   return (
     <SessionStatusBadge status={status}>Status: {statusMessage}</SessionStatusBadge>
   )
-}
+};
 
 export class SpeakerPage extends React.Component {
   state = {
