@@ -5,7 +5,7 @@ import AboutPage from '../components/AboutPage';
 import SpeakerPage from '../components/MyProfile/SpeakerPage';
 import SpeakerEditPage from '../components/MyProfile/SpeakerEditPage';
 import SessionPage from '../components/SessionPage/SessionPage';
-import SessionEditPage from '../components/SessionEditPage';
+import SessionEditPage from '../components/SessionPage/SessionEditPage';
 import SpeakersPage from '../components/SpeakersPage2';
 import SponsorsPage from '../components/SponsorsPage/SponsorsPage.jsx';
 import SponsorPage from '../components/PremiumSponsorPage/PremiumSponsorPage';

@@ -12,10 +12,11 @@ import { Heading5 } from '../GlobalStyledComponents/ReversimStyledComps';
 //styled-components components
 const InfoContainer = styled.div`
   ${({ theme: { space } }) =>`
+    height: 135px;
     display: flex;
     flex-direction: column;
     margin-bottom: ${space.xl};
-  `}  
+  `}
   ${mediaQueryMin.m`
     align-items: flex-start;
   `}
@@ -23,7 +24,7 @@ const InfoContainer = styled.div`
 
 const SessionType = styled.div`
   ${({ theme: { color, font, space } }) => `
-    margin-bottom: ${space.m}  
+    margin-bottom: ${space.m}
     color: ${color.text_2};
     font-weight: ${font.weight_bold};
   `}
@@ -52,7 +53,14 @@ const InfoText = styled(Heading5)`
   `}
 `;
 
-  const TagsContainer = styled.div`
+const LocationContainer = styled(InfoText)`
+  width: 290px;
+  ${mediaQueryMin.l`
+    width: initial;
+  `}
+`;
+
+  const TagsAndCategoriesContainer = styled.div`
   ${({ theme: { space, color, font } }) => `
     margin-bottom: ${space.m};
     display: flex;
@@ -82,8 +90,8 @@ const ClickTag = styled.div`
 
 const Category = styled.span`
   ${({ theme: { color, space, font } }) => `
-    width: min-content;  
-    padding: 0 ${space.m};  
+    margin: ${space.s} calc(2*${space.m}) ${space.s} 0;
+    padding: 0 ${space.m};
     color: ${color.session_category};
     font-weight: ${font.weight_bold};
     border: 2px solid ${color.session_category_border};
@@ -101,12 +109,12 @@ export default function SessionInfo({ session, onTagClick, location }) {
             {getSessionTypeStr(session.type)}
           </InfoText>
         </SessionType>
-        {location && 
-          <InfoText>
+        {location &&
+          <LocationContainer>
             {`Day ${location.day+1} | ${location.time} | ${halls[location.hall]}`}
-          </InfoText>
+          </LocationContainer>
         }
-        <TagsContainer>
+        <TagsAndCategoriesContainer>
           {session.tags.map(tag =>
             onTagClick ? (
               <ClickTag key={tag} onClick={() => onTagClick(tag)}>{tag}</ClickTag>
@@ -114,11 +122,13 @@ export default function SessionInfo({ session, onTagClick, location }) {
               <RegularTag key={tag}>{tag}</RegularTag>
             )
           )}
-        </TagsContainer>
-        {
-          session.categories && 
-          session.categories.map(category =>  <Category key={category}>{category}</Category>)
-        }
+        </TagsAndCategoriesContainer>
+        <TagsAndCategoriesContainer>
+          {
+            session.categories &&
+            session.categories.map(category =>  <Category key={category}>{category}</Category>)
+          }
+        </TagsAndCategoriesContainer>
       </InfoContainer>
     </Fragment>
   );

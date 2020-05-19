@@ -1,9 +1,54 @@
 import React from 'react';
-import {Button, Input} from 'reactstrap';
-import UserForm, {getUserData} from '../CFP/UserForm';
+import styled from 'styled-components';
 import ga from 'react-ga';
-import {Link} from 'react-router-dom';
+
 import {getHref} from '../../utils';
+import UserForm from './UserForm';
+import {StyledButton, InvertedColorLink} from '../GlobalStyledComponents/ReversimStyledComps';
+
+
+const getUserData = formElements => {
+  const fullname = formElements.fullname.value;
+  const oneLiner = formElements.oneLiner.value;
+  const bio = formElements.bio.value;
+  const trackRecord = formElements.trackRecord.value;
+  const linkedin = formElements.linkedin.value;
+  const twitter = formElements.twitter.value;
+  const github = formElements.github.value;
+  const phone = formElements.phone.value;
+  const videoUrl = formElements.video_url.value;
+
+  return {
+    name: fullname,
+    bio: bio,
+    trackRecord: trackRecord,
+    linkedin: linkedin,
+    twitter: twitter,
+    github: github,
+    oneLiner: oneLiner,
+    phone: phone,
+    video_url: videoUrl,
+  };
+};
+
+// styled-components components
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SubmitButton = styled(StyledButton)`
+  ${({ theme: { space } }) => `
+    width: max-content;
+    min-width: initial;
+    margin: 0 ${space.xl} ${space.s} 0px;
+    `}
+`;
+
+
+// React components
 
 class SpeakerForm extends React.Component {
   handleSubmit = async e => {
@@ -28,16 +73,18 @@ class SpeakerForm extends React.Component {
 
   render() {
     const {user} = this.props;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <UserForm user={user} />
-        <Input type="submit" className="d-none" />
-        <div className="d-flex justify-content-center align-items-center">
-          <Button color="primary" className="styled-button w-max-content btn btn-secondary mr-4">
+
+        <ButtonContainer>
+          <SubmitButton>
             Submit
-          </Button>
-          <Link to={`/speaker/${getHref(user)}`}>Cancel</Link>
-        </div>
+          </SubmitButton>
+          <InvertedColorLink href={`/speaker/${getHref(user)}`}>Cancel</InvertedColorLink>
+        </ButtonContainer>
+
       </form>
     );
   }

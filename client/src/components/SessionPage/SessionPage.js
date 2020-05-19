@@ -18,10 +18,13 @@ import {
   Heading2,
   Heading4,
   Paragraph2,
+  ButtonStyledLink,
   InvertedButtonStyledLink,
   InvertedColorLink,
   StyledButton,
-} from '../GlobalStyledComponents/ReversimStyledComps'
+  BreakLineMain,
+} from '../GlobalStyledComponents/ReversimStyledComps';
+import {SessionStatus} from '../MyProfile/SpeakerPage';
 import Page from "../Page";
 import { getHref, key } from "../../utils";
 import SessionPageRoute from "../SessionPageRoute";
@@ -55,6 +58,15 @@ const ContentContainer = styled(LongTextContainer)`
   `}
 `;
 
+const HeroContainer = styled(ContentContainer)`
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  ${mediaQueryMin.m`
+    justify-content: initial;
+  `}
+`;
+
 const SessionPageHero = styled.div`
   ${({ theme: { space, color } }) => `
     padding: calc(12 * ${space.m}) 0 calc(3 * ${space.m}) 0;
@@ -70,7 +82,7 @@ const SessionPageHero = styled.div`
 
 const HeroHeading = styled(Heading2)`
   ${({ theme: { color } }) => `
-    margin-right: 0;  
+    margin-right: 0;
     color: ${color.text_1};
   `}
   ${mediaQueryMin.l`
@@ -84,7 +96,7 @@ const TypeAndTimeContianer = styled.div`
   `}
 `;
 
-const StatAndEditContainer = styled.div`
+const StatContainer = styled.div`
   ${({ theme: { space } }) => `
     margin-bottom: ${space.m};
     display: flex;
@@ -92,15 +104,13 @@ const StatAndEditContainer = styled.div`
   `}
 `;
 
-const SessionStatus = styled(Heading4)`
-  ${({ theme: { color, font } }) => `
-    color: ${color.text_3};
-    font-weight: ${font.weight_bold};
-  `}
-`;
-
-const EditButton = styled(InvertedButtonStyledLink)`
+const EditButton = styled(ButtonStyledLink)`
   min-width: initial;
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      margin: 0 0 0 calc(2 * ${space.xxl});
+    `}
+  `}
 `;
 
 const TextContainer = styled.div`
@@ -125,9 +135,14 @@ const StyledMarkdown = styled(ReactMarkdown)`
   `}
 `;
 
+const BreakLine = styled(BreakLineMain)`
+  width: 100%;
+  margin-left: initial !important;
+`;
+
 const VoteAndSpeakersContainer = styled.div`
   ${({ theme: { space } }) => `
-    width: 100%;  
+    width: 100%;
     margin: ${space.xxl} auto;
     display: flex;
     align-items: center;
@@ -149,7 +164,9 @@ const SpeakerContainer = styled.div`
   `}
 
   ${mediaQueryMin.l`
-    width: 47.5%;
+    ${({ hasCoSpeaker }) => `
+      width: ${hasCoSpeaker ? '47.5%' : '100%'};
+    `}
   `}
 `;
 
@@ -167,7 +184,9 @@ const SpeakerImg = styled.div`
     min-width: 35%;
   `}
   ${mediaQueryMin.l`
-    min-width: 50%;
+    ${({hasCoSpeaker}) => `
+      min-width: ${hasCoSpeaker ? '50%' : '35%'};
+    `}
   `}
 `;
 
@@ -190,8 +209,8 @@ const SpeakerNameAndLink = styled.div`
 const SpeakerName = styled.p`
   ${({ theme: { font } }) => `
     max-width: 135px;
-    font-size: ${font.size_bg};
-    font-weight: ${font.weight_medium};
+    font-size: ${font.size_md};
+    font-weight: ${font.weight_bold};
     overflow-wrap: break-word;
   `}
   ${mediaQueryMin.s`
@@ -230,7 +249,9 @@ const TrashModalBody = styled(ModalBody)`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: ${color.background_5};
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: ${color.background_4};
   `}
 `;
 
@@ -241,13 +262,19 @@ const ModalMessage = styled.p`
     font-weight: ${font.weight_bold};
     width: 85%;
   `}
+  ${mediaQueryMin.m`
+    ${({ theme: { space } }) => `
+      align-self: flex-start;
+      margin-top: ${space.xl};
+    `}
+  `}
 `;
 
 const TrashModalFooter = styled(ModalFooter)`
   ${({ theme: { color } }) => `
     display: flex;
     align-items: flex-end;
-    background: ${color.background_5};
+    background: ${color.background_4};
     border: 0;
   `}
 `;
@@ -319,40 +346,24 @@ class SessionPage extends Component {
       video_url: speaker.video_url
     }));
 
-    const isAuthor = user && session.speaker_ids.includes(user._id);
-    
+    const hasCoSpeaker = sessionSpeakers.length === 2
+
+    const isAuthor = !!user && session.speaker_ids.includes(user._id);
+
     const isTeamMember = user && user.isReversimTeamMember;
-    // const editPeriod = cfp || moderationCompleted;
-    // IMPORTANT: NETA- remove the always true
-    const editPeriod = true;
-    
+    const editPeriod = cfp || moderationCompleted;
+
     const canEdit = (isAuthor && editPeriod) || isTeamMember;
-    
-    const canSeeStatus = (isAuthor || isTeamMember) && moderationCompleted;
-    
+
+    const canSeeStatus = (isAuthor || isTeamMember) || moderationCompleted;
+
     return (
       <Page title={session.title} {...this.props} isSingleContent={true}>
         <SessionPageHero>
-          <ContentContainer>
+          <HeroContainer>
             <HeroHeading>
               {title}
             </HeroHeading>
-          </ContentContainer>
-        </SessionPageHero>
-        
-        <ContentContainer>
-          <TypeAndTimeContianer>
-            <SessionInfo session={session} />
-            <SessionDayTime id={id} />
-          </TypeAndTimeContianer>
-
-          <StatAndEditContainer>
-            {canSeeStatus && (
-              <SessionStatus>
-                Status:
-                {session.status === "accepted" ? " Accepted" : " Sadly not this time"}
-              </SessionStatus>
-            )}
 
             {canEdit && (
               <EditButton
@@ -361,8 +372,19 @@ class SessionPage extends Component {
                 <FontAwesomeIcon icon="pencil-alt" />
               </EditButton>
             )}
-          </StatAndEditContainer>
-          
+          </HeroContainer>
+        </SessionPageHero>
+
+        <ContentContainer>
+          <TypeAndTimeContianer>
+            <SessionInfo session={session} />
+            <SessionDayTime id={id} />
+          </TypeAndTimeContianer>
+
+          <StatContainer>
+            {canSeeStatus && SessionStatus(session.status)}
+          </StatContainer>
+
           <TextContainer>
             <TextHeading>Abstract</TextHeading>
             <StyledMarkdown source={abstract} />
@@ -373,19 +395,19 @@ class SessionPage extends Component {
               <StyledMarkdown source={outline.replace(/\n/g, "<br/>\n")} />{" "}
             </TextContainer>
           )}
-          {!isTeamMember &&
+          {isTeamMember &&
             trackRecords &&
             trackRecords.map((speaker, i) => {
-            return speaker.trackRecord 
+            return speaker.trackRecord
             ? (
                 <TextContainer key={i}>
-                  <TextHeading>{speaker.name}'s Track record</TextHeading>
+                  <TextHeading>{`${speaker.name}'s Track record`}</TextHeading>
                   <StyledMarkdown source={speaker.trackRecord} />
                 </TextContainer>
               )
             : (
               <TextContainer key={i}>
-                <TextHeading>{speaker.name}'s Track record</TextHeading>
+                <TextHeading>{`${speaker.name}'s Track record`}</TextHeading>
                 <Paragraph2>{speaker.name} has not submitted any trackRecords.</Paragraph2>
               </TextContainer>
             )
@@ -395,46 +417,31 @@ class SessionPage extends Component {
             video_urls &&
             video_urls.map((speaker, i) => (
               speaker.video_url && (
-              <TextContainer className="mb-3" key={i}>
+              <TextContainer key={i}>
                 <TextHeading>Watch {speaker.name}</TextHeading>
                 <GeneralLink href={speaker.video_url} target="_blank">
-                  Link to {speaker.name}'s video
+                  {`Link to ${speaker.name}'s video`}
                 </GeneralLink>
               </TextContainer>
               )
             ))}
 
-          <VoteAndSpeakersContainer>
-            {!user && voting && <InvertedButtonStyledLink href={getLoginUrl()}>Login to vote!</InvertedButtonStyledLink>}
-            {user && voting && (
-              <VoteButtons
-              user={user}
-              attended={attended}
-              proposalId={id}
-              attendProposal={attendProposal}
-              eventConfig={eventConfig}
-              />
-            )}
-          </VoteAndSpeakersContainer>
-
-          <VoteAndSpeakersContainer>
-            {sessionSpeakers.map(speaker => (
-              <SpeakerContainer key={key()}>
-                <SpeakerImg speaker={speaker} />
-                <SpeakerNameAndLink>
-                  <SpeakerName>
-                    {speaker.name}
-                  </SpeakerName>
-                  <SpeakerProfileLink
-                    key={speaker._id}
-                    href={`/speaker/${getHref(speaker)}`}
-                  >
-                    Speaker's Profile
-                  </SpeakerProfileLink>
-                </SpeakerNameAndLink>
-              </SpeakerContainer>
-            ))}
-          </VoteAndSpeakersContainer>
+            {voting &&
+              <VoteAndSpeakersContainer>
+              {user
+                ? (
+                    <VoteButtons
+                      user={user}
+                      attended={attended}
+                      proposalId={id}
+                      attendProposal={attendProposal}
+                      eventConfig={eventConfig}
+                    />
+                  )
+                : <InvertedButtonStyledLink href={getLoginUrl()}>Login to vote!</InvertedButtonStyledLink>
+              }
+              </VoteAndSpeakersContainer>
+            }
 
           {canEdit && (
            <TrashButton
@@ -443,6 +450,27 @@ class SessionPage extends Component {
              <FontAwesomeIcon icon="trash" /> Delete Proposal
            </TrashButton>
           )}
+
+          <BreakLine />
+          <TextHeading>Speakers</TextHeading>
+          <VoteAndSpeakersContainer>
+            {sessionSpeakers.map(speaker => (
+              <SpeakerContainer hasCoSpeaker={hasCoSpeaker} key={key()}>
+                <SpeakerImg speaker={speaker} hasCoSpeaker={hasCoSpeaker}/>
+                <SpeakerNameAndLink>
+                  <SpeakerName>
+                    {speaker.name}
+                  </SpeakerName>
+                  <SpeakerProfileLink
+                    key={speaker._id}
+                    href={`/speaker/${getHref(speaker)}`}
+                  >
+                    {`${speaker.name.split(' ')[0]}'s Profile`}
+                  </SpeakerProfileLink>
+                </SpeakerNameAndLink>
+              </SpeakerContainer>
+            ))}
+          </VoteAndSpeakersContainer>
 
         </ContentContainer>
         <Modal isOpen={!!this.state.isDelete} toggle={this.toggleDeleteModal}>

@@ -329,7 +329,7 @@ const PremiumGallery = styled.div`
       ${({ theme: { space } }) => `
         width: 90%;
         margin-left: calc(4 * ${space.m});
-      `}`} /*NOTE: There is a height issue of the carousel which I couldn't solve in min-width 992px*/
+      `}`} 
 `;
 
 const PremiumTechList = styled.ul`

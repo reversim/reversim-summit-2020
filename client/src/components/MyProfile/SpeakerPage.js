@@ -34,7 +34,7 @@ const STATUS_ACCEPTED = 'accepted';
 const STATUS_WITHDRAWN = 'withdrawn';
 const STATUS_REJECTED = 'rejected';
 
-const STATUS_TO_MESSAGES_SIDTIONARY = {
+const STATUS_TO_MESSAGES_DICTIONARY = {
   [STATUS_PROPOSED]: 'Waiting for review',
   [STATUS_ACCEPTED]: 'Accepted',
   [STATUS_WITHDRAWN]: 'Session withdrawn',
@@ -50,7 +50,7 @@ const {
   }
 } = theme;
 
-const STATUS_TO_COLOR_SIDTIONARY = {
+const STATUS_TO_COLOR_DICTIONARY = {
   [STATUS_PROPOSED]: session_status_proposed,
   [STATUS_ACCEPTED]: session_status_accepted,
   [STATUS_WITHDRAWN]: session_status_decline,
@@ -58,7 +58,7 @@ const STATUS_TO_COLOR_SIDTIONARY = {
 };
 
 
-const getStatusColors = status => (STATUS_TO_COLOR_SIDTIONARY[status] || session_status_not_found);
+const getStatusColors = status => (STATUS_TO_COLOR_DICTIONARY[status] || session_status_not_found);
 
 // styled-components components
 
@@ -238,10 +238,12 @@ const Oneliner = styled.p`
 `;
 
 const MainContainer = styled(ResponsiveContainer)`
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme: { space } }) => `
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `}
 `;
 
 const ShortBio = styled.p`
@@ -326,6 +328,7 @@ const SessionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: flex-end;
 `;
 
 const InfoAndStatusContainer = styled.div`
@@ -364,10 +367,12 @@ const SessionInfoContainer = styled.div`
   `}
   ${mediaQueryMin.l`
     min-height: 455px;
+    max-height: 455px;
     flex: 0 0 calc(50% - 20px);
   `}
   ${mediaQueryMin.xl`
-    min-height: 310px;
+    min-height: 455px;
+    max-height: 455px;
   `}
 `;
 
@@ -410,13 +415,13 @@ const ToSessionLink = styled(InvertedButtonStyledLink)`
 
 // React components
 
-const SessionStatus = status => {
-  const statusMessage = STATUS_TO_MESSAGES_SIDTIONARY[status] || 'no status found';
+export const SessionStatus = status => {
+  const statusMessage = STATUS_TO_MESSAGES_DICTIONARY[status] || 'no status found';
 
   return (
     <SessionStatusBadge status={status}>Status: {statusMessage}</SessionStatusBadge>
   )
-}
+};
 
 export class SpeakerPage extends React.Component {
   state = {
@@ -580,35 +585,36 @@ export class SpeakerPage extends React.Component {
           </PersonalInfoConainer>
           )}
 
-          {sessions && sessions.length && (
-            <Fragment>
-              <SessionsHeadingContainer>
-                <HeadingPlus />
-                <SectionHeading>Sessions</SectionHeading>
-                <BreakLineMain/>
-              </SessionsHeadingContainer>
-              <SessionsContainer>
-                {sessions.map((session, index) => (
-                  <InfoAndStatusContainer sessions={sessions}>
-                    {canSeeStatus && SessionStatus(session.status)}
-                    <SessionInfoContainer
-                      key={key()}
-                      index={index}
-                    >
-                      <SessionHeading>{session.title}</SessionHeading>
-                      <SessionInfo session={session} location={session.location} />
-                      <ToSessionLink
-                      key={session._id}
-                      href={`/session/${getHref(session)}`}
-                      >
-                        To Session Page
-                      </ToSessionLink>
-                    </SessionInfoContainer>
-                  </InfoAndStatusContainer>
-                ))}
-              </SessionsContainer>
-            </Fragment>
-          )}
+                  <SessionsHeadingContainer>
+                    <HeadingPlus />
+                    <SectionHeading>Sessions</SectionHeading>
+                    <BreakLineMain/>
+                  </SessionsHeadingContainer>
+
+                  {sessions && sessions.length > 0
+                    ? (
+                      <Fragment>
+                  <SessionsContainer>
+                    {sessions.map((session, index) => (
+                      <InfoAndStatusContainer sessions={sessions} key={session._id}>
+                        {canSeeStatus && SessionStatus(session.status)}
+                        <SessionInfoContainer
+                          key={key()}
+                          index={index}
+                        >
+                          <SessionHeading>{session.title}</SessionHeading>
+                          <SessionInfo session={session} location={session.location} />
+                          <ToSessionLink href={`/session/${getHref(session)}`} >
+                            To Session Page
+                          </ToSessionLink>
+                        </SessionInfoContainer>
+                      </InfoAndStatusContainer>
+                    ))}
+                  </SessionsContainer>
+                </Fragment>
+          )
+          : <NoInfoText>{speaker.name.split(' ')[0]} did not submit sessions..</NoInfoText>
+        }
           </MainContainer>
       </Page>
     );

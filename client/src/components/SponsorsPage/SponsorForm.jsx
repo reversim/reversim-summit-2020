@@ -1,7 +1,3 @@
-/* eslint-disable prettier/prettier */
-
-/*global cloudinary */
-
 import React from "react";
 import pick from "lodash/pick";
 import { loadScript } from "../../utils";
@@ -9,10 +5,10 @@ import {Button} from 'reactstrap';
 
 import styled from 'styled-components';
 import {
-  Input, 
-  TextArea, 
-  StyledButton, 
-  FileInput, 
+  Input,
+  TextArea,
+  StyledButton,
+  FileInput,
   FontAwsomeTrash,
 } from '../GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from "../../styles/MediaQueriesMixin";
@@ -22,7 +18,7 @@ import mediaQueryMin from "../../styles/MediaQueriesMixin";
 const SubmitButton = Button;
 
 const TheForm = styled.form`
-  ${({ theme: { space, color } }) => `  
+  ${({ theme: { space, color } }) => `
   width: 100%;
   margin: ${space.m};
   padding: ${space.m} ${space.m} 0 ${space.m};
@@ -73,29 +69,29 @@ class SponsorForm extends React.Component {
         technologies: "",
         text: ""
       };
-  
+
       if (this.props.sponsor && this.props.sponsor.isPremium) {
         let linkedin = this.props.sponsor.socials.find(social => social.medium === "linkedin");
         this.state.linkedin = linkedin ? linkedin.link : "";
-  
+
         let github = this.props.sponsor.socials.find(social => social.medium === "github");
         this.state.github = github ? github.link : "";
-  
+
         let facebook = this.props.sponsor.socials.find(social => social.medium === "facebook");
         this.state.facebook = facebook ? facebook.link : "";
-  
+
         let twitter = this.props.sponsor.socials.find(social => social.medium === "twitter");
         this.state.twitter = twitter ? twitter.link : "";
-  
+
         let medium = this.props.sponsor.socials.find(social => social.medium === "medium");
         this.state.medium = medium ? medium.link : "";
-  
+
         this.state.techStory.technologies = (
           this.state.techStory.technologies || []
         ).join("\n");
       }
     }
-  
+
     getData = event => {
       if (event) event.preventDefault();
       if (this.state.isPremium) {
@@ -130,8 +126,8 @@ class SponsorForm extends React.Component {
         ]);
       }
     };
-  
-  
+
+
     openCloudinaryUploader() {
       let uploader = cloudinary.createUploadWidget({
         cloudName: 'dtltonc5g',
@@ -140,7 +136,7 @@ class SponsorForm extends React.Component {
         });
       uploader.open();
     }
-  
+
     cloudinaryCallback(error, result) {
       if (error) {
         console.log(error);
@@ -153,7 +149,7 @@ class SponsorForm extends React.Component {
         this.setState({images});
       }
     }
-    
+
     render() {
       const {
         onSubmit,
@@ -163,7 +159,7 @@ class SponsorForm extends React.Component {
       } = this.props;
 
       loadScript("https://widget.cloudinary.com/v2.0/global/all.js")
-  
+
       const _id = sponsor ? sponsor._id : "";
 
       return (
