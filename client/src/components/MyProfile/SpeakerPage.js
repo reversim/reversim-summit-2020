@@ -238,10 +238,12 @@ const Oneliner = styled.p`
 `;
 
 const MainContainer = styled(ResponsiveContainer)`
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme: { space } }) => `
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `}
 `;
 
 const ShortBio = styled.p`
@@ -583,33 +585,36 @@ export class SpeakerPage extends React.Component {
           </PersonalInfoConainer>
           )}
 
-          {sessions && sessions.length && (
-            <Fragment>
-              <SessionsHeadingContainer>
-                <HeadingPlus />
-                <SectionHeading>Sessions</SectionHeading>
-                <BreakLineMain/>
-              </SessionsHeadingContainer>
+                  <SessionsHeadingContainer>
+                    <HeadingPlus />
+                    <SectionHeading>Sessions</SectionHeading>
+                    <BreakLineMain/>
+                  </SessionsHeadingContainer>
 
-              <SessionsContainer>
-                {sessions.map((session, index) => (
-                  <InfoAndStatusContainer sessions={sessions} key={session._id}>
-                    {canSeeStatus && SessionStatus(session.status)}
-                    <SessionInfoContainer
-                      key={key()}
-                      index={index}
-                    >
-                      <SessionHeading>{session.title}</SessionHeading>
-                      <SessionInfo session={session} location={session.location} />
-                      <ToSessionLink href={`/session/${getHref(session)}`} >
-                        To Session Page
-                      </ToSessionLink>
-                    </SessionInfoContainer>
-                  </InfoAndStatusContainer>
-                ))}
-              </SessionsContainer>
-            </Fragment>
-          )}
+                  {sessions && sessions.length > 0
+                    ? (
+                      <Fragment>
+                  <SessionsContainer>
+                    {sessions.map((session, index) => (
+                      <InfoAndStatusContainer sessions={sessions} key={session._id}>
+                        {canSeeStatus && SessionStatus(session.status)}
+                        <SessionInfoContainer
+                          key={key()}
+                          index={index}
+                        >
+                          <SessionHeading>{session.title}</SessionHeading>
+                          <SessionInfo session={session} location={session.location} />
+                          <ToSessionLink href={`/session/${getHref(session)}`} >
+                            To Session Page
+                          </ToSessionLink>
+                        </SessionInfoContainer>
+                      </InfoAndStatusContainer>
+                    ))}
+                  </SessionsContainer>
+                </Fragment>
+          )
+          : <NoInfoText>{speaker.name.split(' ')[0]} did not submit sessions..</NoInfoText>
+        }
           </MainContainer>
       </Page>
     );
