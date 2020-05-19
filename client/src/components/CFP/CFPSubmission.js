@@ -106,7 +106,14 @@ class CFPSubmission extends Component {
       console.log('hasProposalsMaxed error: ', error);
     }
 
-    const result = !!response && size(response.proposals) < MAX_PROPOSALS ? false : true;
+    const userProposals = response.proposals; // NOTE: [ true, false, true ]
+    const deletedString = "status: 'deleted'";
+    const wasDeleted = proposal => proposal.includes(deletedString) // NOTE: the iteration function returns boolean
+
+
+    const activeProposals = userProposals.filter(proposal => !wasDeleted(proposal));
+
+    const result = !!response && size(activeProposals) < MAX_PROPOSALS ? false : true;
     this.setState({
       hasProposalsMaxed: result,
     })
