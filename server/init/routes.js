@@ -9,7 +9,6 @@ import keyBy from 'lodash/keyBy';
 import { controllers } from '../db';
 import { transformProposal, transformUser } from '../db/controllers/helpers';
 import eventConfig from './eventConfig';
-import messages from '../db/controllers/messages';
 
 const usersController = controllers.users;
 const proposalsController = controllers.proposals;
@@ -119,9 +118,20 @@ export default (app) => {
   app.delete('/api/sponsor/:id', sponsorsController.remove);
 
   app.use('/dashboard', express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
-  app.use("/backoffice", express.static(path.join(__dirname, '..', '..', 'backoffice', 'index.html')));
-
+  
   // internal routes
+  app.use('/internal*', (req, res, next) => {
+    // If user is not a team member he won't have access
+    if (!req.user || !req.user.isReversimTeamMember) {
+      return res.send(401);
+    }
+    
+    next();
+  });
+  
+  app.use('/internal/backoffice', express.static(path.resolve(__dirname, '..', '..', 'backoffice')));
+  app.use('/internal/backoffice', express.static(path.join(__dirname, '..', '..', 'backoffice', 'index.html')));
+
   app.get('/internal/users', usersController.internalGetAll);
   app.delete('/internal/users/:_id', usersController.internalDelete);
 

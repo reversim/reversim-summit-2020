@@ -49,7 +49,6 @@ initRoutes(app);
  * HTML
  */
 // Serve static files from the React app
-app.use('/backoffice', express.static(path.resolve(__dirname, '..', 'backoffice')));
 app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));
 
 app.get('*', (req, res) => {
