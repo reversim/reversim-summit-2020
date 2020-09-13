@@ -9,6 +9,7 @@ import keyBy from 'lodash/keyBy';
 import { controllers } from '../db';
 import { transformProposal, transformUser } from '../db/controllers/helpers';
 import eventConfig from './eventConfig';
+import messages from '../db/controllers/messages';
 
 const usersController = controllers.users;
 const proposalsController = controllers.proposals;
@@ -117,5 +118,19 @@ export default (app) => {
   app.put('/api/sponsor/:id', sponsorsController.update);
   app.delete('/api/sponsor/:id', sponsorsController.remove);
 
-  app.use("/dashboard", express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
+  app.use('/dashboard', express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
+  app.use("/backoffice", express.static(path.join(__dirname, '..', '..', 'backoffice', 'index.html')));
+
+  // internal routes
+  app.get('/internal/users', usersController.internalGetAll);
+  app.delete('/internal/users/:_id', usersController.internalDelete);
+
+  app.get('/internal/proposals', proposalsController.internalGetAll);
+  app.delete('/internal/proposals/:_id', proposalsController.internalDelete);
+
+  app.get('/internal/sponsors', sponsorsController.internalGetAll);
+  app.delete('/internal/sponsors/:_id', sponsorsController.internalDelete);
+
+  app.get('/internal/messages', messagesController.internalGetAll);
+  app.delete('/internal/messages/:_id', messagesController.internalDelete);
 };

@@ -48,9 +48,32 @@ function removeMessage(req, res) {
 	});
 }
 
+async function internalGetAll(req, res) {
+  const { q } = req.query;
+  const where = {};
+
+  if (q) {
+    where.text = {
+      $regex: q,
+      $options: 'i'
+    };
+  }
+
+  return res.json(await Message.find(where));
+}
+
+async function internalDelete(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await Message.deleteOne(where));
+}
+
 export default {
 	getMessages,
 	addMessage,
 	removeMessage,
-  getAllMessages
+	getAllMessages,
+	internalGetAll,
+	internalDelete,
 }
