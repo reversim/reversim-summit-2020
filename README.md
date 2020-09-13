@@ -10,6 +10,7 @@ https://summit2020.reversim.com/
 #### Contributors:
 
 * [Ori Harel](https://github.com/oriharel)
+* [Daniel Sternlicht](https://github.com/dsternlicht)
 
 ## Getting started
 
@@ -56,6 +57,19 @@ Intial data import:
 
 #### Restarting the server
 Type `rs` in the server's terminal to restart.
+
+## Backoffice
+
+There's a simple UI available for managing the different entities in the system. It's available under the following route:
+`/internal/backoffice/`
+
+In order to use it locally, you should change some configuration in 2 files.
+
+1. In `backoffice/index.html` file, change the remote url to `http://local.reversim.com:5001/internal/backoffice/config.js`.
+2. In `backoffice/config.js`, change the `baseUrl` variable to `http://local.reversim.com:5001`.
+
+The backoffice is based on an open source tool named **RESTool**. You may find more info about it in the link below:
+[https://github.com/dsternlicht/RESTool](https://github.com/dsternlicht/RESTool)
 
 # License
 MIT

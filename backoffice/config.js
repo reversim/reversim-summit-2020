@@ -1,5 +1,5 @@
-const baseUrl = 'http://local.reversim.com:5001';
-// const baseUrl = '';
+// const baseUrl = 'http://local.reversim.com:5001'; // Dev
+const baseUrl = 'https://summit2020.reversim.com'; // Prod
 
 const userFields = [
   { 
