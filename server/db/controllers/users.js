@@ -196,6 +196,17 @@ async function internalGetAll(req, res) {
   return res.json(await User.find(where));
 }
 
+async function internalUpdate(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await User.updateOne(where, { $set: Object.assign({}, req.body, { updated_at: new Date() }) }));
+}
+
+async function internalCreate(req, res) {
+  return res.json(await Message.create(Object.assign({}, req.body, { created_at: new Date(), updated_at: new Date() })));
+}
+
 async function internalDelete(req, res) {
   const { _id } = req.params;
   const where = { _id };
@@ -215,5 +226,7 @@ export default {
   getTeam,
   registerTeamMember,
   internalGetAll,
+  internalUpdate,
+  internalCreate,
   internalDelete,
 };

@@ -407,6 +407,17 @@ async function internalGetAll(req, res) {
   return res.json(await Proposal.find(where));
 }
 
+async function internalUpdate(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await Proposal.updateOne(where, { $set: Object.assign({}, req.body, { updated_at: new Date() }) }));
+}
+
+async function internalCreate(req, res) {
+  return res.json(await Proposal.create(Object.assign({}, req.body, { created_at: new Date(), updated_at: new Date() })));
+}
+
 async function internalDelete(req, res) {
   const { _id } = req.params;
   const where = { _id };
@@ -432,5 +443,7 @@ export default {
   getProposers,
   getTags,
   internalGetAll,
+  internalUpdate,
+  internalCreate,
   internalDelete,
 };
