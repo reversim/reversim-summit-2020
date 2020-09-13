@@ -176,11 +176,46 @@ async function remove(req, res) {
   return res.sendStatus(200);
 }
 
+async function internalGetAll(req, res) {
+  const { q } = req.query;
+  const where = {};
+
+  if (q) {
+    where.name = {
+      $regex: q,
+      $options: 'i'
+    };
+  }
+
+  return res.json(await Sponsor.find(where));
+}
+
+async function internalUpdate(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await Sponsor.updateOne(where, { $set: Object.assign({}, req.body, { updated_at: new Date() }) }));
+}
+
+async function internalCreate(req, res) {
+  return res.json(await Sponsor.create(Object.assign({}, req.body, { created_at: new Date(), updated_at: new Date() })));
+}
+
+async function internalDelete(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await Sponsor.deleteOne(where));
+}
+
 export default {
   all,
   add,
   update,
   remove,
-
-  getAllSponsors
+  getAllSponsors,
+  internalGetAll,
+  internalUpdate,
+  internalCreate,
+  internalDelete,
 };

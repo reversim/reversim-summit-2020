@@ -182,6 +182,38 @@ export function getProposals(req, res) {
   }
 }
 
+async function internalGetAll(req, res) {
+  const { q } = req.query;
+  const where = {};
+
+  if (q) {
+    where.name = {
+      $regex: q,
+      $options: 'i'
+    };
+  }
+
+  return res.json(await User.find(where));
+}
+
+async function internalUpdate(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await User.updateOne(where, { $set: Object.assign({}, req.body, { updated_at: new Date() }) }));
+}
+
+async function internalCreate(req, res) {
+  return res.json(await Message.create(Object.assign({}, req.body, { created_at: new Date(), updated_at: new Date() })));
+}
+
+async function internalDelete(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await User.deleteOne(where));
+}
+
 export default {
   me,
   login,
@@ -192,5 +224,9 @@ export default {
   getReversimTeam,
   uploadProfilePicture,
   getTeam,
-  registerTeamMember
+  registerTeamMember,
+  internalGetAll,
+  internalUpdate,
+  internalCreate,
+  internalDelete,
 };

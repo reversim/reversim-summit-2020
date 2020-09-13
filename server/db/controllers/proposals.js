@@ -393,6 +393,38 @@ function getProposal(id) {
   return Proposal.findOne({ _id: id });
 }
 
+async function internalGetAll(req, res) {
+  const { q } = req.query;
+  const where = {};
+
+  if (q) {
+    where.title = {
+      $regex: q,
+      $options: 'i'
+    };
+  }
+
+  return res.json(await Proposal.find(where));
+}
+
+async function internalUpdate(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await Proposal.updateOne(where, { $set: Object.assign({}, req.body, { updated_at: new Date() }) }));
+}
+
+async function internalCreate(req, res) {
+  return res.json(await Proposal.create(Object.assign({}, req.body, { created_at: new Date(), updated_at: new Date() })));
+}
+
+async function internalDelete(req, res) {
+  const { _id } = req.params;
+  const where = { _id };
+
+  return res.json(await Proposal.deleteOne(where));
+}
+
 
 export default {
   get,
@@ -406,9 +438,12 @@ export default {
   sessions,
   proposers,
   getAllAttendees,
-
   getAllProposals,
   getAcceptedProposals,
   getProposers,
-  getTags
+  getTags,
+  internalGetAll,
+  internalUpdate,
+  internalCreate,
+  internalDelete,
 };

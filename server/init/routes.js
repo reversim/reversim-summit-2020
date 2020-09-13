@@ -117,5 +117,38 @@ export default (app) => {
   app.put('/api/sponsor/:id', sponsorsController.update);
   app.delete('/api/sponsor/:id', sponsorsController.remove);
 
-  app.use("/dashboard", express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
+  app.use('/dashboard', express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
+  
+  // internal routes
+  app.use('/internal*', (req, res, next) => {
+    // If user is not a team member he won't have access
+    if (!req.user || !req.user.isDataAdmin) {
+      return res.send(401);
+    }
+    
+    next();
+  });
+  
+  app.use('/internal/backoffice', express.static(path.resolve(__dirname, '..', '..', 'backoffice')));
+  app.use('/internal/backoffice', express.static(path.join(__dirname, '..', '..', 'backoffice', 'index.html')));
+
+  app.get('/internal/users', usersController.internalGetAll);
+  app.put('/internal/users/:_id', usersController.internalUpdate);
+  app.post('/internal/users', usersController.internalCreate);
+  app.delete('/internal/users/:_id', usersController.internalDelete);
+
+  app.get('/internal/proposals', proposalsController.internalGetAll);
+  app.put('/internal/proposals/:_id', proposalsController.internalUpdate);
+  app.post('/internal/proposals', proposalsController.internalCreate);
+  app.delete('/internal/proposals/:_id', proposalsController.internalDelete);
+
+  app.get('/internal/sponsors', sponsorsController.internalGetAll);
+  app.post('/internal/sponsors', sponsorsController.internalCreate);
+  app.put('/internal/sponsors/:_id', sponsorsController.internalUpdate);
+  app.delete('/internal/sponsors/:_id', sponsorsController.internalDelete);
+
+  app.get('/internal/messages', messagesController.internalGetAll);
+  app.post('/internal/messages', messagesController.internalCreate);
+  app.put('/internal/messages/:_id', messagesController.internalUpdate);
+  app.delete('/internal/messages/:_id', messagesController.internalDelete);
 };
