@@ -32,21 +32,27 @@ const List = styled.ul`
   width: 100%;
   display: flex; 
   justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
 
   ${mediaQueryMin.xs`
     ${({ theme: { space } }) => `
       margin-bottom: ${space.xl};
     `}`}
-
+    
   ${mediaQueryMin.l`
     ${({ theme: { space } }) => `
       margin-left: -${space.l};
       margin-bottom: 0;
       justify-content: space-between;
+      flex-direction: row;
     `}`}
 `;
 
 const ListItem = styled.li`
+    text-align: center;
+    
     ${({ theme: {space} }) => `
       margin: 0 ${space.xl} 0  0;
     `}
@@ -88,17 +94,17 @@ const AllRightsReserved = styled.h6`
 `;
 
 const FontAwsomeContainer = styled.div`
-  width: 30%;
-
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   
   ${mediaQueryMin.xs`
     flex-wrap: wrap;
-    width: fit-content;
+    width: 100%;
   `}
   ${mediaQueryMin.m`
     flex-wrap: nowrap;
+    width: fit-content;
   `}
 `;
 
