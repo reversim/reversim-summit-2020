@@ -22,7 +22,7 @@ export default (eventConfig) => {
     }
     items.push(sponsors);
     eventConfig.agendaPublished && items.push(speakers);
-    items.push(sessions);
+    // items.push(sessions);
   }
 
   return items;

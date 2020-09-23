@@ -1,12 +1,14 @@
 import Home from '../components/Home';
-import Agenda from '../components/Agenda';
+// import Agenda from '../components/Agenda';
+import Agenda from '../components/AgendaBizzabo';
 import MyProfile from '../components/MyProfile/MyProfile';
 import AboutPage from '../components/AboutPage';
 import SpeakerPage from '../components/MyProfile/SpeakerPage';
 import SpeakerEditPage from '../components/MyProfile/SpeakerEditPage';
 import SessionPage from '../components/SessionPage/SessionPage';
 import SessionEditPage from '../components/SessionPage/SessionEditPage';
-import SpeakersPage from '../components/SpeakersPage2';
+// import SpeakersPage from '../components/SpeakersPage2';
+import SpeakersPage from '../components/SpeakersPageBizzabo';
 import SponsorsPage from '../components/SponsorsPage/SponsorsPage.jsx';
 import SponsorPage from '../components/PremiumSponsorPage/PremiumSponsorPage';
 // import RegisterPage from "../components/RegisterPage";
