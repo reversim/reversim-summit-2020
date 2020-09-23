@@ -15,7 +15,7 @@ const homeSections = [
   // {name: 'timeline', el: TimelineSection},
   {name: 'sponsors', el: HomePageSponsorsSection},
   // {name: 'team', el: Team},
-  {name: 'location', el: Location},
+  // {name: 'location', el: Location},
 ];
 
 export default homeSections;
