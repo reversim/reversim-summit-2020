@@ -77,7 +77,7 @@ const theme = {
 
   // the website's fonts
   font: {
-    main: 'Source Code Pro, monospace',
+    main: `'Assistant', sans-serif`,
     form_button: 'Montserrat, sans-serif',
     button: 'PT Mono',
 
