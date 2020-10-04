@@ -36,7 +36,7 @@ const SelectVotes = ({ text, toggleFilter, isBorder, selected }) => (
   <div
     className="not-relevant-filter cursor-pointer font-weight-bold d-flex align-items-center px-2 py-1"
     onClick={toggleFilter}
-    style={isBorder ? { borderBottom: "solid 2px #5127ff" } : {}}
+    style={isBorder ? { borderBottom: "solid 2px #535352" } : {}}
   >
     <div
       className={cn("mr-2 b-regular", { selected: selected })}
@@ -46,7 +46,7 @@ const SelectVotes = ({ text, toggleFilter, isBorder, selected }) => (
     </div>
     <span> {text} </span>
   </div>
-  // {/*<div className="d-flex flex-column" onClick={() => setValue(value)} style={isBorder ? {borderBottom:'solid 2px #5127ff'} : {}}>*/}
+  // {/*<div className="d-flex flex-column" onClick={() => setValue(value)} style={isBorder ? {borderBottom:'solid 2px #535352'} : {}}>*/}
   //   {/*<div className="cursor-pointer font-weight-bold d-flex align-items-center px-2 py-1">*/}
   //     {/*<div className={cn("mr-2 b-regular")} style={{ width: 24, height: 24 }} />*/}
   //     {/*<span>{text}</span>*/}

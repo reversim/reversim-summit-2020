@@ -53,18 +53,8 @@ const SponsorImg = styled.img`
 const SMPLinkingButton = styled(ButtonStyledLink)`
   ${({ theme: { space, color }, isOnWhite }) =>`
     padding: 0 ${space.xl};
-
     display: flex;
     align-items: center;
-
-    ${isOnWhite && `
-      border: solid 2px ${color.box_shadow_1};
-      box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
-    `}
-
-    &:hover{
-      color: ${color.text_1};
-    }
   `}
 `;
 
@@ -73,29 +63,44 @@ const FAButtonContainer = styled.div`
 `
 
 const FAButton = styled.button`
-  ${({ theme: { color } }) => `
+  ${({ theme: { space, color } }) => `
     width: 50%;
-    height: 40px;
-
+    height: 40px; 
     display: flex;
     justify-content: center;
-
     user-select: none;
     cursor: pointer;
-
-    color: ${color.text_1};
-    text-decoration: none;
-    background: linear-gradient(to right, ${color.font_awsome_background_1} 0%, ${color.font_awsome_background_2} 100%);
-    border: 0;
-    border-radius: 0;
-    border-color: ${color.font_awsome_border};
     transition: all 200ms;
+    padding: ${space.m} ${space.s} ${space.m} ${space.l};
+    letter-spacing: 1px;
+    color: ${color.text_3};
+    position: relative;
+    background: ${color.button_bkgr_2};
+
+    text-align: center;
+    text-decoration: none;
+
+    transition: all .5s ease-out;
+
+    &:after {
+      content: '';
+      background: ${color.button_bkgr_2};
+      width: ${space.m};
+      height: 65%;
+      position: absolute;
+      left: 100%;
+      bottom: 0;
+      transition: all .5s ease-out;
+    }
 
     &:hover{
-      color: ${color.text_1};
       text-decoration: none;
-      background: linear-gradient(to right, ${color.font_awsome_background_1} 0%, ${color.font_awsome_background_2} 100%);
-      box-shadow: inset 0px 0px 10px 2px ${color.font_awsome_box_shadow_1}, 0px 0px 10px 0px ${color.font_awsome_box_shadow_2};
+      color: ${color.text_3};
+      background: ${color.button_bkgr_3};
+
+      &:after {
+        background: ${color.button_bkgr_3};
+      }
     }
   `}
 `;

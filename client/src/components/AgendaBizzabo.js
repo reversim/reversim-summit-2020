@@ -1,9 +1,6 @@
 import React, {useEffect} from "react";
 import Page from "./Page";
 import { Container } from "reactstrap";
-import s from "./Agenda.css";
-import agendaBg from "../images/agenda-page-bg.png";
-import diamond from "../images/SVG/diamond.svg";
 
 const AgendaPage = props => {
   useEffect(() => {
@@ -17,21 +14,6 @@ const AgendaPage = props => {
 
   return (
     <Page title="Agenda" {...props}>
-      <div
-        className="navbar-margin bg-purple2 pb-4 pt-20"
-        style={{
-          backgroundImage: `url('${agendaBg}')`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: '80% 30px',
-        }}>
-        <Container>
-          <div className="d-flex">
-            <img src={diamond} alt="diamond" className={s.diamond} />
-            <div className="mb-4 text-white font-size-xxl">Agenda</div>
-          </div>
-        </Container>
-      </div>
       <Container>
         <div
           className="d-flex align-items-center text-purple2"
