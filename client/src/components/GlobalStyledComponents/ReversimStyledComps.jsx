@@ -406,14 +406,11 @@ export const ButtonStyledLink = styled.a`
       min-width: 280px;
       height: 40px;
       margin: 0 ${space.m} ${space.xl} ${space.m};
-      padding: ${space.m} ${space.l} ${space.m} ${space.l};
+      padding: ${space.m} ${space.s} ${space.m} ${space.l};
       letter-spacing: 1px;
-      color: ${color.text_1};
-
-      background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);
-      background-size: 205% 100%;
-      border: solid 2px ${color.box_shadow_2};
-      box-shadow: -2px 2px ${color.box_shadow_1}, -4px 4px ${color.box_shadow_2};
+      color: ${color.text_3};
+      position: relative;
+      background: ${color.button_bkgr_2};
 
       font-size: ${font.size_reg};
       font-family: ${font.button};
@@ -423,10 +420,25 @@ export const ButtonStyledLink = styled.a`
 
       transition: all .5s ease-out;
 
+      &:after {
+        content: '';
+        background: ${color.button_bkgr_2};
+        width: ${space.m};
+        height: 65%;
+        position: absolute;
+        left: 100%;
+        bottom: 0;
+        transition: all .5s ease-out;
+      }
+
       &:hover{
-        background-position: left bottom;
         text-decoration: none;
-        color: ${color.text_1};
+        color: ${color.text_3};
+        background: ${color.button_bkgr_3};
+
+        &:after {
+          background: ${color.button_bkgr_3};
+        }
       }
   `};
 `;
@@ -441,32 +453,44 @@ export const InvertedButtonStyledLink = styled(ButtonStyledLink)`
 
 export const StyledButton = styled.button`
   ${({theme: {color, font, space,}}) => `
-  width: max-content;
-  min-width: 280px;
-  height: 40px;
-  margin: 0 ${space.m} ${space.xl} ${space.m};
-  padding: ${space.m} ${space.l};
-  letter-spacing: 1px;
-  color: ${color.text_1};
+    width: max-content;
+    min-width: 280px;
+    height: 40px;
+    margin: 0 ${space.m} ${space.xl} ${space.m};
+    padding: ${space.m} ${space.s} ${space.m} ${space.l};
+    letter-spacing: 1px;
+    color: ${color.text_3};
+    position: relative;
+    background: ${color.button_bkgr_2}; 
 
-  background: right bottom linear-gradient(to right, ${color.button_bkgr_2} 50%, ${color.button_bkgr_1} 50%);
-  background-size: 205% 100%;
-  border: solid 2px ${color.box_shadow_1};
-  box-shadow: -2px 2px ${color.box_shadow_2}, -4px 4px ${color.box_shadow_1};
-
-  font-size: ${font.size_reg};
-  font-family: ${font.button};
-  font-weight: ${font.weight_bold};
-  text-align: center;
-  text-decoration: none;
-
-  transition: all .5s ease-out;
-
-  &:hover{
-    background-position: left bottom;
+    font-size: ${font.size_reg};
+    font-family: ${font.button};
+    font-weight: ${font.weight_bold};
+    text-align: center;
     text-decoration: none;
-    color: ${color.text_1};
-  }
+
+    transition: all .5s ease-out;
+
+    &:after {
+      content: '';
+      background: ${color.button_bkgr_2};
+      width: ${space.m};
+      height: 65%;
+      position: absolute;
+      left: 100%;
+      bottom: 0;
+      transition: all .5s ease-out;
+    }
+
+    &:hover{
+      text-decoration: none;
+      color: ${color.text_3};
+      background: ${color.button_bkgr_3};
+
+      &:after {
+        background: ${color.button_bkgr_3};
+      }
+    }
   `}
 `;
 

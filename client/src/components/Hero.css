@@ -10,14 +10,14 @@
 }
 
 .heroContent {
-    box-shadow: 0 0 30px 15px #5127ff;
+    box-shadow: 0 0 30px 15px #535352;
 }
 
 .subtitle {
     letter-spacing: 0.6px;
     font-size: 18px;
     font-weight: 400;
-    background-color: #451deb;
+    background-color: rgba(255,255,255,0.2);
 }
 
 .headphones {

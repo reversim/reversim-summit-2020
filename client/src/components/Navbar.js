@@ -29,7 +29,7 @@ import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
 
 import newImg from '../images/new-nav-tag.png';
-import logoImg from '../images/SVG/RS20-03.svg';
+import logoImg from '../images/SVG/RS20-04.svg';
 
 // styled-components section
 const NavbarContainer = styled.div`
@@ -97,7 +97,7 @@ const GetTicketsCTA = () => (
 
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});
-  const isNew = to === 'sponsors'
+  const isNew = false; // to === 'sponsors'
 
   return (
     <NavLI key={to}>

@@ -288,7 +288,7 @@ export default {
   customStyles: {
     vars: {
       appBackground: '#f1f2f6',
-      navBackground: '#5127ff',
+      navBackground: '#535352',
       navItemHoverBackground: 'rgba(255,255,255,0.1)',
       navItemActiveBackground: '#f66103',
     }
