@@ -157,7 +157,7 @@ const Hero = ({ eventConfig }) => (
           <Subtitle>
             <IconAligner>
               <FontAwesomeIcon icon="calendar-alt" />
-              2-4.11.2020
+              16-18.11.2020
             </IconAligner>
             <IconAligner>
               <FontAwesomeIcon icon="map-marker-alt" />
