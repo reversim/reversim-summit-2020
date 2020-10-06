@@ -31,7 +31,7 @@ const MainAligner = styled(AlignCenter)`
 const List = styled.ul`
   width: 100%;
   display: flex; 
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
@@ -45,7 +45,7 @@ const List = styled.ul`
     ${({ theme: { space } }) => `
       margin-left: -${space.l};
       margin-bottom: 0;
-      justify-content: space-between;
+      justify-content: space-around;
       flex-direction: row;
     `}`}
 `;
@@ -77,6 +77,7 @@ ${({ theme: { space, color } }) => `
 `;
 
 const AllRightsReserved = styled.h6`
+  text-align: center;
   ${({ theme: { color } }) => `
     color: ${color.text_1};
   `}

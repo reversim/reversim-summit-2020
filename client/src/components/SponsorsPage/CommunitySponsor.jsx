@@ -89,10 +89,10 @@ const JobOps = styled.a`
 `;
 
 const SponsorContentContainer = styled.div`
-  ${({ theme: { space } }) => `
+  ${({ theme: { space, color } }) => `
     padding: ${space.l};
     width: 80%;
-
+    color: ${color.text_3};
     display: flex;
     flex-direction: column;
     justify-content: space-between;

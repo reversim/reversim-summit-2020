@@ -12,7 +12,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { Container } from "reactstrap";
 import { ButtonStyledLink } from './GlobalStyledComponents/ReversimStyledComps';
 
-import logoImg from "../images/SVG/RS20-02.svg";
+import logoImg from "../images/SVG/RS20-05.svg";
 import backgroundImg from "../images/home-reg-bg.png";
 
 
@@ -25,8 +25,8 @@ const StyledSection = styled.section`
       display: flex;
       justify-content: center;
       align-items: center;
-      background: url(${backgroundImg}) center white;
-      background-size: cover;
+      // background: url(${backgroundImg}) center white;
+      // background-size: cover;
       height: 100vh;
       background-color: ${color.background_2};
       border-top: 100px solid ${color.background_2};
@@ -78,7 +78,7 @@ const LogoImg = styled.img`
     width: 320px;
   `}
   ${mediaQueryMin.m`
-    width: 400px;
+    width: 600px;
   `}
 `;
 
@@ -93,7 +93,7 @@ const Subtitle = styled.div`
     letter-spacing: 0.6px;
     font-size: ${font.size_md};
     font-weight: 400;
-    background-color: #451deb;
+    background-color: rgba(255,255,255,0.2);
     
     padding: ${space.m};
     display: flex;

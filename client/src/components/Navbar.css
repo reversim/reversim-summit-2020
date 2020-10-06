@@ -5,7 +5,7 @@
 }
 
 .navLink:hover, .navLink:active , .navLink:focus {
-    border-bottom: 2px solid #ff6100;
+    border-bottom: 2px solid #71cea6;
 }
 
 .navItem {
@@ -14,7 +14,7 @@
 
 .logo {
     cursor: pointer;
-    width: 112px;
+    /* width: 112px; */
     height: 40px;
     display: block;
 }
@@ -48,7 +48,7 @@
     }
 
     .navbarOpen {
-        background: rgba(73, 12, 210, 0.8);
+        background: #535352;
         /*width: fit-content;*/
         /*align-items: flex-start !important;*/
     }
