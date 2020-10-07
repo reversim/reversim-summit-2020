@@ -155,12 +155,12 @@ class SponsorsPage extends React.Component {
               )
             }
               <WantToBe />
-              <PremiumSponsors
+              {/* <PremiumSponsors
                 sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
                 user={user}
                 updateSponsor={updateSponsor}
                 deleteSponsor={deleteSponsor}
-              />
+              /> */}
             </AlignCenterColumn>
           </PremiumSectionAligner>
         </PremiumSectionContainer>

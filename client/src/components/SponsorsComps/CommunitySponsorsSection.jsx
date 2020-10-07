@@ -106,14 +106,15 @@ const CommunitySponsorsSection = ({sponsors}) => {
   return (
     <Container>
       <HomeCommunityContainer>
-      {orderSponsors(sponsors)
-        .map((sponsor, i) => {
+      {
+        sponsors.map((sponsor, i) => {
           return (
             <SponsorMiniContainer key={i} {...sponsor}>
               <SponsorMini key={i} {...sponsor} />
             </SponsorMiniContainer>
           );
-        })}
+        })
+      }
       </HomeCommunityContainer>
     </Container>
   );
