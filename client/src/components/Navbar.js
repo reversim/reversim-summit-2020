@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import cn from 'classnames';
 import styled from 'styled-components';
 
@@ -88,12 +88,26 @@ const NavLI = styled.li`
 
 // React.js componenets section
 
-const GetTicketsCTA = () => (
-    <ButtonStyledLink
-    href="https://ti.to/reversim-summit/2020">
+const GetTicketsCTA = () => {
+  useEffect(() => {
+    const e = document.createElement('script');
+    e.id = 'bz-popup-registration-script-60b24367-c65f-48f8-bbee-9b96dee0e118';
+    e.dataset.eventId = '245217';
+    e.dataset.flowId = 'ffb476bc-85f0-4ebb-a94a-1c72feb89f37';
+    e.dataset.elementClass = 'registration-button';
+    e.type = 'text/javascript';
+    e.async = !0;
+    e.src = 'https://organizer.bizzabo.com/widgets/flows/popup/registrationPopup.js';
+    const t = document.getElementsByTagName('script')[0];
+    t.parentNode.insertBefore(e, t);
+  }, []);
+
+  return (
+    <ButtonStyledLink className="registration-button" href="#">
       Get Tickets
     </ButtonStyledLink>
-);
+  );
+};
 
 const NavbarItem = ({to, text, external, pathname}) => {
   let navLinkClass = cn('nav-link', navLink, {active: pathname === `/${to}`});

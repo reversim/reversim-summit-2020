@@ -18,9 +18,7 @@ const Contianer = styled.div`
 const HomePremiumSponsors = ({ sponsors }) =>{
   return (
     <Contianer>
-      {sponsors
-      .filter(sponsor => sponsor.isPremium)
-      .map((sponsor, i) => {
+      {sponsors.map((sponsor, i) => {
         return (
           <div key={i}>
             <SponsorMiniPremium key={sponsor._id} isOnWhite={true} {...sponsor} />

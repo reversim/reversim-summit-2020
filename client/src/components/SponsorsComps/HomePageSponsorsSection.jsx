@@ -3,7 +3,7 @@ import React from "react";
 import styled from 'styled-components';
 
 import CommunitySponsorsSection from "./CommunitySponsorsSection";
-import HomePremiumSponsors from './HomePremiumSponsors';
+// import HomePremiumSponsors from './HomePremiumSponsors';
 
 import {
   AlignCenter,
@@ -25,9 +25,9 @@ const SponserSectionContainter = styled(AlignCenter)`
   flex-wrap: nowrap;
 `;
 
-const BottomLine = styled(BreakLineMain)`
-  width: 100%;
-`;
+// const BottomLine = styled(BreakLineMain)`
+//   width: 100%;
+// `;
 
 // React components section
 
@@ -40,10 +40,12 @@ const HomePageSponsorsSection = ({ sponsors }) => {
         <BreakLineMain />
       </HeadingAligner>
 
-      <HomePremiumSponsors sponsors={sponsors} />
-      <BottomLine /> 
+      {/* <HomePremiumSponsors sponsors={sponsors} /> */}
+      {/* <BottomLine />  */}
 
-      <CommunitySponsorsSection sponsors={sponsors.filter(sponsor => !sponsor.isPremium)} />
+      {/* This year (2020) there are no premium sponsors */}
+      {/* <CommunitySponsorsSection sponsors={sponsors.filter(sponsor => !sponsor.isPremium)} /> */}
+      <CommunitySponsorsSection sponsors={sponsors} />
     </SponserSectionContainter>
   );
 };

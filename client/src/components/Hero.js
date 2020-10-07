@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import mediaQueryMin from '../styles/MediaQueriesMixin';
@@ -173,7 +173,7 @@ const Hero = ({ eventConfig }) => (
 
           <ButtonContainer>
             {eventConfig.registrationOpen &&
-              <ButtonStyledLink href="https://ti.to/reversim-summit/2020">
+              <ButtonStyledLink className="registration-button" href="#">
                 {'Get Tickets'}
               </ButtonStyledLink>
             }

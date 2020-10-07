@@ -28,6 +28,6 @@ export default () => {
     summitStartCountDown,
     moderationCompleted,
     agendaPublished: true, // TODO: use env var
-    registrationOpen: false, // TODO: use env var
+    registrationOpen: true, // TODO: use env var
   }
 }
