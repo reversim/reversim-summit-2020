@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import Page from "./Page";
 import { Container } from "reactstrap";
+import diamond from "../images/SVG/diamond.svg";
 
 const AgendaPage = props => {
   useEffect(() => {
@@ -14,14 +15,16 @@ const AgendaPage = props => {
 
   return (
     <Page title="Agenda" {...props}>
-      <Container>
-        <div
-          className="d-flex align-items-center text-purple2"
-          style={{padding: '80px 0 60px'}}
-          name="bizzabo-web-agenda"
-          data-unique-name="245217"
-          data-events-url="https://events.bizzabo.com"></div>
-      </Container>
+      <div className="white-bg" style={{ paddingTop: '40px' }}>
+        <Container>
+          <div
+            className="d-flex align-items-center text-purple2"
+            style={{padding: '80px 0 60px'}}
+            name="bizzabo-web-agenda"
+            data-unique-name="245217"
+            data-events-url="https://events.bizzabo.com"></div>
+        </Container>
+      </div>
     </Page>
   );
 }

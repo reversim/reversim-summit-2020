@@ -15,7 +15,7 @@ const SpeakersPage = props => {
 
   return (
     <Page title="Speakers" {...props}>
-      <div className="white-bg">
+      <div className="white-bg" style={{ paddingTop: '40px' }}>
         <Container>
           <div
             className="bizzabo-sections-widget d-flex align-items-center text-purple2"
