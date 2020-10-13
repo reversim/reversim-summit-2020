@@ -154,7 +154,7 @@ class SponsorsPage extends React.Component {
                 </AddSoponsorContainer>
               )
             }
-              <WantToBe />
+              {/* <WantToBe /> */}
               {/* <PremiumSponsors
                 sponsors={sponsors.filter(sponsor => sponsor.isPremium)}
                 user={user}
