@@ -5,7 +5,8 @@ import mediaQueryMin from '../styles/MediaQueriesMixin';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapMarkerAlt,
-  faCalendarAlt
+  faCalendarAlt,
+  faLanguage
 } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -44,9 +45,9 @@ const HeroInner = styled.div`
     `}
 
       ${mediaQueryMin.m`
-        text-align: left;      
+        text-align: left;
       `}
-      
+
       ${mediaQueryMin.m`
         margin-right: 0;
       `}
@@ -94,7 +95,7 @@ const Subtitle = styled.div`
     font-size: ${font.size_md};
     font-weight: 400;
     background-color: rgba(255,255,255,0.2);
-    
+
     padding: ${space.m};
     display: flex;
     justify-content: space-between;
@@ -145,6 +146,15 @@ const VoteContainer = styled(ButtonContainer)`
     `}`}
 `;
 
+const HebrewAligner = styled(IconAligner)`
+  ${({ theme: { space } }) => `
+  direction: rtl;
+  text-align: right;
+  width: 100%;
+  padding-right: 1em;
+`}
+`;
+
 // React components
 
 const Hero = ({ eventConfig }) => (
@@ -164,6 +174,17 @@ const Hero = ({ eventConfig }) => (
               Virtual Event
             </IconAligner>
           </Subtitle>
+
+          <Subtitle>
+            <IconAligner>
+              <FontAwesomeIcon icon={faLanguage} />
+              All sessions are in Hebrew.
+            </IconAligner>
+            <HebrewAligner>
+              כל ההרצאות בעברית
+            </HebrewAligner>
+          </Subtitle>
+
 
           {eventConfig.voting && (
             <VoteContainer>
