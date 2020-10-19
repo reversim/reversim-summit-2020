@@ -27,6 +27,7 @@ import { getLoginUrl } from "./Redirect";
 import LinkDuo from './LinkDuo';
 import {ButtonStyledLink} from './GlobalStyledComponents/ReversimStyledComps';
 import mediaQueryMin from '../styles/MediaQueriesMixin';
+import theme from '../styles/Theme'
 
 import newImg from '../images/new-nav-tag.png';
 import logoImg from '../images/SVG/RS20-04.svg';
@@ -36,7 +37,7 @@ const NavbarContainer = styled.div`
   nav  {
   padding: ${props => props.theme.space.xl};
     ${props => {
-      if(props.isColored){
+      if(props.hasBackground){
         return (`
           background: ${props.theme.color.background_1};
           transition: background 0.3s;
@@ -139,6 +140,12 @@ class Navbar extends Component {
   };
 
   componentWillMount() {
+    const mq = window.matchMedia(`(max-width: ${theme.mq.l})`);
+    if (mq.matches) {
+      this.setState({
+        isSmallScreen: true,
+      });
+    }
     if (window.scrollY > 60) {
       this.setState({fixed: true});
     }
@@ -166,9 +173,15 @@ class Navbar extends Component {
       history,
       eventConfig,
     } = this.props;
-    const {fixed, currentPage: _currentPage} = this.state;
+
+    const {
+      fixed,
+      isSmallScreen,
+      currentPage: _currentPage,
+    } = this.state;
+
     const items = navItems(eventConfig);
-    const isColored = !isHome || fixed;
+    const hasBackground = !isHome || fixed || isSmallScreen;
 
     const logoEl = (
       <img className={logo} src={logoImg} onClick={() => history.push('/')} alt={REVERSIM_SUMMIT} />
@@ -183,7 +196,7 @@ class Navbar extends Component {
     );
 
     return (
-      <NavbarContainer isColored={isColored}>
+      <NavbarContainer hasBackground={hasBackground}>
         <ReactstrapNavbar
           expand="lg"
           fixed="top"
