@@ -243,13 +243,13 @@ class Navbar extends Component {
                       {...{to: 'proposals', text: 'Proposals'}}
                     />
                   )}
-                  {!user && (
+                  {/* {!user && (
                     <NavbarItem
                       to={getLoginUrl()}
                       text="Login"
                       external={true}
                     />
-                  )}
+                  )} */}
                   {!isServer && user && (
                     <li>
                       <div className="ml-5">
