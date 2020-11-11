@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import Page from "./Page";
 import { Container } from "reactstrap";
-import diamond from "../images/SVG/diamond.svg";
 
 const AgendaPage = props => {
   useEffect(() => {
@@ -15,8 +14,16 @@ const AgendaPage = props => {
 
   return (
     <Page title="Agenda" {...props}>
-      <div className="white-bg" style={{ paddingTop: '40px' }}>
+      <div className="white-bg" style={{ paddingTop: '120px' }}>
         <Container>
+          <div className="video-links" style={{ textAlign: 'center' }}>
+            <div className="video-link">
+              <span>Discord:</span> <a href="https://discord.gg/s8EgAFW2Ug" target="_blank">https://discord.gg/s8EgAFW2Ug</a>
+            </div> 
+            <div className="video-link">
+              <span>Q&A Zoom:</span> <a href="https://next-insurance.zoom.us/j/97879699144" target="_blank">https://next-insurance.zoom.us/j/97879699144</a>
+            </div>
+          </div>
           <div
             className="d-flex align-items-center text-purple2"
             style={{padding: '80px 0 60px'}}

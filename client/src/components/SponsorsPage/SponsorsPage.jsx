@@ -64,7 +64,6 @@ const PremiumSectionAligner = styled.section`
     align-items: center;
 
     background-size: contain;
-    padding: ${space.xl} 0 ${space.xxl} 0;
 
     border-top: 100px solid ${color.box_shadow_1};
   `}
